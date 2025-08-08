@@ -1,0 +1,26 @@
+Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
+9202,OP,Outpatient Visit,Visit,Visit,Visit,Valid,Standard,14648554
+9201,IP,Inpatient Visit,Visit,Visit,Visit,Valid,Standard,6289940
+581477,OMOP4822458,Office Visit,Visit,Visit,Visit,Valid,Standard,2164178
+8717,21,Inpatient Hospital,Visit,Visit,CMS Place of Service,Valid,Standard,1411342
+9203,ER,Emergency Room Visit,Visit,Visit,Visit,Valid,Standard,755243
+8870,23,Emergency Room - Hospital,Visit,Visit,CMS Place of Service,Valid,Standard,736120
+581379,OMOP4822042,Inpatient Critical Care Facility,Visit,Visit,CMS Place of Service,Valid,Standard,637857
+581385,OMOP4822036,Observation Room,Visit,Visit,CMS Place of Service,Valid,Standard,324454
+32037,OMOP4822460,Intensive Care,Visit,Visit,Visit,Valid,Standard,249039
+0,No matching concept,No matching concept,Undefined,Metadata,None,Valid,Non-standard,200812
+38004259,261QR1100X,Ambulatory Research Clinic / Center,Visit,Visit,NUCC,Valid,Standard,133661
+38004228,261QI0500X,Ambulatory Infusion Therapy Clinic / Center,Visit,Visit,NUCC,Valid,Standard,132070
+38004207,261Q00000X,Ambulatory Clinic / Center,Visit,Visit,NUCC,Valid,Standard,103765
+38004294,291U00000X,Clinical Medical Laboratory,Visit,Visit,NUCC,Valid,Standard,82097
+581384,OMOP4822037,Inpatient Nursery,Visit,Visit,CMS Place of Service,Valid,Standard,42063
+8782,20,Urgent Care Facility,Visit,Visit,CMS Place of Service,Valid,Standard,21472
+581458,OMOP4822462,Pharmacy visit,Visit,Visit,Visit,Valid,Standard,15298
+8650,25,Birthing Center,Visit,Visit,CMS Place of Service,Valid,Standard,8318
+8883,24,Ambulatory Surgical Center,Visit,Visit,CMS Place of Service,Valid,Standard,5094
+38004269,261QX0203X,Ambulatory Oncological Radiation Clinic / Center,Visit,Visit,NUCC,Valid,Standard,3721
+38004287,284300000X,Special Hospital,Visit,Visit,NUCC,Valid,Standard,3093
+38004250,261QR0200X,Ambulatory Radiology Clinic / Center,Visit,Visit,NUCC,Valid,Standard,2118
+38004251,261QR0206X,Ambulatory Mammography Clinic / Center,Visit,Visit,NUCC,Valid,Standard,1821
+8971,51,Inpatient Psychiatric Facility,Visit,Visit,CMS Place of Service,Valid,Standard,249
+38004311,315D00000X,Inpatient Hospice,Visit,Visit,NUCC,Valid,Standard,85

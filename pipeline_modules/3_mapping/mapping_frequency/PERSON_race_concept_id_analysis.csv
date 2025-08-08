@@ -1,0 +1,21 @@
+Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
+8527,8527,White,Race,Race,Race,Valid,Standard,250328
+8516,8516,Black or African American,Race,Race,Race,Valid,Standard,74382
+8552,8552,Unknown,Race,Race,Race,Valid,Standard,16337
+8515,8515,Asian,Race,Race,Race,Valid,Standard,11227
+0,0,No matching concept,Race,Metadata,None,Valid,Standard,9680
+4190758,4190758,Multiple race,Race,Race,Race,Valid,Standard,2732
+3213494,3213494,Other Race,Race,Race,Race,Valid,Standard,2194
+4188159,4188159,Refuse to answer,Race,Race,Race,Valid,Standard,2036
+8657,8657,American Indian or Alaska Native,Race,Race,Race,Valid,Standard,612
+4212311,4212311,Native Hawaiian,Race,Race,Race,Valid,Standard,557
+38003574,38003574,Asian Indian,Race,Race,Race,Valid,Standard,506
+8557,8557,Native Hawaiian or Other Pacific Islander,Race,Race,Race,Valid,Standard,228
+4218674,4218674,Korean,Race,Race,Race,Valid,Standard,206
+38003613,38003613,Chinese,Race,Race,Race,Valid,Standard,100
+38003581,38003581,Japanese,Race,Race,Race,Valid,Standard,83
+38003579,38003579,Filipino,Race,Race,Race,Valid,Standard,49
+8522,8522,Other Pacific Islander,Race,Race,Race,Valid,Standard,46
+38003592,38003592,Vietnamese,Race,Race,Race,Valid,Standard,25
+38003585,38003585,Cambodian,Race,Race,Race,Valid,Standard,24
+38003584,38003584,Laotian,Race,Race,Race,Valid,Standard,13

@@ -1,0 +1,621 @@
+Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
+0,No matching concept,No matching concept,Undefined,Metadata,None,Valid,Non-standard,48250
+NULL,No matching concept,NULL value,Undefined,Metadata,None,Valid,Standard,25967
+317576,53741008,Coronary arteriosclerosis,Disorder,Condition,SNOMED,Valid,Standard,602
+4311499,93986008,Primary malignant neoplasm of respiratory tract,Disorder,Condition,SNOMED,Valid,Standard,505
+4182210,52448006,Dementia,Disorder,Condition,SNOMED,Valid,Standard,359
+255573,13645005,Chronic obstructive pulmonary disease,Disorder,Condition,SNOMED,Valid,Standard,280
+312327,57054005,Acute myocardial infarction,Disorder,Condition,SNOMED,Valid,Standard,212
+255848,233604007,Pneumonia,Disorder,Condition,SNOMED,Valid,Standard,190
+132797,91302008,Sepsis,Disorder,Condition,SNOMED,Valid,Standard,170
+380055,93727008,Primary malignant neoplasm of brain,Disorder,Condition,SNOMED,Valid,Standard,166
+704996,OMOP4912978,Patient meets COVID-19 laboratory diagnostic criteria,Clinical Finding,Observation,OMOP Extension,Valid,Standard,149
+197500,93761005,Primary malignant neoplasm of colon,Disorder,Condition,SNOMED,Valid,Standard,116
+4064161,19943007,Cirrhosis of liver,Disorder,Condition,SNOMED,Valid,Standard,112
+443611,433146000,Chronic kidney disease stage 5,Disorder,Condition,SNOMED,Valid,Standard,109
+199754,372003004,Primary malignant neoplasm of pancreas,Disorder,Condition,SNOMED,Valid,Standard,108
+443392,363346000,Malignant neoplastic disease,Disorder,Condition,SNOMED,Valid,Standard,106
+378419,26929004,Alzheimer's disease,Disorder,Condition,SNOMED,Valid,Standard,104
+4187218,415126001,Pneumonitis caused by inhaled substance,Disorder,Condition,SNOMED,Valid,Standard,99
+316139,84114007,Heart failure,Disorder,Condition,SNOMED,Valid,Standard,99
+321319,85898001,Cardiomyopathy,Disorder,Condition,SNOMED,Valid,Standard,98
+436583,1912002,Fall,Event,Observation,SNOMED,Valid,Standard,96
+43530727,291571000119106,Spontaneous cerebral hemorrhage,Disorder,Condition,SNOMED,Valid,Standard,89
+4110056,196001008,Chronic obstructive pulmonary disease with acute lower respiratory infection,Disorder,Condition,SNOMED,Valid,Standard,82
+4108832,195080001,Atrial fibrillation and flutter,Disorder,Condition,SNOMED,Invalid,Non-standard,81
+4152384,315615007,Non-rheumatic aortic sclerosis,Disorder,Condition,SNOMED,Valid,Standard,74
+4110961,194849004,Generalized ischemic myocardial dysfunction,Disorder,Condition,SNOMED,Valid,Standard,74
+192359,42399005,Renal failure syndrome,Disorder,Condition,SNOMED,Valid,Standard,68
+26638,371984007,Primary malignant neoplasm of esophagus,Disorder,Condition,SNOMED,Valid,Standard,65
+4162253,372137005,Primary malignant neoplasm of breast,Disorder,Condition,SNOMED,Valid,Standard,64
+196360,93689003,Primary malignant neoplasm of urinary bladder,Disorder,Condition,SNOMED,Valid,Standard,64
+200962,93974005,Primary malignant neoplasm of prostate,Disorder,Condition,SNOMED,Valid,Standard,58
+200051,93934004,Primary malignant neoplasm of ovary,Disorder,Condition,SNOMED,Valid,Standard,54
+197320,14669001,Acute kidney injury,Disorder,Condition,SNOMED,Valid,Standard,54
+46271022,709044004,Chronic kidney disease,Disorder,Condition,SNOMED,Valid,Standard,51
+381270,49049000,Parkinson's disease,Disorder,Condition,SNOMED,Valid,Standard,51
+196463,420054005,Alcoholic cirrhosis,Disorder,Condition,SNOMED,Valid,Standard,48
+139750,94047004,Primary malignant neoplasm of skin,Disorder,Condition,SNOMED,Valid,Standard,48
+315286,413838009,Chronic ischemic heart disease,Disorder,Condition,SNOMED,Valid,Standard,46
+192671,74474003,Gastrointestinal hemorrhage,Disorder,Condition,SNOMED,Valid,Standard,45
+140352,91861009,"Acute myeloid leukemia, disease",Disorder,Condition,SNOMED,Valid,Standard,45
+4339214,88223008,Secondary pulmonary hypertension,Disorder,Condition,SNOMED,Valid,Standard,44
+321052,400047006,Peripheral vascular disease,Disorder,Condition,SNOMED,Valid,Standard,44
+81902,68566005,Urinary tract infectious disease,Disorder,Condition,SNOMED,Valid,Standard,43
+4197819,51615001,Fibrosis of lung,Disorder,Condition,SNOMED,Valid,Standard,40
+198985,93849006,Primary malignant neoplasm of kidney,Disorder,Condition,SNOMED,Valid,Standard,40
+4239381,91388009,Psychoactive substance abuse,Disorder,Condition,SNOMED,Valid,Standard,38
+4001171,109841003,Liver cell carcinoma,Disorder,Condition,SNOMED,Valid,Standard,38
+4232337,89736004,Valvular endocarditis,Disorder,Condition,SNOMED,Valid,Standard,37
+441413,87309006,Death of unknown cause,Event,Observation,SNOMED,Valid,Standard,36
+320128,59621000,Essential hypertension,Disorder,Condition,SNOMED,Valid,Standard,36
+437233,109989006,Multiple myeloma,Disorder,Condition,SNOMED,Valid,Standard,34
+4256228,409622000,Respiratory failure,Disorder,Condition,SNOMED,Valid,Standard,34
+321042,410429000,Cardiac arrest,Disorder,Condition,SNOMED,Valid,Standard,34
+443919,49220004,Hypertensive renal failure,Disorder,Condition,SNOMED,Valid,Standard,32
+433143,93679002,Primary malignant neoplasm of appendix,Disorder,Condition,SNOMED,Valid,Standard,32
+321588,56265001,Heart disease,Disorder,Condition,SNOMED,Valid,Standard,32
+435243,66590003,Alcohol dependence,Disorder,Condition,SNOMED,Valid,Standard,31
+319034,60899001,Hypertensive heart disease without congestive heart failure,Disorder,Condition,SNOMED,Valid,Standard,30
+433753,15167005,Alcohol abuse,Disorder,Condition,SNOMED,Valid,Standard,29
+4038838,118601006,Non-Hodgkin's lymphoma (clinical),Disorder,Condition,SNOMED,Valid,Standard,29
+26052,371995001,Primary malignant neoplasm of larynx,Disorder,Condition,SNOMED,Valid,Standard,29
+196044,372014001,Primary malignant neoplasm of stomach,Disorder,Condition,SNOMED,Valid,Standard,28
+377845,389098007,Anoxic encephalopathy,Disorder,Condition,SNOMED,Valid,Standard,27
+193688,186431008,Clostridioides difficile infection,Disorder,Condition,SNOMED,Valid,Standard,27
+443454,432504007,Cerebral infarction,Disorder,Condition,SNOMED,Valid,Standard,26
+4134603,128321003,Vascular disorder of intestine,Disorder,Condition,SNOMED,Valid,Standard,26
+4119786,233703007,Interstitial lung disease,Disorder,Condition,SNOMED,Valid,Standard,26
+4313365,94767002,Neoplasm of uncertain behavior of brain,Disorder,Condition,SNOMED,Valid,Standard,25
+194984,235856003,Disease of liver,Disorder,Condition,SNOMED,Valid,Standard,25
+74582,93984006,Primary malignant neoplasm of rectum,Disorder,Condition,SNOMED,Valid,Standard,24
+437165,214031005,Motor vehicle traffic accident,Event,Observation,SNOMED,Valid,Standard,24
+434056,195239002,Late effects of cerebrovascular disease,Disorder,Condition,SNOMED,Valid,Standard,24
+261325,87433001,Pulmonary emphysema,Disorder,Condition,SNOMED,Valid,Standard,24
+444101,46113002,Hypertensive heart failure,Disorder,Condition,SNOMED,Valid,Standard,23
+4245975,59927004,Hepatic failure,Disorder,Condition,SNOMED,Valid,Standard,23
+257004,195951007,Acute exacerbation of chronic obstructive pulmonary disease,Disorder,Condition,SNOMED,Valid,Standard,23
+318443,72092001,Arteriosclerotic vascular disease,Disorder,Condition,SNOMED,Valid,Standard,22
+314971,39871006,Chronic respiratory failure,Disorder,Condition,SNOMED,Valid,Standard,22
+44784217,698247007,Cardiac arrhythmia,Disorder,Condition,SNOMED,Valid,Standard,21
+437498,94101009,Primary malignant neoplasm of tongue,Disorder,Condition,SNOMED,Valid,Standard,21
+4092411,248062006,Self-injurious behavior,Clinical Finding,Observation,SNOMED,Valid,Standard,21
+4001664,109842005,Intrahepatic bile duct carcinoma,Disorder,Condition,SNOMED,Valid,Standard,21
+376647,372010005,Primary malignant neoplasm of soft tissues,Disorder,Condition,SNOMED,Valid,Standard,21
+4210746,56871000,Localized amyloidosis,Disorder,Condition,SNOMED,Valid,Standard,20
+443731,420279001,Renal disorder due to type 2 diabetes mellitus,Disorder,Condition,SNOMED,Valid,Standard,19
+435517,51387008,Acidosis,Disorder,Condition,SNOMED,Valid,Standard,19
+4148906,270907008,Spontaneous subarachnoid hemorrhage,Disorder,Condition,SNOMED,Valid,Standard,19
+198964,128302006,Chronic hepatitis C,Disorder,Condition,SNOMED,Valid,Standard,19
+138994,109995007,Myelodysplastic syndrome (clinical),Disorder,Condition,SNOMED,Valid,Standard,19
+436670,75934005,Metabolic disease,Disorder,Condition,SNOMED,Valid,Standard,18
+4193704,313436004,Type 2 diabetes mellitus without complication,Disorder,Condition,SNOMED,Valid,Standard,18
+435991,217082002,Accidental fall,Event,Observation,SNOMED,Valid,Standard,17
+4270024,401314000,Acute non-ST segment elevation myocardial infarction,Disorder,Condition,SNOMED,Valid,Standard,17
+374631,37340000,Motor neuron disease,Disorder,Condition,SNOMED,Valid,Standard,17
+440417,59282003,Pulmonary embolism,Disorder,Condition,SNOMED,Valid,Standard,16
+432545,87628006,Bacterial infectious disease,Disorder,Condition,SNOMED,Valid,Standard,16
+4247238,93781006,Primary malignant neoplasm of endometrium,Disorder,Condition,SNOMED,Valid,Standard,16
+40483287,443820000,Disorder of kidney and/or ureter,Disorder,Condition,SNOMED,Valid,Standard,16
+193518,81060008,Intestinal obstruction,Disorder,Condition,SNOMED,Valid,Standard,16
+4246127,93870000,Malignant neoplasm of liver,Disorder,Condition,SNOMED,Valid,Standard,15
+4247802,73297009,Muscular dystrophy,Disorder,Condition,SNOMED,Valid,Standard,14
+4111709,195176009,Non-traumatic subdural hemorrhage,Disorder,Condition,SNOMED,Valid,Standard,14
+4082311,277473004,B-cell chronic lymphocytic leukemia,Disorder,Condition,SNOMED,Invalid,Non-standard,14
+441749,217083007,Fall on or from stairs or steps,Event,Observation,SNOMED,Valid,Standard,13
+319844,413439005,Acute ischemic heart disease,Disorder,Condition,SNOMED,Valid,Standard,13
+141663,60168000,Osteomyelitis,Disorder,Condition,SNOMED,Valid,Standard,13
+442131,93824007,Primary malignant neoplasm of head,Disorder,Condition,SNOMED,Valid,Standard,12
+432851,128462008,Metastatic malignant neoplasm,Disorder,Condition,SNOMED,Valid,Standard,12
+372887,81308009,Disorder of brain,Disorder,Condition,SNOMED,Valid,Standard,12
+45770892,10708511000119108,Primary malignant neoplasm of uterus,Disorder,Condition,SNOMED,Valid,Standard,11
+432867,55822004,Hyperlipidemia,Disorder,Condition,SNOMED,Valid,Standard,11
+4322175,70209001,Late effect of complications of procedure,Disorder,Condition,SNOMED,Invalid,Non-standard,11
+4003171,109913001,Benign neoplasm of meninges,Disorder,Condition,SNOMED,Valid,Standard,11
+381591,62914000,Cerebrovascular disease,Disorder,Condition,SNOMED,Valid,Standard,11
+28083,93961004,Primary malignant neoplasm of pharynx,Disorder,Condition,SNOMED,Valid,Standard,11
+44808122,847741000000106,Diffuse large B-cell lymphoma,Disorder,Condition,SNOMED,Valid,Non-standard,10
+44784621,8501000119104,Hypertensive heart and chronic kidney disease,Disorder,Condition,SNOMED,Valid,Standard,10
+434592,109979007,B-cell lymphoma (clinical),Disorder,Condition,SNOMED,Valid,Standard,10
+433163,238107002,Deficiency of macronutrients,Disorder,Condition,SNOMED,Valid,Standard,10
+4163710,399020009,Dilated cardiomyopathy,Disorder,Condition,SNOMED,Valid,Standard,10
+4134120,128188000,Cerebral palsy,Disorder,Condition,SNOMED,Valid,Standard,10
+36770544,OMOP5000224,Metastasis to liver,Metastasis,Measurement,Cancer Modifier,Valid,Standard,10
+195856,82403002,Cholangitis,Disorder,Condition,SNOMED,Valid,Standard,10
+4222174,83898004,Rheumatic disease of mitral valve,Disorder,Condition,SNOMED,Valid,Standard,9
+4158911,274097009,Non-rheumatic heart valve disorder,Disorder,Condition,SNOMED,Valid,Standard,9
+4111700,195083004,Ventricular fibrillation and flutter,Disorder,Condition,SNOMED,Valid,Standard,9
+4108356,195190007,Cerebral infarction due to embolism of cerebral arteries,Disorder,Condition,SNOMED,Valid,Standard,9
+321314,75878002,Abdominal aortic aneurysm without rupture,Disorder,Condition,SNOMED,Valid,Standard,9
+320739,308546005,Dissection of aorta,Disorder,Condition,SNOMED,Valid,Standard,9
+317510,93143009,Leukemia,Disorder,Condition,SNOMED,Valid,Standard,9
+317109,87317003,Respiratory arrest,Disorder,Condition,SNOMED,Valid,Standard,9
+443412,313435000,Type 1 diabetes mellitus without complication,Disorder,Condition,SNOMED,Invalid,Non-standard,8
+439404,372001002,Primary malignant neoplasm of oral cavity,Disorder,Condition,SNOMED,Valid,Standard,8
+4266809,397881000,Diverticular disease,Disorder,Condition,SNOMED,Valid,Standard,8
+4195694,67782005,Acute respiratory distress syndrome,Disorder,Condition,SNOMED,Valid,Standard,8
+4189531,61503006,Acute nephritis,Disorder,Condition,SNOMED,Valid,Standard,8
+4177206,428255004,Tubulointerstitial nephritis,Disorder,Condition,SNOMED,Valid,Standard,8
+4041283,118222006,General finding of observation of patient,Clinical Finding,Observation,SNOMED,Invalid,Non-standard,8
+316999,44808001,Conduction disorder of the heart,Disorder,Condition,SNOMED,Valid,Standard,8
+257907,19829001,Disorder of lung,Disorder,Condition,SNOMED,Valid,Standard,8
+257315,53084003,Bacterial pneumonia,Disorder,Condition,SNOMED,Valid,Standard,8
+199074,197456007,Acute pancreatitis,Disorder,Condition,SNOMED,Valid,Standard,8
+193242,56905009,Perforation of intestine,Disorder,Condition,SNOMED,Valid,Standard,8
+192956,76581006,Cholecystitis,Disorder,Condition,SNOMED,Valid,Standard,8
+134442,89155008,Systemic sclerosis,Disorder,Condition,SNOMED,Valid,Standard,8
+133424,94098005,Primary malignant neoplasm of thyroid gland,Disorder,Condition,SNOMED,Valid,Standard,8
+46273463,10685111000119102,Upper respiratory tract infection caused by Influenza virus,Disorder,Condition,SNOMED,Valid,Standard,7
+439777,271737000,Anemia,Disorder,Condition,SNOMED,Valid,Standard,7
+433736,414916001,Obesity,Disorder,Condition,SNOMED,Valid,Standard,7
+432833,93933005,Primary malignant neoplasm of oropharynx,Disorder,Condition,SNOMED,Valid,Standard,7
+4157456,372123001,Primary malignant neoplasm of skin head and neck,Disorder,Condition,SNOMED,Valid,Standard,7
+4124693,233873004,Hypertrophic cardiomyopathy,Disorder,Condition,SNOMED,Valid,Standard,7
+4059290,197321007,Steatosis of liver,Disorder,Condition,SNOMED,Valid,Standard,7
+40481901,443487006,Mantle cell lymphoma,Disorder,Condition,SNOMED,Valid,Standard,7
+4000609,119291004,Disorder of upper gastrointestinal tract,Disorder,Condition,SNOMED,Valid,Standard,7
+374919,24700007,Multiple sclerosis,Disorder,Condition,SNOMED,Valid,Standard,7
+35225775,OMOP5031757,Metastasis to nervous system,Metastasis,Measurement,Cancer Modifier,Valid,Standard,7
+256723,195878008,Pneumonia and influenza,Disorder,Condition,SNOMED,Valid,Standard,7
+198571,89138009,Cardiogenic shock,Disorder,Condition,SNOMED,Valid,Standard,7
+196359,372024009,Primary malignant neoplasm of uterine cervix,Disorder,Condition,SNOMED,Valid,Standard,7
+137275,129565002,Disorder of muscle,Disorder,Condition,SNOMED,Valid,Standard,7
+134305,91857003,Acute lymphoid leukemia,Disorder,Condition,SNOMED,Valid,Standard,7
+437312,131148009,Bleeding,Clinical Finding,Condition,SNOMED,Valid,Standard,6
+4320803,70156005,Anomaly of chromosome pair 21,Disorder,Condition,SNOMED,Valid,Standard,6
+4108814,194970009,Pericardial effusion - noninflammatory,Disorder,Condition,SNOMED,Valid,Standard,6
+4098597,190818004,Waldenström macroglobulinemia,Disorder,Condition,SNOMED,Valid,Standard,6
+4040820,16440002,Rheumatic disease of mitral AND aortic valves,Disorder,Condition,SNOMED,Valid,Standard,6
+4033891,109378008,"Mesothelioma (malignant, clinical disorder)",Disorder,Condition,SNOMED,Valid,Standard,6
+374914,11538006,Tetraplegia,Disorder,Condition,SNOMED,Valid,Standard,6
+319049,65710008,Acute respiratory failure,Disorder,Condition,SNOMED,Valid,Standard,6
+198809,65275009,Acute cholecystitis,Disorder,Condition,SNOMED,Valid,Standard,6
+138708,91855006,Acute leukemia,Disorder,Condition,SNOMED,Valid,Standard,6
+80809,69896004,Rheumatoid arthritis,Disorder,Condition,SNOMED,Valid,Standard,5
+80045,93676009,Primary malignant neoplasm of anus,Disorder,Condition,SNOMED,Valid,Standard,5
+45770886,147211000119101,Disorder of plasma protein metabolism,Disorder,Condition,SNOMED,Valid,Standard,5
+45766207,703320000,Non-rheumatic mitral valve stenosis with regurgitation,Disorder,Condition,SNOMED,Valid,Standard,5
+443600,430348006,Localized infection of skin AND/OR subcutaneous tissue,Disorder,Condition,SNOMED,Valid,Standard,5
+437827,267432004,Pure hypercholesterolemia,Disorder,Condition,SNOMED,Valid,Standard,5
+435166,242869008,Assault by firearms,Event,Observation,SNOMED,Valid,Standard,5
+434547,88797001,Complication of surgical procedure,Disorder,Condition,SNOMED,Valid,Standard,5
+4340386,235881000,Alcoholic hepatic failure,Disorder,Condition,SNOMED,Valid,Standard,5
+4340383,235875008,Alcoholic hepatitis,Disorder,Condition,SNOMED,Valid,Standard,5
+4307356,83291003,Cor pulmonale,Disorder,Condition,SNOMED,Valid,Standard,5
+4233565,360549009,Severe protein-calorie malnutrition (Gomez: less than 60 percent of standard weight),Disorder,Condition,SNOMED,Valid,Standard,5
+4213310,80690008,Degenerative disease of the central nervous system,Disorder,Condition,SNOMED,Valid,Standard,5
+4179720,363745004,Primary malignant neoplasm of gastrointestinal tract,Disorder,Condition,SNOMED,Valid,Standard,5
+4119460,233850007,Infective endocarditis,Disorder,Condition,SNOMED,Valid,Standard,5
+4111721,195241001,Sequelae of intracerebral hemorrhage,Disorder,Condition,SNOMED,Valid,Standard,5
+4103295,25569003,Ventricular tachycardia,Disorder,Condition,SNOMED,Valid,Standard,5
+4090207,18726006,Senile asthenia,Clinical Finding,Observation,SNOMED,Valid,Standard,5
+40493038,449082003,Sepsis caused by Gram negative bacteria,Disorder,Condition,SNOMED,Valid,Standard,5
+37311319,816082000,Hypovolemia,Clinical Finding,Condition,SNOMED,Valid,Standard,5
+259852,22754005,Staphylococcal pneumonia,Disorder,Condition,SNOMED,Valid,Standard,5
+252351,41381004,Pneumonia caused by Pseudomonas,Disorder,Condition,SNOMED,Valid,Standard,5
+201965,27942005,Shock,Disorder,Condition,SNOMED,Valid,Standard,5
+201894,91489000,Acute vascular insufficiency of intestine,Disorder,Condition,SNOMED,Valid,Standard,5
+197603,9707006,Intestinal volvulus,Disorder,Condition,SNOMED,Valid,Standard,5
+193240,52890006,Acute generalized peritonitis,Disorder,Condition,SNOMED,Valid,Standard,5
+80482,372939007,Suppurative arthritis,Disorder,Condition,SNOMED,Valid,Standard,4
+76685,91637004,Myasthenia gravis,Disorder,Condition,SNOMED,Valid,Standard,4
+704985,OMOP5117516,Metastasis to abdomen,Metastasis,Measurement,Cancer Modifier,Valid,Standard,4
+441233,93807001,Primary malignant neoplasm of frontal lobe,Disorder,Condition,SNOMED,Valid,Standard,4
+440029,34014006,Viral disease,Disorder,Condition,SNOMED,Valid,Standard,4
+439746,93831006,Primary malignant neoplasm of hypopharynx,Disorder,Condition,SNOMED,Valid,Standard,4
+438688,31541009,Sarcoidosis,Disorder,Condition,SNOMED,Valid,Standard,4
+437828,71638002,Disorder of calcium metabolism,Disorder,Condition,SNOMED,Valid,Standard,4
+436882,20902002,Fall from bed,Event,Observation,SNOMED,Valid,Standard,4
+435443,17886000,Fall from wheelchair,Event,Observation,SNOMED,Valid,Standard,4
+432870,302215000,Thrombocytopenic disorder,Disorder,Condition,SNOMED,Valid,Standard,4
+432585,64779008,Blood coagulation disorder,Disorder,Condition,SNOMED,Valid,Standard,4
+4319328,95454007,Brain stem hemorrhage,Disorder,Condition,SNOMED,Valid,Standard,4
+4304484,109993000,Chronic myeloproliferative disorder (clinical),Disorder,Condition,SNOMED,Valid,Standard,4
+4220238,82525005,Multiple congenital cysts of kidney,Disorder,Condition,SNOMED,Valid,Standard,4
+4144154,425957003,Non-traumatic intracerebral ventricular hemorrhage,Disorder,Condition,SNOMED,Valid,Standard,4
+4111409,194983005,"Aortic incompetence, non-rheumatic",Disorder,Condition,SNOMED,Valid,Standard,4
+376938,19133005,Neurofibromatosis syndrome,Disorder,Condition,SNOMED,Valid,Standard,4
+376063,92051001,Benign neoplasm of cerebral meninges,Disorder,Condition,SNOMED,Valid,Standard,4
+36714559,719848005,Disorder caused by alcohol,Disorder,Condition,SNOMED,Valid,Standard,4
+318773,83521008,Dilated cardiomyopathy secondary to alcohol,Disorder,Condition,SNOMED,Invalid,Non-standard,4
+317009,195967001,Asthma,Disorder,Condition,SNOMED,Valid,Standard,4
+316428,45227007,Hypertrophic obstructive cardiomyopathy,Disorder,Condition,SNOMED,Valid,Standard,4
+312723,13213009,Congenital heart disease,Disorder,Condition,SNOMED,Valid,Standard,4
+254061,60046008,Pleural effusion,Disorder,Condition,SNOMED,Valid,Standard,4
+200687,421893009,Renal disorder due to type 1 diabetes mellitus,Disorder,Condition,SNOMED,Valid,Standard,4
+135333,399912005,Pressure ulcer,Disorder,Condition,SNOMED,Invalid,Non-standard,4
+77079,76107001,Spinal stenosis,Disorder,Condition,SNOMED,Valid,Standard,3
+443729,422166005,Peripheral circulatory disorder due to type 2 diabetes mellitus,Disorder,Condition,SNOMED,Valid,Standard,3
+443612,431857002,Chronic kidney disease stage 4,Disorder,Condition,SNOMED,Valid,Standard,3
+441830,76314005,Disorder of fluid AND/OR electrolyte,Disorder,Condition,SNOMED,Valid,Standard,3
+441051,74883004,Thoracic aortic aneurysm without rupture,Disorder,Condition,SNOMED,Valid,Standard,3
+439237,52684005,Assault,Event,Observation,SNOMED,Valid,Standard,3
+438699,93980002,Primary malignant neoplasm of rectosigmoid junction,Disorder,Condition,SNOMED,Valid,Standard,3
+438368,94096009,Primary malignant neoplasm of thymus,Disorder,Condition,SNOMED,Valid,Standard,3
+437779,85769006,Streptococcal infectious disease,Disorder,Condition,SNOMED,Valid,Standard,3
+436635,94006002,Primary malignant neoplasm of sigmoid colon,Disorder,Condition,SNOMED,Valid,Standard,3
+436093,67406007,Disseminated intravascular coagulation,Disorder,Condition,SNOMED,Valid,Standard,3
+435752,93775003,Primary malignant neoplasm of duodenum,Disorder,Condition,SNOMED,Valid,Standard,3
+435459,56038003,Staphylococcal infectious disease,Disorder,Condition,SNOMED,Valid,Standard,3
+434610,14140009,Hyperkalemia,Disorder,Condition,SNOMED,Valid,Standard,3
+434588,372004005,Primary malignant neoplasm of parotid gland,Disorder,Condition,SNOMED,Valid,Standard,3
+4344158,239887007,Systemic lupus erythematosus with organ/system involvement,Disorder,Condition,SNOMED,Valid,Standard,3
+433976,94086000,Primary malignant neoplasm of temporal lobe,Disorder,Condition,SNOMED,Valid,Standard,3
+433701,3218000,Mycosis,Disorder,Condition,SNOMED,Valid,Standard,3
+4247836,93883004,Primary malignant neoplasm of major salivary gland,Disorder,Condition,SNOMED,Valid,Standard,3
+4221821,40198004,Thrombophlebitis of deep veins of lower extremity,Disorder,Condition,SNOMED,Valid,Standard,3
+4195677,67696008,Rheumatic tricuspid valve regurgitation,Disorder,Condition,SNOMED,Valid,Standard,3
+4181187,363176004,Inflammatory disorder of head,Disorder,Condition,SNOMED,Valid,Standard,3
+4135822,31712002,Primary biliary cholangitis,Disorder,Condition,SNOMED,Valid,Standard,3
+4121123,234437005,Hemophagocytic lymphohistiocytosis,Disorder,Condition,SNOMED,Valid,Standard,3
+4092216,187862007,Malignant neoplasm of upper lobe of lung,Disorder,Condition,SNOMED,Valid,Standard,3
+4013643,11399002,Pulmonary arterial hypertension,Disorder,Condition,SNOMED,Valid,Standard,3
+4001298,203241002,Osteomyelitis of vertebra,Disorder,Condition,SNOMED,Valid,Standard,3
+374313,94805002,Neoplasm of uncertain behavior of soft tissues,Disorder,Condition,SNOMED,Valid,Standard,3
+36714927,720349002,Sequelae of infectious disease,Disorder,Condition,SNOMED,Valid,Standard,3
+317002,45007003,Low blood pressure,Disorder,Condition,SNOMED,Valid,Standard,3
+314658,8186001,Cardiomegaly,Disorder,Condition,SNOMED,Valid,Standard,3
+261514,94080006,Primary malignant neoplasm of supraglottis,Disorder,Condition,SNOMED,Valid,Standard,3
+256449,12295008,Bronchiectasis,Disorder,Condition,SNOMED,Valid,Standard,3
+24609,302866003,Hypoglycemia,Disorder,Condition,SNOMED,Valid,Standard,3
+201620,95570007,Kidney stone,Disorder,Condition,SNOMED,Valid,Standard,3
+201618,85919009,Disorder of intestine,Disorder,Condition,SNOMED,Valid,Standard,3
+201612,41309000,Alcoholic liver damage,Disorder,Condition,SNOMED,Valid,Standard,3
+200762,408335007,Autoimmune hepatitis,Disorder,Condition,SNOMED,Valid,Standard,3
+200174,80659006,Disorder of skin and/or subcutaneous tissue,Disorder,Condition,SNOMED,Valid,Standard,3
+197806,372139008,Primary malignant neoplasm of gallbladder,Disorder,Condition,SNOMED,Valid,Standard,3
+197795,76795007,Acute type B viral hepatitis,Disorder,Condition,SNOMED,Valid,Standard,3
+196455,51292008,Hepatorenal syndrome,Disorder,Condition,SNOMED,Valid,Standard,3
+195559,14336007,Ruptured abdominal aortic aneurysm,Disorder,Condition,SNOMED,Valid,Standard,3
+192836,94048009,Primary malignant neoplasm of small intestine,Disorder,Condition,SNOMED,Valid,Standard,3
+137829,306058006,Aplastic anemia,Disorder,Condition,SNOMED,Valid,Standard,3
+81893,64766004,Ulcerative colitis,Disorder,Condition,SNOMED,Valid,Standard,2
+76914,93725000,Primary malignant neoplasm of bone,Disorder,Condition,SNOMED,Valid,Standard,2
+73001,26889001,Myositis,Disorder,Condition,SNOMED,Valid,Standard,2
+606878,1148757008,Microcephaly,Clinical Finding,Observation,SNOMED,Valid,Standard,2
+444046,40537000,Exposure to cold,Event,Observation,SNOMED,Valid,Standard,2
+444022,48721008,Tetraplegic cerebral palsy,Disorder,Condition,SNOMED,Valid,Standard,2
+443597,433144002,Chronic kidney disease stage 3,Disorder,Condition,SNOMED,Valid,Standard,2
+441875,195258006,Thoracic aortic aneurysm which has ruptured,Disorder,Condition,SNOMED,Valid,Standard,2
+441829,267446004,Hyperosmolality and or hypernatremia,Disorder,Condition,SNOMED,Valid,Standard,2
+441806,93726004,Primary malignant neoplasm of brain stem,Disorder,Condition,SNOMED,Valid,Standard,2
+441269,413603009,Autoimmune hemolytic anemia,Disorder,Condition,SNOMED,Valid,Standard,2
+440142,49483002,Disorder of mediastinum,Disorder,Condition,SNOMED,Valid,Standard,2
+439846,85232009,Left heart failure,Disorder,Condition,SNOMED,Valid,Standard,2
+439392,372087000,Primary malignant neoplasm,Disorder,Condition,SNOMED,Valid,Standard,2
+437390,389087006,Hypoxemia,Disorder,Condition,SNOMED,Valid,Standard,2
+436996,233984007,Thoracoabdominal aortic aneurysm,Disorder,Condition,SNOMED,Valid,Standard,2
+436593,217748000,Accidental drowning and submersion,Event,Observation,SNOMED,Valid,Standard,2
+435783,58214004,Schizophrenia,Disorder,Condition,SNOMED,Valid,Standard,2
+435521,37057007,Psychophysiologic disorder,Clinical Finding,Condition,SNOMED,Invalid,Non-standard,2
+434894,267530009,Acute posthemorrhagic anemia,Disorder,Condition,SNOMED,Valid,Standard,2
+434462,30288003,Ventricular septal defect,Disorder,Condition,SNOMED,Valid,Standard,2
+433811,43064006,Hydronephrosis,Disorder,Condition,SNOMED,Valid,Standard,2
+4332246,432119003,Aneurysm,Disorder,Condition,SNOMED,Valid,Standard,2
+433149,93746009,Primary malignant neoplasm of cerebellum,Disorder,Condition,SNOMED,Valid,Standard,2
+432838,93738008,Primary malignant neoplasm of cardia of stomach,Disorder,Condition,SNOMED,Valid,Standard,2
+432837,371977004,Primary malignant neoplasm of cecum,Disorder,Condition,SNOMED,Valid,Standard,2
+432595,17602002,Amyloidosis,Disorder,Condition,SNOMED,Valid,Standard,2
+432582,118616009,Neoplastic disease of uncertain behavior,Disorder,Condition,SNOMED,Valid,Standard,2
+432559,93928006,Primary malignant neoplasm of occipital lobe,Disorder,Condition,SNOMED,Valid,Standard,2
+432504,217176002,Accident caused by fire and flames,Event,Observation,SNOMED,Valid,Standard,2
+432303,78267003,Cocaine abuse,Disorder,Condition,SNOMED,Valid,Standard,2
+4317409,94801006,Neoplasm of uncertain behavior of colon,Disorder,Condition,SNOMED,Valid,Standard,2
+4308870,83468000,Fall from chair,Event,Observation,SNOMED,Valid,Standard,2
+4293175,384821006,"Mental state, behavior and/or psychosocial function finding",Clinical Finding,Observation,SNOMED,Valid,Standard,2
+4282096,36923009,"Major depression, single episode",Disorder,Condition,SNOMED,Valid,Standard,2
+4252872,409712001,Mitral valve prolapse,Disorder,Condition,SNOMED,Valid,Standard,2
+4252581,7436001,Alveolar pneumopathy,Disorder,Condition,SNOMED,Valid,Standard,2
+4232181,89469000,Chronic duodenal ulcer with hemorrhage,Disorder,Condition,SNOMED,Valid,Standard,2
+4220313,416975007,"Primary degenerative dementia of the Alzheimer type, senile onset",Disorder,Condition,SNOMED,Valid,Standard,2
+4181064,363175000,Inflammatory disorder of extremity,Disorder,Condition,SNOMED,Valid,Standard,2
+4176892,49422009,Cortical hemorrhage,Disorder,Condition,SNOMED,Valid,Standard,2
+4150511,31097004,Post poliomyelitis syndrome,Disorder,Condition,SNOMED,Valid,Standard,2
+4144111,266435005,Gastroesophageal reflux disease without esophagitis,Disorder,Condition,SNOMED,Valid,Standard,2
+4133224,278516003,Lobar pneumonia,Disorder,Condition,SNOMED,Valid,Standard,2
+4130215,12713001,Cellulitis of skin with lymphangitis,Disorder,Condition,SNOMED,Valid,Standard,2
+4110189,195185009,Cerebral infarct due to thrombosis of precerebral arteries,Disorder,Condition,SNOMED,Valid,Standard,2
+4103532,2897005,Immune thrombocytopenia,Disorder,Condition,SNOMED,Valid,Standard,2
+4078925,19242006,Pulmonary edema,Disorder,Condition,SNOMED,Valid,Standard,2
+4076794,275519006,Peripheral arteriovenous malformation,Disorder,Condition,SNOMED,Valid,Standard,2
+40489907,448417001,Sepsis caused by Staphylococcus aureus,Disorder,Condition,SNOMED,Valid,Standard,2
+40486631,447843005,Sepsis caused by anaerobic bacteria,Disorder,Condition,SNOMED,Valid,Standard,2
+40486629,447841007,Sepsis caused by Candida,Disorder,Condition,SNOMED,Valid,Standard,2
+4046205,2304001,Discitis,Disorder,Condition,SNOMED,Valid,Standard,2
+4043738,230745008,Hydrocephalus,Disorder,Condition,SNOMED,Valid,Standard,2
+4043731,230692004,Infarction - precerebral,Disorder,Condition,SNOMED,Valid,Standard,2
+4038835,118599009,Hodgkin's disease (clinical),Disorder,Condition,SNOMED,Valid,Standard,2
+4003188,110007008,Adult T-cell leukemia/lymphoma,Disorder,Condition,SNOMED,Valid,Standard,2
+4001666,109853004,Mesothelioma of peritoneum,Disorder,Condition,SNOMED,Valid,Standard,2
+380378,84757009,Epilepsy,Disorder,Condition,SNOMED,Valid,Standard,2
+379756,93886007,Primary malignant neoplasm of mandible,Disorder,Condition,SNOMED,Valid,Standard,2
+377550,46963008,Compression of brain,Disorder,Condition,SNOMED,Valid,Standard,2
+377263,257277002,Myoneural disorder,Disorder,Condition,SNOMED,Valid,Standard,2
+376026,428638009,Encephalitis caused by Herpesvirus,Disorder,Condition,SNOMED,Valid,Standard,2
+374341,58756001,Huntington's chorea,Disorder,Condition,SNOMED,Valid,Standard,2
+373764,28394000,Toxic encephalopathy,Disorder,Condition,SNOMED,Valid,Standard,2
+373179,45864009,Senile degeneration of brain,Disorder,Condition,SNOMED,Valid,Standard,2
+35226074,OMOP5031538,Metastasis to bone marrow,Metastasis,Measurement,Cancer Modifier,Valid,Standard,2
+320136,50043002,Disorder of respiratory system,Disorder,Condition,SNOMED,Valid,Standard,2
+320073,165517008,Neutropenia,Clinical Finding,Condition,SNOMED,Valid,Standard,2
+31610,37657006,Disorder of esophagus,Disorder,Condition,SNOMED,Valid,Standard,2
+313459,73430006,Sleep apnea,Disorder,Condition,SNOMED,Valid,Standard,2
+312343,73067008,Ruptured aortic aneurysm,Disorder,Condition,SNOMED,Valid,Standard,2
+258554,42908004,"Primary atelectasis, in perinatal period",Disorder,Condition,SNOMED,Valid,Standard,2
+257094,47147007,Congenital anomaly of lung,Disorder,Condition,SNOMED,Valid,Standard,2
+201826,44054006,Type 2 diabetes mellitus,Disorder,Condition,SNOMED,Valid,Standard,2
+201341,196884002,Incisional hernia with obstruction,Disorder,Condition,SNOMED,Valid,Standard,2
+201066,30144000,Obstruction of bile duct,Disorder,Condition,SNOMED,Valid,Standard,2
+201061,39839004,Diaphragmatic hernia,Disorder,Condition,SNOMED,Valid,Standard,2
+198401,94754000,Neoplasm of uncertain behavior of urinary bladder,Disorder,Condition,SNOMED,Valid,Standard,2
+197506,188366002,Malignant neoplasm of abdomen,Disorder,Condition,SNOMED,Valid,Standard,2
+196160,38851006,Fistula of intestine,Disorder,Condition,SNOMED,Valid,Standard,2
+195596,235494005,Chronic pancreatitis,Disorder,Condition,SNOMED,Valid,Standard,2
+194690,45626005,Nontraumatic hemoperitoneum,Disorder,Condition,SNOMED,Valid,Standard,2
+194589,371970002,Primary malignant neoplasm of biliary tract,Disorder,Condition,SNOMED,Valid,Standard,2
+192963,3855007,Disorder of pancreas,Disorder,Condition,SNOMED,Valid,Standard,2
+192953,67766009,Intestinal adhesions with obstruction,Disorder,Condition,SNOMED,Valid,Standard,2
+192606,60389000,Paraplegia,Disorder,Condition,SNOMED,Valid,Standard,2
+192353,39621005,Disorder of gallbladder,Disorder,Condition,SNOMED,Valid,Standard,2
+140057,92812005,Chronic leukemia,Disorder,Condition,SNOMED,Valid,Standard,2
+134603,92818009,Chronic myeloid leukemia,Disorder,Condition,SNOMED,Valid,Standard,2
+134441,19429009,Chronic ulcer of skin,Disorder,Condition,SNOMED,Valid,Standard,2
+134057,49601007,Disorder of cardiovascular system,Disorder,Condition,SNOMED,Valid,Standard,2
+133566,52486002,Necrotizing fasciitis,Disorder,Condition,SNOMED,Valid,Standard,2
+80816,77547008,Degeneration of intervertebral disc,Disorder,Condition,SNOMED,Valid,Standard,1
+80800,31384009,Polymyositis,Disorder,Condition,SNOMED,Valid,Standard,1
+80665,188361007,Malignant neoplasm of thorax,Disorder,Condition,SNOMED,Valid,Standard,1
+79145,398114001,Ehlers-Danlos syndrome,Disorder,Condition,SNOMED,Valid,Standard,1
+77317,52506002,Chronic ulcerative rectosigmoiditis,Disorder,Condition,SNOMED,Valid,Standard,1
+77234,92065004,Benign neoplasm of colon,Disorder,Condition,SNOMED,Valid,Standard,1
+76349,94125001,Primary malignant neoplasm of urinary system,Disorder,Condition,SNOMED,Valid,Standard,1
+73553,399269003,Arthropathy,Disorder,Condition,SNOMED,Valid,Standard,1
+72266,94493005,Metastatic malignant neoplasm to pleura,Disorder,Condition,SNOMED,Valid,Non-standard,1
+46273631,317931000119101,Pulmonary disease due to allergic granulomatosis angiitis,Disorder,Condition,SNOMED,Valid,Standard,1
+444084,37471005,Hypersensitivity pneumonitis,Disorder,Condition,SNOMED,Valid,Standard,1
+444074,36198007,Victim of vehicular AND/OR traffic accident,Clinical Finding,Observation,SNOMED,Valid,Standard,1
+443792,30093007,Calculus of bile duct,Disorder,Condition,SNOMED,Valid,Standard,1
+442995,242490006,Burning due to contact with hot substance,Event,Observation,SNOMED,Valid,Standard,1
+442147,94931004,Neoplasm of uncertain behavior of mediastinum,Disorder,Condition,SNOMED,Valid,Standard,1
+442129,95161002,Neoplasm of uncertain behavior of ureter,Disorder,Condition,SNOMED,Valid,Standard,1
+442077,197480006,Anxiety disorder,Disorder,Condition,SNOMED,Valid,Standard,1
+441553,17450006,Myoclonus,Clinical Finding,Condition,SNOMED,Valid,Standard,1
+441534,76441001,"Severe major depression, single episode, without psychotic features",Disorder,Condition,SNOMED,Valid,Standard,1
+441192,217848007,Accidentally struck by or against objects or persons,Event,Observation,SNOMED,Valid,Standard,1
+441188,32906002,"Victim, pedestrian in vehicular AND/OR traffic accident",Clinical Finding,Observation,SNOMED,Valid,Standard,1
+440896,213770003,Railway accident,Event,Observation,SNOMED,Valid,Standard,1
+440385,230746009,Obstructive hydrocephalus,Disorder,Condition,SNOMED,Valid,Standard,1
+440083,67195008,Acute stress disorder,Disorder,Condition,SNOMED,Valid,Standard,1
+440032,28944009,Cytomegalovirus infection,Disorder,Condition,SNOMED,Valid,Standard,1
+439926,271795006,Malaise and fatigue,Clinical Finding,Observation,SNOMED,Valid,Standard,1
+439658,173300003,Disorder of pregnancy,Disorder,Condition,SNOMED,Valid,Standard,1
+439441,219333004,Drowning or immersion of unknown intent,Event,Observation,SNOMED,Valid,Standard,1
+439128,276658003,Extreme prematurity of infant,Disorder,Condition,SNOMED,Valid,Standard,1
+439003,116020001,Disorder of branched-chain amino acid metabolism,Disorder,Condition,SNOMED,Valid,Standard,1
+438694,371991005,Primary malignant neoplasm of hard palate,Disorder,Condition,SNOMED,Valid,Standard,1
+438310,10298002,"Victim, motorcycle rider in vehicular AND/OR traffic accident",Clinical Finding,Observation,SNOMED,Valid,Standard,1
+438168,65340007,Aneurysm of heart,Disorder,Condition,SNOMED,Valid,Standard,1
+438130,5602001,Opioid abuse,Disorder,Condition,SNOMED,Valid,Standard,1
+438086,93946000,Primary malignant neoplasm of parietal lobe,Disorder,Condition,SNOMED,Valid,Standard,1
+437903,26650005,Acute tracheitis,Disorder,Condition,SNOMED,Valid,Standard,1
+437677,274533004,Abnormal findings on diagnostic imaging of lung,Clinical Finding,Condition,SNOMED,Valid,Standard,1
+436926,93747000,Primary malignant neoplasm of cerebral meninges,Disorder,Condition,SNOMED,Valid,Standard,1
+436885,219257002,Injury due to legal intervention by firearm,Disorder,Condition,SNOMED,Valid,Standard,1
+436665,13746004,Bipolar disorder,Disorder,Condition,SNOMED,Valid,Standard,1
+436659,87522002,Iron deficiency anemia,Disorder,Condition,SNOMED,Valid,Standard,1
+436299,242408008,Fall from one level to another,Event,Observation,SNOMED,Valid,Standard,1
+436147,45534005,Glossitis,Disorder,Condition,SNOMED,Valid,Standard,1
+435875,198609003,"Complication of pregnancy, childbirth and/or puerperium",Disorder,Condition,SNOMED,Valid,Standard,1
+435839,234097001,Lymphedema,Disorder,Condition,SNOMED,Valid,Standard,1
+435773,74257000,Arrested development following protein-calorie malnutrition,Disorder,Condition,SNOMED,Valid,Standard,1
+435515,267447008,Hypo-osmolality and or hyponatremia,Disorder,Condition,SNOMED,Valid,Standard,1
+435506,20376005,Benign neoplastic disease,Disorder,Condition,SNOMED,Valid,Standard,1
+435233,39929009,Disorder of fatty acid metabolism,Disorder,Condition,SNOMED,Valid,Standard,1
+435228,23238000,Common variable agammaglobulinemia,Disorder,Condition,SNOMED,Valid,Standard,1
+435190,93978008,Primary malignant neoplasm of pyriform sinus,Disorder,Condition,SNOMED,Valid,Standard,1
+434633,15241006,Disorder of autonomic nervous system,Disorder,Condition,SNOMED,Valid,Standard,1
+434614,30913008,Disorder of iron metabolism,Disorder,Condition,SNOMED,Valid,Standard,1
+4345577,240126009,Ischemic infarction of muscle,Disorder,Condition,SNOMED,Valid,Standard,1
+434311,36444000,Disorder of the urea cycle metabolism,Disorder,Condition,SNOMED,Valid,Standard,1
+434153,74345006,Congenital chromosomal disease,Disorder,Condition,SNOMED,Valid,Standard,1
+4340390,235886005,Chronic hepatic failure,Disorder,Condition,SNOMED,Valid,Standard,1
+434004,21639008,Hypervolemia,Clinical Finding,Condition,SNOMED,Valid,Standard,1
+433740,234532001,Immunodeficiency disorder,Disorder,Condition,SNOMED,Valid,Standard,1
+433716,94087009,Primary malignant neoplasm of testis,Disorder,Condition,SNOMED,Valid,Standard,1
+433704,93989001,Primary malignant neoplasm of retromolar area,Disorder,Condition,SNOMED,Valid,Standard,1
+433585,5601008,Klippel-Feil sequence,Disorder,Condition,SNOMED,Valid,Standard,1
+4334322,430621000,Malignant neoplasm of lower respiratory tract,Disorder,Condition,SNOMED,Valid,Standard,1
+4329445,22043005,Noninflammatory disorder of uterus,Disorder,Condition,SNOMED,Valid,Standard,1
+432899,30753002,Normal pressure hydrocephalus,Disorder,Condition,SNOMED,Valid,Standard,1
+432898,40700009,Severe intellectual disability,Disorder,Condition,SNOMED,Valid,Standard,1
+432803,86591008,Fall from ladder,Event,Observation,SNOMED,Valid,Standard,1
+432800,219218005,Assault by cutting and stabbing instruments,Event,Observation,SNOMED,Valid,Standard,1
+432534,269716005,Accident caused by machinery,Event,Observation,SNOMED,Valid,Standard,1
+4324261,7159003,Pulmonary necrosis,Disorder,Condition,SNOMED,Valid,Standard,1
+432262,94104001,Primary malignant neoplasm of trachea,Disorder,Condition,SNOMED,Valid,Standard,1
+432250,40733004,Infectious disease,Disorder,Condition,SNOMED,Valid,Standard,1
+4322316,70320004,Congenital anomaly of heart valve,Disorder,Condition,SNOMED,Valid,Standard,1
+4318639,217776008,Accidental drowning and submersion in swimming pool,Event,Observation,SNOMED,Valid,Standard,1
+4317822,95108005,Neoplasm of uncertain behavior of spinal cord,Disorder,Condition,SNOMED,Valid,Standard,1
+4317288,95441000,Pulmonary artery stenosis,Disorder,Condition,SNOMED,Valid,Standard,1
+4313828,86466006,Rheumatic mitral stenosis,Disorder,Condition,SNOMED,Valid,Standard,1
+4311480,93832004,Primary malignant neoplasm of ileum,Disorder,Condition,SNOMED,Valid,Standard,1
+4310400,85189001,Acute appendicitis,Disorder,Condition,SNOMED,Valid,Standard,1
+4304002,386789004,Eosinophil count above reference range,Clinical Finding,Measurement,SNOMED,Valid,Standard,1
+4302537,386617003,Digestive system finding,Clinical Finding,Condition,SNOMED,Valid,Standard,1
+4298809,7724006,Nephritic syndrome,Disorder,Condition,SNOMED,Valid,Standard,1
+4296728,76886005,Polyneuritis,Disorder,Condition,SNOMED,Valid,Standard,1
+4289309,70142008,Atrial septal defect,Disorder,Condition,SNOMED,Valid,Standard,1
+4288480,68618008,Rett syndrome,Disorder,Condition,SNOMED,Valid,Standard,1
+4275423,6456007,Supraventricular tachycardia,Disorder,Condition,SNOMED,Valid,Standard,1
+4268895,62394006,Female pelvic peritoneal adhesions,Disorder,Condition,SNOMED,Valid,Standard,1
+4264766,46975003,Organic mental disorder caused by cocaine,Disorder,Condition,SNOMED,Valid,Standard,1
+4263510,36233006,Congenital stenosis of tricuspid valve,Disorder,Condition,SNOMED,Valid,Standard,1
+4261842,36083008,Sick sinus syndrome,Disorder,Condition,SNOMED,Valid,Standard,1
+42537304,736640009,Hydronephrosis due to calculus of kidney and ureter,Disorder,Condition,SNOMED,Valid,Standard,1
+42536891,735915008,Complication following amputation of limb,Disorder,Condition,SNOMED,Valid,Standard,1
+4247822,93744007,Primary malignant neoplasm of central nervous system,Disorder,Condition,SNOMED,Valid,Standard,1
+4246802,93723007,Primary malignant neoplasm of bone of skull,Disorder,Condition,SNOMED,Valid,Standard,1
+4246141,93951006,Primary malignant neoplasm of pelvic bone,Disorder,Condition,SNOMED,Invalid,Non-standard,1
+4245409,6042001,Pulmonary aspergillosis,Disorder,Condition,SNOMED,Valid,Standard,1
+4243363,59033006,Anomaly of chromosome pair 18,Disorder,Condition,SNOMED,Valid,Standard,1
+4242816,92296004,Benign neoplasm of pituitary gland,Disorder,Condition,SNOMED,Valid,Standard,1
+4239871,92048008,Benign neoplasm of central nervous system,Disorder,Condition,SNOMED,Valid,Standard,1
+4234480,439470001,Arteriovenous fistula,Disorder,Condition,SNOMED,Valid,Standard,1
+4224926,405247003,Obstruction of esophagus,Disorder,Condition,SNOMED,Valid,Standard,1
+4222001,84138006,Collapse of vertebra,Disorder,Condition,SNOMED,Valid,Standard,1
+4217564,395507008,Premature infant,Clinical Finding,Observation,SNOMED,Valid,Standard,1
+4216727,71893005,Struck by falling object,Event,Observation,SNOMED,Valid,Standard,1
+4211001,57246001,Chronic gastric ulcer with hemorrhage,Disorder,Condition,SNOMED,Valid,Standard,1
+4190773,415295002,Restrictive cardiomyopathy,Disorder,Condition,SNOMED,Valid,Standard,1
+4189938,413442004,Acute monocytic/monoblastic leukemia,Disorder,Condition,SNOMED,Invalid,Non-standard,1
+4180066,50967008,Gangliosidosis,Disorder,Condition,SNOMED,Valid,Standard,1
+4176898,427793007,Complication of urinary catheter,Disorder,Condition,SNOMED,Valid,Standard,1
+4174994,48631008,Pyonephrosis,Disorder,Condition,SNOMED,Valid,Standard,1
+4174262,42345000,Polyneuropathy,Disorder,Condition,SNOMED,Valid,Standard,1
+4147498,267576008,"Encephalitis, myelitis and encephalomyelitis",Disorder,Condition,SNOMED,Valid,Standard,1
+4147411,308121000,Follicular lymphoma,Disorder,Condition,SNOMED,Valid,Standard,1
+4146517,3483000,Chronic peptic ulcer with perforation,Disorder,Condition,SNOMED,Valid,Standard,1
+4143969,266238009,Isolated (Fiedler's) myocarditis,Disorder,Condition,SNOMED,Valid,Standard,1
+4141106,33591000,Thrombosis of arteries of the extremities,Disorder,Condition,SNOMED,Valid,Standard,1
+4137468,31928004,Abscess of skin and/or subcutaneous tissue,Disorder,Condition,SNOMED,Valid,Standard,1
+4134552,398100001,Hereditary motor and sensory neuropathy,Disorder,Condition,SNOMED,Valid,Standard,1
+4130372,126764002,Congenital anomaly of intestinal tract,Disorder,Condition,SNOMED,Valid,Standard,1
+4125650,234467004,Thrombophilia,Disorder,Condition,SNOMED,Valid,Standard,1
+4121803,234142008,Cerebral arteriovenous malformation,Disorder,Condition,SNOMED,Valid,Standard,1
+4121038,258149004,Swallowing finding,Clinical Finding,Observation,SNOMED,Valid,Standard,1
+4112820,195889001,Legionella pneumonia,Disorder,Condition,SNOMED,Valid,Standard,1
+4112026,195243003,Sequelae of cerebral infarction,Disorder,Condition,SNOMED,Valid,Standard,1
+4110192,195189003,Cerebral infarction due to thrombosis of cerebral arteries,Disorder,Condition,SNOMED,Valid,Standard,1
+4103703,2901004,Melena,Disorder,Condition,SNOMED,Valid,Standard,1
+4100857,190966007,Extreme obesity with alveolar hypoventilation,Disorder,Condition,SNOMED,Valid,Standard,1
+4096519,189488006,"Neoplasm of uncertain or unknown behavior of brain, infratentorial",Disorder,Condition,SNOMED,Valid,Standard,1
+4095598,188089003,Malignant neoplasm of skin of ear and external auditory canal,Disorder,Condition,SNOMED,Valid,Standard,1
+4095589,188032002,Malignant melanoma of ear and/or external auditory canal,Disorder,Condition,SNOMED,Invalid,Non-standard,1
+4095018,188015001,Malignant neoplasm of connective and soft tissue of abdomen,Disorder,Condition,SNOMED,Invalid,Non-standard,1
+4094548,188718006,Extramedullary plasmacytoma,Disorder,Condition,SNOMED,Valid,Standard,1
+4092223,187906008,Malignant neoplasm of orbital bone,Disorder,Condition,SNOMED,Valid,Standard,1
+4086243,24369008,Pulmonary sarcoidosis,Disorder,Condition,SNOMED,Valid,Standard,1
+4070569,17760001,Anomaly of chromosome pair 13,Disorder,Condition,SNOMED,Valid,Standard,1
+4057432,16838000,Mediastinal emphysema,Disorder,Condition,SNOMED,Valid,Standard,1
+4055201,197244008,Angiodysplasia of colon,Disorder,Condition,SNOMED,Invalid,Non-standard,1
+4054513,126675008,Neoplasm of accessory sinus,Disorder,Condition,SNOMED,Valid,Standard,1
+4053863,242387001,Fall due to slipping on ice or snow,Event,Observation,SNOMED,Valid,Standard,1
+4050977,21007002,Wernicke's disease,Disorder,Condition,SNOMED,Valid,Standard,1
+4049659,20908003,Subcortical hemorrhage,Disorder,Condition,SNOMED,Valid,Standard,1
+40489912,448421008,Sepsis caused by Streptococcus pneumoniae,Disorder,Condition,SNOMED,Valid,Standard,1
+40486896,446189008,Primary malignant neoplasm of extrahepatic bile duct,Disorder,Condition,SNOMED,Valid,Standard,1
+40485046,444133002,Progressive systemic sclerosis,Disorder,Condition,SNOMED,Valid,Standard,1
+40481857,442110002,Fibrosis of pleura,Disorder,Condition,SNOMED,Valid,Standard,1
+40481101,444827008,Erythema of skin,Disorder,Condition,SNOMED,Valid,Standard,1
+4044745,22996003,Splenic infarction,Disorder,Condition,SNOMED,Valid,Standard,1
+4043378,230270009,Frontotemporal dementia,Disorder,Condition,SNOMED,Valid,Standard,1
+4007583,205808005,Congenital malformation syndromes associated with short stature,Disorder,Condition,SNOMED,Valid,Standard,1
+4005764,204667006,Congenital diverticulum of esophagus,Disorder,Condition,SNOMED,Valid,Standard,1
+4005622,204552001,Congenital subglottic stenosis,Disorder,Condition,SNOMED,Valid,Standard,1
+4004672,11061003,Psychoactive substance use disorder,Disorder,Condition,SNOMED,Invalid,Non-standard,1
+4003185,109996008,Refractory anemia (clinical),Disorder,Condition,SNOMED,Invalid,Non-standard,1
+4002356,109968002,"Diffuse non-Hodgkin's lymphoma, small cell (clinical)",Disorder,Condition,SNOMED,Valid,Standard,1
+4001172,109843000,Hepatoblastoma,Disorder,Condition,SNOMED,Valid,Standard,1
+380702,40720005,Cerebral cyst,Disorder,Condition,SNOMED,Valid,Standard,1
+378839,53318002,Spina bifida with hydrocephalus,Disorder,Condition,SNOMED,Valid,Standard,1
+377821,421468001,Disorder of nervous system due to type 1 diabetes mellitus,Disorder,Condition,SNOMED,Valid,Standard,1
+377802,110270004,Late effects of poliomyelitis,Disorder,Condition,SNOMED,Valid,Standard,1
+377085,57148006,Congenital anomaly of brain,Disorder,Condition,SNOMED,Valid,Standard,1
+376690,2032001,Cerebral edema,Disorder,Condition,SNOMED,Valid,Standard,1
+376337,118940003,Disorder of nervous system,Disorder,Condition,SNOMED,Valid,Standard,1
+374021,83942000,Acute disseminated encephalomyelitis,Disorder,Condition,SNOMED,Valid,Standard,1
+372605,5262007,Spinal muscular atrophy,Disorder,Condition,SNOMED,Valid,Standard,1
+372547,34476008,Viral encephalitis,Disorder,Condition,SNOMED,Valid,Standard,1
+37018348,714821006,Recurrent hematuria co-occurrent and due to diffuse membranous glomerulonephritis,Disorder,Condition,SNOMED,Valid,Standard,1
+37016176,135761000119101,Cerebral degeneration due to alcoholism,Disorder,Condition,SNOMED,Valid,Standard,1
+36716700,722855007,Perforation and abscess of large intestine co-occurrent and due to diverticulitis,Disorder,Condition,SNOMED,Valid,Standard,1
+36716624,722694005,Neoplasm of uncertain behavior of bone and articular cartilage,Disorder,Condition,SNOMED,Valid,Standard,1
+35226222,OMOP5031769,Metastasis to digestive organ,Metastasis,Measurement,Cancer Modifier,Valid,Standard,1
+321887,359557001,Disorder of artery,Disorder,Condition,SNOMED,Valid,Standard,1
+321886,46126003,Rupture of artery,Disorder,Condition,SNOMED,Valid,Standard,1
+321107,28656008,Congenital insufficiency of aortic valve,Disorder,Condition,SNOMED,Valid,Standard,1
+320744,27885002,Complete atrioventricular block,Disorder,Condition,SNOMED,Valid,Standard,1
+31884,35563005,Acquired diverticulum of esophagus,Disorder,Condition,SNOMED,Valid,Standard,1
+318776,31085000,Rheumatic mitral regurgitation,Disorder,Condition,SNOMED,Valid,Standard,1
+318772,55855009,Disorder of pericardium,Disorder,Condition,SNOMED,Valid,Standard,1
+318186,45564002,Achalasia of esophagus,Disorder,Condition,SNOMED,Valid,Standard,1
+317814,92132009,Benign neoplasm of heart,Disorder,Condition,SNOMED,Valid,Standard,1
+317585,67362008,Aortic aneurysm,Disorder,Condition,SNOMED,Valid,Standard,1
+317248,414027002,Disorder of hematopoietic structure,Disorder,Condition,SNOMED,Valid,Standard,1
+316427,50570003,Aneurysm of coronary vessels,Disorder,Condition,SNOMED,Valid,Standard,1
+31509,372020000,Primary malignant neoplasm of tonsil,Disorder,Condition,SNOMED,Valid,Standard,1
+314463,59877000,Congenital anomaly of aorta,Disorder,Condition,SNOMED,Valid,Standard,1
+313800,126729006,Thrombotic microangiopathy,Disorder,Condition,SNOMED,Valid,Standard,1
+312938,50490005,Hypertensive encephalopathy,Disorder,Condition,SNOMED,Valid,Standard,1
+312653,46701001,Acute myocarditis,Disorder,Condition,SNOMED,Valid,Standard,1
+312437,267036007,Dyspnea,Clinical Finding,Condition,SNOMED,Valid,Standard,1
+312337,266262004,Arterial embolus and thrombosis,Disorder,Condition,SNOMED,Valid,Standard,1
+30968,15771004,Diabetes insipidus,Disorder,Condition,SNOMED,Invalid,Non-standard,1
+30683,416180004,Hemoglobin SS disease without crisis,Disorder,Condition,SNOMED,Valid,Standard,1
+261883,271503005,Empyema with fistula,Disorder,Condition,SNOMED,Valid,Standard,1
+261880,46621007,Atelectasis,Disorder,Condition,SNOMED,Valid,Standard,1
+261326,75570004,Viral pneumonia,Disorder,Condition,SNOMED,Valid,Standard,1
+261324,34020007,Pneumonia caused by Streptococcus,Disorder,Condition,SNOMED,Valid,Standard,1
+260336,93816002,Primary malignant neoplasm of glottis,Disorder,Condition,SNOMED,Valid,Standard,1
+257010,73452002,Abscess of lung,Disorder,Condition,SNOMED,Valid,Standard,1
+256722,396285007,Bronchopneumonia,Disorder,Condition,SNOMED,Valid,Standard,1
+256622,84353005,Pulmonary disease caused by Mycobacteria,Disorder,Condition,SNOMED,Valid,Standard,1
+255841,63480004,Chronic bronchitis,Disorder,Condition,SNOMED,Valid,Standard,1
+255302,80423007,Spontaneous pneumothorax,Disorder,Condition,SNOMED,Valid,Standard,1
+254591,94391008,Metastatic malignant neoplasm to lung,Disorder,Condition,SNOMED,Valid,Non-standard,1
+253796,36118008,Pneumothorax,Disorder,Condition,SNOMED,Valid,Standard,1
+253790,64479007,Pneumonia caused by Klebsiella pneumoniae,Disorder,Condition,SNOMED,Valid,Standard,1
+253549,105969002,Disorder of connective tissue,Disorder,Condition,SNOMED,Valid,Standard,1
+24296,93964007,Primary malignant neoplasm of pituitary gland,Disorder,Condition,SNOMED,Valid,Standard,1
+201901,27916005,Abscess of liver,Disorder,Condition,SNOMED,Valid,Standard,1
+201606,34000006,Crohn's disease,Disorder,Condition,SNOMED,Valid,Standard,1
+201603,105995000,Disorder of teeth AND/OR supporting structures,Disorder,Condition,SNOMED,Valid,Standard,1
+201344,40046003,Intestinovesical fistula,Disorder,Condition,SNOMED,Valid,Standard,1
+201231,188019007,Malignant neoplasm of connective and soft tissue of pelvis,Disorder,Condition,SNOMED,Invalid,Non-standard,1
+200485,225563000,Pressure injury of buttock,Disorder,Condition,SNOMED,Valid,Standard,1
+200054,94121005,Primary malignant neoplasm of ureter,Disorder,Condition,SNOMED,Valid,Standard,1
+199860,52515009,Hernia of abdominal cavity,Disorder,Condition,SNOMED,Valid,Standard,1
+199837,17920008,Portal vein thrombosis,Disorder,Condition,SNOMED,Valid,Standard,1
+199067,198130006,Female pelvic inflammatory disease,Disorder,Condition,SNOMED,Valid,Standard,1
+199064,111354009,Chronic vascular insufficiency of intestine,Disorder,Condition,SNOMED,Valid,Standard,1
+198803,266569009,Benign prostatic hyperplasia,Disorder,Condition,SNOMED,Valid,Standard,1
+198797,67508005,Umbilical hernia with gangrene,Disorder,Condition,SNOMED,Valid,Standard,1
+198465,33995003,Acquired megacolon,Disorder,Condition,SNOMED,Valid,Standard,1
+198249,69518005,Congenital anomaly of digestive system,Disorder,Condition,SNOMED,Valid,Standard,1
+198104,93665005,Primary malignant neoplasm of adrenal gland,Disorder,Condition,SNOMED,Valid,Standard,1
+198091,94092006,Primary malignant neoplasm of retroperitoneum,Disorder,Condition,SNOMED,Valid,Standard,1
+197917,105997008,Disorder of biliary tract,Disorder,Condition,SNOMED,Valid,Standard,1
+197605,128478005,Inflammatory disorder of male genital organ,Disorder,Condition,SNOMED,Valid,Standard,1
+196732,77225009,Blind loop syndrome,Disorder,Condition,SNOMED,Valid,Standard,1
+196724,48475001,Disorder of diaphragm,Disorder,Condition,SNOMED,Valid,Standard,1
+196469,25345001,Perforation of gallbladder,Disorder,Condition,SNOMED,Valid,Standard,1
+196456,235919008,Gallstone,Disorder,Condition,SNOMED,Valid,Standard,1
+196152,48661000,Peritonitis,Disorder,Condition,SNOMED,Valid,Standard,1
+195483,372005006,Primary malignant neoplasm of penis,Disorder,Condition,SNOMED,Valid,Standard,1
+195482,371992003,Primary malignant neoplasm of intestinal tract,Disorder,Condition,SNOMED,Valid,Standard,1
+195314,52254009,Nephrotic syndrome,Disorder,Condition,SNOMED,Valid,Standard,1
+194991,59771005,Calculus of gallbladder with acute cholecystitis,Disorder,Condition,SNOMED,Valid,Standard,1
+194990,128241005,Inflammatory disease of liver,Disorder,Condition,SNOMED,Valid,Standard,1
+194683,196859000,Obstructed umbilical hernia,Disorder,Condition,SNOMED,Valid,Standard,1
+194406,7163005,Urinary tract obstruction,Disorder,Condition,SNOMED,Valid,Standard,1
+194393,9250002,Celiac artery compression syndrome,Disorder,Condition,SNOMED,Valid,Standard,1
+193402,75375008,Bacterial enteritis of intestine,Disorder,Condition,SNOMED,Valid,Standard,1
+192680,34742003,Portal hypertension,Disorder,Condition,SNOMED,Valid,Standard,1
+192675,1761006,Biliary cirrhosis,Disorder,Condition,SNOMED,Valid,Standard,1
+141651,73442001,Stevens-Johnson syndrome,Disorder,Condition,SNOMED,Valid,Standard,1
+141253,14304000,Disorder of thyroid gland,Disorder,Condition,SNOMED,Valid,Standard,1
+140950,371990006,Primary malignant neoplasm of gum,Disorder,Condition,SNOMED,Valid,Standard,1
+140168,9014002,Psoriasis,Disorder,Condition,SNOMED,Valid,Standard,1
+140046,93787005,Primary malignant neoplasm of ethmoidal sinus,Disorder,Condition,SNOMED,Valid,Standard,1
+138388,91478007,Secondary hyperparathyroidism,Disorder,Condition,SNOMED,Valid,Standard,1
+138387,90739004,Thyrotoxicosis,Disorder,Condition,SNOMED,Valid,Standard,1
+137800,93889000,Primary malignant neoplasm of maxillary sinus,Disorder,Condition,SNOMED,Valid,Standard,1
+136917,94022001,Primary malignant neoplasm of skin of face,Disorder,Condition,SNOMED,Valid,Standard,1
+135750,93802007,Primary malignant neoplasm of floor of mouth,Disorder,Condition,SNOMED,Valid,Standard,1
+135526,48522003,Spinal cord disease,Disorder,Condition,SNOMED,Valid,Standard,1
+135491,94068003,Primary malignant neoplasm of spinal cord,Disorder,Condition,SNOMED,Valid,Standard,1
+135287,195381005,Non-neoplastic nevus,Disorder,Condition,SNOMED,Valid,Standard,1
+134765,238108007,Cachexia,Clinical Finding,Condition,SNOMED,Valid,Standard,1
+134735,40970001,Chronic osteomyelitis,Disorder,Condition,SNOMED,Valid,Standard,1
+132617,58193001,Diplegic cerebral palsy,Disorder,Condition,SNOMED,Valid,Standard,1

@@ -1,0 +1,174 @@
+original_concept_id,original_code,original_name,original_vocab,snomed_concept_id,snomed_concept_code,snomed_concept_name,snomed_vocab,mapping_relationship,frequency
+3195542,27320001000004102,Advance directive not in chart,Nebraska Lexicon,4151021,310301000,Advanced directive status,SNOMED,Is a,32507
+3173773,3330001000004107,Family history of uterine cancer,Nebraska Lexicon,4050798,160299006,FH: neoplasm of uterus,SNOMED,Subsumes,1165
+3187032,26810001000004106,Family history of cerebral aneurysm,Nebraska Lexicon,4148407,266894000,FH: Cardiovascular disease,SNOMED,Is a,1044
+3183518,3050001000004105,Family history of melanoma,Nebraska Lexicon,4171594,275937001,Family history of malignant neoplasm,SNOMED,Is a,623
+45946744,162542,Adhesive tape,CIEL,4225586,84756000,Adhesive tape,SNOMED,Maps to,603
+3169404,12740001000004102,Family history of pulmonary embolism,Nebraska Lexicon,4148407,266894000,FH: Cardiovascular disease,SNOMED,Subsumes,432
+3169855,3140001000004100,Family history of brain aneurysm,Nebraska Lexicon,4148407,266894000,FH: Cardiovascular disease,SNOMED,Subsumes,416
+3186046,9030001000004108,Family history of thyroid cancer,Nebraska Lexicon,4171594,275937001,Family history of malignant neoplasm,SNOMED,Is a,415
+3183101,3480001000004107,Family history of cervical cancer,Nebraska Lexicon,4053374,160298003,FH: neoplasm of cervix,SNOMED,Is a,414
+3168373,3070001000004108,Family history of colon polyps,Nebraska Lexicon,4144262,266883004,Family history of neoplasm,SNOMED,Subsumes,393
+3265453,260152009,Cat dander,Nebraska Lexicon,4125384,260152009,Cat dander,SNOMED,Maps to,203
+3225200,75413007,Peanut,Nebraska Lexicon,4328724,75413007,Arachis hypogaea,SNOMED,Maps to,188
+45951856,162539,Mold,CIEL,4224654,84489001,Mold,SNOMED,Maps to,166
+3171243,3430001000004100,Family history of testicular cancer,Nebraska Lexicon,4144262,266883004,Family history of neoplasm,SNOMED,Subsumes,146
+3053893,89811004,Gluten,Nebraska Lexicon,4231692,89811004,Gluten,SNOMED,Maps to,135
+3341086,260154005,Dog dander,Nebraska Lexicon,4128602,260154005,Dog dander,SNOMED,Maps to,100
+3421369,442571000124108,Tree nut,Nebraska Lexicon,36713251,442571000124108,Tree nut,SNOMED,Maps to,95
+3354837,256307007,Banana,Nebraska Lexicon,4106295,256307007,Banana,SNOMED,Maps to,67
+3334607,256277009,Grass pollen,Nebraska Lexicon,4117479,256277009,Grass pollen,SNOMED,Maps to,67
+3353751,256313003,Pineapple,Nebraska Lexicon,4106297,256313003,Pineapple,SNOMED,Maps to,53
+3173276,20680001000004108,Family history of Addison's disease,Nebraska Lexicon,4050799,160301004,Family history of endocrine disorders,SNOMED,Subsumes,52
+3395358,128488006,House dust,Nebraska Lexicon,4027234,128488006,House dust,SNOMED,Maps to,51
+3214009,734881000,Tomato,Nebraska Lexicon,42536194,734881000,Tomato,SNOMED,Maps to,43
+3054152,55242003,Tomato,Nebraska Lexicon,4208416,55242003,Lycopersicon esculentum,SNOMED,Maps to,43
+3291917,735045008,Mushroom,Nebraska Lexicon,42536301,735045008,Mushroom,SNOMED,Maps to,42
+3223094,735211005,Coconut,Nebraska Lexicon,42536405,735211005,Coconut,SNOMED,Maps to,42
+45951470,162177,Wheat,CIEL,4261709,412071004,Wheat,SNOMED,Maps to,41
+3379579,65256004,Wheat,Nebraska Lexicon,4278230,65256004,Triticum aestivum - wheat,SNOMED,Maps to,41
+3294778,6788000,Wheat,Nebraska Lexicon,4194764,6788000,Triticum - wheat,SNOMED,Maps to,41
+3175262,412071004,Wheat,Nebraska Lexicon,4261709,412071004,Wheat,SNOMED,Maps to,41
+3283208,69334009,Ragweed,Nebraska Lexicon,4239367,69334009,Ambrosia,SNOMED,Maps to,40
+2618150,H1000,"Prenatal care, at-risk assessment",HCPCS,4024608,225314003,Risk management,SNOMED,Is a,38
+43533367,G8981,"Changing & maintaining body position functional limitation, current status, at therapy episode outset and at reporting intervals (Deprecated)",HCPCS,4041848,229824005,Positioning patient,SNOMED,Subsumes,35
+3190203,3190001000004107,Family history of retinitis pigmentosa,Nebraska Lexicon,4050813,160346003,FH: Eye disorder,SNOMED,Is a,33
+953288,G2012,"Brief communication technology-based service, e.g. virtual check-in, by a physician or other qualified health care professional who can report evaluation and management services, provided to an established patient, not originating from a r... (Deprecated)",HCPCS,4088561,185316007,Indirect encounter,SNOMED,Is a,32
+3302493,735047000,Onion,Nebraska Lexicon,42539479,735047000,Onion,SNOMED,Maps to,30
+3250324,2447002,Corn,Nebraska Lexicon,4087403,2447002,Zea - corn,SNOMED,Maps to,30
+3216763,80397000,Onion,Nebraska Lexicon,4213608,80397000,Allium cepa,SNOMED,Maps to,30
+45441520,1151.00,No known allergies,Read,37396387,716186003,No known allergy,SNOMED,Maps to,29
+3412164,260147004,House dust mite,Nebraska Lexicon,4125382,260147004,House dust mite,SNOMED,Maps to,29
+3302473,264287008,Animal dander,Nebraska Lexicon,4138133,264287008,Animal dander,SNOMED,Maps to,29
+43533325,G8982,"Changing & maintaining body position functional limitation, projected goal status, at therapy episode outset, at reporting intervals, and at discharge or to end reporting (Deprecated)",HCPCS,4041848,229824005,Positioning patient,SNOMED,Subsumes,24
+3356622,735249009,Avocado,Nebraska Lexicon,42536428,735249009,Avocado,SNOMED,Maps to,24
+3293343,28140004,Avocado,Nebraska Lexicon,4151052,28140004,Persea americana,SNOMED,Maps to,24
+3249451,75665004,Monosodium glutamate,Nebraska Lexicon,4192848,75665004,Monosodium glutamate,SNOMED,Maps to,24
+3273932,735049002,Peach,Nebraska Lexicon,42536304,735049002,Peach,SNOMED,Maps to,23
+3233333,75618005,Peach,Nebraska Lexicon,4328090,75618005,Prunus persica,SNOMED,Maps to,23
+3337994,88161000,Mango,Nebraska Lexicon,4339307,88161000,Mangifera indica,SNOMED,Maps to,22
+3275426,418785009,Perfume,Nebraska Lexicon,4303397,418785009,Perfume,SNOMED,Maps to,21
+3388694,256260009,Tree and shrub pollen,Nebraska Lexicon,4114081,256260009,Tree and shrub pollen,SNOMED,Maps to,20
+3317964,406951002,Silver,Nebraska Lexicon,4249532,406951002,Silver stain,SNOMED,Maps to,20
+3338194,735215001,Apple,Nebraska Lexicon,42536408,735215001,Apple,SNOMED,Maps to,19
+3334311,46051000,Apple,Nebraska Lexicon,4263597,46051000,Malus,SNOMED,Maps to,19
+3351196,260177005,Melon,Nebraska Lexicon,4125392,260177005,Melon,SNOMED,Maps to,18
+3337473,59627001,Garlic,Nebraska Lexicon,4245761,59627001,Allium ameloprasum,SNOMED,Maps to,18
+3315834,735030001,Garlic,Nebraska Lexicon,42536289,735030001,Garlic,SNOMED,Maps to,18
+3330269,69240000,Walnut,Nebraska Lexicon,4238863,69240000,Juglans,SNOMED,Maps to,15
+3281207,102264005,Cheese,Nebraska Lexicon,4008485,102264005,Cheese,SNOMED,Maps to,15
+3173963,227598003,Honey,Nebraska Lexicon,4028010,227598003,Honey,SNOMED,Maps to,15
+3291984,256303006,Ragweed pollen,Nebraska Lexicon,4103592,256303006,Ragweed pollen,SNOMED,Maps to,14
+3174454,227388008,Cinnamon,Nebraska Lexicon,4027831,227388008,Cinnamon,SNOMED,Maps to,14
+3219155,419420009,Watermelon,Nebraska Lexicon,4304100,419420009,Watermelon,SNOMED,Maps to,13
+3397045,736159005,Crab,Nebraska Lexicon,42537048,736159005,Crab,SNOMED,Maps to,12
+3231249,419604006,Weed pollen,Nebraska Lexicon,4304558,419604006,Weed pollen,SNOMED,Maps to,12
+3378058,412062008,Cantaloupe,Nebraska Lexicon,4258933,412062008,Cantaloupe,SNOMED,Maps to,11
+3342566,256417003,Horse dander,Nebraska Lexicon,4103794,256417003,Horse dander,SNOMED,Maps to,11
+3189807,446275006,Laundry detergent,Nebraska Lexicon,40486992,446275006,Laundry detergent,SNOMED,Maps to,11
+3182975,256443002,Egg white,Nebraska Lexicon,4103922,256443002,Egg white,SNOMED,Maps to,11
+3391228,103442008,Haemophilus influenzae type b,Nebraska Lexicon,4013412,103442008,Haemophilus influenzae type b,SNOMED,Maps to,10
+3250424,73622002,Cherry,Nebraska Lexicon,4249182,73622002,Prunus cerasus,SNOMED,Maps to,10
+3221457,256319004,Carrot,Nebraska Lexicon,4106300,256319004,Carrot,SNOMED,Maps to,10
+3380437,412161004,Wool,Nebraska Lexicon,4135901,412161004,Wool,SNOMED,Maps to,9
+3346054,735123009,Broccoli,Nebraska Lexicon,42536344,735123009,Broccoli,SNOMED,Maps to,9
+3336475,256435007,Feathers,Nebraska Lexicon,4107479,256435007,Feather,SNOMED,Maps to,9
+3277041,1007001,Broccoli,Nebraska Lexicon,4002790,1007001,Brassica oleracea,SNOMED,Maps to,9
+3268418,260167008,Sesame seed,Nebraska Lexicon,4125389,260167008,Sesame seed,SNOMED,Maps to,9
+3324279,256315005,Grapefruit,Nebraska Lexicon,4103594,256315005,Grapefruit,SNOMED,Maps to,8
+3234870,901000161107,Cocoa,Nebraska Lexicon,764951,901000161107,Cocoa,SNOMED,Maps to,8
+42596056,30771000009100,Shellfish,SNOMED Veterinary,4183412,54787006,Shellfish,SNOMED,Maps to,7
+3373587,54803003,Cucumber,Nebraska Lexicon,4183007,54803003,Cucumis,SNOMED,Maps to,7
+3343730,735029006,Shellfish,Nebraska Lexicon,42536288,735029006,Shellfish,SNOMED,Maps to,7
+3333890,54787006,Shellfish,Nebraska Lexicon,4183412,54787006,Shellfish,SNOMED,Maps to,7
+3282620,735213008,Cucumber,Nebraska Lexicon,42536406,735213008,Cucumber,SNOMED,Maps to,7
+3279921,25352004,Pear,Nebraska Lexicon,4101623,25352004,Pear,SNOMED,Maps to,7
+3053724,735050002,Pear,Nebraska Lexicon,42536305,735050002,Pear,SNOMED,Maps to,7
+3384872,735214002,Apricot,Nebraska Lexicon,42536407,735214002,Apricot,SNOMED,Maps to,6
+3384293,15784008,Apricot,Nebraska Lexicon,4049301,15784008,Prunus armeniaca,SNOMED,Maps to,6
+3307520,26949008,Oats,Nebraska Lexicon,4098704,26949008,Avena,SNOMED,Maps to,6
+3248051,735336002,Cauliflower,Nebraska Lexicon,42539023,735336002,Cauliflower,SNOMED,Maps to,6
+3214027,9424004,Oats,Nebraska Lexicon,4246456,9424004,Cultivated oat,SNOMED,Maps to,6
+3054004,418504009,Oats,Nebraska Lexicon,4303810,418504009,Oat,SNOMED,Maps to,6
+1353228,42954,vitamin B6,RxNorm,37312705,787979009,Cyanocobalamin- and folic acid- and pyridoxine-containing product,SNOMED,Maps to,6
+3411627,21655001,Senna,Nebraska Lexicon,4070772,21655001,Cassia acutifolia,SNOMED,Maps to,5
+3393098,227400003,Ginger,Nebraska Lexicon,4039032,227400003,Ginger,SNOMED,Maps to,5
+3383107,735124003,Barley,Nebraska Lexicon,42539513,735124003,Barley,SNOMED,Maps to,5
+3356130,256354006,Bean,Nebraska Lexicon,4103602,256354006,Bean,SNOMED,Maps to,5
+3349410,256442007,Egg yolk,Nebraska Lexicon,4103921,256442007,Egg yolk,SNOMED,Maps to,5
+3290446,226770007,Whey,Nebraska Lexicon,4025779,226770007,Whey,SNOMED,Maps to,5
+3284005,67324005,Rice,Nebraska Lexicon,4284846,67324005,Rice,SNOMED,Maps to,5
+3272120,62093005,Yeast,Nebraska Lexicon,4265186,62093005,Yeast,SNOMED,Maps to,5
+3270382,280939008,Insect venom,Nebraska Lexicon,4091698,280939008,Insect venom,SNOMED,Maps to,5
+3269891,227218003,Asparagus,Nebraska Lexicon,4037453,227218003,Asparagus,SNOMED,Maps to,5
+3259164,256329006,Spinach,Nebraska Lexicon,4103779,256329006,Spinach,SNOMED,Maps to,5
+3253901,2003004,Barley,Nebraska Lexicon,4066239,2003004,Hordeum,SNOMED,Maps to,5
+43533181,G8983,"Changing & maintaining body position functional limitation, discharge status, at discharge from therapy or to end reporting (Deprecated)",HCPCS,4041848,229824005,Positioning patient,SNOMED,Subsumes,4
+3442047,29263009,Coffee,Nebraska Lexicon,4162308,29263009,Coffee,SNOMED,Maps to,4
+3389786,16326002,Aloe,Nebraska Lexicon,4038914,16326002,Aloe,SNOMED,Maps to,4
+3353882,726750009,Rhubarb,Nebraska Lexicon,37111682,726750009,Rhubarb,SNOMED,Maps to,4
+3339138,72903004,Rhubarb,Nebraska Lexicon,4217986,72903004,Rheum rhaponicum,SNOMED,Maps to,4
+3333478,260205009,Sunflower seed,Nebraska Lexicon,4125398,260205009,Sunflower seed,SNOMED,Maps to,4
+3278683,227150003,Mussels,Nebraska Lexicon,4026892,227150003,Mussel,SNOMED,Maps to,4
+3265663,32354004,Eucalyptus,Nebraska Lexicon,4137928,32354004,Eucalyptus,SNOMED,Maps to,4
+3184446,102408007,Cigarette smoke,Nebraska Lexicon,4010323,102408007,Cigarette smoke,SNOMED,Maps to,4
+3183247,256326004,Celery,Nebraska Lexicon,4104625,256326004,Celery,SNOMED,Maps to,4
+42596015,30731000009102,Turkey,SNOMED Veterinary,4245370,396529002,Meleagris - turkeys,SNOMED,Is a,3
+3405059,10646007,Buckwheat,Nebraska Lexicon,4024333,10646007,Fagopyrum esculentum,SNOMED,Maps to,3
+3397006,51905005,Mustard,Nebraska Lexicon,4202198,51905005,Mustard,SNOMED,Maps to,3
+3360542,735108004,Cabbage,Nebraska Lexicon,42536335,735108004,Cabbage,SNOMED,Maps to,3
+3356075,735053000,Potato,Nebraska Lexicon,42536307,735053000,Potato,SNOMED,Maps to,3
+3350400,227441008,Pomegranate,Nebraska Lexicon,4027962,227441008,Pomegranate,SNOMED,Maps to,3
+3295932,103584003,Papaya,Nebraska Lexicon,4013438,103584003,Carica papaya - papaya,SNOMED,Maps to,3
+3295604,1590002,Potato,Nebraska Lexicon,4050520,1590002,Irish potato,SNOMED,Maps to,3
+3286045,227410007,Rosemary,Nebraska Lexicon,4026199,227410007,Rosemary,SNOMED,Maps to,3
+3265665,735340006,Lemon,Nebraska Lexicon,42536454,735340006,Lemon,SNOMED,Maps to,3
+3251019,50593009,Casein,Nebraska Lexicon,4177499,50593009,Casein,SNOMED,Maps to,3
+3232858,16719004,Flowers,Nebraska Lexicon,4042227,16719004,Flowers,SNOMED,Maps to,3
+3218615,125706008,Sodium benzoate,Nebraska Lexicon,4053618,125706008,Sodium benzoate,SNOMED,Maps to,3
+3054065,103589008,Lemon,Nebraska Lexicon,4013888,103589008,Citrus limon,SNOMED,Maps to,3
+40217302,G1004,"Clinical decision support mechanism national decision support company, as defined by the medicare appropriate use criteria program",HCPCS,44807134,815751000000108,Shared decision making with decision support,SNOMED,Subsumes,2
+3410182,447761000124107,Fabric softener,Nebraska Lexicon,763851,447761000124107,Fabric softener,SNOMED,Maps to,2
+3404057,10083006,Marijuana,Nebraska Lexicon,4004259,10083006,Cannabis sativa,SNOMED,Maps to,2
+3395433,288326000,Hornet venom,Nebraska Lexicon,4126083,288326000,Hornet venom,SNOMED,Maps to,2
+3382890,227549007,Mayonnaise,Nebraska Lexicon,4027997,227549007,Mayonnaise,SNOMED,Maps to,2
+3372048,103596005,Mint,Nebraska Lexicon,4013441,103596005,Mentha,SNOMED,Maps to,2
+3370524,227350006,Lentils,Nebraska Lexicon,4025400,227350006,Lentils,SNOMED,Maps to,2
+3369953,303315009,Spider venom,Nebraska Lexicon,4122629,303315009,Spider venom,SNOMED,Maps to,2
+3348342,735046009,Nutmeg,Nebraska Lexicon,42536302,735046009,Nutmeg,SNOMED,Maps to,2
+3334738,103599003,Peppermint,Nebraska Lexicon,4013444,103599003,Mentha piperita,SNOMED,Maps to,2
+3293656,735051003,Plum,Nebraska Lexicon,42536306,735051003,Plum,SNOMED,Maps to,2
+3293251,8206006,Nutmeg,Nebraska Lexicon,4219373,8206006,Myristica fragrans,SNOMED,Maps to,2
+3256285,314115004,Raw vegetable,Nebraska Lexicon,4193035,314115004,Raw vegetable,SNOMED,Maps to,2
+3214268,256325000,Radish,Nebraska Lexicon,4103596,256325000,Radish,SNOMED,Maps to,2
+3213803,227411006,Sage,Nebraska Lexicon,4027958,227411006,Sage,SNOMED,Maps to,2
+3182081,710178007,Flaxseed,Nebraska Lexicon,46271909,710178007,Linseed,SNOMED,Maps to,2
+3173578,227408005,Paprika,Nebraska Lexicon,4026198,227408005,Paprika,SNOMED,Maps to,2
+3054086,412156001,Silk,Nebraska Lexicon,4259065,412156001,Silk,SNOMED,Maps to,2
+3054005,1785003,Plum,Nebraska Lexicon,4075576,1785003,Prunus domestica,SNOMED,Maps to,2
+724904,213,"SARS-COV-2 (COVID-19) vaccine, UNSPECIFIED",CVX,37155722,30141000087107,SARS-CoV-2 virus-like particle antigen vaccine,SNOMED,Maps to,1
+3517568,734577006,C1 esterase inhibitor,Nebraska Lexicon,42536008,734577006,C1 esterase inhibitor,SNOMED,Maps to,1
+3417744,54688007,Fire ant,Nebraska Lexicon,4183294,54688007,Fire ant,SNOMED,Maps to,1
+3389675,227413009,Thyme,Nebraska Lexicon,4025417,227413009,Thyme,SNOMED,Maps to,1
+3377465,735010000,Saffron,Nebraska Lexicon,42536275,735010000,Saffron,SNOMED,Maps to,1
+3358992,18424005,Alfalfa,Nebraska Lexicon,4086467,18424005,Medicago sativa,SNOMED,Maps to,1
+3330039,227435001,Nectarine,Nebraska Lexicon,4039038,227435001,Nectarine,SNOMED,Maps to,1
+3328638,227377002,Asafetida,Nebraska Lexicon,4027826,227377002,Asafetida,SNOMED,Maps to,1
+3319596,412060000,Black pepper,Nebraska Lexicon,4135798,412060000,Black pepper,SNOMED,Maps to,1
+3308175,227254004,Okra,Nebraska Lexicon,4025075,227254004,Okra,SNOMED,Maps to,1
+3288153,735048005,Parsley,Nebraska Lexicon,42536303,735048005,Parsley,SNOMED,Maps to,1
+3281411,256351003,Brazil nut,Nebraska Lexicon,4106306,256351003,Brazil nut,SNOMED,Maps to,1
+3263784,229944000,Wheat flour,Nebraska Lexicon,4044740,229944000,Wheat flour,SNOMED,Maps to,1
+3245788,716624002,Alfalfa,Nebraska Lexicon,37396718,716624002,Alfalfa,SNOMED,Maps to,1
+3237999,7852009,Lima bean,Nebraska Lexicon,4302743,7852009,Lima bean,SNOMED,Maps to,1
+3237058,88818001,Rabbit,Nebraska Lexicon,4228075,88818001,Rabbit,SNOMED,Maps to,1
+3236473,243678009,Crayfish,Nebraska Lexicon,4085772,243678009,Crayfish,SNOMED,Maps to,1
+3228311,735972003,Crayfish,Nebraska Lexicon,42536928,735972003,Crayfish,SNOMED,Maps to,1
+3228070,59545008,Pesticide,Nebraska Lexicon,4245743,59545008,Pesticide,SNOMED,Maps to,1
+3227723,259100002,Gamma-aminobutyric acid,Nebraska Lexicon,4123523,259100002,Gamma-aminobutyric acid,SNOMED,Maps to,1
+3226916,227260004,Pumpkin,Nebraska Lexicon,4025266,227260004,Pumpkin,SNOMED,Maps to,1
+3223062,227414003,Turmeric,Nebraska Lexicon,4025418,227414003,Turmeric,SNOMED,Maps to,1
+3222488,710318008,Lactobacillus,Nebraska Lexicon,46272024,710318008,Lactobacillus,SNOMED,Maps to,1
+3215958,103597001,Spearmint,Nebraska Lexicon,4013442,103597001,Mentha spicata,SNOMED,Maps to,1
+3176911,90563009,Juniper,Nebraska Lexicon,4235129,90563009,Juniperus,SNOMED,Maps to,1
+2617334,G0249,"Provision of test materials and equipment for home inr monitoring of patient with either mechanical heart valve(s), chronic atrial fibrillation, or venous thromboembolism who meets medicare coverage criteria; includes: provision of materials for use in...",HCPCS,4204919,439202006,Monitoring of international normalized ratio,SNOMED,Subsumes,1

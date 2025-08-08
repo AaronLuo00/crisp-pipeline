@@ -1,0 +1,6 @@
+Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
+38003564,38003564,Not Hispanic or Latino,Ethnicity,Ethnicity,Ethnicity,Valid,Standard,332376
+38003563,38003563,Hispanic or Latino,Ethnicity,Ethnicity,Ethnicity,Valid,Standard,21260
+0,0,No matching concept,Ethnicity,Metadata,None,Valid,Standard,15942
+44789059,44789059,Patient ethnicity unknown,Ethnicity,Ethnicity,SNOMED,Valid,Standard,1621
+35607960,35607960,Refusal by patient to provide information about ethnic group,Ethnicity,Ethnicity,SNOMED,Valid,Standard,166

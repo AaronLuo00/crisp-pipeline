@@ -1,0 +1,21 @@
+original_concept_id,original_code,original_name,original_vocab,snomed_concept_id,snomed_concept_code,snomed_concept_name,snomed_vocab,mapping_relationship,frequency
+2211851,77334,"Treatment devices, design and construction; complex (irregular blocks, special shields, compensators, wedges, molds or casts)",CPT4,4235761,90564003,Field block design and fabrication,SNOMED,Is a,7835
+2719510,L0810,"Halo procedure, cervical halo incorporated into jacket vest",HCPCS,4036582,228595003,Provision of orthosis,SNOMED,Is a,480
+2719957,L4205,"Repair of orthotic device, labor component, per 15 minutes",HCPCS,4030855,14490000,Orthotic device construction and fitting,SNOMED,Subsumes,315
+2720001,L5450,"Immediate post surgical or early fitting, application of non-weight bearing rigid dressing, below knee",HCPCS,4305581,3895009,Application of dressing,SNOMED,Is a,211
+2720091,L5700,"Replacement, socket, below knee, molded to patient model",HCPCS,4297706,384728007,Replacement of device,SNOMED,Subsumes,157
+2720092,L5701,"Replacement, socket, above knee/knee disarticulation, including attachment plate, molded to patient model",HCPCS,4297706,384728007,Replacement of device,SNOMED,Is a,87
+2720002,L5460,"Immediate post surgical or early fitting, application of non-weight bearing rigid dressing, above knee",HCPCS,4305581,3895009,Application of dressing,SNOMED,Is a,78
+2615434,B4081,Nasogastric tubing with stylet,HCPCS,4227418,87750000,Insertion of nasogastric tube,SNOMED,Subsumes,14
+2719997,L5400,"Immediate post surgical or early fitting, application of initial rigid dressing, including fitting, alignment, suspension, and one cast change, below knee",HCPCS,4305581,3895009,Application of dressing,SNOMED,Is a,8
+2719825,L3620,"Transfer of an orthosis from one shoe to another, solid stirrup, existing",HCPCS,4208804,312346007,Provision of foot orthosis,SNOMED,Subsumes,6
+2719994,L5331,"Hip disarticulation, canadian type, molded socket, endoskeletal system, hip joint, single axis knee, sach foot",HCPCS,4242396,38162008,Disarticulation of hip,SNOMED,Is a,3
+2720328,L6965,"Shoulder disarticulation, external power, molded inner socket, removable shoulder shell, shoulder bulkhead, humeral section, mechanical elbow, forearm, otto bock or equal electrodes, cables, two batteries and one charger, myoelectronic control of termi...",HCPCS,4030398,13995008,Amputation of arm through shoulder,SNOMED,Is a,2
+2720196,L6550,"Shoulder disarticulation, molded socket, endoskeletal system, including soft prosthetic tissue shaping",HCPCS,4030398,13995008,Amputation of arm through shoulder,SNOMED,Is a,1
+2720183,L6310,"Shoulder disarticulation, passive restoration (complete prosthesis)",HCPCS,4030398,13995008,Amputation of arm through shoulder,SNOMED,Subsumes,1
+2720179,L6200,"Elbow disarticulation, molded socket, outside locking hinge, forearm",HCPCS,4052082,23425005,Amputation of arm through elbow,SNOMED,Subsumes,1
+2719998,L5410,"Immediate post surgical or early fitting, application of initial rigid dressing, including fitting, alignment and suspension, below knee, each additional cast change and realignment",HCPCS,4305581,3895009,Application of dressing,SNOMED,Is a,1
+2719967,L4392,"Replacement, soft interface material, static afo",HCPCS,4042650,118710009,Procedure on lower extremity,SNOMED,Is a,1
+2719826,L3630,"Transfer of an orthosis from one shoe to another, solid stirrup, new",HCPCS,4208804,312346007,Provision of foot orthosis,SNOMED,Is a,1
+2719823,L3600,"Transfer of an orthosis from one shoe to another, caliper plate, existing",HCPCS,4208804,312346007,Provision of foot orthosis,SNOMED,Is a,1
+2614947,A4637,"Replacement, tip, cane, crutch, walker, each.",HCPCS,4297706,384728007,Replacement of device,SNOMED,Is a,1

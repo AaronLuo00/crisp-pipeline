@@ -1,0 +1,28 @@
+Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
+0,No matching concept,No matching concept,Undefined,Metadata,None,Valid,Non-standard,17572189
+9202,OP,Outpatient Visit,Visit,Visit,Visit,Valid,Standard,12764093
+9201,IP,Inpatient Visit,Visit,Visit,Visit,Valid,Standard,2785075
+581477,OMOP4822458,Office Visit,Visit,Visit,Visit,Valid,Standard,2752880
+9203,ER,Emergency Room Visit,Visit,Visit,Visit,Valid,Standard,816572
+32036,OMOP4822461,Laboratory Visit,Visit,Visit,Visit,Valid,Standard,559459
+262,ERIP,Emergency Room and Inpatient Visit,Visit,Visit,Visit,Valid,Standard,154558
+32693,HE,Health examination,Visit,Visit,Visit,Valid,Standard,119432
+5083,02,Telehealth Provided Other than in Patient’s Home,Visit,Visit,CMS Place of Service,Valid,Non-standard,114023
+581476,OMOP4822459,Home Visit,Visit,Visit,Visit,Valid,Standard,78432
+8717,21,Inpatient Hospital,Visit,Visit,CMS Place of Service,Valid,Standard,77599
+38004338,333600000X,Pharmacy,Visit,Visit,NUCC,Valid,Standard,75869
+581479,OMOP4822456,Ambulatory Rehabilitation Visit,Visit,Visit,Visit,Valid,Standard,50457
+8716,49,Independent Clinic,Visit,Visit,CMS Place of Service,Valid,Standard,38824
+581458,OMOP4822462,Pharmacy visit,Visit,Visit,Visit,Valid,Standard,14251
+38004693,70,Clinic or Group Practice,Visit,Visit,Medicare Specialty,Valid,Standard,6317
+38004228,261QI0500X,Ambulatory Infusion Therapy Clinic / Center,Visit,Visit,NUCC,Valid,Standard,4954
+38004269,261QX0203X,Ambulatory Oncological Radiation Clinic / Center,Visit,Visit,NUCC,Valid,Standard,3721
+581385,OMOP4822036,Observation Room,Visit,Visit,CMS Place of Service,Valid,Standard,3320
+38004287,284300000X,Special Hospital,Visit,Visit,NUCC,Valid,Standard,3093
+38004311,315D00000X,Inpatient Hospice,Visit,Visit,NUCC,Valid,Standard,2384
+8883,24,Ambulatory Surgical Center,Visit,Visit,CMS Place of Service,Valid,Standard,2140
+581478,OMOP4822457,Ambulance Visit,Visit,Visit,Visit,Valid,Standard,424
+42898160,LTCP,Non-hospital institution Visit,Visit,Visit,Visit,Valid,Standard,416
+8546,34,Hospice,Visit,Visit,CMS Place of Service,Valid,Standard,330
+8971,51,Inpatient Psychiatric Facility,Visit,Visit,CMS Place of Service,Valid,Standard,92
+38004207,261Q00000X,Ambulatory Clinic / Center,Visit,Visit,NUCC,Valid,Standard,56
