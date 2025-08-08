@@ -41,7 +41,7 @@ CRISP is a **production-ready** data processing pipeline designed to handle **hu
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/crisp-pipeline.git
+git clone https://github.com/AaronLuo00/crisp-pipeline.git
 cd crisp-pipeline
 
 ```
@@ -169,8 +169,8 @@ TBA
 
 ## 📬 Contact & Support
 
-- **Issues**: [GitHub Issues](https://github.com/yourusername/crisp-pipeline/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/yourusername/crisp-pipeline/discussions)
+- **Issues**: [GitHub Issues](https://github.com/AaronLuo00/crisp-pipeline/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/AaronLuo00/crisp-pipeline/discussions)
 - **Email**: crisp-pipeline@gmail.com
 
 ---
