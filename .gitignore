@@ -1,10 +1,8 @@
-# Raw data directory (users should add their own data)
-raw_data/
+# Large data files
 *.csv.gz
 *.csv.zip
-
-# Large data files
 data/**/*.csv
+!data/README.md
 !data/subdataset_1000/*.csv
 !data/example_100/*.csv
 

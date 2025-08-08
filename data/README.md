@@ -1,30 +1,28 @@
 # Data Directory
 
-This directory is for storing sampled or test datasets. The pipeline processes data in the following workflow:
+This directory is for storing your working datasets (sampled or full).
 
-## Data Preparation Steps
+## Data Preparation Options
 
-1. **Place raw OMOP CDM data in `../raw_data/`**
-   - Original OMOP CDM CSV files (PERSON.csv, MEASUREMENT.csv, etc.)
-   - These files should not be committed to version control
+### Option 1: Sample from existing data location (Recommended)
+```bash
+# Sample patients from your OMOP data wherever it's stored
+python utils/sample_patients.py \
+  --input /path/to/your/OMOP_data/PERSON.csv \
+  --output data/PERSON.csv \
+  --sample-size 1000
 
-2. **Generate a sample dataset**
-   ```bash
-   # Sample 1000 patients from your data
-   python utils/sample_patients.py \
-     --input ../raw_data/PERSON.csv \
-     --output data/PERSON.csv \
-     --sample-size 1000
-   ```
+# Then extract all related data for sampled patients
+jupyter notebook notebooks/0_extract_data_subset.ipynb
+```
 
-3. **Extract all related data for sampled patients**
-   - Use `notebooks/0_extract_data_subset.ipynb`
-   - This will extract records from all OMOP tables for your sampled patients
+### Option 2: Full dataset processing
+If you need to process the complete dataset, you can place all OMOP CDM files directly in this `data/` directory. However, **we strongly recommend testing with a subset first** to ensure your pipeline configuration is correct.
 
 ## Expected Files
 
 After data preparation, this directory should contain:
-- PERSON.csv (sampled patients)
+- PERSON.csv
 - MEASUREMENT.csv
 - OBSERVATION.csv
 - CONDITION_OCCURRENCE.csv
@@ -32,8 +30,8 @@ After data preparation, this directory should contain:
 - VISIT_OCCURRENCE.csv
 - And other OMOP CDM standard tables
 
-## Note
+## Important Notes
 
-- Keep sample sizes small for testing (e.g., 100-1000 patients)
-- Large datasets should be processed directly from `raw_data/`
-- This directory is included in git, so avoid committing large files
+- **For testing**: Use small samples (100-1000 patients)
+- **For production**: Can place full datasets here, but test first!
+- **Git**: Large files are excluded from version control via .gitignore

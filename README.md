@@ -52,15 +52,21 @@ cd crisp-pipeline
 
 **Step 1: Prepare your data**
 ```bash
-# Create data directory and place your OMOP CDM files
-mkdir raw_data
-# Copy your PERSON.csv, MEASUREMENT.csv, etc. to raw_data/
+# Option 1: Sample from your existing OMOP data location (recommended)
+python utils/sample_patients.py \
+    --input /path/to/your/OMOP_data/PERSON.csv \
+    --output data/PERSON.csv \
+    --sample-size 1000
+
+# Option 2: For full dataset processing (not recommended for initial testing)
+# You can place all OMOP CDM files directly in the data/ directory
+# Note: We strongly recommend testing with a subset first
 ```
 
-**Step 2: Create a sample dataset** (recommended for testing)
+**Step 2: Extract related data for sampled patients**
 ```bash
-# Sample 1000 patients for quick testing
-python utils/sample_patients.py --sample-size 1000
+# Use the notebook to extract all related tables
+jupyter notebook notebooks/0_extract_data_subset.ipynb
 ```
 
 **Step 3: Run the pipeline**
@@ -125,7 +131,7 @@ Raw Data → [EDA] → [Cleaning] → [Mapping] → [Standardization] → [Extra
 ```
 crisp-pipeline/
 ├── config/                 # Configuration files
-├── data/                   # Sample datasets
+├── data/                   # Working datasets (sampled or full)
 ├── docs/                   # Documentation
 ├── main/                   # Main pipeline runner
 ├── notebooks/              # Jupyter notebooks for exploration
@@ -135,7 +141,7 @@ crisp-pipeline/
 │   ├── 3_mapping/         # Concept mapping
 │   ├── 4_standardization/ # Data standardization
 │   └── 5_extraction/      # Feature extraction
-├── raw_data/              # Your OMOP data (not in git)
+├── output/                # Pipeline outputs (not in git)
 └── utils/                 # Utility scripts
 ```
 

@@ -12,7 +12,7 @@ This guide covers the basics of setting up and running CRISP.
 ### 1. Installation
 
 ```bash
-git clone https://github.com/yourusername/crisp-pipeline.git
+git clone https://github.com/AaronLuo00/crisp-pipeline.git
 cd crisp-pipeline
 pip install pandas numpy tqdm matplotlib seaborn
 ```
@@ -20,11 +20,17 @@ pip install pandas numpy tqdm matplotlib seaborn
 ### 2. Data Setup
 
 ```bash
-# Create directories
-mkdir raw_data data
+# Create data directory
+mkdir data
 
-# Place your OMOP CDM files in raw_data/
-# Files needed: PERSON.csv, MEASUREMENT.csv, etc.
+# Option 1: Sample from your existing OMOP data location (recommended)
+python utils/sample_patients.py \
+    --input /path/to/your/OMOP_data/PERSON.csv \
+    --output data/PERSON.csv \
+    --sample-size 1000
+
+# Option 2: For full dataset (not recommended for initial testing)
+# Copy all OMOP CDM files directly to data/ directory
 ```
 
 ### 3. Run Pipeline
