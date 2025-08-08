@@ -1,0 +1,1387 @@
+{
+  "success": true,
+  "execution_time": 10.665208101272583,
+  "module_id": "1_eda",
+  "data": {
+    "analysis_date": "2025-08-08T18:19:41.820964",
+    "dataset": "subdataset_1000",
+    "chunk_size": 200000,
+    "tables": {
+      "CONDITION_ERA": {
+        "file_name": "CONDITION_ERA.csv",
+        "total_records": 53464,
+        "total_columns": 6,
+        "columns": [
+          "condition_era_id",
+          "person_id",
+          "condition_concept_id",
+          "condition_era_start_date",
+          "condition_era_end_date",
+          "condition_occurrence_count"
+        ],
+        "memory_usage_mb": 9.38177490234375,
+        "missing_values": {
+          "condition_era_id": 0,
+          "person_id": 0,
+          "condition_concept_id": 0,
+          "condition_era_start_date": 0,
+          "condition_era_end_date": 0,
+          "condition_occurrence_count": 0
+        },
+        "data_types": {
+          "condition_era_id": "int64",
+          "person_id": "int64",
+          "condition_concept_id": "int64",
+          "condition_era_start_date": "object",
+          "condition_era_end_date": "object",
+          "condition_occurrence_count": "int64"
+        },
+        "chunks_processed": 1,
+        "missing_percentage": {
+          "condition_era_id": 0.0,
+          "person_id": 0.0,
+          "condition_concept_id": 0.0,
+          "condition_era_start_date": 0.0,
+          "condition_era_end_date": 0.0,
+          "condition_occurrence_count": 0.0
+        },
+        "unique_counts": {
+          "condition_era_id": 53464,
+          "person_id": 359,
+          "condition_concept_id": 5485
+        },
+        "date_ranges": {
+          "condition_era_start_date": {
+            "min": "2004-11-23 00:00:00",
+            "max": "2023-08-24 00:00:00"
+          },
+          "condition_era_end_date": {
+            "min": "2004-11-23 00:00:00",
+            "max": "2024-02-24 00:00:00"
+          }
+        }
+      },
+      "CONDITION_OCCURRENCE": {
+        "file_name": "CONDITION_OCCURRENCE.csv",
+        "total_records": 196241,
+        "total_columns": 16,
+        "columns": [
+          "condition_occurrence_id",
+          "person_id",
+          "condition_concept_id",
+          "condition_start_date",
+          "condition_start_datetime",
+          "condition_end_date",
+          "condition_end_datetime",
+          "condition_type_concept_id",
+          "stop_reason",
+          "provider_id",
+          "visit_occurrence_id",
+          "visit_detail_id",
+          "condition_source_value",
+          "condition_source_concept_id",
+          "condition_status_source_value",
+          "condition_status_concept_id"
+        ],
+        "memory_usage_mb": 66.62468719482422,
+        "missing_values": {
+          "condition_occurrence_id": 0,
+          "person_id": 0,
+          "condition_concept_id": 0,
+          "condition_start_date": 0,
+          "condition_start_datetime": 0,
+          "condition_end_date": 111058,
+          "condition_end_datetime": 135752,
+          "condition_type_concept_id": 0,
+          "stop_reason": 194851,
+          "provider_id": 33378,
+          "visit_occurrence_id": 8606,
+          "visit_detail_id": 171738,
+          "condition_source_value": 196241,
+          "condition_source_concept_id": 450,
+          "condition_status_source_value": 196241,
+          "condition_status_concept_id": 123829
+        },
+        "data_types": {
+          "condition_occurrence_id": "int64",
+          "person_id": "int64",
+          "condition_concept_id": "int64",
+          "condition_start_date": "object",
+          "condition_start_datetime": "object",
+          "condition_end_date": "object",
+          "condition_end_datetime": "object",
+          "condition_type_concept_id": "int64",
+          "stop_reason": "object",
+          "provider_id": "float64",
+          "visit_occurrence_id": "float64",
+          "visit_detail_id": "float64",
+          "condition_source_value": "float64",
+          "condition_source_concept_id": "float64",
+          "condition_status_source_value": "float64",
+          "condition_status_concept_id": "float64"
+        },
+        "chunks_processed": 1,
+        "missing_percentage": {
+          "condition_occurrence_id": 0.0,
+          "person_id": 0.0,
+          "condition_concept_id": 0.0,
+          "condition_start_date": 0.0,
+          "condition_start_datetime": 0.0,
+          "condition_end_date": 56.592659026401215,
+          "condition_end_datetime": 69.17616604073564,
+          "condition_type_concept_id": 0.0,
+          "stop_reason": 99.291687262091,
+          "provider_id": 17.008678104983158,
+          "visit_occurrence_id": 4.385424044924354,
+          "visit_detail_id": 87.51382228993941,
+          "condition_source_value": 100.0,
+          "condition_source_concept_id": 0.22930987917917253,
+          "condition_status_source_value": 100.0,
+          "condition_status_concept_id": 63.10047339750613
+        },
+        "unique_counts": {
+          "condition_occurrence_id": 196241,
+          "person_id": 533,
+          "condition_concept_id": 6277,
+          "condition_type_concept_id": 12,
+          "provider_id": 6923,
+          "visit_occurrence_id": 21581,
+          "visit_detail_id": 2472,
+          "condition_source_concept_id": 11488,
+          "condition_status_concept_id": 14
+        },
+        "date_ranges": {
+          "condition_start_date": {
+            "min": "2006-07-30 00:00:00",
+            "max": "2022-05-27 00:00:00"
+          },
+          "condition_start_datetime": {
+            "min": "2006-07-30 13:00:00",
+            "max": "2022-05-27 23:59:00"
+          },
+          "condition_end_date": {
+            "min": "2006-07-30 00:00:00",
+            "max": "2023-11-12 00:00:00"
+          },
+          "condition_end_datetime": {
+            "min": "2010-10-08 23:59:00",
+            "max": "2023-11-12 00:00:00"
+          }
+        }
+      },
+      "DEATH": {
+        "file_name": "DEATH.csv",
+        "total_records": 113,
+        "total_columns": 7,
+        "columns": [
+          "person_id",
+          "death_date",
+          "death_datetime",
+          "death_type_concept_id",
+          "cause_concept_id",
+          "cause_source_value",
+          "cause_source_concept_id"
+        ],
+        "memory_usage_mb": 0.019843101501464844,
+        "missing_values": {
+          "person_id": 0,
+          "death_date": 0,
+          "death_datetime": 0,
+          "death_type_concept_id": 0,
+          "cause_concept_id": 35,
+          "cause_source_value": 113,
+          "cause_source_concept_id": 41
+        },
+        "data_types": {
+          "person_id": "int64",
+          "death_date": "object",
+          "death_datetime": "object",
+          "death_type_concept_id": "int64",
+          "cause_concept_id": "float64",
+          "cause_source_value": "float64",
+          "cause_source_concept_id": "float64"
+        },
+        "chunks_processed": 1,
+        "missing_percentage": {
+          "person_id": 0.0,
+          "death_date": 0.0,
+          "death_datetime": 0.0,
+          "death_type_concept_id": 0.0,
+          "cause_concept_id": 30.973451327433626,
+          "cause_source_value": 100.0,
+          "cause_source_concept_id": 36.283185840707965
+        },
+        "unique_counts": {
+          "person_id": 113,
+          "death_type_concept_id": 7,
+          "cause_concept_id": 9,
+          "cause_source_concept_id": 9
+        },
+        "date_ranges": {
+          "death_date": {
+            "min": "2009-08-24 00:00:00",
+            "max": "2024-08-19 00:00:00"
+          },
+          "death_datetime": {
+            "min": "2009-08-24 00:00:00",
+            "max": "2024-08-19 00:00:00"
+          }
+        },
+        "total_deaths": 113,
+        "unique_patients_died": 113
+      },
+      "DEVICE_EXPOSURE": {
+        "file_name": "DEVICE_EXPOSURE.csv",
+        "total_records": 6338,
+        "total_columns": 15,
+        "columns": [
+          "device_exposure_id",
+          "person_id",
+          "device_concept_id",
+          "device_exposure_start_date",
+          "device_exposure_start_datetime",
+          "device_exposure_end_date",
+          "device_exposure_end_datetime",
+          "device_type_concept_id",
+          "unique_device_id",
+          "quantity",
+          "provider_id",
+          "visit_occurrence_id",
+          "visit_detail_id",
+          "device_source_value",
+          "device_source_concept_id"
+        ],
+        "memory_usage_mb": 2.1282567977905273,
+        "missing_values": {
+          "device_exposure_id": 0,
+          "person_id": 0,
+          "device_concept_id": 0,
+          "device_exposure_start_date": 0,
+          "device_exposure_start_datetime": 0,
+          "device_exposure_end_date": 6262,
+          "device_exposure_end_datetime": 6262,
+          "device_type_concept_id": 0,
+          "unique_device_id": 833,
+          "quantity": 757,
+          "provider_id": 819,
+          "visit_occurrence_id": 0,
+          "visit_detail_id": 2550,
+          "device_source_value": 6338,
+          "device_source_concept_id": 5433
+        },
+        "data_types": {
+          "device_exposure_id": "int64",
+          "person_id": "int64",
+          "device_concept_id": "int64",
+          "device_exposure_start_date": "object",
+          "device_exposure_start_datetime": "object",
+          "device_exposure_end_date": "object",
+          "device_exposure_end_datetime": "object",
+          "device_type_concept_id": "int64",
+          "unique_device_id": "object",
+          "quantity": "float64",
+          "provider_id": "float64",
+          "visit_occurrence_id": "float64",
+          "visit_detail_id": "float64",
+          "device_source_value": "float64",
+          "device_source_concept_id": "float64"
+        },
+        "chunks_processed": 1,
+        "missing_percentage": {
+          "device_exposure_id": 0.0,
+          "person_id": 0.0,
+          "device_concept_id": 0.0,
+          "device_exposure_start_date": 0.0,
+          "device_exposure_start_datetime": 0.0,
+          "device_exposure_end_date": 98.80088355948249,
+          "device_exposure_end_datetime": 98.80088355948249,
+          "device_type_concept_id": 0.0,
+          "unique_device_id": 13.14294730198801,
+          "quantity": 11.943830861470497,
+          "provider_id": 12.922057431366362,
+          "visit_occurrence_id": 0.0,
+          "visit_detail_id": 40.233512148942886,
+          "device_source_value": 100.0,
+          "device_source_concept_id": 85.72104764910067
+        },
+        "unique_counts": {
+          "device_exposure_id": 6338,
+          "person_id": 204,
+          "device_concept_id": 72,
+          "device_type_concept_id": 2,
+          "unique_device_id": 1,
+          "provider_id": 1410,
+          "visit_occurrence_id": 1575,
+          "visit_detail_id": 1201,
+          "device_source_concept_id": 42
+        },
+        "date_ranges": {
+          "device_exposure_start_date": {
+            "min": "2005-04-29 00:00:00",
+            "max": "2023-11-14 00:00:00"
+          },
+          "device_exposure_start_datetime": {
+            "min": "2005-04-29 02:05:00",
+            "max": "2023-11-14 07:00:00"
+          },
+          "device_exposure_end_date": {
+            "min": "2022-05-03 00:00:00",
+            "max": "2024-01-02 00:00:00"
+          },
+          "device_exposure_end_datetime": {
+            "min": "2022-05-03 18:54:00",
+            "max": "2024-01-02 00:00:00"
+          }
+        }
+      },
+      "DRUG_ERA": {
+        "file_name": "DRUG_ERA.csv",
+        "total_records": 34017,
+        "total_columns": 7,
+        "columns": [
+          "drug_era_id",
+          "person_id",
+          "drug_concept_id",
+          "drug_era_start_date",
+          "drug_era_end_date",
+          "drug_exposure_count",
+          "gap_days"
+        ],
+        "memory_usage_mb": 6.22882080078125,
+        "missing_values": {
+          "drug_era_id": 0,
+          "person_id": 0,
+          "drug_concept_id": 0,
+          "drug_era_start_date": 0,
+          "drug_era_end_date": 0,
+          "drug_exposure_count": 0,
+          "gap_days": 27168
+        },
+        "data_types": {
+          "drug_era_id": "int64",
+          "person_id": "int64",
+          "drug_concept_id": "int64",
+          "drug_era_start_date": "object",
+          "drug_era_end_date": "object",
+          "drug_exposure_count": "int64",
+          "gap_days": "float64"
+        },
+        "chunks_processed": 1,
+        "missing_percentage": {
+          "drug_era_id": 0.0,
+          "person_id": 0.0,
+          "drug_concept_id": 0.0,
+          "drug_era_start_date": 0.0,
+          "drug_era_end_date": 0.0,
+          "drug_exposure_count": 0.0,
+          "gap_days": 79.86594937825205
+        },
+        "unique_counts": {
+          "drug_era_id": 34017,
+          "person_id": 364,
+          "drug_concept_id": 975
+        },
+        "date_ranges": {
+          "drug_era_start_date": {
+            "min": "2005-02-14 00:00:00",
+            "max": "2023-12-04 00:00:00"
+          },
+          "drug_era_end_date": {
+            "min": "2005-03-14 00:00:00",
+            "max": "2024-06-08 00:00:00"
+          }
+        }
+      },
+      "DRUG_EXPOSURE": {
+        "file_name": "DRUG_EXPOSURE.csv",
+        "total_records": 204252,
+        "total_columns": 23,
+        "columns": [
+          "drug_exposure_id",
+          "person_id",
+          "drug_concept_id",
+          "drug_exposure_start_date",
+          "drug_exposure_start_datetime",
+          "drug_exposure_end_date",
+          "drug_exposure_end_datetime",
+          "verbatim_end_date",
+          "drug_type_concept_id",
+          "stop_reason",
+          "refills",
+          "quantity",
+          "days_supply",
+          "sig",
+          "route_concept_id",
+          "lot_number",
+          "provider_id",
+          "visit_occurrence_id",
+          "visit_detail_id",
+          "drug_source_value",
+          "drug_source_concept_id",
+          "route_source_value",
+          "dose_unit_source_value"
+        ],
+        "memory_usage_mb": 89.2735948562622,
+        "missing_values": {
+          "drug_exposure_id": 0,
+          "person_id": 0,
+          "drug_concept_id": 0,
+          "drug_exposure_start_date": 0,
+          "drug_exposure_start_datetime": 0,
+          "drug_exposure_end_date": 61400,
+          "drug_exposure_end_datetime": 72575,
+          "verbatim_end_date": 73173,
+          "drug_type_concept_id": 0,
+          "stop_reason": 204252,
+          "refills": 159758,
+          "quantity": 145167,
+          "days_supply": 170622,
+          "sig": 204252,
+          "route_concept_id": 12398,
+          "lot_number": 204252,
+          "provider_id": 15100,
+          "visit_occurrence_id": 3575,
+          "visit_detail_id": 47499,
+          "drug_source_value": 204252,
+          "drug_source_concept_id": 10618,
+          "route_source_value": 204252,
+          "dose_unit_source_value": 204252
+        },
+        "data_types": {
+          "drug_exposure_id": "int64",
+          "person_id": "int64",
+          "drug_concept_id": "int64",
+          "drug_exposure_start_date": "object",
+          "drug_exposure_start_datetime": "object",
+          "drug_exposure_end_date": "object",
+          "drug_exposure_end_datetime": "object",
+          "verbatim_end_date": "object",
+          "drug_type_concept_id": "int64",
+          "stop_reason": "float64",
+          "refills": "float64",
+          "quantity": "float64",
+          "days_supply": "float64",
+          "sig": "float64",
+          "route_concept_id": "float64",
+          "lot_number": "float64",
+          "provider_id": "float64",
+          "visit_occurrence_id": "float64",
+          "visit_detail_id": "float64",
+          "drug_source_value": "float64",
+          "drug_source_concept_id": "float64",
+          "route_source_value": "float64",
+          "dose_unit_source_value": "float64"
+        },
+        "chunks_processed": 2,
+        "missing_percentage": {
+          "drug_exposure_id": 0.0,
+          "person_id": 0.0,
+          "drug_concept_id": 0.0,
+          "drug_exposure_start_date": 0.0,
+          "drug_exposure_start_datetime": 0.0,
+          "drug_exposure_end_date": 30.060905156375455,
+          "drug_exposure_end_datetime": 35.532087813093625,
+          "verbatim_end_date": 35.82486340403032,
+          "drug_type_concept_id": 0.0,
+          "stop_reason": 100.0,
+          "refills": 78.21612517870082,
+          "quantity": 71.07249867810353,
+          "days_supply": 83.53504494448035,
+          "sig": 100.0,
+          "route_concept_id": 6.069952803399722,
+          "lot_number": 100.0,
+          "provider_id": 7.392828466795918,
+          "visit_occurrence_id": 1.7502888588606231,
+          "visit_detail_id": 23.255096645320485,
+          "drug_source_value": 100.0,
+          "drug_source_concept_id": 5.198480308638349,
+          "route_source_value": 100.0,
+          "dose_unit_source_value": 100.0
+        },
+        "unique_counts": {
+          "drug_exposure_id": 204252,
+          "person_id": 533,
+          "drug_concept_id": 4389,
+          "drug_type_concept_id": 10,
+          "route_concept_id": 51,
+          "provider_id": 8011,
+          "visit_occurrence_id": 9425,
+          "visit_detail_id": 5426,
+          "drug_source_concept_id": 7907
+        },
+        "date_ranges": {
+          "drug_exposure_start_date": {
+            "min": "2010-11-05 00:00:00",
+            "max": "2022-06-02 00:00:00"
+          },
+          "drug_exposure_start_datetime": {
+            "min": "2010-11-05 19:54:00",
+            "max": "2022-06-02 02:59:00"
+          },
+          "drug_exposure_end_date": {
+            "min": "2010-11-06 00:00:00",
+            "max": "2023-07-04 00:00:00"
+          },
+          "drug_exposure_end_datetime": {
+            "min": "2012-06-18 13:38:00",
+            "max": "2023-07-04 10:12:00"
+          },
+          "verbatim_end_date": {
+            "min": "2012-06-18 00:00:00",
+            "max": "2023-07-04 00:00:00"
+          }
+        }
+      },
+      "MEASUREMENT": {
+        "file_name": "MEASUREMENT.csv",
+        "total_records": 1944155,
+        "total_columns": 20,
+        "columns": [
+          "measurement_id",
+          "person_id",
+          "measurement_concept_id",
+          "measurement_date",
+          "measurement_time",
+          "measurement_datetime",
+          "measurement_type_concept_id",
+          "operator_concept_id",
+          "value_as_number",
+          "value_as_concept_id",
+          "unit_concept_id",
+          "range_low",
+          "range_high",
+          "provider_id",
+          "visit_occurrence_id",
+          "visit_detail_id",
+          "measurement_source_value",
+          "measurement_source_concept_id",
+          "unit_source_value",
+          "value_source_value"
+        ],
+        "memory_usage_mb": 603.2262678146362,
+        "missing_values": {
+          "measurement_id": 0,
+          "person_id": 0,
+          "measurement_concept_id": 0,
+          "measurement_date": 0,
+          "measurement_time": 834234,
+          "measurement_datetime": 0,
+          "measurement_type_concept_id": 0,
+          "operator_concept_id": 521367,
+          "value_as_number": 155460,
+          "value_as_concept_id": 1535683,
+          "unit_concept_id": 499402,
+          "range_low": 1332803,
+          "range_high": 1338440,
+          "provider_id": 784690,
+          "visit_occurrence_id": 11254,
+          "visit_detail_id": 1104822,
+          "measurement_source_value": 1944155,
+          "measurement_source_concept_id": 208359,
+          "unit_source_value": 1944155,
+          "value_source_value": 1944155
+        },
+        "data_types": {
+          "measurement_id": "int64",
+          "person_id": "int64",
+          "measurement_concept_id": "int64",
+          "measurement_date": "object",
+          "measurement_time": "object",
+          "measurement_datetime": "object",
+          "measurement_type_concept_id": "int64",
+          "operator_concept_id": "float64",
+          "value_as_number": "float64",
+          "value_as_concept_id": "float64",
+          "unit_concept_id": "float64",
+          "range_low": "float64",
+          "range_high": "float64",
+          "provider_id": "float64",
+          "visit_occurrence_id": "float64",
+          "visit_detail_id": "float64",
+          "measurement_source_value": "float64",
+          "measurement_source_concept_id": "float64",
+          "unit_source_value": "float64",
+          "value_source_value": "float64"
+        },
+        "chunks_processed": 10,
+        "missing_percentage": {
+          "measurement_id": 0.0,
+          "person_id": 0.0,
+          "measurement_concept_id": 0.0,
+          "measurement_date": 0.0,
+          "measurement_time": 42.909850294858174,
+          "measurement_datetime": 0.0,
+          "measurement_type_concept_id": 0.0,
+          "operator_concept_id": 26.81715192461506,
+          "value_as_number": 7.996276017087115,
+          "value_as_concept_id": 78.98974104430974,
+          "unit_concept_id": 25.68735517487032,
+          "range_low": 68.55435909173909,
+          "range_high": 68.84430510941772,
+          "provider_id": 40.361493810935855,
+          "visit_occurrence_id": 0.5788633107956926,
+          "visit_detail_id": 56.82787637816944,
+          "measurement_source_value": 100.0,
+          "measurement_source_concept_id": 10.71720104621288,
+          "unit_source_value": 100.0,
+          "value_source_value": 100.0
+        },
+        "unique_counts": {
+          "measurement_id": 1944155,
+          "person_id": 537,
+          "measurement_concept_id": 2919,
+          "measurement_type_concept_id": 11,
+          "operator_concept_id": 6,
+          "value_as_concept_id": 442,
+          "unit_concept_id": 132,
+          "provider_id": 5860,
+          "visit_occurrence_id": 15579,
+          "visit_detail_id": 7665,
+          "measurement_source_concept_id": 2885
+        },
+        "date_ranges": {
+          "measurement_date": {
+            "min": "1995-04-15 00:00:00",
+            "max": "2021-05-03 00:00:00"
+          },
+          "measurement_time": {
+            "min": "2025-08-08 00:00:00",
+            "max": "2025-08-08 23:53:00"
+          },
+          "measurement_datetime": {
+            "min": "1995-04-15 00:01:00",
+            "max": "2021-05-03 09:19:00"
+          }
+        }
+      },
+      "OBSERVATION": {
+        "file_name": "OBSERVATION.csv",
+        "total_records": 241604,
+        "total_columns": 18,
+        "columns": [
+          "observation_id",
+          "person_id",
+          "observation_concept_id",
+          "observation_date",
+          "observation_datetime",
+          "observation_type_concept_id",
+          "value_as_number",
+          "value_as_string",
+          "value_as_concept_id",
+          "qualifier_concept_id",
+          "unit_concept_id",
+          "provider_id",
+          "visit_occurrence_id",
+          "visit_detail_id",
+          "observation_source_value",
+          "observation_source_concept_id",
+          "unit_source_value",
+          "qualifier_source_value"
+        ],
+        "memory_usage_mb": 62.442026138305664,
+        "missing_values": {
+          "observation_id": 0,
+          "person_id": 0,
+          "observation_concept_id": 0,
+          "observation_date": 0,
+          "observation_datetime": 0,
+          "observation_type_concept_id": 0,
+          "value_as_number": 216845,
+          "value_as_string": 241604,
+          "value_as_concept_id": 100444,
+          "qualifier_concept_id": 132384,
+          "unit_concept_id": 235420,
+          "provider_id": 119997,
+          "visit_occurrence_id": 12919,
+          "visit_detail_id": 163778,
+          "observation_source_value": 241604,
+          "observation_source_concept_id": 9597,
+          "unit_source_value": 241604,
+          "qualifier_source_value": 241604
+        },
+        "data_types": {
+          "observation_id": "int64",
+          "person_id": "int64",
+          "observation_concept_id": "int64",
+          "observation_date": "object",
+          "observation_datetime": "object",
+          "observation_type_concept_id": "int64",
+          "value_as_number": "float64",
+          "value_as_string": "float64",
+          "value_as_concept_id": "float64",
+          "qualifier_concept_id": "float64",
+          "unit_concept_id": "float64",
+          "provider_id": "float64",
+          "visit_occurrence_id": "float64",
+          "visit_detail_id": "float64",
+          "observation_source_value": "float64",
+          "observation_source_concept_id": "float64",
+          "unit_source_value": "float64",
+          "qualifier_source_value": "float64"
+        },
+        "chunks_processed": 2,
+        "missing_percentage": {
+          "observation_id": 0.0,
+          "person_id": 0.0,
+          "observation_concept_id": 0.0,
+          "observation_date": 0.0,
+          "observation_datetime": 0.0,
+          "observation_type_concept_id": 0.0,
+          "value_as_number": 89.75223920133773,
+          "value_as_string": 100.0,
+          "value_as_concept_id": 41.57381500306286,
+          "qualifier_concept_id": 54.79379480472177,
+          "unit_concept_id": 97.44043972781907,
+          "provider_id": 49.6668101521498,
+          "visit_occurrence_id": 5.347179682455589,
+          "visit_detail_id": 67.7877849704475,
+          "observation_source_value": 100.0,
+          "observation_source_concept_id": 3.9722024469793547,
+          "unit_source_value": 100.0,
+          "qualifier_source_value": 100.0
+        },
+        "unique_counts": {
+          "observation_id": 241604,
+          "person_id": 523,
+          "observation_concept_id": 838,
+          "observation_type_concept_id": 12,
+          "value_as_concept_id": 907,
+          "qualifier_concept_id": 31,
+          "unit_concept_id": 10,
+          "provider_id": 5214,
+          "visit_occurrence_id": 13067,
+          "visit_detail_id": 4083,
+          "observation_source_concept_id": 1713
+        },
+        "date_ranges": {
+          "observation_date": {
+            "min": "2005-04-29 00:00:00",
+            "max": "2021-09-16 00:00:00"
+          },
+          "observation_datetime": {
+            "min": "2005-04-29 00:39:00",
+            "max": "2021-09-16 23:59:00"
+          }
+        }
+      },
+      "OBSERVATION_PERIOD": {
+        "file_name": "OBSERVATION_PERIOD.csv",
+        "total_records": 364,
+        "total_columns": 5,
+        "columns": [
+          "observation_period_id",
+          "person_id",
+          "observation_period_start_date",
+          "observation_period_end_date",
+          "period_type_concept_id"
+        ],
+        "memory_usage_mb": 0.05496978759765625,
+        "missing_values": {
+          "observation_period_id": 0,
+          "person_id": 0,
+          "observation_period_start_date": 0,
+          "observation_period_end_date": 0,
+          "period_type_concept_id": 0
+        },
+        "data_types": {
+          "observation_period_id": "int64",
+          "person_id": "int64",
+          "observation_period_start_date": "object",
+          "observation_period_end_date": "object",
+          "period_type_concept_id": "int64"
+        },
+        "chunks_processed": 1,
+        "missing_percentage": {
+          "observation_period_id": 0.0,
+          "person_id": 0.0,
+          "observation_period_start_date": 0.0,
+          "observation_period_end_date": 0.0,
+          "period_type_concept_id": 0.0
+        },
+        "unique_counts": {
+          "observation_period_id": 364,
+          "person_id": 364,
+          "period_type_concept_id": 2
+        },
+        "date_ranges": {
+          "observation_period_start_date": {
+            "min": "1960-01-27 00:00:00",
+            "max": "2023-07-08 00:00:00"
+          },
+          "observation_period_end_date": {
+            "min": "2008-06-19 00:00:00",
+            "max": "2024-01-18 00:00:00"
+          }
+        }
+      },
+      "PERSON": {
+        "file_name": "PERSON.csv",
+        "total_records": 538,
+        "total_columns": 18,
+        "columns": [
+          "person_id",
+          "gender_concept_id",
+          "year_of_birth",
+          "month_of_birth",
+          "day_of_birth",
+          "birth_datetime",
+          "race_concept_id",
+          "ethnicity_concept_id",
+          "location_id",
+          "provider_id",
+          "care_site_id",
+          "person_source_value",
+          "gender_source_value",
+          "gender_source_concept_id",
+          "race_source_value",
+          "race_source_concept_id",
+          "ethnicity_source_value",
+          "ethnicity_source_concept_id"
+        ],
+        "memory_usage_mb": 0.10889434814453125,
+        "missing_values": {
+          "person_id": 0,
+          "gender_concept_id": 0,
+          "year_of_birth": 0,
+          "month_of_birth": 0,
+          "day_of_birth": 0,
+          "birth_datetime": 0,
+          "race_concept_id": 0,
+          "ethnicity_concept_id": 0,
+          "location_id": 214,
+          "provider_id": 306,
+          "care_site_id": 338,
+          "person_source_value": 538,
+          "gender_source_value": 538,
+          "gender_source_concept_id": 68,
+          "race_source_value": 538,
+          "race_source_concept_id": 68,
+          "ethnicity_source_value": 538,
+          "ethnicity_source_concept_id": 68
+        },
+        "data_types": {
+          "person_id": "int64",
+          "gender_concept_id": "int64",
+          "year_of_birth": "int64",
+          "month_of_birth": "int64",
+          "day_of_birth": "int64",
+          "birth_datetime": "object",
+          "race_concept_id": "int64",
+          "ethnicity_concept_id": "int64",
+          "location_id": "float64",
+          "provider_id": "float64",
+          "care_site_id": "float64",
+          "person_source_value": "float64",
+          "gender_source_value": "float64",
+          "gender_source_concept_id": "float64",
+          "race_source_value": "float64",
+          "race_source_concept_id": "float64",
+          "ethnicity_source_value": "float64",
+          "ethnicity_source_concept_id": "float64"
+        },
+        "chunks_processed": 1,
+        "missing_percentage": {
+          "person_id": 0.0,
+          "gender_concept_id": 0.0,
+          "year_of_birth": 0.0,
+          "month_of_birth": 0.0,
+          "day_of_birth": 0.0,
+          "birth_datetime": 0.0,
+          "race_concept_id": 0.0,
+          "ethnicity_concept_id": 0.0,
+          "location_id": 39.77695167286245,
+          "provider_id": 56.877323420074354,
+          "care_site_id": 62.825278810408925,
+          "person_source_value": 100.0,
+          "gender_source_value": 100.0,
+          "gender_source_concept_id": 12.639405204460965,
+          "race_source_value": 100.0,
+          "race_source_concept_id": 12.639405204460965,
+          "ethnicity_source_value": 100.0,
+          "ethnicity_source_concept_id": 12.639405204460965
+        },
+        "unique_counts": {
+          "person_id": 538,
+          "gender_concept_id": 2,
+          "race_concept_id": 9,
+          "ethnicity_concept_id": 4,
+          "location_id": 324,
+          "provider_id": 141,
+          "care_site_id": 15,
+          "gender_source_concept_id": 3,
+          "race_source_concept_id": 9,
+          "ethnicity_source_concept_id": 4
+        },
+        "date_ranges": {
+          "birth_datetime": {
+            "min": "1917-04-13 00:00:00",
+            "max": "2022-05-19 00:00:00"
+          }
+        },
+        "unique_patients": 538,
+        "gender_distribution": {
+          "8507": 300,
+          "8532": 238
+        },
+        "birth_year_range": {
+          "min": 1917,
+          "max": 2022
+        }
+      },
+      "PROCEDURE_OCCURRENCE": {
+        "file_name": "PROCEDURE_OCCURRENCE.csv",
+        "total_records": 47395,
+        "total_columns": 14,
+        "columns": [
+          "procedure_occurrence_id",
+          "person_id",
+          "procedure_concept_id",
+          "procedure_date",
+          "procedure_datetime",
+          "procedure_type_concept_id",
+          "modifier_concept_id",
+          "quantity",
+          "provider_id",
+          "visit_occurrence_id",
+          "visit_detail_id",
+          "procedure_source_value",
+          "procedure_source_concept_id",
+          "modifier_source_value"
+        ],
+        "memory_usage_mb": 10.802777290344238,
+        "missing_values": {
+          "procedure_occurrence_id": 0,
+          "person_id": 0,
+          "procedure_concept_id": 0,
+          "procedure_date": 0,
+          "procedure_datetime": 0,
+          "procedure_type_concept_id": 0,
+          "modifier_concept_id": 18153,
+          "quantity": 28404,
+          "provider_id": 3030,
+          "visit_occurrence_id": 929,
+          "visit_detail_id": 35754,
+          "procedure_source_value": 47395,
+          "procedure_source_concept_id": 107,
+          "modifier_source_value": 47395
+        },
+        "data_types": {
+          "procedure_occurrence_id": "int64",
+          "person_id": "int64",
+          "procedure_concept_id": "int64",
+          "procedure_date": "object",
+          "procedure_datetime": "object",
+          "procedure_type_concept_id": "int64",
+          "modifier_concept_id": "float64",
+          "quantity": "float64",
+          "provider_id": "float64",
+          "visit_occurrence_id": "float64",
+          "visit_detail_id": "float64",
+          "procedure_source_value": "float64",
+          "procedure_source_concept_id": "float64",
+          "modifier_source_value": "float64"
+        },
+        "chunks_processed": 1,
+        "missing_percentage": {
+          "procedure_occurrence_id": 0.0,
+          "person_id": 0.0,
+          "procedure_concept_id": 0.0,
+          "procedure_date": 0.0,
+          "procedure_datetime": 0.0,
+          "procedure_type_concept_id": 0.0,
+          "modifier_concept_id": 38.30150859795337,
+          "quantity": 59.93037240215212,
+          "provider_id": 6.393079438759362,
+          "visit_occurrence_id": 1.9601223757780357,
+          "visit_detail_id": 75.43833737736048,
+          "procedure_source_value": 100.0,
+          "procedure_source_concept_id": 0.22576221120371348,
+          "modifier_source_value": 100.0
+        },
+        "unique_counts": {
+          "procedure_occurrence_id": 47395,
+          "person_id": 526,
+          "procedure_concept_id": 3347,
+          "procedure_type_concept_id": 11,
+          "modifier_concept_id": 31,
+          "provider_id": 7639,
+          "visit_occurrence_id": 9740,
+          "visit_detail_id": 2257,
+          "procedure_source_concept_id": 3395
+        },
+        "date_ranges": {
+          "procedure_date": {
+            "min": "2005-02-14 00:00:00",
+            "max": "2023-06-20 00:00:00"
+          },
+          "procedure_datetime": {
+            "min": "2005-02-14 00:00:00",
+            "max": "2023-06-20 08:02:00"
+          }
+        }
+      },
+      "SPECIMEN": {
+        "file_name": "SPECIMEN.csv",
+        "total_records": 3944,
+        "total_columns": 15,
+        "columns": [
+          "specimen_id",
+          "person_id",
+          "specimen_concept_id",
+          "specimen_type_concept_id",
+          "specimen_date",
+          "specimen_datetime",
+          "quantity",
+          "unit_concept_id",
+          "anatomic_site_concept_id",
+          "disease_status_concept_id",
+          "specimen_source_id",
+          "specimen_source_value",
+          "unit_source_value",
+          "anatomic_site_source_value",
+          "disease_status_source_value"
+        ],
+        "memory_usage_mb": 0.9291610717773438,
+        "missing_values": {
+          "specimen_id": 0,
+          "person_id": 0,
+          "specimen_concept_id": 0,
+          "specimen_type_concept_id": 0,
+          "specimen_date": 0,
+          "specimen_datetime": 0,
+          "quantity": 3701,
+          "unit_concept_id": 3700,
+          "anatomic_site_concept_id": 561,
+          "disease_status_concept_id": 3875,
+          "specimen_source_id": 3944,
+          "specimen_source_value": 3944,
+          "unit_source_value": 3944,
+          "anatomic_site_source_value": 3944,
+          "disease_status_source_value": 3944
+        },
+        "data_types": {
+          "specimen_id": "int64",
+          "person_id": "int64",
+          "specimen_concept_id": "int64",
+          "specimen_type_concept_id": "int64",
+          "specimen_date": "object",
+          "specimen_datetime": "object",
+          "quantity": "float64",
+          "unit_concept_id": "float64",
+          "anatomic_site_concept_id": "float64",
+          "disease_status_concept_id": "float64",
+          "specimen_source_id": "float64",
+          "specimen_source_value": "float64",
+          "unit_source_value": "float64",
+          "anatomic_site_source_value": "float64",
+          "disease_status_source_value": "float64"
+        },
+        "chunks_processed": 1,
+        "missing_percentage": {
+          "specimen_id": 0.0,
+          "person_id": 0.0,
+          "specimen_concept_id": 0.0,
+          "specimen_type_concept_id": 0.0,
+          "specimen_date": 0.0,
+          "specimen_datetime": 0.0,
+          "quantity": 93.83874239350912,
+          "unit_concept_id": 93.8133874239351,
+          "anatomic_site_concept_id": 14.224137931034484,
+          "disease_status_concept_id": 98.25050709939148,
+          "specimen_source_id": 100.0,
+          "specimen_source_value": 100.0,
+          "unit_source_value": 100.0,
+          "anatomic_site_source_value": 100.0,
+          "disease_status_source_value": 100.0
+        },
+        "unique_counts": {
+          "specimen_id": 3944,
+          "person_id": 143,
+          "specimen_concept_id": 30,
+          "specimen_type_concept_id": 2,
+          "unit_concept_id": 1,
+          "anatomic_site_concept_id": 55,
+          "disease_status_concept_id": 2,
+          "specimen_source_id": 0
+        },
+        "date_ranges": {
+          "specimen_date": {
+            "min": "2005-05-16 00:00:00",
+            "max": "2022-06-19 00:00:00"
+          },
+          "specimen_datetime": {
+            "min": "2005-05-16 08:13:00",
+            "max": "2022-06-19 07:22:00"
+          }
+        }
+      },
+      "VISIT_DETAIL": {
+        "file_name": "VISIT_DETAIL.csv",
+        "total_records": 40437,
+        "total_columns": 19,
+        "columns": [
+          "visit_detail_id",
+          "person_id",
+          "visit_detail_concept_id",
+          "visit_detail_start_date",
+          "visit_detail_start_datetime",
+          "visit_detail_end_date",
+          "visit_detail_end_datetime",
+          "visit_detail_type_concept_id",
+          "provider_id",
+          "care_site_id",
+          "visit_detail_source_value",
+          "visit_detail_source_concept_id",
+          "admitting_source_value",
+          "admitting_source_concept_id",
+          "discharge_to_source_value",
+          "discharge_to_concept_id",
+          "preceding_visit_detail_id",
+          "visit_detail_parent_id",
+          "visit_occurrence_id"
+        ],
+        "memory_usage_mb": 15.65699577331543,
+        "missing_values": {
+          "visit_detail_id": 0,
+          "person_id": 0,
+          "visit_detail_concept_id": 0,
+          "visit_detail_start_date": 0,
+          "visit_detail_start_datetime": 0,
+          "visit_detail_end_date": 0,
+          "visit_detail_end_datetime": 0,
+          "visit_detail_type_concept_id": 0,
+          "provider_id": 1453,
+          "care_site_id": 2949,
+          "visit_detail_source_value": 40437,
+          "visit_detail_source_concept_id": 198,
+          "admitting_source_value": 40437,
+          "admitting_source_concept_id": 33043,
+          "discharge_to_source_value": 40437,
+          "discharge_to_concept_id": 40428,
+          "preceding_visit_detail_id": 35266,
+          "visit_detail_parent_id": 40437,
+          "visit_occurrence_id": 0
+        },
+        "data_types": {
+          "visit_detail_id": "int64",
+          "person_id": "int64",
+          "visit_detail_concept_id": "int64",
+          "visit_detail_start_date": "object",
+          "visit_detail_start_datetime": "object",
+          "visit_detail_end_date": "object",
+          "visit_detail_end_datetime": "object",
+          "visit_detail_type_concept_id": "int64",
+          "provider_id": "float64",
+          "care_site_id": "float64",
+          "visit_detail_source_value": "float64",
+          "visit_detail_source_concept_id": "float64",
+          "admitting_source_value": "float64",
+          "admitting_source_concept_id": "float64",
+          "discharge_to_source_value": "float64",
+          "discharge_to_concept_id": "float64",
+          "preceding_visit_detail_id": "float64",
+          "visit_detail_parent_id": "float64",
+          "visit_occurrence_id": "int64"
+        },
+        "chunks_processed": 1,
+        "missing_percentage": {
+          "visit_detail_id": 0.0,
+          "person_id": 0.0,
+          "visit_detail_concept_id": 0.0,
+          "visit_detail_start_date": 0.0,
+          "visit_detail_start_datetime": 0.0,
+          "visit_detail_end_date": 0.0,
+          "visit_detail_end_datetime": 0.0,
+          "visit_detail_type_concept_id": 0.0,
+          "provider_id": 3.5932438113608822,
+          "care_site_id": 7.2928258772906,
+          "visit_detail_source_value": 100.0,
+          "visit_detail_source_concept_id": 0.4896505675495215,
+          "admitting_source_value": 100.0,
+          "admitting_source_concept_id": 81.71476617948909,
+          "discharge_to_source_value": 100.0,
+          "discharge_to_concept_id": 99.97774315602047,
+          "preceding_visit_detail_id": 87.21220664243144,
+          "visit_detail_parent_id": 100.0,
+          "visit_occurrence_id": 0.0
+        },
+        "unique_counts": {
+          "visit_detail_id": 40437,
+          "person_id": 537,
+          "visit_detail_concept_id": 21,
+          "visit_detail_type_concept_id": 3,
+          "provider_id": 1758,
+          "care_site_id": 415,
+          "visit_detail_source_concept_id": 11,
+          "admitting_source_concept_id": 14,
+          "discharge_to_concept_id": 1,
+          "preceding_visit_detail_id": 5171,
+          "visit_detail_parent_id": 0,
+          "visit_occurrence_id": 8357
+        },
+        "date_ranges": {
+          "visit_detail_start_date": {
+            "min": "2005-01-18 00:00:00",
+            "max": "2023-11-26 00:00:00"
+          },
+          "visit_detail_start_datetime": {
+            "min": "2005-01-18 05:15:46",
+            "max": "2023-11-26 09:50:00"
+          },
+          "visit_detail_end_date": {
+            "min": "2005-01-18 00:00:00",
+            "max": "2023-11-26 00:00:00"
+          },
+          "visit_detail_end_datetime": {
+            "min": "2005-01-18 05:16:28",
+            "max": "2023-11-26 23:59:00"
+          }
+        },
+        "icu_visits": {
+          "total": 1259,
+          "unique_patients": 413,
+          "concept_distribution": {
+            "9202": 20865,
+            "9201": 9467,
+            "581477": 2998,
+            "8717": 2159,
+            "9203": 1319,
+            "8870": 1054,
+            "581379": 898,
+            "581385": 414,
+            "32037": 361,
+            "0": 237,
+            "38004207": 185,
+            "38004259": 135,
+            "38004294": 113,
+            "38004228": 111,
+            "581384": 63,
+            "8782": 39,
+            "8883": 11,
+            "38004287": 4,
+            "8650": 2,
+            "38004311": 1,
+            "38004269": 1
+          },
+          "icu_concept_ids": [
+            581379,
+            32037
+          ]
+        }
+      },
+      "VISIT_OCCURRENCE": {
+        "file_name": "VISIT_OCCURRENCE.csv",
+        "total_records": 55185,
+        "total_columns": 17,
+        "columns": [
+          "visit_occurrence_id",
+          "person_id",
+          "visit_concept_id",
+          "visit_start_date",
+          "visit_start_datetime",
+          "visit_end_date",
+          "visit_end_datetime",
+          "visit_type_concept_id",
+          "provider_id",
+          "care_site_id",
+          "visit_source_value",
+          "visit_source_concept_id",
+          "admitting_source_concept_id",
+          "admitting_source_value",
+          "discharge_to_concept_id",
+          "discharge_to_source_value",
+          "preceding_visit_occurrence_id"
+        ],
+        "memory_usage_mb": 20.493562698364258,
+        "missing_values": {
+          "visit_occurrence_id": 0,
+          "person_id": 0,
+          "visit_concept_id": 0,
+          "visit_start_date": 0,
+          "visit_start_datetime": 351,
+          "visit_end_date": 0,
+          "visit_end_datetime": 404,
+          "visit_type_concept_id": 0,
+          "provider_id": 3225,
+          "care_site_id": 3931,
+          "visit_source_value": 55185,
+          "visit_source_concept_id": 5423,
+          "admitting_source_concept_id": 44112,
+          "admitting_source_value": 55185,
+          "discharge_to_concept_id": 48572,
+          "discharge_to_source_value": 55185,
+          "preceding_visit_occurrence_id": 49423
+        },
+        "data_types": {
+          "visit_occurrence_id": "int64",
+          "person_id": "int64",
+          "visit_concept_id": "int64",
+          "visit_start_date": "object",
+          "visit_start_datetime": "object",
+          "visit_end_date": "object",
+          "visit_end_datetime": "object",
+          "visit_type_concept_id": "int64",
+          "provider_id": "float64",
+          "care_site_id": "float64",
+          "visit_source_value": "float64",
+          "visit_source_concept_id": "float64",
+          "admitting_source_concept_id": "float64",
+          "admitting_source_value": "float64",
+          "discharge_to_concept_id": "float64",
+          "discharge_to_source_value": "float64",
+          "preceding_visit_occurrence_id": "float64"
+        },
+        "chunks_processed": 1,
+        "missing_percentage": {
+          "visit_occurrence_id": 0.0,
+          "person_id": 0.0,
+          "visit_concept_id": 0.0,
+          "visit_start_date": 0.0,
+          "visit_start_datetime": 0.6360424028268552,
+          "visit_end_date": 0.0,
+          "visit_end_datetime": 0.7320829935670925,
+          "visit_type_concept_id": 0.0,
+          "provider_id": 5.843979342212558,
+          "care_site_id": 7.123312494337229,
+          "visit_source_value": 100.0,
+          "visit_source_concept_id": 9.826945728005798,
+          "admitting_source_concept_id": 79.93476488176134,
+          "admitting_source_value": 100.0,
+          "discharge_to_concept_id": 88.01667119688321,
+          "discharge_to_source_value": 100.0,
+          "preceding_visit_occurrence_id": 89.55875690858022
+        },
+        "unique_counts": {
+          "visit_occurrence_id": 55185,
+          "person_id": 538,
+          "visit_concept_id": 24,
+          "visit_type_concept_id": 3,
+          "provider_id": 6380,
+          "care_site_id": 1358,
+          "visit_source_concept_id": 15,
+          "admitting_source_concept_id": 21,
+          "discharge_to_concept_id": 30,
+          "preceding_visit_occurrence_id": 5758
+        },
+        "date_ranges": {
+          "visit_start_date": {
+            "min": "2003-06-29 00:00:00",
+            "max": "2023-12-04 00:00:00"
+          },
+          "visit_start_datetime": {
+            "min": "2003-06-29 08:39:00",
+            "max": "2023-12-04 11:33:32"
+          },
+          "visit_end_date": {
+            "min": "2003-06-29 00:00:00",
+            "max": "2023-12-04 00:00:00"
+          },
+          "visit_end_datetime": {
+            "min": "2003-06-29 08:39:00",
+            "max": "2023-12-04 11:57:57"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "run_id": "20250808_181940",
+  "start_time": "2025-08-08T18:19:40.146590",
+  "config": {
+    "python_path": "/Users/aaron_luo/opt/anaconda3/envs/am205/bin/python",
+    "min_concept_freq": 10
+  },
+  "skip_modules": [],
+  "start_from": null
+}

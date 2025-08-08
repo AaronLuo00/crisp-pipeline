@@ -1,0 +1,115 @@
+{
+  "MEASUREMENT": {
+    "total_rows": 1560833,
+    "low_freq_removed": 7645,
+    "outliers_removed": 12217,
+    "duplicates_removed": 4869,
+    "concept_columns": {
+      "measurement_concept_id": {
+        "total_values": 1553188,
+        "null_values": 0,
+        "mapped_count": 524195,
+        "unique_concepts_mapped": 418,
+        "mapping_rate": 33.749616916947595
+      }
+    },
+    "total_mappings_applied": 524195,
+    "output_rows": 1536102
+  },
+  "OBSERVATION": {
+    "total_rows": 204833,
+    "low_freq_removed": 1351,
+    "outliers_removed": 0,
+    "duplicates_removed": 16,
+    "concept_columns": {
+      "observation_concept_id": {
+        "total_values": 203482,
+        "null_values": 0,
+        "mapped_count": 77,
+        "unique_concepts_mapped": 3,
+        "mapping_rate": 0.03784118496967791
+      }
+    },
+    "total_mappings_applied": 77,
+    "output_rows": 203466
+  },
+  "PROCEDURE_OCCURRENCE": {
+    "total_rows": 46067,
+    "low_freq_removed": 6630,
+    "outliers_removed": 0,
+    "duplicates_removed": 54,
+    "concept_columns": {
+      "procedure_concept_id": {
+        "total_values": 39437,
+        "null_values": 0,
+        "mapped_count": 1814,
+        "unique_concepts_mapped": 59,
+        "mapping_rate": 4.599741359636889
+      }
+    },
+    "total_mappings_applied": 1814,
+    "output_rows": 39383
+  },
+  "DEVICE_EXPOSURE": {
+    "total_rows": 5914,
+    "low_freq_removed": 117,
+    "outliers_removed": 0,
+    "duplicates_removed": 0,
+    "concept_columns": {
+      "device_concept_id": {
+        "total_values": 5797,
+        "null_values": 0,
+        "mapped_count": 17,
+        "unique_concepts_mapped": 1,
+        "mapping_rate": 0.2932551319648094
+      }
+    },
+    "total_mappings_applied": 17,
+    "output_rows": 5797
+  },
+  "CONDITION_OCCURRENCE": {
+    "total_rows": 132556,
+    "low_freq_removed": 13606,
+    "outliers_removed": 0,
+    "duplicates_removed": 0,
+    "concept_columns": {},
+    "total_mappings_applied": 0,
+    "output_rows": 118950
+  },
+  "CONDITION_ERA": {
+    "total_rows": 53270,
+    "low_freq_removed": 12187,
+    "outliers_removed": 0,
+    "duplicates_removed": 0,
+    "concept_columns": {},
+    "total_mappings_applied": 0,
+    "output_rows": 41083
+  },
+  "DRUG_EXPOSURE": {
+    "total_rows": 182525,
+    "low_freq_removed": 9440,
+    "outliers_removed": 0,
+    "duplicates_removed": 0,
+    "concept_columns": {},
+    "total_mappings_applied": 0,
+    "output_rows": 173085
+  },
+  "DRUG_ERA": {
+    "total_rows": 31335,
+    "low_freq_removed": 2046,
+    "outliers_removed": 0,
+    "duplicates_removed": 0,
+    "concept_columns": {},
+    "total_mappings_applied": 0,
+    "output_rows": 29289
+  },
+  "VISIT_OCCURRENCE": {
+    "total_rows": 25425,
+    "low_freq_removed": 25,
+    "outliers_removed": 0,
+    "duplicates_removed": 0,
+    "concept_columns": {},
+    "total_mappings_applied": 0,
+    "output_rows": 25400
+  }
+}

@@ -1,0 +1,917 @@
+{
+  "cleaning_date": "2025-08-08T18:19:50.892351",
+  "dataset": "subdataset_1000",
+  "chunk_size": 100000,
+  "tables": {
+    "MEASUREMENT": {
+      "original_records": 1944155,
+      "cleaned_records": 1560833,
+      "records_removed": 383322,
+      "removal_percentage": 19.71663781951542,
+      "original_columns": 20,
+      "cleaned_columns": 17,
+      "columns_removed": [
+        "measurement_source_value",
+        "unit_source_value",
+        "value_source_value"
+      ],
+      "duplicates_removed": 370091,
+      "invalid_concept_removed": 13231,
+      "temporal_issues": 0,
+      "outlier_stats": {
+        "value_as_number": {
+          "total_values": 1476181,
+          "outliers": 22900,
+          "outlier_pct": 1.55130028092761,
+          "q1": 12.0,
+          "q3": 98.0,
+          "lower_bound": -246.0,
+          "upper_bound": 356.0
+        }
+      },
+      "output_file": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/MEASUREMENT_cleaned.csv",
+      "removed_records_files": {
+        "duplicates": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/removed_records/duplicates/MEASUREMENT.csv",
+        "invalid_concept_id": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/removed_records/invalid_concept_id/MEASUREMENT.csv",
+        "temporal_issues": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/removed_records/temporal_issues/MEASUREMENT.csv"
+      },
+      "removed_columns_details": [
+        {
+          "column_name": "measurement_source_value",
+          "total_rows": 1944155,
+          "non_missing_count": 0,
+          "missing_count": 1944155,
+          "missing_percentage": 100.0,
+          "unique_values": 0,
+          "sample_values": [],
+          "data_type": "unknown",
+          "removal_reason": ">95% missing",
+          "table_name": "MEASUREMENT"
+        },
+        {
+          "column_name": "unit_source_value",
+          "total_rows": 1944155,
+          "non_missing_count": 0,
+          "missing_count": 1944155,
+          "missing_percentage": 100.0,
+          "unique_values": 0,
+          "sample_values": [],
+          "data_type": "unknown",
+          "removal_reason": ">95% missing",
+          "table_name": "MEASUREMENT"
+        },
+        {
+          "column_name": "value_source_value",
+          "total_rows": 1944155,
+          "non_missing_count": 0,
+          "missing_count": 1944155,
+          "missing_percentage": 100.0,
+          "unique_values": 0,
+          "sample_values": [],
+          "data_type": "unknown",
+          "removal_reason": ">95% missing",
+          "table_name": "MEASUREMENT"
+        }
+      ]
+    },
+    "OBSERVATION": {
+      "original_records": 241604,
+      "cleaned_records": 204833,
+      "records_removed": 36771,
+      "removal_percentage": 15.219532789192233,
+      "original_columns": 18,
+      "cleaned_columns": 13,
+      "columns_removed": [
+        "value_as_string",
+        "unit_concept_id",
+        "observation_source_value",
+        "unit_source_value",
+        "qualifier_source_value"
+      ],
+      "duplicates_removed": 35520,
+      "invalid_concept_removed": 1251,
+      "temporal_issues": 0,
+      "outlier_stats": {},
+      "output_file": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/OBSERVATION_cleaned.csv",
+      "removed_records_files": {
+        "duplicates": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/removed_records/duplicates/OBSERVATION.csv",
+        "invalid_concept_id": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/removed_records/invalid_concept_id/OBSERVATION.csv",
+        "temporal_issues": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/removed_records/temporal_issues/OBSERVATION.csv"
+      },
+      "removed_columns_details": [
+        {
+          "column_name": "value_as_string",
+          "total_rows": 241604,
+          "non_missing_count": 0,
+          "missing_count": 241604,
+          "missing_percentage": 100.0,
+          "unique_values": 0,
+          "sample_values": [],
+          "data_type": "unknown",
+          "removal_reason": ">95% missing",
+          "table_name": "OBSERVATION"
+        },
+        {
+          "column_name": "unit_concept_id",
+          "total_rows": 241604,
+          "non_missing_count": 6184,
+          "missing_count": 235420,
+          "missing_percentage": 97.44043972781907,
+          "unique_values": 10,
+          "sample_values": [
+            "0.0",
+            "8587.0",
+            "0.0",
+            "0.0",
+            "8587.0",
+            "0.0",
+            "8587.0",
+            "8587.0",
+            "0.0",
+            "0.0"
+          ],
+          "data_type": "numeric",
+          "removal_reason": ">95% missing",
+          "table_name": "OBSERVATION"
+        },
+        {
+          "column_name": "observation_source_value",
+          "total_rows": 241604,
+          "non_missing_count": 0,
+          "missing_count": 241604,
+          "missing_percentage": 100.0,
+          "unique_values": 0,
+          "sample_values": [],
+          "data_type": "unknown",
+          "removal_reason": ">95% missing",
+          "table_name": "OBSERVATION"
+        },
+        {
+          "column_name": "unit_source_value",
+          "total_rows": 241604,
+          "non_missing_count": 0,
+          "missing_count": 241604,
+          "missing_percentage": 100.0,
+          "unique_values": 0,
+          "sample_values": [],
+          "data_type": "unknown",
+          "removal_reason": ">95% missing",
+          "table_name": "OBSERVATION"
+        },
+        {
+          "column_name": "qualifier_source_value",
+          "total_rows": 241604,
+          "non_missing_count": 0,
+          "missing_count": 241604,
+          "missing_percentage": 100.0,
+          "unique_values": 0,
+          "sample_values": [],
+          "data_type": "unknown",
+          "removal_reason": ">95% missing",
+          "table_name": "OBSERVATION"
+        }
+      ]
+    },
+    "DRUG_EXPOSURE": {
+      "original_records": 204252,
+      "cleaned_records": 182525,
+      "records_removed": 21727,
+      "removal_percentage": 10.637349940269862,
+      "original_columns": 23,
+      "cleaned_columns": 17,
+      "columns_removed": [
+        "stop_reason",
+        "sig",
+        "lot_number",
+        "drug_source_value",
+        "route_source_value",
+        "dose_unit_source_value"
+      ],
+      "duplicates_removed": 12373,
+      "invalid_concept_removed": 9016,
+      "temporal_issues": 338,
+      "outlier_stats": {},
+      "output_file": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/DRUG_EXPOSURE_cleaned.csv",
+      "removed_records_files": {
+        "duplicates": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/removed_records/duplicates/DRUG_EXPOSURE.csv",
+        "invalid_concept_id": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/removed_records/invalid_concept_id/DRUG_EXPOSURE.csv",
+        "temporal_issues": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/removed_records/temporal_issues/DRUG_EXPOSURE.csv"
+      },
+      "removed_columns_details": [
+        {
+          "column_name": "stop_reason",
+          "total_rows": 204252,
+          "non_missing_count": 0,
+          "missing_count": 204252,
+          "missing_percentage": 100.0,
+          "unique_values": 0,
+          "sample_values": [],
+          "data_type": "unknown",
+          "removal_reason": ">95% missing",
+          "table_name": "DRUG_EXPOSURE"
+        },
+        {
+          "column_name": "sig",
+          "total_rows": 204252,
+          "non_missing_count": 0,
+          "missing_count": 204252,
+          "missing_percentage": 100.0,
+          "unique_values": 0,
+          "sample_values": [],
+          "data_type": "unknown",
+          "removal_reason": ">95% missing",
+          "table_name": "DRUG_EXPOSURE"
+        },
+        {
+          "column_name": "lot_number",
+          "total_rows": 204252,
+          "non_missing_count": 0,
+          "missing_count": 204252,
+          "missing_percentage": 100.0,
+          "unique_values": 0,
+          "sample_values": [],
+          "data_type": "unknown",
+          "removal_reason": ">95% missing",
+          "table_name": "DRUG_EXPOSURE"
+        },
+        {
+          "column_name": "drug_source_value",
+          "total_rows": 204252,
+          "non_missing_count": 0,
+          "missing_count": 204252,
+          "missing_percentage": 100.0,
+          "unique_values": 0,
+          "sample_values": [],
+          "data_type": "unknown",
+          "removal_reason": ">95% missing",
+          "table_name": "DRUG_EXPOSURE"
+        },
+        {
+          "column_name": "route_source_value",
+          "total_rows": 204252,
+          "non_missing_count": 0,
+          "missing_count": 204252,
+          "missing_percentage": 100.0,
+          "unique_values": 0,
+          "sample_values": [],
+          "data_type": "unknown",
+          "removal_reason": ">95% missing",
+          "table_name": "DRUG_EXPOSURE"
+        },
+        {
+          "column_name": "dose_unit_source_value",
+          "total_rows": 204252,
+          "non_missing_count": 0,
+          "missing_count": 204252,
+          "missing_percentage": 100.0,
+          "unique_values": 0,
+          "sample_values": [],
+          "data_type": "unknown",
+          "removal_reason": ">95% missing",
+          "table_name": "DRUG_EXPOSURE"
+        }
+      ]
+    },
+    "CONDITION_OCCURRENCE": {
+      "original_records": 196241,
+      "cleaned_records": 132556,
+      "records_removed": 63685,
+      "removal_percentage": 32.452443678945784,
+      "original_columns": 16,
+      "cleaned_columns": 13,
+      "columns_removed": [
+        "stop_reason",
+        "condition_source_value",
+        "condition_status_source_value"
+      ],
+      "duplicates_removed": 63364,
+      "invalid_concept_removed": 321,
+      "temporal_issues": 0,
+      "outlier_stats": {},
+      "output_file": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/CONDITION_OCCURRENCE_cleaned.csv",
+      "removed_records_files": {
+        "duplicates": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/removed_records/duplicates/CONDITION_OCCURRENCE.csv",
+        "invalid_concept_id": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/removed_records/invalid_concept_id/CONDITION_OCCURRENCE.csv",
+        "temporal_issues": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/removed_records/temporal_issues/CONDITION_OCCURRENCE.csv"
+      },
+      "removed_columns_details": [
+        {
+          "column_name": "stop_reason",
+          "total_rows": 196241,
+          "non_missing_count": 1390,
+          "missing_count": 194851,
+          "missing_percentage": 99.291687262091,
+          "unique_values": 6,
+          "sample_values": [
+            "Resolved",
+            "Resolved",
+            "Resolved",
+            "Resolved",
+            "Resolved",
+            "Resolved",
+            "Resolved",
+            "Resolved",
+            "discharged",
+            "Resolved"
+          ],
+          "data_type": "string",
+          "removal_reason": ">95% missing",
+          "table_name": "CONDITION_OCCURRENCE"
+        },
+        {
+          "column_name": "condition_source_value",
+          "total_rows": 196241,
+          "non_missing_count": 0,
+          "missing_count": 196241,
+          "missing_percentage": 100.0,
+          "unique_values": 0,
+          "sample_values": [],
+          "data_type": "unknown",
+          "removal_reason": ">95% missing",
+          "table_name": "CONDITION_OCCURRENCE"
+        },
+        {
+          "column_name": "condition_status_source_value",
+          "total_rows": 196241,
+          "non_missing_count": 0,
+          "missing_count": 196241,
+          "missing_percentage": 100.0,
+          "unique_values": 0,
+          "sample_values": [],
+          "data_type": "unknown",
+          "removal_reason": ">95% missing",
+          "table_name": "CONDITION_OCCURRENCE"
+        }
+      ]
+    },
+    "VISIT_OCCURRENCE": {
+      "original_records": 55185,
+      "cleaned_records": 25425,
+      "records_removed": 29760,
+      "removal_percentage": 53.927697743952166,
+      "original_columns": 17,
+      "cleaned_columns": 14,
+      "columns_removed": [
+        "visit_source_value",
+        "admitting_source_value",
+        "discharge_to_source_value"
+      ],
+      "duplicates_removed": 11168,
+      "invalid_concept_removed": 18572,
+      "temporal_issues": 20,
+      "outlier_stats": {},
+      "output_file": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/VISIT_OCCURRENCE_cleaned.csv",
+      "removed_records_files": {
+        "duplicates": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/removed_records/duplicates/VISIT_OCCURRENCE.csv",
+        "invalid_concept_id": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/removed_records/invalid_concept_id/VISIT_OCCURRENCE.csv",
+        "temporal_issues": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/removed_records/temporal_issues/VISIT_OCCURRENCE.csv"
+      },
+      "removed_columns_details": [
+        {
+          "column_name": "visit_source_value",
+          "total_rows": 55185,
+          "non_missing_count": 0,
+          "missing_count": 55185,
+          "missing_percentage": 100.0,
+          "unique_values": 0,
+          "sample_values": [],
+          "data_type": "unknown",
+          "removal_reason": ">95% missing",
+          "table_name": "VISIT_OCCURRENCE"
+        },
+        {
+          "column_name": "admitting_source_value",
+          "total_rows": 55185,
+          "non_missing_count": 0,
+          "missing_count": 55185,
+          "missing_percentage": 100.0,
+          "unique_values": 0,
+          "sample_values": [],
+          "data_type": "unknown",
+          "removal_reason": ">95% missing",
+          "table_name": "VISIT_OCCURRENCE"
+        },
+        {
+          "column_name": "discharge_to_source_value",
+          "total_rows": 55185,
+          "non_missing_count": 0,
+          "missing_count": 55185,
+          "missing_percentage": 100.0,
+          "unique_values": 0,
+          "sample_values": [],
+          "data_type": "unknown",
+          "removal_reason": ">95% missing",
+          "table_name": "VISIT_OCCURRENCE"
+        }
+      ]
+    },
+    "PROCEDURE_OCCURRENCE": {
+      "original_records": 47395,
+      "cleaned_records": 46067,
+      "records_removed": 1328,
+      "removal_percentage": 2.8019833315750606,
+      "original_columns": 14,
+      "cleaned_columns": 12,
+      "columns_removed": [
+        "procedure_source_value",
+        "modifier_source_value"
+      ],
+      "duplicates_removed": 1225,
+      "invalid_concept_removed": 103,
+      "temporal_issues": 0,
+      "outlier_stats": {},
+      "output_file": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/PROCEDURE_OCCURRENCE_cleaned.csv",
+      "removed_records_files": {
+        "duplicates": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/removed_records/duplicates/PROCEDURE_OCCURRENCE.csv",
+        "invalid_concept_id": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/removed_records/invalid_concept_id/PROCEDURE_OCCURRENCE.csv",
+        "temporal_issues": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/removed_records/temporal_issues/PROCEDURE_OCCURRENCE.csv"
+      },
+      "removed_columns_details": [
+        {
+          "column_name": "procedure_source_value",
+          "total_rows": 47395,
+          "non_missing_count": 0,
+          "missing_count": 47395,
+          "missing_percentage": 100.0,
+          "unique_values": 0,
+          "sample_values": [],
+          "data_type": "unknown",
+          "removal_reason": ">95% missing",
+          "table_name": "PROCEDURE_OCCURRENCE"
+        },
+        {
+          "column_name": "modifier_source_value",
+          "total_rows": 47395,
+          "non_missing_count": 0,
+          "missing_count": 47395,
+          "missing_percentage": 100.0,
+          "unique_values": 0,
+          "sample_values": [],
+          "data_type": "unknown",
+          "removal_reason": ">95% missing",
+          "table_name": "PROCEDURE_OCCURRENCE"
+        }
+      ]
+    },
+    "VISIT_DETAIL": {
+      "original_records": 40437,
+      "cleaned_records": 26978,
+      "records_removed": 13459,
+      "removal_percentage": 33.2838736800455,
+      "original_columns": 19,
+      "cleaned_columns": 14,
+      "columns_removed": [
+        "visit_detail_source_value",
+        "admitting_source_value",
+        "discharge_to_source_value",
+        "discharge_to_concept_id",
+        "visit_detail_parent_id"
+      ],
+      "duplicates_removed": 12967,
+      "invalid_concept_removed": 235,
+      "temporal_issues": 257,
+      "outlier_stats": {},
+      "output_file": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/VISIT_DETAIL_cleaned.csv",
+      "removed_records_files": {
+        "duplicates": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/removed_records/duplicates/VISIT_DETAIL.csv",
+        "invalid_concept_id": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/removed_records/invalid_concept_id/VISIT_DETAIL.csv",
+        "temporal_issues": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/removed_records/temporal_issues/VISIT_DETAIL.csv"
+      },
+      "removed_columns_details": [
+        {
+          "column_name": "visit_detail_source_value",
+          "total_rows": 40437,
+          "non_missing_count": 0,
+          "missing_count": 40437,
+          "missing_percentage": 100.0,
+          "unique_values": 0,
+          "sample_values": [],
+          "data_type": "unknown",
+          "removal_reason": ">95% missing",
+          "table_name": "VISIT_DETAIL"
+        },
+        {
+          "column_name": "admitting_source_value",
+          "total_rows": 40437,
+          "non_missing_count": 0,
+          "missing_count": 40437,
+          "missing_percentage": 100.0,
+          "unique_values": 0,
+          "sample_values": [],
+          "data_type": "unknown",
+          "removal_reason": ">95% missing",
+          "table_name": "VISIT_DETAIL"
+        },
+        {
+          "column_name": "discharge_to_source_value",
+          "total_rows": 40437,
+          "non_missing_count": 0,
+          "missing_count": 40437,
+          "missing_percentage": 100.0,
+          "unique_values": 0,
+          "sample_values": [],
+          "data_type": "unknown",
+          "removal_reason": ">95% missing",
+          "table_name": "VISIT_DETAIL"
+        },
+        {
+          "column_name": "discharge_to_concept_id",
+          "total_rows": 40437,
+          "non_missing_count": 9,
+          "missing_count": 40428,
+          "missing_percentage": 99.97774315602047,
+          "unique_values": 1,
+          "sample_values": [
+            "8546.0",
+            "8546.0",
+            "8546.0",
+            "8546.0",
+            "8546.0",
+            "8546.0",
+            "8546.0",
+            "8546.0",
+            "8546.0"
+          ],
+          "data_type": "numeric",
+          "removal_reason": ">95% missing",
+          "table_name": "VISIT_DETAIL"
+        },
+        {
+          "column_name": "visit_detail_parent_id",
+          "total_rows": 40437,
+          "non_missing_count": 0,
+          "missing_count": 40437,
+          "missing_percentage": 100.0,
+          "unique_values": 0,
+          "sample_values": [],
+          "data_type": "unknown",
+          "removal_reason": ">95% missing",
+          "table_name": "VISIT_DETAIL"
+        }
+      ]
+    },
+    "CONDITION_ERA": {
+      "original_records": 53464,
+      "cleaned_records": 53270,
+      "records_removed": 194,
+      "removal_percentage": 0.3628609905730959,
+      "original_columns": 6,
+      "cleaned_columns": 6,
+      "columns_removed": [],
+      "duplicates_removed": 0,
+      "invalid_concept_removed": 194,
+      "temporal_issues": 0,
+      "outlier_stats": {},
+      "output_file": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/CONDITION_ERA_cleaned.csv",
+      "removed_records_files": {
+        "duplicates": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/removed_records/duplicates/CONDITION_ERA.csv",
+        "invalid_concept_id": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/removed_records/invalid_concept_id/CONDITION_ERA.csv",
+        "temporal_issues": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/removed_records/temporal_issues/CONDITION_ERA.csv"
+      },
+      "removed_columns_details": []
+    },
+    "SPECIMEN": {
+      "original_records": 3944,
+      "cleaned_records": 3874,
+      "records_removed": 70,
+      "removal_percentage": 1.7748478701825559,
+      "original_columns": 15,
+      "cleaned_columns": 9,
+      "columns_removed": [
+        "disease_status_concept_id",
+        "specimen_source_id",
+        "specimen_source_value",
+        "unit_source_value",
+        "anatomic_site_source_value",
+        "disease_status_source_value"
+      ],
+      "duplicates_removed": 0,
+      "invalid_concept_removed": 70,
+      "temporal_issues": 0,
+      "outlier_stats": {},
+      "output_file": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/SPECIMEN_cleaned.csv",
+      "removed_records_files": {
+        "duplicates": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/removed_records/duplicates/SPECIMEN.csv",
+        "invalid_concept_id": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/removed_records/invalid_concept_id/SPECIMEN.csv",
+        "temporal_issues": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/removed_records/temporal_issues/SPECIMEN.csv"
+      },
+      "removed_columns_details": [
+        {
+          "column_name": "disease_status_concept_id",
+          "total_rows": 3944,
+          "non_missing_count": 69,
+          "missing_count": 3875,
+          "missing_percentage": 98.25050709939148,
+          "unique_values": 2,
+          "sample_values": [
+            "4069590.0",
+            "4069590.0",
+            "4069590.0",
+            "4069590.0",
+            "4069590.0",
+            "4069590.0",
+            "4069590.0",
+            "4069590.0",
+            "4135493.0",
+            "4069590.0"
+          ],
+          "data_type": "numeric",
+          "removal_reason": ">95% missing",
+          "table_name": "SPECIMEN"
+        },
+        {
+          "column_name": "specimen_source_id",
+          "total_rows": 3944,
+          "non_missing_count": 0,
+          "missing_count": 3944,
+          "missing_percentage": 100.0,
+          "unique_values": 0,
+          "sample_values": [],
+          "data_type": "unknown",
+          "removal_reason": ">95% missing",
+          "table_name": "SPECIMEN"
+        },
+        {
+          "column_name": "specimen_source_value",
+          "total_rows": 3944,
+          "non_missing_count": 0,
+          "missing_count": 3944,
+          "missing_percentage": 100.0,
+          "unique_values": 0,
+          "sample_values": [],
+          "data_type": "unknown",
+          "removal_reason": ">95% missing",
+          "table_name": "SPECIMEN"
+        },
+        {
+          "column_name": "unit_source_value",
+          "total_rows": 3944,
+          "non_missing_count": 0,
+          "missing_count": 3944,
+          "missing_percentage": 100.0,
+          "unique_values": 0,
+          "sample_values": [],
+          "data_type": "unknown",
+          "removal_reason": ">95% missing",
+          "table_name": "SPECIMEN"
+        },
+        {
+          "column_name": "anatomic_site_source_value",
+          "total_rows": 3944,
+          "non_missing_count": 0,
+          "missing_count": 3944,
+          "missing_percentage": 100.0,
+          "unique_values": 0,
+          "sample_values": [],
+          "data_type": "unknown",
+          "removal_reason": ">95% missing",
+          "table_name": "SPECIMEN"
+        },
+        {
+          "column_name": "disease_status_source_value",
+          "total_rows": 3944,
+          "non_missing_count": 0,
+          "missing_count": 3944,
+          "missing_percentage": 100.0,
+          "unique_values": 0,
+          "sample_values": [],
+          "data_type": "unknown",
+          "removal_reason": ">95% missing",
+          "table_name": "SPECIMEN"
+        }
+      ]
+    },
+    "DEATH": {
+      "original_records": 113,
+      "cleaned_records": 112,
+      "records_removed": 1,
+      "removal_percentage": 0.8849557522123894,
+      "original_columns": 7,
+      "cleaned_columns": 6,
+      "columns_removed": [
+        "cause_source_value"
+      ],
+      "duplicates_removed": 0,
+      "invalid_concept_removed": 1,
+      "temporal_issues": 0,
+      "outlier_stats": {},
+      "output_file": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/DEATH_cleaned.csv",
+      "removed_records_files": {
+        "duplicates": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/removed_records/duplicates/DEATH.csv",
+        "invalid_concept_id": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/removed_records/invalid_concept_id/DEATH.csv",
+        "temporal_issues": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/removed_records/temporal_issues/DEATH.csv"
+      },
+      "removed_columns_details": [
+        {
+          "column_name": "cause_source_value",
+          "total_rows": 113,
+          "non_missing_count": 0,
+          "missing_count": 113,
+          "missing_percentage": 100.0,
+          "unique_values": 0,
+          "sample_values": [],
+          "data_type": "unknown",
+          "removal_reason": ">95% missing",
+          "table_name": "DEATH"
+        }
+      ]
+    },
+    "DEVICE_EXPOSURE": {
+      "original_records": 6338,
+      "cleaned_records": 5914,
+      "records_removed": 424,
+      "removal_percentage": 6.6898075102556005,
+      "original_columns": 15,
+      "cleaned_columns": 12,
+      "columns_removed": [
+        "device_exposure_end_date",
+        "device_exposure_end_datetime",
+        "device_source_value"
+      ],
+      "duplicates_removed": 424,
+      "invalid_concept_removed": 0,
+      "temporal_issues": 0,
+      "outlier_stats": {},
+      "output_file": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/DEVICE_EXPOSURE_cleaned.csv",
+      "removed_records_files": {
+        "duplicates": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/removed_records/duplicates/DEVICE_EXPOSURE.csv",
+        "invalid_concept_id": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/removed_records/invalid_concept_id/DEVICE_EXPOSURE.csv",
+        "temporal_issues": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/removed_records/temporal_issues/DEVICE_EXPOSURE.csv"
+      },
+      "removed_columns_details": [
+        {
+          "column_name": "device_exposure_end_date",
+          "total_rows": 6338,
+          "non_missing_count": 76,
+          "missing_count": 6262,
+          "missing_percentage": 98.80088355948249,
+          "unique_values": 45,
+          "sample_values": [
+            "2022-11-16",
+            "2023-05-10",
+            "2023-12-28",
+            "2023-12-28",
+            "2023-12-28",
+            "2023-04-29",
+            "2023-04-25",
+            "2023-12-28",
+            "2023-12-28",
+            "2023-12-28"
+          ],
+          "data_type": "string",
+          "removal_reason": ">95% missing",
+          "table_name": "DEVICE_EXPOSURE"
+        },
+        {
+          "column_name": "device_exposure_end_datetime",
+          "total_rows": 6338,
+          "non_missing_count": 76,
+          "missing_count": 6262,
+          "missing_percentage": 98.80088355948249,
+          "unique_values": 54,
+          "sample_values": [
+            "2022-11-16 16:00:00",
+            "2023-05-10 00:00:00",
+            "2023-12-28 00:00:00",
+            "2023-12-28 00:00:00",
+            "2023-12-28 00:00:00",
+            "2023-04-29 21:21:00",
+            "2023-04-25 19:42:00",
+            "2023-12-28 00:00:00",
+            "2023-12-28 00:00:00",
+            "2023-12-28 00:00:00"
+          ],
+          "data_type": "string",
+          "removal_reason": ">95% missing",
+          "table_name": "DEVICE_EXPOSURE"
+        },
+        {
+          "column_name": "device_source_value",
+          "total_rows": 6338,
+          "non_missing_count": 0,
+          "missing_count": 6338,
+          "missing_percentage": 100.0,
+          "unique_values": 0,
+          "sample_values": [],
+          "data_type": "unknown",
+          "removal_reason": ">95% missing",
+          "table_name": "DEVICE_EXPOSURE"
+        }
+      ]
+    },
+    "DRUG_ERA": {
+      "original_records": 34017,
+      "cleaned_records": 31335,
+      "records_removed": 2682,
+      "removal_percentage": 7.884293147543875,
+      "original_columns": 7,
+      "cleaned_columns": 7,
+      "columns_removed": [],
+      "duplicates_removed": 2682,
+      "invalid_concept_removed": 0,
+      "temporal_issues": 0,
+      "outlier_stats": {},
+      "output_file": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/DRUG_ERA_cleaned.csv",
+      "removed_records_files": {
+        "duplicates": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/removed_records/duplicates/DRUG_ERA.csv",
+        "invalid_concept_id": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/removed_records/invalid_concept_id/DRUG_ERA.csv",
+        "temporal_issues": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/removed_records/temporal_issues/DRUG_ERA.csv"
+      },
+      "removed_columns_details": []
+    },
+    "OBSERVATION_PERIOD": {
+      "original_records": 364,
+      "cleaned_records": 364,
+      "records_removed": 0,
+      "removal_percentage": 0.0,
+      "original_columns": 5,
+      "cleaned_columns": 5,
+      "columns_removed": [],
+      "duplicates_removed": 0,
+      "invalid_concept_removed": 0,
+      "temporal_issues": 0,
+      "outlier_stats": {},
+      "output_file": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/OBSERVATION_PERIOD_cleaned.csv",
+      "removed_records_files": {
+        "duplicates": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/removed_records/duplicates/OBSERVATION_PERIOD.csv",
+        "invalid_concept_id": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/removed_records/invalid_concept_id/OBSERVATION_PERIOD.csv",
+        "temporal_issues": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/removed_records/temporal_issues/OBSERVATION_PERIOD.csv"
+      },
+      "removed_columns_details": []
+    },
+    "PERSON": {
+      "original_records": 538,
+      "cleaned_records": 538,
+      "records_removed": 0,
+      "removal_percentage": 0.0,
+      "original_columns": 18,
+      "cleaned_columns": 14,
+      "columns_removed": [
+        "person_source_value",
+        "gender_source_value",
+        "race_source_value",
+        "ethnicity_source_value"
+      ],
+      "duplicates_removed": 0,
+      "invalid_concept_removed": 0,
+      "temporal_issues": 0,
+      "outlier_stats": {},
+      "output_file": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/PERSON_cleaned.csv",
+      "removed_records_files": {
+        "duplicates": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/removed_records/duplicates/PERSON.csv",
+        "invalid_concept_id": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/removed_records/invalid_concept_id/PERSON.csv",
+        "temporal_issues": "/Users/aaron_luo/2_Harvard_Lifes/3_Research/5_Critical/0_crisp-pipeline/crisp_pipeline_public/output/2_cleaning/removed_records/temporal_issues/PERSON.csv"
+      },
+      "removed_columns_details": [
+        {
+          "column_name": "person_source_value",
+          "total_rows": 538,
+          "non_missing_count": 0,
+          "missing_count": 538,
+          "missing_percentage": 100.0,
+          "unique_values": 0,
+          "sample_values": [],
+          "data_type": "unknown",
+          "removal_reason": ">95% missing",
+          "table_name": "PERSON"
+        },
+        {
+          "column_name": "gender_source_value",
+          "total_rows": 538,
+          "non_missing_count": 0,
+          "missing_count": 538,
+          "missing_percentage": 100.0,
+          "unique_values": 0,
+          "sample_values": [],
+          "data_type": "unknown",
+          "removal_reason": ">95% missing",
+          "table_name": "PERSON"
+        },
+        {
+          "column_name": "race_source_value",
+          "total_rows": 538,
+          "non_missing_count": 0,
+          "missing_count": 538,
+          "missing_percentage": 100.0,
+          "unique_values": 0,
+          "sample_values": [],
+          "data_type": "unknown",
+          "removal_reason": ">95% missing",
+          "table_name": "PERSON"
+        },
+        {
+          "column_name": "ethnicity_source_value",
+          "total_rows": 538,
+          "non_missing_count": 0,
+          "missing_count": 538,
+          "missing_percentage": 100.0,
+          "unique_values": 0,
+          "sample_values": [],
+          "data_type": "unknown",
+          "removal_reason": ">95% missing",
+          "table_name": "PERSON"
+        }
+      ]
+    }
+  }
+}
