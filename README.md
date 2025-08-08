@@ -180,11 +180,11 @@ TBA
 <div align="center">
 <br>
 
-### Built with passion by the research community
+### Empowering clinical AI research through open data standards
 
 <p>
-<strong>CRISP Pipeline</strong> is maintained by researchers and developers committed to<br>
-advancing healthcare analytics through open-source collaboration.
+<strong>CRISP</strong> bridges the gap between raw clinical data and machine learning applications,<br>
+making multi-institutional critical care research more accessible to the global research community.
 </p>
 <sub>If you find CRISP helpful in your research, please consider giving us a ⭐ on GitHub!</sub>
 
