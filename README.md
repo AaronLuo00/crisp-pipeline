@@ -1,4 +1,4 @@
-# CRISP Pipeline
+# CRISP: CRITICAL Records Integrated Standardization Pipeline
 
 <div align="center">
 
@@ -7,9 +7,9 @@
 ![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)
 ![Status](https://img.shields.io/badge/Status-Active-success?style=flat-square)
 
-**Clinical Records Integrated Standardization Pipeline**
+**Transforming Multi-Institutional Critical Care Data into ML-Ready Datasets**
 
-*A comprehensive, open-source solution for transforming large-scale OMOP CDM datasets into ML-ready formats*
+*An open-source pipeline for harmonizing and standardizing large-scale OMOP CDM data from the CRITICAL consortium*
 
 [Getting Started](#-getting-started) • [Documentation](#-documentation) • [Pipeline Modules](#-pipeline-architecture) • [Contributing](#-contributing)
 
