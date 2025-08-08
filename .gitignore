@@ -6,12 +6,10 @@ data/**/*.csv
 !data/subdataset_1000/*.csv
 !data/example_100/*.csv
 
-# Output files
-output/*/removed_records/
-output/**/*.csv
-!output/**/*.json
-!output/**/*.md
-!output/**/*.png
+# Output files - exclude everything except directory structure
+output/**
+!output/
+!output/**/.gitkeep
 
 # Temporary files
 *.tmp
