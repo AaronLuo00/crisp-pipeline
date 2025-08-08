@@ -1,0 +1,80 @@
+# Raw data directory (users should add their own data)
+raw_data/
+*.csv.gz
+*.csv.zip
+
+# Large data files
+data/**/*.csv
+!data/subdataset_1000/*.csv
+!data/example_100/*.csv
+
+# Output files
+output/*/removed_records/
+output/**/*.csv
+!output/**/*.json
+!output/**/*.md
+!output/**/*.png
+
+# Temporary files
+*.tmp
+*.temp
+temp/
+cache/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.env
+.venv
+venv/
+.ipynb_checkpoints/
+.pytest_cache/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Credentials and secrets
+*.key
+*.pem
+credentials.json
+secrets.yaml
+config.local.yaml
+
+# Large model files
+*.pkl
+*.pickle
+*.h5
+*.hdf5
+*.parquet
+*.joblib
+
+# Log files
+*.log
+logs/
+
+# Backup files
+*.bak
+backup/
+*.backup
+
+# Keep important files
+!README.md
+!requirements.txt
+!setup.py
+!docs/**/*.md
+!pipeline_modules/**/*.py
+!utils/**/*.py
+!notebooks/**/*.ipynb
+!config/*.yaml
+!main/*.py
