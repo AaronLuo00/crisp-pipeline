@@ -19,21 +19,23 @@
 
 ## 🌟 Overview
 
-CRISP is a **production-ready** data processing pipeline designed to handle **hundreds of millions of clinical records** efficiently. Originally developed to process the CRITICAL dataset (**571.7M records** from **~400K patients** across **4 major medical centers**), CRISP provides a robust framework for:
+CRISP (CRITICAL Records Integrated Standardization Pipeline) unlocks the full potential of the CRITICAL dataset—**571.7M records** from **~400K patients** across **4 geographically diverse CTSA institutions**. Originally developed to handle this unprecedented scale and diversity, CRISP transforms raw OMOP CDM data into ML-ready datasets through:
 
 | Feature | Description |
 |---------|-------------|
-| ✅ **Data Quality Assurance** | Automated validation and cleaning of OMOP CDM data |
-| ✅ **Concept Standardization** | Mapping diverse medical vocabularies to SNOMED CT |
-| ✅ **Temporal Alignment** | Intelligent merging of fragmented clinical episodes |
-| ✅ **ML-Ready Output** | Direct integration with machine learning workflows |
+| ✅ **Transparent Data Quality Management** | Comprehensive audit trails for all data transformations |
+| ✅ **Cross-Vocabulary Mapping** | Sophisticated harmonization across heterogeneous medical terminologies |
+| ✅ **Data Standardization** | Post-alignment normalization for multi-institutional consistency |
+| ✅ **Modular Architecture** | Flexible pipeline supporting diverse research needs |
+
+CRITICAL's unique strength lies in capturing **full-spectrum patient journeys**—pre-ICU, ICU, and post-ICU encounters across both inpatient and outpatient settings. CRISP democratizes access to this valuable multi-institutional resource, enabling researchers to focus on advancing clinical AI rather than spending months on data preprocessing.
 
 ## 🚀 Getting Started
 
 ### Prerequisites
 
 - **Python 3.8+** (with pip package manager)
-- **Memory**: 16GB+ RAM recommended (8GB minimum)
+- **Memory**: 16GB+ RAM recommended 
 - **Storage**: ~2x your data size in available disk space
 - **Data Format**: OMOP CDM v5.3 compatible
 
