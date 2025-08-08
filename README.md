@@ -105,7 +105,6 @@ Raw Data → [EDA] → [Cleaning] → [Mapping] → [Standardization] → [Extra
 - **Purpose**: Normalize values and formats
 - **Key Features**:
   - DateTime standardization to ISO 8601
-  - Unit conversions (e.g., glucose: mmol/L → mg/dL)
   - Statistical outlier detection (IQR method)  
   - Visit episode merging (configurable window)
 
