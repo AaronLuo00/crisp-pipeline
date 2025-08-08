@@ -52,24 +52,20 @@ cd crisp-pipeline
 
 **Step 1: Prepare your data**
 ```bash
-# Option 1: Sample from your existing OMOP data location (recommended)
+# One-command sampling and extraction (NEW - Recommended)
 python utils/sample_patients.py \
-    --input /path/to/your/OMOP_data/PERSON.csv \
-    --output data/PERSON.csv \
-    --sample-size 1000
+    --input-dir /path/to/your/OMOP_data/ \
+    --output-dir data/ \
+    --sample-size 1000 \
+    --extract-all
 
-# Option 2: For full dataset processing (not recommended for initial testing)
-# You can place all OMOP CDM files directly in the data/ directory
-# Note: We strongly recommend testing with a subset first
+# This automatically:
+# 1. Samples 1000 patients from PERSON.csv
+# 2. Extracts all related records from 14 OMOP tables
+# 3. Saves everything to data/ directory
 ```
 
-**Step 2: Extract related data for sampled patients**
-```bash
-# Use the notebook to extract all related tables
-jupyter notebook notebooks/0_extract_data_subset.ipynb
-```
-
-**Step 3: Run the pipeline**
+**Step 2: Run the pipeline**
 ```bash
 # Execute the complete pipeline
 python main/run_pipeline.py
