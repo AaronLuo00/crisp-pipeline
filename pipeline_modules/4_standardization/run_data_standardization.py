@@ -117,24 +117,33 @@ class DataStandardizer:
         return input_file
     
     def standardize_datetime(self, dt_string):
-        """Standardize datetime format to ISO format."""
+        """Standardize datetime format preserving original precision."""
         if not dt_string:
             return dt_string
-            
-        # Try common formats
-        formats = [
-            '%Y-%m-%d %H:%M:%S',
-            '%Y-%m-%d',
-            '%m/%d/%Y %H:%M:%S',
-            '%m/%d/%Y',
-            '%d/%m/%Y %H:%M:%S',
-            '%d/%m/%Y'
+        
+        # Define formats with their types (format, has_time)
+        datetime_formats = [
+            ('%Y-%m-%d %H:%M:%S', True),   # Has time with seconds
+            ('%Y-%m-%d %H:%M', True),       # Has time without seconds
+            ('%m/%d/%Y %H:%M:%S', True),   # US format with time and seconds
+            ('%m/%d/%Y %H:%M', True),       # US format with time
+            ('%d/%m/%Y %H:%M:%S', True),   # EU format with time and seconds
+            ('%d/%m/%Y %H:%M', True),       # EU format with time
+            ('%Y-%m-%d', False),            # ISO date only
+            ('%m/%d/%Y', False),            # US date only
+            ('%d/%m/%Y', False),            # EU date only
+            ('%Y/%m/%d', False),            # Alternative date format
         ]
         
-        for fmt in formats:
+        for fmt, has_time in datetime_formats:
             try:
                 dt = datetime.strptime(dt_string, fmt)
-                return dt.strftime('%Y-%m-%d %H:%M:%S')
+                if has_time:
+                    # Return with time if original had time
+                    return dt.strftime('%Y-%m-%d %H:%M:%S')
+                else:
+                    # Return date only if original was date only
+                    return dt.strftime('%Y-%m-%d')
             except:
                 continue
         
