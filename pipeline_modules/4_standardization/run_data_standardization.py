@@ -11,6 +11,7 @@ from datetime import datetime, timedelta
 from collections import defaultdict, Counter
 from tqdm import tqdm
 import logging
+from visit_concept_merger import VisitConceptMerger
 
 # Setup logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -633,141 +634,73 @@ class DataStandardizer:
         return stats['output_records']
     
     def merge_close_visits(self, table_name):
-        """Merge temporally close visits and create standardized output."""
-        logging.info(f"\nMerging close visits in {table_name}")
+        """Merge temporally close visits using concept-based merging."""
+        logging.info(f"\nMerging close visits in {table_name} using concept-based merging")
         
-        # Skip VISIT_DETAIL and VISIT_OCCURRENCE merging as it causes data corruption
-        # The standardization already processed them correctly
-        if table_name in ['VISIT_DETAIL', 'VISIT_OCCURRENCE']:
-            logging.info(f"Skipping merge for {table_name} - already processed in standardization")
+        # Only process VISIT_DETAIL and VISIT_OCCURRENCE tables
+        if table_name not in ['VISIT_DETAIL', 'VISIT_OCCURRENCE']:
+            logging.info(f"Skipping merge for {table_name} - not a visit table")
             return
         
-        # For visit tables, we process them in standardize_table first,
-        # then read the standardized output for merging
-        standardized_file = output_dir / f"{table_name}_standardized.csv"
-        if standardized_file.exists():
-            input_file = standardized_file
-            logging.info(f"Using standardized file for merging: {input_file}")
-        else:
+        # Get the standardized input file
+        input_file = output_dir / f"{table_name}_standardized.csv"
+        if not input_file.exists():
+            # If standardized file doesn't exist, use the cleaned file
             input_file = self.get_input_path(table_name)
             if not input_file.exists():
                 logging.warning(f"Input file not found: {input_file}")
                 return
         
-        # Read all visits - preserve string types to avoid data corruption
-        df = pd.read_csv(input_file, low_memory=False, dtype=str, keep_default_na=False)
+        logging.info(f"Processing {table_name} from: {input_file}")
         
-        # Convert datetime columns
-        if table_name == 'VISIT_DETAIL':
-            start_col = 'visit_detail_start_datetime'
-            end_col = 'visit_detail_end_datetime'
-            id_col = 'visit_detail_id'
-        else:
-            start_col = 'visit_start_datetime'
-            end_col = 'visit_end_datetime'
-            id_col = 'visit_occurrence_id'
+        # Create merged subdirectory for mapping files
+        merged_dir = output_dir / "merged_visit"
+        merged_dir.mkdir(parents=True, exist_ok=True)
         
-        df[start_col] = pd.to_datetime(df[start_col], errors='coerce')
-        df[end_col] = pd.to_datetime(df[end_col], errors='coerce')
+        # Initialize the VisitConceptMerger with 60-minute threshold
+        merger = VisitConceptMerger(
+            threshold_minutes=60,  # Use 60 minutes as per user requirement
+            output_dir=merged_dir
+        )
         
-        # Sort by person and start time
-        df = df.sort_values(['person_id', start_col])
+        # Process the table
+        merged_df, mapping_df = merger.process_table(input_file, table_name)
         
-        # Add episode_id column
-        df['episode_id'] = None
-        df['visits_in_episode'] = 1
+        if merged_df.empty:
+            logging.warning(f"No data returned from merging {table_name}")
+            return
         
-        # Track merge mappings
-        merge_mappings = []
-        episodes_created = 0
-        visits_merged = 0
-        
-        # Process each patient
-        for person_id, person_visits in df.groupby('person_id'):
-            person_df = person_visits.reset_index(drop=True)
-            current_episode_id = None
-            episode_start_idx = 0
-            
-            for idx in range(len(person_df)):
-                if idx == 0:
-                    # Start first episode
-                    current_episode_id = f"{person_id}_1"
-                    person_df.loc[idx, 'episode_id'] = current_episode_id
-                    episodes_created += 1
-                else:
-                    # Check time gap from end of previous visit
-                    prev_end = person_df.loc[idx-1, end_col]
-                    curr_start = person_df.loc[idx, start_col]
-                    
-                    if pd.notna(prev_end) and pd.notna(curr_start):
-                        time_gap_hours = (curr_start - prev_end).total_seconds() / 3600
-                        
-                        if time_gap_hours <= self.merge_threshold_hours:
-                            # Continue current episode
-                            person_df.loc[idx, 'episode_id'] = current_episode_id
-                            visits_merged += 1
-                        else:
-                            # Start new episode
-                            episode_num = int(current_episode_id.split('_')[-1]) + 1
-                            current_episode_id = f"{person_id}_{episode_num}"
-                            person_df.loc[idx, 'episode_id'] = current_episode_id
-                            episodes_created += 1
-                            
-                            # Update visit counts for previous episode
-                            episode_mask = person_df.loc[episode_start_idx:idx-1, 'episode_id'] == person_df.loc[episode_start_idx, 'episode_id']
-                            person_df.loc[episode_start_idx:idx-1, 'visits_in_episode'] = episode_mask.sum()
-                            
-                            episode_start_idx = idx
-                    else:
-                        # If datetime is missing, start new episode
-                        episode_num = int(current_episode_id.split('_')[-1]) + 1
-                        current_episode_id = f"{person_id}_{episode_num}"
-                        person_df.loc[idx, 'episode_id'] = current_episode_id
-                        episodes_created += 1
-                        episode_start_idx = idx
-            
-            # Update visit counts for last episode
-            if len(person_df) > 0:
-                last_episode_mask = person_df.loc[episode_start_idx:, 'episode_id'] == person_df.loc[episode_start_idx, 'episode_id']
-                person_df.loc[episode_start_idx:, 'visits_in_episode'] = last_episode_mask.sum()
-            
-            # Update the main dataframe
-            df.loc[person_visits.index] = person_df
-            
-            # Create merge mappings
-            for episode_id in person_df['episode_id'].unique():
-                episode_visits = person_df[person_df['episode_id'] == episode_id]
-                if len(episode_visits) > 1:
-                    merge_mappings.append({
-                        'person_id': person_id,
-                        'episode_id': episode_id,
-                        'visit_count': len(episode_visits),
-                        'original_visit_ids': episode_visits[id_col].tolist(),
-                        'episode_start': episode_visits[start_col].min(),
-                        'episode_end': episode_visits[end_col].max(),
-                        'total_duration_hours': (episode_visits[end_col].max() - episode_visits[start_col].min()).total_seconds() / 3600
-                    })
-        
-        # Save merged data with standardized naming
-        # The merged data should overwrite the standardized file since it includes merging
+        # Save the merged result as the standardized output
+        # This overwrites the standardized file with the merged version
         output_file = output_dir / f"{table_name}_standardized.csv"
-        # Make sure to not write NaN as empty strings - keep original empty strings
-        df.to_csv(output_file, index=False, na_rep='')
-        logging.info(f"Saved merged data to: {output_file}")
+        merged_df.to_csv(output_file, index=False)
+        logging.info(f"Saved merged {table_name} to: {output_file}")
         
-        # Save merge mappings
-        if merge_mappings:
-            mapping_file = merged_visits_dir / f"{table_name}_merge_mapping.csv"
-            pd.DataFrame(merge_mappings).to_csv(mapping_file, index=False)
-            logging.info(f"Created {len(merge_mappings)} merged episodes from {visits_merged} visits")
+        # Save mapping file to merged subdirectory
+        if not mapping_df.empty:
+            mapping_file = merged_dir / f"{table_name}_merge_mapping.csv"
+            mapping_df.to_csv(mapping_file, index=False)
+            logging.info(f"Saved merge mappings to: {mapping_file}")
+        
+        # Save statistics to merged subdirectory
+        stats_file = merged_dir / f"{table_name}_merge_statistics.json"
+        with open(stats_file, 'w') as f:
+            json.dump(merger.statistics, f, indent=2)
+        logging.info(f"Saved merge statistics to: {stats_file}")
         
         # Update standardization results
         self.standardization_results["tables"][table_name + "_merging"] = {
-            'total_visits': len(df),
-            'episodes_created': episodes_created,
-            'visits_merged': visits_merged,
-            'multi_visit_episodes': len(merge_mappings)
+            'total_input_records': merger.statistics.get('total_records', len(merged_df)),
+            'merged_episodes': merger.statistics['merged_episodes'],
+            'unchanged_records': merger.statistics['unchanged_records'],
+            'records_merged': merger.statistics['records_merged'],
+            'output_records': len(merged_df)
         }
+        
+        logging.info(f"Merge Summary for {table_name}:")
+        logging.info(f"  - Merged episodes: {merger.statistics['merged_episodes']:,}")
+        logging.info(f"  - Records merged: {merger.statistics['records_merged']:,}")
+        logging.info(f"  - Unchanged records: {merger.statistics['unchanged_records']:,}")
     
     
     def generate_removal_summary(self):
