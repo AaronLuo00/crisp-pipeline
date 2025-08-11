@@ -114,8 +114,8 @@ Raw Data → [EDA] → [Cleaning] → [Mapping] → [Standardization] → [Extra
 - **Purpose**: Create ML-ready datasets
 - **Key Features**:
   - Cohort-specific extraction
-  - Temporal window generation
   - Feature aggregation
+  - ML model baselines *(coming soon)*
 
 ## 📚 Documentation
 
