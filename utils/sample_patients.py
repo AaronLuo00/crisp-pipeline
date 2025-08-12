@@ -86,47 +86,76 @@ def sample_patients(input_file, output_file, sample_size=1000, prefixes=None, ra
         # Add prefix column for stratification (first 9 digits)
         df['prefix'] = df['person_id'].astype(str).str[:9]
         
-        # Calculate samples per prefix
+        # Calculate samples per prefix with exact target
         total_patients = len(df)
         prefix_groups = df.groupby('prefix')
         
+        # First pass: calculate ideal samples and base allocation
+        prefix_stats = []
+        for prefix, group in prefix_groups:
+            group_size = len(group)
+            ideal_samples = sample_size * group_size / total_patients
+            # Ensure at least 1 sample per group, but use floor for others
+            base_samples = max(1, int(ideal_samples))  # Floor, but at least 1
+            remainder = ideal_samples - int(ideal_samples)  # Fractional part only
+            
+            prefix_stats.append({
+                'prefix': prefix,
+                'group': group,
+                'group_size': group_size,
+                'base_samples': base_samples,
+                'remainder': remainder,
+                'percentage': group_size / total_patients * 100
+            })
+        
+        # Calculate total allocated so far
+        allocated = sum(stat['base_samples'] for stat in prefix_stats)
+        
+        # Distribute remaining samples to match exact target
+        remaining = sample_size - allocated
+        
+        if remaining > 0:
+            # Need to add more samples - sort by remainder (largest fractional part first)
+            prefix_stats.sort(key=lambda x: x['remainder'], reverse=True)
+            for i in range(min(remaining, len(prefix_stats))):
+                prefix_stats[i]['base_samples'] += 1
+        elif remaining < 0:
+            # Need to reduce samples - remove from groups with most samples (but keep at least 1)
+            prefix_stats.sort(key=lambda x: (x['base_samples'], x['group_size']), reverse=True)
+            reduced = 0
+            for stat in prefix_stats:
+                if reduced >= abs(remaining):
+                    break
+                if stat['base_samples'] > 1:
+                    reduction = min(stat['base_samples'] - 1, abs(remaining) - reduced)
+                    stat['base_samples'] -= reduction
+                    reduced += reduction
+        
+        # Now perform the actual sampling
         sampled_dfs = []
         print("\nSampling by prefix:")
         
-        for prefix, group in prefix_groups:
-            group_size = len(group)
-            # Calculate proportional sample size
-            sample_count = max(1, int(np.round(sample_size * group_size / total_patients)))
+        # Sort by prefix for consistent output
+        prefix_stats.sort(key=lambda x: x['prefix'])
+        
+        for stat in prefix_stats:
+            prefix = stat['prefix']
+            group = stat['group']
+            sample_count = stat['base_samples']
+            group_size = stat['group_size']
+            percentage = stat['percentage']
             
-            # Adjust if group is smaller than calculated sample size
-            if group_size < sample_count:
-                sample_count = group_size
+            # Ensure we don't sample more than available
+            sample_count = min(sample_count, group_size)
             
             # Sample from this prefix
             sampled = group.sample(n=sample_count, replace=False, random_state=random_seed)
             sampled_dfs.append(sampled)
             
-            percentage = group_size / total_patients * 100
             print(f"  Prefix {prefix}: {sample_count} from {group_size:,} ({percentage:.1f}%)")
         
         # Combine all samples
         sampled_df = pd.concat(sampled_dfs, ignore_index=True)
-        
-        # If we're slightly under target due to rounding, add more from largest groups
-        current_size = len(sampled_df)
-        if current_size < sample_size:
-            remaining = sample_size - current_size
-            already_sampled = set(sampled_df['person_id'])
-            
-            for prefix in df['prefix'].value_counts().index:
-                if remaining <= 0:
-                    break
-                group = df[df['prefix'] == prefix]
-                available = group[~group['person_id'].isin(already_sampled)]
-                if len(available) > 0:
-                    additional = available.sample(n=min(remaining, len(available)), random_state=random_seed)
-                    sampled_df = pd.concat([sampled_df, additional], ignore_index=True)
-                    remaining -= len(additional)
         
         # Remove the prefix column before saving
         if 'prefix' in sampled_df.columns:
