@@ -51,7 +51,7 @@ CRITICAL's unique strength lies in capturing **full-spectrum patient journeys**â
 
 ### Prerequisites
 
-- **Python 3.8+** (with pip package manager)
+- **Python 3.8+** (tested with Python 3.8.13)
 - **Memory**: 16GB+ RAM recommended 
 - **Storage**: ~2x your data size in available disk space
 - **Data Format**: OMOP CDM v5.3 compatible
@@ -63,6 +63,8 @@ CRITICAL's unique strength lies in capturing **full-spectrum patient journeys**â
 git clone https://github.com/AaronLuo00/crisp-pipeline.git
 cd crisp-pipeline
 
+# Install dependencies
+pip install -r requirements.txt
 ```
 
 ### Your First Run

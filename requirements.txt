@@ -1,0 +1,13 @@
+# CRISP Pipeline Requirements
+# Python 3.8+ required (tested with Python 3.8.13)
+
+# Core data processing
+pandas>=1.3.0
+numpy>=1.21.0
+
+# Progress bars for long-running operations
+tqdm>=4.62.0
+
+# Visualization (for EDA module)
+matplotlib>=3.4.0
+seaborn>=0.11.0

@@ -4,7 +4,7 @@ This guide covers the basics of setting up and running CRISP.
 
 ## Requirements
 
-- Python 3.8+
+- Python 3.8+ (tested with Python 3.8.13)
 - 16GB RAM recommended
 
 ## Quick Start
@@ -14,7 +14,7 @@ This guide covers the basics of setting up and running CRISP.
 ```bash
 git clone https://github.com/AaronLuo00/crisp-pipeline.git
 cd crisp-pipeline
-pip install pandas numpy tqdm matplotlib seaborn
+pip install -r requirements.txt
 ```
 
 ### 2. Data Setup
