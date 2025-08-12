@@ -291,7 +291,7 @@ Examples:
     
     # Full extraction options
     parser.add_argument('--input-dir', help='Directory containing all OMOP CSV files')
-    parser.add_argument('--output-dir', help='Directory for output files')
+    parser.add_argument('--output-dir', default='data/', help='Directory for output files (default: data/)')
     parser.add_argument('--extract-all', action='store_true', help='Extract all related OMOP tables')
     parser.add_argument('--chunk-size', type=int, default=200000, help='Chunk size for processing (default: 200000)')
     parser.add_argument('--resume', action='store_true', help='Resume extraction (skip already extracted tables)')
@@ -301,8 +301,20 @@ Examples:
     
     # Validate arguments
     if args.extract_all:
-        if not args.input_dir or not args.output_dir:
-            parser.error("--extract-all requires --input-dir and --output-dir")
+        if not args.input_dir:
+            parser.error("--extract-all requires --input-dir")
+        
+        # Safety check: warn if input and output directories are the same
+        input_dir_abs = os.path.abspath(args.input_dir)
+        output_dir_abs = os.path.abspath(args.output_dir)
+        
+        if input_dir_abs == output_dir_abs:
+            print("\n⚠️  WARNING: Input and output directories are the same!")
+            print("This will overwrite your original data files.")
+            response = input("Are you ABSOLUTELY sure you want to continue? (yes/no): ")
+            if response.lower() != 'yes':
+                print("Operation cancelled for safety.")
+                sys.exit(0)
         
         # Full extraction mode
         print("="*70)
