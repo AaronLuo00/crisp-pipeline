@@ -43,25 +43,11 @@ python data_preparation/validate_data.py --data-dir data/
 2. **Schema Validation**: Verifies required columns are present
 3. **Data Quality**: Checks for duplicates, null values, and data consistency
 
-### 3. extract_small_tables.py
-Extracts vocabulary and reference tables that don't require patient sampling.
-
-**Features:**
-- Extracts CONCEPT, VOCABULARY, RELATIONSHIP tables
-- Preserves all vocabulary mappings
-- Lightweight extraction for reference data
-
-**Usage:**
-```bash
-python data_preparation/extract_small_tables.py
-```
-
 ## Recommended Workflow
 
 1. **Sample your data** using `sample_patients.py`
 2. **Validate the data** using `validate_data.py`
-3. **Extract vocabulary tables** if needed using `extract_small_tables.py`
-4. **Run the pipeline** once validation passes
+3. **Run the pipeline** once validation passes
 
 ## Important Notes
 
