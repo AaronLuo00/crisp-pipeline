@@ -9,7 +9,7 @@
 
 **Transforming Multi-Institutional Critical Care Data into ML-Ready Datasets**
 
-*An open-source pipeline for harmonizing and standardizing large-scale OMOP CDM data from the CRITICAL consortium*
+*An open-source pipeline for harmonizing and standardizing large-scale OMOP CDM data from the [CRITICAL consortium](https://amia.org/webinar-library/critical-consortium-and-dataset)*
 
 [Getting Started](#-getting-started) • [Documentation](#-documentation) • [Pipeline Modules](#-pipeline-architecture) • [Contributing](#-contributing)
 
@@ -30,7 +30,7 @@ Funded by the National Center for Advancing Translational Sciences (NCATS), CRIT
 - **Native OMOP CDM v5.3**: First large-scale critical care dataset with native standardization
 - **Open Science**: Democratizing access to multi-institutional data for the research community
 
-Learn more: [AMIA Webinar](https://amia.org/webinar-library/critical-consortium-and-dataset) | [Data Access](https://critical.fsm.northwestern.edu/data-access)
+Learn more: [The CRITICAL Consortium and Dataset (AMIA Webinar)](https://amia.org/webinar-library/critical-consortium-and-dataset) | [Data Access](https://critical.fsm.northwestern.edu/data-access)
 
 ---
 
