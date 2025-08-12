@@ -24,16 +24,29 @@ pip install -r requirements.txt
 mkdir data
 
 # Option 1: Sample from your existing OMOP data location (recommended)
-python utils/sample_patients.py \
-    --input /path/to/your/OMOP_data/PERSON.csv \
-    --output data/PERSON.csv \
-    --sample-size 1000
+python data_preparation/sample_patients.py \
+    --input-dir /path/to/your/OMOP_data/ \
+    --output-dir data/ \
+    --sample-size 1000 \
+    --extract-all
 
 # Option 2: For full dataset (not recommended for initial testing)
 # Copy all OMOP CDM files directly to data/ directory
 ```
 
-### 3. Run Pipeline
+### 3. Validate Data (Recommended)
+
+```bash
+# Validate your OMOP CDM data before running pipeline
+python data_preparation/validate_data.py --data-dir data/
+```
+
+This checks:
+- Required tables existence
+- OMOP CDM v5.3 schema compliance
+- Basic data quality
+
+### 4. Run Pipeline
 
 ```bash
 # Option 1: Run complete pipeline

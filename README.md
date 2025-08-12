@@ -72,7 +72,7 @@ pip install -r requirements.txt
 **Step 1: Prepare your data**
 ```bash
 # One-command sampling and extraction (NEW - Recommended)
-python utils/sample_patients.py \
+python data_preparation/sample_patients.py \
     --input-dir /path/to/your/OMOP_data/ \
     --output-dir data/ \
     --sample-size 1000 \
@@ -84,10 +84,16 @@ python utils/sample_patients.py \
 # 3. Saves everything to data/ directory
 ```
 
-**Step 2: Run the pipeline**
+**Step 2: Validate your data (Recommended)**
+```bash
+# Ensure your data meets OMOP CDM requirements
+python data_preparation/validate_data.py --data-dir data/
+```
+
+**Step 3: Run the pipeline**
 ```bash
 # Execute the complete pipeline
-python main/run_pipeline.py
+python pipeline_modules/run_all_module.py
 ```
 
 Your processed data will be available in the `output/` directory.
@@ -157,7 +163,7 @@ crisp-pipeline/
 │   ├── 5_extraction/      # Feature extraction
 │   └── run_all_module.py  # Main pipeline runner
 ├── output/                # Pipeline outputs (not in git)
-└── utils/                 # Utility scripts
+└── data_preparation/      # Data preparation and validation tools
 ```
 
 ## 🤝 Contributing

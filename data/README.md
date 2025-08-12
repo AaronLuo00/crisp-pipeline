@@ -7,7 +7,7 @@ This directory is for storing your working datasets (sampled or full).
 ### Option 1: One-command sampling and extraction (Recommended)
 ```bash
 # Sample patients and extract all related OMOP tables in one command
-python utils/sample_patients.py \
+python data_preparation/sample_patients.py \
   --input-dir /path/to/your/OMOP_data/ \
   --output-dir data/ \
   --sample-size 1000 \
@@ -18,7 +18,7 @@ python utils/sample_patients.py \
 ### Option 2: Sample only (backward compatible)
 ```bash
 # Just sample patients without extraction
-python utils/sample_patients.py \
+python data_preparation/sample_patients.py \
   --input /path/to/your/OMOP_data/PERSON.csv \
   --output data/PERSON.csv \
   --sample-size 1000
@@ -37,6 +37,20 @@ After data preparation, this directory should contain:
 - DRUG_EXPOSURE.csv
 - VISIT_OCCURRENCE.csv
 - And other OMOP CDM standard tables
+
+## Data Validation (Recommended)
+
+Before running the pipeline, validate your OMOP CDM data:
+
+```bash
+# Validate data in this directory
+python data_preparation/validate_data.py --data-dir data/
+```
+
+This will check:
+- Table existence (14 required OMOP tables)
+- Schema compliance with OMOP CDM v5.3
+- Basic data quality (duplicates, nulls, etc.)
 
 ## Important Notes
 
