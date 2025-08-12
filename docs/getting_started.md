@@ -37,7 +37,7 @@ python utils/sample_patients.py \
 
 ```bash
 # Option 1: Run complete pipeline
-python main/run_pipeline.py
+python pipeline_modules/run_all_module.py
 
 # Option 2: Run individual modules
 python pipeline_modules/1_eda/run_eda_analysis.py

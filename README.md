@@ -146,14 +146,14 @@ crisp-pipeline/
 ├── config/                 # Configuration files
 ├── data/                   # Working datasets (sampled or full)
 ├── docs/                   # Documentation
-├── main/                   # Main pipeline runner
 ├── notebooks/              # Jupyter notebooks for exploration
 ├── pipeline_modules/       # Core processing modules
 │   ├── 1_eda/             # Exploratory data analysis
 │   ├── 2_cleaning/        # Data cleaning
 │   ├── 3_mapping/         # Concept mapping
 │   ├── 4_standardization/ # Data standardization
-│   └── 5_extraction/      # Feature extraction
+│   ├── 5_extraction/      # Feature extraction
+│   └── run_all_module.py  # Main pipeline runner
 ├── output/                # Pipeline outputs (not in git)
 └── utils/                 # Utility scripts
 ```
