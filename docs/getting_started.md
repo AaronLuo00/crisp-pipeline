@@ -19,20 +19,36 @@ pip install -r requirements.txt
 
 ### 2. Data Setup
 
+> **Important**: We strongly recommend testing with a small sample first, even if you have your full dataset ready.
+
+**Decision: Do you already have OMOP data in the data/ directory?**
+
+**NO - Starting fresh (Recommended path):**
 ```bash
 # Create data directory
 mkdir data
 
-# Option 1: Sample from your existing OMOP data location (recommended)
+# Sample from your existing OMOP data location
 python data_preparation/sample_patients.py \
     --input-dir /path/to/your/OMOP_data/ \
     --output-dir data/ \
     --sample-size 1000 \
     --extract-all
-
-# Option 2: For full dataset (not recommended for initial testing)
-# Copy all OMOP CDM files directly to data/ directory
 ```
+
+**YES - Already have full dataset in data/:**
+```bash
+# We still recommend testing with a sample first:
+python data_preparation/sample_patients.py \
+    --input-dir data/ \
+    --output-dir data_sample/ \
+    --sample-size 1000 \
+    --extract-all
+
+# After successful test, you can run on full dataset in data/
+```
+
+**Note**: Processing large datasets (>100GB) without testing can lead to hours of wasted computation if configuration is incorrect.
 
 ### 3. Validate Data (Recommended)
 

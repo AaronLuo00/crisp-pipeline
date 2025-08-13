@@ -61,8 +61,12 @@ pip install -r requirements.txt
 ### Your First Run
 
 **Step 1: Prepare your data**
+
+> **Important**: Even if you have your full dataset ready (e.g., 300GB), we strongly recommend testing with a small sample (1000 patients) first to ensure pipeline configuration is correct.
+
+**Option A: If starting fresh (Recommended)**
 ```bash
-# One-command sampling and extraction (NEW - Recommended)
+# Sample and extract from your OMOP data location
 python data_preparation/sample_patients.py \
     --input-dir /path/to/your/OMOP_data/ \
     --output-dir data/ \
@@ -73,6 +77,17 @@ python data_preparation/sample_patients.py \
 # 1. Samples 1000 patients from PERSON.csv
 # 2. Extracts all related records from 14 OMOP tables
 # 3. Saves everything to data/ directory
+```
+
+**Option B: If you already copied full dataset to data/**
+```bash
+# You can skip sampling, but we recommend testing with a sample first
+# To sample from existing data in data/ directory:
+python data_preparation/sample_patients.py \
+    --input-dir data/ \
+    --output-dir data_sample/ \
+    --sample-size 1000 \
+    --extract-all
 ```
 
 **Step 2: Validate your data (Recommended)**
