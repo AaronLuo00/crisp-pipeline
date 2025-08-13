@@ -53,9 +53,23 @@ CRITICAL's unique strength lies in capturing **full-spectrum patient journeys**â
 # Clone the repository
 git clone https://github.com/AaronLuo00/crisp-pipeline.git
 cd crisp-pipeline
+```
+
+**Option 1: Using Conda/Mamba (Recommended)**
+```bash
+# Create and activate environment
+conda env create -f config/environment.yml
+conda activate crisp-pipeline
+```
+
+**Option 2: Using pip**
+```bash
+# Create virtual environment (optional but recommended)
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 
 # Install dependencies
-pip install -r requirements.txt
+pip install -r config/requirements.txt
 ```
 
 ### Your First Run

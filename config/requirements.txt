@@ -8,6 +8,14 @@ numpy>=1.21.0
 # Progress bars for long-running operations
 tqdm>=4.62.0
 
-# Visualization (for EDA module)
+# Visualization (for EDA module and notebooks)
 matplotlib>=3.4.0
 seaborn>=0.11.0
+
+# Scientific computing and ML (for notebooks)
+scipy>=1.7.0
+scikit-learn>=1.0.0
+
+# Jupyter support (optional, for notebooks)
+jupyter
+ipykernel

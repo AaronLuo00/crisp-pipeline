@@ -11,10 +11,25 @@ This guide covers the basics of setting up and running CRISP.
 
 ### 1. Installation
 
+**Clone the repository:**
 ```bash
 git clone https://github.com/AaronLuo00/crisp-pipeline.git
 cd crisp-pipeline
-pip install -r requirements.txt
+```
+
+**Set up Python environment (choose one):**
+
+Using Conda/Mamba (Recommended):
+```bash
+conda env create -f config/environment.yml
+conda activate crisp-pipeline
+```
+
+Using pip:
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r config/requirements.txt
 ```
 
 ### 2. Data Setup
