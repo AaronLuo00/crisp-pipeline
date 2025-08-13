@@ -19,16 +19,7 @@
 
 ## 🏥 About the CRITICAL Consortium
 
-CRISP was developed to unlock the full potential of the groundbreaking **[CRITICAL (Collaborative Resource for Intensive-care Translational science, Informatics, Comprehensive Analytics, and Learning)](https://critical.fsm.northwestern.edu/data-access)** dataset—the first cross-CTSA initiative creating a multi-site, multi-modal, de-identified clinical dataset for advancing critical care research.
-
-Funded by the National Center for Advancing Translational Sciences (NCATS), CRITICAL leverages nationwide CTSA sites (Northwestern, Tufts, WUSTL, UAB) with diverse racial, ethnic, and geographic profiles to accelerate translational research in artificial intelligence. This collaborative breakthrough addresses the critical lack of shared data resources with sufficient depth, breadth, and diversity that has historically hindered healthcare AI advancement.
-
-**Why CRITICAL matters:**
-- **Unprecedented Scale**: ~400,000 patients, 571.7M records, 285.6GB of data
-- **Multi-Institutional Diversity**: 4 geographically distinct CTSA institutions with diverse populations
-- **Full Patient Journey**: Captures pre-ICU, ICU, and post-ICU encounters across inpatient/outpatient settings
-- **Native OMOP CDM v5.3**: First large-scale critical care dataset with native standardization
-- **Open Science**: Democratizing access to multi-institutional data for the research community
+CRISP was developed to unlock the full potential of the **[CRITICAL](https://critical.fsm.northwestern.edu/data-access)** (Collaborative Resource for Intensive-care Translational science, Informatics, Comprehensive Analytics, and Learning) dataset—a multi-institutional, de-identified clinical dataset with ~400,000 patients and 571.7M records from 4 geographically diverse CTSA sites.
 
 Learn more: [The CRITICAL Consortium and Dataset (AMIA Webinar)](https://amia.org/webinar-library/critical-consortium-and-dataset) | [Data Access](https://critical.fsm.northwestern.edu/data-access)
 
