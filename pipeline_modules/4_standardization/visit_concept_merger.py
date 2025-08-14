@@ -71,9 +71,14 @@ class VisitConceptMerger:
             start_col = 'visit_start_datetime'
             end_col = 'visit_end_datetime'
         
-        # Convert datetime columns with error handling
-        patient_visits[start_col] = pd.to_datetime(patient_visits[start_col], errors='coerce')
-        patient_visits[end_col] = pd.to_datetime(patient_visits[end_col], errors='coerce')
+        # Convert datetime columns with standardized format (already standardized in previous step)
+        # All datetime values are in format: YYYY-MM-DD HH:MM:SS
+        patient_visits[start_col] = pd.to_datetime(patient_visits[start_col], 
+                                                  format='%Y-%m-%d %H:%M:%S', 
+                                                  errors='coerce')
+        patient_visits[end_col] = pd.to_datetime(patient_visits[end_col], 
+                                                format='%Y-%m-%d %H:%M:%S', 
+                                                errors='coerce')
         
         all_merged_records = []
         all_unchanged_records = []
