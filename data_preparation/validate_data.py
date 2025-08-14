@@ -206,16 +206,16 @@ class OMOPValidator:
             
             # 3. Basic statistics
             print(f"\n  PERSON table statistics:")
-            print(f"    • Total persons: {total_persons:,}")
+            print(f"    - Total persons: {total_persons:,}")
             
             if 'gender_concept_id' in person_df.columns:
                 gender_counts = person_df['gender_concept_id'].value_counts().head(3)
-                print(f"    • Top gender concepts: {dict(gender_counts)}")
+                print(f"    - Top gender concepts: {dict(gender_counts)}")
             
             if 'year_of_birth' in person_df.columns:
                 min_year = person_df['year_of_birth'].min()
                 max_year = person_df['year_of_birth'].max()
-                print(f"    • Birth year range: {min_year} - {max_year}")
+                print(f"    - Birth year range: {min_year} - {max_year}")
                 
         except Exception as e:
             self.errors.append(f"Error checking data quality: {str(e)}")
@@ -232,9 +232,9 @@ class OMOPValidator:
         total_size = sum(stats['size_mb'] for stats in self.table_stats.values())
         
         print(f"\n[STATS] Dataset Overview:")
-        print(f"  • Total tables found: {len(self.table_stats)}/{len(self.REQUIRED_TABLES)}")
-        print(f"  • Total records: {total_rows:,}")
-        print(f"  • Total data size: {total_size:.1f} MB")
+        print(f"  - Total tables found: {len(self.table_stats)}/{len(self.REQUIRED_TABLES)}")
+        print(f"  - Total records: {total_rows:,}")
+        print(f"  - Total data size: {total_size:.1f} MB")
         
         if self.table_stats:
             # Find largest tables
@@ -242,13 +242,13 @@ class OMOPValidator:
                                  key=lambda x: x[1]['rows'], reverse=True)
             print(f"\n📈 Largest tables by record count:")
             for table, stats in sorted_tables[:3]:
-                print(f"  • {table}: {stats['rows']:,} records ({stats['size_mb']:.1f} MB)")
+                print(f"  - {table}: {stats['rows']:,} records ({stats['size_mb']:.1f} MB)")
         
         # Validation results
         print(f"\n[CHECK] Validation Results:")
-        print(f"  • Schema validation: {'[PASSED]' if not any('schema' in e for e in self.errors) else '[FAILED]'}")
-        print(f"  • Data quality: {'[PASSED]' if not any('duplicate' in e or 'quality' in e for e in self.errors) else '[FAILED]'}")
-        print(f"  • Required tables: {'[ALL PRESENT]' if len(self.table_stats) == len(self.REQUIRED_TABLES) else f'[{len(self.REQUIRED_TABLES) - len(self.table_stats)} MISSING]'}")
+        print(f"  - Schema validation: {'[PASSED]' if not any('schema' in e for e in self.errors) else '[FAILED]'}")
+        print(f"  - Data quality: {'[PASSED]' if not any('duplicate' in e or 'quality' in e for e in self.errors) else '[FAILED]'}")
+        print(f"  - Required tables: {'[ALL PRESENT]' if len(self.table_stats) == len(self.REQUIRED_TABLES) else f'[{len(self.REQUIRED_TABLES) - len(self.table_stats)} MISSING]'}")
         
         # Determine if data is ready
         is_ready = len(self.errors) == 0
@@ -263,9 +263,9 @@ class OMOPValidator:
             print("\n[TIP] Next steps:")
             print("  1. Run complete pipeline: python pipeline_modules/run_all_module.py")
             print("  2. Or run individual modules:")
-            print("     • python pipeline_modules/1_eda/run_eda_analysis.py")
-            print("     • python pipeline_modules/2_cleaning/run_data_cleaning.py")
-            print("     • etc.")
+            print("     - python pipeline_modules/1_eda/run_eda_analysis.py")
+            print("     - python pipeline_modules/2_cleaning/run_data_cleaning.py")
+            print("     - etc.")
         else:
             print(f"\n[FAILED] VALIDATION FAILED")
             print(f"\nFound {len(self.errors)} critical error(s) that must be fixed before running CRISP pipeline:")
@@ -278,17 +278,17 @@ class OMOPValidator:
             if table_errors:
                 print("\n📁 Missing Tables:")
                 for error in table_errors:
-                    print(f"  • {error}")
+                    print(f"  - {error}")
             
             if schema_errors:
                 print("\n[REPORT] Schema Issues:")
                 for error in schema_errors:
-                    print(f"  • {error}")
+                    print(f"  - {error}")
             
             if quality_errors:
                 print("\n[WARNING] Data Quality Issues:")
                 for error in quality_errors:
-                    print(f"  • {error}")
+                    print(f"  - {error}")
             
             print("\n🔧 Resolution:")
             print("  Please fix the above issues before running the CRISP pipeline.")

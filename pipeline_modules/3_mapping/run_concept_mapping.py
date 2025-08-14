@@ -161,7 +161,7 @@ class ConceptMapper:
                 else:
                     freq_stats['high_frequency'] += 1
             
-            logging.info(f"  Low frequency (≤{self.min_concept_freq}): {freq_stats['low_frequency']}")
+            logging.info(f"  Low frequency (<={self.min_concept_freq}): {freq_stats['low_frequency']}")
             logging.info(f"  High frequency (>{self.min_concept_freq}): {freq_stats['high_frequency']}")
     
     def standardize_date(self, date_str):
@@ -472,7 +472,7 @@ class ConceptMapper:
         
         # Step 1: Filter low frequency concepts
         if self.min_concept_freq > 0:
-            logging.info(f"\nFiltering low frequency concepts (≤{self.min_concept_freq})...")
+            logging.info(f"\nFiltering low frequency concepts (<={self.min_concept_freq})...")
             rows, removed_low_freq = self.filter_low_frequency_concepts(rows, table_name)
             table_stats['low_freq_removed'] = len(removed_low_freq)
             
@@ -635,7 +635,7 @@ def generate_mapping_report(stats, mapper):
         f.write(f"**Pipeline Module**: 3_mapping (comprehensive processing)\n\n")
         
         f.write("## Processing Configuration\n\n")
-        f.write(f"- **Low frequency threshold**: ≤{mapper.min_concept_freq}\n")
+        f.write(f"- **Low frequency threshold**: <={mapper.min_concept_freq}\n")
         f.write(f"- **Outlier removal**: {mapper.outlier_lower_pct}% lower, {mapper.outlier_upper_pct}% upper\n")
         f.write(f"- **Deduplication**: {'Enabled' if mapper.enable_dedup else 'Disabled'}\n")
         f.write(f"- **Visit episode window**: {mapper.episode_window_hours} hours\n\n")
@@ -690,7 +690,7 @@ def generate_mapping_report(stats, mapper):
             f.write("\n")
         
         f.write("## Notes\n\n")
-        f.write("- **Low frequency filtering**: Removes records with concept frequency ≤ threshold\n")
+        f.write("- **Low frequency filtering**: Removes records with concept frequency <= threshold\n")
         f.write("- **Date standardization**: Formats all dates consistently (YYYY-MM-DD or YYYY-MM-DD HH:MM:SS)\n")
         f.write("- **SNOMED mapping**: Applied to MEASUREMENT, OBSERVATION, PROCEDURE_OCCURRENCE, DEVICE_EXPOSURE\n")
         f.write("- **Outlier removal**: Applied to MEASUREMENT table based on value_as_number percentiles\n")
@@ -724,7 +724,7 @@ def main():
     print(f"  Output directory: {output_dir}")
     print(f"  Processed mappings: {processed_mappings_dir}")
     print(f"\nFeatures enabled:")
-    print(f"  Low frequency filtering: ≤{args.min_concept_freq}")
+    print(f"  Low frequency filtering: <={args.min_concept_freq}")
     print(f"  Date standardization: ENABLED")
     print(f"  Outlier removal (MEASUREMENT): {args.outlier_lower_pct}% lower, {args.outlier_upper_pct}% upper")
     print(f"  Deduplication: {'DISABLED' if args.no_dedup else 'ENABLED'}")
