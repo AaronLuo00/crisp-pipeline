@@ -87,7 +87,13 @@ def process_table_chunked(file_path, chunk_size=CHUNK_SIZE):
     }
     
     # Process chunks with progress bar
-    with tqdm(total=total_rows, desc=f"Reading {table_name}", unit="rows", leave=False) as pbar:
+    with tqdm(total=total_rows, desc=f"Reading {table_name}", 
+              unit="rows", leave=False,
+              disable=total_rows < 10000,  # Don't show progress for small files
+              miniters=max(1, total_rows//20) if total_rows > 0 else 1,  # Update every 5%
+              mininterval=2.0,  # At least 2 seconds interval
+              position=1,  # Nested position
+              ncols=80) as pbar:
         for chunk_num, chunk in enumerate(pd.read_csv(file_path, chunksize=chunk_size, low_memory=False)):
             # First chunk: initialize column-based statistics
             if chunk_num == 0:
@@ -210,7 +216,8 @@ def process_table_chunked(file_path, chunk_size=CHUNK_SIZE):
 
 # Analyze each table with overall progress bar
 print("\nAnalyzing tables...")
-for file_path in tqdm(sorted(data_files), desc="Processing tables", unit="table"):
+for file_path in tqdm(sorted(data_files), desc="Processing tables", 
+                     unit="table", position=0, leave=True):
     table_name = file_path.stem
     
     # Process table

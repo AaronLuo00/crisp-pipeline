@@ -170,7 +170,7 @@ def process_procedure_occurrence():
     # Note about CPT4 codes
     unmapped_cpt4 = sum(1 for row in rows if row.get('Vocab') == 'CPT4' and row['Id'] not in mappings)
     if unmapped_cpt4 > 0:
-        print(f"\n📌 Note: {unmapped_cpt4} CPT4 codes remain unmapped (no CPT4->SNOMED mapping file available)")
+        print(f"\n[NOTE] {unmapped_cpt4} CPT4 codes remain unmapped (no CPT4->SNOMED mapping file available)")
     
     return stats
 

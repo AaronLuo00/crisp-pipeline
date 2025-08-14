@@ -20,7 +20,8 @@ from tqdm import tqdm
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s'
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S'  # No milliseconds
 )
 
 class CRISPPipeline:
@@ -182,7 +183,7 @@ class CRISPPipeline:
             with open(self.log_file, 'a') as log:
                 log.write(f"\n\n{'='*60}\n")
                 log.write(f"Module: {module_name}\n")
-                log.write(f"Start: {datetime.now()}\n")
+                log.write(f"Start: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
                 log.write(f"{'='*60}\n")
                 
                 process = subprocess.Popen(
@@ -266,7 +267,7 @@ class CRISPPipeline:
         logging.info(f"\n{'='*60}")
         logging.info("CRISP PIPELINE EXECUTION")
         logging.info(f"Run ID: {self.run_id}")
-        logging.info(f"Start Time: {datetime.now()}")
+        logging.info(f"Start Time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
         logging.info(f"{'='*60}\n")
         
         # Save configuration

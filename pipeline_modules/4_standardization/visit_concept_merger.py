@@ -257,7 +257,10 @@ class VisitConceptMerger:
         
         # Process each patient
         from tqdm import tqdm
-        for patient_id in tqdm(patients, desc=f"Processing {table_name}"):
+        for patient_id in tqdm(patients, desc=f"Processing {table_name}",
+                              miniters=max(1, len(patients)//20),  # Update every 5%
+                              mininterval=60.0,  # At least 60 seconds interval
+                              leave=False, ncols=80):
             patient_results, patient_mappings = self.merge_visits_for_patient(df, patient_id)
             
             if not patient_results.empty:

@@ -12,7 +12,9 @@ from tqdm import tqdm
 import logging
 
 # Setup logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO, 
+                    format='%(asctime)s - %(levelname)s - %(message)s',
+                    datefmt='%Y-%m-%d %H:%M:%S')  # No milliseconds
 
 # Setup paths
 base_dir = Path(__file__).parent
@@ -362,23 +364,23 @@ class PatientDataExtractor:
             f.write("\n## Directory Structure\n\n")
             f.write("```\n")
             f.write("output/5_extraction/\n")
-            f.write("├── patient_data/\n")
-            f.write("│   ├── {prefix}/              # Patient ID prefix (first 9 digits)\n")
-            f.write("│   │   ├── {person_id}/       # Individual patient folder\n")
-            f.write("│   │   │   ├── icu_visit_summary_{person_id}.csv\n")
-            f.write("│   │   │   ├── PERSON.csv\n")
-            f.write("│   │   │   ├── DEATH.csv (if applicable)\n")
-            f.write("│   │   │   ├── MEASUREMENT.csv\n")
-            f.write("│   │   │   ├── OBSERVATION.csv\n")
-            f.write("│   │   │   └── ... (all other tables)\n")
-            f.write("│   └── 600000071/             # Special prefix with grouping\n")
-            f.write("│       ├── 000000-000999/\n")
-            f.write("│       │   └── {person_id}/\n")
-            f.write("│       └── ...\n")
-            f.write("├── statistics/\n")
-            f.write("│   ├── patient_before_icu_statistics.csv\n")
-            f.write("│   └── skipped_patients.csv\n")
-            f.write("└── extraction_report.md\n")
+            f.write("|-- patient_data/\n")
+            f.write("|   |-- {prefix}/              # Patient ID prefix (first 9 digits)\n")
+            f.write("|   |   |-- {person_id}/       # Individual patient folder\n")
+            f.write("|   |   |   |-- icu_visit_summary_{person_id}.csv\n")
+            f.write("|   |   |   |-- PERSON.csv\n")
+            f.write("|   |   |   |-- DEATH.csv (if applicable)\n")
+            f.write("|   |   |   |-- MEASUREMENT.csv\n")
+            f.write("|   |   |   |-- OBSERVATION.csv\n")
+            f.write("|   |   |   +-- ... (all other tables)\n")
+            f.write("|   +-- 600000071/             # Special prefix with grouping\n")
+            f.write("|       |-- 000000-000999/\n")
+            f.write("|       |   +-- {person_id}/\n")
+            f.write("|       +-- ...\n")
+            f.write("|-- statistics/\n")
+            f.write("|   |-- patient_before_icu_statistics.csv\n")
+            f.write("|   +-- skipped_patients.csv\n")
+            f.write("+-- extraction_report.md\n")
             f.write("```\n")
             
             if self.extraction_results['errors']:

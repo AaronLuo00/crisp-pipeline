@@ -39,6 +39,7 @@ log_file = output_dir / f"mapping_process_{datetime.now().strftime('%Y%m%d_%H%M%
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S',  # No milliseconds
     handlers=[
         logging.FileHandler(log_file),
         logging.StreamHandler()
@@ -579,7 +580,10 @@ class ConceptMapper:
             unique_mappings = set()
             
             # Process each row
-            for row in tqdm(rows, desc=f"Mapping {col}"):
+            for row in tqdm(rows, desc=f"Mapping {col}",
+                          miniters=max(1, len(rows)//20),  # Update every 5%
+                          mininterval=60.0,  # At least 60 seconds interval
+                          leave=False, ncols=80):
                 # Add mapping indicator column
                 row[f'{col}_mapped'] = 'N'
                 

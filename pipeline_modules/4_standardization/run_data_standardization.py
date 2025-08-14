@@ -14,7 +14,9 @@ import logging
 from visit_concept_merger import VisitConceptMerger
 
 # Setup logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO, 
+                    format='%(asctime)s - %(levelname)s - %(message)s',
+                    datefmt='%Y-%m-%d %H:%M:%S')  # No milliseconds
 
 # Setup
 base_dir = Path(__file__).parent
@@ -230,7 +232,10 @@ class DataStandardizer:
         # Read data to collect values
         df = pd.read_csv(input_file, chunksize=CHUNK_SIZE, low_memory=False)
         chunk_num = 0
-        for chunk in tqdm(df, desc=f"Collecting statistics from {table_name}"):
+        # Use leave=False to avoid clutter in output
+        for chunk in tqdm(df, desc=f"Collecting statistics from {table_name}", 
+                         unit='chunks', leave=False, ncols=80,
+                         mininterval=60.0):  # Update at most once per 60 seconds
             chunk_num += 1
             # Count concept frequencies
             if concept_col in chunk.columns:
@@ -326,11 +331,19 @@ class DataStandardizer:
         return frequency < self.min_concept_frequency
     
     def _process_rows_with_outliers(self, reader, writer, perc_writer, range_writer, 
-                                   freq_writer, change_writer, stats, table_name, concept_col):
+                                   freq_writer, change_writer, stats, table_name, concept_col, input_file):
         """Process rows for MEASUREMENT table with outlier checking."""
         headers = writer.fieldnames
         
-        for row_num, row in enumerate(tqdm(reader, desc=f"Processing {table_name}"), 1):
+        # Count total rows for progress bar
+        with open(input_file, 'r') as f:
+            total_rows = sum(1 for _ in f) - 1  # Subtract header
+        
+        for row_num, row in enumerate(tqdm(reader, desc=f"Processing {table_name}",
+                                          total=total_rows, unit='rows',
+                                          miniters=max(1, total_rows//20),  # Update every 5%
+                                          mininterval=60.0,  # Update at most once per 60 seconds
+                                          leave=False, ncols=80), 1):
             stats['input_records'] += 1
             new_row = row.copy()
             is_removed = False
@@ -444,11 +457,19 @@ class DataStandardizer:
                     change_writer.writerow(change)
     
     def _process_rows_without_outliers(self, reader, writer, freq_writer, 
-                                      change_writer, stats, table_name, concept_col):
+                                      change_writer, stats, table_name, concept_col, input_file):
         """Process rows for non-MEASUREMENT tables without outlier checking."""
         headers = writer.fieldnames
         
-        for row_num, row in enumerate(tqdm(reader, desc=f"Processing {table_name}"), 1):
+        # Count total rows for progress bar
+        with open(input_file, 'r') as f:
+            total_rows = sum(1 for _ in f) - 1  # Subtract header
+        
+        for row_num, row in enumerate(tqdm(reader, desc=f"Processing {table_name}",
+                                          total=total_rows, unit='rows',
+                                          miniters=max(1, total_rows//20),  # Update every 5%
+                                          mininterval=60.0,  # Update at most once per 60 seconds
+                                          leave=False, ncols=80), 1):
             stats['input_records'] += 1
             new_row = row.copy()
             is_removed = False
@@ -603,7 +624,7 @@ class DataStandardizer:
                     # Process rows with outlier checking
                     self._process_rows_with_outliers(reader, writer, perc_writer, range_writer, 
                                                    freq_writer, change_writer, stats, 
-                                                   table_name, concept_col)
+                                                   table_name, concept_col, input_file)
             else:
                 # For other tables, only open necessary files (no outlier files)
                 with open(output_file, 'w', encoding='utf-8', newline='') as outfile, \
@@ -625,7 +646,7 @@ class DataStandardizer:
                     # Process rows without outlier checking
                     self._process_rows_without_outliers(reader, writer, freq_writer, 
                                                       change_writer, stats, 
-                                                      table_name, concept_col)
+                                                      table_name, concept_col, input_file)
         
         # Save statistics
         self.standardization_results["tables"][table_name] = stats
@@ -948,16 +969,16 @@ class DataStandardizer:
             f.write("## Output Structure\n\n")
             f.write("```\n")
             f.write("output/4_standardization/\n")
-            f.write("├── [table]_standardized.csv      # Standardized data\n")
-            f.write("├── removed_records/\n")
-            f.write("│   ├── outliers_percentile/     # Percentile-based outliers\n")
-            f.write("│   ├── outliers_range/          # Range-based outliers\n")
-            f.write("│   ├── low_frequency/           # Low frequency concepts\n")
-            f.write("│   └── removal_summary.csv      # Summary of all removals\n")
-            f.write("├── merged_visits/               # Visit merge information\n")
-            f.write("│   ├── [table]_merged.csv       # Merged visit data\n")
-            f.write("│   └── [table]_merge_mapping.csv # Merge mappings\n")
-            f.write("└── standardization_changes/     # All standardization changes\n")
+            f.write("|-- [table]_standardized.csv      # Standardized data\n")
+            f.write("|-- removed_records/\n")
+            f.write("|   |-- outliers_percentile/     # Percentile-based outliers\n")
+            f.write("|   |-- outliers_range/          # Range-based outliers\n")
+            f.write("|   |-- low_frequency/           # Low frequency concepts\n")
+            f.write("|   +-- removal_summary.csv      # Summary of all removals\n")
+            f.write("|-- merged_visits/               # Visit merge information\n")
+            f.write("|   |-- [table]_merged.csv       # Merged visit data\n")
+            f.write("|   +-- [table]_merge_mapping.csv # Merge mappings\n")
+            f.write("+-- standardization_changes/     # All standardization changes\n")
             f.write("```\n")
             
             f.write("\n## Traceability\n\n")

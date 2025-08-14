@@ -260,7 +260,11 @@ def clean_table(table_name):
             reader = csv.DictReader(infile)
             
             # Create progress bar
-            with tqdm(total=total_rows, desc=f"Cleaning {table_name}", unit="rows") as pbar:
+            with tqdm(total=total_rows, desc=f"Cleaning {table_name}", unit="rows",
+                     miniters=max(1, total_rows//20) if total_rows > 0 else 1,  # Update every 5%
+                     mininterval=10.0,  # At least 10 seconds interval
+                     position=1,  # Nested position
+                     leave=False, ncols=80) as pbar:
                 chunk = []
                 
                 for row_num, row in enumerate(reader):
