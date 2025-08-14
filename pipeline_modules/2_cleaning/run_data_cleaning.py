@@ -376,8 +376,10 @@ def clean_table(table_name):
                         # Clear chunk
                         chunk = []
     
-    # Rename temp file to final output
-    temp_file.rename(output_file)
+    # Rename temp file to final output (Windows-compatible)
+    # Use shutil.move for cross-platform compatibility
+    import shutil
+    shutil.move(str(temp_file), str(output_file))
     
     # Write duplicate groups to file (only groups with multiple records)
     print("\nWriting duplicate groups...")
