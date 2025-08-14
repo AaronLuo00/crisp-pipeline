@@ -131,7 +131,7 @@ class ConceptMapper:
         logging.info("Counting concept frequencies across all tables...")
         
         for table_name in ALL_TABLES:
-            logging.info(f"\nProcessing {table_name}...")
+            # Count frequencies silently to avoid duplicate output
             input_file = input_dir / f"{table_name}_cleaned.csv"
             
             if not input_file.exists():
@@ -152,7 +152,7 @@ class ConceptMapper:
             
             # Store frequencies
             self.concept_frequencies[table_name] = concept_counter
-            logging.info(f"  Found {len(concept_counter)} unique concepts")
+            # Silent processing to avoid verbose output
             
             # Log statistics
             freq_stats = Counter()
@@ -462,11 +462,24 @@ class ConceptMapper:
             'total_mappings_applied': 0
         }
         
-        # Read input file
+        # Get total row count for progress bar
+        with open(input_file, 'r') as f:
+            total_rows = sum(1 for _ in f) - 1  # Subtract header
+        
+        # Read input file with progress bar
+        rows = []
         with open(input_file, 'r') as infile:
             reader = csv.DictReader(infile)
             fieldnames = reader.fieldnames
-            rows = list(reader)
+            
+            # Read with progress bar
+            for row in tqdm(reader, total=total_rows,
+                           desc=f"Mapping {table_name}",
+                           unit="rows",
+                           miniters=max(100, total_rows//100) if total_rows > 0 else 1,
+                           mininterval=10.0,
+                           leave=False, ncols=100):
+                rows.append(row)
         
         table_stats['total_rows'] = len(rows)
         logging.info(f"Loaded {len(rows):,} rows")
@@ -579,11 +592,8 @@ class ConceptMapper:
             
             unique_mappings = set()
             
-            # Process each row
-            for row in tqdm(rows, desc=f"Mapping {col}",
-                          miniters=max(1, len(rows)//20),  # Update every 5%
-                          mininterval=60.0,  # At least 60 seconds interval
-                          leave=False, ncols=80):
+            # Process each row (without progress bar for cleaner output)
+            for row in rows:
                 # Add mapping indicator column
                 row[f'{col}_mapped'] = 'N'
                 

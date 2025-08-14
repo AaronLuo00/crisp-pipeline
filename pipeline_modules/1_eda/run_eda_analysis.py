@@ -36,7 +36,7 @@ print(f"Output directory: {output_dir}")
 
 # Load all CSV files
 data_files = list(data_dir.glob("*.csv"))
-print(f"\nFound {len(data_files)} data files")
+print(f"Found {len(data_files)} data files")
 print(f"Using chunk size: {CHUNK_SIZE:,} rows")
 
 # Store statistics
@@ -86,12 +86,12 @@ def process_table_chunked(file_path, chunk_size=CHUNK_SIZE):
         "all_patients": set()
     }
     
-    # Process chunks with progress bar
+    # Process chunks (progress bar disabled for cleaner output)
     with tqdm(total=total_rows, desc=f"Reading {table_name}", 
               unit="rows", leave=False,
-              disable=total_rows < 10000,  # Don't show progress for small files
+              disable=True,  # Disable to avoid nested progress bars
               miniters=max(1, total_rows//20) if total_rows > 0 else 1,  # Update every 5%
-              mininterval=2.0,  # At least 2 seconds interval
+              mininterval=60.0,  # At least 60 seconds interval
               position=1,  # Nested position
               ncols=80) as pbar:
         for chunk_num, chunk in enumerate(pd.read_csv(file_path, chunksize=chunk_size, low_memory=False)):
@@ -214,22 +214,22 @@ def process_table_chunked(file_path, chunk_size=CHUNK_SIZE):
     
     return stats
 
-# Analyze each table with overall progress bar
+# Analyze each table (simplified output)
 print("\nAnalyzing tables...")
-for file_path in tqdm(sorted(data_files), desc="Processing tables", 
-                     unit="table", position=0, leave=True):
+for i, file_path in enumerate(sorted(data_files), 1):
     table_name = file_path.stem
+    print(f"  [{i}/{len(data_files)}] Processing {table_name}...", end="", flush=True)
     
     # Process table
     stats = process_table_chunked(file_path, CHUNK_SIZE)
     
     # Store results
     eda_results["tables"][table_name] = stats
+    print(" Done")
 
 # Overall summary
-print("\n" + "="*60)
-print("OVERALL SUMMARY")
-print("="*60)
+print("\nOVERALL SUMMARY")
+print("-"*40)
 
 total_records = sum(stats["total_records"] for stats in eda_results["tables"].values())
 print(f"Total records across all tables: {total_records:,}")
@@ -264,7 +264,7 @@ with open(results_path, 'w') as f:
 print(f"\nDetailed results saved to: {results_path}")
 
 # Generate visualizations
-print("\nGenerating visualizations...")
+print("Generating visualizations...")
 
 # 1. Table size distribution
 plt.figure(figsize=(12, 6))

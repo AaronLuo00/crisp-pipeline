@@ -158,7 +158,7 @@ class CRISPPipeline:
         
         logging.info(f"\n{'='*60}")
         logging.info(f"Running Module: {module_name}")
-        logging.info(f"Script: {script_path}")
+        logging.info(f"Script: {script_path.name}")
         logging.info(f"{'='*60}")
         
         # Check if script exists
@@ -176,6 +176,12 @@ class CRISPPipeline:
         if module_id == '3_mapping' and self.config.get('min_concept_freq'):
             cmd.extend(['--min-concept-freq', str(self.config['min_concept_freq'])])
         
+        # Set environment variables to control tqdm behavior
+        env = os.environ.copy()
+        env['TQDM_DISABLE'] = '0'  # Enable tqdm but control nesting
+        env['TQDM_POSITION'] = '0'  # Force single line
+        env['TQDM_NESTED'] = 'false'  # Disable nesting
+        
         # Execute module
         start_time = time.time()
         try:
@@ -192,20 +198,40 @@ class CRISPPipeline:
                     stderr=subprocess.STDOUT,
                     text=True,
                     bufsize=1,
-                    universal_newlines=True
+                    universal_newlines=True,
+                    env=env
                     # Removed cwd parameter - let scripts handle their own paths
                 )
                 
                 # Stream output with progress
                 lines = []
+                last_progress_line = ""
                 for line in process.stdout:
                     lines.append(line)
                     log.write(line)
                     log.flush()
                     
-                    # Show key progress indicators
-                    if 'Processing' in line or 'Completed' in line or 'Error' in line:
-                        print(f"  {line.strip()}")
+                    # Filter output to reduce verbosity
+                    line_stripped = line.strip()
+                    # Skip empty lines and repeated progress bars
+                    if not line_stripped:
+                        continue
+                    # Skip duplicate progress lines
+                    if '%' in line_stripped and line_stripped == last_progress_line:
+                        continue
+                    # Show progress bars and important messages
+                    if any(keyword in line_stripped for keyword in ['Processing', 'Completed', 'Error', 'Warning', 'STEP']) or \
+                       ('Cleaning' in line_stripped and ('rows' in line_stripped or '%' in line_stripped)) or \
+                       ('Extracting' in line_stripped) or \
+                       ('%' in line_stripped and any(table in line_stripped for table in ['MEASUREMENT', 'OBSERVATION', 'DRUG'])):
+                        # Avoid completely identical duplicate lines
+                        if line_stripped != last_progress_line:
+                            # Skip redundant "Processing tables" messages
+                            if 'Processing tables:' not in line_stripped:
+                                print(f"  {line_stripped}")
+                    
+                    if '%' in line_stripped:
+                        last_progress_line = line_stripped
                 
                 process.wait()
                 

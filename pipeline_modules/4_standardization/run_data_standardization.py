@@ -11,12 +11,17 @@ from datetime import datetime, timedelta
 from collections import defaultdict, Counter
 from tqdm import tqdm
 import logging
+import warnings
 from visit_concept_merger import VisitConceptMerger
 
 # Setup logging
 logging.basicConfig(level=logging.INFO, 
                     format='%(asctime)s - %(levelname)s - %(message)s',
                     datefmt='%Y-%m-%d %H:%M:%S')  # No milliseconds
+
+# Suppress warnings
+warnings.filterwarnings('ignore', category=FutureWarning)
+warnings.filterwarnings('ignore', category=UserWarning)
 
 # Setup
 base_dir = Path(__file__).parent
@@ -232,10 +237,11 @@ class DataStandardizer:
         # Read data to collect values
         df = pd.read_csv(input_file, chunksize=CHUNK_SIZE, low_memory=False)
         chunk_num = 0
-        # Use leave=False to avoid clutter in output
-        for chunk in tqdm(df, desc=f"Collecting statistics from {table_name}", 
-                         unit='chunks', leave=False, ncols=80,
-                         mininterval=60.0):  # Update at most once per 60 seconds
+        # Process chunks with more frequent progress updates
+        for chunk in tqdm(df, desc=f"Standardizing {table_name} (statistics)", 
+                         unit='chunks', leave=False, ncols=100,
+                         mininterval=10.0,  # Update at most once per 10 seconds
+                         disable=False):  # Enable progress tracking
             chunk_num += 1
             # Count concept frequencies
             if concept_col in chunk.columns:
@@ -339,11 +345,12 @@ class DataStandardizer:
         with open(input_file, 'r') as f:
             total_rows = sum(1 for _ in f) - 1  # Subtract header
         
-        for row_num, row in enumerate(tqdm(reader, desc=f"Processing {table_name}",
+        for row_num, row in enumerate(tqdm(reader, desc=f"Standardizing {table_name}",
                                           total=total_rows, unit='rows',
-                                          miniters=max(1, total_rows//20),  # Update every 5%
-                                          mininterval=60.0,  # Update at most once per 60 seconds
-                                          leave=False, ncols=80), 1):
+                                          miniters=max(100, total_rows//100),  # Update every 1% or at least 100 rows
+                                          mininterval=10.0,  # Update at most once per 10 seconds
+                                          leave=False, ncols=100,
+                                          disable=False), 1):  # Enable for all tables
             stats['input_records'] += 1
             new_row = row.copy()
             is_removed = False
@@ -465,11 +472,12 @@ class DataStandardizer:
         with open(input_file, 'r') as f:
             total_rows = sum(1 for _ in f) - 1  # Subtract header
         
-        for row_num, row in enumerate(tqdm(reader, desc=f"Processing {table_name}",
+        for row_num, row in enumerate(tqdm(reader, desc=f"Standardizing {table_name}",
                                           total=total_rows, unit='rows',
-                                          miniters=max(1, total_rows//20),  # Update every 5%
-                                          mininterval=60.0,  # Update at most once per 60 seconds
-                                          leave=False, ncols=80), 1):
+                                          miniters=max(100, total_rows//100),  # Update every 1% or at least 100 rows
+                                          mininterval=10.0,  # Update at most once per 10 seconds
+                                          leave=False, ncols=100,
+                                          disable=False), 1):  # Enable for all tables
             stats['input_records'] += 1
             new_row = row.copy()
             is_removed = False
@@ -797,9 +805,7 @@ class DataStandardizer:
         # Process main tables
         for table in TABLES_TO_STANDARDIZE:
             try:
-                logging.info(f"\n{'='*60}")
                 logging.info(f"Processing table: {table}")
-                logging.info(f"{'='*60}")
                 self.standardize_table(table)
             except Exception as e:
                 logging.error(f"Error standardizing {table}: {str(e)}")

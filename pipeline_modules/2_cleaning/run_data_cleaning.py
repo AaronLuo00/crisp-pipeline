@@ -160,9 +160,6 @@ def analyze_columns_chunked(file_path, chunk_size=CHUNK_SIZE):
 
 def clean_table(table_name):
     """Clean a single table with chunked processing."""
-    print(f"\n{'='*60}")
-    print(f"Cleaning {table_name}")
-    print('='*60)
     
     input_file = data_dir / f"{table_name}.csv"
     output_file = output_dir / f"{table_name}_cleaned.csv"
@@ -179,24 +176,16 @@ def clean_table(table_name):
         return 0
     
     # Get total row count for progress bar
-    print("Counting rows...")
     total_rows = get_file_row_count(input_file)
-    print(f"Total records: {total_rows:,}")
     
     # Analyze columns
-    print("\nAnalyzing columns for missing data...")
     headers, columns_to_remove, missing_counts, _, columns_info = analyze_columns_chunked(input_file)
     
     # Add table_name to each column info
     for col_info in columns_info:
         col_info['table_name'] = table_name
     
-    print(f"\nColumns with >95% missing data (will be removed): {len(columns_to_remove)}")
-    for col in columns_to_remove[:5]:
-        missing_pct = (missing_counts[col] / total_rows * 100) if total_rows > 0 else 0
-        print(f"  - {col}: {missing_pct:.1f}% missing")
-    if len(columns_to_remove) > 5:
-        print(f"  ... and {len(columns_to_remove)-5} more columns")
+    # Silent processing - no need to print column removal details
     
     # Define duplicate key columns based on table
     duplicate_key_cols = []
@@ -224,7 +213,6 @@ def clean_table(table_name):
         duplicate_key_cols = ['person_id']  # Primary key
     
     # Process data in chunks
-    print("\nProcessing data in chunks...")
     
     # Initialize counters
     duplicate_count = 0
@@ -259,12 +247,12 @@ def clean_table(table_name):
         with open(input_file, 'r', encoding='utf-8') as infile:
             reader = csv.DictReader(infile)
             
-            # Create progress bar
+            # Create progress bar with more frequent updates
             with tqdm(total=total_rows, desc=f"Cleaning {table_name}", unit="rows",
-                     miniters=max(1, total_rows//20) if total_rows > 0 else 1,  # Update every 5%
+                     miniters=max(100, total_rows//100) if total_rows > 0 else 1,  # Update every 1% or at least 100 rows
                      mininterval=10.0,  # At least 10 seconds interval
-                     position=1,  # Nested position
-                     leave=False, ncols=80) as pbar:
+                     position=1,  # Nested position to avoid overlap
+                     leave=False, ncols=100) as pbar:
                 chunk = []
                 
                 for row_num, row in enumerate(reader):
@@ -386,7 +374,6 @@ def clean_table(table_name):
     shutil.move(str(temp_file), str(output_file))
     
     # Write duplicate groups to file (only groups with multiple records)
-    print("\nWriting duplicate groups...")
     duplicate_groups_written = 0
     with open(duplicates_file, 'w', encoding='utf-8', newline='') as dup_file:
         dup_headers = headers + ['duplicate_status', 'duplicate_group_id', 'original_row_number']
@@ -404,12 +391,12 @@ def clean_table(table_name):
                     dup_writer.writerow(row_with_meta)
                     duplicate_groups_written += 1
     
-    print(f"Duplicate groups written: {duplicate_groups_written} records in {sum(1 for g in duplicate_groups.values() if len(g) > 1)} groups")
+    # Silent processing
     
     # Calculate outlier statistics for MEASUREMENT table
     outlier_stats = {}
     if table_name == 'MEASUREMENT' and numeric_values:
-        print("\nCalculating outlier statistics...")
+        pass  # Calculate silently
         numeric_values.sort()
         q1 = numeric_values[len(numeric_values)//4]
         q3 = numeric_values[3*len(numeric_values)//4]
@@ -428,25 +415,10 @@ def clean_table(table_name):
             'upper_bound': upper_bound
         }
         
-        print(f"Outlier detection (IQR method):")
-        print(f"  - value_as_number: {outlier_count:,} outliers ({outlier_stats['value_as_number']['outlier_pct']:.1f}%)")
+        # Silent processing
     
-    # Print summary
-    print(f"\nDuplicates found and removed: {duplicate_count:,}")
-    if table_name in PRIMARY_CONCEPT_FIELDS:
-        print(f"Invalid {PRIMARY_CONCEPT_FIELDS[table_name]} records removed: {invalid_concept_count:,}")
-    if temporal_issues > 0:
-        print(f"Temporal inconsistencies found and removed: {temporal_issues:,}")
-    
+    # Silent summary - details saved to results file
     rows_removed = total_rows - rows_written
-    
-    print(f"\nCleaning Summary:")
-    print(f"  - Original records: {total_rows:,}")
-    print(f"  - Cleaned records: {rows_written:,}")
-    print(f"  - Records removed: {rows_removed:,} ({rows_removed/total_rows*100:.1f}%)")
-    print(f"  - Original columns: {len(headers)}")
-    print(f"  - Cleaned columns: {len(clean_headers)}")
-    print(f"  - Columns removed: {len(columns_to_remove)}")
     
     # Store results
     cleaning_results["tables"][table_name] = {
@@ -470,7 +442,7 @@ def clean_table(table_name):
         "removed_columns_details": columns_info
     }
     
-    print(f"\nCleaned data saved to: {output_file}")
+    # Silent completion
     
     return rows_written
 
@@ -479,10 +451,11 @@ print("\nStarting table cleaning process...")
 total_original = 0
 total_cleaned = 0
 
-# Process tables with overall progress
-for i, table in enumerate(tqdm(KEY_TABLES, desc="Processing tables", unit="table")):
+# Process tables with progress tracking
+print("\nCleaning tables...")
+for i, table in enumerate(KEY_TABLES):
     try:
-        print(f"\n[{i+1}/{len(KEY_TABLES)}] Processing {table}...")
+        print(f"  [{i+1}/{len(KEY_TABLES)}] Processing {table}...")
         cleaned_count = clean_table(table)
         total_cleaned += cleaned_count
     except Exception as e:

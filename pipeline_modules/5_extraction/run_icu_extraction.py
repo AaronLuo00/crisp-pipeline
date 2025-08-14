@@ -10,11 +10,16 @@ from datetime import datetime
 from collections import defaultdict
 from tqdm import tqdm
 import logging
+import warnings
 
 # Setup logging
 logging.basicConfig(level=logging.INFO, 
                     format='%(asctime)s - %(levelname)s - %(message)s',
                     datefmt='%Y-%m-%d %H:%M:%S')  # No milliseconds
+
+# Suppress warnings
+warnings.filterwarnings('ignore', category=pd.errors.DtypeWarning)
+warnings.filterwarnings('ignore', category=UserWarning)
 
 # Setup paths
 base_dir = Path(__file__).parent
@@ -97,8 +102,10 @@ class PatientDataExtractor:
             estimated_chunks = max(1, file_size // (CHUNK_SIZE * 500))  # Rough estimate
             
             # Read in chunks for memory efficiency with progress bar
-            chunks = pd.read_csv(visit_detail_file, chunksize=CHUNK_SIZE, dtype={"person_id": str})
-            for chunk in tqdm(chunks, total=estimated_chunks, desc="Extracting ICU visits", leave=True):
+            chunks = pd.read_csv(visit_detail_file, chunksize=CHUNK_SIZE, dtype={"person_id": str}, low_memory=False)
+            for chunk in tqdm(chunks, total=estimated_chunks, desc="Extracting ICU visits", 
+                             leave=False, mininterval=10.0,  # 10-second update interval
+                             disable=False):  # Enable progress tracking
                 # Filter ICU visits
                 icu_visits = chunk[chunk['visit_detail_concept_id'].isin(ICU_CONCEPT_IDS)]
                 
@@ -165,9 +172,13 @@ class PatientDataExtractor:
             # Process in chunks
             reader = pd.read_csv(input_file, dtype={"person_id": str}, chunksize=CHUNK_SIZE)
             
+            # Enable progress bar only for large tables
+            show_progress = total_lines > 100000
             for chunk_idx, chunk in enumerate(tqdm(reader, total=num_chunks, 
                                                    desc=f"Processing {table_name}", 
-                                                   unit="chunks", leave=True)):
+                                                   unit="chunks", leave=False, 
+                                                   mininterval=10.0,  # 10-second update interval
+                                                   disable=not show_progress)):  # Enable for large tables
                 # Remove null person_ids
                 chunk = chunk[chunk["person_id"].notnull()]
                 total_records += len(chunk)
@@ -222,7 +233,8 @@ class PatientDataExtractor:
             grouped = df.groupby("person_id")
             
             for person_id, group_df in tqdm(grouped, desc=f"Processing {table_name}", 
-                                           unit="patients", leave=True):
+                                           unit="patients", leave=False, 
+                                           disable=True):  # Keep disabled for basic tables
                 # Get patient folder
                 patient_path = self.get_patient_path(person_id)
                 patient_path.mkdir(parents=True, exist_ok=True)
@@ -254,7 +266,9 @@ class PatientDataExtractor:
         # Process each patient with ICU records
         for person_id, icu_info in tqdm(icu_summaries.items(), 
                                        desc="Calculating pre-ICU stats", 
-                                       unit="patients", leave=True):
+                                       unit="patients", leave=False, 
+                                       mininterval=10.0,  # 10-second update interval
+                                       disable=len(icu_summaries) < 100):  # Enable for many patients
             patient_path = self.get_patient_path(person_id)
             
             if not patient_path.exists():
@@ -392,53 +406,36 @@ class PatientDataExtractor:
     
     def run(self):
         """Run the complete extraction process."""
-        print("\n" + "="*70)
-        print("PATIENT DATA EXTRACTION PROCESS")
-        print("="*70)
-        print(f"Standardized Data Directory: {standardized_dir}")
-        print(f"Cleaning Data Directory: {cleaning_dir}")
-        print(f"Output Directory: {output_dir}")
-        print(f"\nStandardized tables to process: {', '.join(TABLES_TO_PROCESS)}")
-        print(f"Basic tables to process: {', '.join(BASIC_TABLES)}")
+        # Simplified startup
+        print(f"\nExtracting patient data for {len(TABLES_TO_PROCESS) + len(BASIC_TABLES)} tables...")
         print(f"ICU Concept IDs: {', '.join(map(str, ICU_CONCEPT_IDS))}")
-        print("="*70 + "\n")
         
         # Step 1: Extract ICU summaries
-        print("\n" + "="*70)
-        print("STEP 1/4: Extracting ICU visit summaries")
-        print("="*70)
-        logging.info("Step 1: Extracting ICU visit summaries...")
+        print("\nStep 1/4: Extracting ICU visit summaries...")
+        logging.info("Extracting ICU visit summaries...")
         icu_summaries = self.extract_icu_summaries()
         
         # Step 2: Split standardized tables by patient
-        print("\n" + "="*70)
-        print(f"STEP 2/4: Processing {len(TABLES_TO_PROCESS)} standardized tables")
-        print("="*70)
-        logging.info("\nStep 2: Splitting standardized tables by patient...")
+        print(f"\nStep 2/4: Processing {len(TABLES_TO_PROCESS)} standardized tables")
+        logging.info("Splitting standardized tables by patient...")
         for idx, table in enumerate(TABLES_TO_PROCESS, 1):
             print(f"\n[{idx}/{len(TABLES_TO_PROCESS)}] Processing {table}...")
             self.split_table_by_patient(table)
         
         # Step 3: Split basic tables by patient
-        print("\n" + "="*70)
-        print(f"STEP 3/4: Processing {len(BASIC_TABLES)} basic tables")
-        print("="*70)
-        logging.info("\nStep 3: Processing basic tables...")
+        print(f"\nStep 3/4: Processing {len(BASIC_TABLES)} basic tables")
+        logging.info("Processing basic tables...")
         for idx, table in enumerate(BASIC_TABLES, 1):
             print(f"\n[{idx}/{len(BASIC_TABLES)}] Processing {table}...")
             self.split_basic_table_by_patient(table)
         
         # Step 4: Calculate pre-ICU statistics
         if icu_summaries:
-            print("\n" + "="*70)
-            print("STEP 4/4: Calculating pre-ICU statistics")
-            print("="*70)
-            logging.info("\nStep 4: Calculating pre-ICU statistics...")
+            print("\nStep 4/4: Calculating pre-ICU statistics")
+            logging.info("Calculating pre-ICU statistics...")
             self.calculate_pre_icu_statistics(icu_summaries)
         else:
-            print("\n" + "="*70)
-            print("STEP 4/4: Skipping pre-ICU statistics (no ICU patients found)")
-            print("="*70)
+            print("\nStep 4/4: Skipping pre-ICU statistics (no ICU patients found)")
         
         # Save extraction results
         results_path = output_dir / "extraction_results.json"
@@ -448,13 +445,7 @@ class PatientDataExtractor:
         # Generate report
         self.generate_report()
         
-        print("\n" + "="*70)
-        print("EXTRACTION COMPLETE")
-        print("="*70)
-        print(f"Patient data saved to: {patient_data_dir}")
-        print(f"Statistics saved to: {statistics_dir}")
-        print(f"Report saved to: {output_dir / 'extraction_report.md'}")
-        print("="*70)
+        print(f"\nExtraction completed. Results saved to: {output_dir}")
 
 
 def main():

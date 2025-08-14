@@ -74,3 +74,8 @@ backup/
 !notebooks/**/*.ipynb
 !config/*.yaml
 !main/*.py
+# Data directories
+data_1000/
+data_500/
+data/*.csv
+
