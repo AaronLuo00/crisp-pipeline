@@ -125,7 +125,7 @@ class CRISPPipeline:
             return False
         
         # Check Python environment
-        python_path = self.config.get('python_path', '/Users/aaron_luo/opt/anaconda3/envs/am205/bin/python')
+        python_path = self.config.get('python_path', sys.executable)
         try:
             result = subprocess.run(
                 [python_path, '--version'],
@@ -166,7 +166,7 @@ class CRISPPipeline:
             return False, {'error': 'Script not found'}
         
         # Prepare command - use absolute path for script
-        python_path = self.config.get('python_path', '/Users/aaron_luo/opt/anaconda3/envs/am205/bin/python')
+        python_path = self.config.get('python_path', sys.executable)
         # Convert to absolute path
         absolute_script_path = script_path.resolve()
         cmd = [python_path, str(absolute_script_path)]
@@ -444,7 +444,7 @@ def main():
     parser.add_argument(
         '--python-path',
         type=str,
-        default='/Users/aaron_luo/opt/anaconda3/envs/am205/bin/python',
+        default=sys.executable,
         help='Path to Python interpreter'
     )
     
