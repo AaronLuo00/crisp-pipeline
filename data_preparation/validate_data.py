@@ -110,11 +110,11 @@ class OMOPValidator:
                     'size_mb': round(size_mb, 2)
                 }
                 found_tables.append(table)
-                print(f"  ✓ {table}: {rows:,} rows, {size_mb:.1f} MB")
+                print(f"  [OK] {table}: {rows:,} rows, {size_mb:.1f} MB")
         
         # Report missing required tables
         if missing_required:
-            print(f"\n  ❌ Missing {len(missing_required)} required tables:")
+            print(f"\n  [ERROR] Missing {len(missing_required)} required tables:")
             for table in missing_required:
                 print(f"     - {table}.csv")
         
@@ -124,7 +124,7 @@ class OMOPValidator:
             file_path = self.data_dir / f"{table}.csv"
             if file_path.exists():
                 size_mb = file_path.stat().st_size / (1024*1024)
-                print(f"  ℹ️  {table}.csv found ({size_mb:.1f} MB)")
+                print(f"  [INFO] {table}.csv found ({size_mb:.1f} MB)")
                 self.info.append(f"Optional table found: {table}.csv")
             else:
                 print(f"  ○  {table}.csv not found (optional)")
@@ -153,14 +153,14 @@ class OMOPValidator:
                 
                 if missing_cols:
                     self.errors.append(f"{table} missing required columns: {missing_cols}")
-                    print(f"  ❌ {table}: missing columns {missing_cols}")
+                    print(f"  [ERROR] {table}: missing columns {missing_cols}")
                     schema_errors += 1
                 else:
-                    print(f"  ✓ {table}: all required columns present")
+                    print(f"  [OK] {table}: all required columns present")
                     
             except Exception as e:
                 self.errors.append(f"Error reading {table}: {str(e)}")
-                print(f"  ❌ Error reading {table}: {str(e)}")
+                print(f"  [ERROR] Error reading {table}: {str(e)}")
                 schema_errors += 1
         
         print(f"\n  Summary: {tables_checked - schema_errors}/{tables_checked} tables have valid schemas")
@@ -171,7 +171,7 @@ class OMOPValidator:
         # Focus on PERSON table as it's the most critical
         person_file = self.data_dir / "PERSON.csv"
         if not person_file.exists():
-            print("  ⚠️  Cannot check data quality - PERSON.csv not found")
+            print("  [WARNING] Cannot check data quality - PERSON.csv not found")
             return
         
         print(f"  Checking PERSON table quality...")
@@ -185,9 +185,9 @@ class OMOPValidator:
             duplicates = person_df['person_id'].duplicated().sum()
             if duplicates > 0:
                 self.errors.append(f"Found {duplicates} duplicate person_ids in PERSON table")
-                print(f"    ❌ Found {duplicates} duplicate person_ids")
+                print(f"    [ERROR] Found {duplicates} duplicate person_ids")
             else:
-                print(f"    ✓ No duplicate person_ids (checked {total_persons:,} records)")
+                print(f"    [OK] No duplicate person_ids (checked {total_persons:,} records)")
             
             # 2. Check for nulls in critical fields
             critical_fields = ['person_id', 'gender_concept_id', 'year_of_birth']
@@ -200,9 +200,9 @@ class OMOPValidator:
                         null_pct = (null_count / total_persons) * 100
                         self.warnings.append(f"{null_count} null values in PERSON.{col} ({null_pct:.1f}%)")
                         null_summary.append(f"{col}: {null_count} nulls")
-                        print(f"    ⚠️  {col}: {null_count:,} null values ({null_pct:.1f}%)")
+                        print(f"    [WARNING] {col}: {null_count:,} null values ({null_pct:.1f}%)")
                     else:
-                        print(f"    ✓ {col}: no null values")
+                        print(f"    [OK] {col}: no null values")
             
             # 3. Basic statistics
             print(f"\n  PERSON table statistics:")
@@ -219,7 +219,7 @@ class OMOPValidator:
                 
         except Exception as e:
             self.errors.append(f"Error checking data quality: {str(e)}")
-            print(f"  ❌ Error checking data quality: {str(e)}")
+            print(f"  [ERROR] Error checking data quality: {str(e)}")
     
     def generate_report(self):
         """Generate comprehensive validation summary"""
@@ -231,7 +231,7 @@ class OMOPValidator:
         total_rows = sum(stats['rows'] for stats in self.table_stats.values())
         total_size = sum(stats['size_mb'] for stats in self.table_stats.values())
         
-        print(f"\n📊 Dataset Overview:")
+        print(f"\n[STATS] Dataset Overview:")
         print(f"  • Total tables found: {len(self.table_stats)}/{len(self.REQUIRED_TABLES)}")
         print(f"  • Total records: {total_rows:,}")
         print(f"  • Total data size: {total_size:.1f} MB")
@@ -245,10 +245,10 @@ class OMOPValidator:
                 print(f"  • {table}: {stats['rows']:,} records ({stats['size_mb']:.1f} MB)")
         
         # Validation results
-        print(f"\n🔍 Validation Results:")
-        print(f"  • Schema validation: {'✅ PASSED' if not any('schema' in e for e in self.errors) else '❌ FAILED'}")
-        print(f"  • Data quality: {'✅ PASSED' if not any('duplicate' in e or 'quality' in e for e in self.errors) else '❌ FAILED'}")
-        print(f"  • Required tables: {'✅ ALL PRESENT' if len(self.table_stats) == len(self.REQUIRED_TABLES) else f'❌ {len(self.REQUIRED_TABLES) - len(self.table_stats)} MISSING'}")
+        print(f"\n[CHECK] Validation Results:")
+        print(f"  • Schema validation: {'[PASSED]' if not any('schema' in e for e in self.errors) else '[FAILED]'}")
+        print(f"  • Data quality: {'[PASSED]' if not any('duplicate' in e or 'quality' in e for e in self.errors) else '[FAILED]'}")
+        print(f"  • Required tables: {'[ALL PRESENT]' if len(self.table_stats) == len(self.REQUIRED_TABLES) else f'[{len(self.REQUIRED_TABLES) - len(self.table_stats)} MISSING]'}")
         
         # Determine if data is ready
         is_ready = len(self.errors) == 0
@@ -256,18 +256,18 @@ class OMOPValidator:
         print("\n" + "-"*60)
         
         if is_ready:
-            print("\n✅ DATA VALIDATION PASSED")
+            print("\n[SUCCESS] DATA VALIDATION PASSED")
             print("\nYour OMOP CDM data meets all requirements for the CRISP pipeline.")
             print("You can proceed with running the pipeline modules.")
             
-            print("\n💡 Next steps:")
+            print("\n[TIP] Next steps:")
             print("  1. Run complete pipeline: python pipeline_modules/run_all_module.py")
             print("  2. Or run individual modules:")
             print("     • python pipeline_modules/1_eda/run_eda_analysis.py")
             print("     • python pipeline_modules/2_cleaning/run_data_cleaning.py")
             print("     • etc.")
         else:
-            print(f"\n❌ VALIDATION FAILED")
+            print(f"\n[FAILED] VALIDATION FAILED")
             print(f"\nFound {len(self.errors)} critical error(s) that must be fixed before running CRISP pipeline:")
             
             # Group errors by type
@@ -281,12 +281,12 @@ class OMOPValidator:
                     print(f"  • {error}")
             
             if schema_errors:
-                print("\n📋 Schema Issues:")
+                print("\n[REPORT] Schema Issues:")
                 for error in schema_errors:
                     print(f"  • {error}")
             
             if quality_errors:
-                print("\n⚠️  Data Quality Issues:")
+                print("\n[WARNING] Data Quality Issues:")
                 for error in quality_errors:
                     print(f"  • {error}")
             
@@ -295,7 +295,7 @@ class OMOPValidator:
             print("  Refer to OMOP CDM v5.3 documentation for table requirements.")
         
         if self.warnings:
-            print(f"\n⚠️  {len(self.warnings)} warning(s) (non-critical):")
+            print(f"\n[WARNING] {len(self.warnings)} warning(s) (non-critical):")
             for i, warning in enumerate(self.warnings[:3], 1):
                 print(f"  {i}. {warning}")
             if len(self.warnings) > 3:
@@ -327,7 +327,7 @@ Examples:
     # Check if directory exists
     data_path = Path(args.data_dir)
     if not data_path.exists():
-        print(f"❌ Error: Data directory '{data_path}' does not exist")
+        print(f"[ERROR] Data directory '{data_path}' does not exist")
         sys.exit(1)
     
     # Run validation

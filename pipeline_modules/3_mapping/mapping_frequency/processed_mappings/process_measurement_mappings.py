@@ -162,7 +162,7 @@ def process_measurement():
     print(f"    - To new SNOMED: {stats['mapped_to_new_snomed']} ({stats['mapped_to_new_snomed']/stats['total_concepts']*100:.1f}%)")
     print(f"  Unmapped: {stats['unmapped']} ({stats['unmapped']/stats['total_concepts']*100:.1f}%)")
     
-    print("\n⚠️  Note: Some mappings are to existing SNOMED concepts.")
+    print("\n[WARNING] Note: Some mappings are to existing SNOMED concepts.")
     print("    Deduplication will be handled in the 4_standardization module.")
     
     return stats

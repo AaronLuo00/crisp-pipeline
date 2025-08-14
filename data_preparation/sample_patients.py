@@ -187,14 +187,14 @@ def extract_table_data(table_name, input_dir, output_dir, patient_ids, chunk_siz
     
     # Check if file exists
     if not os.path.exists(input_file):
-        print(f"  ⚠️  {table_name}.csv not found, skipping...")
+        print(f"  [WARNING] {table_name}.csv not found, skipping...")
         return
     
     # Check if already extracted
     if os.path.exists(output_file):
         existing_size = os.path.getsize(output_file)
         if existing_size > 0:
-            print(f"  ✅ {table_name}.csv already extracted ({existing_size/1024:.1f} KB), skipping...")
+            print(f"  [OK] {table_name}.csv already extracted ({existing_size/1024:.1f} KB), skipping...")
             return
     
     # Get file size
@@ -285,14 +285,14 @@ def extract_table_data(table_name, input_dir, output_dir, patient_ids, chunk_siz
                 result.to_csv(output_file, index=False, mode='w')
             else:
                 result.to_csv(output_file, index=False, mode='a', header=False)
-            print(f"  ✓ Extracted {total_matches:,} records from {total_rows:,} total")
+            print(f"  [DONE] Extracted {total_matches:,} records from {total_rows:,} total")
         elif total_matches == 0:
             # Create empty file with headers if no matches
             empty_df = pd.read_csv(input_file, nrows=0)
             empty_df.to_csv(output_file, index=False)
-            print(f"  ✓ No matching records found (created empty file with headers)")
+            print(f"  [DONE] No matching records found (created empty file with headers)")
         else:
-            print(f"  ✓ Extracted {total_matches:,} records from {total_rows:,} total")
+            print(f"  [DONE] Extracted {total_matches:,} records from {total_rows:,} total")
             
     except Exception as e:
         print(f"  ✗ Error processing {table_name}: {str(e)}")
@@ -338,7 +338,7 @@ Examples:
         output_dir_abs = os.path.abspath(args.output_dir)
         
         if input_dir_abs == output_dir_abs:
-            print("\n⚠️  WARNING: Input and output directories are the same!")
+            print("\n[WARNING] Input and output directories are the same!")
             print("This will overwrite your original data files.")
             response = input("Are you ABSOLUTELY sure you want to continue? (yes/no): ")
             if response.lower() != 'yes':
@@ -396,7 +396,7 @@ Examples:
             )
         
         print("\n" + "="*70)
-        print("✅ Data extraction complete!")
+        print("[OK] Data extraction complete!")
         print(f"All files saved to: {args.output_dir}")
         print("="*70)
         
@@ -415,7 +415,7 @@ Examples:
         )
         
         if patient_ids:
-            print(f"\n✅ Successfully sampled {len(patient_ids)} patients")
+            print(f"\n[OK] Successfully sampled {len(patient_ids)} patients")
         else:
             print("\n✗ Sampling failed")
             sys.exit(1)

@@ -370,7 +370,7 @@ class CRISPPipeline:
                 module_id = module['id']
                 if module_id in self.results:
                     result = self.results[module_id]
-                    status = "✅ Success" if module_id in successful_modules else "❌ Failed"
+                    status = "[SUCCESS]" if module_id in successful_modules else "[FAILED]"
                     
                     f.write(f"### {module['name']} ({module_id})\n\n")
                     f.write(f"- **Status**: {status}\n")

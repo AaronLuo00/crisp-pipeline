@@ -164,7 +164,7 @@ def process_procedure_occurrence():
     print(f"  Unmapped: {stats['unmapped']} ({stats['unmapped']/stats['total_concepts']*100:.1f}%)")
     
     if stats['mapped_to_existing_snomed'] > 0:
-        print("\n⚠️  Note: Some mappings are to existing SNOMED concepts.")
+        print("\n[WARNING] Note: Some mappings are to existing SNOMED concepts.")
         print("    Deduplication will be handled in the 4_standardization module.")
     
     # Note about CPT4 codes
