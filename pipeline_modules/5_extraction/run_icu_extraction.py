@@ -5,12 +5,19 @@ import os
 import csv
 import json
 import pandas as pd
+import platform
 from pathlib import Path
 from datetime import datetime
 from collections import defaultdict
 from tqdm import tqdm
 import logging
 import warnings
+
+# Platform-specific settings for performance optimization
+if platform.system() == 'Windows':
+    PROGRESS_INTERVAL = 30.0  # Less frequent updates (reduce overhead)
+else:
+    PROGRESS_INTERVAL = 10.0  # Default for macOS/Linux
 
 # Setup logging
 logging.basicConfig(level=logging.INFO, 
@@ -104,7 +111,7 @@ class PatientDataExtractor:
             # Read in chunks for memory efficiency with progress bar
             chunks = pd.read_csv(visit_detail_file, chunksize=CHUNK_SIZE, dtype={"person_id": str}, low_memory=False)
             for chunk in tqdm(chunks, total=estimated_chunks, desc="Extracting ICU visits", 
-                             leave=False, mininterval=10.0,  # 10-second update interval
+                             leave=False, mininterval=PROGRESS_INTERVAL,  # 10-second update interval
                              disable=False):  # Enable progress tracking
                 # Filter ICU visits
                 icu_visits = chunk[chunk['visit_detail_concept_id'].isin(ICU_CONCEPT_IDS)]
@@ -177,7 +184,7 @@ class PatientDataExtractor:
             for chunk_idx, chunk in enumerate(tqdm(reader, total=num_chunks, 
                                                    desc=f"Processing {table_name}", 
                                                    unit="chunks", leave=False, 
-                                                   mininterval=10.0,  # 10-second update interval
+                                                   mininterval=PROGRESS_INTERVAL,  # 10-second update interval
                                                    disable=not show_progress)):  # Enable for large tables
                 # Remove null person_ids
                 chunk = chunk[chunk["person_id"].notnull()]
@@ -267,7 +274,7 @@ class PatientDataExtractor:
         for person_id, icu_info in tqdm(icu_summaries.items(), 
                                        desc="Calculating pre-ICU stats", 
                                        unit="patients", leave=False, 
-                                       mininterval=10.0,  # 10-second update interval
+                                       mininterval=PROGRESS_INTERVAL,  # 10-second update interval
                                        disable=len(icu_summaries) < 100):  # Enable for many patients
             patient_path = self.get_patient_path(person_id)
             

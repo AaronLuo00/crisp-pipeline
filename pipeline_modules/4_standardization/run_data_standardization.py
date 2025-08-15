@@ -6,6 +6,7 @@ import json
 import argparse
 import numpy as np
 import pandas as pd
+import platform
 from pathlib import Path
 from datetime import datetime, timedelta
 from collections import defaultdict, Counter
@@ -13,6 +14,14 @@ from tqdm import tqdm
 import logging
 import warnings
 from visit_concept_merger import VisitConceptMerger
+
+# Platform-specific settings for performance optimization
+if platform.system() == 'Windows':
+    CHUNK_SIZE = 500000  # Larger chunks for Windows (better I/O performance)
+    PROGRESS_INTERVAL = 30.0  # Less frequent updates (reduce overhead)
+else:
+    CHUNK_SIZE = 100000  # Default for macOS/Linux
+    PROGRESS_INTERVAL = 10.0
 
 # Setup logging
 logging.basicConfig(level=logging.INFO, 
@@ -56,9 +65,6 @@ TABLES_TO_STANDARDIZE = ['MEASUREMENT', 'OBSERVATION', 'PROCEDURE_OCCURRENCE',
 
 # Visit tables that need merging (subset of TABLES_TO_STANDARDIZE)
 VISIT_TABLES = ['VISIT_DETAIL', 'VISIT_OCCURRENCE']
-
-# Chunk size for processing
-CHUNK_SIZE = 100000
 
 # Concept-specific reasonable ranges
 # Using SNOMED IDs for concepts that have been mapped, keeping original IDs for unmapped concepts
@@ -240,7 +246,7 @@ class DataStandardizer:
         # Process chunks with more frequent progress updates
         for chunk in tqdm(df, desc=f"Standardizing {table_name} (statistics)", 
                          unit='chunks', leave=False, ncols=100,
-                         mininterval=10.0,  # Update at most once per 10 seconds
+                         mininterval=PROGRESS_INTERVAL,  # Update at most once per 10 seconds
                          disable=False):  # Enable progress tracking
             chunk_num += 1
             # Count concept frequencies
@@ -348,7 +354,7 @@ class DataStandardizer:
         for row_num, row in enumerate(tqdm(reader, desc=f"Standardizing {table_name}",
                                           total=total_rows, unit='rows',
                                           miniters=max(100, total_rows//100),  # Update every 1% or at least 100 rows
-                                          mininterval=10.0,  # Update at most once per 10 seconds
+                                          mininterval=PROGRESS_INTERVAL,  # Update at most once per 10 seconds
                                           leave=False, ncols=100,
                                           disable=False), 1):  # Enable for all tables
             stats['input_records'] += 1
@@ -475,7 +481,7 @@ class DataStandardizer:
         for row_num, row in enumerate(tqdm(reader, desc=f"Standardizing {table_name}",
                                           total=total_rows, unit='rows',
                                           miniters=max(100, total_rows//100),  # Update every 1% or at least 100 rows
-                                          mininterval=10.0,  # Update at most once per 10 seconds
+                                          mininterval=PROGRESS_INTERVAL,  # Update at most once per 10 seconds
                                           leave=False, ncols=100,
                                           disable=False), 1):  # Enable for all tables
             stats['input_records'] += 1

@@ -3,13 +3,19 @@
 
 import csv
 import json
+import platform
 from pathlib import Path
 from datetime import datetime
 from collections import defaultdict, Counter
 from tqdm import tqdm
 
-# Configuration
-CHUNK_SIZE = 100000  # Process in chunks of 100k rows for memory efficiency
+# Platform-specific settings for performance optimization
+if platform.system() == 'Windows':
+    CHUNK_SIZE = 500000  # Larger chunks for Windows (better I/O performance)
+    PROGRESS_INTERVAL = 30.0  # Less frequent updates (reduce overhead)
+else:
+    CHUNK_SIZE = 100000  # Default for macOS/Linux
+    PROGRESS_INTERVAL = 10.0
 
 # Setup
 base_dir = Path(__file__).parent
@@ -250,7 +256,7 @@ def clean_table(table_name):
             # Create progress bar with more frequent updates
             with tqdm(total=total_rows, desc=f"Cleaning {table_name}", unit="rows",
                      miniters=max(100, total_rows//100) if total_rows > 0 else 1,  # Update every 1% or at least 100 rows
-                     mininterval=10.0,  # At least 10 seconds interval
+                     mininterval=PROGRESS_INTERVAL,
                      position=1,  # Nested position to avoid overlap
                      leave=False, ncols=100) as pbar:
                 chunk = []

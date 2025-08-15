@@ -6,11 +6,18 @@ import json
 import logging
 import argparse
 import numpy as np
+import platform
 from pathlib import Path
 from datetime import datetime, timedelta
 from collections import defaultdict, Counter
 from tqdm import tqdm
 import re
+
+# Platform-specific settings for performance optimization
+if platform.system() == 'Windows':
+    PROGRESS_INTERVAL = 30.0  # Less frequent updates (reduce overhead)
+else:
+    PROGRESS_INTERVAL = 10.0  # Default for macOS/Linux
 
 # Setup
 base_dir = Path(__file__).parent
@@ -477,7 +484,7 @@ class ConceptMapper:
                            desc=f"Mapping {table_name}",
                            unit="rows",
                            miniters=max(100, total_rows//100) if total_rows > 0 else 1,
-                           mininterval=10.0,
+                           mininterval=PROGRESS_INTERVAL,
                            leave=False, ncols=100):
                 rows.append(row)
         

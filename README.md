@@ -118,6 +118,14 @@ python pipeline_modules/run_all_module.py
 
 Your processed data will be available in the `output/` directory.
 
+## 🖥️ Platform Optimization
+
+We recommend different chunk sizes for different platforms:
+- **macOS/Linux**: 100K rows (default)
+- **Windows**: 500K rows (better I/O performance)
+
+The pipeline automatically detects your OS and applies these settings. We suggest testing with a subset of your data to determine the optimal chunk size before processing the full dataset.
+
 ## 📊 Pipeline Architecture
 
 CRISP implements a **5-stage progressive pipeline**, each module building upon the previous:

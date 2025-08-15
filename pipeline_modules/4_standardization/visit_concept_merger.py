@@ -9,9 +9,16 @@ Date: 2025-08-08
 import pandas as pd
 import json
 import logging
+import platform
 from datetime import timedelta
 from pathlib import Path
 from typing import Dict, List, Tuple, Optional
+
+# Platform-specific settings for performance optimization
+if platform.system() == 'Windows':
+    PROGRESS_INTERVAL = 30.0  # Less frequent updates (reduce overhead)
+else:
+    PROGRESS_INTERVAL = 10.0  # Default for macOS/Linux
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -264,7 +271,7 @@ class VisitConceptMerger:
         from tqdm import tqdm
         for patient_id in tqdm(patients, desc=f"Standardizing {table_name} visits",
                               miniters=max(10, len(patients)//100),  # Update every 1% or at least 10 patients
-                              mininterval=10.0,  # At least 10 seconds interval
+                              mininterval=PROGRESS_INTERVAL,
                               leave=False, ncols=100):
             patient_results, patient_mappings = self.merge_visits_for_patient(df, patient_id)
             
