@@ -5,10 +5,13 @@ import json
 import pandas as pd
 from pathlib import Path
 from datetime import datetime
+import time
+import os
 import matplotlib.pyplot as plt
 import seaborn as sns
 from tqdm import tqdm
 import numpy as np
+import platform
 
 class NumpyEncoder(json.JSONEncoder):
     """Custom JSON encoder to handle numpy types."""
@@ -22,7 +25,10 @@ class NumpyEncoder(json.JSONEncoder):
         return super(NumpyEncoder, self).default(obj)
 
 # Configuration
-CHUNK_SIZE = 200000  # Default chunk size for reading large files
+if platform.system() == 'Windows':
+    CHUNK_SIZE = 500000  # Larger chunks for Windows (better I/O performance)
+else:
+    CHUNK_SIZE = 100000  # Default for macOS/Linux
 
 # Setup
 base_dir = Path(__file__).parent
@@ -33,6 +39,9 @@ output_dir.mkdir(parents=True, exist_ok=True)
 
 print("Starting EDA analysis on subdataset_1000...")
 print(f"Output directory: {output_dir}")
+
+# Start timing
+start_time = time.time()
 
 # Load all CSV files
 data_files = list(data_dir.glob("*.csv"))
@@ -48,16 +57,68 @@ eda_results = {
 }
 
 def get_file_row_count(file_path):
-    """Get the number of rows in a CSV file (excluding header)."""
-    with open(file_path, 'r') as f:
-        return sum(1 for _ in f) - 1
+    """Get the number of rows in a CSV file with caching."""
+    # Cache file path
+    cache_file = data_dir / ".row_counts_cache.json"
+    
+    # Try to load cache
+    cache = {}
+    if cache_file.exists():
+        try:
+            with open(cache_file, 'r') as f:
+                cache = json.load(f)
+        except:
+            cache = {}
+    
+    # Check if cache is valid
+    file_name = file_path.name
+    file_mtime = os.path.getmtime(file_path)
+    
+    if file_name in cache and cache[file_name].get('mtime') == file_mtime:
+        # Use cached row count
+        return cache[file_name]['row_count']
+    
+    # Calculate row count (using fast method)
+    def blocks(file, size=1024*1024):  # 1MB buffer
+        while True:
+            b = file.read(size)
+            if not b: break
+            yield b
+    
+    with open(file_path, "r", encoding="utf-8", errors='ignore') as f:
+        row_count = sum(bl.count("\n") for bl in blocks(f)) - 1
+    
+    # Update cache
+    cache[file_name] = {
+        'row_count': row_count,
+        'mtime': file_mtime
+    }
+    
+    # Save cache
+    with open(cache_file, 'w') as f:
+        json.dump(cache, f, indent=2)
+    
+    return row_count
 
 def process_table_chunked(file_path, chunk_size=CHUNK_SIZE):
     """Process a table in chunks and return aggregated statistics."""
     table_name = file_path.stem
     
+    # Initialize time statistics
+    time_stats = {
+        'total': 0,
+        'row_counting': 0,
+        'chunk_reading': 0,
+        'missing_calc': 0,
+        'unique_tracking': 0,
+        'date_range': 0
+    }
+    table_start = time.time()
+    
     # Get total rows for progress bar
+    t0 = time.time()
     total_rows = get_file_row_count(file_path)
+    time_stats['row_counting'] = time.time() - t0
     
     # Initialize statistics
     stats = {
@@ -87,6 +148,7 @@ def process_table_chunked(file_path, chunk_size=CHUNK_SIZE):
     }
     
     # Process chunks (progress bar disabled for cleaner output)
+    t0 = time.time()
     with tqdm(total=total_rows, desc=f"Reading {table_name}", 
               unit="rows", leave=False,
               disable=True,  # Disable to avoid nested progress bars
@@ -118,13 +180,19 @@ def process_table_chunked(file_path, chunk_size=CHUNK_SIZE):
             stats["total_records"] += len(chunk)
             stats["memory_usage_mb"] += chunk.memory_usage(deep=True).sum() / 1024 / 1024
             
-            # Update missing values
-            for col in chunk.columns:
-                stats["missing_values"][col] += chunk[col].isnull().sum()
+            # Update missing values - vectorized
+            t1 = time.time()
+            missing_counts = chunk.isnull().sum().to_dict()
+            for col, count in missing_counts.items():
+                stats["missing_values"][col] += count
+            time_stats['missing_calc'] += time.time() - t1
             
             # Track unique values for ID columns
+            t1 = time.time()
             for col in id_columns:
-                unique_trackers[col].update(chunk[col].dropna().unique())
+                if col in chunk.columns:
+                    unique_trackers[col].update(chunk[col].dropna().unique())
+            time_stats['unique_tracking'] += time.time() - t1
             
             # Table-specific processing
             if table_name == "PERSON":
@@ -156,6 +224,8 @@ def process_table_chunked(file_path, chunk_size=CHUNK_SIZE):
             stats["chunks_processed"] += 1
             pbar.update(len(chunk))
     
+    time_stats['chunk_reading'] = time.time() - t0
+    
     # Calculate final statistics
     # Missing percentages
     stats["missing_percentage"] = {
@@ -168,6 +238,7 @@ def process_table_chunked(file_path, chunk_size=CHUNK_SIZE):
     
     # Date ranges (process a sample for efficiency)
     if datetime_columns:
+        t0 = time.time()
         stats["date_ranges"] = {}
         # Read first and last chunks for date ranges
         first_chunk = pd.read_csv(file_path, nrows=1000)
@@ -186,6 +257,7 @@ def process_table_chunked(file_path, chunk_size=CHUNK_SIZE):
                     }
             except:
                 pass
+        time_stats['date_range'] = time.time() - t0
     
     # Add table-specific statistics
     if table_name == "PERSON":
@@ -212,6 +284,10 @@ def process_table_chunked(file_path, chunk_size=CHUNK_SIZE):
         stats["total_deaths"] = table_data["death_count"]
         stats["unique_patients_died"] = len(table_data["all_patients"])
     
+    # Add time statistics
+    time_stats['total'] = time.time() - table_start
+    stats["time_stats"] = time_stats
+    
     return stats
 
 # Analyze each table (simplified output)
@@ -225,7 +301,20 @@ for i, file_path in enumerate(sorted(data_files), 1):
     
     # Store results
     eda_results["tables"][table_name] = stats
-    print(" Done")
+    
+    # Display time details
+    if "time_stats" in stats:
+        ts = stats["time_stats"]
+        table_time = ts['total']  # Use the time from process_table_chunked
+        print(f" Done ({table_time:.2f}s)")
+        print(f"    - Row counting: {ts['row_counting']:.3f}s")
+        print(f"    - Chunk reading: {ts['chunk_reading']:.3f}s")
+        print(f"    - Missing calc: {ts['missing_calc']:.3f}s")
+        print(f"    - Unique tracking: {ts['unique_tracking']:.3f}s")
+        if ts.get('date_range', 0) > 0:
+            print(f"    - Date range: {ts['date_range']:.3f}s")
+    else:
+        print(f" Done")
 
 # Overall summary
 print("\nOVERALL SUMMARY")
@@ -354,3 +443,53 @@ with open(report_path, 'w') as f:
                f"{death_stats['total_deaths'] / person_stats['unique_patients'] * 100:.1f}%\n")
 
 print(f"Report saved to: {report_path}")
+
+# Display total execution time
+total_time = time.time() - start_time
+print(f"\nTotal execution time: {total_time:.2f} seconds")
+
+# Display performance breakdown
+print("\n" + "="*50)
+print("PERFORMANCE BREAKDOWN")
+print("="*50)
+
+# Sum up time spent in each category
+total_row_counting = sum(s.get('time_stats', {}).get('row_counting', 0) 
+                        for s in eda_results["tables"].values())
+total_chunk_reading = sum(s.get('time_stats', {}).get('chunk_reading', 0) 
+                         for s in eda_results["tables"].values())
+total_missing_calc = sum(s.get('time_stats', {}).get('missing_calc', 0) 
+                        for s in eda_results["tables"].values())
+total_unique_tracking = sum(s.get('time_stats', {}).get('unique_tracking', 0) 
+                           for s in eda_results["tables"].values())
+total_date_range = sum(s.get('time_stats', {}).get('date_range', 0) 
+                      for s in eda_results["tables"].values())
+
+# Calculate the sum of all table processing times
+total_table_time = sum(s.get('time_stats', {}).get('total', 0) 
+                      for s in eda_results["tables"].values())
+
+print(f"Row counting:     {total_row_counting:.2f}s ({total_row_counting/total_time*100:.1f}%)")
+print(f"Chunk reading:    {total_chunk_reading:.2f}s ({total_chunk_reading/total_time*100:.1f}%)")
+print(f"Missing calc:     {total_missing_calc:.2f}s ({total_missing_calc/total_time*100:.1f}%)")
+print(f"Unique tracking:  {total_unique_tracking:.2f}s ({total_unique_tracking/total_time*100:.1f}%)")
+print(f"Date range:       {total_date_range:.2f}s ({total_date_range/total_time*100:.1f}%)")
+
+# Calculate overhead (difference between wall time and sum of table times)
+overhead = total_time - total_table_time
+print(f"Overhead:         {overhead:.2f}s ({overhead/total_time*100:.1f}%)")
+
+# Verify timing consistency
+print(f"\nTiming verification:")
+print(f"  Wall clock time: {total_time:.2f}s")
+print(f"  Sum of table times: {total_table_time:.2f}s")
+print(f"  Difference (overhead): {overhead:.2f}s")
+
+# Find slowest tables
+print("\nSlowest tables:")
+table_times = [(name, stats.get('time_stats', {}).get('total', 0)) 
+               for name, stats in eda_results["tables"].items()]
+table_times.sort(key=lambda x: x[1], reverse=True)
+for name, time_taken in table_times[:3]:
+    if time_taken > 0:
+        print(f"  {name}: {time_taken:.2f}s")
