@@ -82,3 +82,8 @@ data/*.csv
 # Performance optimization testing
 performance_optimization/
 
+# Cache files
+data/.row_counts_cache.json
+**/.row_counts_cache.json
+*.cache.json
+
