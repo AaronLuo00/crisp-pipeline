@@ -76,6 +76,7 @@ def get_file_row_count(file_path):
     
     if file_name in cache and cache[file_name].get('mtime') == file_mtime:
         # Use cached row count
+        print(f"  Using cached row count for {file_name}: {cache[file_name]['row_count']:,} rows")
         return cache[file_name]['row_count']
     
     # Calculate row count (using fast method)
@@ -352,22 +353,60 @@ with open(results_path, 'w') as f:
     json.dump(eda_results, f, indent=2, cls=NumpyEncoder)
 print(f"\nDetailed results saved to: {results_path}")
 
+# Save column analysis for data cleaning module
+column_analysis = {}
+for table_name, stats in eda_results["tables"].items():
+    if "missing_percentage" in stats:
+        columns_to_remove = []
+        column_stats = {}
+        
+        for col, missing_pct in stats["missing_percentage"].items():
+            should_remove = missing_pct > 95.0
+            if should_remove:
+                columns_to_remove.append(col)
+            
+            column_stats[col] = {
+                "missing_percentage": missing_pct,
+                "missing_count": stats["missing_values"].get(col, 0),
+                "total_records": stats["total_records"],
+                "data_type": stats["data_types"].get(col, "unknown"),
+                "unique_count": stats.get("unique_counts", {}).get(col, -1),
+                "should_remove": should_remove
+            }
+        
+        column_analysis[table_name] = {
+            "columns_to_remove": columns_to_remove,
+            "column_stats": column_stats,
+            "total_columns": stats["total_columns"],
+            "columns": stats["columns"]
+        }
+
+# Save column analysis
+column_analysis_path = output_dir / "column_analysis.json"
+with open(column_analysis_path, 'w') as f:
+    json.dump(column_analysis, f, indent=2)
+print(f"Column analysis saved to: {column_analysis_path}")
+
 # Generate visualizations
 print("Generating visualizations...")
 
 # 1. Table size distribution
 plt.figure(figsize=(12, 6))
 table_sizes = [(name, stats["total_records"]) for name, stats in eda_results["tables"].items()]
-table_sizes.sort(key=lambda x: x[1], reverse=True)
-tables, sizes = zip(*table_sizes)
+if table_sizes:
+    table_sizes.sort(key=lambda x: x[1], reverse=True)
+    tables, sizes = zip(*table_sizes)
+else:
+    tables, sizes = [], []
 
-plt.bar(range(len(tables)), sizes)
-plt.xticks(range(len(tables)), tables, rotation=45, ha='right')
-plt.ylabel('Number of Records')
-plt.title('Record Count by Table')
-plt.yscale('log')
-plt.tight_layout()
-plt.savefig(output_dir / 'table_sizes.png', dpi=300)
+if tables:
+    plt.bar(range(len(tables)), sizes)
+    plt.xticks(range(len(tables)), tables, rotation=45, ha='right')
+    plt.ylabel('Number of Records')
+    plt.title('Record Count by Table')
+    plt.yscale('log')
+    plt.tight_layout()
+    plt.savefig(output_dir / 'table_sizes.png', dpi=300)
 plt.close()
 
 # 2. Missing data heatmap (for top tables)
