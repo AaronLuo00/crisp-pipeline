@@ -359,9 +359,6 @@ def clean_table(table_name):
     seen_keys = {}  # Changed from set to dict to store first occurrence info
     duplicate_groups = defaultdict(list)  # Store all records in each duplicate group
     
-    # For outlier detection (MEASUREMENT table only)
-    numeric_values = []
-    
     # Clean headers
     clean_headers = [h for h in headers if h not in columns_to_remove]
     
@@ -470,14 +467,6 @@ def clean_table(table_name):
                             if skip_row:
                                 continue
                             
-                            # Collect numeric values for outlier detection (MEASUREMENT only)
-                            if table_name == 'MEASUREMENT' and row.get('value_as_number'):
-                                try:
-                                    val = float(row['value_as_number'])
-                                    numeric_values.append(val)
-                                except:
-                                    pass
-                            
                             # Write cleaned row
                             clean_row = {k: v for k, v in row.items() if k not in columns_to_remove}
                             writer.writerow(clean_row)
@@ -512,32 +501,6 @@ def clean_table(table_name):
                     dup_writer.writerow(row_with_meta)
                     duplicate_groups_written += 1
     
-    # Silent processing
-    
-    # Calculate outlier statistics for MEASUREMENT table
-    outlier_stats = {}
-    if table_name == 'MEASUREMENT' and numeric_values:
-        pass  # Calculate silently
-        numeric_values.sort()
-        q1 = numeric_values[len(numeric_values)//4]
-        q3 = numeric_values[3*len(numeric_values)//4]
-        iqr = q3 - q1
-        lower_bound = q1 - 3 * iqr
-        upper_bound = q3 + 3 * iqr
-        
-        outlier_count = sum(1 for v in numeric_values if v < lower_bound or v > upper_bound)
-        outlier_stats['value_as_number'] = {
-            'total_values': len(numeric_values),
-            'outliers': outlier_count,
-            'outlier_pct': outlier_count / len(numeric_values) * 100 if numeric_values else 0,
-            'q1': q1,
-            'q3': q3,
-            'lower_bound': lower_bound,
-            'upper_bound': upper_bound
-        }
-        
-        # Silent processing
-    
     # Silent summary - details saved to results file
     rows_removed = total_rows - rows_written
     
@@ -562,7 +525,6 @@ def clean_table(table_name):
         "duplicates_removed": duplicate_count,
         "invalid_concept_removed": invalid_concept_count,
         "temporal_issues": temporal_issues,
-        "outlier_stats": outlier_stats,
         "output_file": str(output_file),
         "removed_records_files": {
             "duplicates": str(duplicates_file),
@@ -685,13 +647,6 @@ with open(report_path, 'w') as f:
             if stats.get('invalid_concept_removed', 0) > 0:
                 f.write(f"**Invalid Concept ID**: {stats['invalid_concept_removed']:,} records removed ")
                 f.write(f"(concept_id = 0 or null)\n\n")
-            
-            if stats['outlier_stats']:
-                f.write("**Outlier Detection**:\n")
-                for col, outlier_info in stats['outlier_stats'].items():
-                    f.write(f"- {col}: {outlier_info['outliers']:,} outliers ")
-                    f.write(f"({outlier_info['outlier_pct']:.1f}% of {outlier_info['total_values']:,} values)\n")
-                f.write("\n")
             
             if stats['temporal_issues'] > 0:
                 f.write(f"**Temporal Issues**: {stats['temporal_issues']:,} records with invalid date ranges\n\n")
