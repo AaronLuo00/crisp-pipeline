@@ -3,19 +3,22 @@
 
 import csv
 import json
+import os
 import platform
+import time
 from pathlib import Path
 from datetime import datetime
 from collections import defaultdict, Counter
 from tqdm import tqdm
+import pandas as pd
+import numpy as np
 
-# Platform-specific settings for performance optimization
+# Performance optimization settings
 if platform.system() == 'Windows':
-    CHUNK_SIZE = 500000  # Larger chunks for Windows (better I/O performance)
-    PROGRESS_INTERVAL = 30.0  # Less frequent updates (reduce overhead)
+    CHUNK_SIZE = 500000
 else:
-    CHUNK_SIZE = 100000  # Default for macOS/Linux
-    PROGRESS_INTERVAL = 10.0
+    CHUNK_SIZE = 100000
+PROGRESS_INTERVAL = 10.0  # Progress update interval in seconds
 
 # Setup
 base_dir = Path(__file__).parent
@@ -57,7 +60,7 @@ PRIMARY_CONCEPT_FIELDS = {
     'DRUG_EXPOSURE': 'drug_concept_id',
     'CONDITION_ERA': 'condition_concept_id',
     'CONDITION_OCCURRENCE': 'condition_concept_id',
-    'DEATH': 'death_type_concept_id',  # Primary check on death_type, not cause
+    'DEATH': 'death_datetime',  # Check death_datetime instead of concept_id
     'DEVICE_EXPOSURE': 'device_concept_id',
     'DRUG_ERA': 'drug_concept_id',
     'PROCEDURE_OCCURRENCE': 'procedure_concept_id',
@@ -67,10 +70,51 @@ PRIMARY_CONCEPT_FIELDS = {
     'OBSERVATION_PERIOD': 'period_type_concept_id'
 }
 
+# Define temporal fields for validation
+TEMPORAL_FIELDS = {
+    'DRUG_EXPOSURE': ('drug_exposure_start_datetime', 'drug_exposure_end_datetime'),
+    'VISIT_OCCURRENCE': ('visit_start_datetime', 'visit_end_datetime'),
+    'VISIT_DETAIL': ('visit_detail_start_datetime', 'visit_detail_end_datetime'),
+    'DEVICE_EXPOSURE': ('device_exposure_start_datetime', 'device_exposure_end_datetime'),
+    'DRUG_ERA': ('drug_era_start_date', 'drug_era_end_date'),
+    'OBSERVATION_PERIOD': ('observation_period_start_date', 'observation_period_end_date'),
+    'CONDITION_ERA': ('condition_era_start_date', 'condition_era_end_date'),
+    'CONDITION_OCCURRENCE': ('condition_start_datetime', 'condition_end_datetime'),
+    'PROCEDURE_OCCURRENCE': ('procedure_datetime', 'procedure_end_datetime')
+}
+
+# Define duplicate key columns for each table
+DUPLICATE_KEY_COLUMNS = {
+    'MEASUREMENT': ['person_id', 'measurement_concept_id', 'measurement_datetime'],
+    'OBSERVATION': ['person_id', 'observation_concept_id', 'observation_datetime'],
+    'DRUG_EXPOSURE': ['person_id', 'drug_concept_id', 'drug_exposure_start_datetime'],
+    'CONDITION_OCCURRENCE': ['person_id', 'condition_concept_id', 'condition_start_datetime'],
+    'PROCEDURE_OCCURRENCE': ['person_id', 'procedure_concept_id', 'procedure_datetime'],
+    'VISIT_OCCURRENCE': ['person_id', 'visit_concept_id', 'visit_start_datetime'],
+    'VISIT_DETAIL': ['person_id', 'visit_detail_concept_id', 'visit_detail_start_datetime'],
+    'DEVICE_EXPOSURE': ['person_id', 'device_concept_id', 'device_exposure_start_datetime'],
+    'DRUG_ERA': ['person_id', 'drug_concept_id', 'drug_era_start_date'],
+    'OBSERVATION_PERIOD': ['person_id', 'observation_period_start_date'],
+    'PERSON': ['person_id'],
+    'CONDITION_ERA': ['person_id', 'condition_concept_id', 'condition_era_start_date'],
+    'SPECIMEN': ['specimen_id'],
+    'DEATH': ['person_id']
+}
+
+# Start timing
+start_time = time.time()
+
 print("Starting data cleaning on subdataset_1000...")
 print(f"Output directory: {output_dir}")
 print(f"Chunk size: {CHUNK_SIZE:,} rows")
 print(f"Tables to clean: {', '.join(KEY_TABLES)}")
+
+# Check if column analysis from EDA is available
+column_analysis_path = project_root / "output" / "1_eda" / "column_analysis.json"
+if column_analysis_path.exists():
+    print(f"\nFound column_analysis.json from EDA module, will use cached analysis")
+else:
+    print(f"\nNo column_analysis.json found, will analyze columns for each table")
 
 # Print input information
 print("\n" + "="*70)
@@ -99,12 +143,52 @@ cleaning_results = {
 }
 
 def get_file_row_count(file_path):
-    """Get the number of rows in a CSV file (excluding header)."""
-    with open(file_path, 'r') as f:
-        return sum(1 for _ in f) - 1
+    """Get the number of rows in a CSV file with caching."""
+    # Cache file path - use output directory
+    cache_file = output_dir / ".row_counts_cache.json"
+    
+    # Try to load cache
+    cache = {}
+    if cache_file.exists():
+        try:
+            with open(cache_file, 'r') as f:
+                cache = json.load(f)
+        except:
+            cache = {}
+    
+    # Check if cache is valid
+    file_name = file_path.name
+    file_mtime = os.path.getmtime(file_path)
+    
+    if file_name in cache and cache[file_name].get('mtime') == file_mtime:
+        # Use cached row count
+        print(f"  Using cached row count for {file_name}: {cache[file_name]['row_count']:,} rows")
+        return cache[file_name]['row_count']
+    
+    # Calculate row count (using fast method with 1MB buffer)
+    def blocks(file, size=1024*1024):
+        while True:
+            b = file.read(size)
+            if not b: break
+            yield b
+    
+    with open(file_path, "r", encoding="utf-8", errors='ignore') as f:
+        row_count = sum(bl.count("\n") for bl in blocks(f)) - 1
+    
+    # Update cache
+    cache[file_name] = {
+        'row_count': row_count,
+        'mtime': file_mtime
+    }
+    
+    # Save cache
+    with open(cache_file, 'w') as f:
+        json.dump(cache, f, indent=2)
+    
+    return row_count
 
 def analyze_columns_chunked(file_path, chunk_size=CHUNK_SIZE):
-    """Analyze columns to identify those with >95% missing data using chunked reading."""
+    """Analyze columns to identify those with >95% missing data using pandas vectorized operations."""
     total_rows = 0
     missing_counts = defaultdict(int)
     non_missing_counts = defaultdict(int)
@@ -113,31 +197,42 @@ def analyze_columns_chunked(file_path, chunk_size=CHUNK_SIZE):
     data_types = {}
     headers = None
     
-    # First pass: count missing values and collect samples
-    with open(file_path, 'r', encoding='utf-8') as f:
-        reader = csv.DictReader(f)
-        headers = reader.fieldnames
-        
-        for row in reader:
-            total_rows += 1
-            for col, value in row.items():
-                if not value or value.strip() == '':
-                    missing_counts[col] += 1
+    # Process file in chunks using pandas (much faster than csv.DictReader)
+    for chunk_idx, chunk in enumerate(pd.read_csv(file_path, chunksize=chunk_size, low_memory=False)):
+        if chunk_idx == 0:
+            headers = list(chunk.columns)
+            # Infer data types from first chunk
+            for col in headers:
+                dtype_str = str(chunk[col].dtype)
+                if 'int' in dtype_str or 'float' in dtype_str:
+                    data_types[col] = 'numeric'
                 else:
-                    non_missing_counts[col] += 1
-                    # Collect unique values (limit to prevent memory issues)
-                    if len(unique_values[col]) < 1000:
-                        unique_values[col].add(value)
-                    # Collect sample values
-                    if len(sample_values[col]) < 20:
-                        sample_values[col].append(value)
-                    # Infer data type from first non-empty value
-                    if col not in data_types and value:
-                        try:
-                            float(value)
-                            data_types[col] = 'numeric'
-                        except:
-                            data_types[col] = 'string'
+                    data_types[col] = 'string'
+        
+        total_rows += len(chunk)
+        
+        # Vectorized operations for counting (much faster than loops)
+        chunk_missing = chunk.isnull().sum()
+        chunk_non_missing = chunk.notna().sum()
+        
+        # Update counts
+        for col in headers:
+            missing_counts[col] += int(chunk_missing[col])
+            non_missing_counts[col] += int(chunk_non_missing[col])
+            
+            # Collect unique values and samples from non-null values
+            non_null_values = chunk[col].dropna()
+            if len(non_null_values) > 0:
+                # Collect unique values (limit to prevent memory issues)
+                if len(unique_values[col]) < 1000:
+                    unique_vals = non_null_values.unique()[:min(100, len(non_null_values))]
+                    for val in unique_vals:
+                        unique_values[col].add(str(val))
+                
+                # Collect sample values
+                if len(sample_values[col]) < 20:
+                    samples = non_null_values.head(20 - len(sample_values[col])).tolist()
+                    sample_values[col].extend([str(s) for s in samples])
                             
     # Identify columns to remove and prepare detailed info
     columns_to_remove = []
@@ -167,6 +262,18 @@ def analyze_columns_chunked(file_path, chunk_size=CHUNK_SIZE):
 def clean_table(table_name):
     """Clean a single table with chunked processing."""
     
+    # Initialize time tracking
+    table_time_stats = {
+        'total': 0,
+        'column_analysis': 0,
+        'duplicate_detection': 0,
+        'invalid_concept': 0,
+        'temporal_validation': 0,
+        'file_io': 0,
+        'other_processing': 0
+    }
+    table_start_time = time.time()
+    
     input_file = data_dir / f"{table_name}.csv"
     output_file = output_dir / f"{table_name}_cleaned.csv"
     temp_file = output_dir / f"{table_name}_temp.csv"
@@ -184,8 +291,54 @@ def clean_table(table_name):
     # Get total row count for progress bar
     total_rows = get_file_row_count(input_file)
     
-    # Analyze columns
-    headers, columns_to_remove, missing_counts, _, columns_info = analyze_columns_chunked(input_file)
+    # Try to load column analysis from EDA module
+    t0 = time.time()
+    column_analysis_path = project_root / "output" / "1_eda" / "column_analysis.json"
+    columns_to_remove = []
+    missing_counts = {}
+    columns_info = []
+    
+    if column_analysis_path.exists():
+        # Use pre-computed column analysis from EDA
+        print(f"  Using cached column analysis from EDA module")
+        with open(column_analysis_path, 'r') as f:
+            column_analysis = json.load(f)
+        
+        if table_name in column_analysis:
+            table_analysis = column_analysis[table_name]
+            columns_to_remove = table_analysis.get("columns_to_remove", [])
+            headers = table_analysis.get("columns", [])
+            
+            # Reconstruct missing_counts from column_stats
+            for col, stats in table_analysis.get("column_stats", {}).items():
+                missing_counts[col] = stats.get("missing_count", 0)
+            
+            # Build columns_info for removed columns
+            for col in columns_to_remove:
+                col_stats = table_analysis["column_stats"].get(col, {})
+                total_records = col_stats.get("total_records", total_rows)
+                missing_count = col_stats.get("missing_count", 0)
+                columns_info.append({
+                    'column_name': col,
+                    'total_rows': total_records,
+                    'non_missing_count': total_records - missing_count,  # Calculate from available data
+                    'missing_count': missing_count,
+                    'missing_percentage': col_stats.get("missing_percentage", 0),
+                    'unique_values': col_stats.get("unique_count", 0),  # Get from cache, default to 0
+                    'sample_values': [],  # EDA doesn't store samples, use empty list
+                    'data_type': col_stats.get("data_type", "unknown"),  # Get from cache
+                    'removal_reason': '>95% missing'
+                })
+        else:
+            # Table not in cached analysis, fall back to original method
+            print(f"  Table {table_name} not found in cached analysis, analyzing columns...")
+            headers, columns_to_remove, missing_counts, _, columns_info = analyze_columns_chunked(input_file)
+    else:
+        # No cached analysis available, use original method
+        print(f"  No cached column analysis found, analyzing columns...")
+        headers, columns_to_remove, missing_counts, _, columns_info = analyze_columns_chunked(input_file)
+    
+    table_time_stats['column_analysis'] = time.time() - t0
     
     # Add table_name to each column info
     for col_info in columns_info:
@@ -193,30 +346,8 @@ def clean_table(table_name):
     
     # Silent processing - no need to print column removal details
     
-    # Define duplicate key columns based on table
-    duplicate_key_cols = []
-    if table_name == 'MEASUREMENT':
-        duplicate_key_cols = ['person_id', 'measurement_concept_id', 'measurement_datetime']
-    elif table_name == 'OBSERVATION':
-        duplicate_key_cols = ['person_id', 'observation_concept_id', 'observation_datetime']
-    elif table_name == 'DRUG_EXPOSURE':
-        duplicate_key_cols = ['person_id', 'drug_concept_id', 'drug_exposure_start_datetime']
-    elif table_name == 'CONDITION_OCCURRENCE':
-        duplicate_key_cols = ['person_id', 'condition_concept_id', 'condition_start_datetime']
-    elif table_name == 'PROCEDURE_OCCURRENCE':
-        duplicate_key_cols = ['person_id', 'procedure_concept_id', 'procedure_datetime']
-    elif table_name == 'VISIT_OCCURRENCE':
-        duplicate_key_cols = ['person_id', 'visit_concept_id', 'visit_start_datetime']
-    elif table_name == 'VISIT_DETAIL':
-        duplicate_key_cols = ['person_id', 'visit_detail_concept_id', 'visit_detail_start_datetime']
-    elif table_name == 'DEVICE_EXPOSURE':
-        duplicate_key_cols = ['person_id', 'device_concept_id', 'device_exposure_start_datetime']
-    elif table_name == 'DRUG_ERA':
-        duplicate_key_cols = ['person_id', 'drug_concept_id', 'drug_era_start_date']
-    elif table_name == 'OBSERVATION_PERIOD':
-        duplicate_key_cols = ['person_id', 'observation_period_start_date']
-    elif table_name == 'PERSON':
-        duplicate_key_cols = ['person_id']  # Primary key
+    # Get duplicate key columns for this table
+    duplicate_key_cols = DUPLICATE_KEY_COLUMNS.get(table_name, [])
     
     # Process data in chunks
     
@@ -272,6 +403,7 @@ def clean_table(table_name):
                             skip_row = False
                             removal_reason = None
                             
+                            t1 = time.time()
                             if duplicate_key_cols:
                                 key = tuple(row.get(col, '') for col in duplicate_key_cols)
                                 if key in seen_keys:
@@ -286,11 +418,13 @@ def clean_table(table_name):
                                     group_id = f"{table_name}_{len(seen_keys)+1}"
                                     seen_keys[key] = group_id
                                     duplicate_groups[group_id].append((row, 'kept', original_row_num))
+                            table_time_stats['duplicate_detection'] += time.time() - t1
                             
                             if skip_row:
                                 continue
                             
                             # Check for invalid concept_id
+                            t1 = time.time()
                             if table_name in PRIMARY_CONCEPT_FIELDS:
                                 concept_field = PRIMARY_CONCEPT_FIELDS[table_name]
                                 if concept_field in headers:
@@ -301,42 +435,21 @@ def clean_table(table_name):
                                         removal_reason = 'invalid_concept'
                                         # Save invalid concept record
                                         invalid_writer.writerow(row)
+                            table_time_stats['invalid_concept'] += time.time() - t1
                             
                             if skip_row:
                                 continue
                             
                             # Temporal validation
+                            t1 = time.time()
                             temporal_invalid = False
                             start = None
                             end = None
                             
-                            if table_name == 'DRUG_EXPOSURE':
-                                start = row.get('drug_exposure_start_datetime')
-                                end = row.get('drug_exposure_end_datetime')
-                            elif table_name == 'VISIT_OCCURRENCE':
-                                start = row.get('visit_start_datetime')
-                                end = row.get('visit_end_datetime')
-                            elif table_name == 'VISIT_DETAIL':
-                                start = row.get('visit_detail_start_datetime')
-                                end = row.get('visit_detail_end_datetime')
-                            elif table_name == 'DEVICE_EXPOSURE':
-                                start = row.get('device_exposure_start_datetime')
-                                end = row.get('device_exposure_end_datetime')
-                            elif table_name == 'DRUG_ERA':
-                                start = row.get('drug_era_start_date')
-                                end = row.get('drug_era_end_date')
-                            elif table_name == 'OBSERVATION_PERIOD':
-                                start = row.get('observation_period_start_date')
-                                end = row.get('observation_period_end_date')
-                            elif table_name == 'CONDITION_ERA':
-                                start = row.get('condition_era_start_date')
-                                end = row.get('condition_era_end_date')
-                            elif table_name == 'CONDITION_OCCURRENCE':
-                                start = row.get('condition_start_datetime')
-                                end = row.get('condition_end_datetime')
-                            elif table_name == 'PROCEDURE_OCCURRENCE':
-                                start = row.get('procedure_datetime')
-                                end = row.get('procedure_end_datetime')
+                            if table_name in TEMPORAL_FIELDS:
+                                start_col, end_col = TEMPORAL_FIELDS[table_name]
+                                start = row.get(start_col)
+                                end = row.get(end_col)
                             
                             if start and end and end < start:
                                 temporal_invalid = True
@@ -351,6 +464,8 @@ def clean_table(table_name):
                                 temporal_row['end_datetime'] = end
                                 temporal_row['original_row_number'] = original_row_num
                                 temporal_writer.writerow(temporal_row)
+                            
+                            table_time_stats['temporal_validation'] += time.time() - t1
                             
                             if skip_row:
                                 continue
@@ -426,6 +541,15 @@ def clean_table(table_name):
     # Silent summary - details saved to results file
     rows_removed = total_rows - rows_written
     
+    # Calculate total time and other processing time
+    table_time_stats['total'] = time.time() - table_start_time
+    table_time_stats['other_processing'] = table_time_stats['total'] - (
+        table_time_stats['column_analysis'] + 
+        table_time_stats['duplicate_detection'] +
+        table_time_stats['invalid_concept'] +
+        table_time_stats['temporal_validation']
+    )
+    
     # Store results
     cleaning_results["tables"][table_name] = {
         "original_records": total_rows,
@@ -445,12 +569,13 @@ def clean_table(table_name):
             "invalid_concept_id": str(invalid_concept_file),
             "temporal_issues": str(temporal_issues_file)
         },
-        "removed_columns_details": columns_info
+        "removed_columns_details": columns_info,
+        "time_stats": table_time_stats
     }
     
     # Silent completion
     
-    return rows_written
+    return rows_written, table_time_stats
 
 # Process each key table
 print("\nStarting table cleaning process...")
@@ -459,11 +584,14 @@ total_cleaned = 0
 
 # Process tables with progress tracking
 print("\nCleaning tables...")
+all_time_stats = []
 for i, table in enumerate(KEY_TABLES):
     try:
-        print(f"  [{i+1}/{len(KEY_TABLES)}] Processing {table}...")
-        cleaned_count = clean_table(table)
+        print(f"  [{i+1}/{len(KEY_TABLES)}] Processing {table}...", end="", flush=True)
+        cleaned_count, time_stats = clean_table(table)
         total_cleaned += cleaned_count
+        all_time_stats.append(time_stats)
+        print(f" Done ({time_stats['total']:.2f}s)")
     except Exception as e:
         print(f"\nError cleaning {table}: {str(e)}")
         cleaning_results["tables"][table] = {"error": str(e)}
@@ -681,5 +809,35 @@ print("\n  Reports:")
 print(f"    - {results_path}")
 print(f"    - {report_path}")
 print(f"    - {removed_columns_path}")
+
+# Calculate total execution time
+total_time = time.time() - start_time
+print(f"\nTotal execution time: {total_time:.2f} seconds")
+
+# Performance breakdown
+if all_time_stats:
+    print("\n" + "="*50)
+    print("PERFORMANCE BREAKDOWN - Data Cleaning")
+    print("="*50)
+    
+    # Sum up times from all tables
+    total_column_analysis = sum(s['column_analysis'] for s in all_time_stats)
+    total_duplicate_detection = sum(s['duplicate_detection'] for s in all_time_stats)
+    total_invalid_concept = sum(s['invalid_concept'] for s in all_time_stats)
+    total_temporal_validation = sum(s['temporal_validation'] for s in all_time_stats)
+    total_other = sum(s['other_processing'] for s in all_time_stats)
+    
+    print(f"Column analysis:       {total_column_analysis:.2f}s ({total_column_analysis/total_time*100:.1f}%)")
+    print(f"Duplicate detection:   {total_duplicate_detection:.2f}s ({total_duplicate_detection/total_time*100:.1f}%)")
+    print(f"Invalid concept ID:    {total_invalid_concept:.2f}s ({total_invalid_concept/total_time*100:.1f}%)")
+    print(f"Temporal validation:   {total_temporal_validation:.2f}s ({total_temporal_validation/total_time*100:.1f}%)")
+    print(f"File I/O & other:      {total_other:.2f}s ({total_other/total_time*100:.1f}%)")
+    
+    # Find slowest operations
+    print("\nSlowest tables:")
+    table_times = [(KEY_TABLES[i], s['total']) for i, s in enumerate(all_time_stats)]
+    table_times.sort(key=lambda x: x[1], reverse=True)
+    for name, time_taken in table_times[:3]:
+        print(f"  {name}: {time_taken:.2f}s")
 
 print("="*70)
