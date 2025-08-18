@@ -583,7 +583,15 @@ def clean_table_partial(table_name, start_row=0, end_row=-1, position=0, disable
     
     # Silent completion
     
-    return rows_written, table_time_stats
+    # Return statistics for parallel processing aggregation
+    stats_for_aggregation = {
+        "duplicates_removed": duplicate_count,
+        "invalid_concept_removed": invalid_concept_count,
+        "temporal_issues": temporal_issues,
+        "columns_removed": columns_to_remove
+    }
+    
+    return rows_written, table_time_stats, stats_for_aggregation
 
 def clean_table(table_name, position=0, disable_progress=False):
     """Wrapper function for backward compatibility."""
@@ -710,13 +718,17 @@ if __name__ == '__main__':
                     try:
                         result = future.result()
                         
-                        # clean_table_partial returns a tuple of (cleaned_count, time_stats)
-                        # We need to extract the detailed statistics from cleaning_results["tables"]
-                        if isinstance(result, tuple):
+                        # clean_table_partial now returns (cleaned_count, time_stats, stats_for_aggregation)
+                        if isinstance(result, tuple) and len(result) == 3:
+                            cleaned_count, time_stats, detail_stats = result
+                        elif isinstance(result, tuple) and len(result) == 2:
+                            # Backward compatibility
                             cleaned_count, time_stats = result
+                            detail_stats = {}
                         else:
                             cleaned_count = result
                             time_stats = {}
+                            detail_stats = {}
                         
                         total_cleaned += cleaned_count
                         all_time_stats.append(time_stats)
@@ -724,7 +736,7 @@ if __name__ == '__main__':
                         if num_parts > 0:
                             # Part of a split table
                             table_parts_completed[table] += 1
-                            table_parts_results[table].append((cleaned_count, time_stats))
+                            table_parts_results[table].append((cleaned_count, time_stats, detail_stats))
                             overall_pbar.set_postfix_str(f"Completed: {table} part {part_num}/{num_parts}")
                             
                             # Check if all parts are done
@@ -733,45 +745,38 @@ if __name__ == '__main__':
                                 print(f"\n  Merging {num_parts} parts of {table}...")
                                 merge_table_parts(table, num_parts)
                                 
-                                # Read the actual results from the merged table statistics
-                                # The clean_table_partial function has already stored details in cleaning_results
-                                # We need to aggregate them properly
-                                table_key = f"{table}_part1"
-                                if table_key in cleaning_results["tables"]:
-                                    first_part_stats = cleaning_results["tables"][table_key]
-                                    columns_removed = first_part_stats.get("columns_removed", [])
-                                else:
-                                    columns_removed = []
+                                # Initialize columns_removed (will be set from first part's detail_stats)
+                                columns_removed = []
                                 
                                 # Aggregate statistics for the complete table
-                                total_rows_cleaned = sum(c for c, _ in table_parts_results[table])
+                                total_rows_cleaned = sum(c for c, _, _ in table_parts_results[table])
                                 input_file = data_dir / f"{table}.csv"
                                 total_original_rows = get_file_row_count(input_file)
                                 
-                                # Aggregate detailed statistics from all parts
+                                # Aggregate detailed statistics from all parts using returned values
                                 total_duplicates = 0
                                 total_invalid = 0
                                 total_temporal = 0
                                 
-                                for i in range(num_parts):
-                                    part_key = f"{table}_part{i+1}"
-                                    if part_key in cleaning_results["tables"]:
-                                        part_stats = cleaning_results["tables"][part_key]
-                                        total_duplicates += part_stats.get("duplicates_removed", 0)
-                                        total_invalid += part_stats.get("invalid_concept_removed", 0)
-                                        total_temporal += part_stats.get("temporal_issues", 0)
-                                        # Remove the part stats after aggregating
-                                        del cleaning_results["tables"][part_key]
+                                # Use the returned statistics from each part
+                                for cleaned_count, time_stats, detail_stats in table_parts_results[table]:
+                                    if detail_stats:
+                                        total_duplicates += detail_stats.get("duplicates_removed", 0)
+                                        total_invalid += detail_stats.get("invalid_concept_removed", 0)
+                                        total_temporal += detail_stats.get("temporal_issues", 0)
+                                        # Use columns_removed from first part if not already set
+                                        if not columns_removed and "columns_removed" in detail_stats:
+                                            columns_removed = detail_stats["columns_removed"]
                                 
                                 # Aggregate time stats
                                 aggregated_time_stats = {
-                                    'total': sum(s['total'] for _, s in table_parts_results[table]),
-                                    'column_analysis': sum(s.get('column_analysis', 0) for _, s in table_parts_results[table]),
-                                    'duplicate_detection': sum(s.get('duplicate_detection', 0) for _, s in table_parts_results[table]),
-                                    'invalid_concept': sum(s.get('invalid_concept', 0) for _, s in table_parts_results[table]),
-                                    'temporal_validation': sum(s.get('temporal_validation', 0) for _, s in table_parts_results[table]),
-                                    'file_io': sum(s.get('file_io', 0) for _, s in table_parts_results[table]),
-                                    'other_processing': sum(s.get('other_processing', 0) for _, s in table_parts_results[table])
+                                    'total': sum(s['total'] for _, s, _ in table_parts_results[table]),
+                                    'column_analysis': sum(s.get('column_analysis', 0) for _, s, _ in table_parts_results[table]),
+                                    'duplicate_detection': sum(s.get('duplicate_detection', 0) for _, s, _ in table_parts_results[table]),
+                                    'invalid_concept': sum(s.get('invalid_concept', 0) for _, s, _ in table_parts_results[table]),
+                                    'temporal_validation': sum(s.get('temporal_validation', 0) for _, s, _ in table_parts_results[table]),
+                                    'file_io': sum(s.get('file_io', 0) for _, s, _ in table_parts_results[table]),
+                                    'other_processing': sum(s.get('other_processing', 0) for _, s, _ in table_parts_results[table])
                                 }
                                 
                                 # Store aggregated results
@@ -794,35 +799,27 @@ if __name__ == '__main__':
                                 }
                                 tables_completed.add(table)
                         else:
-                            # Single table - get the detailed results from cleaning_results
-                            if table in cleaning_results["tables"]:
-                                # Already stored by clean_table_partial
-                                stored_stats = cleaning_results["tables"][table]
-                                # Update time_stats if needed
-                                if 'time_stats' not in stored_stats:
-                                    stored_stats['time_stats'] = time_stats
-                            else:
-                                # Fallback if not stored
-                                input_file = data_dir / f"{table}.csv"
-                                if input_file.exists():
-                                    total_original_rows = get_file_row_count(input_file)
-                                    cleaning_results["tables"][table] = {
-                                        "original_records": total_original_rows,
-                                        "cleaned_records": cleaned_count,
-                                        "records_removed": total_original_rows - cleaned_count,
-                                        "removal_percentage": (total_original_rows - cleaned_count) / total_original_rows * 100 if total_original_rows > 0 else 0,
-                                        "output_file": str(output_dir / f"{table}_cleaned.csv"),
-                                        "duplicates_removed": 0,
-                                        "invalid_concept_removed": 0,
-                                        "temporal_issues": 0,
-                                        "columns_removed": [],
-                                        "removed_records_files": {
-                                            "duplicates": str(duplicates_dir / f"{table}.csv"),
-                                            "invalid_concept_id": str(invalid_concept_dir / f"{table}.csv"),
-                                            "temporal_issues": str(temporal_issues_dir / f"{table}.csv")
-                                        },
-                                        "time_stats": time_stats
-                                    }
+                            # Single table - use returned statistics
+                            input_file = data_dir / f"{table}.csv"
+                            if input_file.exists():
+                                total_original_rows = get_file_row_count(input_file)
+                                cleaning_results["tables"][table] = {
+                                    "original_records": total_original_rows,
+                                    "cleaned_records": cleaned_count,
+                                    "records_removed": total_original_rows - cleaned_count,
+                                    "removal_percentage": (total_original_rows - cleaned_count) / total_original_rows * 100 if total_original_rows > 0 else 0,
+                                    "output_file": str(output_dir / f"{table}_cleaned.csv"),
+                                    "duplicates_removed": detail_stats.get("duplicates_removed", 0) if detail_stats else 0,
+                                    "invalid_concept_removed": detail_stats.get("invalid_concept_removed", 0) if detail_stats else 0,
+                                    "temporal_issues": detail_stats.get("temporal_issues", 0) if detail_stats else 0,
+                                    "columns_removed": detail_stats.get("columns_removed", []) if detail_stats else [],
+                                    "removed_records_files": {
+                                        "duplicates": str(duplicates_dir / f"{table}.csv"),
+                                        "invalid_concept_id": str(invalid_concept_dir / f"{table}.csv"),
+                                        "temporal_issues": str(temporal_issues_dir / f"{table}.csv")
+                                    },
+                                    "time_stats": time_stats
+                                }
                             overall_pbar.set_postfix_str(f"Completed: {table}")
                             tables_completed.add(table)
                         
