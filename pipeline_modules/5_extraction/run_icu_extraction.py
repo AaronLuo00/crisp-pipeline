@@ -6,6 +6,7 @@ import csv
 import json
 import pandas as pd
 import platform
+import time
 from pathlib import Path
 from datetime import datetime
 from collections import defaultdict
@@ -158,6 +159,7 @@ class PatientDataExtractor:
     
     def split_table_by_patient(self, table_name: str):
         """Split a standardized table by patient ID and save to patient folders."""
+        t0 = time.time()
         logging.info(f"Processing {table_name}...")
         
         input_file = standardized_dir / f"{table_name}_standardized.csv"
@@ -413,6 +415,9 @@ class PatientDataExtractor:
     
     def run(self):
         """Run the complete extraction process."""
+        # Start timing
+        start_time = time.time()
+        
         # Simplified startup
         print(f"\nExtracting patient data for {len(TABLES_TO_PROCESS) + len(BASIC_TABLES)} tables...")
         print(f"ICU Concept IDs: {', '.join(map(str, ICU_CONCEPT_IDS))}")
@@ -452,7 +457,47 @@ class PatientDataExtractor:
         # Generate report
         self.generate_report()
         
+        # Calculate total time
+        total_time = time.time() - start_time
+        self.extraction_results['statistics']['total_extraction_time'] = total_time
+        
         print(f"\nExtraction completed. Results saved to: {output_dir}")
+        print(f"Total execution time: {total_time:.2f} seconds")
+        
+        # Performance breakdown
+        print("\n" + "="*50)
+        print("PERFORMANCE BREAKDOWN - ICU Data Extraction")
+        print("="*50)
+        
+        stats = self.extraction_results['statistics']
+        
+        # Calculate component times
+        icu_time = stats.get('icu_extraction_time', 0)
+        pre_icu_time = stats.get('pre_icu_calculation_time', 0)
+        
+        # Calculate table processing times
+        standardized_time = sum(stats.get(t, {}).get('processing_time', 0) for t in TABLES_TO_PROCESS)
+        basic_time = sum(stats.get(t, {}).get('processing_time', 0) for t in BASIC_TABLES)
+        
+        print(f"ICU summaries:         {icu_time:.2f}s ({icu_time/total_time*100:.1f}%)")
+        print(f"Standardized tables:   {standardized_time:.2f}s ({standardized_time/total_time*100:.1f}%)")
+        print(f"Basic tables:          {basic_time:.2f}s ({basic_time/total_time*100:.1f}%)")
+        print(f"Pre-ICU statistics:    {pre_icu_time:.2f}s ({pre_icu_time/total_time*100:.1f}%)")
+        
+        # Find slowest tables
+        table_times = []
+        for table in TABLES_TO_PROCESS + BASIC_TABLES:
+            if table in stats and 'processing_time' in stats[table]:
+                table_times.append((table, stats[table]['processing_time']))
+        
+        table_times.sort(key=lambda x: x[1], reverse=True)
+        
+        print("\nSlowest tables:")
+        for name, time_taken in table_times[:3]:
+            if time_taken > 0:
+                print(f"  {name}: {time_taken:.2f}s")
+        
+        print("="*50)
 
 
 def main():

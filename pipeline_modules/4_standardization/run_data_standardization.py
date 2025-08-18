@@ -7,6 +7,7 @@ import argparse
 import numpy as np
 import pandas as pd
 import platform
+import time
 from pathlib import Path
 from datetime import datetime, timedelta
 from collections import defaultdict, Counter
@@ -542,6 +543,15 @@ class DataStandardizer:
     
     def standardize_table(self, table_name):
         """Standardize a single table with outlier removal and low frequency filtering."""
+        # Initialize timing
+        table_time_stats = {
+            'total': 0,
+            'concept_statistics': 0,
+            'data_processing': 0,
+            'file_io': 0
+        }
+        table_start_time = time.time()
+        
         logging.info(f"\n{'='*60}")
         logging.info(f"Standardizing {table_name}")
         logging.info('='*60)
@@ -554,7 +564,9 @@ class DataStandardizer:
             return 0
         
         # First, calculate statistics
+        t0 = time.time()
         self.calculate_concept_statistics(table_name)
+        table_time_stats['concept_statistics'] = time.time() - t0
         
         # Determine the concept column name
         # Note: The _mapped column is a flag, the actual concept ID is still in the original column
@@ -604,6 +616,7 @@ class DataStandardizer:
         }
         
         # Process file
+        t0 = time.time()
         with open(input_file, 'r', encoding='utf-8') as infile:
             reader = csv.DictReader(infile)
             headers = reader.fieldnames
@@ -662,7 +675,13 @@ class DataStandardizer:
                                                       change_writer, stats, 
                                                       table_name, concept_col, input_file)
         
+        # Calculate times
+        table_time_stats['data_processing'] = time.time() - t0
+        table_time_stats['total'] = time.time() - table_start_time
+        table_time_stats['file_io'] = table_time_stats['total'] - table_time_stats['concept_statistics'] - table_time_stats['data_processing']
+        
         # Save statistics
+        stats['time_stats'] = table_time_stats
         self.standardization_results["tables"][table_name] = stats
         
         logging.info(f"\nStandardization Summary for {table_name}:")
@@ -674,6 +693,7 @@ class DataStandardizer:
         logging.info(f"    - Range outliers: {stats['outliers_removed_range']:,}")
         logging.info(f"  - Datetime fields standardized: {stats['datetime_standardized']:,}")
         logging.info(f"  - Units converted: {stats['units_converted']:,}")
+        logging.info(f"  - Processing time: {table_time_stats['total']:.2f}s")
         
         return stats['output_records']
     
@@ -1004,6 +1024,9 @@ class DataStandardizer:
 
 def main():
     """Main execution function."""
+    # Start timing
+    start_time = time.time()
+    
     parser = argparse.ArgumentParser(description='Data standardization with outlier removal, low frequency filtering, and visit merging')
     parser.add_argument('--outlier-percentile', type=float, default=99.0,
                         help='Percentile threshold for outlier removal (default: 99)')
@@ -1025,6 +1048,52 @@ def main():
     )
     
     standardizer.run()
+    
+    # Calculate total time
+    total_time = time.time() - start_time
+    print(f"\nTotal execution time: {total_time:.2f} seconds")
+    
+    # Performance breakdown
+    print("\n" + "="*50)
+    print("PERFORMANCE BREAKDOWN - Data Standardization")
+    print("="*50)
+    
+    # Aggregate timing from all tables
+    total_concept_stats = 0
+    total_data_processing = 0
+    total_file_io = 0
+    
+    for table_stats in standardizer.standardization_results.get('tables', {}).values():
+        if 'time_stats' in table_stats:
+            ts = table_stats['time_stats']
+            total_concept_stats += ts.get('concept_statistics', 0)
+            total_data_processing += ts.get('data_processing', 0)
+            total_file_io += ts.get('file_io', 0)
+    
+    # Also add visit merging time if available
+    visit_merge_time = 0
+    if 'visit_merging' in standardizer.standardization_results:
+        for merge_stats in standardizer.standardization_results['visit_merging'].values():
+            if 'processing_time_seconds' in merge_stats:
+                visit_merge_time += merge_stats['processing_time_seconds']
+    
+    print(f"Concept statistics:    {total_concept_stats:.2f}s ({total_concept_stats/total_time*100:.1f}%)")
+    print(f"Data processing:       {total_data_processing:.2f}s ({total_data_processing/total_time*100:.1f}%)")
+    print(f"File I/O:              {total_file_io:.2f}s ({total_file_io/total_time*100:.1f}%)")
+    if visit_merge_time > 0:
+        print(f"Visit merging:         {visit_merge_time:.2f}s ({visit_merge_time/total_time*100:.1f}%)")
+    
+    # Find slowest tables
+    table_times = [(name, stats.get('time_stats', {}).get('total', 0)) 
+                   for name, stats in standardizer.standardization_results.get('tables', {}).items()]
+    table_times.sort(key=lambda x: x[1], reverse=True)
+    
+    print("\nSlowest tables:")
+    for name, time_taken in table_times[:3]:
+        if time_taken > 0:
+            print(f"  {name}: {time_taken:.2f}s")
+    
+    print("="*50)
 
 
 if __name__ == "__main__":
