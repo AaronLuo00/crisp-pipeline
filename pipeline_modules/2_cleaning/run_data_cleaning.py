@@ -652,6 +652,7 @@ if __name__ == '__main__':
     # Determine whether to use parallel processing
     USE_PARALLEL = os.environ.get('PARALLEL_CLEANING', 'false').lower() == 'true'
     MAX_WORKERS = min(multiprocessing.cpu_count() - 1, 6)  # Leave one CPU free, max 6 workers
+    MEASUREMENT_SPLITS = int(os.environ.get('MEASUREMENT_SPLITS', '6'))  # Control MEASUREMENT table splits (optimized default)
 
     # Process tables with progress tracking
     print("\nCleaning tables...")
@@ -659,21 +660,37 @@ if __name__ == '__main__':
 
     if USE_PARALLEL:
         print(f"Using parallel processing with {MAX_WORKERS} workers")
+        print(f"MEASUREMENT table will be split into {MEASUREMENT_SPLITS} parts")
         print("Set PARALLEL_CLEANING=false to disable parallel processing")
+        print(f"Set MEASUREMENT_SPLITS=N to change splits (current: {MEASUREMENT_SPLITS})")
         
         # Determine which tables need splitting
-        LARGE_TABLE_THRESHOLD = 1000000  # 1M rows
+        # LARGE_TABLE_THRESHOLD = 1000000  # 1M rows (commented out - only split MEASUREMENT)
         table_splits = {}
         
+        # Only split MEASUREMENT table for now
         for table in KEY_TABLES:
-            input_file = data_dir / f"{table}.csv"
-            if input_file.exists():
-                row_count = get_file_row_count(input_file)
-                if row_count > LARGE_TABLE_THRESHOLD:
-                    # Split large tables into 4 parts
-                    num_splits = 4
+            if table == 'MEASUREMENT':
+                input_file = data_dir / f"{table}.csv"
+                if input_file.exists():
+                    row_count = get_file_row_count(input_file)
+                    num_splits = MEASUREMENT_SPLITS
                     table_splits[table] = num_splits
                     print(f"  {table} has {row_count:,} rows - will split into {num_splits} parts")
+        
+        # Generic large table splitting (commented out)
+        # for table in KEY_TABLES:
+        #     input_file = data_dir / f"{table}.csv"
+        #     if input_file.exists():
+        #         row_count = get_file_row_count(input_file)
+        #         if row_count > LARGE_TABLE_THRESHOLD:
+        #             # Use configurable splits for MEASUREMENT, default 4 for others
+        #             if table == 'MEASUREMENT':
+        #                 num_splits = MEASUREMENT_SPLITS
+        #             else:
+        #                 num_splits = 4
+        #             table_splits[table] = num_splits
+        #             print(f"  {table} has {row_count:,} rows - will split into {num_splits} parts")
         
         # Parallel processing
         with ProcessPoolExecutor(max_workers=MAX_WORKERS) as executor:
