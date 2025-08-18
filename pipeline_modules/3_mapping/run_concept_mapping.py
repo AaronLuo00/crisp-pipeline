@@ -12,7 +12,6 @@ from pathlib import Path
 from datetime import datetime, timedelta
 from collections import defaultdict, Counter
 from tqdm import tqdm
-import re
 
 # Platform-specific settings for performance optimization
 if platform.system() == 'Windows':
@@ -37,8 +36,6 @@ duplicates_dir = removed_dir / "duplicates"
 duplicates_dir.mkdir(parents=True, exist_ok=True)
 low_freq_dir = removed_dir / "low_frequency"
 low_freq_dir.mkdir(parents=True, exist_ok=True)
-outliers_dir = removed_dir / "outliers"
-outliers_dir.mkdir(parents=True, exist_ok=True)
 episodes_dir = removed_dir / "visit_episodes"
 episodes_dir.mkdir(parents=True, exist_ok=True)
 
@@ -103,32 +100,12 @@ ID_COLUMNS = {
     'VISIT_OCCURRENCE': 'visit_occurrence_id'
 }
 
-# Define date/datetime columns for standardization
-DATE_COLUMNS = {
-    'MEASUREMENT': ['measurement_date', 'measurement_datetime'],
-    'OBSERVATION': ['observation_date', 'observation_datetime'],
-    'PROCEDURE_OCCURRENCE': ['procedure_date', 'procedure_datetime'],
-    'DEVICE_EXPOSURE': ['device_exposure_start_date', 'device_exposure_start_datetime', 
-                        'device_exposure_end_date', 'device_exposure_end_datetime'],
-    'CONDITION_OCCURRENCE': ['condition_start_date', 'condition_start_datetime',
-                            'condition_end_date', 'condition_end_datetime'],
-    'CONDITION_ERA': ['condition_era_start_date', 'condition_era_end_date'],
-    'DRUG_EXPOSURE': ['drug_exposure_start_date', 'drug_exposure_start_datetime',
-                      'drug_exposure_end_date', 'drug_exposure_end_datetime'],
-    'DRUG_ERA': ['drug_era_start_date', 'drug_era_end_date'],
-    'VISIT_OCCURRENCE': ['visit_start_date', 'visit_start_datetime',
-                         'visit_end_date', 'visit_end_datetime']
-}
-
 class ConceptMapper:
     def __init__(self, enable_dedup=True, min_concept_freq=10, 
-                 outlier_lower_pct=0.5, outlier_upper_pct=0.5,
                  episode_window_hours=2):
         self.stats = defaultdict(lambda: defaultdict(int))
         self.enable_dedup = enable_dedup
         self.min_concept_freq = min_concept_freq
-        self.outlier_lower_pct = outlier_lower_pct
-        self.outlier_upper_pct = outlier_upper_pct
         self.episode_window_hours = episode_window_hours
         self.concept_frequencies = {}  # Store concept frequencies across all tables
         self.all_table_data = {}  # Store all table data for processing
@@ -172,39 +149,6 @@ class ConceptMapper:
             
             logging.info(f"  Low frequency (<={self.min_concept_freq}): {freq_stats['low_frequency']}")
             logging.info(f"  High frequency (>{self.min_concept_freq}): {freq_stats['high_frequency']}")
-    
-    def standardize_date(self, date_str):
-        """Standardize date/datetime string to consistent format."""
-        if not date_str or date_str.strip() == '':
-            return date_str
-        
-        date_str = date_str.strip()
-        
-        # Common datetime patterns
-        datetime_patterns = [
-            ('%Y-%m-%d %H:%M:%S', True),
-            ('%Y-%m-%d %H:%M:%S.%f', True),
-            ('%Y-%m-%d %H:%M', True),
-            ('%Y/%m/%d %H:%M:%S', True),
-            ('%Y-%m-%d', False),
-            ('%Y/%m/%d', False),
-            ('%m/%d/%Y', False),
-            ('%d/%m/%Y', False)
-        ]
-        
-        for pattern, has_time in datetime_patterns:
-            try:
-                dt = datetime.strptime(date_str, pattern)
-                if has_time:
-                    return dt.strftime('%Y-%m-%d %H:%M:%S')
-                else:
-                    return dt.strftime('%Y-%m-%d')
-            except ValueError:
-                continue
-        
-        # If no pattern matches, return original
-        logging.debug(f"Could not parse date: {date_str}")
-        return date_str
     
     def filter_low_frequency_concepts(self, rows, table_name):
         """Filter out records with low frequency concepts."""
@@ -347,104 +291,6 @@ class ConceptMapper:
         
         return unique_rows, all_duplicate_records
     
-    def remove_outliers_measurement(self, rows):
-        """Remove outliers from MEASUREMENT table based on value_as_number percentiles."""
-        if not rows:
-            return rows, []
-        
-        # Group measurements by concept_id
-        concept_measurements = defaultdict(list)
-        row_indices = defaultdict(list)
-        
-        for idx, row in enumerate(rows):
-            concept_id = row.get('measurement_concept_id', '')
-            value_str = row.get('value_as_number', '')
-            
-            if concept_id and value_str and value_str.strip():
-                try:
-                    value = float(value_str)
-                    concept_measurements[concept_id].append(value)
-                    row_indices[concept_id].append(idx)
-                except ValueError:
-                    continue
-        
-        # Calculate percentiles and identify outliers
-        outlier_indices = set()
-        outlier_stats = {}
-        
-        for concept_id, values in concept_measurements.items():
-            if len(values) < 10:  # Skip concepts with too few measurements
-                continue
-            
-            values_array = np.array(values)
-            lower_percentile = np.percentile(values_array, self.outlier_lower_pct)
-            upper_percentile = np.percentile(values_array, 100 - self.outlier_upper_pct)
-            
-            # Track statistics
-            outlier_stats[concept_id] = {
-                'total': len(values),
-                'lower_threshold': lower_percentile,
-                'upper_threshold': upper_percentile,
-                'removed_lower': 0,
-                'removed_upper': 0
-            }
-            
-            # Identify outliers
-            indices = row_indices[concept_id]
-            for i, (value, row_idx) in enumerate(zip(values, indices)):
-                if value < lower_percentile:
-                    outlier_indices.add(row_idx)
-                    outlier_stats[concept_id]['removed_lower'] += 1
-                elif value > upper_percentile:
-                    outlier_indices.add(row_idx)
-                    outlier_stats[concept_id]['removed_upper'] += 1
-        
-        # Separate outliers from clean data
-        clean_rows = []
-        outlier_rows = []
-        
-        for idx, row in enumerate(rows):
-            if idx in outlier_indices:
-                outlier_row = row.copy()
-                concept_id = row.get('measurement_concept_id', '')
-                value = row.get('value_as_number', '')
-                
-                if concept_id in outlier_stats:
-                    stats = outlier_stats[concept_id]
-                    if float(value) < stats['lower_threshold']:
-                        outlier_row['removal_reason'] = f'outlier_low (value={value}, threshold={stats["lower_threshold"]:.2f})'
-                    else:
-                        outlier_row['removal_reason'] = f'outlier_high (value={value}, threshold={stats["upper_threshold"]:.2f})'
-                else:
-                    outlier_row['removal_reason'] = 'outlier'
-                
-                outlier_row['original_row_number'] = idx + 2
-                outlier_rows.append(outlier_row)
-            else:
-                clean_rows.append(row)
-        
-        # Log statistics
-        total_outliers = len(outlier_rows)
-        if total_outliers > 0:
-            logging.info(f"\nOutlier removal statistics:")
-            logging.info(f"  Total outliers removed: {total_outliers}")
-            logging.info(f"  Concepts analyzed: {len(outlier_stats)}")
-            
-            for concept_id, stats in list(outlier_stats.items())[:5]:  # Show top 5
-                logging.info(f"  Concept {concept_id}: {stats['removed_lower']} low, {stats['removed_upper']} high outliers")
-        
-        return clean_rows, outlier_rows
-    
-    def standardize_dates_in_rows(self, rows, table_name):
-        """Standardize all date/datetime columns in rows."""
-        date_cols = DATE_COLUMNS.get(table_name, [])
-        
-        for row in rows:
-            for date_col in date_cols:
-                if date_col in row:
-                    row[date_col] = self.standardize_date(row[date_col])
-        
-        return rows
     
     def process_table(self, table_name):
         """Process a table with all features: filtering, mapping, standardization, etc."""
@@ -453,9 +299,7 @@ class ConceptMapper:
             'total': 0,
             'file_reading': 0,
             'low_freq_filtering': 0,
-            'date_standardization': 0,
             'concept_mapping': 0,
-            'outlier_removal': 0,
             'deduplication': 0,
             'file_writing': 0
         }
@@ -477,11 +321,13 @@ class ConceptMapper:
         table_stats = {
             'total_rows': 0,
             'low_freq_removed': 0,
-            'outliers_removed': 0,
             'duplicates_removed': 0,
             'concept_columns': {},
             'total_mappings_applied': 0
         }
+        
+        # Define write buffer size for all CSV operations
+        WRITE_BUFFER_SIZE = 5000
         
         # Get total row count for progress bar
         with open(input_file, 'r') as f:
@@ -516,21 +362,28 @@ class ConceptMapper:
             table_stats['low_freq_removed'] = len(removed_low_freq)
             
             if removed_low_freq:
-                # Save removed records
+                # Save removed records with buffering
                 low_freq_file = low_freq_dir / f"{table_name}.csv"
+                low_freq_buffer = []
+                
                 with open(low_freq_file, 'w', newline='') as f:
                     writer = csv.DictWriter(f, fieldnames=fieldnames + ['removal_reason', 'original_row_number'])
                     writer.writeheader()
-                    writer.writerows(removed_low_freq)
+                    
+                    # Write with buffering
+                    for row in removed_low_freq:
+                        low_freq_buffer.append(row)
+                        if len(low_freq_buffer) >= WRITE_BUFFER_SIZE:
+                            writer.writerows(low_freq_buffer)
+                            low_freq_buffer = []
+                    
+                    # Write remaining buffer
+                    if low_freq_buffer:
+                        writer.writerows(low_freq_buffer)
+                
                 logging.info(f"  Removed {len(removed_low_freq)} low frequency records")
         
-        # Step 2: Standardize dates
-        logging.info("\nStandardizing dates...")
-        t0 = time.time()
-        rows = self.standardize_dates_in_rows(rows, table_name)
-        table_time_stats['date_standardization'] = time.time() - t0
-        
-        # Step 3: Apply SNOMED mappings (only for tables with mappings)
+        # Step 2: Apply SNOMED mappings (only for tables with mappings)
         t0 = time.time()
         if table_name in TABLES_WITH_MAPPING:
             extended_fieldnames = self.apply_mappings(rows, table_name, fieldnames, table_stats)
@@ -538,24 +391,7 @@ class ConceptMapper:
             extended_fieldnames = fieldnames
         table_time_stats['concept_mapping'] = time.time() - t0
         
-        # Step 4: Remove outliers (MEASUREMENT only)
-        t0 = time.time()
-        if table_name == 'MEASUREMENT' and self.outlier_lower_pct > 0:
-            logging.info(f"\nRemoving outliers ({self.outlier_lower_pct}% lower, {self.outlier_upper_pct}% upper)...")
-            rows, outlier_rows = self.remove_outliers_measurement(rows)
-            table_stats['outliers_removed'] = len(outlier_rows)
-            
-            if outlier_rows:
-                # Save outlier records
-                outlier_file = outliers_dir / f"{table_name}.csv"
-                with open(outlier_file, 'w', newline='') as f:
-                    writer = csv.DictWriter(f, fieldnames=extended_fieldnames + ['removal_reason', 'original_row_number'])
-                    writer.writeheader()
-                    writer.writerows(outlier_rows)
-                logging.info(f"  Removed {len(outlier_rows)} outliers")
-        table_time_stats['outlier_removal'] = time.time() - t0
-        
-        # Step 5: Deduplication (only for mapped tables)
+        # Step 4: Deduplication (only for mapped tables)
         t0 = time.time()
         if self.enable_dedup and table_name in TABLES_WITH_MAPPING:
             logging.info("\nPerforming deduplication...")
@@ -571,10 +407,23 @@ class ConceptMapper:
             if duplicate_rows:
                 duplicates_file = duplicates_dir / f"{table_name}.csv"
                 dup_fieldnames = extended_fieldnames + ['duplicate_status', 'duplicate_group_id', 'original_row_number']
+                dup_buffer = []
+                
                 with open(duplicates_file, 'w', newline='') as dupfile:
                     writer = csv.DictWriter(dupfile, fieldnames=dup_fieldnames)
                     writer.writeheader()
-                    writer.writerows(duplicate_rows)
+                    
+                    # Write with buffering
+                    for row in duplicate_rows:
+                        dup_buffer.append(row)
+                        if len(dup_buffer) >= WRITE_BUFFER_SIZE:
+                            writer.writerows(dup_buffer)
+                            dup_buffer = []
+                    
+                    # Write remaining buffer
+                    if dup_buffer:
+                        writer.writerows(dup_buffer)
+                
                 logging.info(f"  Saved duplicate records to: {duplicates_file}")
             
             rows_to_save = unique_rows
@@ -583,12 +432,25 @@ class ConceptMapper:
             table_stats['output_rows'] = len(rows)
         table_time_stats['deduplication'] = time.time() - t0
         
-        # Save processed data
+        # Save processed data with buffering
         t0 = time.time()
+        write_buffer = []
+        
         with open(output_file, 'w', newline='') as outfile:
             writer = csv.DictWriter(outfile, fieldnames=extended_fieldnames)
             writer.writeheader()
-            writer.writerows(rows_to_save)
+            
+            # Write with buffering
+            for row in rows_to_save:
+                write_buffer.append(row)
+                if len(write_buffer) >= WRITE_BUFFER_SIZE:
+                    writer.writerows(write_buffer)
+                    write_buffer = []
+            
+            # Write remaining buffer
+            if write_buffer:
+                writer.writerows(write_buffer)
+        
         table_time_stats['file_writing'] = time.time() - t0
         
         logging.info(f"\nSaved processed data to: {output_file}")
@@ -687,34 +549,30 @@ def generate_mapping_report(stats, mapper):
         
         f.write("## Processing Configuration\n\n")
         f.write(f"- **Low frequency threshold**: <={mapper.min_concept_freq}\n")
-        f.write(f"- **Outlier removal**: {mapper.outlier_lower_pct}% lower, {mapper.outlier_upper_pct}% upper\n")
         f.write(f"- **Deduplication**: {'Enabled' if mapper.enable_dedup else 'Disabled'}\n")
         f.write(f"- **Visit episode window**: {mapper.episode_window_hours} hours\n\n")
         
         f.write("## Summary Statistics\n\n")
         
         total_low_freq = sum(t.get('low_freq_removed', 0) for t in stats.values())
-        total_outliers = sum(t.get('outliers_removed', 0) for t in stats.values())
         total_mappings = sum(t.get('total_mappings_applied', 0) for t in stats.values())
         total_duplicates = sum(t.get('duplicates_removed', 0) for t in stats.values())
         
         f.write(f"**Total low frequency records removed**: {total_low_freq:,}\n")
-        f.write(f"**Total outliers removed**: {total_outliers:,}\n")
         f.write(f"**Total mappings applied**: {total_mappings:,}\n")
         f.write(f"**Total duplicates removed**: {total_duplicates:,}\n\n")
         
-        f.write("| Table | Input Rows | Low Freq Removed | Outliers Removed | Mappings Applied | Duplicates Removed | Output Rows |\n")
-        f.write("|-------|------------|------------------|------------------|------------------|-------------------|-------------|\n")
+        f.write("| Table | Input Rows | Low Freq Removed | Mappings Applied | Duplicates Removed | Output Rows |\n")
+        f.write("|-------|------------|------------------|------------------|-------------------|-------------|\n")
         
         for table, table_stats in stats.items():
             input_rows = table_stats['total_rows']
             output_rows = table_stats.get('output_rows', input_rows)
             low_freq = table_stats.get('low_freq_removed', 0)
-            outliers = table_stats.get('outliers_removed', 0)
             mappings = table_stats.get('total_mappings_applied', 0)
             duplicates = table_stats.get('duplicates_removed', 0)
             
-            f.write(f"| {table} | {input_rows:,} | {low_freq:,} | {outliers:,} | {mappings:,} | {duplicates:,} | {output_rows:,} |\n")
+            f.write(f"| {table} | {input_rows:,} | {low_freq:,} | {mappings:,} | {duplicates:,} | {output_rows:,} |\n")
         
         f.write("\n## Detailed Column Statistics\n\n")
         
@@ -742,9 +600,7 @@ def generate_mapping_report(stats, mapper):
         
         f.write("## Notes\n\n")
         f.write("- **Low frequency filtering**: Removes records with concept frequency <= threshold\n")
-        f.write("- **Date standardization**: Formats all dates consistently (YYYY-MM-DD or YYYY-MM-DD HH:MM:SS)\n")
         f.write("- **SNOMED mapping**: Applied to MEASUREMENT, OBSERVATION, PROCEDURE_OCCURRENCE, DEVICE_EXPOSURE\n")
-        f.write("- **Outlier removal**: Applied to MEASUREMENT table based on value_as_number percentiles\n")
         f.write("- **Deduplication**: Based on person_id + mapped_concept_id + datetime\n")
         f.write("- All removed records are saved for traceability in the removed_records subdirectories\n")
     
@@ -760,10 +616,6 @@ def main():
                         help='Disable deduplication after mapping')
     parser.add_argument('--min-concept-freq', type=int, default=10,
                         help='Minimum concept frequency threshold (default: 10)')
-    parser.add_argument('--outlier-lower-pct', type=float, default=0.5,
-                        help='Lower percentile for outlier removal (default: 0.5%%)')
-    parser.add_argument('--outlier-upper-pct', type=float, default=0.5,
-                        help='Upper percentile for outlier removal (default: 0.5%%)')
     parser.add_argument('--episode-window-hours', type=float, default=2,
                         help='Time window for visit episode consolidation (default: 2 hours)')
     
@@ -779,8 +631,6 @@ def main():
     print(f"  Processed mappings: {processed_mappings_dir}")
     print(f"\nFeatures enabled:")
     print(f"  Low frequency filtering: <={args.min_concept_freq}")
-    print(f"  Date standardization: ENABLED")
-    print(f"  Outlier removal (MEASUREMENT): {args.outlier_lower_pct}% lower, {args.outlier_upper_pct}% upper")
     print(f"  Deduplication: {'DISABLED' if args.no_dedup else 'ENABLED'}")
     print(f"  Visit episode window: {args.episode_window_hours} hours")
     print(f"\nTables to process: {', '.join(ALL_TABLES)}")
@@ -790,8 +640,6 @@ def main():
     mapper = ConceptMapper(
         enable_dedup=not args.no_dedup,
         min_concept_freq=args.min_concept_freq,
-        outlier_lower_pct=args.outlier_lower_pct,
-        outlier_upper_pct=args.outlier_upper_pct,
         episode_window_hours=args.episode_window_hours
     )
     
@@ -829,9 +677,7 @@ def main():
     # Aggregate timing from all tables
     total_file_reading = 0
     total_low_freq = 0
-    total_date_std = 0
     total_mapping = 0
-    total_outlier = 0
     total_dedup = 0
     total_file_writing = 0
     
@@ -840,17 +686,13 @@ def main():
             ts = table_stats['time_stats']
             total_file_reading += ts.get('file_reading', 0)
             total_low_freq += ts.get('low_freq_filtering', 0)
-            total_date_std += ts.get('date_standardization', 0)
             total_mapping += ts.get('concept_mapping', 0)
-            total_outlier += ts.get('outlier_removal', 0)
             total_dedup += ts.get('deduplication', 0)
             total_file_writing += ts.get('file_writing', 0)
     
     print(f"File reading:          {total_file_reading:.2f}s ({total_file_reading/total_time*100:.1f}%)")
     print(f"Low freq filtering:    {total_low_freq:.2f}s ({total_low_freq/total_time*100:.1f}%)")
-    print(f"Date standardization:  {total_date_std:.2f}s ({total_date_std/total_time*100:.1f}%)")
     print(f"Concept mapping:       {total_mapping:.2f}s ({total_mapping/total_time*100:.1f}%)")
-    print(f"Outlier removal:       {total_outlier:.2f}s ({total_outlier/total_time*100:.1f}%)")
     print(f"Deduplication:         {total_dedup:.2f}s ({total_dedup/total_time*100:.1f}%)")
     print(f"File writing:          {total_file_writing:.2f}s ({total_file_writing/total_time*100:.1f}%)")
     
