@@ -205,91 +205,112 @@ class ConceptMapper:
         return mappings
     
     def deduplicate_mapped_data(self, rows, table_name, fieldnames):
-        """Remove duplicates based on person_id + mapped_concept_id + datetime.
-        For MEASUREMENT table, prioritize records with value_as_number."""
+        """Optimized deduplication using set for seen keys, with full duplicate tracking."""
         if not self.enable_dedup:
             return rows, []
         
         concept_col = CONCEPT_COLUMNS[table_name][0]
         datetime_col = DATETIME_COLUMNS[table_name]
-        id_col = ID_COLUMNS[table_name]
         
-        # Collect all records by dedup key
-        dedup_groups = {}
-        
-        for idx, row in enumerate(rows):
-            # Create deduplication key
-            person_id = row.get('person_id', '')
-            concept_id = row.get(concept_col, '')
-            datetime_val = row.get(datetime_col, '')
-            
-            dedup_key = f"{person_id}|{concept_id}|{datetime_val}"
-            original_row_num = idx + 2  # +2 for header and 1-based indexing
-            
-            # Add row info to the group
-            row_info = {
-                'row': row,
-                'original_row_number': original_row_num,
-                'index': idx
-            }
-            
-            if dedup_key not in dedup_groups:
-                dedup_groups[dedup_key] = []
-            dedup_groups[dedup_key].append(row_info)
-        
-        # Process groups and select which record to keep
         unique_rows = []
-        all_duplicate_records = []
+        duplicate_records = []
         group_counter = 0
         
-        for dedup_key, group_rows in dedup_groups.items():
-            if len(group_rows) == 1:
-                # No duplicates - just keep the single row
-                unique_rows.append(group_rows[0]['row'])
-            else:
-                # Multiple records - need to decide which to keep
-                group_counter += 1
-                group_id = f"{table_name}_{group_counter}"
+        # Special handling for MEASUREMENT table to prioritize records with value_as_number
+        if table_name == 'MEASUREMENT':
+            # Track all duplicate groups
+            key_records = {}  # key -> list of records with metadata
+            
+            for idx, row in enumerate(rows):
+                person_id = row.get('person_id', '')
+                concept_id = row.get(concept_col, '')
+                datetime_val = row.get(datetime_col, '')
                 
-                # For MEASUREMENT table, prioritize records with value_as_number
-                if table_name == 'MEASUREMENT':
-                    # Sort to prioritize records with value_as_number
-                    # First, records with non-empty value_as_number
-                    # Then, by original order
-                    sorted_rows = sorted(group_rows, key=lambda x: (
-                        # Priority 1: Has value_as_number (True sorts before False)
-                        not bool(x['row'].get('value_as_number') and 
-                                str(x['row'].get('value_as_number')).strip()),
-                        # Priority 2: Original order
-                        x['index']
-                    ))
+                dedup_key = f"{person_id}|{concept_id}|{datetime_val}"
+                
+                record_info = {
+                    'row': row,
+                    'idx': idx,
+                    'has_value': bool(row.get('value_as_number') and 
+                                    str(row.get('value_as_number')).strip())
+                }
+                
+                if dedup_key not in key_records:
+                    key_records[dedup_key] = []
+                key_records[dedup_key].append(record_info)
+            
+            # Process each key group
+            for dedup_key, records in key_records.items():
+                if len(records) == 1:
+                    # No duplicates - just keep the single row
+                    unique_rows.append(records[0]['row'])
                 else:
-                    # For other tables, keep original order (first occurrence)
-                    sorted_rows = group_rows
-                
-                # First record in sorted list is kept
-                kept_idx = 0
-                
-                # Process all records in the group
-                for i, row_info in enumerate(sorted_rows):
-                    dup_row = row_info['row'].copy()
-                    dup_row['duplicate_group_id'] = group_id
-                    dup_row['original_row_number'] = row_info['original_row_number']
+                    # Multiple records - create duplicate group
+                    group_counter += 1
+                    group_id = f"{table_name}_{group_counter}"
                     
-                    if i == kept_idx:
-                        # This is the kept record
-                        dup_row['duplicate_status'] = 'kept'
-                        unique_rows.append(row_info['row'])
-                    else:
-                        # This is a removed record
-                        dup_row['duplicate_status'] = 'removed'
+                    # Sort to prioritize records with value_as_number
+                    sorted_records = sorted(records, key=lambda x: (
+                        not x['has_value'],  # True (has value) sorts before False
+                        x['idx']  # Then by original order
+                    ))
                     
-                    all_duplicate_records.append(dup_row)
+                    # First record is kept
+                    for i, record_info in enumerate(sorted_records):
+                        dup_row = record_info['row'].copy()
+                        dup_row['duplicate_group_id'] = group_id
+                        dup_row['original_row_number'] = record_info['idx'] + 2
+                        
+                        if i == 0:
+                            dup_row['duplicate_status'] = 'kept'
+                            unique_rows.append(record_info['row'])
+                        else:
+                            dup_row['duplicate_status'] = 'removed'
+                        
+                        duplicate_records.append(dup_row)
+                    
+        else:
+            # For other tables, use simple first-occurrence logic with group tracking
+            seen_keys = {}  # key -> first occurrence info
+            
+            for idx, row in enumerate(rows):
+                person_id = row.get('person_id', '')
+                concept_id = row.get(concept_col, '')
+                datetime_val = row.get(datetime_col, '')
+                
+                dedup_key = f"{person_id}|{concept_id}|{datetime_val}"
+                
+                if dedup_key not in seen_keys:
+                    # First occurrence - keep it
+                    seen_keys[dedup_key] = {
+                        'idx': idx,
+                        'group_id': None
+                    }
+                    unique_rows.append(row)
+                else:
+                    # Duplicate found
+                    if seen_keys[dedup_key]['group_id'] is None:
+                        # First duplicate for this key - create group
+                        group_counter += 1
+                        group_id = f"{table_name}_{group_counter}"
+                        seen_keys[dedup_key]['group_id'] = group_id
+                        
+                        # Add the kept record to duplicate_records
+                        first_idx = seen_keys[dedup_key]['idx']
+                        kept_row = rows[first_idx].copy()
+                        kept_row['duplicate_status'] = 'kept'
+                        kept_row['duplicate_group_id'] = group_id
+                        kept_row['original_row_number'] = first_idx + 2
+                        duplicate_records.append(kept_row)
+                    
+                    # Add the duplicate record
+                    dup_row = row.copy()
+                    dup_row['duplicate_status'] = 'removed'
+                    dup_row['duplicate_group_id'] = seen_keys[dedup_key]['group_id']
+                    dup_row['original_row_number'] = idx + 2
+                    duplicate_records.append(dup_row)
         
-        # Sort duplicate records by group_id for better readability
-        all_duplicate_records.sort(key=lambda x: (x['duplicate_group_id'], x['original_row_number']))
-        
-        return unique_rows, all_duplicate_records
+        return unique_rows, duplicate_records
     
     
     def process_table(self, table_name):
@@ -404,16 +425,17 @@ class ConceptMapper:
             
             logging.info(f"  Duplicates found and removed: {removed_count:,}")
             
-            if duplicate_rows:
-                duplicates_file = duplicates_dir / f"{table_name}.csv"
-                dup_fieldnames = extended_fieldnames + ['duplicate_status', 'duplicate_group_id', 'original_row_number']
-                dup_buffer = []
+            # Always create duplicate file for consistency (even if empty)
+            duplicates_file = duplicates_dir / f"{table_name}.csv"
+            dup_fieldnames = extended_fieldnames + ['duplicate_status', 'duplicate_group_id', 'original_row_number']
+            
+            with open(duplicates_file, 'w', newline='') as dupfile:
+                writer = csv.DictWriter(dupfile, fieldnames=dup_fieldnames)
+                writer.writeheader()
                 
-                with open(duplicates_file, 'w', newline='') as dupfile:
-                    writer = csv.DictWriter(dupfile, fieldnames=dup_fieldnames)
-                    writer.writeheader()
-                    
+                if duplicate_rows:
                     # Write with buffering
+                    dup_buffer = []
                     for row in duplicate_rows:
                         dup_buffer.append(row)
                         if len(dup_buffer) >= WRITE_BUFFER_SIZE:
@@ -423,8 +445,11 @@ class ConceptMapper:
                     # Write remaining buffer
                     if dup_buffer:
                         writer.writerows(dup_buffer)
-                
+            
+            if duplicate_rows:
                 logging.info(f"  Saved duplicate records to: {duplicates_file}")
+            else:
+                logging.info(f"  No duplicates found, created empty file: {duplicates_file}")
             
             rows_to_save = unique_rows
         else:
