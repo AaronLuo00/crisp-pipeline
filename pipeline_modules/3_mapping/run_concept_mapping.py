@@ -13,6 +13,8 @@ from pathlib import Path
 from datetime import datetime, timedelta
 from collections import defaultdict, Counter
 from tqdm import tqdm
+from concurrent.futures import ProcessPoolExecutor, as_completed
+import multiprocessing
 
 # Set CSV field size limit to maximum to avoid field size errors
 csv.field_size_limit(sys.maxsize)
@@ -28,6 +30,11 @@ else:
     CHUNK_SIZE = 100000  # Default for macOS/Linux
     WRITE_BUFFER_SIZE = 20000  # Moderate buffer for Unix-like systems
     FILE_BUFFER_SIZE = 1024 * 1024  # 1MB file buffer
+
+# Parallel processing configuration
+MAX_WORKERS = min(multiprocessing.cpu_count(), 6)  # Use up to 6 cores
+MEASUREMENT_SPLITS = 6  # Split MEASUREMENT table into 6 parts
+LARGE_TABLE_THRESHOLD = 100000  # Tables larger than this will be considered for splitting
 
 # Setup
 base_dir = Path(__file__).parent
@@ -110,6 +117,60 @@ ID_COLUMNS = {
     'VISIT_OCCURRENCE': 'visit_occurrence_id'
 }
 
+# Standalone function for parallel frequency counting
+def count_single_table_frequency(table_name, input_dir, concept_columns, min_freq):
+    """Count concept frequencies for a single table - used for parallel processing."""
+    import csv
+    from collections import Counter
+    from pathlib import Path
+    
+    input_dir = Path(input_dir) if not isinstance(input_dir, Path) else input_dir
+    input_file = input_dir / f"{table_name}_cleaned.csv"
+    
+    if not input_file.exists():
+        return table_name, {}, {'low_frequency': 0, 'high_frequency': 0}
+    
+    concept_counter = Counter()
+    
+    with open(input_file, 'r', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            for concept_col in concept_columns.get(table_name, []):
+                concept_value = row.get(concept_col, '').strip()
+                if concept_value and concept_value != '':
+                    concept_counter[concept_value] += 1
+    
+    # Calculate statistics
+    freq_stats = Counter()
+    for count in concept_counter.values():
+        if count <= min_freq:
+            freq_stats['low_frequency'] += 1
+        else:
+            freq_stats['high_frequency'] += 1
+    
+    return table_name, dict(concept_counter), dict(freq_stats)
+
+def count_measurement_partial_frequency(input_file, concept_col, start_row, end_row):
+    """Count concept frequencies for a partial MEASUREMENT table - used for parallel processing."""
+    import csv
+    from collections import Counter
+    
+    concept_counter = Counter()
+    
+    with open(input_file, 'r', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        for i, row in enumerate(reader):
+            if i < start_row:
+                continue
+            if end_row is not None and i >= end_row:
+                break
+            
+            concept_value = row.get(concept_col, '').strip()
+            if concept_value and concept_value != '':
+                concept_counter[concept_value] += 1
+    
+    return dict(concept_counter)
+
 class ConceptMapper:
     def __init__(self, enable_dedup=True, min_concept_freq=10, 
                  episode_window_hours=2):
@@ -121,44 +182,93 @@ class ConceptMapper:
         self.all_table_data = {}  # Store all table data for processing
         
     def count_concept_frequencies(self):
-        """Count concept frequencies across all tables."""
+        """Count concept frequencies across all tables using parallel processing."""
         logging.info("="*60)
-        logging.info("Counting concept frequencies across all tables...")
+        logging.info("Counting concept frequencies across all tables (parallel)...")
         
-        for table_name in ALL_TABLES:
-            # Count frequencies silently to avoid duplicate output
-            input_file = input_dir / f"{table_name}_cleaned.csv"
+        # Use ProcessPoolExecutor for parallel counting
+        with ProcessPoolExecutor(max_workers=MAX_WORKERS) as executor:
+            # Submit all tasks
+            futures = []
+            future_info = {}  # Track what each future is for
             
-            if not input_file.exists():
-                logging.warning(f"Input file not found: {input_file}")
-                continue
-            
-            # Count concepts for this table
-            concept_counter = Counter()
-            
-            with open(input_file, 'r', encoding='utf-8') as f:
-                reader = csv.DictReader(f)
-                
-                for row in reader:
-                    for concept_col in CONCEPT_COLUMNS.get(table_name, []):
-                        concept_value = row.get(concept_col, '').strip()
-                        if concept_value and concept_value != '':
-                            concept_counter[concept_value] += 1
-            
-            # Store frequencies
-            self.concept_frequencies[table_name] = concept_counter
-            # Silent processing to avoid verbose output
-            
-            # Log statistics
-            freq_stats = Counter()
-            for count in concept_counter.values():
-                if count <= self.min_concept_freq:
-                    freq_stats['low_frequency'] += 1
+            for table_name in ALL_TABLES:
+                if table_name == 'MEASUREMENT':
+                    # Special handling for MEASUREMENT - split into chunks
+                    measurement_file = input_dir / "MEASUREMENT_cleaned.csv"
+                    if measurement_file.exists():
+                        # First get row count
+                        row_count = 0
+                        with open(measurement_file, 'r', encoding='utf-8') as f:
+                            for _ in f:
+                                row_count += 1
+                        row_count -= 1  # Subtract header
+                        
+                        # Calculate chunk size
+                        chunk_size = row_count // MEASUREMENT_SPLITS + 1
+                        
+                        # Submit partial tasks
+                        for i in range(MEASUREMENT_SPLITS):
+                            start_row = i * chunk_size
+                            end_row = (i + 1) * chunk_size if i < MEASUREMENT_SPLITS - 1 else None
+                            
+                            future = executor.submit(
+                                count_measurement_partial_frequency,
+                                measurement_file, 
+                                'measurement_concept_id',
+                                start_row, 
+                                end_row
+                            )
+                            futures.append(future)
+                            future_info[future] = ('MEASUREMENT_PARTIAL', i)
                 else:
-                    freq_stats['high_frequency'] += 1
+                    # Regular table processing
+                    future = executor.submit(
+                        count_single_table_frequency,
+                        table_name, input_dir, CONCEPT_COLUMNS, self.min_concept_freq
+                    )
+                    futures.append(future)
+                    future_info[future] = ('TABLE', table_name)
             
-            logging.info(f"  Low frequency (<={self.min_concept_freq}): {freq_stats['low_frequency']}")
-            logging.info(f"  High frequency (>{self.min_concept_freq}): {freq_stats['high_frequency']}")
+            # Collect results
+            measurement_partials = []
+            
+            for future in as_completed(futures):
+                info_type, info_data = future_info[future]
+                
+                if info_type == 'MEASUREMENT_PARTIAL':
+                    # Collect partial MEASUREMENT results
+                    partial_freq = future.result()
+                    measurement_partials.append(partial_freq)
+                    logging.info(f"  MEASUREMENT chunk {info_data + 1}/{MEASUREMENT_SPLITS} processed")
+                else:
+                    # Regular table result
+                    table_name, frequencies, stats = future.result()
+                    if frequencies:
+                        self.concept_frequencies[table_name] = frequencies
+                        logging.info(f"  {table_name}: Low freq (<={self.min_concept_freq}): {stats.get('low_frequency', 0)}, "
+                                   f"High freq (>{self.min_concept_freq}): {stats.get('high_frequency', 0)}")
+            
+            # Merge MEASUREMENT partials if available
+            if measurement_partials:
+                from collections import Counter
+                merged_counter = Counter()
+                for partial in measurement_partials:
+                    for concept, count in partial.items():
+                        merged_counter[concept] += count
+                
+                self.concept_frequencies['MEASUREMENT'] = dict(merged_counter)
+                
+                # Calculate statistics for MEASUREMENT
+                freq_stats = {'low_frequency': 0, 'high_frequency': 0}
+                for count in merged_counter.values():
+                    if count <= self.min_concept_freq:
+                        freq_stats['low_frequency'] += 1
+                    else:
+                        freq_stats['high_frequency'] += 1
+                
+                logging.info(f"  MEASUREMENT (merged): Low freq (<={self.min_concept_freq}): {freq_stats['low_frequency']}, "
+                           f"High freq (>{self.min_concept_freq}): {freq_stats['high_frequency']}")
     
     def filter_low_frequency_concepts(self, rows, table_name):
         """Filter out records with low frequency concepts."""
