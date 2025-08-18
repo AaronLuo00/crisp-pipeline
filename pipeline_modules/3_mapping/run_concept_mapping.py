@@ -2,6 +2,7 @@
 """Run concept mapping using processed SNOMED mappings for cleaned tables with deduplication."""
 
 import csv
+import sys
 import json
 import logging
 import argparse
@@ -13,11 +14,16 @@ from datetime import datetime, timedelta
 from collections import defaultdict, Counter
 from tqdm import tqdm
 
+# Set CSV field size limit to maximum to avoid field size errors
+csv.field_size_limit(sys.maxsize)
+
 # Platform-specific settings for performance optimization
 if platform.system() == 'Windows':
     PROGRESS_INTERVAL = 30.0  # Less frequent updates (reduce overhead)
+    CHUNK_SIZE = 500000  # Larger chunks for Windows (better I/O performance)
 else:
     PROGRESS_INTERVAL = 10.0  # Default for macOS/Linux
+    CHUNK_SIZE = 100000  # Default for macOS/Linux
 
 # Setup
 base_dir = Path(__file__).parent
@@ -314,7 +320,7 @@ class ConceptMapper:
     
     
     def process_table(self, table_name):
-        """Process a table with all features: filtering, mapping, standardization, etc."""
+        """Process a table with chunk-based reading for memory efficiency."""
         # Initialize timing
         table_time_stats = {
             'total': 0,
@@ -354,132 +360,269 @@ class ConceptMapper:
         with open(input_file, 'r') as f:
             total_rows = sum(1 for _ in f) - 1  # Subtract header
         
-        # Read input file with progress bar
-        t0 = time.time()
-        rows = []
-        with open(input_file, 'r') as infile:
-            reader = csv.DictReader(infile)
-            fieldnames = reader.fieldnames
-            
-            # Read with progress bar
-            for row in tqdm(reader, total=total_rows,
-                           desc=f"Mapping {table_name}",
-                           unit="rows",
-                           miniters=max(100, total_rows//100) if total_rows > 0 else 1,
-                           mininterval=PROGRESS_INTERVAL,
-                           leave=False, ncols=100):
-                rows.append(row)
-        table_time_stats['file_reading'] = time.time() - t0
         
-        table_stats['total_rows'] = len(rows)
-        logging.info(f"Loaded {len(rows):,} rows")
+        table_stats['total_rows'] = total_rows
+        logging.info(f"Total rows to process: {total_rows:,}")
         
-        # Step 1: Filter low frequency concepts
-        if self.min_concept_freq > 0:
-            logging.info(f"\nFiltering low frequency concepts (<={self.min_concept_freq})...")
-            t0 = time.time()
-            rows, removed_low_freq = self.filter_low_frequency_concepts(rows, table_name)
-            table_time_stats['low_freq_filtering'] = time.time() - t0
-            table_stats['low_freq_removed'] = len(removed_low_freq)
-            
-            if removed_low_freq:
-                # Save removed records with buffering
-                low_freq_file = low_freq_dir / f"{table_name}.csv"
-                low_freq_buffer = []
-                
-                with open(low_freq_file, 'w', newline='') as f:
-                    writer = csv.DictWriter(f, fieldnames=fieldnames + ['removal_reason', 'original_row_number'])
-                    writer.writeheader()
-                    
-                    # Write with buffering
-                    for row in removed_low_freq:
-                        low_freq_buffer.append(row)
-                        if len(low_freq_buffer) >= WRITE_BUFFER_SIZE:
-                            writer.writerows(low_freq_buffer)
-                            low_freq_buffer = []
-                    
-                    # Write remaining buffer
-                    if low_freq_buffer:
-                        writer.writerows(low_freq_buffer)
-                
-                logging.info(f"  Removed {len(removed_low_freq)} low frequency records")
-        
-        # Step 2: Apply SNOMED mappings (only for tables with mappings)
-        t0 = time.time()
+        # Load mappings if needed
+        mappings = {}
         if table_name in TABLES_WITH_MAPPING:
-            extended_fieldnames = self.apply_mappings(rows, table_name, fieldnames, table_stats)
+            mappings = self.load_processed_mappings(table_name)
+        
+        # Get concept columns and fieldnames
+        concept_cols = CONCEPT_COLUMNS.get(table_name, [])
+        datetime_col = DATETIME_COLUMNS.get(table_name)
+        
+        # Read header to get fieldnames
+        with open(input_file, 'r') as f:
+            reader = csv.DictReader(f)
+            fieldnames = reader.fieldnames
+        
+        # Determine extended fieldnames
+        if table_name in TABLES_WITH_MAPPING:
+            extended_fieldnames = fieldnames + [f'{col}_mapped' for col in concept_cols]
         else:
             extended_fieldnames = fieldnames
-        table_time_stats['concept_mapping'] = time.time() - t0
         
-        # Step 4: Deduplication (only for mapped tables)
-        t0 = time.time()
-        if self.enable_dedup and table_name in TABLES_WITH_MAPPING:
-            logging.info("\nPerforming deduplication...")
-            unique_rows, duplicate_rows = self.deduplicate_mapped_data(rows, table_name, extended_fieldnames)
-            
-            # Count only removed duplicates
-            removed_count = sum(1 for row in duplicate_rows if row['duplicate_status'] == 'removed')
-            table_stats['duplicates_removed'] = removed_count
-            table_stats['output_rows'] = len(unique_rows)
-            
-            logging.info(f"  Duplicates found and removed: {removed_count:,}")
-            
-            # Always create duplicate file for consistency (even if empty)
+        # Initialize tracking for deduplication and statistics
+        seen_keys = {}  # For deduplication
+        duplicate_records = []
+        group_counter = 0
+        # Only initialize col_stats for tables with mappings
+        if table_name in TABLES_WITH_MAPPING:
+            col_stats = {col: {
+                'total_values': 0,
+                'null_values': 0,
+                'mapped_count': 0,
+                'unique_concepts_mapped': set()
+            } for col in concept_cols}
+        else:
+            col_stats = {}
+        
+        # Open output files
+        output_file_handle = open(output_file, 'w', newline='')
+        output_writer = csv.DictWriter(output_file_handle, fieldnames=extended_fieldnames)
+        output_writer.writeheader()
+        
+        # Open removed records files
+        low_freq_file = low_freq_dir / f"{table_name}.csv"
+        low_freq_handle = open(low_freq_file, 'w', newline='')
+        low_freq_writer = csv.DictWriter(low_freq_handle, 
+                                        fieldnames=fieldnames + ['removal_reason', 'original_row_number'])
+        low_freq_writer.writeheader()
+        
+        # Only create duplicates file for tables with mapping (that have deduplication)
+        if table_name in TABLES_WITH_MAPPING:
             duplicates_file = duplicates_dir / f"{table_name}.csv"
             dup_fieldnames = extended_fieldnames + ['duplicate_status', 'duplicate_group_id', 'original_row_number']
-            
-            with open(duplicates_file, 'w', newline='') as dupfile:
-                writer = csv.DictWriter(dupfile, fieldnames=dup_fieldnames)
-                writer.writeheader()
-                
-                if duplicate_rows:
-                    # Write with buffering
-                    dup_buffer = []
-                    for row in duplicate_rows:
-                        dup_buffer.append(row)
-                        if len(dup_buffer) >= WRITE_BUFFER_SIZE:
-                            writer.writerows(dup_buffer)
-                            dup_buffer = []
-                    
-                    # Write remaining buffer
-                    if dup_buffer:
-                        writer.writerows(dup_buffer)
-            
-            if duplicate_rows:
-                logging.info(f"  Saved duplicate records to: {duplicates_file}")
-            else:
-                logging.info(f"  No duplicates found, created empty file: {duplicates_file}")
-            
-            rows_to_save = unique_rows
+            dup_handle = open(duplicates_file, 'w', newline='')
+            dup_writer = csv.DictWriter(dup_handle, fieldnames=dup_fieldnames)
+            dup_writer.writeheader()
         else:
-            rows_to_save = rows
-            table_stats['output_rows'] = len(rows)
-        table_time_stats['deduplication'] = time.time() - t0
+            dup_handle = None
+            dup_writer = None
         
-        # Save processed data with buffering
-        t0 = time.time()
+        # Process file in chunks
+        total_time_stats = {
+            'file_reading': 0,
+            'low_freq_filtering': 0,
+            'concept_mapping': 0,
+            'deduplication': 0,
+            'file_writing': 0
+        }
+        
         write_buffer = []
+        low_freq_buffer = []
+        dup_buffer = []
+        rows_written = 0
         
-        with open(output_file, 'w', newline='') as outfile:
-            writer = csv.DictWriter(outfile, fieldnames=extended_fieldnames)
-            writer.writeheader()
+        try:
+            with open(input_file, 'r') as infile:
+                reader = csv.DictReader(infile)
+                
+                # Process with progress bar
+                with tqdm(total=total_rows, desc=f"Processing {table_name}",
+                         unit="rows", miniters=max(100, total_rows//100) if total_rows > 0 else 1,
+                         mininterval=PROGRESS_INTERVAL, leave=False, ncols=100) as pbar:
+                    
+                    chunk = []
+                    row_idx = 0
+                    
+                    for row in reader:
+                        row_idx += 1
+                        chunk.append((row_idx, row))
+                        
+                        # Process chunk when it reaches desired size or at end
+                        if len(chunk) >= CHUNK_SIZE or row_idx == total_rows:
+                            chunk_start_time = time.time()
+                            
+                            # Process each row in chunk
+                            for original_row_num, row in chunk:
+                                # Step 1: Low frequency filtering
+                                t0 = time.time()
+                                keep_row = True
+                                removal_reason = None
+                                
+                                if self.min_concept_freq > 0:
+                                    concept_freq = self.concept_frequencies.get(table_name, {})
+                                    for concept_col in concept_cols:
+                                        concept_value = row.get(concept_col, '').strip()
+                                        if concept_value and concept_freq.get(concept_value, 0) <= self.min_concept_freq:
+                                            keep_row = False
+                                            removal_reason = f'low_frequency_concept ({concept_col}={concept_value}, freq={concept_freq.get(concept_value, 0)})'
+                                            break
+                                
+                                if not keep_row:
+                                    removed_row = row.copy()
+                                    removed_row['removal_reason'] = removal_reason
+                                    removed_row['original_row_number'] = original_row_num + 1  # +1 for header
+                                    low_freq_buffer.append(removed_row)
+                                    table_stats['low_freq_removed'] += 1
+                                    
+                                    if len(low_freq_buffer) >= WRITE_BUFFER_SIZE:
+                                        low_freq_writer.writerows(low_freq_buffer)
+                                        low_freq_buffer = []
+                                    continue
+                                
+                                total_time_stats['low_freq_filtering'] += time.time() - t0
+                                
+                                # Step 2: Apply mappings
+                                t0 = time.time()
+                                if table_name in TABLES_WITH_MAPPING:
+                                    for col in concept_cols:
+                                        row[f'{col}_mapped'] = 'N'
+                                        concept_value = row.get(col, '')
+                                        
+                                        if not concept_value or concept_value == '':
+                                            col_stats[col]['null_values'] += 1
+                                            continue
+                                        
+                                        col_stats[col]['total_values'] += 1
+                                        
+                                        if concept_value in mappings:
+                                            original_value = concept_value
+                                            row[col] = mappings[concept_value]['snomed_concept_id']
+                                            row[f'{col}_mapped'] = 'Y'
+                                            col_stats[col]['mapped_count'] += 1
+                                            col_stats[col]['unique_concepts_mapped'].add(original_value)
+                                            table_stats['total_mappings_applied'] += 1
+                                
+                                total_time_stats['concept_mapping'] += time.time() - t0
+                                
+                                # Step 3: Deduplication
+                                t0 = time.time()
+                                if self.enable_dedup and table_name in TABLES_WITH_MAPPING:
+                                    person_id = row.get('person_id', '')
+                                    concept_id = row.get(concept_cols[0], '')
+                                    datetime_val = row.get(datetime_col, '')
+                                    dedup_key = f"{person_id}|{concept_id}|{datetime_val}"
+                                    
+                                    if dedup_key not in seen_keys:
+                                        # First occurrence - keep it
+                                        seen_keys[dedup_key] = {
+                                            'idx': original_row_num,
+                                            'group_id': None,
+                                            'row': row.copy(),  # Save the kept row for later
+                                            'has_value': bool(row.get('value_as_number') and 
+                                                            str(row.get('value_as_number')).strip()) if table_name == 'MEASUREMENT' else False
+                                        }
+                                        # Write to output
+                                        write_buffer.append(row)
+                                        rows_written += 1
+                                    else:
+                                        # Duplicate found
+                                        if seen_keys[dedup_key]['group_id'] is None:
+                                            # First duplicate for this key - create group
+                                            group_counter += 1
+                                            group_id = f"{table_name}_{group_counter}"
+                                            seen_keys[dedup_key]['group_id'] = group_id
+                                            
+                                            # Add the kept record to duplicate_records
+                                            kept_row = seen_keys[dedup_key]['row'].copy()
+                                            kept_row['duplicate_status'] = 'kept'
+                                            kept_row['duplicate_group_id'] = group_id
+                                            kept_row['original_row_number'] = seen_keys[dedup_key]['idx'] + 1
+                                            dup_buffer.append(kept_row)
+                                        
+                                        # Add the duplicate record
+                                        dup_row = row.copy()
+                                        dup_row['duplicate_status'] = 'removed'
+                                        dup_row['duplicate_group_id'] = seen_keys[dedup_key]['group_id']
+                                        dup_row['original_row_number'] = original_row_num + 1
+                                        dup_buffer.append(dup_row)
+                                        table_stats['duplicates_removed'] += 1
+                                        
+                                        if len(dup_buffer) >= WRITE_BUFFER_SIZE and dup_writer:
+                                            dup_writer.writerows(dup_buffer)
+                                            dup_buffer = []
+                                else:
+                                    # No deduplication - just write
+                                    write_buffer.append(row)
+                                    rows_written += 1
+                                
+                                total_time_stats['deduplication'] += time.time() - t0
+                                
+                                # Write buffer if full
+                                t0 = time.time()
+                                if len(write_buffer) >= WRITE_BUFFER_SIZE:
+                                    output_writer.writerows(write_buffer)
+                                    write_buffer = []
+                                total_time_stats['file_writing'] += time.time() - t0
+                            
+                            # Update progress bar
+                            pbar.update(len(chunk))
+                            chunk = []
             
-            # Write with buffering
-            for row in rows_to_save:
-                write_buffer.append(row)
-                if len(write_buffer) >= WRITE_BUFFER_SIZE:
-                    writer.writerows(write_buffer)
-                    write_buffer = []
-            
-            # Write remaining buffer
+            # Write remaining buffers
+            t0 = time.time()
             if write_buffer:
-                writer.writerows(write_buffer)
+                output_writer.writerows(write_buffer)
+            if low_freq_buffer:
+                low_freq_writer.writerows(low_freq_buffer)
+            if dup_buffer and dup_writer:
+                dup_writer.writerows(dup_buffer)
+            total_time_stats['file_writing'] += time.time() - t0
+            
+        finally:
+            # Close all files
+            output_file_handle.close()
+            low_freq_handle.close()
+            if dup_handle:
+                dup_handle.close()
         
-        table_time_stats['file_writing'] = time.time() - t0
+        # Update statistics
+        table_stats['output_rows'] = rows_written
+        # Only update concept column stats for tables with mappings
+        if table_name in TABLES_WITH_MAPPING and col_stats:
+            for col in concept_cols:
+                if col in col_stats:
+                    if col_stats[col]['total_values'] > 0:
+                        col_stats[col]['mapping_rate'] = (col_stats[col]['mapped_count'] / col_stats[col]['total_values']) * 100
+                    else:
+                        col_stats[col]['mapping_rate'] = 0
+                    col_stats[col]['unique_concepts_mapped'] = len(col_stats[col]['unique_concepts_mapped'])
+            table_stats['concept_columns'] = col_stats
+        else:
+            table_stats['concept_columns'] = {}
+        
+        # Copy timing stats
+        table_time_stats.update(total_time_stats)
         
         logging.info(f"\nSaved processed data to: {output_file}")
         logging.info(f"Final row count: {table_stats['output_rows']:,}")
+        if table_stats['low_freq_removed'] > 0:
+            logging.info(f"Low frequency records removed: {table_stats['low_freq_removed']:,}")
+        if table_stats['duplicates_removed'] > 0:
+            logging.info(f"Duplicates removed: {table_stats['duplicates_removed']:,}")
+        
+        # Log mapping statistics
+        if table_name in TABLES_WITH_MAPPING and table_stats['concept_columns']:
+            for col, stats in table_stats['concept_columns'].items():
+                if stats['total_values'] > 0:
+                    logging.info(f"\n{col} mapping:")
+                    logging.info(f"  Total non-null values: {stats['total_values']:,}")
+                    logging.info(f"  Mapped values: {stats['mapped_count']:,} ({stats['mapping_rate']:.1f}%)")
+                    logging.info(f"  Unique concepts mapped: {stats['unique_concepts_mapped']:,}")
         
         # Calculate total time and store statistics
         table_time_stats['total'] = time.time() - table_start_time
@@ -604,6 +747,11 @@ def generate_mapping_report(stats, mapper):
         for table, table_stats in stats.items():
             f.write(f"### {table}\n\n")
             
+            # Check if this table has SNOMED mappings
+            if table not in TABLES_WITH_MAPPING:
+                f.write("No SNOMED mapping applied (filtering only).\n\n")
+                continue
+                
             if not table_stats['concept_columns']:
                 f.write("No concept columns processed.\n\n")
                 continue
@@ -669,7 +817,9 @@ def main():
     )
     
     # Step 1: Count concept frequencies across all tables
+    freq_count_start = time.time()
     mapper.count_concept_frequencies()
+    freq_count_time = time.time() - freq_count_start
     
     # Step 2: Process each table
     for table in ALL_TABLES:
@@ -705,6 +855,7 @@ def main():
     total_mapping = 0
     total_dedup = 0
     total_file_writing = 0
+    total_chunk_processing = 0
     
     for table_stats in mapper.stats.values():
         if 'time_stats' in table_stats:
@@ -714,12 +865,25 @@ def main():
             total_mapping += ts.get('concept_mapping', 0)
             total_dedup += ts.get('deduplication', 0)
             total_file_writing += ts.get('file_writing', 0)
+            # Calculate chunk processing overhead (total - sum of components)
+            table_total = ts.get('total', 0)
+            table_components = (ts.get('file_reading', 0) + ts.get('low_freq_filtering', 0) + 
+                              ts.get('concept_mapping', 0) + ts.get('deduplication', 0) + 
+                              ts.get('file_writing', 0))
+            total_chunk_processing += max(0, table_total - table_components)
     
-    print(f"File reading:          {total_file_reading:.2f}s ({total_file_reading/total_time*100:.1f}%)")
+    print(f"Frequency counting:    {freq_count_time:.2f}s ({freq_count_time/total_time*100:.1f}%)")
+    print(f"Chunk processing:      {total_chunk_processing:.2f}s ({total_chunk_processing/total_time*100:.1f}%)")
     print(f"Low freq filtering:    {total_low_freq:.2f}s ({total_low_freq/total_time*100:.1f}%)")
     print(f"Concept mapping:       {total_mapping:.2f}s ({total_mapping/total_time*100:.1f}%)")
     print(f"Deduplication:         {total_dedup:.2f}s ({total_dedup/total_time*100:.1f}%)")
     print(f"File writing:          {total_file_writing:.2f}s ({total_file_writing/total_time*100:.1f}%)")
+    
+    # Calculate accounted vs unaccounted time
+    accounted_time = freq_count_time + total_chunk_processing + total_low_freq + total_mapping + total_dedup + total_file_writing
+    unaccounted_time = total_time - accounted_time
+    if unaccounted_time > 0.1:  # Only show if significant
+        print(f"Other operations:      {unaccounted_time:.2f}s ({unaccounted_time/total_time*100:.1f}%)")
     
     # Find slowest tables
     table_times = [(name, stats.get('time_stats', {}).get('total', 0)) 
