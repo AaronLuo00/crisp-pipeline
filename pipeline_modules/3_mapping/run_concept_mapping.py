@@ -21,9 +21,13 @@ csv.field_size_limit(sys.maxsize)
 if platform.system() == 'Windows':
     PROGRESS_INTERVAL = 30.0  # Less frequent updates (reduce overhead)
     CHUNK_SIZE = 500000  # Larger chunks for Windows (better I/O performance)
+    WRITE_BUFFER_SIZE = 50000  # Larger write buffer for Windows
+    FILE_BUFFER_SIZE = 2 * 1024 * 1024  # 2MB file buffer
 else:
     PROGRESS_INTERVAL = 10.0  # Default for macOS/Linux
     CHUNK_SIZE = 100000  # Default for macOS/Linux
+    WRITE_BUFFER_SIZE = 20000  # Moderate buffer for Unix-like systems
+    FILE_BUFFER_SIZE = 1024 * 1024  # 1MB file buffer
 
 # Setup
 base_dir = Path(__file__).parent
@@ -353,9 +357,6 @@ class ConceptMapper:
             'total_mappings_applied': 0
         }
         
-        # Define write buffer size for all CSV operations
-        WRITE_BUFFER_SIZE = 5000
-        
         # Get total row count for progress bar
         with open(input_file, 'r') as f:
             total_rows = sum(1 for _ in f) - 1  # Subtract header
@@ -399,14 +400,14 @@ class ConceptMapper:
         else:
             col_stats = {}
         
-        # Open output files
-        output_file_handle = open(output_file, 'w', newline='')
+        # Open output files with optimized buffering
+        output_file_handle = open(output_file, 'w', newline='', buffering=FILE_BUFFER_SIZE)
         output_writer = csv.DictWriter(output_file_handle, fieldnames=extended_fieldnames)
         output_writer.writeheader()
         
         # Open removed records files
         low_freq_file = low_freq_dir / f"{table_name}.csv"
-        low_freq_handle = open(low_freq_file, 'w', newline='')
+        low_freq_handle = open(low_freq_file, 'w', newline='', buffering=FILE_BUFFER_SIZE)
         low_freq_writer = csv.DictWriter(low_freq_handle, 
                                         fieldnames=fieldnames + ['removal_reason', 'original_row_number'])
         low_freq_writer.writeheader()
@@ -415,7 +416,7 @@ class ConceptMapper:
         if table_name in TABLES_WITH_MAPPING:
             duplicates_file = duplicates_dir / f"{table_name}.csv"
             dup_fieldnames = extended_fieldnames + ['duplicate_status', 'duplicate_group_id', 'original_row_number']
-            dup_handle = open(duplicates_file, 'w', newline='')
+            dup_handle = open(duplicates_file, 'w', newline='', buffering=FILE_BUFFER_SIZE)
             dup_writer = csv.DictWriter(dup_handle, fieldnames=dup_fieldnames)
             dup_writer.writeheader()
         else:

@@ -17,10 +17,15 @@ import multiprocessing
 
 # Performance optimization settings
 if platform.system() == 'Windows':
-    CHUNK_SIZE = 500000
+    CHUNK_SIZE = 500000  # Larger chunks for Windows (better I/O performance)
+    WRITE_BUFFER_SIZE = 50000  # Larger write buffer for Windows
+    FILE_BUFFER_SIZE = 2 * 1024 * 1024  # 2MB file buffer
+    PROGRESS_INTERVAL = 30.0  # Less frequent updates (reduce overhead)
 else:
-    CHUNK_SIZE = 100000
-PROGRESS_INTERVAL = 10.0  # Progress update interval in seconds
+    CHUNK_SIZE = 100000  # Default for macOS/Linux
+    WRITE_BUFFER_SIZE = 20000  # Moderate buffer for Unix-like systems
+    FILE_BUFFER_SIZE = 1024 * 1024  # 1MB file buffer
+    PROGRESS_INTERVAL = 10.0  # Default progress update interval
 
 # Setup
 base_dir = Path(__file__).parent
@@ -387,7 +392,6 @@ def clean_table_partial(table_name, start_row=0, end_row=-1, position=0, disable
     duplicate_groups = defaultdict(list)  # Store all records in each duplicate group
     
     # Initialize write buffers for batch writing
-    WRITE_BUFFER_SIZE = 5000
     write_buffer = []
     invalid_buffer = []
     temporal_buffer = []
@@ -395,10 +399,10 @@ def clean_table_partial(table_name, start_row=0, end_row=-1, position=0, disable
     # Clean headers
     clean_headers = [h for h in headers if h not in columns_to_remove]
     
-    # Open output file and removed records files
-    with open(temp_file, 'w', encoding='utf-8', newline='') as outfile, \
-         open(invalid_concept_file, 'w', encoding='utf-8', newline='') as invalid_file, \
-         open(temporal_issues_file, 'w', encoding='utf-8', newline='') as temporal_file:
+    # Open output file and removed records files with optimized buffering
+    with open(temp_file, 'w', encoding='utf-8', newline='', buffering=FILE_BUFFER_SIZE) as outfile, \
+         open(invalid_concept_file, 'w', encoding='utf-8', newline='', buffering=FILE_BUFFER_SIZE) as invalid_file, \
+         open(temporal_issues_file, 'w', encoding='utf-8', newline='', buffering=FILE_BUFFER_SIZE) as temporal_file:
         
         writer = csv.DictWriter(outfile, fieldnames=clean_headers)
         writer.writeheader()
@@ -556,7 +560,7 @@ def clean_table_partial(table_name, start_row=0, end_row=-1, position=0, disable
     
     # Write duplicate groups to file (only groups with multiple records)
     duplicate_groups_written = 0
-    with open(duplicates_file, 'w', encoding='utf-8', newline='') as dup_file:
+    with open(duplicates_file, 'w', encoding='utf-8', newline='', buffering=FILE_BUFFER_SIZE) as dup_file:
         dup_headers = headers + ['duplicate_status', 'duplicate_group_id', 'original_row_number']
         dup_writer = csv.DictWriter(dup_file, fieldnames=dup_headers)
         dup_writer.writeheader()
