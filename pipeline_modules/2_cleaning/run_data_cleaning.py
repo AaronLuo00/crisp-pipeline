@@ -386,6 +386,12 @@ def clean_table_partial(table_name, start_row=0, end_row=-1, position=0, disable
     seen_keys = {}  # Changed from set to dict to store first occurrence info
     duplicate_groups = defaultdict(list)  # Store all records in each duplicate group
     
+    # Initialize write buffers for batch writing
+    WRITE_BUFFER_SIZE = 5000
+    write_buffer = []
+    invalid_buffer = []
+    temporal_buffer = []
+    
     # Clean headers
     clean_headers = [h for h in headers if h not in columns_to_remove]
     
@@ -469,8 +475,13 @@ def clean_table_partial(table_name, start_row=0, end_row=-1, position=0, disable
                                         invalid_concept_count += 1
                                         skip_row = True
                                         removal_reason = 'invalid_concept'
-                                        # Save invalid concept record
-                                        invalid_writer.writerow(row)
+                                        # Save invalid concept record to buffer
+                                        invalid_buffer.append(row)
+                                        
+                                        # Batch write when buffer is full
+                                        if len(invalid_buffer) >= WRITE_BUFFER_SIZE:
+                                            invalid_writer.writerows(invalid_buffer)
+                                            invalid_buffer = []
                             table_time_stats['invalid_concept'] += time.time() - t1
                             
                             if skip_row:
@@ -493,24 +504,35 @@ def clean_table_partial(table_name, start_row=0, end_row=-1, position=0, disable
                                 skip_row = True
                                 removal_reason = 'temporal_issue'
                                 
-                                # Save temporal issue record
+                                # Save temporal issue record to buffer
                                 temporal_row = row.copy()
                                 temporal_row['temporal_issue_reason'] = f"End datetime ({end}) is before start datetime ({start})"
                                 temporal_row['start_datetime'] = start
                                 temporal_row['end_datetime'] = end
                                 temporal_row['original_row_number'] = original_row_num
-                                temporal_writer.writerow(temporal_row)
+                                temporal_buffer.append(temporal_row)
+                                
+                                # Batch write when buffer is full
+                                if len(temporal_buffer) >= WRITE_BUFFER_SIZE:
+                                    temporal_writer.writerows(temporal_buffer)
+                                    temporal_buffer = []
                             
                             table_time_stats['temporal_validation'] += time.time() - t1
                             
                             if skip_row:
                                 continue
                             
-                            # Write cleaned row
+                            # Write cleaned row to buffer
                             t_write = time.time()
                             clean_row = {k: v for k, v in row.items() if k not in columns_to_remove}
-                            writer.writerow(clean_row)
+                            write_buffer.append(clean_row)
                             rows_written += 1
+                            
+                            # Batch write when buffer is full
+                            if len(write_buffer) >= WRITE_BUFFER_SIZE:
+                                writer.writerows(write_buffer)
+                                write_buffer = []
+                            
                             table_time_stats['file_io'] += time.time() - t_write
                         
                         # Update progress
@@ -518,6 +540,14 @@ def clean_table_partial(table_name, start_row=0, end_row=-1, position=0, disable
                         
                         # Clear chunk
                         chunk = []
+        
+        # Write any remaining buffered data before closing files
+        if write_buffer:
+            writer.writerows(write_buffer)
+        if invalid_buffer:
+            invalid_writer.writerows(invalid_buffer)
+        if temporal_buffer:
+            temporal_writer.writerows(temporal_buffer)
     
     # Rename temp file to final output (Windows-compatible)
     # Use shutil.move for cross-platform compatibility
