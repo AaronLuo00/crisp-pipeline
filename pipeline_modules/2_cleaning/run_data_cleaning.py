@@ -12,6 +12,8 @@ from collections import defaultdict, Counter
 from tqdm import tqdm
 import pandas as pd
 import numpy as np
+from concurrent.futures import ProcessPoolExecutor, as_completed
+import multiprocessing
 
 # Performance optimization settings
 if platform.system() == 'Windows':
@@ -259,8 +261,17 @@ def analyze_columns_chunked(file_path, chunk_size=CHUNK_SIZE):
             
     return headers, columns_to_remove, missing_counts, total_rows, columns_info
 
-def clean_table(table_name):
-    """Clean a single table with chunked processing."""
+def clean_table_partial(table_name, start_row=0, end_row=-1, position=0, disable_progress=False, part_suffix=""):
+    """Clean a table or part of a table with chunked processing.
+    
+    Args:
+        table_name: Name of the table to clean
+        start_row: Starting row (0-based), 0 for beginning
+        end_row: Ending row (exclusive), -1 for end of file
+        position: Position for progress bar (for parallel processing)
+        disable_progress: Whether to disable progress bar
+        part_suffix: Suffix for output files when processing partial table
+    """
     
     # Initialize time tracking
     table_time_stats = {
@@ -275,13 +286,20 @@ def clean_table(table_name):
     table_start_time = time.time()
     
     input_file = data_dir / f"{table_name}.csv"
-    output_file = output_dir / f"{table_name}_cleaned.csv"
-    temp_file = output_dir / f"{table_name}_temp.csv"
     
-    # Files for removed records
-    duplicates_file = duplicates_dir / f"{table_name}.csv"
-    invalid_concept_file = invalid_concept_dir / f"{table_name}.csv"
-    temporal_issues_file = temporal_issues_dir / f"{table_name}.csv"
+    # Add part suffix to output files if processing partial table
+    if part_suffix:
+        output_file = output_dir / f"{table_name}_cleaned{part_suffix}.csv"
+        temp_file = output_dir / f"{table_name}_temp{part_suffix}.csv"
+        duplicates_file = duplicates_dir / f"{table_name}{part_suffix}.csv"
+        invalid_concept_file = invalid_concept_dir / f"{table_name}{part_suffix}.csv"
+        temporal_issues_file = temporal_issues_dir / f"{table_name}{part_suffix}.csv"
+    else:
+        output_file = output_dir / f"{table_name}_cleaned.csv"
+        temp_file = output_dir / f"{table_name}_temp.csv"
+        duplicates_file = duplicates_dir / f"{table_name}.csv"
+        invalid_concept_file = invalid_concept_dir / f"{table_name}.csv"
+        temporal_issues_file = temporal_issues_dir / f"{table_name}.csv"
     
     # Check if file exists
     if not input_file.exists():
@@ -289,7 +307,16 @@ def clean_table(table_name):
         return 0
     
     # Get total row count for progress bar
-    total_rows = get_file_row_count(input_file)
+    file_total_rows = get_file_row_count(input_file)
+    
+    # Determine actual rows to process
+    if end_row == -1:
+        end_row = file_total_rows
+    total_rows = end_row - start_row
+    
+    # For partial processing, show which part is being processed
+    if part_suffix:
+        print(f"  Processing {table_name} rows {start_row:,} to {end_row:,} ({total_rows:,} rows)")
     
     # Try to load column analysis from EDA module
     t0 = time.time()
@@ -382,18 +409,30 @@ def clean_table(table_name):
             reader = csv.DictReader(infile)
             
             # Create progress bar with more frequent updates
-            with tqdm(total=total_rows, desc=f"Cleaning {table_name}", unit="rows",
+            desc_text = f"Cleaning {table_name}{part_suffix}" if part_suffix else f"Cleaning {table_name}"
+            with tqdm(total=total_rows, desc=desc_text, unit="rows",
                      miniters=max(100, total_rows//100) if total_rows > 0 else 1,  # Update every 1% or at least 100 rows
                      mininterval=PROGRESS_INTERVAL,
-                     position=1,  # Nested position to avoid overlap
-                     leave=False, ncols=100) as pbar:
+                     position=position,  # Use provided position for parallel processing
+                     leave=False, ncols=100,
+                     disable=disable_progress) as pbar:
                 chunk = []
                 
+                rows_processed = 0
                 for row_num, row in enumerate(reader):
+                    # Skip rows before start_row
+                    if row_num < start_row:
+                        continue
+                    
+                    # Stop if we've reached end_row
+                    if row_num >= end_row:
+                        break
+                    
                     chunk.append((row_num + 1, row))  # Store with 1-based row number
+                    rows_processed += 1
                     
                     # Process chunk when it reaches the desired size
-                    if len(chunk) >= CHUNK_SIZE or row_num == total_rows - 1:
+                    if len(chunk) >= CHUNK_SIZE or rows_processed == total_rows:
                         # Process each row in the chunk
                         for original_row_num, row in chunk:
                             # Check for duplicates
@@ -468,9 +507,11 @@ def clean_table(table_name):
                                 continue
                             
                             # Write cleaned row
+                            t_write = time.time()
                             clean_row = {k: v for k, v in row.items() if k not in columns_to_remove}
                             writer.writerow(clean_row)
                             rows_written += 1
+                            table_time_stats['file_io'] += time.time() - t_write
                         
                         # Update progress
                         pbar.update(len(chunk))
@@ -504,17 +545,22 @@ def clean_table(table_name):
     # Silent summary - details saved to results file
     rows_removed = total_rows - rows_written
     
-    # Calculate total time and other processing time
+    # Calculate total time
     table_time_stats['total'] = time.time() - table_start_time
-    table_time_stats['other_processing'] = table_time_stats['total'] - (
+    
+    # Calculate other_processing as the time not accounted for by specific operations
+    accounted_time = (
         table_time_stats['column_analysis'] + 
         table_time_stats['duplicate_detection'] +
         table_time_stats['invalid_concept'] +
-        table_time_stats['temporal_validation']
+        table_time_stats['temporal_validation'] +
+        table_time_stats['file_io']
     )
+    table_time_stats['other_processing'] = max(0, table_time_stats['total'] - accounted_time)
     
-    # Store results
-    cleaning_results["tables"][table_name] = {
+    # Store results - use table_name with part_suffix for proper aggregation
+    result_key = f"{table_name}{part_suffix}" if part_suffix else table_name
+    cleaning_results["tables"][result_key] = {
         "original_records": total_rows,
         "cleaned_records": rows_written,
         "records_removed": rows_removed,
@@ -539,260 +585,531 @@ def clean_table(table_name):
     
     return rows_written, table_time_stats
 
-# Process each key table
-print("\nStarting table cleaning process...")
-total_original = 0
-total_cleaned = 0
+def clean_table(table_name, position=0, disable_progress=False):
+    """Wrapper function for backward compatibility."""
+    return clean_table_partial(table_name, 0, -1, position, disable_progress, "")
 
-# Process tables with progress tracking
-print("\nCleaning tables...")
-all_time_stats = []
-for i, table in enumerate(KEY_TABLES):
-    try:
-        print(f"  [{i+1}/{len(KEY_TABLES)}] Processing {table}...", end="", flush=True)
-        cleaned_count, time_stats = clean_table(table)
-        total_cleaned += cleaned_count
-        all_time_stats.append(time_stats)
-        print(f" Done ({time_stats['total']:.2f}s)")
-    except Exception as e:
-        print(f"\nError cleaning {table}: {str(e)}")
-        cleaning_results["tables"][table] = {"error": str(e)}
-
-# Save cleaning results
-results_path = output_dir / "cleaning_results.json"
-with open(results_path, 'w') as f:
-    json.dump(cleaning_results, f, indent=2)
-
-print(f"\n{'='*60}")
-print("CLEANING COMPLETE")
-print('='*60)
-print(f"Detailed results saved to: {results_path}")
-
-# Generate removed columns analysis
-removed_columns_path = removed_dir / "removed_columns_analysis.csv"
-with open(removed_columns_path, 'w', encoding='utf-8', newline='') as f:
-    fieldnames = ['table_name', 'column_name', 'total_rows', 'non_missing_count', 
-                  'missing_count', 'missing_percentage', 'unique_values', 
-                  'sample_values', 'data_type', 'removal_reason']
-    writer = csv.DictWriter(f, fieldnames=fieldnames)
-    writer.writeheader()
+def merge_table_parts(table_name, num_parts):
+    """Merge multiple parts of a cleaned table into one file."""
+    output_dir = project_root / "output" / "2_cleaning"
+    final_file = output_dir / f"{table_name}_cleaned.csv"
     
-    for table_name, table_stats in cleaning_results["tables"].items():
-        if "removed_columns_details" in table_stats and "error" not in table_stats:
-            for col_info in table_stats["removed_columns_details"]:
-                writer.writerow({
-                    'table_name': col_info['table_name'],
-                    'column_name': col_info['column_name'],
-                    'total_rows': col_info['total_rows'],
-                    'non_missing_count': col_info['non_missing_count'],
-                    'missing_count': col_info['missing_count'],
-                    'missing_percentage': f"{col_info['missing_percentage']:.1f}",
-                    'unique_values': col_info['unique_values'],
-                    'sample_values': json.dumps(col_info['sample_values'][:5]) if col_info['sample_values'] else "[]",
-                    'data_type': col_info['data_type'],
-                    'removal_reason': col_info['removal_reason']
-                })
-
-print(f"Removed columns analysis saved to: {removed_columns_path}")
-
-# Generate cleaning report
-report_path = output_dir / "cleaning_report.md"
-with open(report_path, 'w') as f:
-    f.write("# Data Cleaning Report - subdataset_1000\n\n")
-    f.write(f"**Date**: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
-    f.write(f"**Chunk Size**: {CHUNK_SIZE:,} rows\n")
-    f.write(f"**Tables Cleaned**: {', '.join(KEY_TABLES)}\n")
-    f.write(f"**Removed Records Directory**: {removed_dir}\n\n")
+    # Merge main cleaned files
+    first_part = True
+    with open(final_file, 'w') as outfile:
+        for i in range(num_parts):
+            part_file = output_dir / f"{table_name}_cleaned_part{i+1}.csv"
+            if part_file.exists():
+                with open(part_file, 'r') as infile:
+                    if first_part:
+                        # Include header from first part
+                        outfile.write(infile.read())
+                        first_part = False
+                    else:
+                        # Skip header for subsequent parts
+                        lines = infile.readlines()
+                        if len(lines) > 1:
+                            outfile.writelines(lines[1:])
+                # Remove part file after merging
+                part_file.unlink()
     
-    f.write("## Cleaning Summary\n\n")
-    f.write("| Table | Original Records | Cleaned Records | Records Removed | Duplicates | Invalid Concept ID | Columns Removed |\n")
-    f.write("|-------|-----------------|-----------------|-----------------|------------|-------------------|----------------|\n")
-    
-    for table in KEY_TABLES:
-        if table in cleaning_results["tables"] and "error" not in cleaning_results["tables"][table]:
-            stats = cleaning_results["tables"][table]
-            f.write(f"| {table} | {stats['original_records']:,} | {stats['cleaned_records']:,} | ")
-            f.write(f"{stats['records_removed']:,} ({stats['removal_percentage']:.1f}%) | ")
-            f.write(f"{stats['duplicates_removed']:,} | ")
-            f.write(f"{stats.get('invalid_concept_removed', 0):,} | ")
-            f.write(f"{len(stats['columns_removed'])} |\n")
-    
-    # Calculate totals
-    total_original = sum(s['original_records'] for s in cleaning_results['tables'].values() if 'error' not in s)
-    total_cleaned = sum(s['cleaned_records'] for s in cleaning_results['tables'].values() if 'error' not in s)
-    total_removed = total_original - total_cleaned
-    total_duplicates = sum(s['duplicates_removed'] for s in cleaning_results['tables'].values() if 'error' not in s)
-    total_invalid = sum(s.get('invalid_concept_removed', 0) for s in cleaning_results['tables'].values() if 'error' not in s)
-    
-    f.write(f"| **TOTAL** | **{total_original:,}** | **{total_cleaned:,}** | ")
-    if total_original > 0:
-        f.write(f"**{total_removed:,} ({total_removed/total_original*100:.1f}%)** | ")
-    else:
-        f.write(f"**{total_removed:,} (0.0%)** | ")
-    f.write(f"**{total_duplicates:,}** | **{total_invalid:,}** | - |\n")
-    
-    f.write("\n## Detailed Results\n\n")
-    
-    for table in KEY_TABLES:
-        if table in cleaning_results["tables"] and "error" not in cleaning_results["tables"][table]:
-            stats = cleaning_results["tables"][table]
-            f.write(f"### {table}\n\n")
-            
-            if stats['columns_removed']:
-                f.write("**Columns Removed** (>95% missing):\n")
-                for col in stats['columns_removed']:
-                    f.write(f"- {col}\n")
-                f.write("\n")
-            
-            if stats.get('invalid_concept_removed', 0) > 0:
-                f.write(f"**Invalid Concept ID**: {stats['invalid_concept_removed']:,} records removed ")
-                f.write(f"(concept_id = 0 or null)\n\n")
-            
-            if stats['temporal_issues'] > 0:
-                f.write(f"**Temporal Issues**: {stats['temporal_issues']:,} records with invalid date ranges\n\n")
-            
-            f.write("**Removed Records Files**:\n")
-            f.write(f"- Duplicates: `{stats['removed_records_files']['duplicates']}`\n")
-            f.write(f"- Invalid Concept ID: `{stats['removed_records_files']['invalid_concept_id']}`\n")
-            if stats['temporal_issues'] > 0:
-                f.write(f"- Temporal Issues: `{stats['removed_records_files']['temporal_issues']}`\n")
-            f.write("\n")
+    # Merge removed records files
+    for subdir, file_pattern in [
+        (duplicates_dir, "duplicates"),
+        (invalid_concept_dir, "invalid_concept_id"),
+        (temporal_issues_dir, "temporal_issues")
+    ]:
+        final_removed = subdir / f"{table_name}.csv"
+        first_part = True
+        with open(final_removed, 'w') as outfile:
+            for i in range(num_parts):
+                part_file = subdir / f"{table_name}_part{i+1}.csv"
+                if part_file.exists():
+                    with open(part_file, 'r') as infile:
+                        if first_part:
+                            outfile.write(infile.read())
+                            first_part = False
+                        else:
+                            lines = infile.readlines()
+                            if len(lines) > 1:
+                                outfile.writelines(lines[1:])
+                    part_file.unlink()
 
-print(f"Report saved to: {report_path}")
+if __name__ == '__main__':
+    # Process each key table
+    print("\nStarting table cleaning process...")
+    total_original = 0
+    total_cleaned = 0
 
-# Print comprehensive summary
-print("\n" + "="*70)
-print("DATA CLEANING PROCESS - SUMMARY")
-print("="*70)
+    # Determine whether to use parallel processing
+    USE_PARALLEL = os.environ.get('PARALLEL_CLEANING', 'false').lower() == 'true'
+    MAX_WORKERS = min(multiprocessing.cpu_count() - 1, 6)  # Leave one CPU free, max 6 workers
 
-# Calculate summary statistics
-tables_processed = 0
-tables_with_errors = 0
-total_input_records = 0
-total_output_records = 0
-total_duplicates = 0
-total_invalid_concepts = 0
-total_columns_removed = 0
-total_temporal_issues = 0
-output_files_created = []
+    # Process tables with progress tracking
+    print("\nCleaning tables...")
+    all_time_stats = []
 
-for table, stats in cleaning_results["tables"].items():
-    if "error" in stats:
-        tables_with_errors += 1
-    else:
-        tables_processed += 1
-        total_input_records += stats['original_records']
-        total_output_records += stats['cleaned_records']
-        total_duplicates += stats['duplicates_removed']
-        total_invalid_concepts += stats.get('invalid_concept_removed', 0)
-        total_columns_removed += len(stats['columns_removed'])
-        total_temporal_issues += stats.get('temporal_issues', 0)
+    if USE_PARALLEL:
+        print(f"Using parallel processing with {MAX_WORKERS} workers")
+        print("Set PARALLEL_CLEANING=false to disable parallel processing")
         
-        # Track output files
-        if Path(stats['output_file']).exists():
-            output_files_created.append(stats['output_file'])
+        # Determine which tables need splitting
+        LARGE_TABLE_THRESHOLD = 1000000  # 1M rows
+        table_splits = {}
+        
+        for table in KEY_TABLES:
+            input_file = data_dir / f"{table}.csv"
+            if input_file.exists():
+                row_count = get_file_row_count(input_file)
+                if row_count > LARGE_TABLE_THRESHOLD:
+                    # Split large tables into 4 parts
+                    num_splits = 4
+                    table_splits[table] = num_splits
+                    print(f"  {table} has {row_count:,} rows - will split into {num_splits} parts")
+        
+        # Parallel processing
+        with ProcessPoolExecutor(max_workers=MAX_WORKERS) as executor:
+            # Submit all tasks
+            future_to_info = {}
+            position_counter = 1
+            
+            for table in KEY_TABLES:
+                if table in table_splits:
+                    # Submit multiple tasks for large table
+                    num_splits = table_splits[table]
+                    input_file = data_dir / f"{table}.csv"
+                    total_rows = get_file_row_count(input_file)
+                    rows_per_split = total_rows // num_splits
+                    
+                    for i in range(num_splits):
+                        start_row = i * rows_per_split
+                        end_row = (i + 1) * rows_per_split if i < num_splits - 1 else total_rows
+                        part_suffix = f"_part{i+1}"
+                        
+                        future = executor.submit(
+                            clean_table_partial, table, start_row, end_row,
+                            position_counter, False, part_suffix
+                        )
+                        future_to_info[future] = (table, i+1, num_splits)
+                        position_counter += 1
+                else:
+                    # Submit single task for normal table
+                    future = executor.submit(clean_table, table, position_counter, False)
+                    future_to_info[future] = (table, 0, 0)
+                    position_counter += 1
+            
+            # Track completed tasks
+            total_tasks = len(future_to_info)
+            tables_completed = set()
+            table_parts_completed = defaultdict(int)
+            table_parts_results = defaultdict(list)  # Store results for each part
+            
+            with tqdm(total=total_tasks, desc="Overall progress", position=0) as overall_pbar:
+                for future in as_completed(future_to_info):
+                    table, part_num, num_parts = future_to_info[future]
+                    try:
+                        result = future.result()
+                        
+                        # clean_table_partial returns a tuple of (cleaned_count, time_stats)
+                        # We need to extract the detailed statistics from cleaning_results["tables"]
+                        if isinstance(result, tuple):
+                            cleaned_count, time_stats = result
+                        else:
+                            cleaned_count = result
+                            time_stats = {}
+                        
+                        total_cleaned += cleaned_count
+                        all_time_stats.append(time_stats)
+                        
+                        if num_parts > 0:
+                            # Part of a split table
+                            table_parts_completed[table] += 1
+                            table_parts_results[table].append((cleaned_count, time_stats))
+                            overall_pbar.set_postfix_str(f"Completed: {table} part {part_num}/{num_parts}")
+                            
+                            # Check if all parts are done
+                            if table_parts_completed[table] == num_parts:
+                                # Merge the parts
+                                print(f"\n  Merging {num_parts} parts of {table}...")
+                                merge_table_parts(table, num_parts)
+                                
+                                # Read the actual results from the merged table statistics
+                                # The clean_table_partial function has already stored details in cleaning_results
+                                # We need to aggregate them properly
+                                table_key = f"{table}_part1"
+                                if table_key in cleaning_results["tables"]:
+                                    first_part_stats = cleaning_results["tables"][table_key]
+                                    columns_removed = first_part_stats.get("columns_removed", [])
+                                else:
+                                    columns_removed = []
+                                
+                                # Aggregate statistics for the complete table
+                                total_rows_cleaned = sum(c for c, _ in table_parts_results[table])
+                                input_file = data_dir / f"{table}.csv"
+                                total_original_rows = get_file_row_count(input_file)
+                                
+                                # Aggregate detailed statistics from all parts
+                                total_duplicates = 0
+                                total_invalid = 0
+                                total_temporal = 0
+                                
+                                for i in range(num_parts):
+                                    part_key = f"{table}_part{i+1}"
+                                    if part_key in cleaning_results["tables"]:
+                                        part_stats = cleaning_results["tables"][part_key]
+                                        total_duplicates += part_stats.get("duplicates_removed", 0)
+                                        total_invalid += part_stats.get("invalid_concept_removed", 0)
+                                        total_temporal += part_stats.get("temporal_issues", 0)
+                                        # Remove the part stats after aggregating
+                                        del cleaning_results["tables"][part_key]
+                                
+                                # Aggregate time stats
+                                aggregated_time_stats = {
+                                    'total': sum(s['total'] for _, s in table_parts_results[table]),
+                                    'column_analysis': sum(s.get('column_analysis', 0) for _, s in table_parts_results[table]),
+                                    'duplicate_detection': sum(s.get('duplicate_detection', 0) for _, s in table_parts_results[table]),
+                                    'invalid_concept': sum(s.get('invalid_concept', 0) for _, s in table_parts_results[table]),
+                                    'temporal_validation': sum(s.get('temporal_validation', 0) for _, s in table_parts_results[table]),
+                                    'file_io': sum(s.get('file_io', 0) for _, s in table_parts_results[table]),
+                                    'other_processing': sum(s.get('other_processing', 0) for _, s in table_parts_results[table])
+                                }
+                                
+                                # Store aggregated results
+                                cleaning_results["tables"][table] = {
+                                    "original_records": total_original_rows,
+                                    "cleaned_records": total_rows_cleaned,
+                                    "records_removed": total_original_rows - total_rows_cleaned,
+                                    "removal_percentage": (total_original_rows - total_rows_cleaned) / total_original_rows * 100 if total_original_rows > 0 else 0,
+                                    "output_file": str(output_dir / f"{table}_cleaned.csv"),
+                                    "duplicates_removed": total_duplicates,
+                                    "invalid_concept_removed": total_invalid,
+                                    "temporal_issues": total_temporal,
+                                    "columns_removed": columns_removed,
+                                    "removed_records_files": {
+                                        "duplicates": str(duplicates_dir / f"{table}.csv"),
+                                        "invalid_concept_id": str(invalid_concept_dir / f"{table}.csv"),
+                                        "temporal_issues": str(temporal_issues_dir / f"{table}.csv")
+                                    },
+                                    "time_stats": aggregated_time_stats
+                                }
+                                tables_completed.add(table)
+                        else:
+                            # Single table - get the detailed results from cleaning_results
+                            if table in cleaning_results["tables"]:
+                                # Already stored by clean_table_partial
+                                stored_stats = cleaning_results["tables"][table]
+                                # Update time_stats if needed
+                                if 'time_stats' not in stored_stats:
+                                    stored_stats['time_stats'] = time_stats
+                            else:
+                                # Fallback if not stored
+                                input_file = data_dir / f"{table}.csv"
+                                if input_file.exists():
+                                    total_original_rows = get_file_row_count(input_file)
+                                    cleaning_results["tables"][table] = {
+                                        "original_records": total_original_rows,
+                                        "cleaned_records": cleaned_count,
+                                        "records_removed": total_original_rows - cleaned_count,
+                                        "removal_percentage": (total_original_rows - cleaned_count) / total_original_rows * 100 if total_original_rows > 0 else 0,
+                                        "output_file": str(output_dir / f"{table}_cleaned.csv"),
+                                        "duplicates_removed": 0,
+                                        "invalid_concept_removed": 0,
+                                        "temporal_issues": 0,
+                                        "columns_removed": [],
+                                        "removed_records_files": {
+                                            "duplicates": str(duplicates_dir / f"{table}.csv"),
+                                            "invalid_concept_id": str(invalid_concept_dir / f"{table}.csv"),
+                                            "temporal_issues": str(temporal_issues_dir / f"{table}.csv")
+                                        },
+                                        "time_stats": time_stats
+                                    }
+                            overall_pbar.set_postfix_str(f"Completed: {table}")
+                            tables_completed.add(table)
+                        
+                        overall_pbar.update(1)
+                    except Exception as e:
+                        print(f"\nError cleaning {table}: {str(e)}")
+                        cleaning_results["tables"][table] = {"error": str(e)}
+                        overall_pbar.update(1)
+            
+            # Clear any lingering progress bars
+            print("\r" + " " * 100 + "\r", end="", flush=True)
+    else:
+        print("Using sequential processing")
+        print("Set PARALLEL_CLEANING=true to enable parallel processing")
+        
+        # Sequential processing (original code)
+        for i, table in enumerate(KEY_TABLES):
+            try:
+                print(f"  [{i+1}/{len(KEY_TABLES)}] Processing {table}...", end="", flush=True)
+                cleaned_count, time_stats = clean_table(table, position=1, disable_progress=False)
+                total_cleaned += cleaned_count
+                all_time_stats.append(time_stats)
+                print(f" Done ({time_stats['total']:.2f}s)")
+            except Exception as e:
+                print(f"\nError cleaning {table}: {str(e)}")
+                cleaning_results["tables"][table] = {"error": str(e)}
 
-print(f"\nTables Processed:")
-print(f"  - Successfully processed: {tables_processed}")
-print(f"  - Failed with errors: {tables_with_errors}")
+    # Save cleaning results
+    results_path = output_dir / "cleaning_results.json"
+    with open(results_path, 'w') as f:
+        json.dump(cleaning_results, f, indent=2)
 
-print(f"\nTotal Records:")
-print(f"  - Input: {total_input_records:,}")
-print(f"  - Output: {total_output_records:,}")
-print(f"  - Removed: {total_input_records - total_output_records:,} ({(total_input_records - total_output_records)/total_input_records*100:.1f}%)" if total_input_records > 0 else "  - Removed: 0 (0.0%)")
-
-print(f"\nBreakdown of Removals:")
-print(f"  - Duplicate records: {total_duplicates:,}")
-print(f"  - Invalid concept IDs: {total_invalid_concepts:,}")
-print(f"  - Temporal issues: {total_temporal_issues:,}")
-print(f"  - Columns removed: {total_columns_removed}")
-
-print("\nOutput Files Created:")
-print("  Cleaned Data:")
-for table in KEY_TABLES:
-    cleaned_file = output_dir / f"{table}_cleaned.csv"
-    if cleaned_file.exists():
-        print(f"    - {cleaned_file}")
-
-print("\n  Removed Records:")
-# Check for duplicate files
-has_duplicates = False
-for table in KEY_TABLES:
-    dup_file = duplicates_dir / f"{table}.csv"
-    if dup_file.exists() and dup_file.stat().st_size > 0:
-        has_duplicates = True
-        break
-
-if has_duplicates:
-    print("    Duplicates:")
+    print(f"\n{'='*60}")
+    print("CLEANING COMPLETE")
+    print('='*60)
+    print(f"Detailed results saved to: {results_path}")
+    
+    # Generate removed columns analysis
+    removed_columns_path = removed_dir / "removed_columns_analysis.csv"
+    with open(removed_columns_path, 'w', encoding='utf-8', newline='') as f:
+        fieldnames = ['table_name', 'column_name', 'total_rows', 'non_missing_count', 
+                      'missing_count', 'missing_percentage', 'unique_values', 
+                      'sample_values', 'data_type', 'removal_reason']
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer.writeheader()
+        
+        for table_name, table_stats in cleaning_results["tables"].items():
+            if "removed_columns_details" in table_stats and "error" not in table_stats:
+                for col_info in table_stats["removed_columns_details"]:
+                    writer.writerow({
+                        'table_name': col_info['table_name'],
+                        'column_name': col_info['column_name'],
+                        'total_rows': col_info['total_rows'],
+                        'non_missing_count': col_info['non_missing_count'],
+                        'missing_count': col_info['missing_count'],
+                        'missing_percentage': f"{col_info['missing_percentage']:.1f}",
+                        'unique_values': col_info['unique_values'],
+                        'sample_values': json.dumps(col_info['sample_values'][:5]) if col_info['sample_values'] else "[]",
+                        'data_type': col_info['data_type'],
+                        'removal_reason': col_info['removal_reason']
+                    })
+    
+    print(f"Removed columns analysis saved to: {removed_columns_path}")
+    
+    # Generate cleaning report
+    report_path = output_dir / "cleaning_report.md"
+    with open(report_path, 'w') as f:
+        f.write("# Data Cleaning Report - subdataset_1000\n\n")
+        f.write(f"**Date**: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+        f.write(f"**Chunk Size**: {CHUNK_SIZE:,} rows\n")
+        f.write(f"**Tables Cleaned**: {', '.join(KEY_TABLES)}\n")
+        f.write(f"**Removed Records Directory**: {removed_dir}\n\n")
+        
+        f.write("## Cleaning Summary\n\n")
+        f.write("| Table | Original Records | Cleaned Records | Records Removed | Duplicates | Invalid Concept ID | Columns Removed |\n")
+        f.write("|-------|-----------------|-----------------|-----------------|------------|-------------------|----------------|\n")
+        
+        for table in KEY_TABLES:
+            if table in cleaning_results["tables"] and "error" not in cleaning_results["tables"][table]:
+                stats = cleaning_results["tables"][table]
+                f.write(f"| {table} | {stats['original_records']:,} | {stats['cleaned_records']:,} | ")
+                f.write(f"{stats['records_removed']:,} ({stats['removal_percentage']:.1f}%) | ")
+                f.write(f"{stats['duplicates_removed']:,} | ")
+                f.write(f"{stats.get('invalid_concept_removed', 0):,} | ")
+                f.write(f"{len(stats['columns_removed'])} |\n")
+        
+        # Calculate totals
+        total_original = sum(s['original_records'] for s in cleaning_results['tables'].values() if 'error' not in s)
+        total_cleaned = sum(s['cleaned_records'] for s in cleaning_results['tables'].values() if 'error' not in s)
+        total_removed = total_original - total_cleaned
+        total_duplicates = sum(s['duplicates_removed'] for s in cleaning_results['tables'].values() if 'error' not in s)
+        total_invalid = sum(s.get('invalid_concept_removed', 0) for s in cleaning_results['tables'].values() if 'error' not in s)
+        
+        f.write(f"| **TOTAL** | **{total_original:,}** | **{total_cleaned:,}** | ")
+        if total_original > 0:
+            f.write(f"**{total_removed:,} ({total_removed/total_original*100:.1f}%)** | ")
+        else:
+            f.write(f"**{total_removed:,} (0.0%)** | ")
+        f.write(f"**{total_duplicates:,}** | **{total_invalid:,}** | - |\n")
+        
+        f.write("\n## Detailed Results\n\n")
+        
+        for table in KEY_TABLES:
+            if table in cleaning_results["tables"] and "error" not in cleaning_results["tables"][table]:
+                stats = cleaning_results["tables"][table]
+                f.write(f"### {table}\n\n")
+                
+                if stats['columns_removed']:
+                    f.write("**Columns Removed** (>95% missing):\n")
+                    for col in stats['columns_removed']:
+                        f.write(f"- {col}\n")
+                    f.write("\n")
+                
+                if stats.get('invalid_concept_removed', 0) > 0:
+                    f.write(f"**Invalid Concept ID**: {stats['invalid_concept_removed']:,} records removed ")
+                    f.write(f"(concept_id = 0 or null)\n\n")
+                
+                if stats['temporal_issues'] > 0:
+                    f.write(f"**Temporal Issues**: {stats['temporal_issues']:,} records with invalid date ranges\n\n")
+                
+                f.write("**Removed Records Files**:\n")
+                f.write(f"- Duplicates: `{stats['removed_records_files']['duplicates']}`\n")
+                f.write(f"- Invalid Concept ID: `{stats['removed_records_files']['invalid_concept_id']}`\n")
+                if stats['temporal_issues'] > 0:
+                    f.write(f"- Temporal Issues: `{stats['removed_records_files']['temporal_issues']}`\n")
+                f.write("\n")
+    
+    print(f"Report saved to: {report_path}")
+    
+    # Print comprehensive summary
+    print("\n" + "="*70)
+    print("DATA CLEANING PROCESS - SUMMARY")
+    print("="*70)
+    
+    # Calculate summary statistics
+    tables_processed = 0
+    tables_with_errors = 0
+    total_input_records = 0
+    total_output_records = 0
+    total_duplicates = 0
+    total_invalid_concepts = 0
+    total_columns_removed = 0
+    total_temporal_issues = 0
+    output_files_created = []
+    
+    for table, stats in cleaning_results["tables"].items():
+        if "error" in stats:
+            tables_with_errors += 1
+        else:
+            tables_processed += 1
+            total_input_records += stats['original_records']
+            total_output_records += stats['cleaned_records']
+            total_duplicates += stats['duplicates_removed']
+            total_invalid_concepts += stats.get('invalid_concept_removed', 0)
+            total_columns_removed += len(stats['columns_removed'])
+            total_temporal_issues += stats.get('temporal_issues', 0)
+            
+            # Track output files
+            if Path(stats['output_file']).exists():
+                output_files_created.append(stats['output_file'])
+    
+    print(f"\nTables Processed:")
+    print(f"  - Successfully processed: {tables_processed}")
+    print(f"  - Failed with errors: {tables_with_errors}")
+    
+    print(f"\nTotal Records:")
+    print(f"  - Input: {total_input_records:,}")
+    print(f"  - Output: {total_output_records:,}")
+    print(f"  - Removed: {total_input_records - total_output_records:,} ({(total_input_records - total_output_records)/total_input_records*100:.1f}%)" if total_input_records > 0 else "  - Removed: 0 (0.0%)")
+    
+    print(f"\nBreakdown of Removals:")
+    print(f"  - Duplicate records: {total_duplicates:,}")
+    print(f"  - Invalid concept IDs: {total_invalid_concepts:,}")
+    print(f"  - Temporal issues: {total_temporal_issues:,}")
+    print(f"  - Columns removed: {total_columns_removed}")
+    
+    print("\nOutput Files Created:")
+    print("  Cleaned Data:")
+    for table in KEY_TABLES:
+        cleaned_file = output_dir / f"{table}_cleaned.csv"
+        if cleaned_file.exists():
+            print(f"    - {cleaned_file}")
+    
+    print("\n  Removed Records:")
+    # Check for duplicate files
+    has_duplicates = False
     for table in KEY_TABLES:
         dup_file = duplicates_dir / f"{table}.csv"
         if dup_file.exists() and dup_file.stat().st_size > 0:
-            print(f"      - {dup_file}")
-
-# Check for invalid concept files
-has_invalid = False
-for table in KEY_TABLES:
-    invalid_file = invalid_concept_dir / f"{table}.csv"
-    if invalid_file.exists() and invalid_file.stat().st_size > 0:
-        has_invalid = True
-        break
-
-if has_invalid:
-    print("    Invalid Concept IDs:")
+            has_duplicates = True
+            break
+    
+    if has_duplicates:
+        print("    Duplicates:")
+        for table in KEY_TABLES:
+            dup_file = duplicates_dir / f"{table}.csv"
+            if dup_file.exists() and dup_file.stat().st_size > 0:
+                print(f"      - {dup_file}")
+    
+    # Check for invalid concept files
+    has_invalid = False
     for table in KEY_TABLES:
         invalid_file = invalid_concept_dir / f"{table}.csv"
         if invalid_file.exists() and invalid_file.stat().st_size > 0:
-            print(f"      - {invalid_file}")
-
-# Check for temporal issues files
-has_temporal = False
-for table in KEY_TABLES:
-    temporal_file = temporal_issues_dir / f"{table}.csv"
-    if temporal_file.exists() and temporal_file.stat().st_size > 0:
-        has_temporal = True
-        break
-
-if has_temporal:
-    print("    Temporal Issues:")
+            has_invalid = True
+            break
+    
+    if has_invalid:
+        print("    Invalid Concept IDs:")
+        for table in KEY_TABLES:
+            invalid_file = invalid_concept_dir / f"{table}.csv"
+            if invalid_file.exists() and invalid_file.stat().st_size > 0:
+                print(f"      - {invalid_file}")
+    
+    # Check for temporal issues files
+    has_temporal = False
     for table in KEY_TABLES:
         temporal_file = temporal_issues_dir / f"{table}.csv"
         if temporal_file.exists() and temporal_file.stat().st_size > 0:
-            print(f"      - {temporal_file}")
-
-print("\n  Reports:")
-print(f"    - {results_path}")
-print(f"    - {report_path}")
-print(f"    - {removed_columns_path}")
-
-# Calculate total execution time
-total_time = time.time() - start_time
-print(f"\nTotal execution time: {total_time:.2f} seconds")
-
-# Performance breakdown
-if all_time_stats:
-    print("\n" + "="*50)
-    print("PERFORMANCE BREAKDOWN - Data Cleaning")
-    print("="*50)
+            has_temporal = True
+            break
     
-    # Sum up times from all tables
-    total_column_analysis = sum(s['column_analysis'] for s in all_time_stats)
-    total_duplicate_detection = sum(s['duplicate_detection'] for s in all_time_stats)
-    total_invalid_concept = sum(s['invalid_concept'] for s in all_time_stats)
-    total_temporal_validation = sum(s['temporal_validation'] for s in all_time_stats)
-    total_other = sum(s['other_processing'] for s in all_time_stats)
+    if has_temporal:
+        print("    Temporal Issues:")
+        for table in KEY_TABLES:
+            temporal_file = temporal_issues_dir / f"{table}.csv"
+            if temporal_file.exists() and temporal_file.stat().st_size > 0:
+                print(f"      - {temporal_file}")
     
-    print(f"Column analysis:       {total_column_analysis:.2f}s ({total_column_analysis/total_time*100:.1f}%)")
-    print(f"Duplicate detection:   {total_duplicate_detection:.2f}s ({total_duplicate_detection/total_time*100:.1f}%)")
-    print(f"Invalid concept ID:    {total_invalid_concept:.2f}s ({total_invalid_concept/total_time*100:.1f}%)")
-    print(f"Temporal validation:   {total_temporal_validation:.2f}s ({total_temporal_validation/total_time*100:.1f}%)")
-    print(f"File I/O & other:      {total_other:.2f}s ({total_other/total_time*100:.1f}%)")
+    print("\n  Reports:")
+    print(f"    - {results_path}")
+    print(f"    - {report_path}")
+    print(f"    - {removed_columns_path}")
     
-    # Find slowest operations
-    print("\nSlowest tables:")
-    table_times = [(KEY_TABLES[i], s['total']) for i, s in enumerate(all_time_stats)]
-    table_times.sort(key=lambda x: x[1], reverse=True)
-    for name, time_taken in table_times[:3]:
-        print(f"  {name}: {time_taken:.2f}s")
-
-print("="*70)
+    # Calculate total execution time
+    total_time = time.time() - start_time
+    print(f"\nTotal execution time: {total_time:.2f} seconds")
+    
+    # Performance breakdown
+    if all_time_stats:
+        print("\n" + "="*50)
+        print("PERFORMANCE BREAKDOWN - Data Cleaning")
+        print("="*50)
+        
+        # Sum up times from all tables
+        total_column_analysis = sum(s.get('column_analysis', 0) for s in all_time_stats)
+        total_duplicate_detection = sum(s.get('duplicate_detection', 0) for s in all_time_stats)
+        total_invalid_concept = sum(s.get('invalid_concept', 0) for s in all_time_stats)
+        total_temporal_validation = sum(s.get('temporal_validation', 0) for s in all_time_stats)
+        total_file_io = sum(s.get('file_io', 0) for s in all_time_stats)
+        total_other = sum(s.get('other_processing', 0) for s in all_time_stats)
+        
+        # For parallel processing, percentages should be based on CPU time (sum of all tasks)
+        # not wall clock time, since tasks run in parallel
+        if USE_PARALLEL:
+            # Sum of all task times represents total CPU time used
+            total_cpu_time = sum(s.get('total', 0) for s in all_time_stats)
+            if total_cpu_time > 0:
+                print(f"Total CPU time:        {total_cpu_time:.2f}s (across {len(all_time_stats)} tasks)")
+                print(f"Wall clock time:       {total_time:.2f}s")
+                print(f"Parallelization efficiency: {total_cpu_time/total_time/MAX_WORKERS*100:.1f}%\n")
+                
+                # Show breakdown as percentage of total CPU time
+                print("CPU Time Breakdown:")
+                print(f"  Column analysis:       {total_column_analysis:.2f}s ({total_column_analysis/total_cpu_time*100:.1f}%)")
+                print(f"  Duplicate detection:   {total_duplicate_detection:.2f}s ({total_duplicate_detection/total_cpu_time*100:.1f}%)")
+                print(f"  Invalid concept ID:    {total_invalid_concept:.2f}s ({total_invalid_concept/total_cpu_time*100:.1f}%)")
+                print(f"  Temporal validation:   {total_temporal_validation:.2f}s ({total_temporal_validation/total_cpu_time*100:.1f}%)")
+                print(f"  File I/O:              {total_file_io:.2f}s ({total_file_io/total_cpu_time*100:.1f}%)")
+                print(f"  Other processing:      {total_other:.2f}s ({total_other/total_cpu_time*100:.1f}%)")
+            else:
+                print("No timing statistics available")
+        else:
+            # Sequential processing - use wall clock time
+            print(f"Column analysis:       {total_column_analysis:.2f}s ({total_column_analysis/total_time*100:.1f}%)")
+            print(f"Duplicate detection:   {total_duplicate_detection:.2f}s ({total_duplicate_detection/total_time*100:.1f}%)")
+            print(f"Invalid concept ID:    {total_invalid_concept:.2f}s ({total_invalid_concept/total_time*100:.1f}%)")
+            print(f"Temporal validation:   {total_temporal_validation:.2f}s ({total_temporal_validation/total_time*100:.1f}%)")
+            print(f"File I/O:              {total_file_io:.2f}s ({total_file_io/total_time*100:.1f}%)")
+            print(f"Other processing:      {total_other:.2f}s ({total_other/total_time*100:.1f}%)")
+        
+        # Find slowest operations (skip if using parallel processing with splits)
+        if not USE_PARALLEL or len(all_time_stats) == len(KEY_TABLES):
+            print("\nSlowest tables:")
+            table_times = [(KEY_TABLES[i], s['total']) for i, s in enumerate(all_time_stats)]
+            table_times.sort(key=lambda x: x[1], reverse=True)
+            for name, time_taken in table_times[:3]:
+                print(f"  {name}: {time_taken:.2f}s")
+    
+    print("="*70)
