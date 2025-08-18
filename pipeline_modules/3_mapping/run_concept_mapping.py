@@ -7,6 +7,7 @@ import logging
 import argparse
 import numpy as np
 import platform
+import time
 from pathlib import Path
 from datetime import datetime, timedelta
 from collections import defaultdict, Counter
@@ -447,6 +448,19 @@ class ConceptMapper:
     
     def process_table(self, table_name):
         """Process a table with all features: filtering, mapping, standardization, etc."""
+        # Initialize timing
+        table_time_stats = {
+            'total': 0,
+            'file_reading': 0,
+            'low_freq_filtering': 0,
+            'date_standardization': 0,
+            'concept_mapping': 0,
+            'outlier_removal': 0,
+            'deduplication': 0,
+            'file_writing': 0
+        }
+        table_start_time = time.time()
+        
         logging.info(f"\n{'='*60}")
         logging.info(f"Processing {table_name}")
         logging.info('='*60)
@@ -474,6 +488,7 @@ class ConceptMapper:
             total_rows = sum(1 for _ in f) - 1  # Subtract header
         
         # Read input file with progress bar
+        t0 = time.time()
         rows = []
         with open(input_file, 'r') as infile:
             reader = csv.DictReader(infile)
@@ -487,6 +502,7 @@ class ConceptMapper:
                            mininterval=PROGRESS_INTERVAL,
                            leave=False, ncols=100):
                 rows.append(row)
+        table_time_stats['file_reading'] = time.time() - t0
         
         table_stats['total_rows'] = len(rows)
         logging.info(f"Loaded {len(rows):,} rows")
@@ -494,7 +510,9 @@ class ConceptMapper:
         # Step 1: Filter low frequency concepts
         if self.min_concept_freq > 0:
             logging.info(f"\nFiltering low frequency concepts (<={self.min_concept_freq})...")
+            t0 = time.time()
             rows, removed_low_freq = self.filter_low_frequency_concepts(rows, table_name)
+            table_time_stats['low_freq_filtering'] = time.time() - t0
             table_stats['low_freq_removed'] = len(removed_low_freq)
             
             if removed_low_freq:
@@ -508,15 +526,20 @@ class ConceptMapper:
         
         # Step 2: Standardize dates
         logging.info("\nStandardizing dates...")
+        t0 = time.time()
         rows = self.standardize_dates_in_rows(rows, table_name)
+        table_time_stats['date_standardization'] = time.time() - t0
         
         # Step 3: Apply SNOMED mappings (only for tables with mappings)
+        t0 = time.time()
         if table_name in TABLES_WITH_MAPPING:
             extended_fieldnames = self.apply_mappings(rows, table_name, fieldnames, table_stats)
         else:
             extended_fieldnames = fieldnames
+        table_time_stats['concept_mapping'] = time.time() - t0
         
         # Step 4: Remove outliers (MEASUREMENT only)
+        t0 = time.time()
         if table_name == 'MEASUREMENT' and self.outlier_lower_pct > 0:
             logging.info(f"\nRemoving outliers ({self.outlier_lower_pct}% lower, {self.outlier_upper_pct}% upper)...")
             rows, outlier_rows = self.remove_outliers_measurement(rows)
@@ -530,8 +553,10 @@ class ConceptMapper:
                     writer.writeheader()
                     writer.writerows(outlier_rows)
                 logging.info(f"  Removed {len(outlier_rows)} outliers")
+        table_time_stats['outlier_removal'] = time.time() - t0
         
         # Step 5: Deduplication (only for mapped tables)
+        t0 = time.time()
         if self.enable_dedup and table_name in TABLES_WITH_MAPPING:
             logging.info("\nPerforming deduplication...")
             unique_rows, duplicate_rows = self.deduplicate_mapped_data(rows, table_name, extended_fieldnames)
@@ -556,17 +581,22 @@ class ConceptMapper:
         else:
             rows_to_save = rows
             table_stats['output_rows'] = len(rows)
+        table_time_stats['deduplication'] = time.time() - t0
         
         # Save processed data
+        t0 = time.time()
         with open(output_file, 'w', newline='') as outfile:
             writer = csv.DictWriter(outfile, fieldnames=extended_fieldnames)
             writer.writeheader()
             writer.writerows(rows_to_save)
+        table_time_stats['file_writing'] = time.time() - t0
         
         logging.info(f"\nSaved processed data to: {output_file}")
         logging.info(f"Final row count: {table_stats['output_rows']:,}")
         
-        # Store statistics
+        # Calculate total time and store statistics
+        table_time_stats['total'] = time.time() - table_start_time
+        table_stats['time_stats'] = table_time_stats
         self.stats[table_name] = table_stats
         
         return table_stats
@@ -722,6 +752,9 @@ def generate_mapping_report(stats, mapper):
 
 def main():
     """Main execution function."""
+    # Start timing
+    start_time = time.time()
+    
     parser = argparse.ArgumentParser(description='Comprehensive data processing with concept mapping')
     parser.add_argument('--no-dedup', action='store_true', 
                         help='Disable deduplication after mapping')
@@ -777,12 +810,59 @@ def main():
     # Generate summary report
     generate_mapping_report(mapper.stats, mapper)
     
+    # Calculate total execution time
+    total_time = time.time() - start_time
+    
     print("\n" + "="*80)
     print("PROCESSING COMPLETED SUCCESSFULLY")
     print(f"End time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    print(f"Total execution time: {total_time:.2f} seconds")
     print(f"\nOutputs saved to: {output_dir}")
     print(f"Removed records saved to: {removed_dir}")
     print("="*80)
+    
+    # Performance breakdown
+    print("\n" + "="*50)
+    print("PERFORMANCE BREAKDOWN - Concept Mapping")
+    print("="*50)
+    
+    # Aggregate timing from all tables
+    total_file_reading = 0
+    total_low_freq = 0
+    total_date_std = 0
+    total_mapping = 0
+    total_outlier = 0
+    total_dedup = 0
+    total_file_writing = 0
+    
+    for table_stats in mapper.stats.values():
+        if 'time_stats' in table_stats:
+            ts = table_stats['time_stats']
+            total_file_reading += ts.get('file_reading', 0)
+            total_low_freq += ts.get('low_freq_filtering', 0)
+            total_date_std += ts.get('date_standardization', 0)
+            total_mapping += ts.get('concept_mapping', 0)
+            total_outlier += ts.get('outlier_removal', 0)
+            total_dedup += ts.get('deduplication', 0)
+            total_file_writing += ts.get('file_writing', 0)
+    
+    print(f"File reading:          {total_file_reading:.2f}s ({total_file_reading/total_time*100:.1f}%)")
+    print(f"Low freq filtering:    {total_low_freq:.2f}s ({total_low_freq/total_time*100:.1f}%)")
+    print(f"Date standardization:  {total_date_std:.2f}s ({total_date_std/total_time*100:.1f}%)")
+    print(f"Concept mapping:       {total_mapping:.2f}s ({total_mapping/total_time*100:.1f}%)")
+    print(f"Outlier removal:       {total_outlier:.2f}s ({total_outlier/total_time*100:.1f}%)")
+    print(f"Deduplication:         {total_dedup:.2f}s ({total_dedup/total_time*100:.1f}%)")
+    print(f"File writing:          {total_file_writing:.2f}s ({total_file_writing/total_time*100:.1f}%)")
+    
+    # Find slowest tables
+    table_times = [(name, stats.get('time_stats', {}).get('total', 0)) 
+                   for name, stats in mapper.stats.items()]
+    table_times.sort(key=lambda x: x[1], reverse=True)
+    
+    print("\nSlowest tables:")
+    for name, time_taken in table_times[:3]:
+        if time_taken > 0:
+            print(f"  {name}: {time_taken:.2f}s")
 
 if __name__ == "__main__":
     main()
