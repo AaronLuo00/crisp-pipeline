@@ -4,17 +4,18 @@
 import csv
 import sys
 import json
+import shutil
 import logging
 import argparse
 import numpy as np
 import platform
 import time
+import multiprocessing
 from pathlib import Path
 from datetime import datetime, timedelta
 from collections import defaultdict, Counter
 from tqdm import tqdm
-from concurrent.futures import ProcessPoolExecutor, as_completed
-import multiprocessing
+from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor, as_completed
 
 # Set CSV field size limit to maximum to avoid field size errors
 csv.field_size_limit(sys.maxsize)
@@ -29,7 +30,7 @@ else:
     PROGRESS_INTERVAL = 10.0  # Default for macOS/Linux
     CHUNK_SIZE = 100000  # Default for macOS/Linux
     WRITE_BUFFER_SIZE = 20000  # Moderate buffer for Unix-like systems
-    FILE_BUFFER_SIZE = 1024 * 1024  # 1MB file buffer
+    FILE_BUFFER_SIZE = 1 * 1024 * 1024  # 1MB file buffer
 
 # Parallel processing configuration
 MAX_WORKERS = min(multiprocessing.cpu_count(), 6)  # Use up to 6 cores
@@ -595,80 +596,64 @@ def process_measurement_chunk(chunk_id, total_chunks, input_file, output_dir,
     
     return chunk_id, stats, time_stats
 
-def merge_measurement_chunks(output_dir, total_chunks):
-    """Merge MEASUREMENT chunk results into final files."""
-    import csv
-    from pathlib import Path
+def merge_csv_files_fast(output_file, chunk_files, buffer_size=FILE_BUFFER_SIZE):
+    """Fast merge CSV files by skipping CSV parsing - just copy raw content."""
+    output_file = Path(output_file)
+    output_file.parent.mkdir(parents=True, exist_ok=True)
     
+    with open(output_file, 'wb') as outf:
+        first_file = True
+        for chunk_file in chunk_files:
+            if chunk_file.exists():
+                with open(chunk_file, 'rb') as inf:
+                    if first_file:
+                        # Copy entire first file including header
+                        shutil.copyfileobj(inf, outf, buffer_size)
+                        first_file = False
+                    else:
+                        # Skip header line for subsequent files
+                        inf.readline()  # Skip the header
+                        shutil.copyfileobj(inf, outf, buffer_size)
+
+def merge_measurement_chunks(output_dir, total_chunks):
+    """Merge MEASUREMENT chunk results into final files - serial execution to test CSV parsing optimization."""
     output_dir = Path(output_dir)
+    
+    # Prepare file lists for merging
+    main_chunks = [output_dir / f".temp_measurement_chunk_{i}.csv" 
+                   for i in range(total_chunks)]
+    low_freq_chunks = [output_dir / "removed_records" / "low_frequency" / 
+                       f".temp_MEASUREMENT_low_freq_chunk_{i}.csv" 
+                       for i in range(total_chunks)]
+    dup_chunks = [output_dir / "removed_records" / "duplicates" / 
+                  f".temp_MEASUREMENT_duplicates_chunk_{i}.csv" 
+                  for i in range(total_chunks)]
     
     # Merge main output file
     output_file = output_dir / "MEASUREMENT_mapped.csv"
-    with open(output_file, 'w', newline='', encoding='utf-8', buffering=FILE_BUFFER_SIZE) as outf:
-        writer = None
-        
-        for chunk_id in range(total_chunks):
-            chunk_file = output_dir / f".temp_measurement_chunk_{chunk_id}.csv"
-            if chunk_file.exists():
-                with open(chunk_file, 'r', encoding='utf-8') as inf:
-                    reader = csv.DictReader(inf)
-                    # Get fieldnames from the first file
-                    if writer is None and reader.fieldnames:
-                        writer = csv.DictWriter(outf, fieldnames=reader.fieldnames)
-                        writer.writeheader()
-                    # Write rows
-                    if writer is not None:
-                        for row in reader:
-                            writer.writerow(row)
-                chunk_file.unlink()  # Delete temp file
+    merge_csv_files_fast(output_file, main_chunks)
+    # Clean up temp files
+    for f in main_chunks:
+        if f.exists():
+            f.unlink()
     
-    # Merge low frequency removed records
-    low_freq_file = output_dir / "removed_records" / "low_frequency" / "MEASUREMENT_low_freq.csv"
-    low_freq_file.parent.mkdir(parents=True, exist_ok=True)
-    with open(low_freq_file, 'w', newline='', encoding='utf-8') as outf:
-        writer = None
-        
-        for chunk_id in range(total_chunks):
-            chunk_file = output_dir / "removed_records" / "low_frequency" / f".temp_MEASUREMENT_low_freq_chunk_{chunk_id}.csv"
-            if chunk_file.exists():
-                with open(chunk_file, 'r', encoding='utf-8') as inf:
-                    reader = csv.DictReader(inf)
-                    if writer is None and reader.fieldnames:
-                        writer = csv.DictWriter(outf, fieldnames=reader.fieldnames)
-                        writer.writeheader()
-                    if writer is not None:
-                        for row in reader:
-                            writer.writerow(row)
-                chunk_file.unlink()
+    # Merge low frequency records
+    output_file = output_dir / "removed_records" / "low_frequency" / "MEASUREMENT_low_freq.csv"
+    merge_csv_files_fast(output_file, low_freq_chunks)
+    # Clean up temp files
+    for f in low_freq_chunks:
+        if f.exists():
+            f.unlink()
     
-    # Merge duplicate records
-    dup_file = output_dir / "removed_records" / "duplicates" / "MEASUREMENT.csv"
-    dup_file.parent.mkdir(parents=True, exist_ok=True)
-    has_content = False
-    
-    # First check if any duplicate files exist
-    for chunk_id in range(total_chunks):
-        chunk_file = output_dir / "removed_records" / "duplicates" / f".temp_MEASUREMENT_duplicates_chunk_{chunk_id}.csv"
-        if chunk_file.exists():
-            has_content = True
-            break
-    
+    # Merge duplicate records if any exist
+    has_content = any(f.exists() for f in dup_chunks)
     if has_content:
-        with open(dup_file, 'w', newline='', encoding='utf-8') as outf:
-            writer = None
-            
-            for chunk_id in range(total_chunks):
-                chunk_file = output_dir / "removed_records" / "duplicates" / f".temp_MEASUREMENT_duplicates_chunk_{chunk_id}.csv"
-                if chunk_file.exists():
-                    with open(chunk_file, 'r', encoding='utf-8') as inf:
-                        reader = csv.DictReader(inf)
-                        if writer is None and reader.fieldnames:
-                            writer = csv.DictWriter(outf, fieldnames=reader.fieldnames)
-                            writer.writeheader()
-                        if writer is not None:
-                            for row in reader:
-                                writer.writerow(row)
-                    chunk_file.unlink()
+        output_file = output_dir / "removed_records" / "duplicates" / "MEASUREMENT.csv"
+        merge_csv_files_fast(output_file, dup_chunks)
+    # Clean up temp files
+    for f in dup_chunks:
+        if f.exists():
+            f.unlink()
 
 class ConceptMapper:
     def __init__(self, enable_dedup=True, min_concept_freq=10):
