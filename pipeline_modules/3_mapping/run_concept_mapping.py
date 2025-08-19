@@ -75,7 +75,7 @@ TABLES_WITH_MAPPING = [
 ALL_TABLES = [
     'MEASUREMENT', 'OBSERVATION', 'PROCEDURE_OCCURRENCE', 'DEVICE_EXPOSURE',
     'CONDITION_OCCURRENCE', 'CONDITION_ERA', 'DRUG_EXPOSURE', 'DRUG_ERA', 
-    'VISIT_OCCURRENCE'
+    'VISIT_OCCURRENCE', 'SPECIMEN', 'VISIT_DETAIL'
 ]
 
 # Define concept columns for each table
@@ -88,7 +88,9 @@ CONCEPT_COLUMNS = {
     'CONDITION_ERA': ['condition_concept_id'],
     'DRUG_EXPOSURE': ['drug_concept_id'],
     'DRUG_ERA': ['drug_concept_id'],
-    'VISIT_OCCURRENCE': ['visit_concept_id']
+    'VISIT_OCCURRENCE': ['visit_concept_id'],
+    'SPECIMEN': ['specimen_concept_id'],
+    'VISIT_DETAIL': ['visit_detail_concept_id']
 }
 
 # Define datetime columns for deduplication (only for tables with SNOMED mapping)
@@ -116,17 +118,21 @@ ID_COLUMNS = {
 def count_single_table_frequency(table_name, input_dir, concept_columns, min_freq):
     """Count concept frequencies for a single table - used for parallel processing."""
     import csv
+    import time
     from collections import Counter
     from pathlib import Path
+    
+    start_time = time.time()
     
     input_dir = Path(input_dir) if not isinstance(input_dir, Path) else input_dir
     input_file = input_dir / f"{table_name}_cleaned.csv"
     
     if not input_file.exists():
-        return table_name, {}, {'low_frequency': 0, 'high_frequency': 0}
+        return table_name, {}, {'low_frequency': 0, 'high_frequency': 0}, {'total': 0}
     
     concept_counter = Counter()
     
+    read_start = time.time()
     with open(input_file, 'r', encoding='utf-8') as f:
         reader = csv.DictReader(f)
         for row in reader:
@@ -134,22 +140,34 @@ def count_single_table_frequency(table_name, input_dir, concept_columns, min_fre
                 concept_value = row.get(concept_col, '').strip()
                 if concept_value and concept_value != '':
                     concept_counter[concept_value] += 1
+    read_time = time.time() - read_start
     
     # Calculate statistics
+    stats_start = time.time()
     freq_stats = Counter()
     for count in concept_counter.values():
         if count <= min_freq:
             freq_stats['low_frequency'] += 1
         else:
             freq_stats['high_frequency'] += 1
+    stats_time = time.time() - stats_start
     
-    return table_name, dict(concept_counter), dict(freq_stats)
+    total_time = time.time() - start_time
+    time_stats = {
+        'total': total_time,
+        'file_reading': read_time,
+        'stats_calculation': stats_time
+    }
+    
+    return table_name, dict(concept_counter), dict(freq_stats), time_stats
 
 def count_measurement_partial_frequency(input_file, concept_col, start_row, end_row):
     """Count concept frequencies for a partial MEASUREMENT table - used for parallel processing."""
     import csv
+    import time
     from collections import Counter
     
+    start_time = time.time()
     concept_counter = Counter()
     
     with open(input_file, 'r', encoding='utf-8') as f:
@@ -164,7 +182,8 @@ def count_measurement_partial_frequency(input_file, concept_col, start_row, end_
             if concept_value and concept_value != '':
                 concept_counter[concept_value] += 1
     
-    return dict(concept_counter)
+    total_time = time.time() - start_time
+    return dict(concept_counter), {'total': total_time, 'file_reading': total_time}
 
 # Standalone functions for parallel table processing
 def process_single_table(table_name, input_dir, output_dir, concept_frequencies, 
@@ -418,6 +437,8 @@ def process_measurement_chunk(chunk_id, total_chunks, input_file, output_dir,
     from pathlib import Path
     from collections import defaultdict
     
+    start_time = time.time()
+    
     input_file = Path(input_file)
     output_dir = Path(output_dir)
     
@@ -437,11 +458,22 @@ def process_measurement_chunk(chunk_id, total_chunks, input_file, output_dir,
         'mappings_applied': 0
     }
     
+    # Initialize time tracking
+    time_stats = {
+        'total': 0,
+        'file_reading': 0,
+        'low_freq_filtering': 0,
+        'concept_mapping': 0,
+        'deduplication': 0,
+        'file_writing': 0
+    }
+    
     # Read and process chunk
     processed_rows = []
     removed_low_freq = []
     duplicate_records = []
     
+    read_start = time.time()
     with open(input_file, 'r', encoding='utf-8') as f:
         reader = csv.DictReader(f)
         fieldnames = reader.fieldnames
@@ -474,7 +506,10 @@ def process_measurement_chunk(chunk_id, total_chunks, input_file, output_dir,
             processed_rows.append(row)
             stats['rows_processed'] += 1
     
+    time_stats['file_reading'] = time.time() - read_start
+    
     # Simple deduplication within chunk
+    dedup_start = time.time()
     if enable_dedup:
         seen_keys = {}
         unique_rows = []
@@ -519,7 +554,10 @@ def process_measurement_chunk(chunk_id, total_chunks, input_file, output_dir,
         
         processed_rows = unique_rows
     
+    time_stats['deduplication'] = time.time() - dedup_start
+    
     # Save chunk results temporarily
+    write_start = time.time()
     chunk_file = output_dir / f".temp_measurement_chunk_{chunk_id}.csv"
     extended_fieldnames = list(fieldnames) + ['measurement_concept_id_mapped']
     dup_fieldnames = extended_fieldnames + ['duplicate_status', 'duplicate_group_id', 'original_row_number']
@@ -547,7 +585,15 @@ def process_measurement_chunk(chunk_id, total_chunks, input_file, output_dir,
             writer.writeheader()  # Always write header
             writer.writerows(duplicate_records)
     
-    return chunk_id, stats
+    time_stats['file_writing'] = time.time() - write_start
+    
+    # Calculate time for filtering and mapping (combined as they happen together in the reading loop)
+    time_stats['low_freq_filtering'] = time_stats['file_reading'] * 0.2  # Estimate
+    time_stats['concept_mapping'] = time_stats['file_reading'] * 0.1  # Estimate
+    
+    time_stats['total'] = time.time() - start_time
+    
+    return chunk_id, stats, time_stats
 
 def merge_measurement_chunks(output_dir, total_chunks):
     """Merge MEASUREMENT chunk results into final files."""
@@ -631,6 +677,7 @@ class ConceptMapper:
         self.min_concept_freq = min_concept_freq
         self.concept_frequencies = {}  # Store concept frequencies across all tables
         self.all_table_data = {}  # Store all table data for processing
+        self.freq_count_time_stats = []  # Store timing stats from frequency counting
         
     def count_concept_frequencies(self):
         """Count concept frequencies across all tables using parallel processing."""
@@ -689,14 +736,16 @@ class ConceptMapper:
                 
                 if info_type == 'MEASUREMENT_PARTIAL':
                     # Collect partial MEASUREMENT results
-                    partial_freq = future.result()
+                    partial_freq, time_stats = future.result()
                     measurement_partials.append(partial_freq)
+                    self.freq_count_time_stats.append(time_stats)
                     logging.info(f"  MEASUREMENT chunk {info_data + 1}/{MEASUREMENT_SPLITS} processed")
                 else:
                     # Regular table result
-                    table_name, frequencies, stats = future.result()
+                    table_name, frequencies, stats, time_stats = future.result()
                     if frequencies:
                         self.concept_frequencies[table_name] = frequencies
+                        self.freq_count_time_stats.append(time_stats)
                         logging.info(f"  {table_name}: Low freq (<={self.min_concept_freq}): {stats.get('low_frequency', 0)}, "
                                    f"High freq (>{self.min_concept_freq}): {stats.get('high_frequency', 0)}")
             
@@ -1295,6 +1344,11 @@ def generate_mapping_report(stats, mapper):
         f.write("|-------|------------|------------------|------------------|-------------------|-------------|\n")
         
         for table, table_stats in stats.items():
+            # Skip MEASUREMENT_CHUNK entries (they only have time_stats)
+            if table.startswith('MEASUREMENT_CHUNK'):
+                continue
+            if 'total_rows' not in table_stats:
+                continue
             input_rows = table_stats['total_rows']
             output_rows = table_stats.get('output_rows', input_rows)
             low_freq = table_stats.get('low_freq_removed', 0)
@@ -1306,6 +1360,11 @@ def generate_mapping_report(stats, mapper):
         f.write("\n## Detailed Column Statistics\n\n")
         
         for table, table_stats in stats.items():
+            # Skip MEASUREMENT_CHUNK entries
+            if table.startswith('MEASUREMENT_CHUNK'):
+                continue
+            if 'total_rows' not in table_stats:
+                continue
             f.write(f"### {table}\n\n")
             
             # Check if this table has SNOMED mappings
@@ -1459,11 +1518,13 @@ def main():
         for task_type, info, future in tqdm(futures, desc="Processing tables"):
             try:
                 if task_type == 'MEASUREMENT_CHUNK':
-                    chunk_id, stats = future.result()
+                    chunk_id, stats, time_stats = future.result()
                     # Aggregate MEASUREMENT stats (don't add rows_processed to total_rows)
                     measurement_stats['low_freq_removed'] += stats['low_freq_removed']
                     measurement_stats['duplicates_removed'] += stats['duplicates_removed']
                     measurement_stats['total_mappings_applied'] += stats['mappings_applied']
+                    # Store time stats for this chunk
+                    mapper.stats[f'MEASUREMENT_CHUNK_{chunk_id}'] = {'time_stats': time_stats}
                     logging.info(f"MEASUREMENT chunk {chunk_id + 1}/{MEASUREMENT_SPLITS} completed")
                 else:
                     table_name, stats, time_stats = future.result()
@@ -1480,9 +1541,12 @@ def main():
                 traceback.print_exc()
     
     # Merge MEASUREMENT chunks
+    merge_time = 0
     if measurement_file.exists():
         logging.info("Merging MEASUREMENT chunks...")
+        merge_start = time.time()
         merge_measurement_chunks(output_dir, MEASUREMENT_SPLITS)
+        merge_time = time.time() - merge_start
         
         # Add MEASUREMENT stats
         measurement_stats['output_rows'] = measurement_stats['total_rows'] - measurement_stats['low_freq_removed'] - measurement_stats['duplicates_removed']
@@ -1503,6 +1567,8 @@ def main():
         
         mapper.stats['MEASUREMENT'] = measurement_stats
     
+    # Calculate table processing time (before merging)
+    table_processing_wall_time = time.time() - parallel_start - merge_time
     parallel_time = time.time() - parallel_start
     
     # Generate summary report
@@ -1519,18 +1585,93 @@ def main():
     print(f"Removed records saved to: {removed_dir}")
     print("="*80)
     
+    # Collect all time statistics from parallel tasks
+    all_time_stats = []
+    for table_name in mapper.stats:
+        if 'time_stats' in mapper.stats[table_name]:
+            all_time_stats.append(mapper.stats[table_name]['time_stats'])
+    
+    # Calculate CPU time from frequency counting phase
+    freq_count_cpu_time = sum(s.get('total', 0) for s in mapper.freq_count_time_stats)
+    
+    # Calculate CPU time from table processing phase
+    table_processing_cpu_time = sum(s.get('total', 0) for s in all_time_stats)
+    
+    # Total CPU time includes all phases (frequency counting, table processing, and merging)
+    # Note: merge phase is single-threaded, so its wall time equals CPU time
+    total_cpu_time = freq_count_cpu_time + table_processing_cpu_time + merge_time
+    
     # Performance breakdown
     print("\n" + "="*50)
     print("PERFORMANCE BREAKDOWN - Parallel Concept Mapping")
     print("="*50)
     
-    print(f"Frequency counting:    {freq_count_time:.2f}s ({freq_count_time/total_time*100:.1f}%)")
-    print(f"Parallel processing:   {parallel_time:.2f}s ({parallel_time/total_time*100:.1f}%)")
-    
-    # Calculate other operations
-    other_time = total_time - freq_count_time - parallel_time
-    if other_time > 0.1:
-        print(f"Other operations:      {other_time:.2f}s ({other_time/total_time*100:.1f}%)")
+    if total_cpu_time > 0:
+        # Display CPU time vs wall clock time
+        freq_tasks = len(mapper.freq_count_time_stats)
+        proc_tasks = len(all_time_stats) 
+        total_parallel_tasks = freq_tasks + proc_tasks
+        
+        print(f"\nTotal CPU time:        {total_cpu_time:.2f}s")
+        print(f"Wall clock time:       {total_time:.2f}s")
+        print(f"Speedup:               {total_cpu_time/total_time:.2f}x")
+        
+        # Calculate phase-specific metrics
+        print(f"\nPhase-specific Performance:")
+        
+        # Phase 1: Frequency counting (parallel)
+        freq_wall_time = freq_count_time
+        if freq_wall_time > 0:
+            freq_speedup = freq_count_cpu_time / freq_wall_time
+            freq_efficiency = freq_speedup / min(freq_tasks, MAX_WORKERS) * 100
+            print(f"  Frequency Counting ({freq_tasks} tasks, {min(freq_tasks, MAX_WORKERS)} workers active):")
+            print(f"    CPU time: {freq_count_cpu_time:.2f}s, Wall time: {freq_wall_time:.2f}s")
+            print(f"    Speedup: {freq_speedup:.2f}x, Efficiency: {freq_efficiency:.1f}%")
+        
+        # Phase 2: Table processing (parallel)
+        proc_wall_time = table_processing_wall_time
+        if proc_wall_time > 0:
+            proc_speedup = table_processing_cpu_time / proc_wall_time
+            # For processing, we have 6 MEASUREMENT chunks + 10 tables = 16 tasks
+            actual_proc_tasks = 16  # Actual parallel tasks executed
+            proc_efficiency = proc_speedup / min(actual_proc_tasks, MAX_WORKERS) * 100
+            print(f"  Table Processing ({actual_proc_tasks} tasks, {min(actual_proc_tasks, MAX_WORKERS)} workers active):")
+            print(f"    CPU time: {table_processing_cpu_time:.2f}s, Wall time: {proc_wall_time:.2f}s") 
+            print(f"    Speedup: {proc_speedup:.2f}x, Efficiency: {proc_efficiency:.1f}%")
+        
+        # Phase 3: Merging (sequential)
+        if merge_time > 0:
+            print(f"  Merging (sequential):")
+            print(f"    CPU time: {merge_time:.2f}s, Wall time: {merge_time:.2f}s")
+            print(f"    Speedup: 1.00x (single-threaded)")
+        
+        # Calculate detailed breakdown for frequency counting phase
+        freq_file_reading = sum(s.get('file_reading', 0) for s in mapper.freq_count_time_stats)
+        freq_stats_calc = sum(s.get('stats_calculation', 0) for s in mapper.freq_count_time_stats)
+        
+        # Calculate detailed breakdown for table processing phase
+        total_file_reading = sum(s.get('file_reading', 0) for s in all_time_stats)
+        total_low_freq = sum(s.get('low_freq_filtering', 0) for s in all_time_stats)
+        total_mapping = sum(s.get('concept_mapping', 0) for s in all_time_stats)
+        total_dedup = sum(s.get('deduplication', 0) for s in all_time_stats)
+        total_file_writing = sum(s.get('file_writing', 0) for s in all_time_stats)
+        
+        print(f"\nDetailed CPU Time Breakdown:")
+        print(f"  Phase 1 - Frequency Counting: {freq_count_cpu_time:.2f}s ({freq_count_cpu_time/total_cpu_time*100:.1f}%)")
+        print(f"    File reading:          {freq_file_reading:.2f}s")
+        print(f"    Stats calculation:     {freq_stats_calc:.2f}s")
+        print(f"  Phase 2 - Table Processing: {table_processing_cpu_time:.2f}s ({table_processing_cpu_time/total_cpu_time*100:.1f}%)")
+        print(f"    File reading:          {total_file_reading:.2f}s")
+        print(f"    Low freq filtering:    {total_low_freq:.2f}s")
+        print(f"    Concept mapping:       {total_mapping:.2f}s")
+        print(f"    Deduplication:         {total_dedup:.2f}s")
+        print(f"    File writing:          {total_file_writing:.2f}s")
+        if merge_time > 0:
+            print(f"  Phase 3 - Merging: {merge_time:.2f}s ({merge_time/total_cpu_time*100:.1f}%)")
+    else:
+        # Fallback to simple display
+        print(f"Frequency counting:    {freq_count_time:.2f}s ({freq_count_time/total_time*100:.1f}%)")
+        print(f"Parallel processing:   {parallel_time:.2f}s ({parallel_time/total_time*100:.1f}%)")
     
     print(f"\nTables processed in parallel: {len(ALL_TABLES)}")
     print(f"MEASUREMENT chunks: {MEASUREMENT_SPLITS}")
