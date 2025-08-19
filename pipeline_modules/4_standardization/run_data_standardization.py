@@ -3,6 +3,7 @@
 
 import csv
 import json
+import re
 import argparse
 import numpy as np
 import pandas as pd
@@ -37,7 +38,7 @@ warnings.filterwarnings('ignore', category=UserWarning)
 base_dir = Path(__file__).parent
 project_root = base_dir.parent.parent  # Go up to crisp_pipeline_code
 data_dir = project_root / "data"
-cleaning_dir = project_root / "output" / "2_cleaning"
+# All inputs now come from Module 3 (mapping) output
 mapping_dir = project_root / "output" / "3_mapping"
 output_dir = project_root / "output" / "4_standardization"
 
@@ -45,19 +46,15 @@ output_dir = project_root / "output" / "4_standardization"
 removed_dir = output_dir / "removed_records"
 outliers_percentile_dir = removed_dir / "outliers_percentile"
 outliers_range_dir = removed_dir / "outliers_range"
-low_frequency_dir = removed_dir / "low_frequency"
-merged_visits_dir = output_dir / "merged_visits"
+merged_visit_dir = output_dir / "merged_visit"
 changes_dir = output_dir / "standardization_changes"
 
 # Create all directories
 for dir_path in [output_dir, outliers_percentile_dir, outliers_range_dir, 
-                 low_frequency_dir, merged_visits_dir, changes_dir]:
+                 merged_visit_dir, changes_dir]:
     dir_path.mkdir(parents=True, exist_ok=True)
 
-# Tables that have been mapped to SNOMED
-MAPPED_TABLES = ['MEASUREMENT', 'OBSERVATION', 'PROCEDURE_OCCURRENCE', 'DEVICE_EXPOSURE']
-
-# All tables to standardize (including visit tables)
+# All tables to standardize (all have been processed by Module 3)
 TABLES_TO_STANDARDIZE = ['MEASUREMENT', 'OBSERVATION', 'PROCEDURE_OCCURRENCE', 
                         'DEVICE_EXPOSURE', 'DRUG_EXPOSURE', 
                         'VISIT_DETAIL', 'VISIT_OCCURRENCE',
@@ -66,6 +63,26 @@ TABLES_TO_STANDARDIZE = ['MEASUREMENT', 'OBSERVATION', 'PROCEDURE_OCCURRENCE',
 
 # Visit tables that need merging (subset of TABLES_TO_STANDARDIZE)
 VISIT_TABLES = ['VISIT_DETAIL', 'VISIT_OCCURRENCE']
+
+# Date/datetime columns for optimized date standardization
+DATE_COLUMNS = {
+    'MEASUREMENT': ['measurement_date', 'measurement_datetime'],
+    'OBSERVATION': ['observation_date', 'observation_datetime'],
+    'PROCEDURE_OCCURRENCE': ['procedure_date', 'procedure_datetime'],
+    'DEVICE_EXPOSURE': ['device_exposure_start_date', 'device_exposure_start_datetime', 
+                        'device_exposure_end_date', 'device_exposure_end_datetime'],
+    'CONDITION_OCCURRENCE': ['condition_start_date', 'condition_start_datetime',
+                            'condition_end_date', 'condition_end_datetime'],
+    'CONDITION_ERA': ['condition_era_start_date', 'condition_era_end_date'],
+    'DRUG_EXPOSURE': ['drug_exposure_start_date', 'drug_exposure_start_datetime',
+                      'drug_exposure_end_date', 'drug_exposure_end_datetime'],
+    'DRUG_ERA': ['drug_era_start_date', 'drug_era_end_date'],
+    'VISIT_OCCURRENCE': ['visit_start_date', 'visit_start_datetime',
+                         'visit_end_date', 'visit_end_datetime'],
+    'VISIT_DETAIL': ['visit_detail_start_date', 'visit_detail_start_datetime',
+                     'visit_detail_end_date', 'visit_detail_end_datetime'],
+    'SPECIMEN': ['specimen_date', 'specimen_datetime']
+}
 
 # Concept-specific reasonable ranges
 # Using SNOMED IDs for concepts that have been mapped, keeping original IDs for unmapped concepts
@@ -101,67 +118,157 @@ UNIT_CONVERSIONS = {
 }
 
 class DataStandardizer:
-    def __init__(self, outlier_percentile=99.0, min_concept_frequency=10, 
+    def __init__(self, outlier_percentile=99.0, 
                  merge_visits=True, merge_threshold_hours=2.0):
         self.outlier_percentile = outlier_percentile
-        self.min_concept_frequency = min_concept_frequency
         self.merge_visits = merge_visits
         self.merge_threshold_hours = merge_threshold_hours
         self.concept_thresholds = {}
-        self.concept_frequencies = {}
+        # No longer need to track concept frequencies for filtering
+        # self.concept_frequencies = {}
+        
+        # Date processing optimization - caching for performance
+        self.date_cache = {}  # Cache for parsed dates
+        self.format_cache = {}  # Cache for detected date formats
+        
         self.standardization_results = {
             "standardization_date": datetime.now().isoformat(),
             "dataset": "OMOP CDM",
             "parameters": {
-                "outlier_percentile": outlier_percentile,
-                "min_concept_frequency": min_concept_frequency,
-                "merge_visits": merge_visits,
-                "merge_threshold_hours": merge_threshold_hours
+                "outlier_percentile": self.outlier_percentile,
+                "merge_visits": self.merge_visits,
+                "merge_threshold_hours": self.merge_threshold_hours
             },
             "tables": {}
         }
         
     def get_input_path(self, table_name):
-        """Get the correct input path based on whether table has been mapped."""
-        if table_name in MAPPED_TABLES:
-            input_file = mapping_dir / f"{table_name}_mapped.csv"
-        else:
-            input_file = cleaning_dir / f"{table_name}_cleaned.csv"
-        
+        """Get the correct input path - all tables should come from mapping output."""
+        # All tables have been processed by Module 3 (mapping and low frequency filtering)
+        input_file = mapping_dir / f"{table_name}_mapped.csv"
         return input_file
     
-    def standardize_datetime(self, dt_string):
-        """Standardize datetime format preserving original precision."""
-        if not dt_string:
+    def standardize_datetime(self, dt_string, column_name=""):
+        """Optimized datetime standardization with caching and format detection."""
+        if not dt_string or not dt_string.strip():
             return dt_string
         
-        # Define formats with their types (format, has_time)
-        datetime_formats = [
-            ('%Y-%m-%d %H:%M:%S', True),   # Has time with seconds
-            ('%Y-%m-%d %H:%M', True),       # Has time without seconds
-            ('%m/%d/%Y %H:%M:%S', True),   # US format with time and seconds
-            ('%m/%d/%Y %H:%M', True),       # US format with time
-            ('%d/%m/%Y %H:%M:%S', True),   # EU format with time and seconds
-            ('%d/%m/%Y %H:%M', True),       # EU format with time
-            ('%Y-%m-%d', False),            # ISO date only
-            ('%m/%d/%Y', False),            # US date only
-            ('%d/%m/%Y', False),            # EU date only
-            ('%Y/%m/%d', False),            # Alternative date format
+        dt_string = dt_string.strip()
+        
+        # Check cache first for performance
+        if dt_string in self.date_cache:
+            return self.date_cache[dt_string]
+        
+        # Normalize: Remove fractional seconds first (major optimization)
+        normalized = re.sub(r'(\d{2}:\d{2}:\d{2})\.\d+', r'\1', dt_string)
+        
+        # Check cache again after normalization
+        if normalized in self.date_cache:
+            self.date_cache[dt_string] = self.date_cache[normalized]
+            return self.date_cache[normalized]
+        
+        # Use column name for direct format detection (ultra-fast optimization)
+        expected_format = None
+        has_time = False
+        
+        if column_name.endswith('_datetime'):
+            expected_format = '%Y-%m-%d %H:%M:%S'
+            has_time = True
+        elif column_name.endswith('_date'):
+            expected_format = '%Y-%m-%d'
+            has_time = False
+        
+        # Try expected format first
+        if expected_format:
+            try:
+                dt = datetime.strptime(normalized, expected_format)
+                if has_time:
+                    result = dt.strftime('%Y-%m-%d %H:%M:%S')
+                else:
+                    result = dt.strftime('%Y-%m-%d')
+                
+                # Cache both original and normalized
+                self.date_cache[dt_string] = result
+                self.date_cache[normalized] = result
+                return result
+            except ValueError:
+                pass
+        
+        # Fallback: Fast format detection with regex (if column name detection failed)
+        format_patterns = [
+            (r'^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$', '%Y-%m-%d %H:%M:%S', True),
+            (r'^\d{4}-\d{2}-\d{2}$', '%Y-%m-%d', False),
+            (r'^\d{4}-\d{2}-\d{2} \d{2}:\d{2}$', '%Y-%m-%d %H:%M', True),
+            (r'^\d{4}/\d{2}/\d{2} \d{2}:\d{2}:\d{2}$', '%Y/%m/%d %H:%M:%S', True),
+            (r'^\d{4}/\d{2}/\d{2}$', '%Y/%m/%d', False),
+            (r'^\d{2}/\d{2}/\d{4} \d{2}:\d{2}:\d{2}$', '%m/%d/%Y %H:%M:%S', True),
+            (r'^\d{2}/\d{2}/\d{4}$', '%m/%d/%Y', False),
         ]
         
-        for fmt, has_time in datetime_formats:
-            try:
-                dt = datetime.strptime(dt_string, fmt)
-                if has_time:
-                    # Return with time if original had time
-                    return dt.strftime('%Y-%m-%d %H:%M:%S')
-                else:
-                    # Return date only if original was date only
-                    return dt.strftime('%Y-%m-%d')
-            except:
-                continue
+        for pattern, format_str, has_time in format_patterns:
+            if re.match(pattern, normalized):
+                try:
+                    dt = datetime.strptime(normalized, format_str)
+                    if has_time:
+                        result = dt.strftime('%Y-%m-%d %H:%M:%S')
+                    else:
+                        result = dt.strftime('%Y-%m-%d')
+                    
+                    # Cache both original and normalized
+                    self.date_cache[dt_string] = result
+                    self.date_cache[normalized] = result
+                    return result
+                except ValueError:
+                    continue
         
-        return dt_string  # Return original if can't parse
+        # If all else fails, cache and return original
+        self.date_cache[dt_string] = dt_string
+        return dt_string
+    
+    def batch_standardize_dates_in_rows(self, rows, table_name):
+        """Batch-process date standardization for optimal performance."""
+        date_cols = DATE_COLUMNS.get(table_name, [])
+        
+        if not date_cols:
+            # Fallback: detect date columns by name
+            if rows:
+                first_row = rows[0]
+                date_cols = [col for col in first_row.keys() 
+                            if 'datetime' in col.lower() or 'date' in col.lower()]
+        
+        if not date_cols:
+            return rows
+        
+        # Step 1: Collect all unique date values from all date columns
+        unique_dates_by_column = {}
+        for col in date_cols:
+            unique_dates_by_column[col] = set()
+        
+        for row in rows:
+            for col in date_cols:
+                if col in row and row[col] and row[col].strip():
+                    unique_dates_by_column[col].add(row[col].strip())
+        
+        # Step 2: Batch process unique dates for each column
+        for col, unique_dates in unique_dates_by_column.items():
+            # Only process dates that aren't already cached
+            uncached_dates = unique_dates - set(self.date_cache.keys())
+            
+            if uncached_dates:
+                for date_str in uncached_dates:
+                    # Process with column name for optimized format detection
+                    self.standardize_datetime(date_str, col)
+        
+        # Step 3: Apply cached results to all rows
+        for row in rows:
+            for col in date_cols:
+                if col in row and row[col] and row[col].strip():
+                    original_date = row[col].strip()
+                    # Use cached result
+                    standardized_date = self.date_cache.get(original_date, original_date)
+                    row[col] = standardized_date
+        
+        return rows
     
     def standardize_units(self, value, unit_concept_id, measurement_concept_id):
         """Standardize measurement units based on concept IDs."""
@@ -200,7 +307,7 @@ class DataStandardizer:
         return value, unit_concept_id, conversion_info
     
     def calculate_concept_statistics(self, table_name):
-        """Calculate concept frequencies and outlier thresholds."""
+        """Calculate outlier thresholds for MEASUREMENT table."""
         logging.info(f"Calculating concept statistics for {table_name}")
         
         input_file = self.get_input_path(table_name)
@@ -280,14 +387,14 @@ class DataStandardizer:
                         except:
                             pass
         
-        # Store concept frequencies
-        self.concept_frequencies[table_name] = dict(concept_counts)
+        # No longer store concept frequencies since filtering is done in Module 3
+        # self.concept_frequencies[table_name] = dict(concept_counts)
         
         # Calculate outlier thresholds for MEASUREMENT
         if table_name == 'MEASUREMENT':
             self.concept_thresholds[table_name] = {}
             for concept_id, values in concept_values.items():
-                if len(values) >= self.min_concept_frequency:  # Need sufficient data
+                if len(values) >= 10:  # Need sufficient data for percentile calculation
                     values_array = np.array(values)
                     lower = np.percentile(values_array, 100 - self.outlier_percentile)
                     upper = np.percentile(values_array, self.outlier_percentile)
@@ -310,9 +417,10 @@ class DataStandardizer:
             
             logging.info(f"Calculated thresholds for {len(self.concept_thresholds[table_name])} concepts")
         
-        logging.info(f"Found {len(concept_counts)} unique concepts in {table_name}")
-        low_freq_concepts = sum(1 for count in concept_counts.values() if count < self.min_concept_frequency)
-        logging.info(f"  - {low_freq_concepts} concepts have frequency < {self.min_concept_frequency}")
+        # Only log for MEASUREMENT table since we only calculate outlier thresholds for it
+        if table_name == 'MEASUREMENT':
+            logging.info(f"Found {len(concept_counts)} unique concepts in {table_name}")
+        # No longer log low frequency concepts since filtering is done in Module 3
     
     def check_outlier(self, value, concept_id, table_name):
         """Check if a value is an outlier based on percentile and range."""
@@ -335,16 +443,8 @@ class DataStandardizer:
         
         return False, None
     
-    def check_low_frequency(self, concept_id, table_name):
-        """Check if a concept has low frequency."""
-        if table_name not in self.concept_frequencies:
-            return False
-        
-        frequency = self.concept_frequencies[table_name].get(concept_id, 0)
-        return frequency < self.min_concept_frequency
-    
     def _process_rows_with_outliers(self, reader, writer, perc_writer, range_writer, 
-                                   freq_writer, change_writer, stats, table_name, concept_col, input_file):
+                                   change_writer, stats, table_name, concept_col, input_file):
         """Process rows for MEASUREMENT table with outlier checking."""
         headers = writer.fieldnames
         
@@ -365,28 +465,18 @@ class DataStandardizer:
             removal_info = {}
             changes = []
             
-            # Check for low frequency concepts first
-            if concept_col and concept_col in row and row[concept_col]:
-                try:
-                    concept_id = int(row[concept_col])
-                    if self.check_low_frequency(concept_id, table_name):
-                        is_removed = True
-                        removal_reason = 'low_frequency'
-                        removal_info = {
-                            'concept_id': concept_id,
-                            'frequency': self.concept_frequencies[table_name].get(concept_id, 0),
-                            'threshold': self.min_concept_frequency
-                        }
-                except:
-                    pass
-            
             # If not removed for low frequency, continue with other checks
             if not is_removed:
-                # Standardize datetime fields
-                for col in headers:
-                    if 'datetime' in col.lower() or 'date' in col.lower():
+                # Standardize datetime fields - use DATE_COLUMNS config for better performance
+                date_cols = DATE_COLUMNS.get(table_name, [])
+                if not date_cols:
+                    # Fallback: detect date columns by name
+                    date_cols = [col for col in headers if 'datetime' in col.lower() or 'date' in col.lower()]
+                
+                for col in date_cols:
+                    if col in row:
                         original = row[col]
-                        standardized = self.standardize_datetime(original)
+                        standardized = self.standardize_datetime(original, col)
                         if original != standardized:
                             stats['datetime_standardized'] += 1
                             new_row[col] = standardized
@@ -453,10 +543,7 @@ class DataStandardizer:
                 removed_row['original_row_number'] = row_num
                 removed_row['additional_info'] = json.dumps(removal_info)
                 
-                if removal_reason == 'low_frequency':
-                    stats['low_frequency_removed'] += 1
-                    freq_writer.writerow(removed_row)
-                elif removal_reason == 'percentile_outlier':
+                if removal_reason == 'percentile_outlier':
                     stats['outliers_removed_percentile'] += 1
                     perc_writer.writerow(removed_row)
                 elif removal_reason == 'range_outlier':
@@ -470,7 +557,7 @@ class DataStandardizer:
                 for change in changes:
                     change_writer.writerow(change)
     
-    def _process_rows_without_outliers(self, reader, writer, freq_writer, 
+    def _process_rows_without_outliers(self, reader, writer, 
                                       change_writer, stats, table_name, concept_col, input_file):
         """Process rows for non-MEASUREMENT tables without outlier checking."""
         headers = writer.fieldnames
@@ -492,27 +579,17 @@ class DataStandardizer:
             removal_info = {}
             changes = []
             
-            # Check for low frequency concepts
-            if concept_col and concept_col in row and row[concept_col]:
-                try:
-                    concept_id = int(row[concept_col])
-                    if self.check_low_frequency(concept_id, table_name):
-                        is_removed = True
-                        removal_reason = 'low_frequency'
-                        removal_info = {
-                            'concept_id': concept_id,
-                            'frequency': self.concept_frequencies[table_name].get(concept_id, 0),
-                            'threshold': self.min_concept_frequency
-                        }
-                except:
-                    pass
-            
-            # If not removed, standardize datetime fields
+            # Standardize datetime fields - use DATE_COLUMNS config for better performance
             if not is_removed:
-                for col in headers:
-                    if 'datetime' in col.lower() or 'date' in col.lower():
+                date_cols = DATE_COLUMNS.get(table_name, [])
+                if not date_cols:
+                    # Fallback: detect date columns by name
+                    date_cols = [col for col in headers if 'datetime' in col.lower() or 'date' in col.lower()]
+                
+                for col in date_cols:
+                    if col in row:
                         original = row[col]
-                        standardized = self.standardize_datetime(original)
+                        standardized = self.standardize_datetime(original, col)
                         if original != standardized:
                             stats['datetime_standardized'] += 1
                             new_row[col] = standardized
@@ -530,9 +607,6 @@ class DataStandardizer:
                 removed_row['removal_reason'] = removal_reason
                 removed_row['original_row_number'] = row_num
                 removed_row['additional_info'] = json.dumps(removal_info)
-                
-                stats['low_frequency_removed'] += 1
-                freq_writer.writerow(removed_row)
             else:
                 writer.writerow(new_row)
                 stats['output_records'] += 1
@@ -595,7 +669,6 @@ class DataStandardizer:
             concept_col = 'visit_concept_id'
         
         # Open files for removed records
-        low_frequency_file = low_frequency_dir / f"{table_name}_low_frequency.csv"
         changes_file = changes_dir / f"{table_name}_changes.csv"
         
         # Only create outlier files for MEASUREMENT table
@@ -611,7 +684,6 @@ class DataStandardizer:
             'units_converted': 0,
             'outliers_removed_percentile': 0,
             'outliers_removed_range': 0,
-            'low_frequency_removed': 0,
             'values_normalized': 0
         }
         
@@ -627,7 +699,6 @@ class DataStandardizer:
                 with open(output_file, 'w', encoding='utf-8', newline='') as outfile, \
                      open(outliers_percentile_file, 'w', encoding='utf-8', newline='') as perc_file, \
                      open(outliers_range_file, 'w', encoding='utf-8', newline='') as range_file, \
-                     open(low_frequency_file, 'w', encoding='utf-8', newline='') as freq_file, \
                      open(changes_file, 'w', encoding='utf-8', newline='') as change_file:
                     
                     # Writers
@@ -641,21 +712,17 @@ class DataStandardizer:
                     range_writer = csv.DictWriter(range_file, fieldnames=removed_headers)
                     range_writer.writeheader()
                     
-                    freq_writer = csv.DictWriter(freq_file, fieldnames=removed_headers)
-                    freq_writer.writeheader()
-                    
                     change_headers = ['row_number', 'field', 'original_value', 'new_value', 'change_type']
                     change_writer = csv.DictWriter(change_file, fieldnames=change_headers)
                     change_writer.writeheader()
                     
                     # Process rows with outlier checking
                     self._process_rows_with_outliers(reader, writer, perc_writer, range_writer, 
-                                                   freq_writer, change_writer, stats, 
+                                                   change_writer, stats, 
                                                    table_name, concept_col, input_file)
             else:
                 # For other tables, only open necessary files (no outlier files)
                 with open(output_file, 'w', encoding='utf-8', newline='') as outfile, \
-                     open(low_frequency_file, 'w', encoding='utf-8', newline='') as freq_file, \
                      open(changes_file, 'w', encoding='utf-8', newline='') as change_file:
                     
                     # Writers
@@ -663,15 +730,12 @@ class DataStandardizer:
                     writer.writeheader()
                     
                     removed_headers = headers + ['removal_reason', 'original_row_number', 'additional_info']
-                    freq_writer = csv.DictWriter(freq_file, fieldnames=removed_headers)
-                    freq_writer.writeheader()
-                    
                     change_headers = ['row_number', 'field', 'original_value', 'new_value', 'change_type']
                     change_writer = csv.DictWriter(change_file, fieldnames=change_headers)
                     change_writer.writeheader()
                     
                     # Process rows without outlier checking
-                    self._process_rows_without_outliers(reader, writer, freq_writer, 
+                    self._process_rows_without_outliers(reader, writer, 
                                                       change_writer, stats, 
                                                       table_name, concept_col, input_file)
         
@@ -688,7 +752,6 @@ class DataStandardizer:
         logging.info(f"  - Input records: {stats['input_records']:,}")
         logging.info(f"  - Output records: {stats['output_records']:,}")
         logging.info(f"  - Records removed: {stats['input_records'] - stats['output_records']:,}")
-        logging.info(f"    - Low frequency concepts: {stats['low_frequency_removed']:,}")
         logging.info(f"    - Percentile outliers: {stats['outliers_removed_percentile']:,}")
         logging.info(f"    - Range outliers: {stats['outliers_removed_range']:,}")
         logging.info(f"  - Datetime fields standardized: {stats['datetime_standardized']:,}")
@@ -774,21 +837,14 @@ class DataStandardizer:
         # Collect removal statistics for each table
         for table_name, stats in self.standardization_results["tables"].items():
             if isinstance(stats, dict) and 'input_records' in stats:
-                if stats['low_frequency_removed'] > 0:
-                    removal_summary.append({
-                        'table': table_name,
-                        'removal_reason': 'low_frequency',
-                        'count': stats['low_frequency_removed'],
-                        'percentage': (stats['low_frequency_removed'] / stats['input_records'] * 100) if stats['input_records'] > 0 else 0
-                    })
-                if stats['outliers_removed_percentile'] > 0:
+                if stats.get('outliers_removed_percentile', 0) > 0:
                     removal_summary.append({
                         'table': table_name,
                         'removal_reason': 'percentile_outlier',
                         'count': stats['outliers_removed_percentile'],
                         'percentage': (stats['outliers_removed_percentile'] / stats['input_records'] * 100) if stats['input_records'] > 0 else 0
                     })
-                if stats['outliers_removed_range'] > 0:
+                if stats.get('outliers_removed_range', 0) > 0:
                     removal_summary.append({
                         'table': table_name,
                         'removal_reason': 'range_outlier',
@@ -805,21 +861,19 @@ class DataStandardizer:
         """Run the complete standardization process."""
         logging.info("Starting data standardization process...")
         logging.info(f"Parameters: outlier_percentile={self.outlier_percentile}, "
-                    f"min_concept_frequency={self.min_concept_frequency}, "
                     f"merge_visits={self.merge_visits}, merge_threshold={self.merge_threshold_hours}h")
         
         # Print input information
         print("\n" + "="*70)
         print("DATA STANDARDIZATION PROCESS - INPUT INFORMATION")
         print("="*70)
-        print(f"Cleaning Directory: {cleaning_dir}")
-        print(f"Mapping Directory: {mapping_dir}")
+        print(f"Input Directory: {mapping_dir}")
         print(f"Output Directory: {output_dir}")
         print("\nTables to standardize:")
         for table in TABLES_TO_STANDARDIZE:
             input_file = self.get_input_path(table)
-            source = "mapped" if table in MAPPED_TABLES else "cleaned"
-            print(f"  - {table}: {input_file} (from {source})")
+            # All tables now come from Module 3 output (mapped/filtered)
+            print(f"  - {table}: {input_file}")
         
         if self.merge_visits:
             print("\nVisit tables for merging:")
@@ -867,7 +921,6 @@ class DataStandardizer:
         total_input = 0
         total_output = 0
         total_removed = 0
-        total_low_freq = 0
         total_outliers = 0
         total_visits_merged = 0
         tables_modified = []
@@ -877,7 +930,6 @@ class DataStandardizer:
                 if 'input_records' in stats:  # Main standardization tables
                     total_input += stats['input_records']
                     total_output += stats['output_records']
-                    total_low_freq += stats.get('low_frequency_removed', 0)
                     total_outliers += stats.get('outliers_removed_percentile', 0) + stats.get('outliers_removed_range', 0)
                     if stats['input_records'] != stats['output_records']:
                         tables_modified.append(table)
@@ -901,7 +953,6 @@ class DataStandardizer:
             print("  - Removed: 0 (0.0%)")
         
         print(f"\nRecords Removed by Type:")
-        print(f"  - Low frequency concepts: {total_low_freq:,}")
         print(f"  - Outliers: {total_outliers:,}")
         
         if self.merge_visits:
@@ -917,7 +968,7 @@ class DataStandardizer:
                 print(f"    - {output_file.name}")
         
         print("\n  Removed records:")
-        for subdir in ['outliers_percentile', 'outliers_range', 'low_frequency']:
+        for subdir in ['outliers_percentile', 'outliers_range']:
             dir_path = removed_dir / subdir
             if dir_path.exists():
                 files = list(dir_path.glob('*.csv'))
@@ -943,12 +994,11 @@ class DataStandardizer:
             f.write(f"**Generated**: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
             f.write(f"**Dataset**: OMOP CDM\n")
             f.write(f"**Outlier Percentile**: {self.outlier_percentile}%\n")
-            f.write(f"**Minimum Concept Frequency**: {self.min_concept_frequency}\n")
             f.write(f"**Visit Merge Threshold**: {self.merge_threshold_hours} hours\n\n")
             
             f.write("## Standardization Summary\n\n")
-            f.write("| Table | Input Records | Output Records | Low Freq Removed | Outliers Removed | Total Removed |\n")
-            f.write("|-------|---------------|----------------|------------------|------------------|---------------|\n")
+            f.write("| Table | Input Records | Output Records | Outliers Removed | Total Removed |\n")
+            f.write("|-------|---------------|----------------|------------------|---------------|\n")
             
             total_input = 0
             total_output = 0
@@ -963,22 +1013,17 @@ class DataStandardizer:
                     total_removed += removed
                     
                     f.write(f"| {table} | {stats['input_records']:,} | {stats['output_records']:,} | ")
-                    f.write(f"{stats['low_frequency_removed']:,} | {outliers:,} | {removed:,} |\n")
+                    f.write(f"{outliers:,} | {removed:,} |\n")
             
             f.write(f"| **Total** | **{total_input:,}** | **{total_output:,}** | - | - | **{total_removed:,}** |\n")
             
             f.write("\n## Key Features\n\n")
-            f.write("### 1. Low Frequency Filtering\n")
-            f.write(f"- Removed concepts with frequency < {self.min_concept_frequency}\n")
-            f.write("- Applied to all tables with concept IDs\n")
-            f.write("- Preserves data quality by removing rare/erroneous concepts\n\n")
-            
-            f.write("### 2. Outlier Removal\n")
+            f.write("### 1. Outlier Removal\n")
             f.write(f"- Percentile-based: Values beyond {self.outlier_percentile}th percentile\n")
             f.write("- Range-based: Physiologically implausible values\n")
             f.write("- Applied per concept ID to preserve concept-specific distributions\n\n")
             
-            f.write("### 3. Visit Merging\n")
+            f.write("### 2. Visit Merging\n")
             if self.merge_visits:
                 f.write(f"- Merged visits within {self.merge_threshold_hours} hours\n")
                 f.write("- Created episode identifiers for continuous care\n")
@@ -986,17 +1031,15 @@ class DataStandardizer:
             else:
                 f.write("- Visit merging was disabled\n")
             
-            f.write("\n### 4. Standardizations Applied\n")
+            f.write("\n### 3. Standardizations Applied\n")
             f.write("- Datetime format: ISO 8601 (YYYY-MM-DD HH:MM:SS)\n")
             f.write("- Unit conversions: glucose, temperature, weight, height\n")
             f.write("- All changes are traceable through change logs\n\n")
             
             f.write("## Data Sources\n\n")
-            f.write("- **Mapped tables** (from 3_mapping): ")
-            f.write(", ".join(MAPPED_TABLES) + "\n")
-            f.write("- **Cleaned tables** (from 2_cleaning): ")
-            cleaned_tables = [t for t in TABLES_TO_STANDARDIZE if t not in MAPPED_TABLES]
-            f.write(", ".join(cleaned_tables) + "\n\n")
+            f.write("- **All tables** (from Module 3 - mapping): ")
+            f.write(", ".join(TABLES_TO_STANDARDIZE) + "\n")
+            f.write("- All tables have been processed through Module 3 for concept mapping and low frequency filtering\n\n")
             
             f.write("## Output Structure\n\n")
             f.write("```\n")
@@ -1005,9 +1048,8 @@ class DataStandardizer:
             f.write("|-- removed_records/\n")
             f.write("|   |-- outliers_percentile/     # Percentile-based outliers\n")
             f.write("|   |-- outliers_range/          # Range-based outliers\n")
-            f.write("|   |-- low_frequency/           # Low frequency concepts\n")
             f.write("|   +-- removal_summary.csv      # Summary of all removals\n")
-            f.write("|-- merged_visits/               # Visit merge information\n")
+            f.write("|-- merged_visit/                # Visit merge information\n")
             f.write("|   |-- [table]_merged.csv       # Merged visit data\n")
             f.write("|   +-- [table]_merge_mapping.csv # Merge mappings\n")
             f.write("+-- standardization_changes/     # All standardization changes\n")
@@ -1030,8 +1072,6 @@ def main():
     parser = argparse.ArgumentParser(description='Data standardization with outlier removal, low frequency filtering, and visit merging')
     parser.add_argument('--outlier-percentile', type=float, default=99.0,
                         help='Percentile threshold for outlier removal (default: 99)')
-    parser.add_argument('--min-concept-frequency', type=int, default=10,
-                        help='Minimum concept frequency threshold (default: 10)')
     parser.add_argument('--no-merge-visits', action='store_true',
                         help='Disable visit merging')
     parser.add_argument('--merge-threshold', type=float, default=2.0,
@@ -1042,7 +1082,6 @@ def main():
     # Initialize and run standardizer
     standardizer = DataStandardizer(
         outlier_percentile=args.outlier_percentile,
-        min_concept_frequency=args.min_concept_frequency,
         merge_visits=not args.no_merge_visits,
         merge_threshold_hours=args.merge_threshold
     )
