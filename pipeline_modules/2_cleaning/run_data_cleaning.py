@@ -109,40 +109,10 @@ DUPLICATE_KEY_COLUMNS = {
     'DEATH': ['person_id']
 }
 
-# Start timing
-start_time = time.time()
-
-print("Starting data cleaning on subdataset_1000...")
-print(f"Output directory: {output_dir}")
-print(f"Chunk size: {CHUNK_SIZE:,} rows")
-print(f"Tables to clean: {', '.join(KEY_TABLES)}")
-
-# Check if column analysis from EDA is available
+# Check if column analysis from EDA is available (module-level for all processes)
 column_analysis_path = project_root / "output" / "1_eda" / "column_analysis.json"
-if column_analysis_path.exists():
-    print(f"\nFound column_analysis.json from EDA module, will use cached analysis")
-else:
-    print(f"\nNo column_analysis.json found, will analyze columns for each table")
 
-# Print input information
-print("\n" + "="*70)
-print("DATA CLEANING PROCESS - INPUT INFORMATION")
-print("="*70)
-print(f"Data Directory: {data_dir}")
-print(f"Output Directory: {output_dir}")
-print("\nTables to be cleaned:")
-for table in KEY_TABLES:
-    input_file = data_dir / f"{table}.csv"
-    print(f"  - {table}: {input_file}")
-
-print("\nCleaning Strategy:")
-print("  1. Remove columns with >95% missing data")
-print("  2. Remove duplicate records based on table-specific keys")
-print("  3. Remove records with invalid concept IDs (0 or null)")
-print("  4. Validate temporal consistency for date ranges")
-print("="*70 + "\n")
-
-# Store cleaning results
+# Initialize cleaning results at module level for parallel processing
 cleaning_results = {
     "cleaning_date": datetime.now().isoformat(),
     "dataset": "subdataset_1000",
@@ -283,6 +253,8 @@ def clean_table_partial(table_name, start_row=0, end_row=-1, position=0, disable
     table_time_stats = {
         'total': 0,
         'column_analysis': 0,
+        'csv_reading': 0,
+        'data_transformation': 0,
         'duplicate_detection': 0,
         'invalid_concept': 0,
         'temporal_validation': 0,
@@ -431,16 +403,20 @@ def clean_table_partial(table_name, start_row=0, end_row=-1, position=0, disable
                 
                 rows_processed = 0
                 for row_num, row in enumerate(reader):
+                    t_read = time.time()
                     # Skip rows before start_row
                     if row_num < start_row:
+                        table_time_stats['csv_reading'] += time.time() - t_read
                         continue
                     
                     # Stop if we've reached end_row
                     if row_num >= end_row:
+                        table_time_stats['csv_reading'] += time.time() - t_read
                         break
                     
                     chunk.append((row_num + 1, row))  # Store with 1-based row number
                     rows_processed += 1
+                    table_time_stats['csv_reading'] += time.time() - t_read
                     
                     # Process chunk when it reaches the desired size
                     if len(chunk) >= CHUNK_SIZE or rows_processed == total_rows:
@@ -528,8 +504,11 @@ def clean_table_partial(table_name, start_row=0, end_row=-1, position=0, disable
                                 continue
                             
                             # Write cleaned row to buffer
-                            t_write = time.time()
+                            t_transform = time.time()
                             clean_row = {k: v for k, v in row.items() if k not in columns_to_remove}
+                            table_time_stats['data_transformation'] += time.time() - t_transform
+                            
+                            t_write = time.time()
                             write_buffer.append(clean_row)
                             rows_written += 1
                             
@@ -586,6 +565,8 @@ def clean_table_partial(table_name, start_row=0, end_row=-1, position=0, disable
     # Calculate other_processing as the time not accounted for by specific operations
     accounted_time = (
         table_time_stats['column_analysis'] + 
+        table_time_stats['csv_reading'] +
+        table_time_stats['data_transformation'] +
         table_time_stats['duplicate_detection'] +
         table_time_stats['invalid_concept'] +
         table_time_stats['temporal_validation'] +
@@ -659,6 +640,7 @@ def merge_csv_files_fast(output_file, part_files, buffer_size=FILE_BUFFER_SIZE):
 
 def merge_table_parts(table_name, num_parts):
     """Merge multiple parts of a cleaned table into one file."""
+    merge_start = time.time()
     output_dir = project_root / "output" / "2_cleaning"
     final_file = output_dir / f"{table_name}_cleaned.csv"
     
@@ -693,8 +675,42 @@ def merge_table_parts(table_name, num_parts):
             # Remove part files after merging
             for part_file in part_files:
                 part_file.unlink()
+    
+    merge_time = time.time() - merge_start
+    return merge_time
 
 if __name__ == '__main__':
+    # Start timing
+    start_time = time.time()
+    
+    print("Starting data cleaning on subdataset_1000...")
+    print(f"Output directory: {output_dir}")
+    print(f"Chunk size: {CHUNK_SIZE:,} rows")
+    print(f"Tables to clean: {', '.join(KEY_TABLES)}")
+    
+    if column_analysis_path.exists():
+        print(f"\nFound column_analysis.json from EDA module, will use cached analysis")
+    else:
+        print(f"\nNo column_analysis.json found, will analyze columns for each table")
+    
+    # Print input information
+    print("\n" + "="*70)
+    print("DATA CLEANING PROCESS - INPUT INFORMATION")
+    print("="*70)
+    print(f"Data Directory: {data_dir}")
+    print(f"Output Directory: {output_dir}")
+    print("\nTables to be cleaned:")
+    for table in KEY_TABLES:
+        input_file = data_dir / f"{table}.csv"
+        print(f"  - {table}: {input_file}")
+    
+    print("\nCleaning Strategy:")
+    print("  1. Remove columns with >95% missing data")
+    print("  2. Remove duplicate records based on table-specific keys")
+    print("  3. Remove records with invalid concept IDs (0 or null)")
+    print("  4. Validate temporal consistency for date ranges")
+    print("="*70 + "\n")
+    
     # Process each key table
     print("\nStarting table cleaning process...")
     total_original = 0
@@ -708,6 +724,7 @@ if __name__ == '__main__':
     # Process tables with progress tracking
     print("\nCleaning tables...")
     all_time_stats = []
+    total_merge_time = 0  # Track total merge time
 
     if USE_PARALLEL:
         print(f"Using parallel processing with {MAX_WORKERS} workers")
@@ -811,7 +828,9 @@ if __name__ == '__main__':
                             if table_parts_completed[table] == num_parts:
                                 # Merge the parts
                                 print(f"\n  Merging {num_parts} parts of {table}...")
-                                merge_table_parts(table, num_parts)
+                                merge_time = merge_table_parts(table, num_parts)
+                                print(f"  Merged in {merge_time:.2f}s")
+                                total_merge_time += merge_time
                                 
                                 # Initialize columns_removed (will be set from first part's detail_stats)
                                 columns_removed = []
@@ -840,6 +859,8 @@ if __name__ == '__main__':
                                 aggregated_time_stats = {
                                     'total': sum(s['total'] for _, s, _ in table_parts_results[table]),
                                     'column_analysis': sum(s.get('column_analysis', 0) for _, s, _ in table_parts_results[table]),
+                                    'csv_reading': sum(s.get('csv_reading', 0) for _, s, _ in table_parts_results[table]),
+                                    'data_transformation': sum(s.get('data_transformation', 0) for _, s, _ in table_parts_results[table]),
                                     'duplicate_detection': sum(s.get('duplicate_detection', 0) for _, s, _ in table_parts_results[table]),
                                     'invalid_concept': sum(s.get('invalid_concept', 0) for _, s, _ in table_parts_results[table]),
                                     'temporal_validation': sum(s.get('temporal_validation', 0) for _, s, _ in table_parts_results[table]),
@@ -907,7 +928,7 @@ if __name__ == '__main__':
         for i, table in enumerate(KEY_TABLES):
             try:
                 print(f"  [{i+1}/{len(KEY_TABLES)}] Processing {table}...", end="", flush=True)
-                cleaned_count, time_stats = clean_table(table, position=1, disable_progress=False)
+                cleaned_count, time_stats, _ = clean_table(table, position=1, disable_progress=False)
                 total_cleaned += cleaned_count
                 all_time_stats.append(time_stats)
                 print(f" Done ({time_stats['total']:.2f}s)")
@@ -1134,6 +1155,8 @@ if __name__ == '__main__':
         
         # Sum up times from all tables
         total_column_analysis = sum(s.get('column_analysis', 0) for s in all_time_stats)
+        total_csv_reading = sum(s.get('csv_reading', 0) for s in all_time_stats)
+        total_data_transformation = sum(s.get('data_transformation', 0) for s in all_time_stats)
         total_duplicate_detection = sum(s.get('duplicate_detection', 0) for s in all_time_stats)
         total_invalid_concept = sum(s.get('invalid_concept', 0) for s in all_time_stats)
         total_temporal_validation = sum(s.get('temporal_validation', 0) for s in all_time_stats)
@@ -1153,11 +1176,15 @@ if __name__ == '__main__':
                 # Show breakdown as percentage of total CPU time
                 print("CPU Time Breakdown:")
                 print(f"  Column analysis:       {total_column_analysis:.2f}s ({total_column_analysis/total_cpu_time*100:.1f}%)")
+                print(f"  CSV reading:           {total_csv_reading:.2f}s ({total_csv_reading/total_cpu_time*100:.1f}%)")
+                print(f"  Data transformation:   {total_data_transformation:.2f}s ({total_data_transformation/total_cpu_time*100:.1f}%)")
                 print(f"  Duplicate detection:   {total_duplicate_detection:.2f}s ({total_duplicate_detection/total_cpu_time*100:.1f}%)")
                 print(f"  Invalid concept ID:    {total_invalid_concept:.2f}s ({total_invalid_concept/total_cpu_time*100:.1f}%)")
                 print(f"  Temporal validation:   {total_temporal_validation:.2f}s ({total_temporal_validation/total_cpu_time*100:.1f}%)")
                 print(f"  File I/O:              {total_file_io:.2f}s ({total_file_io/total_cpu_time*100:.1f}%)")
                 print(f"  Other processing:      {total_other:.2f}s ({total_other/total_cpu_time*100:.1f}%)")
+                print(f"\nMerging Phase (sequential):")
+                print(f"  Merge time:            {total_merge_time:.2f}s")
             else:
                 print("No timing statistics available")
         else:
