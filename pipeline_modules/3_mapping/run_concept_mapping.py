@@ -53,8 +53,6 @@ duplicates_dir = removed_dir / "duplicates"
 duplicates_dir.mkdir(parents=True, exist_ok=True)
 low_freq_dir = removed_dir / "low_frequency"
 low_freq_dir.mkdir(parents=True, exist_ok=True)
-episodes_dir = removed_dir / "visit_episodes"
-episodes_dir.mkdir(parents=True, exist_ok=True)
 
 # Setup logging
 log_file = output_dir / f"mapping_process_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
@@ -171,13 +169,469 @@ def count_measurement_partial_frequency(input_file, concept_col, start_row, end_
     
     return dict(concept_counter)
 
+# Standalone functions for parallel table processing
+def process_single_table(table_name, input_dir, output_dir, concept_frequencies, 
+                        processed_mappings_dir, enable_dedup, min_concept_freq):
+    """Process a complete table - used for parallel processing of non-MEASUREMENT tables."""
+    import csv
+    import time
+    import logging
+    from pathlib import Path
+    from collections import defaultdict
+    
+    # Initialize paths
+    input_dir = Path(input_dir)
+    output_dir = Path(output_dir)
+    processed_mappings_dir = Path(processed_mappings_dir)
+    
+    input_file = input_dir / f"{table_name}_cleaned.csv"
+    output_file = output_dir / f"{table_name}_mapped.csv"
+    
+    if not input_file.exists():
+        return table_name, {'error': f'Input file not found: {input_file}'}, {}
+    
+    # Initialize statistics
+    stats = {
+        'total_rows': 0,
+        'low_freq_removed': 0,
+        'duplicates_removed': 0,
+        'concept_columns': {},
+        'total_mappings_applied': 0
+    }
+    
+    time_stats = {
+        'total': 0,
+        'file_reading': 0,
+        'low_freq_filtering': 0,
+        'concept_mapping': 0,
+        'deduplication': 0,
+        'file_writing': 0
+    }
+    
+    start_time = time.time()
+    
+    # Load mappings if needed
+    mappings = {}
+    if table_name in TABLES_WITH_MAPPING:
+        mapping_file = processed_mappings_dir / f"{table_name}_mapping_reference.csv"
+        if mapping_file.exists():
+            mappings = {}
+            with open(mapping_file, 'r') as f:
+                reader = csv.DictReader(f)
+                for row in reader:
+                    source_id = row['original_concept_id']
+                    target_id = row['snomed_concept_id']
+                    mappings[source_id] = target_id
+    
+    # Get concept columns
+    concept_cols = CONCEPT_COLUMNS.get(table_name, [])
+    datetime_col = DATETIME_COLUMNS.get(table_name)
+    
+    # Process the table
+    read_start = time.time()
+    all_rows = []
+    with open(input_file, 'r', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        fieldnames = reader.fieldnames
+        for row in reader:
+            all_rows.append(row)
+    time_stats['file_reading'] = time.time() - read_start
+    
+    stats['total_rows'] = len(all_rows)
+    
+    # Filter low frequency concepts
+    filter_start = time.time()
+    if table_name in concept_frequencies:
+        freq_map = concept_frequencies[table_name]
+        filtered_rows = []
+        removed_rows = []
+        
+        for idx, row in enumerate(all_rows, start=2):  # Start from 2 (1 for header, 2 for first data row)
+            keep_row = True
+            removal_reason = None
+            for concept_col in concept_cols:
+                concept_value = row.get(concept_col, '').strip()
+                if concept_value and freq_map.get(concept_value, 0) <= min_concept_freq:
+                    keep_row = False
+                    freq = freq_map.get(concept_value, 0)
+                    removal_reason = f"low_frequency_concept ({concept_col}={concept_value}, freq={freq})"
+                    break
+            
+            if keep_row:
+                filtered_rows.append(row)
+            else:
+                row_copy = row.copy()
+                row_copy['removal_reason'] = removal_reason
+                row_copy['original_row_number'] = idx
+                removed_rows.append(row_copy)
+        
+        stats['low_freq_removed'] = len(removed_rows)
+        
+        # Save removed records
+        if removed_rows:
+            removed_file = output_dir / "removed_records" / "low_frequency" / f"{table_name}_low_freq.csv"
+            removed_file.parent.mkdir(parents=True, exist_ok=True)
+            extended_fieldnames = list(fieldnames) + ['removal_reason', 'original_row_number']
+            with open(removed_file, 'w', newline='', encoding='utf-8') as f:
+                writer = csv.DictWriter(f, fieldnames=extended_fieldnames)
+                writer.writeheader()
+                writer.writerows(removed_rows)
+        
+        all_rows = filtered_rows
+    time_stats['low_freq_filtering'] = time.time() - filter_start
+    
+    # Apply mappings
+    mapping_start = time.time()
+    if mappings:
+        for row in all_rows:
+            for concept_col in concept_cols:
+                original_value = row.get(concept_col, '').strip()
+                if original_value in mappings:
+                    row[concept_col] = mappings[original_value]  # Replace with mapped SNOMED ID
+                    row[f'{concept_col}_mapped'] = 'Y'
+                    stats['total_mappings_applied'] += 1
+                else:
+                    row[f'{concept_col}_mapped'] = 'N'
+                
+                # Track statistics
+                if concept_col not in stats['concept_columns']:
+                    stats['concept_columns'][concept_col] = {
+                        'total_non_null': 0,
+                        'mapped': 0,
+                        'unique_mapped': set()
+                    }
+                
+                if original_value:
+                    stats['concept_columns'][concept_col]['total_non_null'] += 1
+                    if original_value in mappings:
+                        stats['concept_columns'][concept_col]['mapped'] += 1
+                        stats['concept_columns'][concept_col]['unique_mapped'].add(mappings[original_value])
+    time_stats['concept_mapping'] = time.time() - mapping_start
+    
+    # Deduplication
+    dedup_start = time.time()
+    if enable_dedup and table_name in TABLES_WITH_MAPPING:
+        seen_keys = {}
+        unique_rows = []
+        duplicate_records = []
+        group_counter = 0
+        
+        for idx, row in enumerate(all_rows):
+            person_id = row.get('person_id', '')
+            # Use mapped concept for deduplication
+            concept_col = concept_cols[0] if concept_cols else None
+            if concept_col:
+                original_value = row.get(concept_col, '')
+                if original_value in mappings:
+                    concept_id = mappings[original_value]
+                else:
+                    concept_id = original_value
+            else:
+                concept_id = ''
+            datetime_val = row.get(datetime_col, '') if datetime_col else ''
+            
+            dedup_key = f"{person_id}|{concept_id}|{datetime_val}"
+            
+            if dedup_key not in seen_keys:
+                seen_keys[dedup_key] = {'idx': idx, 'group_id': None}
+                unique_rows.append(row)
+            else:
+                # First duplicate for this key - create group and add kept record
+                if seen_keys[dedup_key]['group_id'] is None:
+                    group_counter += 1
+                    group_id = f"{table_name}_{group_counter}"
+                    seen_keys[dedup_key]['group_id'] = group_id
+                    
+                    # Add kept record
+                    kept_idx = seen_keys[dedup_key]['idx']
+                    kept_row = all_rows[kept_idx].copy()
+                    kept_row['duplicate_status'] = 'kept'
+                    kept_row['duplicate_group_id'] = group_id
+                    kept_row['original_row_number'] = kept_idx + 2
+                    duplicate_records.append(kept_row)
+                
+                # Add removed record
+                dup_row = row.copy()
+                dup_row['duplicate_status'] = 'removed'
+                dup_row['duplicate_group_id'] = seen_keys[dedup_key]['group_id']
+                dup_row['original_row_number'] = idx + 2
+                duplicate_records.append(dup_row)
+        
+        # Count only removed duplicates for stats
+        stats['duplicates_removed'] = sum(1 for r in duplicate_records if r.get('duplicate_status') == 'removed')
+        
+        all_rows = unique_rows
+    
+    # Always create duplicate file for mapping tables
+    if table_name in TABLES_WITH_MAPPING:
+        dup_file = output_dir / "removed_records" / "duplicates" / f"{table_name}.csv"
+        dup_file.parent.mkdir(parents=True, exist_ok=True)
+        
+        if duplicate_records:
+            dup_fieldnames = list(duplicate_records[0].keys())
+        else:
+            # Create empty file with header
+            dup_fieldnames = list(fieldnames) + [f'{concept_cols[0]}_mapped'] if concept_cols else fieldnames
+            dup_fieldnames = dup_fieldnames + ['duplicate_status', 'duplicate_group_id', 'original_row_number']
+        
+        with open(dup_file, 'w', newline='', encoding='utf-8') as f:
+            writer = csv.DictWriter(f, fieldnames=dup_fieldnames)
+            writer.writeheader()
+            if duplicate_records:
+                writer.writerows(duplicate_records)
+    time_stats['deduplication'] = time.time() - dedup_start
+    
+    # Write output
+    write_start = time.time()
+    extended_fieldnames = fieldnames.copy()
+    if table_name in TABLES_WITH_MAPPING:
+        for col in concept_cols:
+            if f'{col}_mapped' not in extended_fieldnames:
+                extended_fieldnames.append(f'{col}_mapped')
+    
+    with open(output_file, 'w', newline='', encoding='utf-8', buffering=FILE_BUFFER_SIZE) as f:
+        writer = csv.DictWriter(f, fieldnames=extended_fieldnames)
+        writer.writeheader()
+        
+        # Write in buffers
+        buffer = []
+        for row in all_rows:
+            buffer.append(row)
+            if len(buffer) >= WRITE_BUFFER_SIZE:
+                writer.writerows(buffer)
+                buffer = []
+        
+        if buffer:
+            writer.writerows(buffer)
+    
+    time_stats['file_writing'] = time.time() - write_start
+    time_stats['total'] = time.time() - start_time
+    
+    # Convert sets to counts for JSON serialization
+    for col_stats in stats['concept_columns'].values():
+        col_stats['unique_mapped'] = len(col_stats['unique_mapped'])
+    
+    return table_name, stats, time_stats
+
+def process_measurement_chunk(chunk_id, total_chunks, input_file, output_dir,
+                             concept_frequencies, mappings, enable_dedup, min_concept_freq):
+    """Process a chunk of MEASUREMENT table - used for parallel processing."""
+    import csv
+    import time
+    from pathlib import Path
+    from collections import defaultdict
+    
+    input_file = Path(input_file)
+    output_dir = Path(output_dir)
+    
+    # Calculate row range
+    with open(input_file, 'r') as f:
+        total_rows = sum(1 for _ in f) - 1  # Subtract header
+    
+    chunk_size = total_rows // total_chunks
+    start_row = chunk_id * chunk_size
+    end_row = (chunk_id + 1) * chunk_size if chunk_id < total_chunks - 1 else total_rows
+    
+    # Initialize statistics
+    stats = {
+        'rows_processed': 0,
+        'low_freq_removed': 0,
+        'duplicates_removed': 0,
+        'mappings_applied': 0
+    }
+    
+    # Read and process chunk
+    processed_rows = []
+    removed_low_freq = []
+    duplicate_records = []
+    
+    with open(input_file, 'r', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        fieldnames = reader.fieldnames
+        
+        for i, row in enumerate(reader):
+            if i < start_row:
+                continue
+            if i >= end_row:
+                break
+            
+            # Filter low frequency
+            concept_value = row.get('measurement_concept_id', '').strip()
+            if concept_value and concept_frequencies.get('MEASUREMENT', {}).get(concept_value, 0) <= min_concept_freq:
+                freq = concept_frequencies.get('MEASUREMENT', {}).get(concept_value, 0)
+                row_copy = row.copy()
+                row_copy['removal_reason'] = f"low_frequency_concept (measurement_concept_id={concept_value}, freq={freq})"
+                row_copy['original_row_number'] = i + 2  # +2 for header and 1-based indexing
+                removed_low_freq.append(row_copy)
+                stats['low_freq_removed'] += 1
+                continue
+            
+            # Apply mapping
+            if concept_value in mappings:
+                row['measurement_concept_id'] = mappings[concept_value]  # Replace with mapped SNOMED ID
+                row['measurement_concept_id_mapped'] = 'Y'
+                stats['mappings_applied'] += 1
+            else:
+                row['measurement_concept_id_mapped'] = 'N'
+            
+            processed_rows.append(row)
+            stats['rows_processed'] += 1
+    
+    # Simple deduplication within chunk
+    if enable_dedup:
+        seen_keys = {}
+        unique_rows = []
+        group_counter = 0
+        
+        for idx, row in enumerate(processed_rows):
+            person_id = row.get('person_id', '')
+            # Use mapped concept for deduplication
+            original_value = row.get('measurement_concept_id', '')
+            if original_value in mappings:
+                concept_id = mappings[original_value]
+            else:
+                concept_id = original_value
+            datetime_val = row.get('measurement_datetime', '')
+            
+            dedup_key = f"{person_id}|{concept_id}|{datetime_val}"
+            
+            if dedup_key not in seen_keys:
+                seen_keys[dedup_key] = {'idx': idx, 'group_id': None, 'row': row.copy()}
+                unique_rows.append(row)
+            else:
+                # First duplicate for this key - create group and add kept record
+                if seen_keys[dedup_key]['group_id'] is None:
+                    group_counter += 1
+                    group_id = f"MEASUREMENT_CHUNK{chunk_id}_{group_counter}"
+                    seen_keys[dedup_key]['group_id'] = group_id
+                    
+                    # Add kept record
+                    kept_row = seen_keys[dedup_key]['row'].copy()
+                    kept_row['duplicate_status'] = 'kept'
+                    kept_row['duplicate_group_id'] = group_id
+                    kept_row['original_row_number'] = seen_keys[dedup_key]['idx'] + start_row + 2
+                    duplicate_records.append(kept_row)
+                
+                # Add removed record
+                dup_row = row.copy()
+                dup_row['duplicate_status'] = 'removed'
+                dup_row['duplicate_group_id'] = seen_keys[dedup_key]['group_id']
+                dup_row['original_row_number'] = idx + start_row + 2
+                duplicate_records.append(dup_row)
+                stats['duplicates_removed'] += 1
+        
+        processed_rows = unique_rows
+    
+    # Save chunk results temporarily
+    chunk_file = output_dir / f".temp_measurement_chunk_{chunk_id}.csv"
+    extended_fieldnames = list(fieldnames) + ['measurement_concept_id_mapped']
+    dup_fieldnames = extended_fieldnames + ['duplicate_status', 'duplicate_group_id', 'original_row_number']
+    
+    with open(chunk_file, 'w', newline='', encoding='utf-8', buffering=FILE_BUFFER_SIZE) as f:
+        writer = csv.DictWriter(f, fieldnames=extended_fieldnames)
+        writer.writeheader()  # Always write header for each chunk
+        writer.writerows(processed_rows)
+    
+    # Save removed records for this chunk
+    if removed_low_freq:
+        removed_file = output_dir / "removed_records" / "low_frequency" / f".temp_MEASUREMENT_low_freq_chunk_{chunk_id}.csv"
+        removed_file.parent.mkdir(parents=True, exist_ok=True)
+        low_freq_fieldnames = list(fieldnames) + ['removal_reason', 'original_row_number']
+        with open(removed_file, 'w', newline='', encoding='utf-8') as f:
+            writer = csv.DictWriter(f, fieldnames=low_freq_fieldnames)
+            writer.writeheader()  # Always write header
+            writer.writerows(removed_low_freq)
+    
+    if duplicate_records:
+        dup_file = output_dir / "removed_records" / "duplicates" / f".temp_MEASUREMENT_duplicates_chunk_{chunk_id}.csv"
+        dup_file.parent.mkdir(parents=True, exist_ok=True)
+        with open(dup_file, 'w', newline='', encoding='utf-8') as f:
+            writer = csv.DictWriter(f, fieldnames=dup_fieldnames)
+            writer.writeheader()  # Always write header
+            writer.writerows(duplicate_records)
+    
+    return chunk_id, stats
+
+def merge_measurement_chunks(output_dir, total_chunks):
+    """Merge MEASUREMENT chunk results into final files."""
+    import csv
+    from pathlib import Path
+    
+    output_dir = Path(output_dir)
+    
+    # Merge main output file
+    output_file = output_dir / "MEASUREMENT_mapped.csv"
+    with open(output_file, 'w', newline='', encoding='utf-8', buffering=FILE_BUFFER_SIZE) as outf:
+        writer = None
+        
+        for chunk_id in range(total_chunks):
+            chunk_file = output_dir / f".temp_measurement_chunk_{chunk_id}.csv"
+            if chunk_file.exists():
+                with open(chunk_file, 'r', encoding='utf-8') as inf:
+                    reader = csv.DictReader(inf)
+                    # Get fieldnames from the first file
+                    if writer is None and reader.fieldnames:
+                        writer = csv.DictWriter(outf, fieldnames=reader.fieldnames)
+                        writer.writeheader()
+                    # Write rows
+                    if writer is not None:
+                        for row in reader:
+                            writer.writerow(row)
+                chunk_file.unlink()  # Delete temp file
+    
+    # Merge low frequency removed records
+    low_freq_file = output_dir / "removed_records" / "low_frequency" / "MEASUREMENT_low_freq.csv"
+    low_freq_file.parent.mkdir(parents=True, exist_ok=True)
+    with open(low_freq_file, 'w', newline='', encoding='utf-8') as outf:
+        writer = None
+        
+        for chunk_id in range(total_chunks):
+            chunk_file = output_dir / "removed_records" / "low_frequency" / f".temp_MEASUREMENT_low_freq_chunk_{chunk_id}.csv"
+            if chunk_file.exists():
+                with open(chunk_file, 'r', encoding='utf-8') as inf:
+                    reader = csv.DictReader(inf)
+                    if writer is None and reader.fieldnames:
+                        writer = csv.DictWriter(outf, fieldnames=reader.fieldnames)
+                        writer.writeheader()
+                    if writer is not None:
+                        for row in reader:
+                            writer.writerow(row)
+                chunk_file.unlink()
+    
+    # Merge duplicate records
+    dup_file = output_dir / "removed_records" / "duplicates" / "MEASUREMENT.csv"
+    dup_file.parent.mkdir(parents=True, exist_ok=True)
+    has_content = False
+    
+    # First check if any duplicate files exist
+    for chunk_id in range(total_chunks):
+        chunk_file = output_dir / "removed_records" / "duplicates" / f".temp_MEASUREMENT_duplicates_chunk_{chunk_id}.csv"
+        if chunk_file.exists():
+            has_content = True
+            break
+    
+    if has_content:
+        with open(dup_file, 'w', newline='', encoding='utf-8') as outf:
+            writer = None
+            
+            for chunk_id in range(total_chunks):
+                chunk_file = output_dir / "removed_records" / "duplicates" / f".temp_MEASUREMENT_duplicates_chunk_{chunk_id}.csv"
+                if chunk_file.exists():
+                    with open(chunk_file, 'r', encoding='utf-8') as inf:
+                        reader = csv.DictReader(inf)
+                        if writer is None and reader.fieldnames:
+                            writer = csv.DictWriter(outf, fieldnames=reader.fieldnames)
+                            writer.writeheader()
+                        if writer is not None:
+                            for row in reader:
+                                writer.writerow(row)
+                    chunk_file.unlink()
+
 class ConceptMapper:
-    def __init__(self, enable_dedup=True, min_concept_freq=10, 
-                 episode_window_hours=2):
+    def __init__(self, enable_dedup=True, min_concept_freq=10):
         self.stats = defaultdict(lambda: defaultdict(int))
         self.enable_dedup = enable_dedup
         self.min_concept_freq = min_concept_freq
-        self.episode_window_hours = episode_window_hours
         self.concept_frequencies = {}  # Store concept frequencies across all tables
         self.all_table_data = {}  # Store all table data for processing
         
@@ -828,8 +1282,7 @@ def generate_mapping_report(stats, mapper):
         
         f.write("## Processing Configuration\n\n")
         f.write(f"- **Low frequency threshold**: <={mapper.min_concept_freq}\n")
-        f.write(f"- **Deduplication**: {'Enabled' if mapper.enable_dedup else 'Disabled'}\n")
-        f.write(f"- **Visit episode window**: {mapper.episode_window_hours} hours\n\n")
+        f.write(f"- **Deduplication**: {'Enabled' if mapper.enable_dedup else 'Disabled'}\n\n")
         
         f.write("## Summary Statistics\n\n")
         
@@ -871,10 +1324,19 @@ def generate_mapping_report(stats, mapper):
             f.write("|--------|--------------|---------|--------------|------------------------|\n")
             
             for col, col_stats in table_stats['concept_columns'].items():
-                f.write(f"| {col} | {col_stats['total_values']:,} | ")
-                f.write(f"{col_stats['mapped_count']:,} | ")
-                f.write(f"{col_stats['mapping_rate']:.1f}% | ")
-                f.write(f"{col_stats['unique_concepts_mapped']:,} |\n")
+                # Handle different stats structures
+                if isinstance(col_stats, dict):
+                    total_vals = col_stats.get('total_values', col_stats.get('total_non_null', 0))
+                    mapped = col_stats.get('mapped_count', col_stats.get('mapped', 0))
+                    rate = col_stats.get('mapping_rate', 0)
+                    if rate == 0 and total_vals > 0:
+                        rate = (mapped / total_vals * 100)
+                    unique = col_stats.get('unique_concepts_mapped', col_stats.get('unique_mapped', 0))
+                    
+                    f.write(f"| {col} | {total_vals:,} | ")
+                    f.write(f"{mapped:,} | ")
+                    f.write(f"{rate:.1f}% | ")
+                    f.write(f"{unique:,} |\n")
             
             if table_stats.get('duplicates_removed', 0) > 0:
                 dup_rate = (table_stats['duplicates_removed'] / table_stats['total_rows']) * 100
@@ -891,7 +1353,7 @@ def generate_mapping_report(stats, mapper):
     logging.info(f"Report saved to: {report_path}")
 
 def main():
-    """Main execution function."""
+    """Main execution function with parallel processing."""
     # Start timing
     start_time = time.time()
     
@@ -900,46 +1362,151 @@ def main():
                         help='Disable deduplication after mapping')
     parser.add_argument('--min-concept-freq', type=int, default=10,
                         help='Minimum concept frequency threshold (default: 10)')
-    parser.add_argument('--episode-window-hours', type=float, default=2,
-                        help='Time window for visit episode consolidation (default: 2 hours)')
     
     args = parser.parse_args()
     
     print("\n" + "="*80)
-    print("COMPREHENSIVE DATA PROCESSING MODULE")
+    print("COMPREHENSIVE DATA PROCESSING MODULE (PARALLEL)")
     print("="*80)
     print(f"Start time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print(f"\nConfiguration:")
     print(f"  Input directory: {input_dir}")
     print(f"  Output directory: {output_dir}")
     print(f"  Processed mappings: {processed_mappings_dir}")
+    print(f"  Parallel workers: {MAX_WORKERS}")
     print(f"\nFeatures enabled:")
     print(f"  Low frequency filtering: <={args.min_concept_freq}")
     print(f"  Deduplication: {'DISABLED' if args.no_dedup else 'ENABLED'}")
-    print(f"  Visit episode window: {args.episode_window_hours} hours")
     print(f"\nTables to process: {', '.join(ALL_TABLES)}")
     print("="*80 + "\n")
     
-    # Initialize mapper with all parameters
+    # Initialize mapper for frequency counting
     mapper = ConceptMapper(
         enable_dedup=not args.no_dedup,
-        min_concept_freq=args.min_concept_freq,
-        episode_window_hours=args.episode_window_hours
+        min_concept_freq=args.min_concept_freq
     )
     
-    # Step 1: Count concept frequencies across all tables
+    # Step 1: Count concept frequencies across all tables (already parallel)
     freq_count_start = time.time()
     mapper.count_concept_frequencies()
     freq_count_time = time.time() - freq_count_start
     
-    # Step 2: Process each table
-    for table in ALL_TABLES:
-        try:
-            mapper.process_table(table)
-        except Exception as e:
-            logging.error(f"Error mapping {table}: {str(e)}")
-            import traceback
-            traceback.print_exc()
+    # Step 2: Parallel table processing
+    parallel_start = time.time()
+    
+    # Load MEASUREMENT mappings for chunks
+    measurement_mappings = {}
+    if 'MEASUREMENT' in TABLES_WITH_MAPPING:
+        mapping_file = processed_mappings_dir / "MEASUREMENT_mapping_reference.csv"
+        if mapping_file.exists():
+            with open(mapping_file, 'r') as f:
+                reader = csv.DictReader(f)
+                for row in reader:
+                    measurement_mappings[row['original_concept_id']] = row['snomed_concept_id']
+            logging.info(f"Loaded {len(measurement_mappings)} mappings for MEASUREMENT")
+    
+    # Process tables in parallel
+    with ProcessPoolExecutor(max_workers=MAX_WORKERS) as executor:
+        futures = []
+        
+        # Submit MEASUREMENT chunks
+        measurement_file = input_dir / "MEASUREMENT_cleaned.csv"
+        if measurement_file.exists():
+            logging.info("Submitting MEASUREMENT chunks for parallel processing...")
+            for i in range(MEASUREMENT_SPLITS):
+                future = executor.submit(
+                    process_measurement_chunk,
+                    chunk_id=i,
+                    total_chunks=MEASUREMENT_SPLITS,
+                    input_file=measurement_file,
+                    output_dir=output_dir,
+                    concept_frequencies=mapper.concept_frequencies,
+                    mappings=measurement_mappings,
+                    enable_dedup=not args.no_dedup,
+                    min_concept_freq=args.min_concept_freq
+                )
+                futures.append(('MEASUREMENT_CHUNK', i, future))
+        
+        # Submit other tables
+        other_tables = [t for t in ALL_TABLES if t != 'MEASUREMENT']
+        logging.info(f"Submitting {len(other_tables)} other tables for parallel processing...")
+        for table in other_tables:
+            future = executor.submit(
+                process_single_table,
+                table_name=table,
+                input_dir=input_dir,
+                output_dir=output_dir,
+                concept_frequencies=mapper.concept_frequencies,
+                processed_mappings_dir=processed_mappings_dir,
+                enable_dedup=not args.no_dedup,
+                min_concept_freq=args.min_concept_freq
+            )
+            futures.append(('TABLE', table, future))
+        
+        # Collect results
+        measurement_stats = {
+            'total_rows': 0,
+            'low_freq_removed': 0,
+            'duplicates_removed': 0,
+            'total_mappings_applied': 0,
+            'concept_columns': {},
+            'time_stats': {'total': 0}
+        }
+        
+        # Get total MEASUREMENT rows from file
+        if measurement_file.exists():
+            with open(measurement_file, 'r') as f:
+                measurement_total_rows = sum(1 for _ in f) - 1
+            measurement_stats['total_rows'] = measurement_total_rows
+        
+        for task_type, info, future in tqdm(futures, desc="Processing tables"):
+            try:
+                if task_type == 'MEASUREMENT_CHUNK':
+                    chunk_id, stats = future.result()
+                    # Aggregate MEASUREMENT stats (don't add rows_processed to total_rows)
+                    measurement_stats['low_freq_removed'] += stats['low_freq_removed']
+                    measurement_stats['duplicates_removed'] += stats['duplicates_removed']
+                    measurement_stats['total_mappings_applied'] += stats['mappings_applied']
+                    logging.info(f"MEASUREMENT chunk {chunk_id + 1}/{MEASUREMENT_SPLITS} completed")
+                else:
+                    table_name, stats, time_stats = future.result()
+                    if 'error' not in stats:
+                        mapper.stats[table_name] = stats
+                        mapper.stats[table_name]['time_stats'] = time_stats
+                        mapper.stats[table_name]['output_rows'] = stats['total_rows'] - stats.get('low_freq_removed', 0) - stats.get('duplicates_removed', 0)
+                        logging.info(f"{table_name} completed: {stats['total_rows']} rows processed")
+                    else:
+                        logging.error(f"{table_name}: {stats['error']}")
+            except Exception as e:
+                logging.error(f"Error processing {task_type} {info}: {str(e)}")
+                import traceback
+                traceback.print_exc()
+    
+    # Merge MEASUREMENT chunks
+    if measurement_file.exists():
+        logging.info("Merging MEASUREMENT chunks...")
+        merge_measurement_chunks(output_dir, MEASUREMENT_SPLITS)
+        
+        # Add MEASUREMENT stats
+        measurement_stats['output_rows'] = measurement_stats['total_rows'] - measurement_stats['low_freq_removed'] - measurement_stats['duplicates_removed']
+        
+        # Calculate mapping statistics for MEASUREMENT
+        if measurement_mappings:
+            total_mapped = measurement_stats['total_mappings_applied']
+            # Calculate actual non-empty values (total - low_freq)
+            total_values = measurement_stats['total_rows'] - measurement_stats['low_freq_removed']
+            measurement_stats['concept_columns'] = {
+                'measurement_concept_id': {
+                    'total_values': total_values,
+                    'mapped_count': total_mapped,
+                    'mapping_rate': (total_mapped / total_values * 100) if total_values > 0 else 0,
+                    'unique_concepts_mapped': len(set(measurement_mappings.values()))
+                }
+            }
+        
+        mapper.stats['MEASUREMENT'] = measurement_stats
+    
+    parallel_time = time.time() - parallel_start
     
     # Generate summary report
     generate_mapping_report(mapper.stats, mapper)
@@ -957,54 +1524,19 @@ def main():
     
     # Performance breakdown
     print("\n" + "="*50)
-    print("PERFORMANCE BREAKDOWN - Concept Mapping")
+    print("PERFORMANCE BREAKDOWN - Parallel Concept Mapping")
     print("="*50)
     
-    # Aggregate timing from all tables
-    total_file_reading = 0
-    total_low_freq = 0
-    total_mapping = 0
-    total_dedup = 0
-    total_file_writing = 0
-    total_chunk_processing = 0
-    
-    for table_stats in mapper.stats.values():
-        if 'time_stats' in table_stats:
-            ts = table_stats['time_stats']
-            total_file_reading += ts.get('file_reading', 0)
-            total_low_freq += ts.get('low_freq_filtering', 0)
-            total_mapping += ts.get('concept_mapping', 0)
-            total_dedup += ts.get('deduplication', 0)
-            total_file_writing += ts.get('file_writing', 0)
-            # Calculate chunk processing overhead (total - sum of components)
-            table_total = ts.get('total', 0)
-            table_components = (ts.get('file_reading', 0) + ts.get('low_freq_filtering', 0) + 
-                              ts.get('concept_mapping', 0) + ts.get('deduplication', 0) + 
-                              ts.get('file_writing', 0))
-            total_chunk_processing += max(0, table_total - table_components)
-    
     print(f"Frequency counting:    {freq_count_time:.2f}s ({freq_count_time/total_time*100:.1f}%)")
-    print(f"Chunk processing:      {total_chunk_processing:.2f}s ({total_chunk_processing/total_time*100:.1f}%)")
-    print(f"Low freq filtering:    {total_low_freq:.2f}s ({total_low_freq/total_time*100:.1f}%)")
-    print(f"Concept mapping:       {total_mapping:.2f}s ({total_mapping/total_time*100:.1f}%)")
-    print(f"Deduplication:         {total_dedup:.2f}s ({total_dedup/total_time*100:.1f}%)")
-    print(f"File writing:          {total_file_writing:.2f}s ({total_file_writing/total_time*100:.1f}%)")
+    print(f"Parallel processing:   {parallel_time:.2f}s ({parallel_time/total_time*100:.1f}%)")
     
-    # Calculate accounted vs unaccounted time
-    accounted_time = freq_count_time + total_chunk_processing + total_low_freq + total_mapping + total_dedup + total_file_writing
-    unaccounted_time = total_time - accounted_time
-    if unaccounted_time > 0.1:  # Only show if significant
-        print(f"Other operations:      {unaccounted_time:.2f}s ({unaccounted_time/total_time*100:.1f}%)")
+    # Calculate other operations
+    other_time = total_time - freq_count_time - parallel_time
+    if other_time > 0.1:
+        print(f"Other operations:      {other_time:.2f}s ({other_time/total_time*100:.1f}%)")
     
-    # Find slowest tables
-    table_times = [(name, stats.get('time_stats', {}).get('total', 0)) 
-                   for name, stats in mapper.stats.items()]
-    table_times.sort(key=lambda x: x[1], reverse=True)
-    
-    print("\nSlowest tables:")
-    for name, time_taken in table_times[:3]:
-        if time_taken > 0:
-            print(f"  {name}: {time_taken:.2f}s")
+    print(f"\nTables processed in parallel: {len(ALL_TABLES)}")
+    print(f"MEASUREMENT chunks: {MEASUREMENT_SPLITS}")
 
 if __name__ == "__main__":
     main()
