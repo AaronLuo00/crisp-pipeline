@@ -91,15 +91,12 @@ CONCEPT_COLUMNS = {
     'VISIT_OCCURRENCE': ['visit_concept_id']
 }
 
-# Define datetime columns for deduplication
+# Define datetime columns for deduplication (only for tables with SNOMED mapping)
 DATETIME_COLUMNS = {
     'MEASUREMENT': 'measurement_datetime',
     'OBSERVATION': 'observation_datetime',
     'PROCEDURE_OCCURRENCE': 'procedure_datetime',
-    'DEVICE_EXPOSURE': 'device_exposure_start_datetime',
-    'CONDITION_OCCURRENCE': 'condition_start_datetime',
-    'DRUG_EXPOSURE': 'drug_exposure_start_datetime',
-    'VISIT_OCCURRENCE': 'visit_start_datetime'
+    'DEVICE_EXPOSURE': 'device_exposure_start_datetime'
 }
 
 # Define ID columns for tracking
