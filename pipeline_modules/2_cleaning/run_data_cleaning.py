@@ -5,6 +5,7 @@ import csv
 import json
 import os
 import platform
+import shutil
 import time
 from pathlib import Path
 from datetime import datetime
@@ -631,51 +632,67 @@ def clean_table(table_name, position=0, disable_progress=False):
     """Wrapper function for backward compatibility."""
     return clean_table_partial(table_name, 0, -1, position, disable_progress, "")
 
+def merge_csv_files_fast(output_file, part_files, buffer_size=FILE_BUFFER_SIZE):
+    """Fast merge CSV files by skipping CSV parsing - just copy raw content.
+    
+    Args:
+        output_file: Path to output file
+        part_files: List of Path objects for part files to merge
+        buffer_size: Buffer size for file operations
+    """
+    output_file = Path(output_file)
+    output_file.parent.mkdir(parents=True, exist_ok=True)
+    
+    with open(output_file, 'wb') as outf:
+        first_file = True
+        for part_file in part_files:
+            if part_file.exists():
+                with open(part_file, 'rb') as inf:
+                    if first_file:
+                        # Copy entire first file including header
+                        shutil.copyfileobj(inf, outf, buffer_size)
+                        first_file = False
+                    else:
+                        # Skip header line for subsequent files
+                        inf.readline()
+                        shutil.copyfileobj(inf, outf, buffer_size)
+
 def merge_table_parts(table_name, num_parts):
     """Merge multiple parts of a cleaned table into one file."""
     output_dir = project_root / "output" / "2_cleaning"
     final_file = output_dir / f"{table_name}_cleaned.csv"
     
-    # Merge main cleaned files
-    first_part = True
-    with open(final_file, 'w') as outfile:
-        for i in range(num_parts):
-            part_file = output_dir / f"{table_name}_cleaned_part{i+1}.csv"
-            if part_file.exists():
-                with open(part_file, 'r') as infile:
-                    if first_part:
-                        # Include header from first part
-                        outfile.write(infile.read())
-                        first_part = False
-                    else:
-                        # Skip header for subsequent parts
-                        lines = infile.readlines()
-                        if len(lines) > 1:
-                            outfile.writelines(lines[1:])
-                # Remove part file after merging
-                part_file.unlink()
+    # Collect part files for main cleaned data
+    part_files = []
+    for i in range(num_parts):
+        part_file = output_dir / f"{table_name}_cleaned_part{i+1}.csv"
+        if part_file.exists():
+            part_files.append(part_file)
+    
+    # Merge main cleaned files using fast merge
+    if part_files:
+        merge_csv_files_fast(final_file, part_files)
+        # Remove part files after merging
+        for part_file in part_files:
+            part_file.unlink()
     
     # Merge removed records files
-    for subdir, file_pattern in [
-        (duplicates_dir, "duplicates"),
-        (invalid_concept_dir, "invalid_concept_id"),
-        (temporal_issues_dir, "temporal_issues")
-    ]:
+    for subdir in [duplicates_dir, invalid_concept_dir, temporal_issues_dir]:
         final_removed = subdir / f"{table_name}.csv"
-        first_part = True
-        with open(final_removed, 'w') as outfile:
-            for i in range(num_parts):
-                part_file = subdir / f"{table_name}_part{i+1}.csv"
-                if part_file.exists():
-                    with open(part_file, 'r') as infile:
-                        if first_part:
-                            outfile.write(infile.read())
-                            first_part = False
-                        else:
-                            lines = infile.readlines()
-                            if len(lines) > 1:
-                                outfile.writelines(lines[1:])
-                    part_file.unlink()
+        
+        # Collect part files for this removed records type
+        part_files = []
+        for i in range(num_parts):
+            part_file = subdir / f"{table_name}_part{i+1}.csv"
+            if part_file.exists():
+                part_files.append(part_file)
+        
+        # Merge if there are any part files
+        if part_files:
+            merge_csv_files_fast(final_removed, part_files)
+            # Remove part files after merging
+            for part_file in part_files:
+                part_file.unlink()
 
 if __name__ == '__main__':
     # Process each key table
