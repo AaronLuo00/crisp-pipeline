@@ -308,6 +308,11 @@ class DataStandardizer:
     
     def calculate_concept_statistics(self, table_name):
         """Calculate outlier thresholds for MEASUREMENT table."""
+        
+        # Early return: Only MEASUREMENT table needs statistics for outlier detection
+        if table_name != 'MEASUREMENT':
+            return
+        
         logging.info(f"Calculating concept statistics for {table_name}")
         
         input_file = self.get_input_path(table_name)
@@ -748,15 +753,28 @@ class DataStandardizer:
         stats['time_stats'] = table_time_stats
         self.standardization_results["tables"][table_name] = stats
         
-        logging.info(f"\nStandardization Summary for {table_name}:")
-        logging.info(f"  - Input records: {stats['input_records']:,}")
-        logging.info(f"  - Output records: {stats['output_records']:,}")
-        logging.info(f"  - Records removed: {stats['input_records'] - stats['output_records']:,}")
-        logging.info(f"    - Percentile outliers: {stats['outliers_removed_percentile']:,}")
-        logging.info(f"    - Range outliers: {stats['outliers_removed_range']:,}")
-        logging.info(f"  - Datetime fields standardized: {stats['datetime_standardized']:,}")
-        logging.info(f"  - Units converted: {stats['units_converted']:,}")
-        logging.info(f"  - Processing time: {table_time_stats['total']:.2f}s")
+        # Only show detailed summary if changes were made
+        if stats['input_records'] != stats['output_records'] or \
+           stats.get('units_converted', 0) > 0 or \
+           stats.get('datetime_standardized', 0) > 0:
+            # Detailed output for tables with changes
+            logging.info(f"\nStandardization Summary for {table_name}:")
+            logging.info(f"  - Input records: {stats['input_records']:,}")
+            logging.info(f"  - Output records: {stats['output_records']:,}")
+            if stats['input_records'] != stats['output_records']:
+                logging.info(f"  - Records removed: {stats['input_records'] - stats['output_records']:,}")
+                if stats.get('outliers_removed_percentile', 0) > 0:
+                    logging.info(f"    - Percentile outliers: {stats['outliers_removed_percentile']:,}")
+                if stats.get('outliers_removed_range', 0) > 0:
+                    logging.info(f"    - Range outliers: {stats['outliers_removed_range']:,}")
+            if stats.get('datetime_standardized', 0) > 0:
+                logging.info(f"  - Datetime fields standardized: {stats['datetime_standardized']:,}")
+            if stats.get('units_converted', 0) > 0:
+                logging.info(f"  - Units converted: {stats['units_converted']:,}")
+            logging.info(f"  - Processing time: {table_time_stats['total']:.2f}s")
+        else:
+            # Single line output for tables with no changes
+            logging.info(f"{table_name}: No changes needed ({stats['input_records']:,} records, {table_time_stats['total']:.2f}s)")
         
         return stats['output_records']
     
