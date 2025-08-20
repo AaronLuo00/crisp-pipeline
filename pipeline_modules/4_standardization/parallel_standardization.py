@@ -344,3 +344,172 @@ def merge_outlier_files(output_dir: Path, num_chunks: int, outlier_type: str):
                         infile.readline()  # Skip header
                         shutil.copyfileobj(infile, outfile, FILE_BUFFER_SIZE)
                 chunk_file.unlink()  # Remove temp file
+
+
+def process_visit_patient_chunk(args: Tuple) -> Tuple[int, Dict, float]:
+    """
+    Process a chunk of patients for VISIT table merging.
+    
+    Args:
+        args: Tuple containing (chunk_id, total_chunks, input_file, output_dir, patient_chunk, table_name, threshold_hours)
+    
+    Returns:
+        Tuple of (chunk_id, statistics, elapsed_time)
+    """
+    import sys
+    from pathlib import Path
+    sys.path.append(str(Path(__file__).parent))
+    from visit_concept_merger import VisitConceptMerger
+    
+    start_time = time.time()
+    chunk_id, total_chunks, input_file, output_dir, patient_chunk, table_name, threshold_hours = args
+    
+    # Initialize statistics
+    stats = {
+        'patients_processed': len(patient_chunk),
+        'merged_episodes': 0,
+        'unchanged_records': 0,
+        'records_merged': 0,
+        'total_output_records': 0
+    }
+    
+    # Read input file
+    df = pd.read_csv(input_file, low_memory=False)
+    
+    # Filter to only patients in this chunk
+    chunk_df = df[df['person_id'].isin(patient_chunk)]
+    
+    if chunk_df.empty:
+        logging.warning(f"No data found for chunk {chunk_id}")
+        return chunk_id, stats, time.time() - start_time
+    
+    # Initialize merger
+    merger = VisitConceptMerger(threshold_minutes=int(threshold_hours * 60))
+    
+    # Process each patient in chunk
+    all_results = []
+    all_mappings = []
+    
+    for patient_id in patient_chunk:
+        patient_data = chunk_df[chunk_df['person_id'] == patient_id]
+        if not patient_data.empty:
+            patient_results, patient_mappings = merger.merge_visits_for_patient(patient_data, patient_id)
+            
+            if not patient_results.empty:
+                all_results.append(patient_results)
+            
+            if not patient_mappings.empty:
+                all_mappings.append(patient_mappings)
+    
+    # Combine chunk results
+    if all_results:
+        merged_df = pd.concat(all_results, ignore_index=True)
+        stats['total_output_records'] = len(merged_df)
+    else:
+        merged_df = pd.DataFrame()
+    
+    if all_mappings:
+        mapping_df = pd.concat(all_mappings, ignore_index=True)
+    else:
+        mapping_df = pd.DataFrame()
+    
+    # Update statistics from merger
+    stats['merged_episodes'] = merger.statistics.get('merged_episodes', 0)
+    stats['unchanged_records'] = merger.statistics.get('unchanged_records', 0)
+    stats['records_merged'] = merger.statistics.get('records_merged', 0)
+    
+    # Save chunk results to temporary files
+    output_dir = Path(output_dir)
+    temp_output = output_dir / f".temp_{table_name}_chunk_{chunk_id}.csv"
+    temp_mapping = output_dir / "merged_visit" / f".temp_{table_name}_mapping_chunk_{chunk_id}.csv"
+    
+    # Ensure directories exist
+    temp_mapping.parent.mkdir(parents=True, exist_ok=True)
+    
+    # Save results
+    if not merged_df.empty:
+        merged_df.to_csv(temp_output, index=False)
+    
+    if not mapping_df.empty:
+        mapping_df.to_csv(temp_mapping, index=False)
+    
+    elapsed = time.time() - start_time
+    logging.info(f"{table_name} chunk {chunk_id+1}/{total_chunks} completed: "
+                 f"{stats['patients_processed']} patients, "
+                 f"{stats['total_output_records']} output records in {elapsed:.2f}s")
+    
+    return chunk_id, stats, elapsed
+
+
+def merge_visit_chunks(output_dir: Path, table_name: str, num_chunks: int) -> Dict:
+    """
+    Merge VISIT chunk files into final output.
+    
+    Args:
+        output_dir: Output directory path
+        table_name: Table name (VISIT_DETAIL or VISIT_OCCURRENCE)
+        num_chunks: Number of chunks to merge
+    
+    Returns:
+        Dictionary with merge statistics
+    """
+    start_time = time.time()
+    stats = {'chunks_merged': 0, 'records_merged': 0}
+    
+    # Output files
+    final_output = output_dir / f"{table_name}_standardized.csv"
+    final_mapping = output_dir / "merged_visit" / f"{table_name}_merge_mapping.csv"
+    
+    # Ensure directories exist
+    final_mapping.parent.mkdir(parents=True, exist_ok=True)
+    
+    # Merge main data files
+    chunk_files = []
+    mapping_files = []
+    
+    for i in range(num_chunks):
+        chunk_file = output_dir / f".temp_{table_name}_chunk_{i}.csv"
+        mapping_file = output_dir / "merged_visit" / f".temp_{table_name}_mapping_chunk_{i}.csv"
+        
+        if chunk_file.exists():
+            chunk_files.append(chunk_file)
+        if mapping_file.exists():
+            mapping_files.append(mapping_file)
+    
+    # Merge main output files using fast binary copy
+    if chunk_files:
+        with open(final_output, 'wb') as outfile:
+            for i, chunk_file in enumerate(chunk_files):
+                with open(chunk_file, 'rb') as infile:
+                    if i == 0:
+                        # Copy entire first file including header
+                        shutil.copyfileobj(infile, outfile, FILE_BUFFER_SIZE)
+                    else:
+                        # Skip header for subsequent files
+                        infile.readline()
+                        shutil.copyfileobj(infile, outfile, FILE_BUFFER_SIZE)
+                
+                # Clean up temp file
+                chunk_file.unlink()
+                stats['chunks_merged'] += 1
+    
+    # Merge mapping files
+    if mapping_files:
+        with open(final_mapping, 'wb') as outfile:
+            for i, mapping_file in enumerate(mapping_files):
+                with open(mapping_file, 'rb') as infile:
+                    if i == 0:
+                        # Copy entire first file including header
+                        shutil.copyfileobj(infile, outfile, FILE_BUFFER_SIZE)
+                    else:
+                        # Skip header for subsequent files
+                        infile.readline()
+                        shutil.copyfileobj(infile, outfile, FILE_BUFFER_SIZE)
+                
+                # Clean up temp file
+                mapping_file.unlink()
+    
+    elapsed = time.time() - start_time
+    logging.info(f"{table_name} chunks merged in {elapsed:.2f}s")
+    
+    return stats

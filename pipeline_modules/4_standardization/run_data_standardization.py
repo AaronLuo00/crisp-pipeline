@@ -12,17 +12,33 @@ import time
 from pathlib import Path
 from datetime import datetime, timedelta
 from collections import defaultdict, Counter
+from typing import List, Dict, Tuple, Any
 from tqdm import tqdm
 import logging
 import warnings
-from visit_concept_merger import VisitConceptMerger
+try:
+    # Try relative imports first (when run as module)
+    from .visit_concept_merger import VisitConceptMerger
+    from .parallel_tdigest import process_measurement_chunk, merge_tdigest_states, split_file_for_parallel
+    from .parallel_standardization import (
+        process_measurement_chunk as process_measurement_chunk_std,
+        process_standard_table,
+        merge_measurement_chunks,
+        process_visit_patient_chunk,
+        merge_visit_chunks
+    )
+except ImportError:
+    # Fall back to absolute imports (when run as script)
+    from visit_concept_merger import VisitConceptMerger
+    from parallel_tdigest import process_measurement_chunk, merge_tdigest_states, split_file_for_parallel
+    from parallel_standardization import (
+        process_measurement_chunk as process_measurement_chunk_std,
+        process_standard_table,
+        merge_measurement_chunks,
+        process_visit_patient_chunk,
+        merge_visit_chunks
+    )
 import multiprocessing as mp
-from parallel_tdigest import process_measurement_chunk, merge_tdigest_states, split_file_for_parallel
-from parallel_standardization import (
-    process_measurement_chunk as process_measurement_chunk_std,
-    process_standard_table,
-    merge_measurement_chunks
-)
 from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor, as_completed
 
 # Platform-specific settings for performance optimization
@@ -1074,70 +1090,158 @@ class DataStandardizer:
                     f"(CPU time: {total_cpu_time:.2f}s)")
     
     def execute_post_processing_parallel(self):
-        """Phase 3: Parallel post-processing (merge chunks and visits)."""
+        """Phase 3: Parallel post-processing with chunked VISIT processing."""
         logging.info("\n" + "="*60)
         logging.info("Phase 3: Parallel Post-Processing")
         logging.info("="*60)
         
         phase3_start = time.time()
         
-        # Prepare tasks
+        # Prepare parallel tasks
         tasks = []
         
         # Task 1: Merge MEASUREMENT chunks
         if 'MEASUREMENT' in self.standardization_results['tables']:
             tasks.append(('merge_measurement', None))
         
-        # Task 2: VISIT_DETAIL merging
-        if self.merge_visits and 'VISIT_DETAIL' in self.standardization_results['tables']:
-            tasks.append(('merge_visits', 'VISIT_DETAIL'))
-        
-        # Task 3: VISIT_OCCURRENCE merging
-        if self.merge_visits and 'VISIT_OCCURRENCE' in self.standardization_results['tables']:
-            tasks.append(('merge_visits', 'VISIT_OCCURRENCE'))
+        # Task 2-3: VISIT tables - process with patient chunks
+        visit_tables = []
+        if self.merge_visits:
+            for table_name in ['VISIT_DETAIL', 'VISIT_OCCURRENCE']:
+                if table_name in self.standardization_results['tables']:
+                    visit_tables.append(table_name)
+                    tasks.append(('visit_chunks', table_name))
         
         self.phase_stats['phase3']['tasks'] = len(tasks)
         self.phase_stats['phase3']['task_times'] = {}
         logging.info(f"Executing {len(tasks)} post-processing tasks...")
         
-        # Execute with ThreadPoolExecutor (I/O bound tasks)
-        with ThreadPoolExecutor(max_workers=3) as executor:
+        # Execute with ProcessPoolExecutor for CPU-bound VISIT processing
+        with ProcessPoolExecutor(max_workers=6) as executor:
             futures = []
             task_start_times = {}
             
-            for task_type, task_data in tasks:
-                task_start_times[(task_type, task_data)] = time.time()
-                if task_type == 'merge_measurement':
-                    future = executor.submit(merge_measurement_chunks, output_dir, 6)
-                    futures.append(('merge_measurement', None, future))
-                elif task_type == 'merge_visits':
-                    future = executor.submit(self.merge_close_visits, task_data)
-                    futures.append(('merge_visits', task_data, future))
+            # Submit MEASUREMENT merge task
+            if any(task[0] == 'merge_measurement' for task in tasks):
+                task_start_times[('merge_measurement', None)] = time.time()
+                future = executor.submit(merge_measurement_chunks, output_dir, 6)
+                futures.append(('merge_measurement', None, future))
             
-            # Wait for completion and track times
+            # Submit VISIT chunk processing tasks
+            for task_type, table_name in tasks:
+                if task_type == 'visit_chunks':
+                    task_start_times[('visit_chunks', table_name)] = time.time()
+                    
+                    # Get patient list for this table
+                    input_file = self.get_input_path(table_name)
+                    if input_file.exists():
+                        # Read just to get patient list
+                        import pandas as pd
+                        df_sample = pd.read_csv(input_file, usecols=['person_id'], low_memory=False)
+                        patients = df_sample['person_id'].unique()
+                        
+                        # Split patients into 6 chunks
+                        import numpy as np
+                        patient_chunks = np.array_split(patients, 6)
+                        
+                        # Submit chunk processing tasks
+                        chunk_futures = []
+                        for i, patient_chunk in enumerate(patient_chunks):
+                            chunk_future = executor.submit(
+                                process_visit_patient_chunk,
+                                (i, 6, input_file, output_dir, patient_chunk.tolist(), 
+                                 table_name, self.merge_threshold_hours)
+                            )
+                            chunk_futures.append(('visit_chunk', table_name, i, chunk_future))
+                        
+                        futures.extend(chunk_futures)
+            
+            # Wait for chunk processing completion
+            visit_chunk_results = {}
             for future_data in futures:
                 try:
-                    task_type = future_data[0]
-                    task_data = future_data[1]
-                    future = future_data[2]
-                    
-                    if task_type == 'merge_measurement':
-                        result = future.result(timeout=60)
-                        task_time = time.time() - task_start_times[(task_type, task_data)]
+                    if future_data[0] == 'merge_measurement':
+                        result = future_data[2].result(timeout=60)
+                        task_time = time.time() - task_start_times[('merge_measurement', None)]
                         self.phase_stats['phase3']['task_times']['MEASUREMENT_merge'] = task_time
                         logging.info(f"MEASUREMENT chunks merged successfully in {task_time:.2f}s")
-                    elif task_type == 'merge_visits':
-                        table_name = task_data
-                        result = future.result(timeout=180)
-                        task_time = time.time() - task_start_times[(task_type, task_data)]
-                        self.phase_stats['phase3']['task_times'][f'{table_name}_merge'] = task_time
-                        logging.info(f"{table_name} visits merged successfully in {task_time:.2f}s")
+                        
+                    elif future_data[0] == 'visit_chunk':
+                        table_name = future_data[1]
+                        chunk_id = future_data[2]
+                        chunk_result = future_data[3].result(timeout=120)
+                        
+                        if table_name not in visit_chunk_results:
+                            visit_chunk_results[table_name] = []
+                        visit_chunk_results[table_name].append(chunk_result)
+                        
                 except Exception as e:
                     logging.error(f"Post-processing task failed: {e}")
+        
+        # Now merge VISIT chunks sequentially (fast file operations)
+        for table_name in visit_tables:
+            if table_name in visit_chunk_results and visit_chunk_results[table_name]:
+                merge_start = time.time()
+                
+                # Merge the chunk files
+                merge_stats = merge_visit_chunks(output_dir, table_name, 6)
+                
+                # Generate statistics file
+                self._generate_visit_statistics(table_name, visit_chunk_results[table_name])
+                
+                merge_time = time.time() - merge_start
+                
+                # Calculate total time including chunk processing
+                total_time = time.time() - task_start_times[('visit_chunks', table_name)]
+                self.phase_stats['phase3']['task_times'][f'{table_name}_merge'] = total_time
+                
+                logging.info(f"{table_name} visits merged successfully in {total_time:.2f}s")
         
         self.phase_stats['phase3']['wall_time'] = time.time() - phase3_start
         
         logging.info(f"Phase 3 completed in {self.phase_stats['phase3']['wall_time']:.2f}s")
+    
+    def _generate_visit_statistics(self, table_name: str, chunk_results: List):
+        """Generate aggregated statistics from chunk results."""
+        # Aggregate statistics from all chunks
+        total_stats = {
+            'merged_episodes': 0,
+            'unchanged_records': 0,
+            'records_merged': 0,
+            'total_records': 0,
+            'output_records': 0
+        }
+        
+        for chunk_id, stats, elapsed in chunk_results:
+            total_stats['merged_episodes'] += stats.get('merged_episodes', 0)
+            total_stats['unchanged_records'] += stats.get('unchanged_records', 0)
+            total_stats['records_merged'] += stats.get('records_merged', 0)
+            total_stats['output_records'] += stats.get('total_output_records', 0)
+        
+        # Update results
+        self.standardization_results["tables"][table_name + "_merging"] = {
+            'total_input_records': 0,
+            'merged_episodes': total_stats['merged_episodes'],
+            'visits_merged': total_stats['merged_episodes'],
+            'unchanged_records': total_stats['unchanged_records'],
+            'records_merged': total_stats['records_merged'],
+            'output_records': total_stats['output_records']
+        }
+        
+        # Save statistics to JSON file
+        import json
+        stats_file = output_dir / "merged_visit" / f"{table_name}_merge_statistics.json"
+        stats_file.parent.mkdir(parents=True, exist_ok=True)
+        
+        with open(stats_file, 'w') as f:
+            json.dump({
+                'total_records': total_stats['total_records'],
+                'merged_episodes': total_stats['merged_episodes'],
+                'unchanged_records': total_stats['unchanged_records'],
+                'records_merged': total_stats['records_merged']
+            }, f, indent=2)
+        
+        logging.info(f"Saved {table_name} merge statistics to: {stats_file}")
     
     def run_parallel(self):
         """Run the standardization process with three-phase parallel architecture."""
