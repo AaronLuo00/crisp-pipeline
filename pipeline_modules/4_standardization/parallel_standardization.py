@@ -373,8 +373,11 @@ def process_visit_patient_chunk(args: Tuple) -> Tuple[int, Dict, float]:
         'total_output_records': 0
     }
     
-    # Read input file
+    # Read input file and add original row numbers
     df = pd.read_csv(input_file, low_memory=False)
+    
+    # Add original row numbers (index + 2 because index starts at 0 and we have header)
+    df['original_row_number'] = df.index + 2
     
     # Filter to only patients in this chunk
     chunk_df = df[df['person_id'].isin(patient_chunk)]

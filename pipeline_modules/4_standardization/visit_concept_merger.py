@@ -123,7 +123,8 @@ class VisitConceptMerger:
                             'merged_episode_id': merged_record['episode_id'],
                             'person_id': patient_id,
                             'concept_id': concept_id,
-                            'table_type': table_type
+                            'table_type': table_type,
+                            'original_row_number': original_record.get('original_row_number', 'N/A')
                         }
                         patient_mappings.append(mapping)
                         self.merge_mappings.append(mapping)
