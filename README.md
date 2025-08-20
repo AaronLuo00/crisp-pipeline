@@ -137,7 +137,7 @@ Raw Data → [EDA] → [Cleaning] → [Mapping] → [Standardization] → [Extra
 ### Stage 1: Exploratory Data Analysis (EDA)
 - **Purpose**: Understand your dataset's characteristics
 - **Key Features**: 
-  - Memory-efficient chunked processing for 100GB+ files
+  - Comprehensive statistical analysis and data profiling
   - Automated data quality metrics
   - Cohort identification (e.g., ICU patients via concept IDs: 581379, 32037)
 
@@ -146,22 +146,25 @@ Raw Data → [EDA] → [Cleaning] → [Mapping] → [Standardization] → [Extra
 - **Key Features**:
   - Duplicate removal using table-specific composite keys
   - Invalid concept ID filtering (null, 0, or non-existent)
+  - Handle missing concept values
   - Temporal validation (ensuring start_date ≤ end_date)
   - Column pruning (removes features with >95% missing values)
 
 ### Stage 3: Concept Mapping
 - **Purpose**: Standardize medical terminologies
 - **Key Features**:
-  - Maps LOINC, RxNorm, ICD codes to SNOMED CT
+  - Maps LOINC, RxNorm, ICD codes to SNOMED CT vocabulary
   - Leverages OMOP vocabulary relationships
   - Handles 20+ vocabulary sources
+  - Concept frequency analysis
 
 ### Stage 4: Data Standardization
 - **Purpose**: Normalize values and formats
 - **Key Features**:
   - DateTime standardization to ISO 8601
-  - Statistical outlier detection (IQR method)  
+  - Statistical outlier detection and removal
   - Visit episode merging (configurable window)
+  - Comprehensive statistics calculation
 
 ### Stage 5: Feature Extraction
 - **Purpose**: Create ML-ready datasets
@@ -169,6 +172,13 @@ Raw Data → [EDA] → [Cleaning] → [Mapping] → [Standardization] → [Extra
   - Cohort-specific extraction
   - Feature aggregation
   - ML model baselines *(coming soon)*
+
+## ⚡ Performance Optimizations
+
+The pipeline has been optimized with parallel processing capabilities:
+- **Parallel Processing**: All modules support concurrent execution for improved performance
+- **Memory Optimization**: Chunk-based processing reduces memory footprint from O(n) to O(chunk_size)
+- **T-Digest Algorithm**: Memory-efficient percentile calculation for statistical analysis
 
 ## 📚 Documentation
 
