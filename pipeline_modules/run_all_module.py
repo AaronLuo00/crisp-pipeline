@@ -192,6 +192,9 @@ class CRISPPipeline:
         env['TQDM_DISABLE'] = '0'  # Enable tqdm but control nesting
         env['TQDM_POSITION'] = '0'  # Force single line
         env['TQDM_NESTED'] = 'false'  # Disable nesting
+        # Use ASCII characters and disable ANSI escape sequences for cleaner logs
+        env['TQDM_ASCII'] = '1'  # Use ASCII characters instead of Unicode
+        env['TERM'] = 'dumb'  # Prevent ANSI escape sequences in subprocess
         
         # Execute module
         start_time = time.time()
@@ -214,6 +217,10 @@ class CRISPPipeline:
                     # Removed cwd parameter - let scripts handle their own paths
                 )
                 
+                # Helper function to remove ANSI escape sequences
+                import re
+                ansi_escape = re.compile(r'\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])')
+                
                 # Stream output with improved filtering
                 lines = []
                 last_progress_line = ""
@@ -222,11 +229,13 @@ class CRISPPipeline:
                 
                 for line in process.stdout:
                     lines.append(line)
-                    log.write(line)
+                    # Clean ANSI sequences before writing to log
+                    clean_line = ansi_escape.sub('', line)
+                    log.write(clean_line)
                     log.flush()
                     
                     # Improved output filtering based on verbosity settings
-                    line_stripped = line.strip()
+                    line_stripped = clean_line.strip()
                     
                     # Skip empty lines
                     if not line_stripped:
