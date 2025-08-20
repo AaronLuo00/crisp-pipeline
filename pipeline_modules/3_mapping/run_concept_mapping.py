@@ -17,16 +17,27 @@ from collections import defaultdict, Counter
 from tqdm import tqdm
 from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor, as_completed
 
-# Set CSV field size limit to maximum to avoid field size errors
-csv.field_size_limit(sys.maxsize)
-
-# Platform-specific settings for performance optimization
+# Platform-specific settings for CSV field size limit and performance optimization
 if platform.system() == 'Windows':
+    # Windows: C long is 32-bit even on 64-bit systems
+    max_int = 2147483647  # 2^31 - 1 (max 32-bit signed integer)
+    while True:
+        try:
+            csv.field_size_limit(max_int)
+            break
+        except OverflowError:
+            max_int = int(max_int / 10)
+    
+    # Windows performance settings
     PROGRESS_INTERVAL = 30.0  # Less frequent updates (reduce overhead)
     CHUNK_SIZE = 500000  # Larger chunks for Windows (better I/O performance)
     WRITE_BUFFER_SIZE = 50000  # Larger write buffer for Windows
     FILE_BUFFER_SIZE = 2 * 1024 * 1024  # 2MB file buffer
 else:
+    # macOS/Linux: C long is 64-bit on 64-bit systems
+    csv.field_size_limit(sys.maxsize)
+    
+    # Unix-like system performance settings
     PROGRESS_INTERVAL = 10.0  # Default for macOS/Linux
     CHUNK_SIZE = 100000  # Default for macOS/Linux
     WRITE_BUFFER_SIZE = 20000  # Moderate buffer for Unix-like systems
