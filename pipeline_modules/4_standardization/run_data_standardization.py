@@ -1319,7 +1319,7 @@ class DataStandardizer:
         if 'task_times' in self.phase_stats['phase3']:
             for task_name, task_time in self.phase_stats['phase3']['task_times'].items():
                 display_name = task_name.replace('_merge', ' merge')
-                print(f"      • {display_name}: {task_time:.2f}s")
+                print(f"      * {display_name}: {task_time:.2f}s")
         
         logging.info("Parallel standardization process completed!")
         

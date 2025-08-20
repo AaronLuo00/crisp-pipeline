@@ -643,13 +643,13 @@ class PatientDataExtractor:
                     if key == 'icu':
                         icu_summaries = future.result(timeout=30)
                         completed_tasks += 1
-                        print(f"  ✓ ICU summaries extracted: {len(icu_summaries) if icu_summaries else 0} patients")
+                        print(f"  [OK] ICU summaries extracted: {len(icu_summaries) if icu_summaries else 0} patients")
                         self.extraction_results['statistics']['total_icu_patients'] = len(icu_summaries) if icu_summaries else 0
                     
                     elif key == 'small_batch':
                         batch_results = future.result(timeout=60)
                         completed_tasks += 1
-                        print(f"  ✓ Small tables batch completed")
+                        print(f"  [OK] Small tables batch completed")
                         for table, stats in batch_results.items():
                             if 'error' not in stats:
                                 self.extraction_results['statistics'][table] = stats
@@ -661,14 +661,14 @@ class PatientDataExtractor:
                         completed_tasks += 1
                         if 'error' not in stats:
                             self.extraction_results['statistics'][table_name] = stats
-                            print(f"  ✓ {table_name}: {stats.get('total_records', 0):,} records")
+                            print(f"  [OK] {table_name}: {stats.get('total_records', 0):,} records")
                         else:
-                            print(f"  ✗ {table_name}: {stats['error']}")
+                            print(f"  [FAIL] {table_name}: {stats['error']}")
                             self.extraction_results['errors'].append(f"{table_name}: {stats['error']}")
                 
                 except Exception as e:
                     logging.error(f"Task {key} failed: {e}")
-                    print(f"  ✗ Task {key} failed: {e}")
+                    print(f"  [FAIL] Task {key} failed: {e}")
                     self.extraction_results['errors'].append(f"Task {key}: {str(e)}")
         
         self.phase_times['phase1'] = time.time() - phase1_start
@@ -698,9 +698,9 @@ class PatientDataExtractor:
                     try:
                         chunk_id, patient_counts, temp_dir = future.result(timeout=120)
                         chunk_results.append((chunk_id, patient_counts, temp_dir))
-                        print(f"  ✓ Chunk {chunk_id + 1}/{MEASUREMENT_CHUNKS} completed")
+                        print(f"  [OK] Chunk {chunk_id + 1}/{MEASUREMENT_CHUNKS} completed")
                     except Exception as e:
-                        print(f"  ✗ Chunk {i} failed: {e}")
+                        print(f"  [FAIL] Chunk {i} failed: {e}")
                         logging.error(f"MEASUREMENT chunk {i} failed: {e}")
             
             # Merge chunks
@@ -714,7 +714,7 @@ class PatientDataExtractor:
                     'unique_patients': merge_stats['unique_patients'],
                     'processing_time': measurement_time
                 }
-                print(f"  ✓ MEASUREMENT completed: {merge_stats['total_records']:,} records, "
+                print(f"  [OK] MEASUREMENT completed: {merge_stats['total_records']:,} records, "
                      f"{merge_stats['unique_patients']} patients in {measurement_time:.2f}s")
         else:
             print("  MEASUREMENT file not found, skipping...")
@@ -734,7 +734,7 @@ class PatientDataExtractor:
             if table in self.extraction_results['statistics']:
                 self.extraction_results['statistics'][table]['processing_time'] = table_time
                 records = self.extraction_results['statistics'][table].get('total_records', 0)
-                print(f"    ✓ Completed: {records:,} records in {table_time:.2f}s")
+                print(f"    [OK] Completed: {records:,} records in {table_time:.2f}s")
         
         self.phase_times['phase3'] = time.time() - phase3_start
         
@@ -746,7 +746,7 @@ class PatientDataExtractor:
             print("Calculating pre-ICU statistics...")
             self.calculate_pre_icu_statistics(icu_summaries)
             stats_time = time.time() - phase4_start
-            print(f"  ✓ Completed: {len(icu_summaries)} patients analyzed in {stats_time:.2f}s")
+            print(f"  [OK] Completed: {len(icu_summaries)} patients analyzed in {stats_time:.2f}s")
         else:
             print("Skipping pre-ICU statistics (no ICU patients found)")
         
