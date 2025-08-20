@@ -18,6 +18,12 @@ import warnings
 from visit_concept_merger import VisitConceptMerger
 import multiprocessing as mp
 from parallel_tdigest import process_measurement_chunk, merge_tdigest_states, split_file_for_parallel
+from parallel_standardization import (
+    process_measurement_chunk as process_measurement_chunk_std,
+    process_standard_table,
+    merge_measurement_chunks
+)
+from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor, as_completed
 
 # Platform-specific settings for performance optimization
 if platform.system() == 'Windows':
@@ -42,7 +48,10 @@ project_root = base_dir.parent.parent  # Go up to crisp_pipeline_code
 data_dir = project_root / "data"
 # All inputs now come from Module 3 (mapping) output
 mapping_dir = project_root / "output" / "3_mapping"
+# Ensure we're using absolute paths
+mapping_dir = mapping_dir.resolve()
 output_dir = project_root / "output" / "4_standardization"
+output_dir = output_dir.resolve()
 
 # Create output directories
 removed_dir = output_dir / "removed_records"
@@ -135,11 +144,18 @@ class DataStandardizer:
             'workers_used': 0
         }
         self.visit_merge_stats = {}
+        # Phase timing statistics
+        self.phase_stats = {
+            'phase1': {'wall_time': 0, 'cpu_time': 0},
+            'phase2': {'wall_time': 0, 'cpu_time': 0, 'tasks': 0},
+            'phase3': {'wall_time': 0, 'cpu_time': 0, 'tasks': 0}
+        }
         
         # Date processing optimization - caching for performance
         self.date_cache = {}  # Cache for parsed dates
         self.format_cache = {}  # Cache for detected date formats
         
+        # Initialize results dictionary
         self.standardization_results = {
             "standardization_date": datetime.now().isoformat(),
             "dataset": "OMOP CDM",
@@ -970,6 +986,241 @@ class DataStandardizer:
             summary_df.to_csv(removed_dir / 'removal_summary.csv', index=False)
             logging.info("Generated removal summary")
     
+    def standardize_all_tables_parallel(self):
+        """Phase 2: Parallel processing of all tables' standardization."""
+        logging.info("\n" + "="*60)
+        logging.info("Phase 2: Parallel Data Standardization")
+        logging.info("="*60)
+        
+        phase2_start = time.time()
+        total_cpu_time = 0
+        
+        # Prepare tasks
+        tasks = []
+        
+        # Add MEASUREMENT chunks (6 tasks)
+        measurement_file = self.get_input_path('MEASUREMENT')
+        if measurement_file.exists():
+            for i in range(6):
+                tasks.append(('measurement_chunk', i, 6, measurement_file))
+        
+        # Add other tables
+        other_tables = ['OBSERVATION', 'DRUG_EXPOSURE', 'CONDITION_OCCURRENCE',
+                       'PROCEDURE_OCCURRENCE', 'DEVICE_EXPOSURE', 'DRUG_ERA',
+                       'CONDITION_ERA', 'SPECIMEN', 'VISIT_DETAIL', 'VISIT_OCCURRENCE']
+        for table in other_tables:
+            input_file = self.get_input_path(table)
+            if input_file.exists():
+                tasks.append(('standard_table', table, input_file))
+        
+        self.phase_stats['phase2']['tasks'] = len(tasks)
+        logging.info(f"Submitting {len(tasks)} parallel tasks...")
+        
+        # Execute parallel processing
+        with ProcessPoolExecutor(max_workers=6) as executor:
+            futures = []
+            
+            # Submit MEASUREMENT chunks
+            measurement_stats = {}
+            for task in tasks:
+                if task[0] == 'measurement_chunk':
+                    future = executor.submit(
+                        process_measurement_chunk_std,
+                        (task[1], task[2], task[3], output_dir, 
+                         self.concept_thresholds, self.outlier_percentile)
+                    )
+                    futures.append(('measurement', future))
+                elif task[0] == 'standard_table':
+                    future = executor.submit(
+                        process_standard_table,
+                        (task[1], task[2], output_dir)
+                    )
+                    futures.append(('table', future))
+            
+            # Collect results
+            for task_type, future in futures:
+                try:
+                    result = future.result(timeout=300)
+                    if task_type == 'measurement':
+                        chunk_id, stats, elapsed = result
+                        measurement_stats[chunk_id] = stats
+                        total_cpu_time += elapsed
+                        logging.info(f"MEASUREMENT chunk {chunk_id+1}/6: {stats['records_processed']} records")
+                    else:
+                        table_name, stats, elapsed = result
+                        self.standardization_results['tables'][table_name] = stats
+                        total_cpu_time += elapsed
+                        logging.info(f"{table_name}: {stats['input_records']} -> {stats['output_records']} records")
+                except Exception as e:
+                    logging.error(f"Task failed: {e}")
+        
+        # Aggregate MEASUREMENT statistics
+        if measurement_stats:
+            aggregated = {
+                'input_records': sum(s['records_processed'] for s in measurement_stats.values()),
+                'output_records': sum(s['records_processed'] - s['outliers_removed_percentile'] - s['outliers_removed_range'] 
+                                    for s in measurement_stats.values()),
+                'outliers_removed_percentile': sum(s['outliers_removed_percentile'] for s in measurement_stats.values()),
+                'outliers_removed_range': sum(s['outliers_removed_range'] for s in measurement_stats.values()),
+                'units_converted': sum(s['units_converted'] for s in measurement_stats.values()),
+                'datetime_standardized': sum(s['datetime_standardized'] for s in measurement_stats.values())
+            }
+            self.standardization_results['tables']['MEASUREMENT'] = aggregated
+        
+        self.phase_stats['phase2']['wall_time'] = time.time() - phase2_start
+        self.phase_stats['phase2']['cpu_time'] = total_cpu_time
+        
+        logging.info(f"Phase 2 completed in {self.phase_stats['phase2']['wall_time']:.2f}s "
+                    f"(CPU time: {total_cpu_time:.2f}s)")
+    
+    def execute_post_processing_parallel(self):
+        """Phase 3: Parallel post-processing (merge chunks and visits)."""
+        logging.info("\n" + "="*60)
+        logging.info("Phase 3: Parallel Post-Processing")
+        logging.info("="*60)
+        
+        phase3_start = time.time()
+        
+        # Prepare tasks
+        tasks = []
+        
+        # Task 1: Merge MEASUREMENT chunks
+        if 'MEASUREMENT' in self.standardization_results['tables']:
+            tasks.append(('merge_measurement', None))
+        
+        # Task 2: VISIT_DETAIL merging
+        if self.merge_visits and 'VISIT_DETAIL' in self.standardization_results['tables']:
+            tasks.append(('merge_visits', 'VISIT_DETAIL'))
+        
+        # Task 3: VISIT_OCCURRENCE merging
+        if self.merge_visits and 'VISIT_OCCURRENCE' in self.standardization_results['tables']:
+            tasks.append(('merge_visits', 'VISIT_OCCURRENCE'))
+        
+        self.phase_stats['phase3']['tasks'] = len(tasks)
+        self.phase_stats['phase3']['task_times'] = {}
+        logging.info(f"Executing {len(tasks)} post-processing tasks...")
+        
+        # Execute with ThreadPoolExecutor (I/O bound tasks)
+        with ThreadPoolExecutor(max_workers=3) as executor:
+            futures = []
+            task_start_times = {}
+            
+            for task_type, task_data in tasks:
+                task_start_times[(task_type, task_data)] = time.time()
+                if task_type == 'merge_measurement':
+                    future = executor.submit(merge_measurement_chunks, output_dir, 6)
+                    futures.append(('merge_measurement', None, future))
+                elif task_type == 'merge_visits':
+                    future = executor.submit(self.merge_close_visits, task_data)
+                    futures.append(('merge_visits', task_data, future))
+            
+            # Wait for completion and track times
+            for future_data in futures:
+                try:
+                    task_type = future_data[0]
+                    task_data = future_data[1]
+                    future = future_data[2]
+                    
+                    if task_type == 'merge_measurement':
+                        result = future.result(timeout=60)
+                        task_time = time.time() - task_start_times[(task_type, task_data)]
+                        self.phase_stats['phase3']['task_times']['MEASUREMENT_merge'] = task_time
+                        logging.info(f"MEASUREMENT chunks merged successfully in {task_time:.2f}s")
+                    elif task_type == 'merge_visits':
+                        table_name = task_data
+                        result = future.result(timeout=180)
+                        task_time = time.time() - task_start_times[(task_type, task_data)]
+                        self.phase_stats['phase3']['task_times'][f'{table_name}_merge'] = task_time
+                        logging.info(f"{table_name} visits merged successfully in {task_time:.2f}s")
+                except Exception as e:
+                    logging.error(f"Post-processing task failed: {e}")
+        
+        self.phase_stats['phase3']['wall_time'] = time.time() - phase3_start
+        
+        logging.info(f"Phase 3 completed in {self.phase_stats['phase3']['wall_time']:.2f}s")
+    
+    def run_parallel(self):
+        """Run the standardization process with three-phase parallel architecture."""
+        total_start = time.time()
+        
+        logging.info("Starting parallel data standardization process...")
+        logging.info(f"Parameters: outlier_percentile={self.outlier_percentile}, "
+                    f"merge_visits={self.merge_visits}, merge_threshold={self.merge_threshold_hours}h")
+        
+        # Phase 1: Concept Statistics (T-Digest)
+        logging.info("\n" + "="*60)
+        logging.info("Phase 1: Concept Statistics Calculation")
+        logging.info("="*60)
+        phase1_start = time.time()
+        self.calculate_concept_statistics('MEASUREMENT')
+        self.phase_stats['phase1']['wall_time'] = time.time() - phase1_start
+        self.phase_stats['phase1']['cpu_time'] = self.parallel_stats.get('cpu_time', 0)
+        
+        # Phase 2: Parallel Standardization
+        self.standardize_all_tables_parallel()
+        
+        # Phase 3: Parallel Post-Processing
+        self.execute_post_processing_parallel()
+        
+        # Save results to JSON
+        self.standardization_results["standardization_date"] = datetime.now().isoformat()
+        self.standardization_results["dataset"] = "OMOP CDM"
+        self.standardization_results["parameters"] = {
+            "outlier_percentile": self.outlier_percentile,
+            "merge_visits": self.merge_visits,
+            "merge_threshold_hours": self.merge_threshold_hours
+        }
+        
+        # Save JSON results (convert numpy types for JSON serialization)
+        results_path = output_dir / "standardization_results.json"
+        
+        # Convert numpy types to native Python types
+        def convert_numpy(obj):
+            if isinstance(obj, dict):
+                return {k: convert_numpy(v) for k, v in obj.items()}
+            elif isinstance(obj, list):
+                return [convert_numpy(v) for v in obj]
+            elif hasattr(obj, 'item'):  # numpy scalars
+                return obj.item()
+            else:
+                return obj
+        
+        json_safe_results = convert_numpy(self.standardization_results)
+        
+        with open(results_path, 'w') as f:
+            json.dump(json_safe_results, f, indent=2)
+        
+        # Generate markdown report
+        self.generate_markdown_report()
+        
+        total_time = time.time() - total_start
+        
+        # Print enhanced performance summary
+        print("\n" + "="*60)
+        print("PARALLEL PROCESSING PERFORMANCE SUMMARY")
+        print("="*60)
+        print(f"\nTotal execution time: {total_time:.2f}s")
+        print(f"\nPhase Breakdown:")
+        print(f"  Phase 1 (Statistics): {self.phase_stats['phase1']['wall_time']:.2f}s")
+        if self.phase_stats['phase1']['cpu_time'] > 0:
+            print(f"    - CPU time: {self.phase_stats['phase1']['cpu_time']:.2f}s")
+            print(f"    - Speedup: {self.phase_stats['phase1']['cpu_time']/self.phase_stats['phase1']['wall_time']:.2f}x")
+        print(f"  Phase 2 (Standardization): {self.phase_stats['phase2']['wall_time']:.2f}s")
+        print(f"    - {self.phase_stats['phase2']['tasks']} parallel tasks")
+        if self.phase_stats['phase2']['cpu_time'] > 0:
+            print(f"    - CPU time: {self.phase_stats['phase2']['cpu_time']:.2f}s")
+            print(f"    - Speedup: {self.phase_stats['phase2']['cpu_time']/self.phase_stats['phase2']['wall_time']:.2f}x")
+        print(f"  Phase 3 (Post-Processing): {self.phase_stats['phase3']['wall_time']:.2f}s")
+        print(f"    - {self.phase_stats['phase3']['tasks']} parallel tasks:")
+        if 'task_times' in self.phase_stats['phase3']:
+            for task_name, task_time in self.phase_stats['phase3']['task_times'].items():
+                display_name = task_name.replace('_merge', ' merge')
+                print(f"      • {display_name}: {task_time:.2f}s")
+        
+        logging.info("Parallel standardization process completed!")
+        
+        return self.standardization_results
+    
     def run(self):
         """Run the complete standardization process."""
         logging.info("Starting data standardization process...")
@@ -1192,6 +1443,10 @@ def main():
                         help='Disable visit merging')
     parser.add_argument('--merge-threshold', type=float, default=2.0,
                         help='Hours threshold for visit merging (default: 2)')
+    parser.add_argument('--parallel', action='store_true', default=True,
+                        help='Use parallel processing mode (default: True)')
+    parser.add_argument('--sequential', action='store_true',
+                        help='Use sequential processing mode instead of parallel')
     
     args = parser.parse_args()
     
@@ -1202,92 +1457,102 @@ def main():
         merge_threshold_hours=args.merge_threshold
     )
     
-    standardizer.run()
+    # Run in parallel or sequential mode
+    # Sequential flag overrides parallel (which is now default)
+    if args.sequential:
+        standardizer.run()
+        is_parallel = False
+    else:
+        standardizer.run_parallel()
+        is_parallel = True
     
     # Calculate total time
     total_time = time.time() - start_time
     print(f"\nTotal execution time: {total_time:.2f} seconds")
     
-    # Performance breakdown
-    print("\n" + "="*50)
-    print("PERFORMANCE BREAKDOWN - Data Standardization")
-    print("="*50)
-    
-    # Aggregate timing from all tables
-    total_concept_stats_wall = 0
-    total_concept_stats_cpu = 0
-    total_data_processing = 0
-    total_file_io = 0
-    total_outlier_detection = 0
-    total_unit_conversion = 0
-    total_datetime_std = 0
-    
-    for table_stats in standardizer.standardization_results.get('tables', {}).values():
-        if 'time_stats' in table_stats:
-            ts = table_stats['time_stats']
-            total_concept_stats_wall += ts.get('concept_statistics', 0)
-            total_concept_stats_cpu += ts.get('concept_statistics_cpu', 0)
-            total_data_processing += ts.get('data_processing', 0)
-            total_file_io += ts.get('file_io', 0)
-            total_outlier_detection += ts.get('outlier_detection', 0)
-            total_unit_conversion += ts.get('unit_conversion', 0)
-            total_datetime_std += ts.get('datetime_standardization', 0)
-    
-    # Also add visit merging time
-    visit_merge_time = sum(stats.get('wall_time', 0) for stats in standardizer.visit_merge_stats.values())
-    
-    # Calculate total CPU time
-    total_cpu_time = total_concept_stats_cpu if total_concept_stats_cpu > 0 else total_concept_stats_wall
-    total_cpu_time += total_data_processing + visit_merge_time
-    
-    # Display enhanced metrics
-    print(f"\nTotal CPU time:        {total_cpu_time:.2f}s")
-    print(f"Wall clock time:       {total_time:.2f}s")
-    if total_cpu_time > total_time:
-        print(f"Speedup:               {total_cpu_time/total_time:.2f}x")
-    
-    print(f"\nPhase-specific Performance:")
-    
-    # Phase 1: T-Digest Statistics (parallel for MEASUREMENT)
-    if standardizer.parallel_stats['wall_time'] > 0:
-        print(f"  T-Digest Statistics ({standardizer.parallel_stats['workers_used']} workers):")
-        print(f"    CPU time: {standardizer.parallel_stats['cpu_time']:.2f}s, Wall time: {standardizer.parallel_stats['wall_time']:.2f}s")
-        print(f"    Speedup: {standardizer.parallel_stats['speedup']:.2f}x, Efficiency: {standardizer.parallel_stats['efficiency']:.1f}%")
-    
-    # Phase 2: Data Processing (sequential)
-    print(f"  Data Processing (sequential):")
-    print(f"    Total time: {total_data_processing:.2f}s")
-    if total_outlier_detection > 0:
-        print(f"    - Outlier detection: {total_outlier_detection:.2f}s")
-    if total_unit_conversion > 0:
-        print(f"    - Unit conversion: {total_unit_conversion:.2f}s")
-    if total_datetime_std > 0:
-        print(f"    - Datetime standardization: {total_datetime_std:.2f}s")
-    
-    # Phase 3: Visit Merging
-    if visit_merge_time > 0:
-        print(f"  Visit Merging (sequential):")
-        for table_name, stats in standardizer.visit_merge_stats.items():
-            print(f"    - {table_name}: {stats['wall_time']:.2f}s")
-    
-    print(f"\nDetailed Time Breakdown:")
-    print(f"  Concept statistics:    {total_concept_stats_wall:.2f}s ({total_concept_stats_wall/total_time*100:.1f}%)")
-    print(f"  Data processing:       {total_data_processing:.2f}s ({total_data_processing/total_time*100:.1f}%)")
-    print(f"  File I/O:              {total_file_io:.2f}s ({total_file_io/total_time*100:.1f}%)")
-    if visit_merge_time > 0:
-        print(f"  Visit merging:         {visit_merge_time:.2f}s ({visit_merge_time/total_time*100:.1f}%)")
-    
-    # Find slowest tables
-    table_times = [(name, stats.get('time_stats', {}).get('total', 0)) 
-                   for name, stats in standardizer.standardization_results.get('tables', {}).items()]
-    table_times.sort(key=lambda x: x[1], reverse=True)
-    
-    print("\nSlowest tables:")
-    for name, time_taken in table_times[:3]:
-        if time_taken > 0:
-            print(f"  {name}: {time_taken:.2f}s")
-    
-    print("="*50)
+    # Only show the detailed performance breakdown for sequential mode
+    # Parallel mode already has its own detailed report
+    if not is_parallel:
+        # Performance breakdown
+        print("\n" + "="*50)
+        print("PERFORMANCE BREAKDOWN - Data Standardization")
+        print("="*50)
+        
+        # Aggregate timing from all tables
+        total_concept_stats_wall = 0
+        total_concept_stats_cpu = 0
+        total_data_processing = 0
+        total_file_io = 0
+        total_outlier_detection = 0
+        total_unit_conversion = 0
+        total_datetime_std = 0
+        
+        for table_stats in standardizer.standardization_results.get('tables', {}).values():
+            if 'time_stats' in table_stats:
+                ts = table_stats['time_stats']
+                total_concept_stats_wall += ts.get('concept_statistics', 0)
+                total_concept_stats_cpu += ts.get('concept_statistics_cpu', 0)
+                total_data_processing += ts.get('data_processing', 0)
+                total_file_io += ts.get('file_io', 0)
+                total_outlier_detection += ts.get('outlier_detection', 0)
+                total_unit_conversion += ts.get('unit_conversion', 0)
+                total_datetime_std += ts.get('datetime_standardization', 0)
+        
+        # Also add visit merging time
+        visit_merge_time = sum(stats.get('wall_time', 0) for stats in standardizer.visit_merge_stats.values())
+        
+        # Calculate total CPU time
+        total_cpu_time = total_concept_stats_cpu if total_concept_stats_cpu > 0 else total_concept_stats_wall
+        total_cpu_time += total_data_processing + visit_merge_time
+        
+        # Display enhanced metrics
+        print(f"\nTotal CPU time:        {total_cpu_time:.2f}s")
+        print(f"Wall clock time:       {total_time:.2f}s")
+        if total_cpu_time > total_time:
+            print(f"Speedup:               {total_cpu_time/total_time:.2f}x")
+        
+        print(f"\nPhase-specific Performance:")
+        
+        # Phase 1: T-Digest Statistics (parallel for MEASUREMENT)
+        if standardizer.parallel_stats['wall_time'] > 0:
+            print(f"  T-Digest Statistics ({standardizer.parallel_stats['workers_used']} workers):")
+            print(f"    CPU time: {standardizer.parallel_stats['cpu_time']:.2f}s, Wall time: {standardizer.parallel_stats['wall_time']:.2f}s")
+            print(f"    Speedup: {standardizer.parallel_stats['speedup']:.2f}x, Efficiency: {standardizer.parallel_stats['efficiency']:.1f}%")
+        
+        # Phase 2: Data Processing (sequential)
+        print(f"  Data Processing (sequential):")
+        print(f"    Total time: {total_data_processing:.2f}s")
+        if total_outlier_detection > 0:
+            print(f"    - Outlier detection: {total_outlier_detection:.2f}s")
+        if total_unit_conversion > 0:
+            print(f"    - Unit conversion: {total_unit_conversion:.2f}s")
+        if total_datetime_std > 0:
+            print(f"    - Datetime standardization: {total_datetime_std:.2f}s")
+        
+        # Phase 3: Visit Merging
+        if visit_merge_time > 0:
+            print(f"  Visit Merging (sequential):")
+            for table_name, stats in standardizer.visit_merge_stats.items():
+                print(f"    - {table_name}: {stats['wall_time']:.2f}s")
+        
+        print(f"\nDetailed Time Breakdown:")
+        print(f"  Concept statistics:    {total_concept_stats_wall:.2f}s ({total_concept_stats_wall/total_time*100:.1f}%)")
+        print(f"  Data processing:       {total_data_processing:.2f}s ({total_data_processing/total_time*100:.1f}%)")
+        print(f"  File I/O:              {total_file_io:.2f}s ({total_file_io/total_time*100:.1f}%)")
+        if visit_merge_time > 0:
+            print(f"  Visit merging:         {visit_merge_time:.2f}s ({visit_merge_time/total_time*100:.1f}%)")
+        
+        # Find slowest tables
+        table_times = [(name, stats.get('time_stats', {}).get('total', 0)) 
+                       for name, stats in standardizer.standardization_results.get('tables', {}).items()]
+        table_times.sort(key=lambda x: x[1], reverse=True)
+        
+        print("\nSlowest tables:")
+        for name, time_taken in table_times[:3]:
+            if time_taken > 0:
+                print(f"  {name}: {time_taken:.2f}s")
+        
+        print("="*50)
 
 
 if __name__ == "__main__":
