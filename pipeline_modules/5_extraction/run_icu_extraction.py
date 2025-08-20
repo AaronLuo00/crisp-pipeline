@@ -13,6 +13,26 @@ from collections import defaultdict
 from tqdm import tqdm
 import logging
 import warnings
+import multiprocessing as mp
+from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor, as_completed
+
+# Import parallel processing functions
+try:
+    from .parallel_extraction import (
+        process_table_batch,
+        process_single_table_worker,
+        process_measurement_chunk,
+        merge_measurement_chunks,
+        group_tables_by_size
+    )
+except ImportError:
+    from parallel_extraction import (
+        process_table_batch,
+        process_single_table_worker,
+        process_measurement_chunk,
+        merge_measurement_chunks,
+        group_tables_by_size
+    )
 
 # Platform-specific settings for performance optimization
 if platform.system() == 'Windows':
@@ -81,6 +101,10 @@ PRE_ICU_STAT_TABLES = {
 ICU_CONCEPT_IDS = [581379, 32037]
 ICU_SUMMARY_COL = "visit_detail_start_datetime_earliest"
 
+# Parallel processing configuration
+MAX_WORKERS = min(6, mp.cpu_count())
+MEASUREMENT_CHUNKS = 6
+
 
 class PatientDataExtractor:
     def __init__(self):
@@ -89,9 +113,11 @@ class PatientDataExtractor:
             "dataset": "subdataset_1000",
             "icu_concept_ids": ICU_CONCEPT_IDS,
             "statistics": {},
-            "errors": []
+            "errors": [],
+            "phase_stats": {}
         }
         self.skipped_patients = []
+        self.phase_times = {}
         
     def get_patient_path(self, person_id: str) -> Path:
         """Generate patient data storage path with hierarchical structure."""
@@ -170,9 +196,10 @@ class PatientDataExtractor:
             logging.error(f"Error processing VISIT_DETAIL: {str(e)}")
             self.extraction_results['errors'].append(f"VISIT_DETAIL processing: {str(e)}")
         
-        logging.info(f"Extracted ICU summaries for {total_icu_patients} patients")
+        extraction_time = time.time() - t0
+        logging.info(f"Extracted ICU summaries for {total_icu_patients} patients in {extraction_time:.2f}s")
         self.extraction_results['statistics']['total_icu_patients'] = total_icu_patients
-        self.extraction_results['statistics']['icu_extraction_time'] = time.time() - t0
+        self.extraction_results['statistics']['icu_extraction_time'] = extraction_time
         
         return icu_summaries
     
@@ -395,7 +422,8 @@ class PatientDataExtractor:
             logging.info(f"Skipped patients saved to: {skipped_file}")
         
         # Record processing time
-        self.extraction_results['statistics']['pre_icu_calculation_time'] = time.time() - t0
+        processing_time = time.time() - t0
+        self.extraction_results['statistics']['pre_icu_calculation_time'] = processing_time
     
     def generate_report(self):
         """Generate extraction report."""
@@ -470,41 +498,263 @@ class PatientDataExtractor:
         
         logging.info(f"Report saved to: {report_path}")
     
+    def print_performance_breakdown(self, total_time):
+        """Print detailed performance breakdown."""
+        print("\n" + "="*60)
+        print("PERFORMANCE BREAKDOWN - Parallel ICU Data Extraction")
+        print("="*60)
+        
+        stats = self.extraction_results['statistics']
+        phase_stats = self.phase_times
+        
+        # Calculate component times
+        phase1_time = phase_stats.get('phase1', 0)  # Parallel table processing
+        phase2_time = phase_stats.get('phase2', 0)  # MEASUREMENT processing
+        phase3_time = phase_stats.get('phase3', 0)  # Basic tables
+        phase4_time = phase_stats.get('phase4', 0)  # Pre-ICU statistics
+        
+        # Calculate CPU time (sum of all individual processing times)
+        cpu_time = 0
+        parallel_tasks = 0
+        
+        # Phase 1 CPU time (all parallel tasks)
+        for table in TABLES_TO_PROCESS:
+            if table != 'MEASUREMENT' and table in stats:
+                table_time = stats[table].get('processing_time', 0)
+                if table_time > 0:
+                    cpu_time += table_time
+                    parallel_tasks += 1
+        
+        # Add ICU extraction time
+        icu_time = stats.get('icu_extraction_time', 0) 
+        if icu_time > 0:
+            cpu_time += icu_time
+            parallel_tasks += 1
+        
+        # MEASUREMENT CPU time (6 parallel chunks)
+        measurement_time = stats.get('MEASUREMENT', {}).get('processing_time', 0)
+        if measurement_time > 0:
+            # Estimate CPU time as chunk_time * num_chunks
+            cpu_time += measurement_time * MEASUREMENT_CHUNKS
+            parallel_tasks += MEASUREMENT_CHUNKS
+        
+        # Basic tables and pre-ICU are sequential
+        basic_cpu = sum(stats.get(t, {}).get('processing_time', 0) for t in BASIC_TABLES)
+        pre_icu_cpu = stats.get('pre_icu_calculation_time', 0)
+        cpu_time += basic_cpu + pre_icu_cpu
+        
+        # Overall metrics
+        if cpu_time > 0:
+            speedup = cpu_time / total_time
+            efficiency = (speedup / MAX_WORKERS) * 100
+            
+            print(f"\nOverall Performance:")
+            print(f"  Total CPU time:        {cpu_time:.2f}s")
+            print(f"  Wall clock time:       {total_time:.2f}s") 
+            print(f"  Speedup:               {speedup:.2f}x")
+            print(f"  Parallel efficiency:   {efficiency:.1f}%")
+            print(f"  Parallel tasks:        {parallel_tasks}")
+        
+        # Phase breakdown
+        print(f"\nPhase Breakdown:")
+        if phase1_time > 0:
+            print(f"  Phase 1 (Parallel Tables): {phase1_time:.2f}s ({phase1_time/total_time*100:.1f}%)")
+        if phase2_time > 0:
+            print(f"  Phase 2 (MEASUREMENT):      {phase2_time:.2f}s ({phase2_time/total_time*100:.1f}%)")
+        if phase3_time > 0:
+            print(f"  Phase 3 (Basic Tables):     {phase3_time:.2f}s ({phase3_time/total_time*100:.1f}%)")
+        if phase4_time > 0:
+            print(f"  Phase 4 (Pre-ICU Stats):    {phase4_time:.2f}s ({phase4_time/total_time*100:.1f}%)")
+        
+        # Individual table performance
+        print(f"\nTable Processing Times:")
+        table_times = []
+        for table in TABLES_TO_PROCESS:
+            if table in stats and 'processing_time' in stats[table]:
+                table_times.append((table, stats[table]['processing_time']))
+        
+        table_times.sort(key=lambda x: x[1], reverse=True)
+        
+        for name, time_taken in table_times[:5]:  # Show top 5
+            if time_taken > 0:
+                records = stats[name].get('total_records', 0)
+                if records > 0:
+                    rate = records / time_taken
+                    print(f"  {name:20s}: {time_taken:6.2f}s ({records:>10,} records, {rate:>10.0f} rec/s)")
+                else:
+                    print(f"  {name:20s}: {time_taken:6.2f}s")
+        
+        print("="*60)
+    
     def run(self):
-        """Run the complete extraction process."""
+        """Run the complete extraction process with parallel optimization."""
         # Start timing
         start_time = time.time()
         
         # Simplified startup
         print(f"\nExtracting patient data for {len(TABLES_TO_PROCESS) + len(BASIC_TABLES)} tables...")
         print(f"ICU Concept IDs: {', '.join(map(str, ICU_CONCEPT_IDS))}")
+        print(f"Using parallel processing with {MAX_WORKERS} workers")
         
-        # Step 1: Extract ICU summaries
-        print("\nStep 1/4: Extracting ICU visit summaries...")
-        logging.info("Extracting ICU visit summaries...")
-        icu_summaries = self.extract_icu_summaries()
+        # Group tables by size for optimal parallel processing
+        tables_without_measurement = [t for t in TABLES_TO_PROCESS if t != 'MEASUREMENT']
+        small_tables, medium_tables, large_tables = group_tables_by_size(
+            tables_without_measurement, standardized_dir
+        )
         
-        # Step 2: Split standardized tables by patient
-        print(f"\nStep 2/4: Processing {len(TABLES_TO_PROCESS)} standardized tables")
-        logging.info("Splitting standardized tables by patient...")
-        for idx, table in enumerate(TABLES_TO_PROCESS, 1):
-            print(f"\n[{idx}/{len(TABLES_TO_PROCESS)}] Processing {table}...")
-            self.split_table_by_patient(table)
+        print(f"\nTable grouping:")
+        print(f"  Small tables ({len(small_tables)}): {', '.join(small_tables) if small_tables else 'None'}")
+        print(f"  Medium tables ({len(medium_tables)}): {', '.join(medium_tables) if medium_tables else 'None'}")
+        print(f"  Large tables: MEASUREMENT")
         
-        # Step 3: Split basic tables by patient
-        print(f"\nStep 3/4: Processing {len(BASIC_TABLES)} basic tables")
-        logging.info("Processing basic tables...")
+        # Phase 1: Parallel processing of ICU summaries and tables
+        print("\n=== Phase 1: Parallel Processing ===")
+        phase1_start = time.time()
+        
+        with ProcessPoolExecutor(max_workers=MAX_WORKERS) as executor:
+            futures = {}
+            
+            # Step 1: Submit ICU summaries extraction (independent task)
+            print("\nStep 1/4: Extracting ICU visit summaries (parallel)...")
+            futures['icu'] = executor.submit(self.extract_icu_summaries)
+            
+            # Step 2a: Submit small tables as batch (if any)
+            if small_tables:
+                print(f"\nStep 2a/4: Processing {len(small_tables)} small tables as batch...")
+                futures['small_batch'] = executor.submit(
+                    process_table_batch, small_tables, standardized_dir, patient_data_dir
+                )
+            
+            # Step 2b: Submit medium tables individually
+            if medium_tables:
+                print(f"\nStep 2b/4: Processing {len(medium_tables)} medium tables in parallel...")
+                for table in medium_tables:
+                    futures[f'medium_{table}'] = executor.submit(
+                        process_single_table_worker, table, standardized_dir, patient_data_dir
+                    )
+            
+            # Collect parallel results
+            icu_summaries = None
+            completed_tasks = 0
+            total_tasks = len(futures)
+            
+            for key, future in futures.items():
+                try:
+                    if key == 'icu':
+                        icu_summaries = future.result(timeout=30)
+                        completed_tasks += 1
+                        print(f"  ✓ ICU summaries extracted: {len(icu_summaries) if icu_summaries else 0} patients")
+                        self.extraction_results['statistics']['total_icu_patients'] = len(icu_summaries) if icu_summaries else 0
+                    
+                    elif key == 'small_batch':
+                        batch_results = future.result(timeout=60)
+                        completed_tasks += 1
+                        print(f"  ✓ Small tables batch completed")
+                        for table, stats in batch_results.items():
+                            if 'error' not in stats:
+                                self.extraction_results['statistics'][table] = stats
+                                print(f"    - {table}: {stats.get('total_records', 0):,} records")
+                    
+                    elif key.startswith('medium_'):
+                        table_name = key.replace('medium_', '')
+                        stats = future.result(timeout=120)
+                        completed_tasks += 1
+                        if 'error' not in stats:
+                            self.extraction_results['statistics'][table_name] = stats
+                            print(f"  ✓ {table_name}: {stats.get('total_records', 0):,} records")
+                        else:
+                            print(f"  ✗ {table_name}: {stats['error']}")
+                            self.extraction_results['errors'].append(f"{table_name}: {stats['error']}")
+                
+                except Exception as e:
+                    logging.error(f"Task {key} failed: {e}")
+                    print(f"  ✗ Task {key} failed: {e}")
+                    self.extraction_results['errors'].append(f"Task {key}: {str(e)}")
+        
+        self.phase_times['phase1'] = time.time() - phase1_start
+        
+        # Phase 2: MEASUREMENT parallel chunk processing
+        print("\n=== Phase 2: MEASUREMENT Parallel Processing ===")
+        phase2_start = time.time()
+        measurement_file = standardized_dir / "MEASUREMENT_standardized.csv"
+        
+        if measurement_file.exists():
+            print(f"Processing MEASUREMENT with {MEASUREMENT_CHUNKS} parallel chunks...")
+            measurement_start = time.time()
+            
+            with ProcessPoolExecutor(max_workers=MEASUREMENT_CHUNKS) as executor:
+                # Submit all chunks
+                chunk_futures = []
+                for chunk_id in range(MEASUREMENT_CHUNKS):
+                    future = executor.submit(
+                        process_measurement_chunk,
+                        (chunk_id, MEASUREMENT_CHUNKS, measurement_file, output_dir)
+                    )
+                    chunk_futures.append(future)
+                
+                # Collect chunk results
+                chunk_results = []
+                for i, future in enumerate(as_completed(chunk_futures)):
+                    try:
+                        chunk_id, patient_counts, temp_dir = future.result(timeout=120)
+                        chunk_results.append((chunk_id, patient_counts, temp_dir))
+                        print(f"  ✓ Chunk {chunk_id + 1}/{MEASUREMENT_CHUNKS} completed")
+                    except Exception as e:
+                        print(f"  ✗ Chunk {i} failed: {e}")
+                        logging.error(f"MEASUREMENT chunk {i} failed: {e}")
+            
+            # Merge chunks
+            if chunk_results:
+                print("  Merging MEASUREMENT chunks...")
+                merge_stats = merge_measurement_chunks(output_dir, patient_data_dir, MEASUREMENT_CHUNKS)
+                
+                measurement_time = time.time() - measurement_start
+                self.extraction_results['statistics']['MEASUREMENT'] = {
+                    'total_records': merge_stats['total_records'],
+                    'unique_patients': merge_stats['unique_patients'],
+                    'processing_time': measurement_time
+                }
+                print(f"  ✓ MEASUREMENT completed: {merge_stats['total_records']:,} records, "
+                     f"{merge_stats['unique_patients']} patients in {measurement_time:.2f}s")
+        else:
+            print("  MEASUREMENT file not found, skipping...")
+        
+        self.phase_times['phase2'] = time.time() - phase2_start
+        
+        # Step 3: Process basic tables (still sequential, they're small)
+        print(f"\n=== Phase 3: Basic Tables ===")
+        print(f"Processing {len(BASIC_TABLES)} basic tables...")
+        phase3_start = time.time()
+        
         for idx, table in enumerate(BASIC_TABLES, 1):
-            print(f"\n[{idx}/{len(BASIC_TABLES)}] Processing {table}...")
+            print(f"  [{idx}/{len(BASIC_TABLES)}] Processing {table}...")
+            table_start = time.time()
             self.split_basic_table_by_patient(table)
+            table_time = time.time() - table_start
+            if table in self.extraction_results['statistics']:
+                self.extraction_results['statistics'][table]['processing_time'] = table_time
+                records = self.extraction_results['statistics'][table].get('total_records', 0)
+                print(f"    ✓ Completed: {records:,} records in {table_time:.2f}s")
+        
+        self.phase_times['phase3'] = time.time() - phase3_start
         
         # Step 4: Calculate pre-ICU statistics
+        print("\n=== Phase 4: Pre-ICU Statistics ===")
+        phase4_start = time.time()
+        
         if icu_summaries:
-            print("\nStep 4/4: Calculating pre-ICU statistics")
-            logging.info("Calculating pre-ICU statistics...")
+            print("Calculating pre-ICU statistics...")
             self.calculate_pre_icu_statistics(icu_summaries)
+            stats_time = time.time() - phase4_start
+            print(f"  ✓ Completed: {len(icu_summaries)} patients analyzed in {stats_time:.2f}s")
         else:
-            print("\nStep 4/4: Skipping pre-ICU statistics (no ICU patients found)")
+            print("Skipping pre-ICU statistics (no ICU patients found)")
+        
+        self.phase_times['phase4'] = time.time() - phase4_start
+        
+        # Calculate total time
+        total_time = time.time() - start_time
+        self.extraction_results['statistics']['total_extraction_time'] = total_time
         
         # Save extraction results
         results_path = output_dir / "extraction_results.json"
@@ -514,47 +764,16 @@ class PatientDataExtractor:
         # Generate report
         self.generate_report()
         
-        # Calculate total time
-        total_time = time.time() - start_time
-        self.extraction_results['statistics']['total_extraction_time'] = total_time
-        
-        print(f"\nExtraction completed. Results saved to: {output_dir}")
+        # Final summary
+        print("\n" + "="*80)
+        print("EXTRACTION COMPLETED SUCCESSFULLY")
+        print(f"End time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
         print(f"Total execution time: {total_time:.2f} seconds")
+        print(f"\nOutputs saved to: {output_dir}")
+        print("="*80)
         
         # Performance breakdown
-        print("\n" + "="*50)
-        print("PERFORMANCE BREAKDOWN - ICU Data Extraction")
-        print("="*50)
-        
-        stats = self.extraction_results['statistics']
-        
-        # Calculate component times
-        icu_time = stats.get('icu_extraction_time', 0)
-        pre_icu_time = stats.get('pre_icu_calculation_time', 0)
-        
-        # Calculate table processing times
-        standardized_time = sum(stats.get(t, {}).get('processing_time', 0) for t in TABLES_TO_PROCESS)
-        basic_time = sum(stats.get(t, {}).get('processing_time', 0) for t in BASIC_TABLES)
-        
-        print(f"ICU summaries:         {icu_time:.2f}s ({icu_time/total_time*100:.1f}%)")
-        print(f"Standardized tables:   {standardized_time:.2f}s ({standardized_time/total_time*100:.1f}%)")
-        print(f"Basic tables:          {basic_time:.2f}s ({basic_time/total_time*100:.1f}%)")
-        print(f"Pre-ICU statistics:    {pre_icu_time:.2f}s ({pre_icu_time/total_time*100:.1f}%)")
-        
-        # Find slowest tables
-        table_times = []
-        for table in TABLES_TO_PROCESS + BASIC_TABLES:
-            if table in stats and 'processing_time' in stats[table]:
-                table_times.append((table, stats[table]['processing_time']))
-        
-        table_times.sort(key=lambda x: x[1], reverse=True)
-        
-        print("\nSlowest tables:")
-        for name, time_taken in table_times[:3]:
-            if time_taken > 0:
-                print(f"  {name}: {time_taken:.2f}s")
-        
-        print("="*50)
+        self.print_performance_breakdown(total_time)
 
 
 def main():
