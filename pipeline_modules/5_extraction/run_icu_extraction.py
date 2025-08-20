@@ -17,8 +17,14 @@ import warnings
 # Platform-specific settings for performance optimization
 if platform.system() == 'Windows':
     PROGRESS_INTERVAL = 30.0  # Less frequent updates (reduce overhead)
+    CHUNK_SIZE = 500000  # Larger chunks for Windows (better I/O performance)
+    WRITE_BUFFER_SIZE = 50000  # 50K rows batch write
+    FILE_BUFFER_SIZE = 2 * 1024 * 1024  # 2MB file buffer
 else:
     PROGRESS_INTERVAL = 10.0  # Default for macOS/Linux
+    CHUNK_SIZE = 100000  # Default for macOS/Linux
+    WRITE_BUFFER_SIZE = 20000  # 20K rows batch write
+    FILE_BUFFER_SIZE = 1 * 1024 * 1024  # 1MB file buffer
 
 # Setup logging
 logging.basicConfig(level=logging.INFO, 
@@ -31,10 +37,22 @@ warnings.filterwarnings('ignore', category=UserWarning)
 
 # Setup paths
 base_dir = Path(__file__).parent
-project_root = base_dir.parent.parent  # Go up to crisp_pipeline_code
+project_root = base_dir.parent.parent  # Go up to crisp_pipeline_public
+data_dir = project_root / "data"
+
+# Input directories - Module 5 should primarily use Module 4's standardized output
 standardized_dir = project_root / "output" / "4_standardization"
+# Ensure we're using absolute paths
+standardized_dir = standardized_dir.resolve()
+
+# Also need Module 2's cleaned PERSON table for patient demographics
 cleaning_dir = project_root / "output" / "2_cleaning"
+cleaning_dir = cleaning_dir.resolve()
+
+# Output directories
 output_dir = project_root / "output" / "5_extraction"
+output_dir = output_dir.resolve()
+# Subdirectories for organized output
 patient_data_dir = output_dir / "patient_data"
 statistics_dir = output_dir / "statistics"
 
@@ -61,7 +79,6 @@ PRE_ICU_STAT_TABLES = {
 
 # ICU concept IDs
 ICU_CONCEPT_IDS = [581379, 32037]
-CHUNK_SIZE = 100000
 ICU_SUMMARY_COL = "visit_detail_start_datetime_earliest"
 
 
@@ -93,6 +110,7 @@ class PatientDataExtractor:
     
     def extract_icu_summaries(self):
         """Extract ICU visit summaries for each patient."""
+        t0 = time.time()
         logging.info("Extracting ICU visit summaries...")
         
         visit_detail_file = standardized_dir / "VISIT_DETAIL_standardized.csv"
@@ -114,8 +132,8 @@ class PatientDataExtractor:
             for chunk in tqdm(chunks, total=estimated_chunks, desc="Extracting ICU visits", 
                              leave=False, mininterval=PROGRESS_INTERVAL,  # 10-second update interval
                              disable=False):  # Enable progress tracking
-                # Filter ICU visits
-                icu_visits = chunk[chunk['visit_detail_concept_id'].isin(ICU_CONCEPT_IDS)]
+                # Filter ICU visits (use .copy() to avoid SettingWithCopyWarning)
+                icu_visits = chunk[chunk['visit_detail_concept_id'].isin(ICU_CONCEPT_IDS)].copy()
                 
                 if not icu_visits.empty:
                     # Parse datetime columns
@@ -154,6 +172,7 @@ class PatientDataExtractor:
         
         logging.info(f"Extracted ICU summaries for {total_icu_patients} patients")
         self.extraction_results['statistics']['total_icu_patients'] = total_icu_patients
+        self.extraction_results['statistics']['icu_extraction_time'] = time.time() - t0
         
         return icu_summaries
     
@@ -172,25 +191,39 @@ class PatientDataExtractor:
         patients_processed = set()
         
         try:
-            # Get total lines for progress bar
-            with open(input_file) as f:
-                total_lines = sum(1 for _ in f) - 1  # Subtract header
+            # Count total rows for progress bar (consistent with Module 4)
+            with open(input_file, 'r') as f:
+                total_rows = sum(1 for _ in f) - 1  # Subtract header
             
-            num_chunks = (total_lines + CHUNK_SIZE - 1) // CHUNK_SIZE
+            # Calculate number of chunks based on actual rows
+            num_chunks = (total_rows + CHUNK_SIZE - 1) // CHUNK_SIZE
             
             # Process in chunks
             reader = pd.read_csv(input_file, dtype={"person_id": str}, chunksize=CHUNK_SIZE)
             
-            # Enable progress bar only for large tables
-            show_progress = total_lines > 100000
-            for chunk_idx, chunk in enumerate(tqdm(reader, total=num_chunks, 
-                                                   desc=f"Processing {table_name}", 
-                                                   unit="chunks", leave=False, 
-                                                   mininterval=PROGRESS_INTERVAL,  # 10-second update interval
-                                                   disable=not show_progress)):  # Enable for large tables
+            # Enable progress bar for tables with significant data (consistent with Module 4)
+            show_progress = total_rows > 10000  # Show progress for tables > 10k rows
+            
+            # Create progress bar with row-based tracking (consistent with Module 4)
+            pbar = tqdm(total=total_rows, desc=f"Processing {table_name}",
+                       unit='rows',
+                       miniters=max(100, total_rows//100),  # Update every 1% or at least 100 rows
+                       mininterval=PROGRESS_INTERVAL,  # Update at most once per 10 seconds
+                       leave=False, ncols=100,
+                       disable=not show_progress)
+            
+            # Track file handles for optimized appending
+            file_handles = {}
+            file_writers = {}
+            
+            for chunk_idx, chunk in enumerate(reader):
                 # Remove null person_ids
                 chunk = chunk[chunk["person_id"].notnull()]
-                total_records += len(chunk)
+                chunk_size = len(chunk)
+                total_records += chunk_size
+                
+                # Update progress bar with number of rows processed
+                pbar.update(chunk_size)
                 
                 # Group by person_id
                 grouped = chunk.groupby("person_id")
@@ -200,20 +233,36 @@ class PatientDataExtractor:
                     patient_path = self.get_patient_path(person_id)
                     patient_path.mkdir(parents=True, exist_ok=True)
                     
-                    # Write to patient's table file
+                    # Get or create file handle with buffering
                     file_path = patient_path / f"{table_name}.csv"
-                    write_header = not file_path.exists()
-                    group_df.to_csv(file_path, mode='a', header=write_header, index=False)
+                    if person_id not in file_handles:
+                        # Open file with optimized buffering
+                        file_handles[person_id] = open(file_path, 'w', newline='', 
+                                                      encoding='utf-8', buffering=FILE_BUFFER_SIZE)
+                        # Write header for new file
+                        group_df.to_csv(file_handles[person_id], index=False)
+                    else:
+                        # Append without header
+                        group_df.to_csv(file_handles[person_id], header=False, index=False)
                     
                     patients_processed.add(person_id)
+            
+            # Close all file handles
+            for handle in file_handles.values():
+                handle.close()
+            
+            # Close progress bar
+            pbar.close()
             
             logging.info(f"Processed {total_records:,} records for {len(patients_processed):,} patients in {table_name}")
             
             # Update statistics
+            processing_time = time.time() - t0
             if table_name not in self.extraction_results['statistics']:
                 self.extraction_results['statistics'][table_name] = {}
             self.extraction_results['statistics'][table_name]['total_records'] = total_records
             self.extraction_results['statistics'][table_name]['unique_patients'] = len(patients_processed)
+            self.extraction_results['statistics'][table_name]['processing_time'] = processing_time
             
         except Exception as e:
             logging.error(f"Error processing {table_name}: {str(e)}")
@@ -221,6 +270,7 @@ class PatientDataExtractor:
     
     def split_basic_table_by_patient(self, table_name: str):
         """Split a basic table (PERSON/DEATH) by patient ID and save to patient folders."""
+        t0 = time.time()
         logging.info(f"Processing {table_name} from cleaning directory...")
         
         input_file = cleaning_dir / f"{table_name}_cleaned.csv"
@@ -248,19 +298,22 @@ class PatientDataExtractor:
                 patient_path = self.get_patient_path(person_id)
                 patient_path.mkdir(parents=True, exist_ok=True)
                 
-                # Write to patient's table file
+                # Write to patient's table file with optimized buffering
                 file_path = patient_path / f"{table_name}.csv"
-                group_df.to_csv(file_path, index=False)
+                with open(file_path, 'w', newline='', encoding='utf-8', buffering=FILE_BUFFER_SIZE) as f:
+                    group_df.to_csv(f, index=False)
                 
                 patients_processed.add(person_id)
             
             logging.info(f"Processed {total_records:,} records for {len(patients_processed):,} patients in {table_name}")
             
             # Update statistics
+            processing_time = time.time() - t0
             if table_name not in self.extraction_results['statistics']:
                 self.extraction_results['statistics'][table_name] = {}
             self.extraction_results['statistics'][table_name]['total_records'] = total_records
             self.extraction_results['statistics'][table_name]['unique_patients'] = len(patients_processed)
+            self.extraction_results['statistics'][table_name]['processing_time'] = processing_time
             
         except Exception as e:
             logging.error(f"Error processing {table_name}: {str(e)}")
@@ -268,6 +321,7 @@ class PatientDataExtractor:
     
     def calculate_pre_icu_statistics(self, icu_summaries: dict):
         """Calculate statistics for records before ICU admission."""
+        t0 = time.time()
         logging.info("Calculating pre-ICU statistics...")
         
         results = []
@@ -339,6 +393,9 @@ class PatientDataExtractor:
             skipped_file = statistics_dir / "skipped_patients.csv"
             skipped_df.to_csv(skipped_file, index=False)
             logging.info(f"Skipped patients saved to: {skipped_file}")
+        
+        # Record processing time
+        self.extraction_results['statistics']['pre_icu_calculation_time'] = time.time() - t0
     
     def generate_report(self):
         """Generate extraction report."""
