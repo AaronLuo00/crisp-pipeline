@@ -31,6 +31,7 @@ Core packages include:
 - **pandas** (>=1.3.0): Data manipulation
 - **numpy** (>=1.21.0): Numerical computing
 - **tqdm** (>=4.62.0): Progress bars
+- **tdigest** (>=0.5.1): T-Digest algorithm for efficient percentile calculation
 - **matplotlib** (>=3.4.0): Plotting
 - **seaborn** (>=0.11.0): Statistical visualization
 - **scipy** (>=1.7.0): Scientific computing

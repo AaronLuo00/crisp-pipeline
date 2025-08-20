@@ -33,7 +33,7 @@ else:
 
 # Parallel processing configuration
 PARALLEL_EDA = os.environ.get('PARALLEL_EDA', 'true').lower() == 'true'
-MAX_WORKERS = min(os.cpu_count(), 4)  # Limit to 4 workers max
+MAX_WORKERS = min(os.cpu_count(), 6)  # Limit to 4 workers max
 MEASUREMENT_SPLITS = int(os.environ.get('MEASUREMENT_SPLITS', '6'))  # Split MEASUREMENT table
 
 def get_file_row_count(file_path, silent=False):

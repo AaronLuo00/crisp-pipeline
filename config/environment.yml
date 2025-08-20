@@ -38,6 +38,5 @@ dependencies:
   # Additional packages via pip (if needed)
   - pip
   - pip:
-      # Add any pip-only packages here if needed
-      # For example:
-      # - some-package==1.0.0
+      # Statistical algorithms (not available in conda)
+      - tdigest>=0.5.1  # T-Digest algorithm for efficient percentile calculation

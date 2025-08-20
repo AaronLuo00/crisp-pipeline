@@ -8,6 +8,9 @@ numpy>=1.21.0
 # Progress bars for long-running operations
 tqdm>=4.62.0
 
+# Statistical algorithms
+tdigest>=0.5.1
+
 # Visualization (for EDA module and notebooks)
 matplotlib>=3.4.0
 seaborn>=0.11.0
