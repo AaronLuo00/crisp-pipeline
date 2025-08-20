@@ -16,6 +16,8 @@ from tqdm import tqdm
 import logging
 import warnings
 from visit_concept_merger import VisitConceptMerger
+import multiprocessing as mp
+from parallel_tdigest import process_measurement_chunk, merge_tdigest_states, split_file_for_parallel
 
 # Platform-specific settings for performance optimization
 if platform.system() == 'Windows':
@@ -126,6 +128,13 @@ class DataStandardizer:
         self.concept_thresholds = {}
         # No longer need to track concept frequencies for filtering
         # self.concept_frequencies = {}
+        # Enhanced timing statistics
+        self.parallel_stats = {
+            'cpu_time': 0,
+            'wall_time': 0,
+            'workers_used': 0
+        }
+        self.visit_merge_stats = {}
         
         # Date processing optimization - caching for performance
         self.date_cache = {}  # Cache for parsed dates
@@ -320,34 +329,107 @@ class DataStandardizer:
             logging.warning(f"Input file not found: {input_file}")
             return
         
-        # Determine the concept column name
-        # Note: The _mapped column is a flag, the actual concept ID is still in the original column
-        concept_col = None
-        if table_name == 'MEASUREMENT':
-            concept_col = 'measurement_concept_id'
-        elif table_name == 'OBSERVATION':
-            concept_col = 'observation_concept_id'
-        elif table_name == 'PROCEDURE_OCCURRENCE':
-            concept_col = 'procedure_concept_id'
-        elif table_name == 'DEVICE_EXPOSURE':
-            concept_col = 'device_concept_id'
-        elif table_name == 'DRUG_EXPOSURE':
-            concept_col = 'drug_concept_id'
-        elif table_name == 'CONDITION_ERA':
-            concept_col = 'condition_concept_id'
-        elif table_name == 'CONDITION_OCCURRENCE':
-            concept_col = 'condition_concept_id'
-        elif table_name == 'DRUG_ERA':
-            concept_col = 'drug_concept_id'
-        elif table_name == 'SPECIMEN':
-            concept_col = 'specimen_concept_id'
-        elif table_name == 'VISIT_DETAIL':
-            concept_col = 'visit_detail_concept_id'
-        elif table_name == 'VISIT_OCCURRENCE':
-            concept_col = 'visit_concept_id'
+        # Check file size to decide between parallel and single-threaded processing
+        file_size = input_file.stat().st_size
+        use_parallel = file_size > 100_000_000  # Use parallel for files > 100MB
         
-        if not concept_col:
-            return
+        if use_parallel:
+            self._calculate_statistics_parallel(input_file, table_name)
+        else:
+            self._calculate_statistics_single(input_file, table_name)
+    
+    def _calculate_statistics_parallel(self, input_file, table_name):
+        """Calculate statistics using parallel T-Digest processing."""
+        logging.info(f"Using parallel T-Digest processing for {table_name}")
+        
+        # Track wall time
+        wall_start = time.time()
+        
+        # Determine number of workers
+        num_workers = min(6, mp.cpu_count())
+        
+        # Split file for parallel processing
+        chunks = split_file_for_parallel(str(input_file), num_workers)
+        
+        # Process chunks in parallel
+        with mp.Pool(processes=num_workers) as pool:
+            # Process chunks and show progress
+            results = list(tqdm(
+                pool.imap(process_measurement_chunk, chunks),
+                total=len(chunks),
+                desc=f"Processing {table_name} chunks",
+                unit='chunks',
+                leave=False
+            ))
+        
+        # Extract statistics and CPU times
+        digest_results = []
+        total_cpu_time = 0
+        for result, cpu_time in results:
+            digest_results.append(result)
+            total_cpu_time += cpu_time
+        
+        # Track parallel stats
+        wall_time = time.time() - wall_start
+        self.parallel_stats = {
+            'cpu_time': total_cpu_time,
+            'wall_time': wall_time,
+            'workers_used': num_workers,
+            'speedup': total_cpu_time / wall_time if wall_time > 0 else 1.0,
+            'efficiency': (total_cpu_time / wall_time / num_workers * 100) if wall_time > 0 else 0
+        }
+        
+        # Merge T-Digest states
+        merged_stats = merge_tdigest_states(digest_results, delta=0.01, K=25)
+        
+        # Convert to format expected by rest of pipeline
+        self.concept_thresholds[table_name] = {}
+        
+        for concept_id, stats in merged_stats.items():
+            if stats['count'] >= 10:  # Keep threshold for minimum data
+                percentiles = stats['percentiles']
+                
+                # Calculate outlier thresholds using configured percentile
+                lower_percentile = percentiles.get('p1')  # 1st percentile for lower bound
+                upper_percentile = percentiles.get('p99')  # 99th percentile for upper bound
+                
+                # Use configured percentile if different from default
+                if self.outlier_percentile != 99:
+                    # For custom percentiles, use closest available
+                    if self.outlier_percentile >= 99:
+                        upper_percentile = percentiles.get('p99')
+                        lower_percentile = percentiles.get('p1')
+                    elif self.outlier_percentile >= 95:
+                        upper_percentile = percentiles.get('p95')
+                        lower_percentile = percentiles.get('p5')
+                    else:
+                        upper_percentile = percentiles.get('p75')
+                        lower_percentile = percentiles.get('p25')
+                
+                self.concept_thresholds[table_name][concept_id] = {
+                    'lower_percentile': lower_percentile,
+                    'upper_percentile': upper_percentile,
+                    'count': stats['count'],
+                    'min': stats['min'],
+                    'max': stats['max'],
+                    'p50': percentiles.get('p50')  # median
+                }
+                
+                # Add range limits if defined
+                if concept_id in CONCEPT_RANGES:
+                    self.concept_thresholds[table_name][concept_id].update({
+                        'range_min': CONCEPT_RANGES[concept_id]['min'],
+                        'range_max': CONCEPT_RANGES[concept_id]['max'],
+                        'name': CONCEPT_RANGES[concept_id]['name']
+                    })
+        
+        logging.info(f"Calculated thresholds for {len(self.concept_thresholds[table_name])} concepts using parallel processing")
+    
+    def _calculate_statistics_single(self, input_file, table_name):
+        """Calculate statistics using single-threaded processing (fallback for small files)."""
+        logging.info(f"Using single-threaded processing for {table_name}")
+        
+        concept_col = 'measurement_concept_id'
         
         # Collect values by concept
         concept_values = defaultdict(list)
@@ -356,76 +438,65 @@ class DataStandardizer:
         # Read data to collect values
         df = pd.read_csv(input_file, chunksize=CHUNK_SIZE, low_memory=False)
         chunk_num = 0
-        # Process chunks with more frequent progress updates
+        
         for chunk in tqdm(df, desc=f"Standardizing {table_name} (statistics)", 
                          unit='chunks', leave=False, ncols=100,
-                         mininterval=PROGRESS_INTERVAL,  # Update at most once per 10 seconds
-                         disable=False):  # Enable progress tracking
+                         mininterval=PROGRESS_INTERVAL,
+                         disable=False):
             chunk_num += 1
+            
             # Count concept frequencies
             if concept_col in chunk.columns:
-                # Debug logging for first chunk
                 if chunk_num == 1:
                     logging.info(f"Column '{concept_col}' found in {table_name}")
-                    logging.info(f"Sample values: {chunk[concept_col].dropna().head(5).tolist()}")
                 
                 for concept_id in chunk[concept_col].dropna():
                     try:
                         concept_id = int(concept_id)
                         concept_counts[concept_id] += 1
                     except Exception as e:
-                        if chunk_num == 1:  # Log error only for first chunk
+                        if chunk_num == 1:
                             logging.warning(f"Error processing concept_id '{concept_id}': {e}")
                         pass
-            else:
-                if chunk_num == 1:
-                    logging.warning(f"Column '{concept_col}' not found in {table_name}. Available columns: {list(chunk.columns)[:10]}")
             
-            # Collect values for outlier detection (only for MEASUREMENT)
-            if table_name == 'MEASUREMENT' and 'value_as_number' in chunk.columns:
-                for _, row in chunk.iterrows():
-                    if pd.notna(row['value_as_number']) and pd.notna(row[concept_col]):
-                        try:
-                            value = float(row['value_as_number'])
-                            concept_id = int(row[concept_col])
-                            concept_values[concept_id].append(value)
-                        except:
-                            pass
+            # Collect values using vectorized operations
+            if 'value_as_number' in chunk.columns:
+                valid_rows = chunk[chunk['value_as_number'].notna() & chunk[concept_col].notna()]
+                
+                for concept_id, group in valid_rows.groupby(concept_col):
+                    try:
+                        concept_id = int(concept_id)
+                        values = group['value_as_number'].astype(float).tolist()
+                        concept_values[concept_id].extend(values)
+                    except:
+                        pass
         
-        # No longer store concept frequencies since filtering is done in Module 3
-        # self.concept_frequencies[table_name] = dict(concept_counts)
+        # Calculate outlier thresholds
+        self.concept_thresholds[table_name] = {}
+        for concept_id, values in concept_values.items():
+            if len(values) >= 10:
+                values_array = np.array(values)
+                lower = np.percentile(values_array, 100 - self.outlier_percentile)
+                upper = np.percentile(values_array, self.outlier_percentile)
+                
+                self.concept_thresholds[table_name][concept_id] = {
+                    'lower_percentile': lower,
+                    'upper_percentile': upper,
+                    'count': len(values),
+                    'mean': np.mean(values_array),
+                    'std': np.std(values_array)
+                }
+                
+                # Add range limits if defined
+                if concept_id in CONCEPT_RANGES:
+                    self.concept_thresholds[table_name][concept_id].update({
+                        'range_min': CONCEPT_RANGES[concept_id]['min'],
+                        'range_max': CONCEPT_RANGES[concept_id]['max'],
+                        'name': CONCEPT_RANGES[concept_id]['name']
+                    })
         
-        # Calculate outlier thresholds for MEASUREMENT
-        if table_name == 'MEASUREMENT':
-            self.concept_thresholds[table_name] = {}
-            for concept_id, values in concept_values.items():
-                if len(values) >= 10:  # Need sufficient data for percentile calculation
-                    values_array = np.array(values)
-                    lower = np.percentile(values_array, 100 - self.outlier_percentile)
-                    upper = np.percentile(values_array, self.outlier_percentile)
-                    
-                    self.concept_thresholds[table_name][concept_id] = {
-                        'lower_percentile': lower,
-                        'upper_percentile': upper,
-                        'count': len(values),
-                        'mean': np.mean(values_array),
-                        'std': np.std(values_array)
-                    }
-                    
-                    # Add range limits if defined
-                    if concept_id in CONCEPT_RANGES:
-                        self.concept_thresholds[table_name][concept_id].update({
-                            'range_min': CONCEPT_RANGES[concept_id]['min'],
-                            'range_max': CONCEPT_RANGES[concept_id]['max'],
-                            'name': CONCEPT_RANGES[concept_id]['name']
-                        })
-            
-            logging.info(f"Calculated thresholds for {len(self.concept_thresholds[table_name])} concepts")
-        
-        # Only log for MEASUREMENT table since we only calculate outlier thresholds for it
-        if table_name == 'MEASUREMENT':
-            logging.info(f"Found {len(concept_counts)} unique concepts in {table_name}")
-        # No longer log low frequency concepts since filtering is done in Module 3
+        logging.info(f"Calculated thresholds for {len(self.concept_thresholds[table_name])} concepts")
+        logging.info(f"Found {len(concept_counts)} unique concepts in {table_name}")
     
     def check_outlier(self, value, concept_id, table_name):
         """Check if a value is an outlier based on percentile and range."""
@@ -622,12 +693,18 @@ class DataStandardizer:
     
     def standardize_table(self, table_name):
         """Standardize a single table with outlier removal and low frequency filtering."""
-        # Initialize timing
+        # Initialize enhanced timing
         table_time_stats = {
             'total': 0,
             'concept_statistics': 0,
+            'concept_statistics_cpu': 0,
             'data_processing': 0,
-            'file_io': 0
+            'file_io': 0,
+            'outlier_detection': 0,
+            'unit_conversion': 0,
+            'datetime_standardization': 0,
+            'file_reading': 0,
+            'file_writing': 0
         }
         table_start_time = time.time()
         
@@ -646,6 +723,9 @@ class DataStandardizer:
         t0 = time.time()
         self.calculate_concept_statistics(table_name)
         table_time_stats['concept_statistics'] = time.time() - t0
+        # Copy parallel stats if available (for MEASUREMENT)
+        if table_name == 'MEASUREMENT' and self.parallel_stats['wall_time'] > 0:
+            table_time_stats['concept_statistics_cpu'] = self.parallel_stats['cpu_time']
         
         # Determine the concept column name
         # Note: The _mapped column is a flag, the actual concept ID is still in the original column
@@ -808,8 +888,15 @@ class DataStandardizer:
             output_dir=merged_dir
         )
         
-        # Process the table
+        # Process the table and track time
+        merge_start = time.time()
         merged_df, mapping_df = merger.process_table(input_file, table_name)
+        merge_time = time.time() - merge_start
+        
+        # Store merge stats
+        if table_name not in self.visit_merge_stats:
+            self.visit_merge_stats[table_name] = {}
+        self.visit_merge_stats[table_name]['wall_time'] = merge_time
         
         if merged_df.empty:
             logging.warning(f"No data returned from merging {table_name}")
@@ -837,10 +924,18 @@ class DataStandardizer:
         self.standardization_results["tables"][table_name + "_merging"] = {
             'total_input_records': merger.statistics.get('total_records', len(merged_df)),
             'merged_episodes': merger.statistics['merged_episodes'],
+            'visits_merged': merger.statistics['merged_episodes'],  # Add for summary compatibility
             'unchanged_records': merger.statistics['unchanged_records'],
             'records_merged': merger.statistics['records_merged'],
             'output_records': len(merged_df)
         }
+        
+        # Update the original table's output records after merging
+        if table_name in self.standardization_results['tables']:
+            original_input = self.standardization_results['tables'][table_name]['input_records']
+            records_removed_by_merge = merger.statistics['records_merged']
+            self.standardization_results['tables'][table_name]['output_records'] = original_input - records_removed_by_merge
+            self.standardization_results['tables'][table_name]['records_merged'] = records_removed_by_merge
         
         logging.info(f"Merge Summary for {table_name}:")
         logging.info(f"  - Merged episodes: {merger.statistics['merged_episodes']:,}")
@@ -949,12 +1044,15 @@ class DataStandardizer:
                     total_input += stats['input_records']
                     total_output += stats['output_records']
                     total_outliers += stats.get('outliers_removed_percentile', 0) + stats.get('outliers_removed_range', 0)
+                    # Check if table was modified
                     if stats['input_records'] != stats['output_records']:
                         tables_modified.append(table)
+                    elif stats.get('records_merged', 0) > 0:
+                        # VISIT tables that had merging
+                        if table not in tables_modified:
+                            tables_modified.append(table)
                 elif 'visits_merged' in stats:  # Visit merging tables
                     total_visits_merged += stats['visits_merged']
-                    if stats['visits_merged'] > 0:
-                        tables_modified.append(table.replace('_merging', '') + ' (visits merged)')
         
         total_removed = total_input - total_output
         
@@ -1116,29 +1214,68 @@ def main():
     print("="*50)
     
     # Aggregate timing from all tables
-    total_concept_stats = 0
+    total_concept_stats_wall = 0
+    total_concept_stats_cpu = 0
     total_data_processing = 0
     total_file_io = 0
+    total_outlier_detection = 0
+    total_unit_conversion = 0
+    total_datetime_std = 0
     
     for table_stats in standardizer.standardization_results.get('tables', {}).values():
         if 'time_stats' in table_stats:
             ts = table_stats['time_stats']
-            total_concept_stats += ts.get('concept_statistics', 0)
+            total_concept_stats_wall += ts.get('concept_statistics', 0)
+            total_concept_stats_cpu += ts.get('concept_statistics_cpu', 0)
             total_data_processing += ts.get('data_processing', 0)
             total_file_io += ts.get('file_io', 0)
+            total_outlier_detection += ts.get('outlier_detection', 0)
+            total_unit_conversion += ts.get('unit_conversion', 0)
+            total_datetime_std += ts.get('datetime_standardization', 0)
     
-    # Also add visit merging time if available
-    visit_merge_time = 0
-    if 'visit_merging' in standardizer.standardization_results:
-        for merge_stats in standardizer.standardization_results['visit_merging'].values():
-            if 'processing_time_seconds' in merge_stats:
-                visit_merge_time += merge_stats['processing_time_seconds']
+    # Also add visit merging time
+    visit_merge_time = sum(stats.get('wall_time', 0) for stats in standardizer.visit_merge_stats.values())
     
-    print(f"Concept statistics:    {total_concept_stats:.2f}s ({total_concept_stats/total_time*100:.1f}%)")
-    print(f"Data processing:       {total_data_processing:.2f}s ({total_data_processing/total_time*100:.1f}%)")
-    print(f"File I/O:              {total_file_io:.2f}s ({total_file_io/total_time*100:.1f}%)")
+    # Calculate total CPU time
+    total_cpu_time = total_concept_stats_cpu if total_concept_stats_cpu > 0 else total_concept_stats_wall
+    total_cpu_time += total_data_processing + visit_merge_time
+    
+    # Display enhanced metrics
+    print(f"\nTotal CPU time:        {total_cpu_time:.2f}s")
+    print(f"Wall clock time:       {total_time:.2f}s")
+    if total_cpu_time > total_time:
+        print(f"Speedup:               {total_cpu_time/total_time:.2f}x")
+    
+    print(f"\nPhase-specific Performance:")
+    
+    # Phase 1: T-Digest Statistics (parallel for MEASUREMENT)
+    if standardizer.parallel_stats['wall_time'] > 0:
+        print(f"  T-Digest Statistics ({standardizer.parallel_stats['workers_used']} workers):")
+        print(f"    CPU time: {standardizer.parallel_stats['cpu_time']:.2f}s, Wall time: {standardizer.parallel_stats['wall_time']:.2f}s")
+        print(f"    Speedup: {standardizer.parallel_stats['speedup']:.2f}x, Efficiency: {standardizer.parallel_stats['efficiency']:.1f}%")
+    
+    # Phase 2: Data Processing (sequential)
+    print(f"  Data Processing (sequential):")
+    print(f"    Total time: {total_data_processing:.2f}s")
+    if total_outlier_detection > 0:
+        print(f"    - Outlier detection: {total_outlier_detection:.2f}s")
+    if total_unit_conversion > 0:
+        print(f"    - Unit conversion: {total_unit_conversion:.2f}s")
+    if total_datetime_std > 0:
+        print(f"    - Datetime standardization: {total_datetime_std:.2f}s")
+    
+    # Phase 3: Visit Merging
     if visit_merge_time > 0:
-        print(f"Visit merging:         {visit_merge_time:.2f}s ({visit_merge_time/total_time*100:.1f}%)")
+        print(f"  Visit Merging (sequential):")
+        for table_name, stats in standardizer.visit_merge_stats.items():
+            print(f"    - {table_name}: {stats['wall_time']:.2f}s")
+    
+    print(f"\nDetailed Time Breakdown:")
+    print(f"  Concept statistics:    {total_concept_stats_wall:.2f}s ({total_concept_stats_wall/total_time*100:.1f}%)")
+    print(f"  Data processing:       {total_data_processing:.2f}s ({total_data_processing/total_time*100:.1f}%)")
+    print(f"  File I/O:              {total_file_io:.2f}s ({total_file_io/total_time*100:.1f}%)")
+    if visit_merge_time > 0:
+        print(f"  Visit merging:         {visit_merge_time:.2f}s ({visit_merge_time/total_time*100:.1f}%)")
     
     # Find slowest tables
     table_times = [(name, stats.get('time_stats', {}).get('total', 0)) 
