@@ -87,6 +87,35 @@ TABLES_TO_PROCESS = [
     'DEVICE_EXPOSURE', 'SPECIMEN', 'CONDITION_ERA', 'DRUG_ERA'
 ]
 
+def estimate_file_rows(file_path, sample_size=1024*1024):
+    """Estimate total rows by sampling first 1MB of file."""
+    file_size = file_path.stat().st_size
+    
+    if file_size == 0:
+        return 0
+    
+    # Read first 1MB (or entire file if smaller)
+    actual_sample_size = min(sample_size, file_size)
+    
+    with open(file_path, 'rb') as f:
+        sample = f.read(actual_sample_size)
+    
+    # Count lines in sample
+    line_count = sample.count(b'\n')
+    
+    if line_count == 0:
+        return 1  # At least header row
+    
+    # Estimate total lines based on sample
+    if actual_sample_size < file_size:
+        # Extrapolate based on sample
+        estimated_lines = int(line_count * (file_size / actual_sample_size))
+    else:
+        # We read the whole file
+        estimated_lines = line_count
+    
+    return max(1, estimated_lines - 1)  # Subtract header row
+
 # Basic tables from cleaning directory
 BASIC_TABLES = ['PERSON', 'DEATH']
 
@@ -149,9 +178,14 @@ class PatientDataExtractor:
         total_icu_patients = 0
         
         try:
-            # Estimate number of chunks for progress bar
-            file_size = visit_detail_file.stat().st_size
-            estimated_chunks = max(1, file_size // (CHUNK_SIZE * 500))  # Rough estimate
+            # Use sampling to estimate rows and chunks
+            estimated_rows = estimate_file_rows(visit_detail_file)
+            
+            if estimated_rows > 0:
+                estimated_chunks = max(1, (estimated_rows + CHUNK_SIZE - 1) // CHUNK_SIZE)
+            else:
+                logging.warning(f"VISIT_DETAIL file appears to be empty")
+                return icu_summaries
             
             # Read in chunks for memory efficiency with progress bar
             chunks = pd.read_csv(visit_detail_file, chunksize=CHUNK_SIZE, dtype={"person_id": str}, low_memory=False)
@@ -194,6 +228,12 @@ class PatientDataExtractor:
                         
         except Exception as e:
             logging.error(f"Error processing VISIT_DETAIL: {str(e)}")
+            logging.error(f"File path: {visit_detail_file}")
+            if visit_detail_file.exists():
+                logging.error(f"File size: {visit_detail_file.stat().st_size} bytes")
+            logging.error(f"CHUNK_SIZE: {CHUNK_SIZE}")
+            if 'estimated_chunks' in locals():
+                logging.error(f"Estimated chunks: {estimated_chunks}")
             self.extraction_results['errors'].append(f"VISIT_DETAIL processing: {str(e)}")
         
         extraction_time = time.time() - t0
@@ -218,9 +258,8 @@ class PatientDataExtractor:
         patients_processed = set()
         
         try:
-            # Count total rows for progress bar (consistent with Module 4)
-            with open(input_file, 'r') as f:
-                total_rows = sum(1 for _ in f) - 1  # Subtract header
+            # Use estimation for better performance on large files
+            total_rows = estimate_file_rows(input_file)
             
             # Calculate number of chunks based on actual rows
             num_chunks = (total_rows + CHUNK_SIZE - 1) // CHUNK_SIZE
@@ -234,7 +273,7 @@ class PatientDataExtractor:
             # Create progress bar with row-based tracking (consistent with Module 4)
             pbar = tqdm(total=total_rows, desc=f"Processing {table_name}",
                        unit='rows',
-                       miniters=max(100, total_rows//100),  # Update every 1% or at least 100 rows
+                       miniters=max(100, total_rows//100 if total_rows > 0 else 100),  # Update every 1% or at least 100 rows
                        mininterval=PROGRESS_INTERVAL,  # Update at most once per 10 seconds
                        leave=False, ncols=100,
                        disable=not show_progress)
