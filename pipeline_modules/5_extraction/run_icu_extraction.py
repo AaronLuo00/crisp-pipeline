@@ -187,13 +187,22 @@ class PatientDataExtractor:
                 logging.warning(f"VISIT_DETAIL file appears to be empty")
                 return icu_summaries
             
-            # Read in chunks for memory efficiency with progress bar
+            # Read in chunks for memory efficiency
             chunks = pd.read_csv(visit_detail_file, chunksize=CHUNK_SIZE, dtype={"person_id": str}, low_memory=False)
-            for chunk in tqdm(chunks, total=estimated_chunks, desc="Extracting ICU visits", 
-                             leave=False, 
-                             miniters=1,  # Update on every iteration to avoid division by zero
-                             mininterval=PROGRESS_INTERVAL,  # 10-second update interval
-                             disable=False):  # Enable progress tracking
+            
+            # Only use progress bar if we have multiple chunks (avoid tqdm bug on Windows with single chunk)
+            if estimated_chunks > 1:
+                chunk_iterator = tqdm(chunks, total=estimated_chunks, 
+                                     desc="Extracting ICU visits", 
+                                     leave=False, 
+                                     miniters=1,
+                                     mininterval=PROGRESS_INTERVAL)
+            else:
+                # For single chunk, don't use progress bar to avoid Windows tqdm bug
+                logging.info(f"Processing single chunk without progress bar")
+                chunk_iterator = chunks
+            
+            for chunk in chunk_iterator:
                 # Filter ICU visits (use .copy() to avoid SettingWithCopyWarning)
                 icu_visits = chunk[chunk['visit_detail_concept_id'].isin(ICU_CONCEPT_IDS)].copy()
                 
