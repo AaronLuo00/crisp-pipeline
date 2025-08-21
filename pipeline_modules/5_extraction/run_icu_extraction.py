@@ -107,7 +107,7 @@ def estimate_file_rows(file_path, sample_size=1024*1024):
         return 1  # At least header row
     
     # Estimate total lines based on sample
-    if actual_sample_size < file_size:
+    if actual_sample_size < file_size and actual_sample_size > 0:
         # Extrapolate based on sample
         estimated_lines = int(line_count * (file_size / actual_sample_size))
     else:
@@ -190,7 +190,9 @@ class PatientDataExtractor:
             # Read in chunks for memory efficiency with progress bar
             chunks = pd.read_csv(visit_detail_file, chunksize=CHUNK_SIZE, dtype={"person_id": str}, low_memory=False)
             for chunk in tqdm(chunks, total=estimated_chunks, desc="Extracting ICU visits", 
-                             leave=False, mininterval=PROGRESS_INTERVAL,  # 10-second update interval
+                             leave=False, 
+                             miniters=1,  # Update on every iteration to avoid division by zero
+                             mininterval=PROGRESS_INTERVAL,  # 10-second update interval
                              disable=False):  # Enable progress tracking
                 # Filter ICU visits (use .copy() to avoid SettingWithCopyWarning)
                 icu_visits = chunk[chunk['visit_detail_concept_id'].isin(ICU_CONCEPT_IDS)].copy()
