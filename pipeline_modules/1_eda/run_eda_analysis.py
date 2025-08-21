@@ -247,7 +247,10 @@ def process_table_partial(file_path, start_row, end_row, chunk_size=CHUNK_SIZE, 
         
         for col in datetime_columns:
             try:
-                dates = pd.to_datetime(sample_chunk[col], errors='coerce').dropna()
+                # Fix for Pandas 2.0+ warning on Windows
+                dates = pd.to_datetime(sample_chunk[col], 
+                                      infer_datetime_format=True,
+                                      errors='coerce').dropna()
                 if len(dates) > 0:
                     stats["date_ranges"][col] = {
                         "min": str(dates.min()),
@@ -434,8 +437,13 @@ def process_table_chunked(file_path, chunk_size=CHUNK_SIZE):
         
         for col in datetime_columns:
             try:
-                first_dates = pd.to_datetime(first_chunk[col], errors='coerce')
-                last_dates = pd.to_datetime(last_chunk[col], errors='coerce')
+                # Fix for Pandas 2.0+ warning on Windows
+                first_dates = pd.to_datetime(first_chunk[col], 
+                                            infer_datetime_format=True,
+                                            errors='coerce')
+                last_dates = pd.to_datetime(last_chunk[col], 
+                                           infer_datetime_format=True,
+                                           errors='coerce')
                 all_dates = pd.concat([first_dates, last_dates])
                 all_dates = all_dates.dropna()
                 if len(all_dates) > 0:
