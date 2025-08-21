@@ -14,6 +14,10 @@ import numpy as np
 import platform
 from concurrent.futures import ProcessPoolExecutor, as_completed
 
+# Check pandas version for compatibility
+PANDAS_VERSION = tuple(map(int, pd.__version__.split('.')[:2]))
+USE_INFER_FORMAT = PANDAS_VERSION < (2, 0)
+
 class NumpyEncoder(json.JSONEncoder):
     """Custom JSON encoder to handle numpy types."""
     def default(self, obj):
@@ -247,10 +251,15 @@ def process_table_partial(file_path, start_row, end_row, chunk_size=CHUNK_SIZE, 
         
         for col in datetime_columns:
             try:
-                # Fix for Pandas 2.0+ warning on Windows
-                dates = pd.to_datetime(sample_chunk[col], 
-                                      infer_datetime_format=True,
-                                      errors='coerce').dropna()
+                # Pandas 2.0+ automatically infers format, older versions need explicit parameter
+                if USE_INFER_FORMAT:
+                    dates = pd.to_datetime(sample_chunk[col], 
+                                          infer_datetime_format=True,
+                                          errors='coerce').dropna()
+                else:
+                    dates = pd.to_datetime(sample_chunk[col], 
+                                          errors='coerce').dropna()
+                
                 if len(dates) > 0:
                     stats["date_ranges"][col] = {
                         "min": str(dates.min()),
@@ -437,13 +446,20 @@ def process_table_chunked(file_path, chunk_size=CHUNK_SIZE):
         
         for col in datetime_columns:
             try:
-                # Fix for Pandas 2.0+ warning on Windows
-                first_dates = pd.to_datetime(first_chunk[col], 
-                                            infer_datetime_format=True,
-                                            errors='coerce')
-                last_dates = pd.to_datetime(last_chunk[col], 
-                                           infer_datetime_format=True,
-                                           errors='coerce')
+                # Pandas 2.0+ automatically infers format, older versions need explicit parameter
+                if USE_INFER_FORMAT:
+                    first_dates = pd.to_datetime(first_chunk[col], 
+                                                infer_datetime_format=True,
+                                                errors='coerce')
+                    last_dates = pd.to_datetime(last_chunk[col], 
+                                               infer_datetime_format=True,
+                                               errors='coerce')
+                else:
+                    first_dates = pd.to_datetime(first_chunk[col], 
+                                                errors='coerce')
+                    last_dates = pd.to_datetime(last_chunk[col], 
+                                               errors='coerce')
+                
                 all_dates = pd.concat([first_dates, last_dates])
                 all_dates = all_dates.dropna()
                 if len(all_dates) > 0:
