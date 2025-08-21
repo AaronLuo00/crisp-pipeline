@@ -1,0 +1,16 @@
+# Extracted Patient Data Directory
+
+This directory contains the extracted patient-level data organized by patient ID.
+
+Structure:
+extracted_patient_data/
+├── {patient_id}/           # Individual patient folders
+│   ├── MEASUREMENT.csv
+│   ├── OBSERVATION.csv
+│   ├── PERSON.csv
+│   ├── DEATH.csv
+│   └── ...
+
+Statistics and reports remain in output/5_extraction/
+
+Note: Actual patient data files are excluded from version control.

@@ -30,6 +30,8 @@ This directory contains the 5-stage CRISP-DM pipeline modules for processing OMO
 ### 5. Extraction Module (`5_extraction/`)
 **Purpose**: Feature extraction and cohort selection
 - `run_icu_extraction.py` - Extract ICU cohort data
+- **Output**: Patient data saved to `extracted_patient_data/` at project root
+- **Reports**: Statistics and summaries saved to `output/5_extraction/`
 
 ## Performance Optimizations
 
@@ -72,8 +74,21 @@ python pipeline_modules/run_all_module.py
 
 ## Output
 
-Each module generates results in the `output/` directory with:
-- Processed data files
-- Analysis reports
+Pipeline outputs are organized in two locations:
+
+### Reports and Analytics (`output/`)
+Each module generates results in its respective subdirectory:
+- Processed intermediate data files
+- Statistical analysis reports  
 - Visualization plots
-- Summary statistics
+
+### Patient-Level Data (`extracted_patient_data/`)
+The extraction module saves final patient data separately at the project root:
+- **Location**: `extracted_patient_data/` (not in `output/`)
+- **Structure**: `<patient_id>/<table_name>.csv`
+- **Content**: Complete OMOP CDM records for each patient
+- **Purpose**: Direct consumption by ML pipelines without navigating deep folder structures
+
+This separation ensures:
+- Clean distinction between pipeline artifacts and final data products
+- Easy access to patient data for downstream analysis

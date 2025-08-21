@@ -4,6 +4,7 @@
 import os
 import csv
 import json
+import glob
 import pandas as pd
 import platform
 import time
@@ -72,8 +73,10 @@ cleaning_dir = cleaning_dir.resolve()
 # Output directories
 output_dir = project_root / "output" / "5_extraction"
 output_dir = output_dir.resolve()
-# Subdirectories for organized output
-patient_data_dir = output_dir / "patient_data"
+
+# Patient data goes to root level, statistics stays in output
+patient_data_dir = project_root / "extracted_patient_data"
+patient_data_dir = patient_data_dir.resolve()
 statistics_dir = output_dir / "statistics"
 
 # Create output directories
@@ -552,6 +555,32 @@ class PatientDataExtractor:
             f.write("+-- extraction_report.md\n")
             f.write("```\n")
             
+            # Add output structure section
+            f.write("\n## Output Data Structure\n\n")
+            f.write("### Patient Data Location\n")
+            f.write("The extracted patient data is stored in the project root directory:\n")
+            f.write("- **Path**: `extracted_patient_data/`\n")
+            f.write("- **Structure**: `extracted_patient_data/<patient_id>/<table_name>.csv`\n\n")
+            
+            f.write("### Data Format\n")
+            f.write("Each patient folder contains:\n")
+            f.write("- Individual CSV files for each OMOP table\n")
+            f.write("- All records for that patient across all tables\n")
+            f.write("- Timestamps preserved in original format\n")
+            f.write("- Ready for direct use in ML pipelines\n\n")
+            
+            f.write("### Example Structure\n")
+            f.write("```\n")
+            f.write("extracted_patient_data/\n")
+            f.write("|-- 400000000026076/\n")
+            f.write("|   |-- MEASUREMENT.csv\n")
+            f.write("|   |-- OBSERVATION.csv\n")
+            f.write("|   |-- DRUG_EXPOSURE.csv\n")
+            f.write("|   +-- ...\n")
+            f.write("|-- 600000071123456/\n")
+            f.write("|   +-- ...\n")
+            f.write("```\n")
+            
             if self.extraction_results['errors']:
                 f.write("\n## Errors\n\n")
                 for error in self.extraction_results['errors']:
@@ -830,7 +859,25 @@ class PatientDataExtractor:
         print("EXTRACTION COMPLETED SUCCESSFULLY")
         print(f"End time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
         print(f"Total execution time: {total_time:.2f} seconds")
-        print(f"\nOutputs saved to: {output_dir}")
+        
+        # Detailed output locations
+        print("\n[OUTPUT LOCATIONS]")
+        print(f"  Reports & Statistics: {output_dir}")
+        print(f"  Patient Data: {patient_data_dir}")
+        
+        # Count actual patients extracted by counting PERSON.csv files
+        person_files = glob.glob(str(patient_data_dir / "**" / "PERSON.csv"), recursive=True)
+        patient_count = len(person_files)
+        
+        print(f"    * Located at project root: extracted_patient_data/")
+        print(f"    * Total patients extracted: {patient_count}")
+        print(f"    * Structure: extracted_patient_data/<patient_id>/")
+        print(f"    * Each patient folder contains:")
+        print(f"       - MEASUREMENT.csv")
+        print(f"       - OBSERVATION.csv") 
+        print(f"       - DRUG_EXPOSURE.csv")
+        print(f"       - CONDITION_OCCURRENCE.csv")
+        print(f"       - And other OMOP tables for that patient")
         print("="*80)
         
         # Performance breakdown

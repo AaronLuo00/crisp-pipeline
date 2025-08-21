@@ -118,6 +118,41 @@ python pipeline_modules/run_all_module.py
 
 Your processed data will be available in the `output/` directory.
 
+### Output Structure
+
+After running the pipeline, your results will be organized in two main locations:
+
+**Pipeline Reports & Analytics** (`output/`)
+- Module-specific reports, statistics, and intermediate processing results
+- Each module creates its own subdirectory with detailed documentation
+- Includes data processing reports, mapping statistics, and processing logs
+
+**ML-Ready Patient Data** (`extracted_patient_data/`) 
+- Final extracted patient-level data at the project root
+- Structure: `extracted_patient_data/<patient_id>/<table_name>.csv`
+- Each patient folder contains their complete OMOP CDM records
+- Ready for direct use in machine learning pipelines
+
+Example structure:
+```
+crisp-pipeline/
+├── output/                          # Pipeline analytics & reports
+│   ├── 1_eda/                      # EDA reports and visualizations
+│   ├── 2_cleaning/                 # Cleaning statistics and logs
+│   ├── 3_mapping/                  # Concept mapping reports
+│   ├── 4_standardization/          # Standardization statistics
+│   └── 5_extraction/               # Extraction reports and summaries
+└── extracted_patient_data/         # Final ML-ready data
+    ├── 400000000026076/           # Patient folder
+    │   ├── PERSON.csv
+    │   ├── MEASUREMENT.csv
+    │   ├── OBSERVATION.csv
+    │   ├── DRUG_EXPOSURE.csv
+    │   └── ...
+    └── 600000071123456/
+        └── ...
+```
+
 ## 🖥️ Platform Optimization
 
 We recommend different chunk sizes for different platforms:
@@ -200,7 +235,8 @@ crisp-pipeline/
 │   ├── 4_standardization/ # Data standardization
 │   ├── 5_extraction/      # Feature extraction
 │   └── run_all_module.py  # Main pipeline runner
-├── output/                # Pipeline outputs (not in git)
+├── output/                # Pipeline outputs (reports & statistics)
+├── extracted_patient_data/ # Final patient-level data (created after extraction)
 └── data_preparation/      # Data preparation and validation tools
 ```
 

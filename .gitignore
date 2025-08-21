@@ -87,3 +87,7 @@ data/.row_counts_cache.json
 **/.row_counts_cache.json
 *.cache.json
 
+# Extracted patient data - exclude actual data but keep directory structure
+extracted_patient_data/*
+!extracted_patient_data/.gitkeep
+

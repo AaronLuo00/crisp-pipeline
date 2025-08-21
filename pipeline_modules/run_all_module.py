@@ -9,6 +9,7 @@ import os
 import sys
 import json
 import time
+import glob
 import logging
 import argparse
 import subprocess
@@ -482,6 +483,19 @@ class CRISPPipeline:
         print(f"  Log File: {self.log_file}")
         print(f"  Data Outputs: {self.project_root / 'output'}")
         
+        # Check if extraction module was successful and show patient data location
+        if '5_extraction' in self.results and self.results['5_extraction'].get('success', False):
+            extracted_dir = self.project_root / "extracted_patient_data"
+            if extracted_dir.exists():
+                # Count actual patients by counting PERSON.csv files (most accurate method)
+                person_files = glob.glob(str(extracted_dir / "**" / "PERSON.csv"), recursive=True)
+                patient_count = len(person_files)
+                if patient_count > 0:
+                    print(f"\nExtracted Patient Data:")
+                    print(f"  Location: {extracted_dir}")
+                    print(f"  Patients Extracted: {patient_count}")
+                    print(f"  (See extraction_report.md for detailed structure)")
+        
         print("="*80)
     
     def generate_report(self, successful_modules: List[str], failed_modules: List[str]):
@@ -540,7 +554,23 @@ class CRISPPipeline:
             f.write(f"- **Pipeline Output**: `{self.output_dir}`\n")
             f.write(f"- **Module Results**: `{self.module_results_dir}`\n")
             f.write(f"- **Log File**: `{self.log_file}`\n")
-            f.write(f"- **Data Outputs**: `{self.project_root / 'output'}`\n\n")
+            f.write(f"- **Data Outputs**: `{self.project_root / 'output'}`\n")
+            
+            # Add extracted patient data location if extraction was successful
+            if '5_extraction' in successful_modules:
+                extracted_dir = self.project_root / "extracted_patient_data"
+                if extracted_dir.exists():
+                    # Count actual patients by counting PERSON.csv files
+                    person_files = glob.glob(str(extracted_dir / "**" / "PERSON.csv"), recursive=True)
+                    patient_count = len(person_files)
+                    if patient_count > 0:
+                        f.write(f"\n### Final Output\n\n")
+                        f.write(f"**Extracted Patient Data**: `{extracted_dir}`\n")
+                        f.write(f"- **Number of Patients**: {patient_count}\n")
+                        f.write(f"- **Format**: Individual patient folders with OMOP CDM tables\n")
+                        f.write(f"- **Details**: See `output/5_extraction/extraction_report.md` for complete structure\n")
+            
+            f.write("\n")
             
             f.write("## Next Steps\n\n")
             if failed_modules:
@@ -554,7 +584,11 @@ class CRISPPipeline:
                 f.write("- Cleaned data in `output/2_cleaning/`\n")
                 f.write("- Mapped concepts in `output/3_mapping/`\n")
                 f.write("- Standardized data in `output/4_standardization/`\n")
-                f.write("- Patient-level ICU data in `output/5_extraction/`\n\n")
+                if '5_extraction' in successful_modules:
+                    f.write("- Patient-level ICU data in `extracted_patient_data/` (root directory)\n")
+                    f.write("- Extraction statistics in `output/5_extraction/`\n\n")
+                else:
+                    f.write("\n")
                 
                 # Add performance summary
                 f.write("### Performance Summary\n\n")
