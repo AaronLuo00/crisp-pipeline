@@ -404,11 +404,22 @@ class PatientDataExtractor:
         results = []
         
         # Process each patient with ICU records
-        for person_id, icu_info in tqdm(icu_summaries.items(), 
-                                       desc="Calculating pre-ICU stats", 
-                                       unit="patients", leave=False, 
-                                       mininterval=PROGRESS_INTERVAL,  # 10-second update interval
-                                       disable=len(icu_summaries) < 100):  # Enable for many patients
+        if not icu_summaries:
+            logging.info("No ICU patients found, skipping pre-ICU statistics")
+            return
+        
+        # Use progress bar only for sufficient data
+        if len(icu_summaries) >= 100:
+            patient_iterator = tqdm(icu_summaries.items(), 
+                                   desc="Calculating pre-ICU stats", 
+                                   unit="patients", leave=False, 
+                                   mininterval=PROGRESS_INTERVAL)
+        else:
+            # For small datasets, don't use progress bar
+            logging.info(f"Processing {len(icu_summaries)} ICU patients without progress bar")
+            patient_iterator = icu_summaries.items()
+        
+        for person_id, icu_info in patient_iterator:
             patient_path = self.get_patient_path(person_id)
             
             if not patient_path.exists():
