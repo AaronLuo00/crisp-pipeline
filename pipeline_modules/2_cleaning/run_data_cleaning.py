@@ -720,7 +720,7 @@ if __name__ == '__main__':
     total_cleaned = 0
 
     # Determine whether to use parallel processing
-    USE_PARALLEL = os.environ.get('PARALLEL_CLEANING', 'false').lower() == 'true'
+    USE_PARALLEL = os.environ.get('PARALLEL_CLEANING', 'true').lower() == 'true'
     MAX_WORKERS = min(multiprocessing.cpu_count() - 1, 6)  # Leave one CPU free, max 6 workers
     MEASUREMENT_SPLITS = int(os.environ.get('MEASUREMENT_SPLITS', '6'))  # Control MEASUREMENT table splits (optimized default)
 
@@ -927,7 +927,7 @@ if __name__ == '__main__':
             print("\r" + " " * 100 + "\r", end="", flush=True)
     else:
         print("Using sequential processing")
-        print("Set PARALLEL_CLEANING=true to enable parallel processing")
+        print("Set PARALLEL_CLEANING=true to re-enable parallel processing")
         
         # Sequential processing (original code)
         for i, table in enumerate(KEY_TABLES):
