@@ -1,23 +1,23 @@
 #!/usr/bin/env python
-"""Process MEASUREMENT mappings to create SNOMED-mapped versions."""
+"""Process PROCEDURE_OCCURRENCE mappings to create SNOMED-mapped versions."""
 
 import csv
 from pathlib import Path
 
 # Setup paths
-base_dir = Path(__file__).parent.parent
-processed_dir = Path(__file__).parent
+base_dir = Path(__file__).parent.parent  # mapping_resources directory
+processed_dir = Path(__file__).parent  # processed_mappings directory
 
 # Input files
-original_file = base_dir / "MEASUREMENT_measurement_concept_id_analysis_complete.csv"
-mappings_file = base_dir / "non_snomed_concepts" / "mapping_results" / "measurement_snomed_mappings.csv"
+original_file = base_dir / "original_mappings" / "PROCEDURE_OCCURRENCE_procedure_concept_id_analysis_complete.csv"
+mappings_file = base_dir / "non_snomed_concepts" / "mapping_results" / "procedure_snomed_mappings.csv"
 
 # Output files
-mapped_output = processed_dir / "MEASUREMENT_snomed_mapped.csv"
-reference_output = processed_dir / "MEASUREMENT_mapping_reference.csv"
+mapped_output = processed_dir / "PROCEDURE_OCCURRENCE_snomed_mapped.csv"
+reference_output = processed_dir / "PROCEDURE_OCCURRENCE_mapping_reference.csv"
 
 def load_mappings():
-    """Load SNOMED mappings from measurement_snomed_mappings.csv"""
+    """Load SNOMED mappings from procedure_snomed_mappings.csv"""
     mappings = {}
     
     with open(mappings_file, 'r') as f:
@@ -38,8 +38,8 @@ def load_mappings():
     print(f"Loaded {len(mappings)} SNOMED mappings")
     return mappings
 
-def process_measurement():
-    """Process MEASUREMENT file with SNOMED mappings."""
+def process_procedure_occurrence():
+    """Process PROCEDURE_OCCURRENCE file with SNOMED mappings."""
     mappings = load_mappings()
     
     # Read original file
@@ -99,8 +99,8 @@ def process_measurement():
             new_row['Id'] = mapping['snomed_concept_id']
             new_row['Code'] = mapping['snomed_concept_code']
             new_row['Name'] = mapping['snomed_concept_name']
-            new_row['Standard Class'] = 'Clinical Observation'  # Keep appropriate class
-            new_row['Domain'] = 'Measurement'  # Keep Measurement domain
+            new_row['Standard Class'] = 'Procedure'  # Keep appropriate class
+            new_row['Domain'] = 'Procedure'  # Keep Procedure domain
             new_row['Vocab'] = 'SNOMED'
             new_row['Mapping_Applied'] = 'Yes'
             new_row['Mapping_Relationship'] = mapping['mapping_relationship']
@@ -158,18 +158,25 @@ def process_measurement():
     print(f"  Total concepts: {stats['total_concepts']}")
     print(f"  Already SNOMED: {stats['already_snomed']} ({stats['already_snomed']/stats['total_concepts']*100:.1f}%)")
     print(f"  Mapped to SNOMED: {stats['mapped_to_snomed']} ({stats['mapped_to_snomed']/stats['total_concepts']*100:.1f}%)")
-    print(f"    - To existing SNOMED: {stats['mapped_to_existing_snomed']} ({stats['mapped_to_existing_snomed']/stats['total_concepts']*100:.1f}%)")
-    print(f"    - To new SNOMED: {stats['mapped_to_new_snomed']} ({stats['mapped_to_new_snomed']/stats['total_concepts']*100:.1f}%)")
+    if stats['mapped_to_existing_snomed'] > 0:
+        print(f"    - To existing SNOMED: {stats['mapped_to_existing_snomed']} ({stats['mapped_to_existing_snomed']/stats['total_concepts']*100:.1f}%)")
+        print(f"    - To new SNOMED: {stats['mapped_to_new_snomed']} ({stats['mapped_to_new_snomed']/stats['total_concepts']*100:.1f}%)")
     print(f"  Unmapped: {stats['unmapped']} ({stats['unmapped']/stats['total_concepts']*100:.1f}%)")
     
-    print("\n[WARNING] Note: Some mappings are to existing SNOMED concepts.")
-    print("    Deduplication will be handled in the 4_standardization module.")
+    if stats['mapped_to_existing_snomed'] > 0:
+        print("\n[WARNING] Note: Some mappings are to existing SNOMED concepts.")
+        print("    Deduplication will be handled in the 4_standardization module.")
+    
+    # Note about CPT4 codes
+    unmapped_cpt4 = sum(1 for row in rows if row.get('Vocab') == 'CPT4' and row['Id'] not in mappings)
+    if unmapped_cpt4 > 0:
+        print(f"\n[NOTE] {unmapped_cpt4} CPT4 codes remain unmapped (no CPT4->SNOMED mapping file available)")
     
     return stats
 
 if __name__ == "__main__":
-    print("Processing MEASUREMENT mappings...")
+    print("Processing PROCEDURE_OCCURRENCE mappings...")
     print("="*60)
-    process_measurement()
+    process_procedure_occurrence()
     print("="*60)
     print("Processing complete!")

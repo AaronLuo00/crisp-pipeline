@@ -16,9 +16,9 @@ This directory contains the 5-stage CRISP-DM pipeline modules for processing OMO
 ### 3. Mapping Module (`3_mapping/`)
 **Purpose**: Concept mapping and vocabulary standardization
 - `run_concept_mapping.py` - Map concepts to SNOMED-CT vocabulary
-- `mapping_frequency/` - Concept frequency analysis and mapping references
-  - `*_analysis.csv` - Frequency analysis for each OMOP table
-  - `processed_mappings/` - Pre-processed SNOMED mapping references
+- Uses mapping resources from `mapping_resources/` (at project root)
+  - `mapping_resources/original_mappings/` - Frequency analysis for each OMOP table
+  - `mapping_resources/processed_mappings/` - Pre-processed SNOMED mapping references
 
 ### 4. Standardization Module (`4_standardization/`)
 **Purpose**: Data normalization and standardization

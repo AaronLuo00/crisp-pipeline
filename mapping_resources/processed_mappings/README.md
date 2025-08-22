@@ -21,7 +21,7 @@ A reference file containing only the successfully mapped concepts (20 entries) f
 
 ### 3. `process_device_exposure_mappings.py`
 The Python script used to generate these files from:
-- Source: `../DEVICE_EXPOSURE_device_concept_id_analysis.csv`
+- Source: `../original_mappings/DEVICE_EXPOSURE_device_concept_id_analysis.csv`
 - Mappings: `../non_snomed_concepts/mapping_results/device_exposure_snomed_mappings.csv`
 
 ## Mapping Statistics

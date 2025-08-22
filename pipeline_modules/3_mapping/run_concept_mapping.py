@@ -53,7 +53,7 @@ base_dir = Path(__file__).parent
 project_root = base_dir.parent.parent  # Go up to crisp_pipeline_code
 input_dir = project_root / "output" / "2_cleaning"
 output_dir = project_root / "output" / "3_mapping"
-processed_mappings_dir = base_dir / "mapping_frequency" / "processed_mappings"
+processed_mappings_dir = project_root / "mapping_resources" / "processed_mappings"
 
 # Create output directories
 output_dir.mkdir(parents=True, exist_ok=True)

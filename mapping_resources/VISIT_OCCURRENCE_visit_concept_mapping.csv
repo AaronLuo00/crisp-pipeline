@@ -1,0 +1,28 @@
+Id,Code,Name,Standard Class,Vocab,Validity,Concept
+0,No matching concept,No matching concept,Undefined,None,Valid,Non-standard
+9202,OP,Outpatient Visit,Visit,Visit,Valid,Standard
+9201,IP,Inpatient Visit,Visit,Visit,Valid,Standard
+581477,OMOP4822458,Office Visit,Visit,Visit,Valid,Standard
+9203,ER,Emergency Room Visit,Visit,Visit,Valid,Standard
+32036,OMOP4822461,Laboratory Visit,Visit,Visit,Valid,Standard
+262,ERIP,Emergency Room and Inpatient Visit,Visit,Visit,Valid,Standard
+32693,HE,Health examination,Visit,Visit,Valid,Standard
+5083,02,Telehealth Provided Other than in Patient’s Home,Visit,CMS Place of Service,Valid,Non-standard
+581476,OMOP4822459,Home Visit,Visit,Visit,Valid,Standard
+8717,21,Inpatient Hospital,Visit,CMS Place of Service,Valid,Standard
+38004338,333600000X,Pharmacy,Visit,NUCC,Valid,Standard
+581479,OMOP4822456,Ambulatory Rehabilitation Visit,Visit,Visit,Valid,Standard
+8716,49,Independent Clinic,Visit,CMS Place of Service,Valid,Standard
+581458,OMOP4822462,Pharmacy visit,Visit,Visit,Valid,Standard
+38004693,70,Clinic or Group Practice,Visit,Medicare Specialty,Valid,Standard
+38004228,261QI0500X,Ambulatory Infusion Therapy Clinic / Center,Visit,NUCC,Valid,Standard
+38004269,261QX0203X,Ambulatory Oncological Radiation Clinic / Center,Visit,NUCC,Valid,Standard
+581385,OMOP4822036,Observation Room,Visit,CMS Place of Service,Valid,Standard
+38004287,284300000X,Special Hospital,Visit,NUCC,Valid,Standard
+38004311,315D00000X,Inpatient Hospice,Visit,NUCC,Valid,Standard
+8883,24,Ambulatory Surgical Center,Visit,CMS Place of Service,Valid,Standard
+581478,OMOP4822457,Ambulance Visit,Visit,Visit,Valid,Standard
+42898160,LTCP,Non-hospital institution Visit,Visit,Visit,Valid,Standard
+8546,34,Hospice,Visit,CMS Place of Service,Valid,Standard
+8971,51,Inpatient Psychiatric Facility,Visit,CMS Place of Service,Valid,Standard
+38004207,261Q00000X,Ambulatory Clinic / Center,Visit,NUCC,Valid,Standard

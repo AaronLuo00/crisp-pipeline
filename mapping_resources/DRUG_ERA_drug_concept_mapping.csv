@@ -1,0 +1,2535 @@
+Id,Code,Name,Standard Class,Vocab,Validity,Concept
+967823,9863,sodium chloride,Ingredient,RxNorm,Valid,Standard
+1125315,161,acetaminophen,Ingredient,RxNorm,Valid,Standard
+1000560,26225,ondansetron,Ingredient,RxNorm,Valid,Standard
+19049105,8591,potassium chloride,Ingredient,RxNorm,Valid,Standard
+1367571,5224,heparin,Ingredient,RxNorm,Valid,Standard
+989878,6387,lidocaine,Ingredient,RxNorm,Valid,Standard
+1154029,4337,fentanyl,Ingredient,RxNorm,Valid,Standard
+1112807,1191,aspirin,Ingredient,RxNorm,Valid,Standard
+941258,82003,docusate,Ingredient,RxNorm,Valid,Standard
+1560524,4850,glucose,Ingredient,RxNorm,Valid,Standard
+938268,36387,"sennosides, USP",Ingredient,RxNorm,Valid,Standard
+1154343,435,albuterol,Ingredient,RxNorm,Valid,Standard
+1307046,6918,metoprolol,Ingredient,RxNorm,Valid,Standard
+19036781,1901,calcium chloride,Ingredient,RxNorm,Valid,Standard
+956874,4603,furosemide,Ingredient,RxNorm,Valid,Standard
+948078,40790,pantoprazole,Ingredient,RxNorm,Valid,Standard
+1126658,3423,hydromorphone,Ingredient,RxNorm,Valid,Standard
+19011035,114202,lactate,Ingredient,RxNorm,Valid,Standard
+708298,6960,midazolam,Ingredient,RxNorm,Valid,Standard
+1545958,83367,atorvastatin,Ingredient,RxNorm,Valid,Standard
+986417,221147,polyethylene glycol 3350,Ingredient,RxNorm,Valid,Standard
+1129625,3498,diphenhydramine,Ingredient,RxNorm,Valid,Standard
+1301025,67108,enoxaparin,Ingredient,RxNorm,Valid,Standard
+1707687,11124,vancomycin,Ingredient,RxNorm,Valid,Standard
+1550023,86009,insulin lispro,Ingredient,RxNorm,Valid,Standard
+1771162,2180,cefazolin,Ingredient,RxNorm,Valid,Standard
+19111620,4511,folic acid,Ingredient,RxNorm,Valid,Standard
+953076,4278,famotidine,Ingredient,RxNorm,Valid,Standard
+1174888,5489,hydrocodone,Ingredient,RxNorm,Valid,Standard
+1373928,5470,hydralazine,Ingredient,RxNorm,Valid,Standard
+19095164,2418,cholecalciferol,Ingredient,RxNorm,Valid,Standard
+753626,8782,propofol,Ingredient,RxNorm,Valid,Standard
+19093848,6585,magnesium sulfate,Ingredient,RxNorm,Valid,Standard
+1308216,29046,lisinopril,Ingredient,RxNorm,Valid,Standard
+1518254,3264,dexamethasone,Ingredient,RxNorm,Valid,Standard
+1124957,7804,oxycodone,Ingredient,RxNorm,Valid,Standard
+1308738,11248,vitamin B12,Ingredient,RxNorm,Valid,Standard
+924939,1596,bisacodyl,Ingredient,RxNorm,Valid,Standard
+1551099,8640,prednisone,Ingredient,RxNorm,Valid,Standard
+1332418,17767,amlodipine,Ingredient,RxNorm,Valid,Standard
+1110410,7052,morphine,Ingredient,RxNorm,Valid,Standard
+1386957,6185,labetalol,Ingredient,RxNorm,Valid,Standard
+1328165,3443,diltiazem,Ingredient,RxNorm,Valid,Standard
+1114220,7242,naloxone,Ingredient,RxNorm,Valid,Standard
+19049024,8588,potassium,Ingredient,RxNorm,Valid,Standard
+1797513,2551,ciprofloxacin,Ingredient,RxNorm,Valid,Standard
+797399,25480,gabapentin,Ingredient,RxNorm,Valid,Standard
+1502905,274783,insulin glargine,Ingredient,RxNorm,Valid,Standard
+1149380,41126,fluticasone,Ingredient,RxNorm,Valid,Standard
+1103314,10689,tramadol,Ingredient,RxNorm,Valid,Standard
+1746114,8339,piperacillin,Ingredient,RxNorm,Valid,Standard
+1777806,2193,ceftriaxone,Ingredient,RxNorm,Valid,Standard
+906780,6915,metoclopramide,Ingredient,RxNorm,Valid,Standard
+1506270,6902,methylprednisolone,Ingredient,RxNorm,Valid,Standard
+1310149,11289,warfarin,Ingredient,RxNorm,Valid,Standard
+19005046,684879,pyridoxine,Ingredient,RxNorm,Valid,Standard
+1734104,18631,azithromycin,Ingredient,RxNorm,Valid,Standard
+1501700,10582,levothyroxine,Ingredient,RxNorm,Valid,Standard
+1136980,35827,ketorolac,Ingredient,RxNorm,Valid,Standard
+1135766,8163,phenylephrine,Ingredient,RxNorm,Valid,Standard
+19124906,6574,magnesium,Ingredient,RxNorm,Valid,Standard
+1713332,723,amoxicillin,Ingredient,RxNorm,Valid,Standard
+19035704,1897,calcium carbonate,Ingredient,RxNorm,Valid,Standard
+1177480,5640,ibuprofen,Ingredient,RxNorm,Valid,Standard
+1741122,37617,tazobactam,Ingredient,RxNorm,Valid,Standard
+1560305,484348,omega-3 acid ethyl esters (USP),Ingredient,RxNorm,Valid,Standard
+1396131,24947,ferrous sulfate,Ingredient,RxNorm,Valid,Standard
+19044812,8310,phytosterols,Ingredient,RxNorm,Valid,Standard
+1343916,3992,epinephrine,Ingredient,RxNorm,Valid,Standard
+1322184,32968,clopidogrel,Ingredient,RxNorm,Valid,Standard
+992956,6581,magnesium hydroxide,Ingredient,RxNorm,Valid,Standard
+1596977,253182,"insulin, regular, human",Ingredient,RxNorm,Valid,Standard
+904453,283742,esomeprazole,Ingredient,RxNorm,Valid,Standard
+1344143,828529,"albumin human, USP",Ingredient,RxNorm,Valid,Standard
+974166,5487,hydrochlorothiazide,Ingredient,RxNorm,Valid,Standard
+19044727,8308,vitamin K1,Ingredient,RxNorm,Valid,Standard
+1346823,20352,carvedilol,Ingredient,RxNorm,Valid,Standard
+1790812,2358,chlorhexidine,Ingredient,RxNorm,Valid,Standard
+1707164,6922,metronidazole,Ingredient,RxNorm,Valid,Standard
+1836430,10180,sulfamethoxazole,Ingredient,RxNorm,Valid,Standard
+975125,5492,hydrocortisone,Ingredient,RxNorm,Valid,Standard
+1560278,4832,glucagon,Ingredient,RxNorm,Valid,Standard
+929887,17128,lansoprazole,Ingredient,RxNorm,Valid,Standard
+19037038,1908,calcium gluconate,Ingredient,RxNorm,Valid,Standard
+966991,9796,simethicone,Ingredient,RxNorm,Valid,Standard
+990499,235496,"sodium phosphate, monobasic",Ingredient,RxNorm,Valid,Standard
+991710,236719,"sodium phosphate, dibasic",Ingredient,RxNorm,Valid,Standard
+19080985,5956,iohexol,Ingredient,RxNorm,Valid,Standard
+939506,36676,sodium bicarbonate,Ingredient,RxNorm,Valid,Standard
+19003953,68139,rocuronium,Ingredient,RxNorm,Valid,Standard
+993631,6582,magnesium oxide,Ingredient,RxNorm,Valid,Standard
+1361711,4917,nitroglycerin,Ingredient,RxNorm,Valid,Standard
+19137312,10454,thiamine,Ingredient,RxNorm,Valid,Standard
+19027362,34322,potassium phosphate,Ingredient,RxNorm,Valid,Standard
+791967,6470,lorazepam,Ingredient,RxNorm,Valid,Standard
+924566,77492,tamsulosin,Ingredient,RxNorm,Valid,Standard
+19011331,1331,barium sulfate,Ingredient,RxNorm,Valid,Standard
+1102527,6754,meperidine,Ingredient,RxNorm,Valid,Standard
+1567198,51428,"insulin aspart, human",Ingredient,RxNorm,Valid,Standard
+1539403,36567,simvastatin,Ingredient,RxNorm,Valid,Standard
+1367500,52175,losartan,Ingredient,RxNorm,Valid,Standard
+922570,7597,nystatin,Ingredient,RxNorm,Valid,Standard
+923645,7646,omeprazole,Ingredient,RxNorm,Valid,Standard
+19011773,1151,ascorbic acid,Ingredient,RxNorm,Valid,Standard
+1748975,20481,cefepime,Ingredient,RxNorm,Valid,Standard
+1786621,2231,cephalexin,Ingredient,RxNorm,Valid,Standard
+711584,114477,levetiracetam,Ingredient,RxNorm,Valid,Standard
+19071160,283753,perflutren,Ingredient,RxNorm,Valid,Standard
+1309944,703,amiodarone,Ingredient,RxNorm,Valid,Standard
+997881,2582,clindamycin,Ingredient,RxNorm,Valid,Standard
+1321341,7512,norepinephrine,Ingredient,RxNorm,Valid,Standard
+732893,1815,bupivacaine,Ingredient,RxNorm,Valid,Standard
+970250,9997,spironolactone,Ingredient,RxNorm,Valid,Standard
+1503297,6809,metformin,Ingredient,RxNorm,Valid,Standard
+1112921,7213,ipratropium,Ingredient,RxNorm,Valid,Standard
+985247,612,aluminum hydroxide,Ingredient,RxNorm,Valid,Standard
+1717327,733,ampicillin,Ingredient,RxNorm,Valid,Standard
+1705674,10829,trimethoprim,Ingredient,RxNorm,Valid,Standard
+932745,1808,bumetanide,Ingredient,RxNorm,Valid,Standard
+965748,9601,scopolamine,Ingredient,RxNorm,Valid,Standard
+1163944,5032,guaifenesin,Ingredient,RxNorm,Valid,Standard
+1754994,4450,fluconazole,Ingredient,RxNorm,Valid,Standard
+987245,6218,lactulose,Ingredient,RxNorm,Valid,Standard
+915175,1291,bacitracin,Ingredient,RxNorm,Valid,Standard
+939259,19831,budesonide,Ingredient,RxNorm,Valid,Standard
+19055153,4457,flumazenil,Ingredient,RxNorm,Valid,Standard
+951511,42372,mupirocin,Ingredient,RxNorm,Valid,Standard
+1746940,4053,erythromycin,Ingredient,RxNorm,Valid,Standard
+1742253,82122,levofloxacin,Ingredient,RxNorm,Valid,Standard
+1301065,67109,dalteparin,Ingredient,RxNorm,Valid,Standard
+43013024,1364430,apixaban,Ingredient,RxNorm,Valid,Standard
+19081224,5966,iopamidol,Ingredient,RxNorm,Valid,Standard
+19061088,48937,dexmedetomidine,Ingredient,RxNorm,Valid,Standard
+19010309,11295,water,Ingredient,RxNorm,Valid,Standard
+718583,7407,nicotine,Ingredient,RxNorm,Valid,Standard
+1167322,519,allopurinol,Ingredient,RxNorm,Valid,Standard
+778711,21949,cyclobenzaprine,Ingredient,RxNorm,Valid,Standard
+19045045,4018,ergocalciferol,Ingredient,RxNorm,Valid,Standard
+45892419,1596450,gentamicin,Ingredient,RxNorm,Valid,Standard
+1510813,301542,rosuvastatin,Ingredient,RxNorm,Valid,Standard
+19048493,84990,gadobutrol,Ingredient,RxNorm,Valid,Standard
+1136601,18993,benzonatate,Ingredient,RxNorm,Valid,Standard
+752061,8704,prochlorperazine,Ingredient,RxNorm,Valid,Standard
+45775571,1546438,glycopyrronium,Ingredient,RxNorm,Valid,Standard
+1551860,42463,pravastatin,Ingredient,RxNorm,Valid,Standard
+1738521,3640,doxycycline,Ingredient,RxNorm,Valid,Standard
+917006,1399,benzocaine,Ingredient,RxNorm,Valid,Standard
+717136,7315,neostigmine,Ingredient,RxNorm,Valid,Standard
+1137529,36117,salmeterol,Ingredient,RxNorm,Valid,Standard
+19069131,27792,ioversol,Ingredient,RxNorm,Valid,Standard
+903963,10759,triamcinolone,Ingredient,RxNorm,Valid,Standard
+991876,6468,loperamide,Ingredient,RxNorm,Valid,Standard
+836208,10154,succinylcholine,Ingredient,RxNorm,Valid,Standard
+950637,42316,tacrolimus,Ingredient,RxNorm,Valid,Standard
+1398937,2599,clonidine,Ingredient,RxNorm,Valid,Standard
+19033354,8091,petrolatum,Ingredient,RxNorm,Valid,Standard
+914335,1223,atropine,Ingredient,RxNorm,Valid,Standard
+798874,2598,clonazepam,Ingredient,RxNorm,Valid,Standard
+781182,596205,ramelteon,Ingredient,RxNorm,Valid,Standard
+949279,2062,carboxymethylcellulose,Ingredient,RxNorm,Valid,Standard
+1347450,8410,alteplase,Ingredient,RxNorm,Valid,Standard
+1383815,6057,isosorbide,Ingredient,RxNorm,Valid,Standard
+1709170,29561,meropenem,Ingredient,RxNorm,Valid,Standard
+19077884,56443,sodium acetate,Ingredient,RxNorm,Valid,Standard
+1201620,2670,codeine,Ingredient,RxNorm,Valid,Standard
+528323,797752,hepatitis B surface antigen vaccine,Ingredient,RxNorm,Valid,Standard
+908523,6972,mineral oil,Ingredient,RxNorm,Valid,Standard
+1314002,1202,atenolol,Ingredient,RxNorm,Valid,Standard
+1154161,88249,montelukast,Ingredient,RxNorm,Valid,Standard
+1326303,3407,digoxin,Ingredient,RxNorm,Valid,Standard
+19009405,11253,vitamin D,Ingredient,RxNorm,Valid,Standard
+19018544,1895,calcium,Ingredient,RxNorm,Valid,Standard
+1036228,10156,sucralfate,Ingredient,RxNorm,Valid,Standard
+1308842,69749,valsartan,Ingredient,RxNorm,Valid,Standard
+40163661,854930,Streptococcus pneumoniae type 1 capsular polysaccharide antigen,Ingredient,RxNorm,Valid,Standard
+1703687,281,acyclovir,Ingredient,RxNorm,Valid,Standard
+19092849,6579,magnesium chloride,Ingredient,RxNorm,Valid,Standard
+1107830,28889,loratadine,Ingredient,RxNorm,Valid,Standard
+1318137,7396,nicardipine,Ingredient,RxNorm,Valid,Standard
+939871,36709,sodium phosphate,Ingredient,RxNorm,Valid,Standard
+1308368,6963,midodrine,Ingredient,RxNorm,Valid,Standard
+1759842,48203,clavulanate,Ingredient,RxNorm,Valid,Standard
+1143374,3966,ephedrine,Ingredient,RxNorm,Valid,Standard
+1149196,20610,cetirizine,Ingredient,RxNorm,Valid,Standard
+938205,1952,camphor,Ingredient,RxNorm,Valid,Standard
+901656,6750,menthol,Ingredient,RxNorm,Valid,Standard
+43526404,1421151,gadoterate meglumine,Ingredient,RxNorm,Valid,Standard
+40166605,864701,influenza A-California-7-2009-(H1N1)v-like virus vaccine,Ingredient,RxNorm,Invalid,Non-standard
+1139042,197,acetylcysteine,Ingredient,RxNorm,Valid,Standard
+19092377,6536,lysine,Ingredient,RxNorm,Valid,Standard
+1716903,139462,moxifloxacin,Ingredient,RxNorm,Valid,Standard
+42873956,1304122,"influenza A virus vaccine, A-Victoria-361-2011 (H3N2)-like virus",Ingredient,RxNorm,Invalid,Non-standard
+19006186,10898,tryptophan,Ingredient,RxNorm,Valid,Standard
+19004724,6837,methionine,Ingredient,RxNorm,Valid,Standard
+19007572,11115,valine,Ingredient,RxNorm,Valid,Standard
+19000537,10524,threonine,Ingredient,RxNorm,Valid,Standard
+19082306,6033,isoleucine,Ingredient,RxNorm,Valid,Standard
+19035577,8156,phenylalanine,Ingredient,RxNorm,Valid,Standard
+19088571,6308,leucine,Ingredient,RxNorm,Valid,Standard
+19069149,5340,histidine,Ingredient,RxNorm,Valid,Standard
+40163710,854974,Streptococcus pneumoniae type 9V capsular polysaccharide antigen,Ingredient,RxNorm,Valid,Standard
+40163708,854972,Streptococcus pneumoniae type 9N capsular polysaccharide antigen,Ingredient,RxNorm,Valid,Standard
+40163706,854970,Streptococcus pneumoniae type 8 capsular polysaccharide antigen,Ingredient,RxNorm,Valid,Standard
+40163704,854968,Streptococcus pneumoniae type 7F capsular polysaccharide antigen,Ingredient,RxNorm,Valid,Standard
+40163702,854966,Streptococcus pneumoniae type 6B capsular polysaccharide antigen,Ingredient,RxNorm,Valid,Standard
+40163700,854964,Streptococcus pneumoniae type 5 capsular polysaccharide antigen,Ingredient,RxNorm,Valid,Standard
+40163698,854962,Streptococcus pneumoniae type 4 capsular polysaccharide antigen,Ingredient,RxNorm,Valid,Standard
+40163696,854960,Streptococcus pneumoniae type 33F capsular polysaccharide antigen,Ingredient,RxNorm,Valid,Standard
+40163694,854958,Streptococcus pneumoniae type 3 capsular polysaccharide antigen,Ingredient,RxNorm,Valid,Standard
+40163692,854956,Streptococcus pneumoniae type 23F capsular polysaccharide antigen,Ingredient,RxNorm,Valid,Standard
+40163690,854954,Streptococcus pneumoniae type 22F capsular polysaccharide antigen,Ingredient,RxNorm,Valid,Standard
+40163688,854952,Streptococcus pneumoniae type 20 capsular polysaccharide antigen,Ingredient,RxNorm,Valid,Standard
+40163686,854950,Streptococcus pneumoniae type 2 capsular polysaccharide antigen,Ingredient,RxNorm,Valid,Standard
+40163684,854948,Streptococcus pneumoniae type 19F capsular polysaccharide antigen,Ingredient,RxNorm,Valid,Standard
+40163682,854946,Streptococcus pneumoniae type 19A capsular polysaccharide antigen,Ingredient,RxNorm,Valid,Standard
+40163680,854944,Streptococcus pneumoniae type 18C capsular polysaccharide antigen,Ingredient,RxNorm,Valid,Standard
+40163678,854942,Streptococcus pneumoniae type 17F capsular polysaccharide antigen,Ingredient,RxNorm,Valid,Standard
+40163676,854940,Streptococcus pneumoniae type 15B capsular polysaccharide antigen,Ingredient,RxNorm,Valid,Standard
+40163674,854938,Streptococcus pneumoniae type 14 capsular polysaccharide antigen,Ingredient,RxNorm,Valid,Standard
+40163672,854936,Streptococcus pneumoniae type 12F capsular polysaccharide antigen,Ingredient,RxNorm,Valid,Standard
+40163670,854934,Streptococcus pneumoniae type 11A capsular polysaccharide antigen,Ingredient,RxNorm,Valid,Standard
+40163668,854932,Streptococcus pneumoniae type 10A capsular polysaccharide antigen,Ingredient,RxNorm,Valid,Standard
+1301125,105694,epoetin alfa,Ingredient,RxNorm,Valid,Standard
+19078126,56512,sodium polystyrene sulfonate,Ingredient,RxNorm,Valid,Standard
+777221,5553,hydroxyzine,Ingredient,RxNorm,Valid,Standard
+750982,42347,bupropion,Ingredient,RxNorm,Valid,Standard
+43531944,1427022,"influenza B virus vaccine, B-Massachusetts-2-2012-like virus",Ingredient,RxNorm,Invalid,Non-standard
+948582,8536,polymyxin B,Ingredient,RxNorm,Valid,Standard
+19003999,68149,mycophenolate mofetil,Ingredient,RxNorm,Valid,Standard
+1507835,11149,vasopressin (USP),Ingredient,RxNorm,Valid,Standard
+766529,5093,haloperidol,Ingredient,RxNorm,Valid,Standard
+715233,1292,baclofen,Ingredient,RxNorm,Valid,Standard
+46275993,1657128,influenza A virus (H1N1) antigen,Ingredient,RxNorm,Valid,Standard
+46275999,1657134,influenza B virus antigen,Ingredient,RxNorm,Valid,Standard
+46275996,1657131,influenza A virus (H3N2) antigen,Ingredient,RxNorm,Valid,Standard
+1736887,190376,linezolid,Ingredient,RxNorm,Valid,Standard
+1196677,25255,formoterol,Ingredient,RxNorm,Valid,Standard
+785649,6130,ketamine,Ingredient,RxNorm,Valid,Standard
+1115008,7258,naproxen,Ingredient,RxNorm,Valid,Standard
+1778162,2194,cefuroxime,Ingredient,RxNorm,Valid,Standard
+907013,6916,metolazone,Ingredient,RxNorm,Valid,Standard
+1318853,7417,nifedipine,Ingredient,RxNorm,Valid,Standard
+911064,11423,zinc oxide,Ingredient,RxNorm,Valid,Standard
+19044522,39954,zinc sulfate,Ingredient,RxNorm,Valid,Standard
+920293,7454,nitrofurantoin,Ingredient,RxNorm,Valid,Standard
+952004,214824,sevelamer,Ingredient,RxNorm,Valid,Standard
+1550557,8638,prednisolone,Ingredient,RxNorm,Valid,Standard
+40241331,1114195,rivaroxaban,Ingredient,RxNorm,Valid,Standard
+961047,9143,ranitidine,Ingredient,RxNorm,Valid,Standard
+1134439,1886,caffeine,Ingredient,RxNorm,Valid,Standard
+923540,33290,phenol,Ingredient,RxNorm,Valid,Standard
+703547,10737,trazodone,Ingredient,RxNorm,Valid,Standard
+1717704,73645,valacyclovir,Ingredient,RxNorm,Valid,Standard
+996416,25025,finasteride,Ingredient,RxNorm,Valid,Standard
+942350,38413,torsemide,Ingredient,RxNorm,Valid,Standard
+967861,52356,magnesium citrate,Ingredient,RxNorm,Valid,Standard
+19054242,8825,protamine sulfate (USP),Ingredient,RxNorm,Valid,Standard
+46221581,1605101,insulin isophane,Ingredient,RxNorm,Valid,Standard
+19076714,55018,dibasic potassium phosphate,Ingredient,RxNorm,Valid,Standard
+19090761,640062,regadenoson,Ingredient,RxNorm,Valid,Standard
+1560171,4821,glipizide,Ingredient,RxNorm,Valid,Standard
+1307863,11170,verapamil,Ingredient,RxNorm,Valid,Standard
+19010955,3024,cysteine,Ingredient,RxNorm,Valid,Standard
+19036638,35805,royal jelly,Ingredient,RxNorm,Valid,Standard
+1101554,2683,colchicine,Ingredient,RxNorm,Valid,Standard
+19078092,56476,sodium gluconate,Ingredient,RxNorm,Valid,Standard
+1118084,140587,celecoxib,Ingredient,RxNorm,Valid,Standard
+19050488,4177,etomidate,Ingredient,RxNorm,Valid,Standard
+529411,798306,"tetanus toxoid vaccine, inactivated",Ingredient,RxNorm,Valid,Standard
+529303,798304,"diphtheria toxoid vaccine, inactivated",Ingredient,RxNorm,Valid,Standard
+19070224,9949,soybean oil,Ingredient,RxNorm,Valid,Standard
+918906,32675,oxybutynin,Ingredient,RxNorm,Valid,Standard
+1526475,341248,ezetimibe,Ingredient,RxNorm,Valid,Standard
+1799139,260101,oseltamivir,Ingredient,RxNorm,Valid,Standard
+1836241,10167,sulbactam,Ingredient,RxNorm,Valid,Standard
+994058,6628,mannitol,Ingredient,RxNorm,Valid,Standard
+1301152,6711,melatonin,Ingredient,RxNorm,Valid,Standard
+1715117,1272,aztreonam,Ingredient,RxNorm,Valid,Standard
+19003201,27729,iodixanol,Ingredient,RxNorm,Valid,Standard
+1119510,3289,dextromethorphan,Ingredient,RxNorm,Valid,Standard
+529218,798302,"acellular pertussis vaccine, inactivated",Ingredient,RxNorm,Valid,Standard
+924724,3361,dicyclomine,Ingredient,RxNorm,Valid,Standard
+19012565,7145,mycophenolic acid,Ingredient,RxNorm,Valid,Standard
+766814,51272,quetiapine,Ingredient,RxNorm,Valid,Standard
+1000632,2623,clotrimazole,Ingredient,RxNorm,Valid,Standard
+19136048,9853,sodium,Ingredient,RxNorm,Valid,Standard
+1703063,275891,valganciclovir,Ingredient,RxNorm,Valid,Standard
+1395773,24909,iron sucrose,Ingredient,RxNorm,Valid,Standard
+1154332,8896,pseudoephedrine,Ingredient,RxNorm,Valid,Standard
+994341,6676,meclizine,Ingredient,RxNorm,Valid,Standard
+907879,6932,miconazole,Ingredient,RxNorm,Valid,Standard
+950435,21183,citric acid,Ingredient,RxNorm,Valid,Standard
+1516976,139825,insulin detemir,Ingredient,RxNorm,Valid,Standard
+19063575,49737,esmolol,Ingredient,RxNorm,Valid,Standard
+723013,3322,diazepam,Ingredient,RxNorm,Valid,Standard
+1124300,3355,diclofenac,Ingredient,RxNorm,Valid,Standard
+19035631,1894,calcitriol,Ingredient,RxNorm,Valid,Standard
+977968,56466,sodium citrate,Ingredient,RxNorm,Valid,Standard
+19136247,10159,sucrose,Ingredient,RxNorm,Valid,Standard
+954688,43611,latanoprost,Ingredient,RxNorm,Valid,Standard
+1304850,68442,filgrastim,Ingredient,RxNorm,Valid,Standard
+1353766,8787,propranolol,Ingredient,RxNorm,Valid,Standard
+781039,596,alprazolam,Ingredient,RxNorm,Valid,Standard
+962398,4919,glycine,Ingredient,RxNorm,Valid,Standard
+19039850,36679,sodium bisulfite,Ingredient,RxNorm,Valid,Standard
+19029306,164,acetate,Ingredient,RxNorm,Valid,Standard
+1517824,7393,niacin,Ingredient,RxNorm,Valid,Standard
+902722,10627,tobramycin,Ingredient,RxNorm,Valid,Standard
+744740,39993,zolpidem,Ingredient,RxNorm,Valid,Standard
+19008339,11246,vitamin A,Ingredient,RxNorm,Valid,Standard
+925636,7812,oxymetazoline,Ingredient,RxNorm,Valid,Standard
+1586346,221109,"insulin, regular, pork",Ingredient,RxNorm,Valid,Standard
+1337720,3616,dobutamine,Ingredient,RxNorm,Valid,Standard
+1551803,8703,fenofibrate,Ingredient,RxNorm,Valid,Standard
+1735947,35619,rifaximin,Ingredient,RxNorm,Valid,Standard
+1316262,136411,sildenafil,Ingredient,RxNorm,Valid,Standard
+1303425,10691,tranexamic acid,Ingredient,RxNorm,Valid,Standard
+929435,167,acetazolamide,Ingredient,RxNorm,Valid,Standard
+915981,7299,neomycin,Ingredient,RxNorm,Valid,Standard
+1341927,3827,enalapril,Ingredient,RxNorm,Valid,Standard
+948856,8570,polyvinyl alcohol,Ingredient,RxNorm,Valid,Standard
+1300673,10528,thrombin,Ingredient,RxNorm,Valid,Standard
+739138,36437,sertraline,Ingredient,RxNorm,Valid,Standard
+19018013,325887,micafungin,Ingredient,RxNorm,Valid,Standard
+19117912,5666,immunoglobulin G,Ingredient,RxNorm,Valid,Standard
+1717963,325642,ertapenem,Ingredient,RxNorm,Valid,Standard
+797617,2556,citalopram,Ingredient,RxNorm,Valid,Standard
+1369939,99,6-aminocaproic acid,Ingredient,RxNorm,Valid,Standard
+19062817,9346,riboflavin,Ingredient,RxNorm,Valid,Standard
+1557272,46041,alendronate,Ingredient,RxNorm,Valid,Standard
+1192218,237159,levalbuterol,Ingredient,RxNorm,Valid,Standard
+902427,10600,timolol,Ingredient,RxNorm,Valid,Standard
+19006410,1091,arginine,Ingredient,RxNorm,Valid,Standard
+916662,324072,dimethicone,Ingredient,RxNorm,Valid,Standard
+19009540,11256,vitamin E,Ingredient,RxNorm,Valid,Standard
+910232,3001,cyclopentolate,Ingredient,RxNorm,Valid,Standard
+1796458,25037,cefdinir,Ingredient,RxNorm,Valid,Standard
+920458,1514,betamethasone,Ingredient,RxNorm,Valid,Standard
+19006692,10962,tyrosine,Ingredient,RxNorm,Valid,Standard
+19052489,426,alanine,Ingredient,RxNorm,Valid,Standard
+19066774,9671,serine,Ingredient,RxNorm,Valid,Standard
+19052736,8737,proline,Ingredient,RxNorm,Valid,Standard
+778474,57258,tizanidine,Ingredient,RxNorm,Valid,Standard
+35604506,1726988,sugammadex,Ingredient,RxNorm,Valid,Standard
+19007652,692620,gadobenate,Ingredient,RxNorm,Valid,Standard
+1383925,6058,isosorbide dinitrate,Ingredient,RxNorm,Valid,Standard
+961145,4910,glycerin,Ingredient,RxNorm,Valid,Standard
+1580747,593411,sitagliptin,Ingredient,RxNorm,Valid,Standard
+43532539,1424884,vilanterol,Ingredient,RxNorm,Valid,Standard
+951469,214342,calcium acetate,Ingredient,RxNorm,Valid,Standard
+1153428,87636,fexofenadine,Ingredient,RxNorm,Valid,Standard
+1103640,6813,methadone,Ingredient,RxNorm,Valid,Standard
+1114122,7238,nalbuphine,Ingredient,RxNorm,Valid,Standard
+1368671,52769,milrinone,Ingredient,RxNorm,Valid,Standard
+991855,236782,Saccharomyces boulardii,Ingredient,RxNorm,Valid,Standard
+740910,8183,phenytoin,Ingredient,RxNorm,Valid,Standard
+1139699,19860,butalbital,Ingredient,RxNorm,Valid,Standard
+715997,135447,donepezil,Ingredient,RxNorm,Valid,Standard
+1597756,25789,glimepiride,Ingredient,RxNorm,Valid,Standard
+1334456,35296,ramipril,Ingredient,RxNorm,Valid,Standard
+992590,2396,chlorothiazide,Ingredient,RxNorm,Valid,Standard
+40241186,1116632,ticagrelor,Ingredient,RxNorm,Valid,Standard
+1353228,42954,vitamin B6,Ingredient,RxNorm,Valid,Standard
+957797,8928,psyllium,Ingredient,RxNorm,Valid,Standard
+1153013,8745,promethazine,Ingredient,RxNorm,Valid,Standard
+742267,38404,topiramate,Ingredient,RxNorm,Valid,Standard
+44785907,1487514,umeclidinium,Ingredient,RxNorm,Valid,Standard
+1106776,69120,tiotropium,Ingredient,RxNorm,Valid,Standard
+19024770,1588,biotin,Ingredient,RxNorm,Valid,Standard
+942799,38685,trimethobenzamide,Ingredient,RxNorm,Valid,Standard
+1400498,262150,iron carbonyl,Ingredient,RxNorm,Valid,Standard
+1363053,49276,doxazosin,Ingredient,RxNorm,Valid,Standard
+985708,6135,ketoconazole,Ingredient,RxNorm,Valid,Standard
+948515,8516,polyethylene glycols,Ingredient,RxNorm,Valid,Standard
+988095,62427,ursodeoxycholate,Ingredient,RxNorm,Valid,Standard
+905233,108118,mometasone,Ingredient,RxNorm,Valid,Standard
+725131,15996,mirtazapine,Ingredient,RxNorm,Valid,Standard
+1781733,60212,atovaquone,Ingredient,RxNorm,Valid,Standard
+704943,6845,methocarbamol,Ingredient,RxNorm,Valid,Standard
+1340128,1998,captopril,Ingredient,RxNorm,Valid,Standard
+1777087,5521,hydroxychloroquine,Ingredient,RxNorm,Valid,Standard
+19010482,3008,cyclosporine,Ingredient,RxNorm,Valid,Standard
+1790868,641,amikacin,Ingredient,RxNorm,Valid,Standard
+915542,134615,brimonidine,Ingredient,RxNorm,Valid,Standard
+1150345,41493,meloxicam,Ingredient,RxNorm,Valid,Standard
+911486,70602,glutamate,Ingredient,RxNorm,Valid,Standard
+19052059,42543,aspartate,Ingredient,RxNorm,Valid,Standard
+998415,2590,clobetasol,Ingredient,RxNorm,Valid,Standard
+1396012,24942,ferrous gluconate,Ingredient,RxNorm,Valid,Standard
+1522957,7617,octreotide,Ingredient,RxNorm,Valid,Standard
+934075,18603,azelastine,Ingredient,RxNorm,Valid,Standard
+906072,10869,tropicamide,Ingredient,RxNorm,Valid,Standard
+1305058,6851,methotrexate,Ingredient,RxNorm,Valid,Standard
+19016749,73032,remifentanil,Ingredient,RxNorm,Valid,Standard
+785788,61381,olanzapine,Ingredient,RxNorm,Valid,Standard
+1395058,2409,chlorthalidone,Ingredient,RxNorm,Valid,Standard
+755695,4493,fluoxetine,Ingredient,RxNorm,Valid,Standard
+1592085,6472,lovastatin,Ingredient,RxNorm,Valid,Standard
+715259,72625,duloxetine,Ingredient,RxNorm,Valid,Standard
+902251,27334,hypromellose,Ingredient,RxNorm,Valid,Standard
+740560,2019,carbidopa,Ingredient,RxNorm,Valid,Standard
+933724,8120,phenazopyridine,Ingredient,RxNorm,Valid,Standard
+1342001,3829,enalaprilat,Ingredient,RxNorm,Valid,Standard
+1517070,3251,desmopressin,Ingredient,RxNorm,Valid,Standard
+1769535,2177,cefadroxil,Ingredient,RxNorm,Valid,Standard
+1776684,2191,ceftazidime,Ingredient,RxNorm,Valid,Standard
+1300153,66887,racepinephrine,Ingredient,RxNorm,Valid,Standard
+19008009,2890,cosyntropin,Ingredient,RxNorm,Valid,Standard
+1178663,5781,indomethacin,Ingredient,RxNorm,Valid,Standard
+1559684,4815,glyburide,Ingredient,RxNorm,Valid,Standard
+1510687,2047628,sodium zirconium cyclosilicate,Ingredient,RxNorm,Valid,Standard
+904542,10763,triamterene,Ingredient,RxNorm,Valid,Standard
+19020994,7476,nitroprusside,Ingredient,RxNorm,Valid,Standard
+939976,36721,sodium sulfate,Ingredient,RxNorm,Valid,Standard
+19015726,319864,cisatracurium,Ingredient,RxNorm,Valid,Standard
+1336926,358263,tadalafil,Ingredient,RxNorm,Valid,Standard
+713823,72302,ropinirole,Ingredient,RxNorm,Valid,Standard
+987153,6205,Lactobacillus acidophilus,Ingredient,RxNorm,Valid,Standard
+701322,6719,memantine,Ingredient,RxNorm,Valid,Standard
+715939,321988,escitalopram,Ingredient,RxNorm,Valid,Standard
+40226742,321064,olmesartan,Ingredient,RxNorm,Valid,Standard
+1337860,3628,dopamine,Ingredient,RxNorm,Valid,Standard
+1714277,121243,voriconazole,Ingredient,RxNorm,Valid,Standard
+40161805,852091,hog epithelia extract,Ingredient,RxNorm,Valid,Standard
+1347384,83818,irbesartan,Ingredient,RxNorm,Valid,Standard
+734275,8134,phenobarbital,Ingredient,RxNorm,Valid,Standard
+966376,508,allantoin,Ingredient,RxNorm,Valid,Standard
+1789276,228476,gatifloxacin,Ingredient,RxNorm,Valid,Standard
+705944,6901,methylphenidate,Ingredient,RxNorm,Valid,Standard
+1555120,4452,fludrocortisone,Ingredient,RxNorm,Valid,Standard
+966956,9793,silver sulfadiazine,Ingredient,RxNorm,Valid,Standard
+19018419,7405,niacinamide,Ingredient,RxNorm,Valid,Standard
+19106973,4301,omega-3 fatty acids,Ingredient,RxNorm,Valid,Standard
+19101604,2669,cod liver oil,Ingredient,RxNorm,Valid,Standard
+980311,58939,collagenase,Ingredient,RxNorm,Valid,Standard
+1335471,18867,benazepril,Ingredient,RxNorm,Valid,Standard
+43012202,1362737,fluorodeoxyglucose F18,Ingredient,RxNorm,Valid,Standard
+981709,60207,dorzolamide,Ingredient,RxNorm,Valid,Standard
+1786617,22299,daptomycin,Ingredient,RxNorm,Valid,Standard
+1548111,407990,cinacalcet,Ingredient,RxNorm,Valid,Standard
+923672,153970,hyoscyamine,Ingredient,RxNorm,Valid,Standard
+19056802,237099,alpha tocopherol,Ingredient,RxNorm,Valid,Standard
+19014878,1256,azathioprine,Ingredient,RxNorm,Valid,Standard
+528986,798220,Streptococcus pneumoniae serotype 14 capsular antigen diphtheria CRM197 protein conjugate vaccine,Ingredient,RxNorm,Valid,Standard
+919204,743,amylase,Ingredient,RxNorm,Valid,Standard
+719174,1424,benztropine,Ingredient,RxNorm,Valid,Standard
+950056,8610,povidone,Ingredient,RxNorm,Valid,Standard
+19087394,623400,lacosamide,Ingredient,RxNorm,Valid,Standard
+913782,119565,tolterodine,Ingredient,RxNorm,Valid,Standard
+1525215,33738,pioglitazone,Ingredient,RxNorm,Valid,Standard
+19058274,8948,purified protein derivative of tuberculin,Ingredient,RxNorm,Valid,Standard
+19012598,71535,vecuronium,Ingredient,RxNorm,Valid,Standard
+734354,187832,pregabalin,Ingredient,RxNorm,Valid,Standard
+1730370,7994,pentamidine,Ingredient,RxNorm,Valid,Standard
+1548195,4083,estradiol,Ingredient,RxNorm,Valid,Standard
+745466,40254,valproate,Ingredient,RxNorm,Valid,Standard
+1549080,4099,"estrogens, conjugated (USP)",Ingredient,RxNorm,Valid,Standard
+988294,22701,dexpanthenol,Ingredient,RxNorm,Valid,Standard
+1140643,37418,sumatriptan,Ingredient,RxNorm,Valid,Standard
+1309204,296,adenosine,Ingredient,RxNorm,Valid,Standard
+1341238,37798,terazosin,Ingredient,RxNorm,Valid,Standard
+1370109,9947,sotalol,Ingredient,RxNorm,Valid,Standard
+1314273,121191,rituximab,Ingredient,RxNorm,Valid,Standard
+1549786,4124,ethinyl estradiol,Ingredient,RxNorm,Valid,Standard
+529118,798279,"Haemophilus influenzae type b, capsular polysaccharide inactivated tetanus toxoid conjugate vaccine",Ingredient,RxNorm,Valid,Standard
+710062,704,amitriptyline,Ingredient,RxNorm,Valid,Standard
+19010970,11251,vitamin B complex,Ingredient,RxNorm,Valid,Standard
+930916,3500,diphenoxylate,Ingredient,RxNorm,Valid,Standard
+1724703,7773,oxacillin,Ingredient,RxNorm,Valid,Standard
+743670,39786,venlafaxine,Ingredient,RxNorm,Valid,Standard
+37499271,2284718,remdesivir,Ingredient,RxNorm,Valid,Standard
+1326901,7895,papaverine,Ingredient,RxNorm,Valid,Standard
+789578,6375,levodopa,Ingredient,RxNorm,Valid,Standard
+46276229,1661547,human milk preparation,Ingredient,RxNorm,Valid,Standard
+44784806,1483317,hypochlorite,Ingredient,RxNorm,Valid,Standard
+1036884,10391,tetracaine,Ingredient,RxNorm,Valid,Standard
+19058572,47613,calcium citrate,Ingredient,RxNorm,Valid,Standard
+718122,32624,oxcarbazepine,Ingredient,RxNorm,Valid,Standard
+19087317,6227,lanolin,Ingredient,RxNorm,Valid,Standard
+911354,70561,palonosetron,Ingredient,RxNorm,Valid,Standard
+1105775,689,aminophylline,Ingredient,RxNorm,Valid,Standard
+40222444,993449,denosumab,Ingredient,RxNorm,Valid,Standard
+720810,746741,pramipexole,Ingredient,RxNorm,Valid,Standard
+1399177,261435,sodium ferric gluconate complex,Ingredient,RxNorm,Valid,Standard
+19095309,2447,cholestyramine resin,Ingredient,RxNorm,Valid,Standard
+529072,798232,Streptococcus pneumoniae serotype 9V capsular antigen diphtheria CRM197 protein conjugate vaccine,Ingredient,RxNorm,Valid,Standard
+529046,798230,Streptococcus pneumoniae serotype 6B capsular antigen diphtheria CRM197 protein conjugate vaccine,Ingredient,RxNorm,Valid,Standard
+529044,798228,Streptococcus pneumoniae serotype 4 capsular antigen diphtheria CRM197 protein conjugate vaccine,Ingredient,RxNorm,Valid,Standard
+529042,798226,Streptococcus pneumoniae serotype 23F capsular antigen diphtheria CRM197 protein conjugate vaccine,Ingredient,RxNorm,Valid,Standard
+528990,798224,Streptococcus pneumoniae serotype 19F capsular antigen diphtheria CRM197 protein conjugate vaccine,Ingredient,RxNorm,Valid,Standard
+528988,798222,Streptococcus pneumoniae serotype 18C capsular antigen diphtheria CRM197 protein conjugate vaccine,Ingredient,RxNorm,Valid,Standard
+19077117,5531,hetastarch,Ingredient,RxNorm,Valid,Standard
+19136716,10337,taurine,Ingredient,RxNorm,Valid,Standard
+19039874,36696,sodium metabisulfite,Ingredient,RxNorm,Valid,Standard
+40228152,1037042,dabigatran etexilate,Ingredient,RxNorm,Valid,Standard
+1300978,6703,megestrol,Ingredient,RxNorm,Valid,Standard
+19027475,34323,potassium sulfate,Ingredient,RxNorm,Valid,Standard
+1310317,3002,cyclophosphamide,Ingredient,RxNorm,Valid,Standard
+1351115,21406,ubidecarenone,Ingredient,RxNorm,Valid,Standard
+1325608,338036,pegfilgrastim,Ingredient,RxNorm,Valid,Standard
+1750500,21212,clarithromycin,Ingredient,RxNorm,Valid,Standard
+1304643,283838,darbepoetin alfa,Ingredient,RxNorm,Valid,Standard
+937791,19478,bismuth subsalicylate,Ingredient,RxNorm,Valid,Standard
+40174023,901636,Streptococcus pneumoniae serotype 7F capsular antigen diphtheria CRM197 protein conjugate vaccine,Ingredient,RxNorm,Valid,Standard
+40174020,901633,Streptococcus pneumoniae serotype 6A capsular antigen diphtheria CRM197 protein conjugate vaccine,Ingredient,RxNorm,Valid,Standard
+40174018,901631,Streptococcus pneumoniae serotype 5 capsular antigen diphtheria CRM197 protein conjugate vaccine,Ingredient,RxNorm,Valid,Standard
+40174015,901628,Streptococcus pneumoniae serotype 3 capsular antigen diphtheria CRM197 protein conjugate vaccine,Ingredient,RxNorm,Valid,Standard
+40174011,901624,Streptococcus pneumoniae serotype 19A capsular antigen diphtheria CRM197 protein conjugate vaccine,Ingredient,RxNorm,Valid,Standard
+40174004,901620,Streptococcus pneumoniae serotype 1 capsular antigen diphtheria CRM197 protein conjugate vaccine,Ingredient,RxNorm,Valid,Standard
+1314577,31555,nebivolol,Ingredient,RxNorm,Valid,Standard
+1710281,300195,tenofovir disoproxil,Ingredient,RxNorm,Valid,Standard
+904525,283810,bimatoprost,Ingredient,RxNorm,Valid,Standard
+1037005,10402,dronabinol,Ingredient,RxNorm,Valid,Standard
+951279,8686,prilocaine,Ingredient,RxNorm,Valid,Standard
+733301,1827,buspirone,Ingredient,RxNorm,Valid,Standard
+19059547,89903,potassium gluconate,Ingredient,RxNorm,Valid,Standard
+19084670,60819,bivalirudin,Ingredient,RxNorm,Valid,Standard
+19076414,54987,potassium acetate,Ingredient,RxNorm,Valid,Standard
+42900528,1309208,grape seed oil,Ingredient,RxNorm,Valid,Standard
+927478,34347,pramoxine,Ingredient,RxNorm,Valid,Standard
+714785,725,amphetamine,Ingredient,RxNorm,Valid,Standard
+40163718,613391,prasugrel,Ingredient,RxNorm,Valid,Standard
+1763204,9384,rifampin,Ingredient,RxNorm,Valid,Standard
+1337107,35829,ranolazine,Ingredient,RxNorm,Valid,Standard
+1636780,10379,testosterone,Ingredient,RxNorm,Valid,Standard
+968426,52582,mesalamine,Ingredient,RxNorm,Valid,Standard
+1703069,276237,emtricitabine,Ingredient,RxNorm,Valid,Standard
+1524674,77655,zoledronic acid,Ingredient,RxNorm,Valid,Standard
+1136487,35780,ropivacaine,Ingredient,RxNorm,Valid,Standard
+35605594,1731071,fosaprepitant,Ingredient,RxNorm,Valid,Standard
+1363516,94,5-hydroxytryptophan,Ingredient,RxNorm,Valid,Standard
+1377141,5552,hydroxyurea,Ingredient,RxNorm,Valid,Standard
+722031,32937,paroxetine,Ingredient,RxNorm,Valid,Standard
+923081,7623,ofloxacin,Ingredient,RxNorm,Valid,Standard
+1354118,8814,epoprostenol,Ingredient,RxNorm,Valid,Standard
+19034726,35302,sirolimus,Ingredient,RxNorm,Valid,Standard
+37003432,2468231,"SARS-CoV-2 (COVID-19) vaccine, mRNA spike protein",Ingredient,RxNorm,Valid,Standard
+19022596,3319,diatrizoate,Ingredient,RxNorm,Valid,Standard
+19019131,142131,magnesium aspartate,Ingredient,RxNorm,Valid,Standard
+955252,4462,fluocinonide,Ingredient,RxNorm,Valid,Standard
+955632,4492,fluorouracil,Ingredient,RxNorm,Valid,Standard
+19089969,233603,clevidipine,Ingredient,RxNorm,Valid,Standard
+19049059,8589,potassium aspartate,Ingredient,RxNorm,Valid,Standard
+705103,28439,lamotrigine,Ingredient,RxNorm,Valid,Standard
+19056808,237123,dipotassium adipate,Ingredient,RxNorm,Valid,Standard
+19135786,8595,potassium dichromate,Ingredient,RxNorm,Valid,Standard
+1500211,6691,medroxyprogesterone,Ingredient,RxNorm,Valid,Standard
+19122158,5970,iothalamate,Ingredient,RxNorm,Valid,Standard
+19056704,236907,potassium sulfide,Ingredient,RxNorm,Valid,Standard
+19055951,236259,potassium glucoheptonate,Ingredient,RxNorm,Valid,Standard
+1115572,1347,beclomethasone,Ingredient,RxNorm,Valid,Standard
+1313200,7226,nadolol,Ingredient,RxNorm,Valid,Standard
+959196,89821,witch hazel,Ingredient,RxNorm,Valid,Standard
+1360067,90176,iron,Ingredient,RxNorm,Valid,Standard
+1315865,321208,fondaparinux,Ingredient,RxNorm,Valid,Standard
+1309799,298869,eplerenone,Ingredient,RxNorm,Valid,Standard
+46275719,1656328,sacubitril,Ingredient,RxNorm,Valid,Standard
+710650,30125,modafinil,Ingredient,RxNorm,Valid,Standard
+1311078,3041,cytarabine,Ingredient,RxNorm,Valid,Standard
+40170911,475968,liraglutide,Ingredient,RxNorm,Valid,Standard
+929504,34905,proparacaine,Ingredient,RxNorm,Valid,Standard
+939881,1992,capsaicin,Ingredient,RxNorm,Valid,Standard
+40239216,1100699,linagliptin,Ingredient,RxNorm,Valid,Standard
+1344905,40048,carboplatin,Ingredient,RxNorm,Valid,Standard
+1775741,2189,cefoxitin,Ingredient,RxNorm,Valid,Standard
+915855,135391,olopatadine,Ingredient,RxNorm,Valid,Standard
+19051926,214688,magnesium lactate,Ingredient,RxNorm,Valid,Standard
+735979,35636,risperidone,Ingredient,RxNorm,Valid,Standard
+523283,763096,"poliovirus vaccine inactivated, type 1 (Mahoney)",Ingredient,RxNorm,Valid,Standard
+1348265,84857,anastrozole,Ingredient,RxNorm,Valid,Standard
+19068715,52885,monofluorophosphate,Ingredient,RxNorm,Valid,Standard
+1338512,3639,doxorubicin,Ingredient,RxNorm,Valid,Standard
+45774751,1545653,empagliflozin,Ingredient,RxNorm,Valid,Standard
+19010696,11416,zinc,Ingredient,RxNorm,Valid,Standard
+916005,322167,solifenacin,Ingredient,RxNorm,Valid,Standard
+1504620,6835,methimazole,Ingredient,RxNorm,Valid,Standard
+990340,235379,pancrelipase,Ingredient,RxNorm,Invalid,Non-standard
+958999,47686,carbamide peroxide,Ingredient,RxNorm,Valid,Standard
+1133201,1819,buprenorphine,Ingredient,RxNorm,Valid,Standard
+19087090,620,amantadine,Ingredient,RxNorm,Valid,Standard
+19018255,155060,pyroglutamate,Ingredient,RxNorm,Valid,Standard
+19028106,797541,isopropyl alcohol,Ingredient,RxNorm,Valid,Standard
+1388796,6313,leucovorin,Ingredient,RxNorm,Valid,Standard
+19025274,7806,oxygen,Ingredient,RxNorm,Valid,Standard
+904501,283809,travoprost,Ingredient,RxNorm,Valid,Standard
+1708880,6980,minocycline,Ingredient,RxNorm,Valid,Standard
+1517740,73710,paricalcitol,Ingredient,RxNorm,Valid,Standard
+780442,591622,varenicline,Ingredient,RxNorm,Valid,Standard
+19067971,52358,magnesium gluconate,Ingredient,RxNorm,Valid,Standard
+1704139,282446,posaconazole,Ingredient,RxNorm,Valid,Standard
+936748,358255,aprepitant,Ingredient,RxNorm,Valid,Standard
+42873636,1300786,mirabegron,Ingredient,RxNorm,Valid,Standard
+1558242,4719,gemfibrozil,Ingredient,RxNorm,Valid,Standard
+19000382,100272,Lactobacillus delbrueckii subsp. bulgaricus,Ingredient,RxNorm,Valid,Standard
+1749008,20489,cefpodoxime,Ingredient,RxNorm,Valid,Standard
+1757803,4678,ganciclovir,Ingredient,RxNorm,Valid,Standard
+1717240,732,amphotericin B,Ingredient,RxNorm,Valid,Standard
+42900108,1311569,tetrofosmin,Ingredient,RxNorm,Valid,Standard
+729855,1712,botulinum toxin type A,Ingredient,RxNorm,Valid,Standard
+1512446,11516,doxercalciferol,Ingredient,RxNorm,Valid,Standard
+1350489,8629,prazosin,Ingredient,RxNorm,Valid,Standard
+19071991,29164,magnesium phosphate,Ingredient,RxNorm,Valid,Standard
+1341149,37776,temozolomide,Ingredient,RxNorm,Valid,Standard
+719311,3288,dextroamphetamine,Ingredient,RxNorm,Valid,Standard
+1729720,7984,penicillin V,Ingredient,RxNorm,Valid,Standard
+1354698,44,mesna,Ingredient,RxNorm,Valid,Standard
+19011093,117466,tenofovir,Ingredient,RxNorm,Valid,Standard
+1326115,7824,oxytocin,Ingredient,RxNorm,Valid,Standard
+990760,6406,lipase,Ingredient,RxNorm,Valid,Standard
+1350310,21107,cilostazol,Ingredient,RxNorm,Valid,Standard
+908464,29155,magnesium carbonate,Ingredient,RxNorm,Valid,Standard
+1000772,26237,granisetron,Ingredient,RxNorm,Valid,Standard
+1319133,7426,nimodipine,Ingredient,RxNorm,Valid,Standard
+931973,8031,protease,Ingredient,RxNorm,Valid,Standard
+1750087,8611,povidone-iodine,Ingredient,RxNorm,Valid,Standard
+1360332,4845,glucosamine,Ingredient,RxNorm,Valid,Standard
+1521369,7514,norethindrone,Ingredient,RxNorm,Valid,Standard
+1350504,4179,etoposide,Ingredient,RxNorm,Valid,Standard
+1728416,7980,penicillin G,Ingredient,RxNorm,Valid,Standard
+19088079,62400,pantothenate,Ingredient,RxNorm,Valid,Standard
+713192,72236,fosphenytoin,Ingredient,RxNorm,Valid,Standard
+909841,29899,methylnaltrexone,Ingredient,RxNorm,Valid,Standard
+966913,9789,silver nitrate,Ingredient,RxNorm,Valid,Standard
+1309068,6984,minoxidil,Ingredient,RxNorm,Valid,Standard
+19013986,314718,magnesium acetate,Ingredient,RxNorm,Valid,Standard
+979096,58295,zinc acetate,Ingredient,RxNorm,Valid,Standard
+43014216,1368706,stearate,Ingredient,RxNorm,Valid,Standard
+19016889,139233,magnesium orotate,Ingredient,RxNorm,Valid,Standard
+1331235,35208,quinapril,Ingredient,RxNorm,Valid,Standard
+1338005,19484,bisoprolol,Ingredient,RxNorm,Valid,Standard
+523367,763100,"poliovirus vaccine inactivated, type 3 (Saukett)",Ingredient,RxNorm,Valid,Standard
+523365,763098,"poliovirus vaccine inactivated, type 2 (MEF-1)",Ingredient,RxNorm,Valid,Standard
+950933,2129,castor oil,Ingredient,RxNorm,Valid,Standard
+19060896,486895,magnesium amino acid chelate,Ingredient,RxNorm,Valid,Standard
+45774435,1551291,dulaglutide,Ingredient,RxNorm,Valid,Standard
+1553610,42955,levocarnitine,Ingredient,RxNorm,Valid,Standard
+1741309,37801,terbinafine,Ingredient,RxNorm,Valid,Standard
+757688,89013,aripiprazole,Ingredient,RxNorm,Valid,Standard
+976545,54993,potassium citrate,Ingredient,RxNorm,Valid,Standard
+19050832,21241,clobazam,Ingredient,RxNorm,Valid,Standard
+1308290,11202,vincristine,Ingredient,RxNorm,Valid,Standard
+1354860,4441,flecainide,Ingredient,RxNorm,Valid,Standard
+990678,2356,chlordiazepoxide,Ingredient,RxNorm,Valid,Standard
+937368,191831,infliximab,Ingredient,RxNorm,Valid,Standard
+523212,762817,rubella virus vaccine live (Wistar RA 27-3 strain),Ingredient,RxNorm,Valid,Standard
+19059006,476818,magnesium glycinate,Ingredient,RxNorm,Valid,Standard
+532272,804179,"measles virus vaccine live, Enders' attenuated Edmonston strain",Ingredient,RxNorm,Valid,Standard
+529713,798372,"mumps virus vaccine live, Jeryl Lynn strain",Ingredient,RxNorm,Valid,Standard
+42899412,1311396,magnesium ascorbate,Ingredient,RxNorm,Valid,Standard
+721724,7531,nortriptyline,Ingredient,RxNorm,Valid,Standard
+1748921,85762,ritonavir,Ingredient,RxNorm,Valid,Standard
+1378382,56946,paclitaxel,Ingredient,RxNorm,Valid,Standard
+19004283,283578,magnesium malate,Ingredient,RxNorm,Valid,Standard
+1711759,3108,dapsone,Ingredient,RxNorm,Valid,Standard
+19056038,236324,magnesium glutamate,Ingredient,RxNorm,Valid,Standard
+19056376,236564,magnesium gluconogluceptate,Ingredient,RxNorm,Valid,Standard
+19091804,236741,magnesium sulfate heptahydrate,Ingredient,RxNorm,Valid,Standard
+906914,11002,urea,Ingredient,RxNorm,Valid,Standard
+917205,3254,desonide,Ingredient,RxNorm,Valid,Standard
+712615,115698,ziprasidone,Ingredient,RxNorm,Valid,Standard
+1119119,327361,adalimumab,Ingredient,RxNorm,Valid,Standard
+1351541,42375,leuprolide,Ingredient,RxNorm,Valid,Standard
+42900505,1307404,linaclotide,Ingredient,RxNorm,Valid,Standard
+35602717,1670007,insulin degludec,Ingredient,RxNorm,Valid,Standard
+19059528,480,alfentanil,Ingredient,RxNorm,Valid,Standard
+1331270,3521,dipyridamole,Ingredient,RxNorm,Valid,Standard
+19017742,73689,febuxostat,Ingredient,RxNorm,Valid,Standard
+1721543,7517,norfloxacin,Ingredient,RxNorm,Valid,Standard
+1774470,2186,cefotaxime,Ingredient,RxNorm,Valid,Standard
+1351935,4249,factor IX,Ingredient,RxNorm,Valid,Standard
+1397141,253337,bevacizumab,Ingredient,RxNorm,Valid,Standard
+792777,1986821,varicella zoster virus glycoprotein E,Ingredient,RxNorm,Valid,Standard
+1322199,75635,eptifibatide,Ingredient,RxNorm,Valid,Standard
+1531601,352385,"insulin aspart protamine, human",Ingredient,RxNorm,Valid,Standard
+751347,8691,primidone,Ingredient,RxNorm,Valid,Standard
+44785020,4254,factor VII,Ingredient,RxNorm,Valid,Standard
+42801108,8834,protein C,Ingredient,RxNorm,Valid,Standard
+537647,194279,palivizumab,Ingredient,RxNorm,Valid,Standard
+40172153,898492,collagenase Clostridium histolyticum,Ingredient,RxNorm,Valid,Standard
+44785022,4262,factor X,Ingredient,RxNorm,Valid,Standard
+44507865,1441688,prothrombin,Ingredient,RxNorm,Valid,Standard
+44785045,34822,protein S,Ingredient,RxNorm,Valid,Standard
+1395573,2473,chondroitin sulfates,Ingredient,RxNorm,Valid,Standard
+40163615,233698,dronedarone,Ingredient,RxNorm,Valid,Standard
+1150871,42331,misoprostol,Ingredient,RxNorm,Valid,Standard
+780369,59078,metaxalone,Ingredient,RxNorm,Valid,Standard
+35602991,1716203,patiromer,Ingredient,RxNorm,Valid,Standard
+19089891,232539,calfactant,Ingredient,RxNorm,Valid,Standard
+1319156,3274,dextran 70,Ingredient,RxNorm,Valid,Standard
+1310353,11359,lutein,Ingredient,RxNorm,Valid,Standard
+1362979,49247,dofetilide,Ingredient,RxNorm,Valid,Standard
+19038024,36344,selenious acid,Ingredient,RxNorm,Valid,Standard
+1331247,8013,pentoxifylline,Ingredient,RxNorm,Valid,Standard
+1704183,68244,lamivudine,Ingredient,RxNorm,Valid,Standard
+991382,644,amiloride,Ingredient,RxNorm,Valid,Standard
+940864,3743,econazole,Ingredient,RxNorm,Valid,Standard
+1513103,72143,raloxifene,Ingredient,RxNorm,Valid,Standard
+1337620,194000,capecitabine,Ingredient,RxNorm,Valid,Standard
+950098,21090,ciclopirox,Ingredient,RxNorm,Valid,Standard
+1782521,6038,isoniazid,Ingredient,RxNorm,Valid,Standard
+1714319,7243,naltrexone,Ingredient,RxNorm,Valid,Standard
+905518,6878,methylene blue,Ingredient,RxNorm,Valid,Standard
+945286,8328,pilocarpine,Ingredient,RxNorm,Valid,Standard
+1315946,72965,letrozole,Ingredient,RxNorm,Valid,Standard
+1101898,27169,leflunomide,Ingredient,RxNorm,Valid,Standard
+19078219,56795,sufentanil,Ingredient,RxNorm,Valid,Standard
+744798,39998,zonisamide,Ingredient,RxNorm,Valid,Standard
+1307542,6926,mexiletine,Ingredient,RxNorm,Valid,Standard
+911735,114979,rabeprazole,Ingredient,RxNorm,Valid,Standard
+1351557,214354,candesartan,Ingredient,RxNorm,Valid,Standard
+1125443,337623,dornase alfa,Ingredient,RxNorm,Valid,Standard
+964339,9524,sulfasalazine,Ingredient,RxNorm,Valid,Standard
+787787,62372,hyaluronate,Ingredient,RxNorm,Valid,Standard
+1436678,10324,tamoxifen,Ingredient,RxNorm,Valid,Standard
+937439,19257,bethanechol,Ingredient,RxNorm,Valid,Standard
+44785829,1488564,dapagliflozin,Ingredient,RxNorm,Valid,Standard
+19036797,358257,tolvaptan,Ingredient,RxNorm,Valid,Standard
+938044,194881,brinzolamide,Ingredient,RxNorm,Valid,Standard
+956653,4550,fosfomycin,Ingredient,RxNorm,Valid,Standard
+1516800,73056,risedronate,Ingredient,RxNorm,Valid,Standard
+903643,10753,tretinoin,Ingredient,RxNorm,Valid,Standard
+19000811,100278,Lacticaseibacillus rhamnosus,Ingredient,RxNorm,Valid,Standard
+19011440,141704,everolimus,Ingredient,RxNorm,Valid,Standard
+1101703,27084,homatropine,Ingredient,RxNorm,Valid,Standard
+1116109,1359,belladonna alkaloids,Ingredient,RxNorm,Valid,Standard
+793143,1991302,semaglutide,Ingredient,RxNorm,Valid,Standard
+996541,25126,fluocinolone,Ingredient,RxNorm,Valid,Standard
+1381661,5992,iron-dextran complex,Ingredient,RxNorm,Valid,Standard
+19127890,748794,inert ingredients,Ingredient,RxNorm,Valid,Standard
+1796435,25033,cefixime,Ingredient,RxNorm,Valid,Standard
+739323,3648,droperidol,Ingredient,RxNorm,Valid,Standard
+989482,228790,dutasteride,Ingredient,RxNorm,Valid,Standard
+1797258,2540,cilastatin,Ingredient,RxNorm,Valid,Standard
+1718054,140108,caspofungin,Ingredient,RxNorm,Valid,Standard
+19110701,4419,fish oils,Ingredient,RxNorm,Valid,Standard
+740275,2002,carbamazepine,Ingredient,RxNorm,Valid,Standard
+1778262,5690,imipenem,Ingredient,RxNorm,Valid,Standard
+1397599,2555,cisplatin,Ingredient,RxNorm,Valid,Standard
+1110727,3013,cyproheptadine,Ingredient,RxNorm,Valid,Standard
+918172,1418,benzoyl peroxide,Ingredient,RxNorm,Valid,Standard
+1353776,4316,felodipine,Ingredient,RxNorm,Valid,Standard
+1595799,24941,ferrous fumarate,Ingredient,RxNorm,Valid,Standard
+909440,29787,methyl salicylate,Ingredient,RxNorm,Valid,Standard
+19136207,1011,"lymphocyte immune globulin, anti-thymocyte globulin",Ingredient,RxNorm,Valid,Standard
+529660,798361,hepatitis A vaccine (inactivated) strain HM175,Ingredient,RxNorm,Valid,Standard
+1344965,40114,guanfacine,Ingredient,RxNorm,Valid,Standard
+1589505,6373,levonorgestrel,Ingredient,RxNorm,Valid,Standard
+1317640,73494,telmisartan,Ingredient,RxNorm,Valid,Standard
+19039926,816346,dexlansoprazole,Ingredient,RxNorm,Valid,Standard
+904356,6832,methenamine,Ingredient,RxNorm,Valid,Standard
+1501309,10572,thyroid (USP),Ingredient,RxNorm,Valid,Standard
+923829,7676,opium,Ingredient,RxNorm,Valid,Standard
+40171288,612865,tocilizumab,Ingredient,RxNorm,Valid,Standard
+19073031,21833,cupric chloride,Ingredient,RxNorm,Valid,Standard
+1547504,84108,rosiglitazone,Ingredient,RxNorm,Valid,Standard
+46221284,1608322,isavuconazonium,Ingredient,RxNorm,Valid,Standard
+759740,9000,pyridostigmine,Ingredient,RxNorm,Valid,Standard
+42800027,1292422,varicella-zoster virus vaccine live (Oka-Merck) strain,Ingredient,RxNorm,Valid,Standard
+1792429,2382,proguanil,Ingredient,RxNorm,Valid,Standard
+19057346,21579,copper sulfate,Ingredient,RxNorm,Valid,Standard
+922976,33219,Peruvian balsam,Ingredient,RxNorm,Valid,Standard
+1344381,83008,bicalutamide,Ingredient,RxNorm,Valid,Standard
+1192710,2400,chlorpheniramine,Ingredient,RxNorm,Valid,Standard
+1113648,31448,nabumetone,Ingredient,RxNorm,Valid,Standard
+1318011,32592,oxaliplatin,Ingredient,RxNorm,Valid,Standard
+1314924,12574,gemcitabine,Ingredient,RxNorm,Valid,Standard
+1237049,10438,theophylline,Ingredient,RxNorm,Valid,Standard
+19008897,29268,manganese sulfate,Ingredient,RxNorm,Valid,Standard
+19049877,21009,chromic chloride,Ingredient,RxNorm,Valid,Standard
+990028,234416,lanthanum carbonate,Ingredient,RxNorm,Valid,Standard
+1312706,117055,alemtuzumab,Ingredient,RxNorm,Valid,Standard
+1583722,60548,exenatide,Ingredient,RxNorm,Valid,Standard
+1537655,36118,salmon calcitonin,Ingredient,RxNorm,Valid,Standard
+1236744,10368,terbutaline,Ingredient,RxNorm,Valid,Standard
+906149,10890,trypsin,Ingredient,RxNorm,Valid,Standard
+46274210,1040004,ceftaroline fosamil,Ingredient,RxNorm,Valid,Standard
+1304565,283821,rasburicase,Ingredient,RxNorm,Valid,Standard
+45776867,1550045,Bifidobacterium animalis,Ingredient,RxNorm,Valid,Standard
+720727,74667,zaleplon,Ingredient,RxNorm,Valid,Standard
+930021,17300,alfuzosin,Ingredient,RxNorm,Valid,Standard
+45775965,1547545,pembrolizumab,Ingredient,RxNorm,Valid,Standard
+19091377,236381,poractant alfa,Ingredient,RxNorm,Valid,Standard
+35605744,1721947,daratumumab,Ingredient,RxNorm,Valid,Standard
+1505346,10814,liothyronine,Ingredient,RxNorm,Valid,Standard
+1724666,3356,dicloxacillin,Ingredient,RxNorm,Valid,Standard
+40242573,1150096,Bifidobacterium longum,Ingredient,RxNorm,Valid,Standard
+19037401,1919,calcium phosphate,Ingredient,RxNorm,Valid,Standard
+922868,33199,permethrin,Ingredient,RxNorm,Valid,Standard
+733523,183379,rivastigmine,Ingredient,RxNorm,Valid,Standard
+19037446,1925,calcium sulfate,Ingredient,RxNorm,Valid,Standard
+1712889,719872,raltegravir,Ingredient,RxNorm,Valid,Standard
+19068900,265323,mycophenolate,Ingredient,RxNorm,Valid,Standard
+19058896,47622,calcium lactate,Ingredient,RxNorm,Valid,Standard
+1518148,141626,colesevelam,Ingredient,RxNorm,Valid,Standard
+42898955,1309243,cottonseed oil,Ingredient,RxNorm,Valid,Standard
+19065779,253163,dicalcium phosphate,Ingredient,RxNorm,Valid,Standard
+1154077,88014,rizatriptan,Ingredient,RxNorm,Valid,Standard
+43012211,1362748,formate,Ingredient,RxNorm,Valid,Standard
+43012244,1362901,calcium pyrophosphate,Ingredient,RxNorm,Valid,Standard
+980478,5924,inulin,Ingredient,RxNorm,Valid,Standard
+19056480,236693,calcium saccharate,Ingredient,RxNorm,Valid,Standard
+19097867,25806,calcium glubionate,Ingredient,RxNorm,Valid,Standard
+1756831,460132,darunavir,Ingredient,RxNorm,Valid,Standard
+40163731,473387,ferumoxytol,Ingredient,RxNorm,Valid,Standard
+1336825,358258,bortezomib,Ingredient,RxNorm,Valid,Standard
+1513876,314684,"insulin lispro protamine, human",Ingredient,RxNorm,Valid,Standard
+19097468,25486,gadopentetate dimeglumine,Ingredient,RxNorm,Valid,Standard
+1516766,73044,repaglinide,Ingredient,RxNorm,Valid,Standard
+1703603,68099,famciclovir,Ingredient,RxNorm,Valid,Standard
+43560385,1433868,dolutegravir,Ingredient,RxNorm,Valid,Standard
+1512480,115264,ibandronate,Ingredient,RxNorm,Valid,Standard
+1738135,195085,efavirenz,Ingredient,RxNorm,Valid,Standard
+1111220,304962,arformoterol,Ingredient,RxNorm,Valid,Standard
+927322,34316,potassium nitrate,Ingredient,RxNorm,Valid,Standard
+19071869,287637,calcium aspartate,Ingredient,RxNorm,Valid,Standard
+1301267,6718,melphalan,Ingredient,RxNorm,Valid,Standard
+986117,6146,ketotifen,Ingredient,RxNorm,Valid,Standard
+711452,70589,benzoate,Ingredient,RxNorm,Valid,Standard
+1395557,24698,fludarabine,Ingredient,RxNorm,Valid,Standard
+19015768,729596,methoxy polyethylene glycol-epoetin beta,Ingredient,RxNorm,Valid,Standard
+19011007,11363,xenon,Ingredient,RxNorm,Valid,Standard
+19127547,73409,calcium citrate malate,Ingredient,RxNorm,Valid,Standard
+19090806,235786,calcium orotate,Ingredient,RxNorm,Valid,Standard
+950183,41397,lactase,Ingredient,RxNorm,Valid,Standard
+836715,10355,temazepam,Ingredient,RxNorm,Valid,Standard
+19090802,235784,calcium lactobionate,Ingredient,RxNorm,Valid,Standard
+19031583,802624,gadoxetate,Ingredient,RxNorm,Valid,Standard
+42904214,1358175,levulinate,Ingredient,RxNorm,Valid,Standard
+749910,2101,carisoprodol,Ingredient,RxNorm,Valid,Standard
+19018602,1907,calcium glucarate,Ingredient,RxNorm,Valid,Standard
+19058978,47628,tricalcium phosphate,Ingredient,RxNorm,Valid,Standard
+19059654,480639,alvimopan,Ingredient,RxNorm,Valid,Standard
+1363749,50166,fosinopril,Ingredient,RxNorm,Valid,Standard
+43526046,1421150,calcium malate,Ingredient,RxNorm,Valid,Standard
+1776430,5499,hydrogen peroxide,Ingredient,RxNorm,Valid,Standard
+1337159,1909,calcium glycerophosphate,Ingredient,RxNorm,Valid,Standard
+42873961,1303855,"influenza B virus vaccine, B-Wisconsin-1-2010-like virus",Ingredient,RxNorm,Invalid,Non-standard
+19038440,196102,basiliximab,Ingredient,RxNorm,Valid,Standard
+1749301,4110,ethambutol,Ingredient,RxNorm,Valid,Standard
+1389036,632,mitomycin,Ingredient,RxNorm,Valid,Standard
+940426,20063,calcium polycarbophil,Ingredient,RxNorm,Valid,Standard
+40222115,994438,calcium amino acid chelate,Ingredient,RxNorm,Valid,Standard
+1511856,70619,phenylacetate,Ingredient,RxNorm,Valid,Standard
+928744,3444,dimenhydrinate,Ingredient,RxNorm,Valid,Standard
+19058971,47624,calcium levulinate,Ingredient,RxNorm,Valid,Standard
+1311276,306674,vardenafil,Ingredient,RxNorm,Valid,Standard
+19026972,342369,lenalidomide,Ingredient,RxNorm,Valid,Standard
+1353256,8754,propafenone,Ingredient,RxNorm,Valid,Standard
+1136422,356887,levocetirizine,Ingredient,RxNorm,Valid,Standard
+1711246,306266,entecavir,Ingredient,RxNorm,Valid,Standard
+19058867,47618,calcium gluceptate,Ingredient,RxNorm,Valid,Standard
+1381504,598,alprostadil,Ingredient,RxNorm,Valid,Standard
+1501617,2685,colestipol,Ingredient,RxNorm,Valid,Standard
+1322207,15202,argatroban,Ingredient,RxNorm,Valid,Standard
+1436650,103,mercaptopurine,Ingredient,RxNorm,Valid,Standard
+43526465,1373458,canagliflozin,Ingredient,RxNorm,Valid,Standard
+42900359,1311287,calcitonin,Ingredient,RxNorm,Valid,Standard
+905151,108088,alclometasone,Ingredient,RxNorm,Valid,Standard
+19010128,11258,vitamin K,Ingredient,RxNorm,Valid,Standard
+19014341,1218,atracurium,Ingredient,RxNorm,Valid,Standard
+1367268,51499,irinotecan,Ingredient,RxNorm,Valid,Standard
+1511646,11473,pamidronate,Ingredient,RxNorm,Valid,Standard
+19136097,100213,Bifidobacterium infantis,Ingredient,RxNorm,Valid,Standard
+1836948,10395,tetracycline,Ingredient,RxNorm,Valid,Standard
+967562,52177,loteprednol etabonate,Ingredient,RxNorm,Valid,Standard
+735340,8152,phentermine,Ingredient,RxNorm,Valid,Standard
+43560392,1433693,ferric carboxymaltose,Ingredient,RxNorm,Valid,Standard
+730548,1760,bromocriptine,Ingredient,RxNorm,Valid,Standard
+978555,5764,indapamide,Ingredient,RxNorm,Valid,Standard
+794852,2403,chlorpromazine,Ingredient,RxNorm,Valid,Standard
+1736971,190521,abacavir,Ingredient,RxNorm,Valid,Standard
+528271,797629,Neisseria meningitidis serogroup A capsular polysaccharide diphtheria toxoid protein conjugate vaccine,Ingredient,RxNorm,Valid,Standard
+43532261,1424671,calcium hypophosphite,Ingredient,RxNorm,Valid,Standard
+528301,797635,Neisseria meningitidis serogroup Y capsular polysaccharide diphtheria toxoid protein conjugate vaccine,Ingredient,RxNorm,Valid,Standard
+528297,797633,Neisseria meningitidis serogroup W-135 capsular polysaccharide diphtheria toxoid protein conjugate vaccine,Ingredient,RxNorm,Valid,Standard
+528295,797631,Neisseria meningitidis serogroup C capsular polysaccharide diphtheria toxoid protein conjugate vaccine,Ingredient,RxNorm,Valid,Standard
+1703653,28031,itraconazole,Ingredient,RxNorm,Valid,Standard
+19080550,59308,chromium picolinate,Ingredient,RxNorm,Valid,Standard
+45892628,1597876,nivolumab,Ingredient,RxNorm,Valid,Standard
+1398399,258494,exemestane,Ingredient,RxNorm,Valid,Standard
+724394,7715,orphenadrine,Ingredient,RxNorm,Valid,Standard
+1183554,6054,isoproterenol,Ingredient,RxNorm,Valid,Standard
+987366,623033,lubiprostone,Ingredient,RxNorm,Valid,Standard
+751246,42351,lithium carbonate,Ingredient,RxNorm,Valid,Standard
+35605546,1721603,tenofovir alafenamide,Ingredient,RxNorm,Valid,Standard
+45775324,1546223,diatrizoic acid,Ingredient,RxNorm,Valid,Standard
+1727223,343047,atazanavir,Ingredient,RxNorm,Valid,Standard
+19115051,55685,risedronic acid,Ingredient,RxNorm,Valid,Standard
+923840,3339,dibucaine,Ingredient,RxNorm,Valid,Standard
+702774,6759,mepivacaine,Ingredient,RxNorm,Valid,Standard
+738156,3638,doxepin,Ingredient,RxNorm,Valid,Standard
+45774639,1538097,vedolizumab,Ingredient,RxNorm,Valid,Standard
+1300751,105669,polysaccharide iron complex,Ingredient,RxNorm,Valid,Standard
+941472,37806,terconazole,Ingredient,RxNorm,Valid,Standard
+1305637,6883,methylergonovine,Ingredient,RxNorm,Valid,Standard
+1549686,41127,fluvastatin,Ingredient,RxNorm,Valid,Standard
+939726,19861,butamben,Ingredient,RxNorm,Valid,Standard
+1036252,10169,sulfacetamide,Ingredient,RxNorm,Valid,Standard
+19078612,5775,indocyanine green,Ingredient,RxNorm,Valid,Standard
+19037223,19143,beta carotene,Ingredient,RxNorm,Valid,Standard
+40236897,1091836,roflumilast,Ingredient,RxNorm,Valid,Standard
+1521987,32915,teriparatide,Ingredient,RxNorm,Valid,Standard
+901318,267366,sodium ascorbate,Ingredient,RxNorm,Valid,Standard
+1315942,72962,docetaxel,Ingredient,RxNorm,Valid,Standard
+35604205,1747556,venetoclax,Ingredient,RxNorm,Valid,Standard
+1352141,4256,factor VIIa,Ingredient,RxNorm,Valid,Standard
+1151789,214555,etanercept,Ingredient,RxNorm,Valid,Standard
+45774613,1551777,naloxegol,Ingredient,RxNorm,Valid,Standard
+905371,6873,methylcellulose,Ingredient,RxNorm,Valid,Standard
+1552310,8727,progesterone,Ingredient,RxNorm,Valid,Standard
+1195492,24605,etodolac,Ingredient,RxNorm,Valid,Standard
+46275677,1656052,cangrelor,Ingredient,RxNorm,Valid,Standard
+991825,236778,trospium,Ingredient,RxNorm,Valid,Standard
+1387104,224905,trastuzumab,Ingredient,RxNorm,Valid,Standard
+44785094,1484911,sofosbuvir,Ingredient,RxNorm,Valid,Standard
+19057932,46967,beractant,Ingredient,RxNorm,Valid,Standard
+1327256,343048,treprostinil,Ingredient,RxNorm,Valid,Standard
+702006,2571856,technetium,Ingredient,RxNorm,Valid,Standard
+1590165,235275,"insulin, regular, beef-pork",Ingredient,RxNorm,Valid,Standard
+709567,700810,lisdexamfetamine,Ingredient,RxNorm,Valid,Standard
+1304919,68446,pemetrexed,Ingredient,RxNorm,Valid,Standard
+19051035,21842,cuprous oxide,Ingredient,RxNorm,Valid,Standard
+19024728,15657,decitabine,Ingredient,RxNorm,Valid,Standard
+1386670,618060,thioctate,Ingredient,RxNorm,Valid,Standard
+42874220,1306284,cobicistat,Ingredient,RxNorm,Valid,Standard
+19043959,82819,acamprosate,Ingredient,RxNorm,Valid,Standard
+501343,26744,hepatitis B immune globulin,Ingredient,RxNorm,Valid,Standard
+908921,29365,calcipotriene,Ingredient,RxNorm,Valid,Standard
+1714527,3154,demeclocycline,Ingredient,RxNorm,Valid,Standard
+1713930,7233,nafcillin,Ingredient,RxNorm,Valid,Standard
+40239985,1111103,fidaxomicin,Ingredient,RxNorm,Valid,Standard
+1742432,384455,tigecycline,Ingredient,RxNorm,Valid,Standard
+915935,321952,pimecrolimus,Ingredient,RxNorm,Valid,Standard
+1337068,358274,ambrisentan,Ingredient,RxNorm,Valid,Standard
+40241181,1114883,turmeric extract,Ingredient,RxNorm,Valid,Standard
+948490,8514,polyethylene glycol 400,Ingredient,RxNorm,Valid,Standard
+40244266,1232150,aflibercept,Ingredient,RxNorm,Valid,Standard
+19086681,33093,peppermint preparation,Ingredient,RxNorm,Valid,Standard
+19049150,2051,carboprost,Ingredient,RxNorm,Valid,Standard
+1001419,2653,cocaine,Ingredient,RxNorm,Valid,Standard
+45775636,1593128,meningococcal group B vaccine,Ingredient,RxNorm,Valid,Standard
+981691,59943,imiquimod,Ingredient,RxNorm,Valid,Standard
+943116,38866,trolamine salicylate,Ingredient,RxNorm,Valid,Standard
+711714,3105,dantrolene,Ingredient,RxNorm,Valid,Standard
+757352,461016,eszopiclone,Ingredient,RxNorm,Valid,Standard
+1311799,3109,daunorubicin,Ingredient,RxNorm,Valid,Standard
+1304107,282388,imatinib,Ingredient,RxNorm,Valid,Standard
+40164828,857921,influenza B virus vaccine B/Brisbane/60/2008 antigen,Ingredient,RxNorm,Invalid,Non-standard
+997276,2541,cimetidine,Ingredient,RxNorm,Valid,Standard
+40166035,857974,saxagliptin,Ingredient,RxNorm,Valid,Standard
+19090249,235286,"insulin, prompt zinc, pork",Ingredient,RxNorm,Valid,Standard
+1710612,11413,zidovudine,Ingredient,RxNorm,Valid,Standard
+46287466,1665684,evolocumab,Ingredient,RxNorm,Valid,Standard
+1740226,20012,cadexomer iodine,Ingredient,RxNorm,Valid,Standard
+1515774,31994,norgestimate,Ingredient,RxNorm,Valid,Standard
+42904300,36710,tribasic sodium phosphate,Ingredient,RxNorm,Valid,Standard
+1333357,1828,busulfan,Ingredient,RxNorm,Valid,Standard
+922024,32926,paregoric,Ingredient,RxNorm,Valid,Standard
+42874246,1304974,icosapent ethyl,Ingredient,RxNorm,Valid,Standard
+1304277,283579,milk thistle extract,Ingredient,RxNorm,Valid,Standard
+1502826,274332,nateglinide,Ingredient,RxNorm,Valid,Standard
+1760616,9071,quinine,Ingredient,RxNorm,Valid,Standard
+782211,60307,entacapone,Ingredient,RxNorm,Valid,Standard
+1315027,125933,cranberry preparation,Ingredient,RxNorm,Valid,Standard
+1389780,23247,methylsulfonylmethane,Ingredient,RxNorm,Valid,Standard
+964407,9525,salicylic acid,Ingredient,RxNorm,Valid,Standard
+42900491,1311500,mebrofenin,Ingredient,RxNorm,Valid,Standard
+19005015,6847,methohexital,Ingredient,RxNorm,Valid,Standard
+1510627,2047232,baricitinib,Ingredient,RxNorm,Valid,Standard
+19078187,5657,ifosfamide,Ingredient,RxNorm,Valid,Standard
+1103006,275635,desloratadine,Ingredient,RxNorm,Valid,Standard
+929549,168,acetic acid,Ingredient,RxNorm,Valid,Standard
+916230,136198,darifenacin,Ingredient,RxNorm,Valid,Standard
+1724700,33562,foscarnet,Ingredient,RxNorm,Valid,Standard
+917336,3255,desoximetasone,Ingredient,RxNorm,Valid,Standard
+19090984,641465,armodafinil,Ingredient,RxNorm,Valid,Standard
+1544838,400008,"insulin glulisine, human",Ingredient,RxNorm,Valid,Standard
+44507848,1442981,ibrutinib,Ingredient,RxNorm,Valid,Standard
+955583,4491,fluorometholone,Ingredient,RxNorm,Valid,Standard
+19012925,720825,silodosin,Ingredient,RxNorm,Valid,Standard
+40244464,1193326,ruxolitinib,Ingredient,RxNorm,Valid,Standard
+738818,3642,doxylamine,Ingredient,RxNorm,Valid,Standard
+1152631,42612,cromolyn,Ingredient,RxNorm,Valid,Standard
+715710,134748,rasagiline,Ingredient,RxNorm,Valid,Standard
+46234437,1649480,ivabradine,Ingredient,RxNorm,Valid,Standard
+19052430,221090,dibasic sodium phosphate heptahydrate,Precise Ingredient,RxNorm,Valid,Non-standard
+1352213,4257,factor VIII,Ingredient,RxNorm,Valid,Standard
+742185,38400,atomoxetine,Ingredient,RxNorm,Valid,Standard
+19137042,10432,thalidomide,Ingredient,RxNorm,Valid,Standard
+1786055,614373,deferasirox,Ingredient,RxNorm,Valid,Standard
+1326012,33910,isradipine,Ingredient,RxNorm,Valid,Standard
+1189754,232158,rofecoxib,Ingredient,RxNorm,Valid,Standard
+938061,36345,selenium sulfide,Ingredient,RxNorm,Valid,Standard
+19047423,83929,abciximab,Ingredient,RxNorm,Valid,Standard
+1758536,475969,etravirine,Ingredient,RxNorm,Valid,Standard
+19026459,787390,tapentadol,Ingredient,RxNorm,Valid,Standard
+45892833,1599276,sulfur hexafluoride,Ingredient,RxNorm,Valid,Standard
+976778,5509,hydroquinone,Ingredient,RxNorm,Valid,Standard
+45775116,1546059,olodaterol,Ingredient,RxNorm,Valid,Standard
+902616,106212,calamine,Ingredient,RxNorm,Valid,Standard
+1377898,219315,iron polysaccharide,Ingredient,RxNorm,Valid,Standard
+19027958,797195,fesoterodine,Ingredient,RxNorm,Valid,Standard
+1784444,6069,ivermectin,Ingredient,RxNorm,Valid,Standard
+40234834,1086769,vilazodone,Ingredient,RxNorm,Valid,Standard
+19071840,285279,honey preparation,Ingredient,RxNorm,Valid,Standard
+914533,7247,naphazoline,Ingredient,RxNorm,Valid,Standard
+19016670,73,docosahexaenoate,Ingredient,RxNorm,Valid,Standard
+1510417,2045371,cannabidiol,Ingredient,RxNorm,Valid,Standard
+757627,4637,galantamine,Ingredient,RxNorm,Valid,Standard
+735951,35623,riluzole,Ingredient,RxNorm,Valid,Standard
+996625,25138,fluorescein,Ingredient,RxNorm,Valid,Standard
+1762711,9344,ribavirin,Ingredient,RxNorm,Valid,Standard
+1738170,195088,lopinavir,Ingredient,RxNorm,Valid,Standard
+1151422,8698,probenecid,Ingredient,RxNorm,Valid,Standard
+949759,41208,halobetasol,Ingredient,RxNorm,Valid,Standard
+40171076,36717,sodium selenate,Ingredient,RxNorm,Valid,Standard
+1558471,47579,cabergoline,Ingredient,RxNorm,Valid,Standard
+1317967,325646,aliskiren,Ingredient,RxNorm,Valid,Standard
+45892075,1601374,palbociclib,Ingredient,RxNorm,Valid,Standard
+926770,7892,papain,Ingredient,RxNorm,Valid,Standard
+45892599,1597609,ceftolozane,Ingredient,RxNorm,Valid,Standard
+40165636,861634,pitavastatin,Ingredient,RxNorm,Valid,Standard
+1196514,25120,flunisolide,Ingredient,RxNorm,Valid,Standard
+943030,8259,phosphoric acid,Ingredient,RxNorm,Valid,Standard
+40225028,1005931,"influenza virus vaccine, inactivated A-Victoria-210-2009 X-187 (H3N2) (A-Perth-16-2009) strain",Ingredient,RxNorm,Invalid,Non-standard
+40239056,1100072,abiraterone,Ingredient,RxNorm,Valid,Standard
+19090767,6404,linseed oil,Ingredient,RxNorm,Valid,Standard
+19073699,5464,hyaluronidase,Ingredient,RxNorm,Valid,Standard
+964310,2001816,Viburnum opulus whole extract,Ingredient,RxNorm,Valid,Standard
+1759455,8987,pyrazinamide,Ingredient,RxNorm,Valid,Standard
+40230761,1040028,lurasidone,Ingredient,RxNorm,Valid,Standard
+19011438,1406,benzoin resin,Ingredient,RxNorm,Valid,Standard
+44507580,1442132,macitentan,Ingredient,RxNorm,Valid,Standard
+705178,10811,trihexyphenidyl,Ingredient,RxNorm,Valid,Standard
+1711947,3131,deferoxamine,Ingredient,RxNorm,Valid,Standard
+941577,37935,tetrahydrozoline,Ingredient,RxNorm,Valid,Standard
+1137460,36108,salsalate,Ingredient,RxNorm,Valid,Standard
+19012346,711942,eltrombopag,Ingredient,RxNorm,Valid,Standard
+40241969,1147320,brentuximab vedotin,Ingredient,RxNorm,Valid,Standard
+986790,618278,azelate,Ingredient,RxNorm,Valid,Standard
+523202,762595,Salmonella typhi Ty21a live antigen,Ingredient,RxNorm,Valid,Standard
+19067803,9800,sincalide,Ingredient,RxNorm,Valid,Standard
+1304044,282357,fulvestrant,Ingredient,RxNorm,Valid,Standard
+970011,9945,sorbitol,Ingredient,RxNorm,Valid,Standard
+905223,6854,methoxsalen,Ingredient,RxNorm,Valid,Standard
+19032407,805452,romiplostim,Ingredient,RxNorm,Valid,Standard
+1116031,135775,zolmitriptan,Ingredient,RxNorm,Valid,Standard
+1315342,318224,flaxseed extract,Ingredient,RxNorm,Valid,Standard
+704599,10767,triazolam,Ingredient,RxNorm,Valid,Standard
+1391846,6466,lomustine,Ingredient,RxNorm,Valid,Standard
+987406,62349,ethacrynate,Ingredient,RxNorm,Valid,Standard
+42898624,1311067,barium,Ingredient,RxNorm,Valid,Standard
+1314865,1251,azacitidine,Ingredient,RxNorm,Valid,Standard
+1529331,16681,acarbose,Ingredient,RxNorm,Valid,Standard
+19017581,733003,plerixafor,Ingredient,RxNorm,Valid,Standard
+40239116,1102188,ferrous bisglycinate,Ingredient,RxNorm,Valid,Standard
+1592332,1925821,riboflavin 5'-phosphate,Ingredient,RxNorm,Valid,Standard
+42874212,1306286,elvitegravir,Ingredient,RxNorm,Valid,Standard
+1363387,495881,sorafenib,Ingredient,RxNorm,Valid,Standard
+942494,82242,chlorophyllin copper complex,Ingredient,RxNorm,Valid,Standard
+42709324,1244014,vitamin D3,Ingredient,RxNorm,Valid,Standard
+19056281,236502,tribasic potassium phosphate,Ingredient,RxNorm,Valid,Standard
+1335606,3541,disopyramide,Ingredient,RxNorm,Valid,Standard
+1325363,337525,erlotinib,Ingredient,RxNorm,Valid,Standard
+1401437,265647,garlic preparation,Ingredient,RxNorm,Valid,Standard
+1139179,19737,bromfenac,Ingredient,RxNorm,Valid,Standard
+955372,448,ethanol,Ingredient,RxNorm,Valid,Standard
+19009557,107056,ferrous phosphate,Ingredient,RxNorm,Valid,Standard
+46275447,1659152,alirocumab,Ingredient,RxNorm,Valid,Standard
+46233915,1652071,omega-3 carboxylic acids,Ingredient,RxNorm,Valid,Standard
+40173209,901511,Neisseria meningitidis serogroup Y oligosaccharide diphtheria CRM197 protein conjugate vaccine,Ingredient,RxNorm,Valid,Standard
+40173207,901509,Neisseria meningitidis serogroup W-135 oligosaccharide diphtheria CRM197 protein conjugate vaccine,Ingredient,RxNorm,Valid,Standard
+40173205,901507,Neisseria meningitidis serogroup C oligosaccharide diphtheria CRM197 protein conjugate vaccine,Ingredient,RxNorm,Valid,Standard
+40173198,901505,Neisseria meningitidis serogroup A oligosaccharide diphtheria CRM197 protein conjugate vaccine,Ingredient,RxNorm,Valid,Standard
+35200165,2053495,fish oil (containing omega-3 acids),Ingredient,RxNorm,Valid,Standard
+1326481,34132,pegaspargase,Ingredient,RxNorm,Valid,Standard
+19069022,9873,sodium fluoride,Ingredient,RxNorm,Valid,Standard
+1391470,644718,ferrous asparto glycinate,Ingredient,RxNorm,Valid,Standard
+19049909,8597,potassium iodide,Ingredient,RxNorm,Valid,Standard
+964008,1999660,bictegravir,Ingredient,RxNorm,Valid,Standard
+19055848,236196,ferrous oxalate,Ingredient,RxNorm,Valid,Standard
+19049410,20859,chloroprocaine,Ingredient,RxNorm,Valid,Standard
+19015523,134547,bendamustine,Ingredient,RxNorm,Valid,Standard
+43014237,1369713,pomalidomide,Ingredient,RxNorm,Valid,Standard
+731533,352372,dexmethylphenidate,Ingredient,RxNorm,Valid,Standard
+716968,3247,desipramine,Ingredient,RxNorm,Valid,Standard
+19096133,24946,ferrous succinate,Ingredient,RxNorm,Valid,Standard
+42873639,1303098,aclidinium,Ingredient,RxNorm,Valid,Standard
+1118045,32613,oxaprozin,Ingredient,RxNorm,Valid,Standard
+911891,70727,fiber,Ingredient,RxNorm,Valid,Standard
+44506752,1439816,riociguat,Ingredient,RxNorm,Valid,Standard
+19087063,618597,eicosapentaenoate,Ingredient,RxNorm,Valid,Standard
+1436169,1009,antithrombin III,Ingredient,RxNorm,Valid,Standard
+929128,34693,propylene glycol,Ingredient,RxNorm,Valid,Standard
+980955,594680,docosanol,Ingredient,RxNorm,Valid,Standard
+586491,22178,cytomegalovirus immune globulin,Ingredient,RxNorm,Valid,Standard
+19006155,10878,trypan blue,Ingredient,RxNorm,Valid,Standard
+35604901,1739745,brivaracetam,Ingredient,RxNorm,Valid,Standard
+19078097,5650,idarubicin,Ingredient,RxNorm,Valid,Standard
+19055036,235271,ferrous cacodylate,Ingredient,RxNorm,Valid,Standard
+43560137,1433887,choline fenofibrate,Ingredient,RxNorm,Valid,Standard
+1777417,55672,rifabutin,Ingredient,RxNorm,Valid,Standard
+19054670,4356,ferrous ascorbate,Ingredient,RxNorm,Valid,Standard
+44506781,1440290,ferrous carbonate,Ingredient,RxNorm,Valid,Standard
+1321636,75207,bosentan,Ingredient,RxNorm,Valid,Standard
+1133732,1841,butorphanol,Ingredient,RxNorm,Valid,Standard
+535714,35465,Rho(D) immune globulin,Ingredient,RxNorm,Valid,Standard
+1358436,475342,dasatinib,Ingredient,RxNorm,Valid,Standard
+19089579,23043,difluprednate,Ingredient,RxNorm,Valid,Standard
+45775760,1547099,suvorexant,Ingredient,RxNorm,Valid,Standard
+19018482,17784,ammonium ferrous sulfate,Ingredient,RxNorm,Valid,Standard
+44785066,1484283,sucroferric oxyhydroxide,Ingredient,RxNorm,Valid,Standard
+42904205,1357536,tofacitinib,Ingredient,RxNorm,Valid,Standard
+19041065,819300,golimumab,Ingredient,RxNorm,Valid,Standard
+1305447,6876,methyldopa,Ingredient,RxNorm,Valid,Standard
+19000753,105655,ferrous glycine sulfate,Ingredient,RxNorm,Valid,Standard
+751889,214582,glatiramer,Ingredient,RxNorm,Valid,Standard
+1554072,8794,propylthiouracil,Ingredient,RxNorm,Valid,Standard
+800878,2626,clozapine,Ingredient,RxNorm,Valid,Standard
+703244,679314,paliperidone,Ingredient,RxNorm,Valid,Standard
+1153664,8785,propoxyphene,Ingredient,RxNorm,Valid,Standard
+730729,8004,pentobarbital,Ingredient,RxNorm,Valid,Standard
+45775208,1592257,levomefolate,Ingredient,RxNorm,Valid,Standard
+1125765,7814,oxymorphone,Ingredient,RxNorm,Valid,Standard
+45775080,1539753,efinaconazole,Ingredient,RxNorm,Valid,Standard
+19027339,34318,potassium perchlorate,Ingredient,RxNorm,Valid,Standard
+1303339,27825,iron succinyl milk protein complex,Ingredient,RxNorm,Valid,Standard
+1356009,2107301,ravulizumab,Ingredient,RxNorm,Valid,Standard
+1186087,614391,abatacept,Ingredient,RxNorm,Valid,Standard
+792929,1988648,letermovir,Ingredient,RxNorm,Valid,Standard
+40161532,847083,ustekinumab,Ingredient,RxNorm,Valid,Standard
+19061731,24940,ferrous chloride,Ingredient,RxNorm,Valid,Standard
+981774,60223,adapalene,Ingredient,RxNorm,Valid,Standard
+42900250,1307298,enzalutamide,Ingredient,RxNorm,Valid,Standard
+924151,155046,pentosan polysulfate,Ingredient,RxNorm,Valid,Standard
+717607,734064,desvenlafaxine,Ingredient,RxNorm,Valid,Standard
+19090159,235272,"iron,peptonized",Ingredient,RxNorm,Valid,Standard
+19041135,37744,teferrol,Ingredient,RxNorm,Valid,Standard
+1391575,236617,ferrous aspartate,Ingredient,RxNorm,Valid,Standard
+932815,1813,levobunolol,Ingredient,RxNorm,Valid,Standard
+40171826,637366,wheat dextrin,Ingredient,RxNorm,Valid,Standard
+19126896,7094,muramidase,Ingredient,RxNorm,Valid,Standard
+1126557,3418,dihydroergotamine,Ingredient,RxNorm,Valid,Standard
+19044273,828682,fospropofol,Ingredient,RxNorm,Valid,Standard
+1519936,14584,etonogestrel,Ingredient,RxNorm,Valid,Standard
+950792,21232,clidinium,Ingredient,RxNorm,Valid,Standard
+44507700,1455099,vortioxetine,Ingredient,RxNorm,Valid,Standard
+778268,5691,imipramine,Ingredient,RxNorm,Valid,Standard
+1379525,5833,inositol,Ingredient,RxNorm,Valid,Standard
+1360421,9068,quinidine,Ingredient,RxNorm,Valid,Standard
+1588000,22656,desogestrel,Ingredient,RxNorm,Valid,Standard
+1111706,114970,zafirlukast,Ingredient,RxNorm,Valid,Standard
+702530,2587892,nirmatrelvir,Ingredient,RxNorm,Valid,Standard
+1036667,10323,talc,Ingredient,RxNorm,Valid,Standard
+901845,2709,colistin,Ingredient,RxNorm,Valid,Standard
+40239665,1112973,belatacept,Ingredient,RxNorm,Valid,Standard
+966282,9641,selenium,Ingredient,RxNorm,Valid,Standard
+929638,16818,acitretin,Ingredient,RxNorm,Valid,Standard
+1512674,11636,drospirenone,Ingredient,RxNorm,Valid,Standard
+1110942,302379,omalizumab,Ingredient,RxNorm,Valid,Standard
+981654,59839,penciclovir,Ingredient,RxNorm,Valid,Standard
+954819,44281,cevimeline,Ingredient,RxNorm,Valid,Standard
+45776202,1594675,ferric citrate,Ingredient,RxNorm,Valid,Standard
+40167554,714438,pazopanib,Ingredient,RxNorm,Valid,Standard
+509079,29501,meningococcal group A polysaccharide,Ingredient,RxNorm,Valid,Standard
+1584910,61148,somatropin,Ingredient,RxNorm,Valid,Standard
+1391307,236344,saw palmetto extract,Ingredient,RxNorm,Valid,Standard
+43525811,1371444,Boswellia sacra bark extract,Ingredient,RxNorm,Valid,Standard
+19080982,595060,ranibizumab,Ingredient,RxNorm,Valid,Standard
+19030692,17621,aluminum sulfate,Ingredient,RxNorm,Valid,Standard
+908730,29170,magnesium trisilicate,Ingredient,RxNorm,Valid,Standard
+19004810,2839,copper gluconate,Ingredient,RxNorm,Valid,Standard
+40238930,1102270,rilpivirine,Ingredient,RxNorm,Valid,Standard
+35605522,1721560,osimertinib,Ingredient,RxNorm,Valid,Standard
+44507780,1482502,eslicarbazepine,Ingredient,RxNorm,Valid,Standard
+909795,298665,nepafenac,Ingredient,RxNorm,Valid,Standard
+19073229,21837,cupric oxide,Ingredient,RxNorm,Valid,Standard
+19006586,69036,rufinamide,Ingredient,RxNorm,Valid,Standard
+42873638,1302966,carfilzomib,Ingredient,RxNorm,Valid,Standard
+1510363,2045114,andexanet alfa,Ingredient,RxNorm,Valid,Standard
+1189697,231049,eletriptan,Ingredient,RxNorm,Valid,Standard
+19003345,27824,iron sorbitex,Ingredient,RxNorm,Valid,Standard
+19009025,29421,mecobalamin,Ingredient,RxNorm,Valid,Standard
+44814562,1490797,ferrous cysteine glycinate,Ingredient,RxNorm,Valid,Standard
+43532497,1425099,trametinib,Ingredient,RxNorm,Valid,Standard
+1701928,272,activated charcoal,Ingredient,RxNorm,Valid,Standard
+1236607,10237,sulindac,Ingredient,RxNorm,Valid,Standard
+44816294,1492727,apremilast,Ingredient,RxNorm,Valid,Standard
+934262,18747,balsalazide,Ingredient,RxNorm,Valid,Standard
+786426,616739,rotigotine,Ingredient,RxNorm,Valid,Standard
+1738366,19552,cefprozil,Ingredient,RxNorm,Valid,Standard
+912263,709271,certolizumab pegol,Ingredient,RxNorm,Valid,Standard
+790253,2353,clorazepate,Ingredient,RxNorm,Valid,Standard
+19136210,10114,streptozocin,Ingredient,RxNorm,Valid,Standard
+1319998,149,acebutolol,Ingredient,RxNorm,Valid,Standard
+514015,314725,meningococcal polysaccharide vaccine group Y,Ingredient,RxNorm,Valid,Standard
+1336539,357977,sunitinib,Ingredient,RxNorm,Valid,Standard
+514012,314724,meningococcal polysaccharide vaccine group W-135,Ingredient,RxNorm,Valid,Standard
+509081,29503,meningococcal group C polysaccharide,Ingredient,RxNorm,Valid,Standard
+19135928,91495,soy protein-iron complex,Ingredient,RxNorm,Valid,Standard
+795661,24812,felbamate,Ingredient,RxNorm,Valid,Standard
+1389885,232540,red yeast rice,Ingredient,RxNorm,Valid,Standard
+40238188,1094833,ipilimumab,Ingredient,RxNorm,Valid,Standard
+19016234,136034,ferrous lactate,Ingredient,RxNorm,Valid,Standard
+1315411,318341,cetuximab,Ingredient,RxNorm,Valid,Standard
+1309770,70223,aldesleukin,Ingredient,RxNorm,Valid,Standard
+902938,274964,ciclesonide,Ingredient,RxNorm,Valid,Standard
+529216,798294,human-bovine reassortant rotavirus strain P1A[8] vaccine,Ingredient,RxNorm,Valid,Standard
+529214,798292,human-bovine reassortant rotavirus strain G4 vaccine,Ingredient,RxNorm,Valid,Standard
+529212,798290,human-bovine reassortant rotavirus strain G3 vaccine,Ingredient,RxNorm,Valid,Standard
+529180,798288,human-bovine reassortant rotavirus strain G2 vaccine,Ingredient,RxNorm,Valid,Standard
+529176,798286,human-bovine reassortant rotavirus strain G1 vaccine,Ingredient,RxNorm,Valid,Standard
+960900,91263,aloe extract,Ingredient,RxNorm,Valid,Standard
+37003288,2465242,casirivimab,Ingredient,RxNorm,Valid,Standard
+1335539,8153,phentolamine,Ingredient,RxNorm,Valid,Standard
+19032398,17684,amidoline,Ingredient,RxNorm,Valid,Standard
+40223464,997602,citicoline,Ingredient,RxNorm,Valid,Standard
+1307310,285245,cinnamon preparation,Ingredient,RxNorm,Valid,Standard
+19080226,588250,milnacipran,Ingredient,RxNorm,Valid,Standard
+933952,8132,pheniramine,Ingredient,RxNorm,Valid,Standard
+919986,14845,apraclonidine,Ingredient,RxNorm,Valid,Standard
+42900442,1311560,norflurane,Ingredient,RxNorm,Valid,Standard
+19003412,27863,iso-sulfan blue,Ingredient,RxNorm,Valid,Standard
+19054245,8826,protamines,Ingredient,RxNorm,Valid,Standard
+1342439,38454,trandolapril,Ingredient,RxNorm,Valid,Standard
+19050414,4166,ethylmorphine,Ingredient,RxNorm,Valid,Standard
+733008,8076,perphenazine,Ingredient,RxNorm,Valid,Standard
+43532299,1424911,dabrafenib,Ingredient,RxNorm,Valid,Standard
+46221507,1603834,avibactam,Ingredient,RxNorm,Valid,Standard
+37003293,2465249,imdevimab,Ingredient,RxNorm,Valid,Standard
+1377023,5514,hydroxocobalamin,Ingredient,RxNorm,Valid,Standard
+1598819,2596,clomiphene,Ingredient,RxNorm,Valid,Standard
+959362,4778,gentian violet,Ingredient,RxNorm,Valid,Standard
+766209,9639,selegiline,Ingredient,RxNorm,Valid,Standard
+739902,2479831,"SARS-COV-2 (COVID-19) vaccine, vector non-replicating",Ingredient,RxNorm,Valid,Standard
+714684,31565,nefazodone,Ingredient,RxNorm,Valid,Standard
+45775206,1592254,pirfenidone,Ingredient,RxNorm,Valid,Standard
+19101786,39085,ubiquinol,Ingredient,RxNorm,Valid,Standard
+1391889,236809,Ginkgo biloba extract,Ingredient,RxNorm,Valid,Standard
+916460,1378,benzalkonium,Ingredient,RxNorm,Valid,Standard
+722424,75917,interferon beta-1a,Ingredient,RxNorm,Valid,Standard
+19058092,4716,gelatin,Ingredient,RxNorm,Valid,Standard
+19137385,10473,thiotepa,Ingredient,RxNorm,Valid,Standard
+19115055,56161,sennoside B,Ingredient,RxNorm,Valid,Standard
+789837,2167673,botulinum toxin type B,Ingredient,RxNorm,Valid,Standard
+1745072,83171,cidofovir,Ingredient,RxNorm,Valid,Standard
+950316,4141,ethyl chloride,Ingredient,RxNorm,Valid,Standard
+905078,10803,trifluridine,Ingredient,RxNorm,Valid,Standard
+902950,10637,tolnaftate,Ingredient,RxNorm,Valid,Standard
+1343346,39541,vinorelbine,Ingredient,RxNorm,Valid,Standard
+42903714,1314214,chondroitin 4-sulfate,Ingredient,RxNorm,Valid,Standard
+19080406,314504,anti-inhibitor coagulant complex,Ingredient,RxNorm,Valid,Standard
+1780601,5933,iodine,Ingredient,RxNorm,Valid,Standard
+1376289,5495,hydroflumethiazide,Ingredient,RxNorm,Valid,Standard
+1036059,1001,antipyrine,Ingredient,RxNorm,Valid,Standard
+793843,1940635,glecaprevir,Ingredient,RxNorm,Valid,Standard
+45775396,1592737,nintedanib,Ingredient,RxNorm,Valid,Standard
+1353011,42736,dexrazoxane,Ingredient,RxNorm,Valid,Standard
+1350040,4126,amifostine,Ingredient,RxNorm,Valid,Standard
+43012292,1363268,cabozantinib,Ingredient,RxNorm,Valid,Standard
+1322081,1520,betaxolol,Ingredient,RxNorm,Valid,Standard
+46221433,1603296,lenvatinib,Ingredient,RxNorm,Valid,Standard
+40220740,1801820,lifitegrast,Ingredient,RxNorm,Valid,Standard
+1511449,3102,danazol,Ingredient,RxNorm,Valid,Standard
+1103374,278567,valdecoxib,Ingredient,RxNorm,Valid,Standard
+751412,42355,fluvoxamine,Ingredient,RxNorm,Valid,Standard
+735850,3554,disulfiram,Ingredient,RxNorm,Valid,Standard
+45775550,1546411,thiosulfate,Ingredient,RxNorm,Valid,Standard
+19020002,14851,vigabatrin,Ingredient,RxNorm,Valid,Standard
+1510467,2045613,erenumab,Ingredient,RxNorm,Valid,Standard
+19026739,7891,pantothenic acid,Ingredient,RxNorm,Valid,Standard
+1521592,7518,norgestrel,Ingredient,RxNorm,Valid,Standard
+1158632,89785,methscopolamine,Ingredient,RxNorm,Valid,Standard
+1713905,119771,doripenem,Ingredient,RxNorm,Valid,Standard
+963889,1999003,angiotensin II,Ingredient,RxNorm,Valid,Standard
+1755112,4451,flucytosine,Ingredient,RxNorm,Valid,Standard
+1351779,8702,procarbazine,Ingredient,RxNorm,Valid,Standard
+914053,31476,naftifine,Ingredient,RxNorm,Valid,Standard
+735843,354770,natalizumab,Ingredient,RxNorm,Valid,Standard
+1751310,8687,primaquine,Ingredient,RxNorm,Valid,Standard
+1366310,50610,goserelin,Ingredient,RxNorm,Valid,Standard
+35604680,1727875,tetanus immune globulin,Ingredient,RxNorm,Valid,Standard
+1774932,2187,cefotetan,Ingredient,RxNorm,Valid,Standard
+42629079,1792776,atezolizumab,Ingredient,RxNorm,Valid,Standard
+1593467,1876376,dupilumab,Ingredient,RxNorm,Valid,Standard
+1308432,69634,sargramostim,Ingredient,RxNorm,Valid,Standard
+37498625,2274413,"hepatitis A virus strain CR 326F antigen, inactivated",Ingredient,RxNorm,Valid,Standard
+19135789,8606,potassium sorbate,Ingredient,RxNorm,Valid,Standard
+1350066,2105,carmustine,Ingredient,RxNorm,Valid,Standard
+45775020,1591922,ledipasvir,Ingredient,RxNorm,Valid,Standard
+960820,485853,Senna leaf extract,Ingredient,RxNorm,Valid,Standard
+19092139,237057,lepirudin,Ingredient,RxNorm,Valid,Standard
+793351,1992864,netarsudil,Ingredient,RxNorm,Valid,Standard
+19006047,10865,tromethamine,Ingredient,RxNorm,Valid,Standard
+19002912,274771,nelarabine,Ingredient,RxNorm,Valid,Standard
+1769389,53654,nevirapine,Ingredient,RxNorm,Valid,Standard
+45892579,1597582,olaparib,Ingredient,RxNorm,Valid,Standard
+957393,46241,aluminum chloride,Ingredient,RxNorm,Valid,Standard
+42903460,1312397,regorafenib,Ingredient,RxNorm,Valid,Standard
+1593457,1876366,ocrelizumab,Ingredient,RxNorm,Valid,Standard
+46275300,1658314,brexpiprazole,Ingredient,RxNorm,Valid,Standard
+1563600,4986,chorionic gonadotropin,Ingredient,RxNorm,Valid,Standard
+950696,42319,nizatidine,Ingredient,RxNorm,Valid,Standard
+1335301,8149,phenoxybenzamine,Ingredient,RxNorm,Valid,Standard
+1315376,318340,Aloe vera preparation,Ingredient,RxNorm,Valid,Standard
+904351,683,aminolevulinic acid,Ingredient,RxNorm,Valid,Standard
+19013782,314583,D-biotin,Ingredient,RxNorm,Valid,Standard
+1381253,596724,anagrelide,Ingredient,RxNorm,Valid,Standard
+986261,221082,colloidal oatmeal,Ingredient,RxNorm,Valid,Standard
+19071128,2837,copper,Ingredient,RxNorm,Valid,Standard
+1130863,1767,brompheniramine,Ingredient,RxNorm,Valid,Standard
+19079204,58300,zinc gluconate,Ingredient,RxNorm,Valid,Standard
+742594,38574,trichloroacetaldehyde,Ingredient,RxNorm,Valid,Standard
+951112,21389,cocoa butter,Ingredient,RxNorm,Valid,Standard
+19044317,39937,zinc chloride,Ingredient,RxNorm,Valid,Standard
+19000498,6694,mefloquine,Ingredient,RxNorm,Valid,Standard
+1195334,2449,choline,Ingredient,RxNorm,Valid,Standard
+956266,4500,flurandrenolide,Ingredient,RxNorm,Valid,Standard
+42899398,1310578,medium chain triglycerides,Ingredient,RxNorm,Valid,Standard
+40180818,992920,sodium chlorite,Ingredient,RxNorm,Valid,Standard
+40170680,897018,dalfampridine,Ingredient,RxNorm,Valid,Standard
+978236,569,eflornithine,Ingredient,RxNorm,Valid,Standard
+35606631,1720597,mepolizumab,Ingredient,RxNorm,Valid,Standard
+1351461,8700,procainamide,Ingredient,RxNorm,Valid,Standard
+45775579,1546451,iothalamic acid,Ingredient,RxNorm,Valid,Standard
+42874050,1306107,nicotine bitartrate,Ingredient,RxNorm,Valid,Standard
+947416,83947,tazarotene,Ingredient,RxNorm,Valid,Standard
+43526424,1373478,dimethyl fumarate,Ingredient,RxNorm,Valid,Standard
+984232,6064,isotretinoin,Ingredient,RxNorm,Valid,Standard
+44785885,11274,von Willebrand factor,Ingredient,RxNorm,Valid,Standard
+42709322,1242999,axitinib,Ingredient,RxNorm,Valid,Standard
+1312007,3143,prasterone,Ingredient,RxNorm,Valid,Standard
+43012918,1367110,polyethylene glycol 1450,Ingredient,RxNorm,Valid,Standard
+1724869,3364,didanosine,Ingredient,RxNorm,Valid,Standard
+44818489,1535922,ramucirumab,Ingredient,RxNorm,Valid,Standard
+43533064,1429926,Cannabis sativa seed extract,Ingredient,RxNorm,Valid,Standard
+1036157,10046,starch,Ingredient,RxNorm,Valid,Standard
+1329415,3478,dinoprostone,Ingredient,RxNorm,Valid,Standard
+928006,3435,iodoquinol,Ingredient,RxNorm,Valid,Standard
+19037624,194,acetylcholine,Ingredient,RxNorm,Valid,Standard
+1378509,57308,topotecan,Ingredient,RxNorm,Valid,Standard
+19069049,2714,collagen,Ingredient,RxNorm,Valid,Standard
+45774701,1545063,tafamidis,Ingredient,RxNorm,Valid,Standard
+37498244,2268216,ubrogepant,Ingredient,RxNorm,Valid,Standard
+1517998,139953,pramlintide,Ingredient,RxNorm,Valid,Standard
+1344354,3995,epirubicin,Ingredient,RxNorm,Valid,Standard
+1309188,7005,mitoxantrone,Ingredient,RxNorm,Valid,Standard
+1168079,52364,magnesium salicylate,Ingredient,RxNorm,Valid,Standard
+42904177,1356552,perampanel,Ingredient,RxNorm,Valid,Standard
+44814542,1489913,droxidopa,Ingredient,RxNorm,Valid,Standard
+1503501,68092,lanreotide,Ingredient,RxNorm,Valid,Standard
+705219,284637,hylan G-F 20,Ingredient,RxNorm,Valid,Standard
+40235485,1091643,azilsartan,Ingredient,RxNorm,Valid,Standard
+19027080,34296,potassium bicarbonate,Ingredient,RxNorm,Valid,Standard
+1736829,358262,fosamprenavir,Ingredient,RxNorm,Valid,Standard
+43013884,1368001,alogliptin,Ingredient,RxNorm,Valid,Standard
+19080458,591781,eculizumab,Ingredient,RxNorm,Valid,Standard
+741530,37925,orlistat,Ingredient,RxNorm,Valid,Standard
+42873635,1300701,lorcaserin,Ingredient,RxNorm,Valid,Standard
+40236987,1092437,belimumab,Ingredient,RxNorm,Valid,Standard
+795113,2410,chlorzoxazone,Ingredient,RxNorm,Valid,Standard
+40226208,1011650,pegloticase,Ingredient,RxNorm,Valid,Standard
+35606214,1723735,ixazomib,Ingredient,RxNorm,Valid,Standard
+35604848,1729002,selexipag,Ingredient,RxNorm,Valid,Standard
+1114375,72435,anakinra,Ingredient,RxNorm,Valid,Standard
+1437379,10485,thioguanine,Ingredient,RxNorm,Valid,Standard
+35200800,2058846,galcanezumab,Ingredient,RxNorm,Valid,Standard
+713196,72257,interferon beta-1b,Ingredient,RxNorm,Valid,Standard
+43013182,1364347,ponatinib,Ingredient,RxNorm,Valid,Standard
+1715315,31819,nitazoxanide,Ingredient,RxNorm,Valid,Standard
+1394023,662281,nilotinib,Ingredient,RxNorm,Valid,Standard
+1359548,480167,lapatinib,Ingredient,RxNorm,Valid,Standard
+42801287,1298944,pertuzumab,Ingredient,RxNorm,Valid,Standard
+42800417,1299884,ammonia,Ingredient,RxNorm,Valid,Standard
+954853,4440,flavoxate,Ingredient,RxNorm,Valid,Standard
+1592897,1873752,plecanatide,Ingredient,RxNorm,Valid,Standard
+918222,32638,oxiconazole,Ingredient,RxNorm,Valid,Standard
+42898952,1309239,coconut oil,Ingredient,RxNorm,Valid,Standard
+19050610,41967,salmon oil,Ingredient,RxNorm,Valid,Standard
+19017805,738,inamrinone,Ingredient,RxNorm,Valid,Standard
+1356018,2107310,prucalopride,Ingredient,RxNorm,Valid,Standard
+40175841,862461,cherry allergenic extract,Ingredient,RxNorm,Valid,Standard
+35604032,1726104,elotuzumab,Ingredient,RxNorm,Valid,Standard
+19008264,11198,vinblastine,Ingredient,RxNorm,Valid,Standard
+1714165,120608,peginterferon alfa-2a,Ingredient,RxNorm,Valid,Standard
+1524769,7779,oxandrolone,Ingredient,RxNorm,Valid,Standard
+42709325,1244607,tafluprost,Ingredient,RxNorm,Valid,Standard
+1146810,8356,piroxicam,Ingredient,RxNorm,Valid,Standard
+19058410,475230,degarelix,Ingredient,RxNorm,Valid,Standard
+19011437,140480,icodextrin,Ingredient,RxNorm,Valid,Standard
+1588712,227518,follicle stimulating hormone,Ingredient,RxNorm,Valid,Standard
+1551673,214549,"estrogens, esterified (USP)",Ingredient,RxNorm,Valid,Standard
+1355509,4488,floxuridine,Ingredient,RxNorm,Valid,Standard
+45775570,1546437,polystyrene sulfonate,Ingredient,RxNorm,Valid,Standard
+19022479,15226,fomepizole,Ingredient,RxNorm,Valid,Standard
+1731597,352374,drotrecogin alfa,Ingredient,RxNorm,Valid,Standard
+904250,6826,methazolamide,Ingredient,RxNorm,Valid,Standard
+19095786,24912,ferric subsulfate solution,Ingredient,RxNorm,Valid,Standard
+922191,32987,pectin,Ingredient,RxNorm,Valid,Standard
+529076,798262,"L1 protein, human papillomavirus type 11 vaccine",Ingredient,RxNorm,Valid,Standard
+19069076,27244,hydroxyethyl cellulose,Ingredient,RxNorm,Valid,Standard
+1768849,2176,cefaclor,Ingredient,RxNorm,Valid,Standard
+1338985,19666,nesiritide,Ingredient,RxNorm,Valid,Standard
+44785086,1482790,simeprevir,Ingredient,RxNorm,Valid,Standard
+45775686,1540825,tedizolid,Ingredient,RxNorm,Valid,Standard
+40225716,1000492,resveratrol,Ingredient,RxNorm,Valid,Standard
+19077143,5542,17-alpha-hydroxyprogesterone,Ingredient,RxNorm,Valid,Standard
+1329241,1622,bleomycin,Ingredient,RxNorm,Valid,Standard
+42709323,1243041,ivacaftor,Ingredient,RxNorm,Valid,Standard
+45892883,1599788,secukinumab,Ingredient,RxNorm,Valid,Standard
+19010496,11377,xylitol,Ingredient,RxNorm,Valid,Standard
+1523280,3327,diazoxide,Ingredient,RxNorm,Valid,Standard
+1125449,33767,pirbuterol,Ingredient,RxNorm,Valid,Standard
+45892906,1599832,C1 esterase inhibitor,Ingredient,RxNorm,Valid,Standard
+45774861,1539239,dalbavancin,Ingredient,RxNorm,Valid,Standard
+1763779,5021,griseofulvin,Ingredient,RxNorm,Valid,Standard
+1589795,6383,luteinizing hormone,Ingredient,RxNorm,Valid,Standard
+1311409,3098,dacarbazine,Ingredient,RxNorm,Valid,Standard
+750119,4135,ethosuximide,Ingredient,RxNorm,Valid,Standard
+19017390,325514,indigotindisulfonate,Ingredient,RxNorm,Valid,Standard
+1118117,141366,naratriptan,Ingredient,RxNorm,Valid,Standard
+793844,1940636,pibrentasvir,Ingredient,RxNorm,Valid,Standard
+19112563,47630,calcium polystyrene sulfonate product,Ingredient,RxNorm,Valid,Standard
+1319219,142407,calcium ascorbate,Ingredient,RxNorm,Valid,Standard
+1333379,18330,arsenic trioxide,Ingredient,RxNorm,Valid,Standard
+948760,8560,polysorbate 80,Ingredient,RxNorm,Valid,Standard
+19063297,4952,thyrotropin alfa,Ingredient,RxNorm,Valid,Standard
+1594003,1919083,midostaurin,Ingredient,RxNorm,Valid,Standard
+19100985,263034,panitumumab,Ingredient,RxNorm,Valid,Standard
+1373225,54552,perindopril,Ingredient,RxNorm,Valid,Standard
+42900584,1310520,teriflunomide,Ingredient,RxNorm,Valid,Standard
+19055217,235535,carbomer,Ingredient,RxNorm,Valid,Standard
+1559914,2049106,encorafenib,Ingredient,RxNorm,Valid,Standard
+19052317,8723,proflavine,Ingredient,RxNorm,Valid,Standard
+19039029,19698,brilliant green,Ingredient,RxNorm,Valid,Standard
+19010927,302285,conivaptan,Ingredient,RxNorm,Valid,Standard
+1787101,620216,maraviroc,Ingredient,RxNorm,Valid,Standard
+1308473,69646,tinzaparin,Ingredient,RxNorm,Valid,Standard
+1302398,10594,ticlopidine,Ingredient,RxNorm,Valid,Standard
+916943,139778,tegaserod,Ingredient,RxNorm,Valid,Standard
+40230712,1045453,eribulin,Ingredient,RxNorm,Valid,Standard
+36249204,1799206,velpatasvir,Ingredient,RxNorm,Valid,Standard
+1594148,1921069,abaloparatide,Ingredient,RxNorm,Valid,Standard
+1380068,5880,interferon alfa-2b,Ingredient,RxNorm,Valid,Standard
+37498993,2282307,rimegepant,Ingredient,RxNorm,Valid,Standard
+1319880,7435,nisoldipine,Ingredient,RxNorm,Valid,Standard
+1156378,4502,flurbiprofen,Ingredient,RxNorm,Valid,Standard
+715458,31914,tiagabine,Ingredient,RxNorm,Valid,Standard
+529116,798268,"L1 protein, human papillomavirus type 6 vaccine",Ingredient,RxNorm,Valid,Standard
+529114,798266,"L1 protein, human papillomavirus type 18 vaccine",Ingredient,RxNorm,Valid,Standard
+529112,798264,"L1 protein, human papillomavirus type 16 vaccine",Ingredient,RxNorm,Valid,Standard
+40234201,1085787,butylscopolamine,Ingredient,RxNorm,Valid,Standard
+1781406,59763,stavudine,Ingredient,RxNorm,Valid,Standard
+1559930,2049122,binimetinib,Ingredient,RxNorm,Valid,Standard
+45892847,1599538,edoxaban,Ingredient,RxNorm,Valid,Standard
+19054825,44157,cladribine,Ingredient,RxNorm,Valid,Standard
+1000995,2635,coal tar,Ingredient,RxNorm,Valid,Standard
+19029488,3489,diosmin,Ingredient,RxNorm,Valid,Standard
+19012585,1156,asparaginase,Ingredient,RxNorm,Valid,Standard
+1753745,430,albendazole,Ingredient,RxNorm,Valid,Standard
+1594034,1919503,durvalumab,Ingredient,RxNorm,Valid,Standard
+19031224,8011,pentostatin,Ingredient,RxNorm,Valid,Standard
+756018,4496,fluphenazine,Ingredient,RxNorm,Valid,Standard
+1147878,40575,zileuton,Ingredient,RxNorm,Valid,Standard
+700465,10510,thiothixene,Ingredient,RxNorm,Valid,Standard
+40230597,1040005,ceftaroline,Ingredient,RxNorm,Valid,Standard
+1593397,1865953,crisaborole,Ingredient,RxNorm,Valid,Standard
+1536743,35825,ganirelix,Ingredient,RxNorm,Valid,Standard
+1311443,3100,dactinomycin,Ingredient,RxNorm,Valid,Standard
+1518198,326374,norelgestromin,Ingredient,RxNorm,Valid,Standard
+40242675,1148495,crizotinib,Ingredient,RxNorm,Valid,Standard
+1792515,2393,chloroquine,Ingredient,RxNorm,Valid,Standard
+19042345,8214,lecithin,Ingredient,RxNorm,Valid,Standard
+1593031,1863556,nusinersen,Ingredient,RxNorm,Valid,Standard
+1541079,376,corticotropin,Ingredient,RxNorm,Valid,Standard
+792649,1946825,abemaciclib,Ingredient,RxNorm,Valid,Standard
+19050087,41289,ibutilide,Ingredient,RxNorm,Valid,Standard
+1729323,16521,adefovir,Ingredient,RxNorm,Valid,Standard
+1310756,30131,moexipril,Ingredient,RxNorm,Valid,Standard
+40161115,214355,Candida albicans allergenic extract,Ingredient,RxNorm,Valid,Standard
+1343914,39918,zeaxanthin,Ingredient,RxNorm,Valid,Standard
+1836391,10171,sulfadiazine,Ingredient,RxNorm,Valid,Standard
+1506602,6904,methyltestosterone,Ingredient,RxNorm,Valid,Standard
+42628962,1791685,pimavanserin,Ingredient,RxNorm,Valid,Standard
+35602825,1673265,aripiprazole lauroxil,Ingredient,RxNorm,Valid,Standard
+1355513,2105806,gilteritinib,Ingredient,RxNorm,Valid,Standard
+46234135,1653781,eluxadoline,Ingredient,RxNorm,Valid,Standard
+1389112,228041,Echinacea preparation,Ingredient,RxNorm,Valid,Standard
+1000979,26344,guar gum,Ingredient,RxNorm,Valid,Standard
+1126128,3393,diflunisal,Ingredient,RxNorm,Valid,Standard
+912476,115238,becaplermin,Ingredient,RxNorm,Valid,Standard
+19135830,89886,"rabies immune globulin, human",Ingredient,RxNorm,Valid,Standard
+19060985,4885,glutamine,Ingredient,RxNorm,Valid,Standard
+19014220,314875,"tocopheryl acid succinate,D-alpha",Ingredient,RxNorm,Valid,Standard
+1760039,9010,pyrimethamine,Ingredient,RxNorm,Valid,Standard
+1345858,8332,pindolol,Ingredient,RxNorm,Valid,Standard
+779705,2601723,tirzepatide,Ingredient,RxNorm,Valid,Standard
+586306,221105,Haemophilus capsular oligosaccharide,Ingredient,RxNorm,Valid,Standard
+35603277,1667655,cariprazine,Ingredient,RxNorm,Valid,Standard
+35201105,2099995,baloxavir marboxil,Ingredient,RxNorm,Valid,Standard
+35200577,2056691,fremanezumab,Ingredient,RxNorm,Valid,Standard
+1597235,25357,follitropin beta,Ingredient,RxNorm,Valid,Standard
+35603563,1745099,ixekizumab,Ingredient,RxNorm,Valid,Standard
+1036525,10223,sulfur,Ingredient,RxNorm,Valid,Standard
+43013171,1364468,teduglutide,Ingredient,RxNorm,Valid,Standard
+35201615,2102775,revefenacin,Ingredient,RxNorm,Valid,Standard
+19070012,9913,sodium tetradecyl sulfate,Ingredient,RxNorm,Valid,Standard
+1389888,233272,bexarotene,Ingredient,RxNorm,Valid,Standard
+45892531,1597258,blinatumomab,Ingredient,RxNorm,Valid,Standard
+43533090,1430438,afatinib,Ingredient,RxNorm,Valid,Standard
+19045317,203223,digoxin antibodies Fab fragments,Ingredient,RxNorm,Valid,Standard
+19037833,3626,domperidone,Ingredient,RxNorm,Valid,Standard
+19032614,178,acetone,Ingredient,RxNorm,Valid,Standard
+1715472,134527,nelfinavir,Ingredient,RxNorm,Valid,Standard
+45774679,1538275,Schizochytrium DHA oil,Ingredient,RxNorm,Valid,Standard
+947705,8463,podofilox,Ingredient,RxNorm,Valid,Standard
+792993,1989100,benralizumab,Ingredient,RxNorm,Valid,Standard
+44507676,974779,obinutuzumab,Ingredient,RxNorm,Valid,Standard
+792764,1986808,acalabrutinib,Ingredient,RxNorm,Valid,Standard
+724816,7781,oxazepam,Ingredient,RxNorm,Valid,Standard
+40161662,819911,besifloxacin,Ingredient,RxNorm,Valid,Standard
+19011091,11645,deferiprone,Ingredient,RxNorm,Valid,Standard
+1391648,236665,black cohosh extract,Ingredient,RxNorm,Valid,Standard
+43560354,1433212,levomilnacipran,Ingredient,RxNorm,Valid,Standard
+1525348,2606543,silver,Ingredient,RxNorm,Valid,Standard
+756349,4501,flurazepam,Ingredient,RxNorm,Valid,Standard
+35602783,1670383,factor IX complex,Ingredient,RxNorm,Valid,Standard
+1759196,2593692,Streptococcus thermophilus,Ingredient,RxNorm,Valid,Standard
+1185922,6142,ketoprofen,Ingredient,RxNorm,Valid,Standard
+950370,2116,carteolol,Ingredient,RxNorm,Valid,Standard
+798834,2597,clomipramine,Ingredient,RxNorm,Valid,Standard
+19084212,606396,"secretin human, synthetic",Ingredient,RxNorm,Valid,Standard
+943634,39684,epinastine,Ingredient,RxNorm,Valid,Standard
+1746244,83395,saquinavir,Ingredient,RxNorm,Valid,Standard
+1189458,228783,frovatriptan,Ingredient,RxNorm,Valid,Standard
+19026674,7883,pancuronium,Ingredient,RxNorm,Valid,Standard
+1307213,285241,ginger extract,Ingredient,RxNorm,Valid,Standard
+702418,2587300,tixagevimab,Ingredient,RxNorm,Valid,Standard
+19024227,155080,methacholine,Ingredient,RxNorm,Valid,Standard
+19061821,2496,chromium,Ingredient,RxNorm,Valid,Standard
+19019122,3272,dextran 40,Ingredient,RxNorm,Valid,Standard
+940183,1999,carbachol,Ingredient,RxNorm,Valid,Standard
+793293,1992672,ertugliflozin,Ingredient,RxNorm,Valid,Standard
+702423,2587306,cilgavimab,Ingredient,RxNorm,Valid,Standard
+19066188,9627,secretin,Ingredient,RxNorm,Valid,Standard
+42799711,1294580,gemtuzumab ozogamicin,Ingredient,RxNorm,Valid,Standard
+40168296,880350,krill oil,Ingredient,RxNorm,Valid,Standard
+1507705,2878,cortisone,Ingredient,RxNorm,Valid,Standard
+1103552,279645,almotriptan,Ingredient,RxNorm,Valid,Standard
+45892478,1596934,"L1 protein, human papillomavirus type 58 vaccine",Ingredient,RxNorm,Valid,Standard
+45892477,1596933,"L1 protein, human papillomavirus type 52 vaccine",Ingredient,RxNorm,Valid,Standard
+45892476,1596932,"L1 protein, human papillomavirus type 45 vaccine",Ingredient,RxNorm,Valid,Standard
+45892475,1596931,"L1 protein, human papillomavirus type 33 vaccine",Ingredient,RxNorm,Valid,Standard
+45892474,1596930,"L1 protein, human papillomavirus type 31 vaccine",Ingredient,RxNorm,Valid,Standard
+42900401,1307619,bosutinib,Ingredient,RxNorm,Valid,Standard
+1361580,2196092,upadacitinib,Ingredient,RxNorm,Valid,Standard
+792263,6475,loxapine,Ingredient,RxNorm,Valid,Standard
+44816332,1534763,albiglutide,Ingredient,RxNorm,Valid,Standard
+19094980,34119,polyestradiol,Ingredient,RxNorm,Valid,Standard
+19054702,4385,fibrinogen,Ingredient,RxNorm,Valid,Standard
+19037596,193,acetylcarnitine,Ingredient,RxNorm,Valid,Standard
+19031524,20615,cetyl alcohol,Ingredient,RxNorm,Valid,Standard
+19017671,325526,ginseng preparation,Ingredient,RxNorm,Valid,Standard
+1511251,2123126,romosozumab,Ingredient,RxNorm,Valid,Standard
+1390051,2346,chlorambucil,Ingredient,RxNorm,Valid,Standard
+739363,36514,sibutramine,Ingredient,RxNorm,Valid,Standard
+35604657,1727455,alectinib,Ingredient,RxNorm,Valid,Standard
+35602757,1670304,tipiracil,Ingredient,RxNorm,Valid,Standard
+794068,1942950,inotuzumab ozogamicin,Ingredient,RxNorm,Valid,Standard
+19086176,221050,"BCG, live, Tice strain",Ingredient,RxNorm,Valid,Standard
+35200446,2055755,doravirine,Ingredient,RxNorm,Valid,Standard
+1702559,10612,tinidazole,Ingredient,RxNorm,Valid,Standard
+767410,52105,lithium citrate,Ingredient,RxNorm,Valid,Standard
+35200202,2054068,mogamulizumab,Ingredient,RxNorm,Valid,Standard
+960988,91311,diflorasone,Ingredient,RxNorm,Valid,Standard
+40242044,1148138,icatibant,Ingredient,RxNorm,Valid,Standard
+40168385,877510,romidepsin,Ingredient,RxNorm,Valid,Standard
+19124972,659476,green tea extract,Ingredient,RxNorm,Valid,Standard
+1560123,2049873,ivosidenib,Ingredient,RxNorm,Valid,Standard
+836877,10390,tetrabenazine,Ingredient,RxNorm,Valid,Standard
+748010,4077,estazolam,Ingredient,RxNorm,Valid,Standard
+19132965,82088,Plantago seed,Ingredient,RxNorm,Valid,Standard
+1508439,6964,mifepristone,Ingredient,RxNorm,Valid,Standard
+1797155,253453,peginterferon alfa-2b,Ingredient,RxNorm,Valid,Standard
+793797,1940332,enasidenib,Ingredient,RxNorm,Valid,Standard
+700299,10502,thioridazine,Ingredient,RxNorm,Valid,Standard
+544411,830457,rabies virus vaccine flury-lep strain,Ingredient,RxNorm,Valid,Standard
+19069080,27306,hylan,Ingredient,RxNorm,Valid,Standard
+1702911,274786,telithromycin,Ingredient,RxNorm,Valid,Standard
+1398039,258326,St. John's wort extract,Ingredient,RxNorm,Valid,Standard
+1359143,477053,cinnamon bark,Ingredient,RxNorm,Valid,Standard
+1340532,37255,succinic acid,Ingredient,RxNorm,Valid,Standard
+40166571,863035,bepotastine,Ingredient,RxNorm,Valid,Standard
+35603017,1716278,trabectedin,Ingredient,RxNorm,Valid,Standard
+990069,2348,chloramphenicol,Ingredient,RxNorm,Valid,Standard
+904205,283540,apple pectin,Ingredient,RxNorm,Valid,Standard
+42800040,1291301,avanafil,Ingredient,RxNorm,Valid,Standard
+40241937,1147220,vemurafenib,Ingredient,RxNorm,Valid,Standard
+40235242,1088438,6-O-palmitoylascorbic acid,Ingredient,RxNorm,Valid,Standard
+40226579,1012892,fingolimod,Ingredient,RxNorm,Valid,Standard
+19071967,2907,creatine,Ingredient,RxNorm,Valid,Standard
+1397059,253206,valerian root extract,Ingredient,RxNorm,Valid,Standard
+1396423,2169285,alpelisib,Ingredient,RxNorm,Valid,Standard
+937712,36122,phenyl salicylate,Ingredient,RxNorm,Valid,Standard
+713109,722,amoxapine,Ingredient,RxNorm,Valid,Standard
+544505,830464,"rabies virus vaccine wistar strain PM-1503-3M (human), inactivated",Ingredient,RxNorm,Valid,Standard
+1346686,83515,eprosartan,Ingredient,RxNorm,Valid,Standard
+1189490,22892,dichloralphenazone,Ingredient,RxNorm,Valid,Standard
+1103518,27946,isometheptene,Ingredient,RxNorm,Valid,Standard
+19096783,253161,collagen hemostat,Ingredient,RxNorm,Valid,Standard
+19028050,7975,penicillamine,Ingredient,RxNorm,Valid,Standard
+1539954,81647,phenylbutyrate,Ingredient,RxNorm,Valid,Standard
+45775210,1592259,potassium ascorbate,Ingredient,RxNorm,Valid,Standard
+40241654,1144960,ascorbate manganese,Ingredient,RxNorm,Valid,Standard
+19044337,8299,physostigmine,Ingredient,RxNorm,Valid,Standard
+754270,8886,protriptyline,Ingredient,RxNorm,Valid,Standard
+37003201,2463114,bamlanivimab,Ingredient,RxNorm,Valid,Standard
+35606465,1734628,elbasvir,Ingredient,RxNorm,Valid,Standard
+19064496,25142,fluorescein dilaurate,Ingredient,RxNorm,Valid,Standard
+1836191,10109,streptomycin,Ingredient,RxNorm,Valid,Standard
+1542948,386938,follitropin alfa,Ingredient,RxNorm,Valid,Standard
+958396,47461,butenafine,Ingredient,RxNorm,Valid,Standard
+906874,110,oxyquinoline,Ingredient,RxNorm,Valid,Standard
+40222431,996051,cabazitaxel,Ingredient,RxNorm,Valid,Standard
+35602981,1716191,idarucizumab,Ingredient,RxNorm,Valid,Standard
+1314806,124150,dandelion extract,Ingredient,RxNorm,Valid,Standard
+1145571,2361285,tucatinib,Ingredient,RxNorm,Valid,Standard
+40224159,1000082,alcaftadine,Ingredient,RxNorm,Valid,Standard
+19098548,259280,tenecteplase,Ingredient,RxNorm,Valid,Standard
+19015230,318,adenosine triphosphate,Ingredient,RxNorm,Valid,Standard
+1759073,2592360,bebtelovimab,Ingredient,RxNorm,Valid,Standard
+1513849,314683,"lente insulin, human",Ingredient,RxNorm,Valid,Standard
+40167569,619693,peramivir,Ingredient,RxNorm,Valid,Standard
+19041536,37855,testosterone 17-phenylpropionate,Ingredient,RxNorm,Valid,Standard
+911638,70603,glycolate,Ingredient,RxNorm,Valid,Standard
+792531,1945213,vaborbactam,Ingredient,RxNorm,Valid,Standard
+40239330,1102261,telaprevir,Ingredient,RxNorm,Valid,Standard
+37497998,2265690,cenobamate,Ingredient,RxNorm,Valid,Standard
+532881,807219,"typhoid Vi polysaccharide vaccine, S typhi Ty2 strain",Ingredient,RxNorm,Valid,Standard
+45776475,1549114,zinc ascorbate,Ingredient,RxNorm,Valid,Standard
+40167582,712566,ofatumumab,Ingredient,RxNorm,Valid,Standard
+35200953,2059269,omadacycline,Ingredient,RxNorm,Valid,Standard
+1510483,2045726,avatrombopag,Ingredient,RxNorm,Valid,Standard
+1343039,38782,triptorelin,Ingredient,RxNorm,Valid,Standard
+958527,89781,"belladonna extract, USP",Ingredient,RxNorm,Valid,Standard
+45776944,1544460,idelalisib,Ingredient,RxNorm,Valid,Standard
+44506754,1440051,lixisenatide,Ingredient,RxNorm,Valid,Standard
+19050104,2106,carnitine,Ingredient,RxNorm,Valid,Standard
+19036892,190353,daclizumab,Ingredient,RxNorm,Valid,Standard
+1361191,2178390,selinexor,Ingredient,RxNorm,Valid,Standard
+1344992,40138,iloprost,Ingredient,RxNorm,Valid,Standard
+963950,1999382,tezacaftor,Ingredient,RxNorm,Valid,Standard
+963742,5011,gramicidin,Ingredient,RxNorm,Valid,Standard
+40240664,1114326,indacaterol,Ingredient,RxNorm,Valid,Standard
+992716,6572,mafenide,Ingredient,RxNorm,Valid,Standard
+958134,47181,bismuth subcitrate,Ingredient,RxNorm,Valid,Standard
+792899,1988390,latanoprostene bunod,Ingredient,RxNorm,Valid,Standard
+701552,2566297,Streptococcus pneumoniae serotype 22F capsular antigen diphtheria CRM197 protein conjugate vaccine,Ingredient,RxNorm,Valid,Standard
+701551,2566296,Streptococcus pneumoniae serotype 33F capsular antigen diphtheria CRM197 protein conjugate vaccine,Ingredient,RxNorm,Valid,Standard
+701550,2566295,Streptococcus pneumoniae serotype 8 capsular antigen diphtheria CRM197 protein conjugate vaccine,Ingredient,RxNorm,Valid,Standard
+701549,2566294,Streptococcus pneumoniae serotype 15B capsular antigen diphtheria CRM197 protein conjugate vaccine,Ingredient,RxNorm,Valid,Standard
+701548,2566293,Streptococcus pneumoniae serotype 12F capsular antigen diphtheria CRM197 protein conjugate vaccine,Ingredient,RxNorm,Valid,Standard
+701547,2566292,Streptococcus pneumoniae serotype 11A capsular antigen diphtheria CRM197 protein conjugate vaccine,Ingredient,RxNorm,Valid,Standard
+701546,2566291,Streptococcus pneumoniae serotype 10A capsular antigen diphtheria CRM197 protein conjugate vaccine,Ingredient,RxNorm,Valid,Standard
+43014123,1358207,medronate,Ingredient,RxNorm,Valid,Standard
+37498010,2265702,cefiderocol,Ingredient,RxNorm,Valid,Standard
+42904198,1356761,ascorbyl tetraisopalmitate,Ingredient,RxNorm,Valid,Standard
+19054821,44151,clofarabine,Ingredient,RxNorm,Valid,Standard
+1702364,10591,ticarcillin,Ingredient,RxNorm,Valid,Standard
+1594308,1921877,edaravone,Ingredient,RxNorm,Valid,Standard
+1593861,1918231,niraparib,Ingredient,RxNorm,Valid,Standard
+1536976,2550731,sotrovimab,Ingredient,RxNorm,Valid,Standard
+45776076,1541617,"influenza A virus vaccine, A-Texas-50-2012 (H3N2)-like virus",Ingredient,RxNorm,Invalid,Non-standard
+43012577,1367177,catechin,Ingredient,RxNorm,Valid,Standard
+42898933,1311089,defibrotide,Ingredient,RxNorm,Valid,Standard
+45776537,1543173,tavaborole,Ingredient,RxNorm,Valid,Standard
+42898673,1310844,Bacillus coagulans,Ingredient,RxNorm,Valid,Standard
+19092845,657797,temsirolimus,Ingredient,RxNorm,Valid,Standard
+19066563,259372,fructooligosaccharide,Ingredient,RxNorm,Valid,Standard
+19017067,73137,tirofiban,Ingredient,RxNorm,Valid,Standard
+1763339,9386,rimantadine,Ingredient,RxNorm,Valid,Standard
+1511348,2166040,risankizumab,Ingredient,RxNorm,Valid,Standard
+19137031,104129,ispaghula husk,Ingredient,RxNorm,Valid,Standard
+1747157,83816,delavirdine,Ingredient,RxNorm,Valid,Standard
+1503983,68147,cetrorelix,Ingredient,RxNorm,Valid,Standard
+1308185,29008,lycopene,Ingredient,RxNorm,Valid,Standard
+1794280,6672,mebendazole,Ingredient,RxNorm,Valid,Standard
+1789517,229369,dalfopristin,Ingredient,RxNorm,Valid,Standard
+1789515,229367,quinupristin,Ingredient,RxNorm,Valid,Standard
+1717002,139896,enfuvirtide,Ingredient,RxNorm,Valid,Standard
+1708748,69722,zanamivir,Ingredient,RxNorm,Valid,Standard
+1593619,1876597,naldemedine,Ingredient,RxNorm,Valid,Standard
+1356461,4508,flutamide,Ingredient,RxNorm,Valid,Standard
+1302788,273888,calcium threonate,Ingredient,RxNorm,Valid,Standard
+924120,155002,aminolevulinate,Ingredient,RxNorm,Valid,Standard
+40164052,784649,asenapine,Ingredient,RxNorm,Valid,Standard
+19086888,22396,deflazacort,Ingredient,RxNorm,Valid,Standard
+19067085,260040,evening primrose extract,Ingredient,RxNorm,Valid,Standard
+1595461,24591,ethynodiol,Ingredient,RxNorm,Valid,Standard
+1592911,1873916,ribociclib,Ingredient,RxNorm,Valid,Standard
+939134,36435,sertaconazole,Ingredient,RxNorm,Valid,Standard
+928110,34369,prednicarbate,Ingredient,RxNorm,Valid,Standard
+19012224,150596,copper chloride,Ingredient,RxNorm,Valid,Standard
+19006764,285148,Bifidobacterium bifidum,Ingredient,RxNorm,Valid,Standard
+19001311,105695,epoetin beta,Ingredient,RxNorm,Valid,Standard
+1718850,1862579,rucaparib,Ingredient,RxNorm,Valid,Standard
+1114620,31563,nedocromil,Ingredient,RxNorm,Valid,Standard
+998598,259351,alpha-D-galactosidase enzyme,Ingredient,RxNorm,Valid,Standard
+950882,21249,clocortolone,Ingredient,RxNorm,Valid,Standard
+916751,1388,lindane,Ingredient,RxNorm,Valid,Standard
+702536,2587901,molnupiravir,Ingredient,RxNorm,Valid,Standard
+44818461,1535218,siltuximab,Ingredient,RxNorm,Valid,Standard
+36250189,1798288,obeticholic acid,Ingredient,RxNorm,Valid,Standard
+1159811,9009,pyrilamine,Ingredient,RxNorm,Valid,Standard
+837027,1043,apomorphine,Ingredient,RxNorm,Valid,Standard
+793846,1940643,neratinib,Ingredient,RxNorm,Valid,Standard
+530007,798444,Haemophilus influenzae b (Ross strain) capsular polysaccharide meningococcal protein conjugate vaccine,Ingredient,RxNorm,Valid,Standard
+42709321,1242987,vismodegib,Ingredient,RxNorm,Valid,Standard
+35201733,2103164,lorlatinib,Ingredient,RxNorm,Valid,Standard
+19071833,285208,Arnica montana extract,Ingredient,RxNorm,Valid,Standard
+19025348,337523,ixabepilone,Ingredient,RxNorm,Valid,Standard
+19010499,11378,xylose,Ingredient,RxNorm,Valid,Standard
+1593849,1918219,valbenazine,Ingredient,RxNorm,Valid,Standard
+1169352,535,alpha 1-antitrypsin,Ingredient,RxNorm,Valid,Standard
+948487,8513,polyethylene glycol 300,Ingredient,RxNorm,Valid,Standard
+759401,47858,methsuximide,Ingredient,RxNorm,Valid,Standard
+46275580,1655922,lumacaftor,Ingredient,RxNorm,Valid,Standard
+43012417,1364105,pasireotide,Ingredient,RxNorm,Valid,Standard
+43012289,1363060,sucrose monostearate,Ingredient,RxNorm,Valid,Standard
+42900448,1309250,olive oil,Ingredient,RxNorm,Valid,Standard
+19067086,260053,elderberry fruit,Ingredient,RxNorm,Valid,Standard
+19030059,17305,alginic acid,Ingredient,RxNorm,Valid,Standard
+1594587,1923319,sarilumab,Ingredient,RxNorm,Valid,Standard
+44507693,1482680,luliconazole,Ingredient,RxNorm,Valid,Standard
+40231628,1044584,tesamorelin,Ingredient,RxNorm,Valid,Standard
+19060400,9061,quinacrine,Ingredient,RxNorm,Valid,Standard
+19020068,7442,nitric oxide,Ingredient,RxNorm,Valid,Standard
+19013765,119246,respiratory syncytial virus immune globulin intravenous,Ingredient,RxNorm,Valid,Standard
+1768734,5293,hexachlorophene,Ingredient,RxNorm,Valid,Standard
+1593273,1875534,avelumab,Ingredient,RxNorm,Valid,Standard
+1525278,33747,estropipate,Ingredient,RxNorm,Valid,Standard
+1309161,7004,mitotane,Ingredient,RxNorm,Valid,Standard
+1164108,9518,salicylamide,Ingredient,RxNorm,Valid,Standard
+46221696,1606218,daclatasvir,Ingredient,RxNorm,Valid,Standard
+44818466,1535457,ceritinib,Ingredient,RxNorm,Valid,Standard
+37497446,2256951,elexacaftor,Ingredient,RxNorm,Valid,Standard
+35602886,1673942,Lactiplantibacillus plantarum,Ingredient,RxNorm,Valid,Standard
+19017241,73178,iloperidone,Ingredient,RxNorm,Valid,Standard
+1520218,1512,betaine,Ingredient,RxNorm,Valid,Standard
+1337651,194337,vorinostat,Ingredient,RxNorm,Valid,Standard
+1304239,283567,green tea leaf extract,Ingredient,RxNorm,Valid,Standard
+43525773,1370971,ospemifene,Ingredient,RxNorm,Valid,Standard
+37497670,2262279,crizanlizumab,Ingredient,RxNorm,Valid,Standard
+35200783,2058826,cemiplimab,Ingredient,RxNorm,Valid,Standard
+19098644,259385,ginseng root,Ingredient,RxNorm,Valid,Standard
+19086491,221166,standardized senna concentrate,Ingredient,RxNorm,Valid,Standard
+19058494,24246,epigallocatechin gallate,Ingredient,RxNorm,Valid,Standard
+19000729,1056,aprotinin,Ingredient,RxNorm,Valid,Standard
+1392182,237116,grape seed extract,Ingredient,RxNorm,Valid,Standard
+1366390,2110011,Bifidobacterium breve,Ingredient,RxNorm,Valid,Standard
+1197677,2578,clemastine,Ingredient,RxNorm,Valid,Standard
+1189220,636827,guaiacolsulfonate,Ingredient,RxNorm,Valid,Standard
+1146220,2375526,Lacticaseibacillus paracasei,Ingredient,RxNorm,Valid,Standard
+19099049,260020,horse chestnut seed,Ingredient,RxNorm,Valid,Standard
+19035953,35617,rifapentine,Ingredient,RxNorm,Valid,Standard
+19023835,76469,"BCG, live, Connaught strain",Ingredient,RxNorm,Valid,Standard
+1727443,7934,paromomycin,Ingredient,RxNorm,Valid,Standard
+1593700,1928588,guselkumab,Ingredient,RxNorm,Valid,Standard
+40168938,658708,ecallantide,Ingredient,RxNorm,Valid,Standard
+19097664,2567,citrulline,Ingredient,RxNorm,Valid,Standard
+19018438,17614,aluminum magnesium silicate,Ingredient,RxNorm,Valid,Standard
+1596779,253166,"synthetic conjugated estrogens, A",Ingredient,RxNorm,Valid,Standard
+1387426,62356,folate,Ingredient,RxNorm,Valid,Standard
+957623,46307,amlexanox,Ingredient,RxNorm,Valid,Standard
+912362,712,ammonium chloride,Ingredient,RxNorm,Valid,Standard
+42899438,1310514,lactoperoxidase,Ingredient,RxNorm,Valid,Standard
+37499009,2282403,bempedoic acid,Ingredient,RxNorm,Valid,Standard
+19068688,5281,hesperidin,Ingredient,RxNorm,Valid,Standard
+19058100,47180,bismuth tribromophenate,Ingredient,RxNorm,Valid,Standard
+19004969,10798,trientine,Ingredient,RxNorm,Valid,Standard
+1750461,8628,praziquantel,Ingredient,RxNorm,Valid,Standard
+1401581,266604,metyrosine,Ingredient,RxNorm,Valid,Standard
+1396729,2174090,polatuzumab vedotin,Ingredient,RxNorm,Valid,Standard
+1363981,9504,S-adenosylmethionine,Ingredient,RxNorm,Valid,Standard
+1361291,2180325,darolutamide,Ingredient,RxNorm,Valid,Standard
+1331681,802755,liver stomach concentrate,Ingredient,RxNorm,Valid,Standard
+1105889,10849,triprolidine,Ingredient,RxNorm,Valid,Standard
+992153,237058,thonzonium,Ingredient,RxNorm,Valid,Standard
+929698,1700,boric acid,Ingredient,RxNorm,Valid,Standard
+40244281,18451,astaxanthin,Ingredient,RxNorm,Valid,Standard
+19102150,401713,carglumic acid,Ingredient,RxNorm,Valid,Standard
+19048699,214461,corticotropin-releasing hormone,Ingredient,RxNorm,Valid,Standard
+19007490,6923,metyrapone,Ingredient,RxNorm,Valid,Standard
+1594333,1922448,safinamide,Ingredient,RxNorm,Valid,Standard
+953391,8761,propantheline,Ingredient,RxNorm,Valid,Standard
+939784,19884,butoconazole,Ingredient,RxNorm,Valid,Standard
+793042,1989794,emicizumab,Ingredient,RxNorm,Valid,Standard
+733896,8123,phenelzine,Ingredient,RxNorm,Valid,Standard
+702865,6760,meprobamate,Ingredient,RxNorm,Valid,Standard
+42709320,1242806,ingenol mebutate,Ingredient,RxNorm,Valid,Standard
+40225722,1005921,ulipristal,Ingredient,RxNorm,Valid,Standard
+40172543,299081,spinosad,Ingredient,RxNorm,Valid,Standard
+40172365,27748,iodoform,Ingredient,RxNorm,Valid,Standard
+19092061,236911,zinc citrate,Ingredient,RxNorm,Valid,Standard
+19020124,1511,betahistine,Ingredient,RxNorm,Valid,Standard
+19004189,283537,anamu preparation,Ingredient,RxNorm,Valid,Standard
+1380191,5882,interferon gamma-1b,Ingredient,RxNorm,Valid,Standard
+1319193,328134,gefitinib,Ingredient,RxNorm,Valid,Standard
+989301,2286,cetylpyridinium,Ingredient,RxNorm,Valid,Standard
+944360,39952,zinc pyrithione,Ingredient,RxNorm,Valid,Standard
+42903942,1316105,"herpesvirus 1, human",Ingredient,RxNorm,Valid,Standard
+42898318,1311524,aspartame,Ingredient,RxNorm,Valid,Standard
+37002419,2387834,belantamab mafodotin,Ingredient,RxNorm,Valid,Standard
+35200763,2058509,duvelisib,Ingredient,RxNorm,Valid,Standard
+19124981,6633,mannose,Ingredient,RxNorm,Valid,Standard
+19106287,42781,vitamin K2,Ingredient,RxNorm,Valid,Standard
+19043395,8263,phosphorus,Ingredient,RxNorm,Valid,Standard
+1711523,114289,indinavir,Ingredient,RxNorm,Valid,Standard
+1592541,1872441,telotristat ethyl,Ingredient,RxNorm,Valid,Standard
+1379969,5879,interferon alfa-2a,Ingredient,RxNorm,Valid,Standard
+1314955,125929,bilberry extract,Ingredient,RxNorm,Valid,Standard
+1140640,20217,carbetapentane,Ingredient,RxNorm,Valid,Standard
+961304,91472,shark liver oil,Ingredient,RxNorm,Valid,Standard
+43013775,1368863,polyethylene glycol 1000,Ingredient,RxNorm,Valid,Standard
+42904152,1356135,Ginko biloba leaf oil,Ingredient,RxNorm,Valid,Standard
+42904014,1331702,Solanum dulcamara top extract,Ingredient,RxNorm,Valid,Standard
+42900058,1309673,Toxicodendron pubescens leaf extract,Ingredient,RxNorm,Valid,Standard
+42899909,1311188,Pulsatilla vulgaris extract,Ingredient,RxNorm,Valid,Standard
+42899791,1309717,Rhododendron aureum leaf extract,Ingredient,RxNorm,Valid,Standard
+42898489,1309676,Bryonia alba root extract,Ingredient,RxNorm,Valid,Standard
+42898360,1309947,Arnica montana root extract,Ingredient,RxNorm,Valid,Standard
+42709319,1242127,glucarpidase,Ingredient,RxNorm,Valid,Standard
+40166675,473837,telavancin,Ingredient,RxNorm,Valid,Standard
+37497986,2265678,voxelotor,Ingredient,RxNorm,Valid,Standard
+37497705,2262544,luspatercept,Ingredient,RxNorm,Valid,Standard
+19082762,319839,maca preparation,Ingredient,RxNorm,Valid,Standard
+19071803,285157,Matricaria recutita extract,Ingredient,RxNorm,Valid,Standard
+19051865,42405,muromonab-CD3,Ingredient,RxNorm,Valid,Standard
+19029824,1705,boron,Ingredient,RxNorm,Valid,Standard
+1145484,2360231,sacituzumab,Ingredient,RxNorm,Valid,Standard
+931035,35100,pyrithione,Ingredient,RxNorm,Valid,Standard
+739471,2472778,relugolix,Ingredient,RxNorm,Valid,Standard
+739438,2472254,vibegron,Ingredient,RxNorm,Valid,Standard
+42874054,1306068,oxidronate,Ingredient,RxNorm,Valid,Standard
+40227359,1012134,sour cherry allergenic extract,Ingredient,RxNorm,Valid,Standard
+40224095,997261,sipuleucel-T,Ingredient,RxNorm,Valid,Standard
+35606467,1734630,grazoprevir,Ingredient,RxNorm,Valid,Standard
+19127669,746070,lithium aspartate,Ingredient,RxNorm,Valid,Standard
+19019317,32863,pantethine,Ingredient,RxNorm,Valid,Standard
+1552929,42682,etidronate,Ingredient,RxNorm,Valid,Standard
+1510202,30009,miglitol,Ingredient,RxNorm,Valid,Standard
+1398573,259320,plant stanol ester,Ingredient,RxNorm,Valid,Standard
+1330144,17376,allyl sulfide,Ingredient,RxNorm,Valid,Standard
+966468,5084,halcinonide,Ingredient,RxNorm,Valid,Standard
+948555,85248,alosetron,Ingredient,RxNorm,Valid,Standard
+916802,1390,benzethonium,Ingredient,RxNorm,Valid,Standard
+704984,10800,trifluoperazine,Ingredient,RxNorm,Valid,Standard
+45775566,1546432,gadopentetate,Ingredient,RxNorm,Valid,Standard
+43532316,1427225,florbetapir,Ingredient,RxNorm,Valid,Standard
+43531995,1425933,lactoferrin,Ingredient,RxNorm,Valid,Standard
+43013540,1368862,carrageenan,Ingredient,RxNorm,Valid,Standard
+37498615,2274394,ferric derisomaltose,Ingredient,RxNorm,Valid,Standard
+37497426,2256930,lasmiditan,Ingredient,RxNorm,Valid,Standard
+37002370,2387302,oxybate,Ingredient,RxNorm,Valid,Standard
+35603983,1746889,reslizumab,Ingredient,RxNorm,Valid,Standard
+19113039,52103,lithium acetate,Ingredient,RxNorm,Valid,Standard
+19112632,477454,"collagen, hydrolyzed",Ingredient,RxNorm,Valid,Standard
+19091430,644101,idursulfase,Ingredient,RxNorm,Valid,Standard
+19072030,2955,curcumin,Ingredient,RxNorm,Valid,Standard
+19050768,21226,clemizolpenicillin,Ingredient,RxNorm,Valid,Standard
+1593670,1876905,deutetrabenazine,Ingredient,RxNorm,Valid,Standard
+1560104,2049846,elagolix,Ingredient,RxNorm,Valid,Standard
+1525746,338817,agalsidase beta,Ingredient,RxNorm,Valid,Standard
+1368823,5296,altretamine,Ingredient,RxNorm,Valid,Standard
+1348407,84959,imiglucerase,Ingredient,RxNorm,Valid,Standard
+992127,237027,loteprednol,Ingredient,RxNorm,Valid,Standard
+986517,2221,cellulose,Ingredient,RxNorm,Valid,Standard
+978577,577312,"mineral oil, light",Ingredient,RxNorm,Valid,Standard
+956691,4570,fructose,Ingredient,RxNorm,Valid,Standard
+915392,7268,natamycin,Ingredient,RxNorm,Valid,Standard
+793242,1992412,papaya extract,Ingredient,RxNorm,Valid,Standard
+792844,1987398,axicabtagene ciloleucel,Ingredient,RxNorm,Valid,Standard
+543291,39385,varicella-zoster immune globulin,Ingredient,RxNorm,Valid,Standard
+46287434,1665496,rolapitant,Ingredient,RxNorm,Valid,Standard
+46274595,1368451,glycerol phenylbutyrate,Ingredient,RxNorm,Valid,Standard
+45892558,1597381,dasabuvir,Ingredient,RxNorm,Valid,Standard
+45892554,1597373,paritaprevir,Ingredient,RxNorm,Valid,Standard
+45892552,1597371,ombitasvir,Ingredient,RxNorm,Valid,Standard
+43013047,1364449,crofelemer,Ingredient,RxNorm,Valid,Standard
+35605804,1722365,cobimetinib,Ingredient,RxNorm,Valid,Standard
+19124477,6448,lithium,Ingredient,RxNorm,Valid,Standard
+19123729,618371,pentetate,Ingredient,RxNorm,Valid,Standard
+19095285,24460,ethanolamine oleate,Ingredient,RxNorm,Valid,Standard
+19090505,235481,human calcitonin,Ingredient,RxNorm,Valid,Standard
+19063981,9500,rutin,Ingredient,RxNorm,Valid,Standard
+19018384,74,4-aminobenzoic acid,Ingredient,RxNorm,Valid,Standard
+19000726,10553,thymol,Ingredient,RxNorm,Valid,Standard
+1594973,2404,chlorpropamide,Ingredient,RxNorm,Valid,Standard
+1508241,69440,policosanol,Ingredient,RxNorm,Valid,Standard
+1146139,2374729,lurbinectedin,Ingredient,RxNorm,Valid,Standard
+1145379,4025,ergotamine,Ingredient,RxNorm,Valid,Standard
+991003,642274,retapamulin,Ingredient,RxNorm,Valid,Standard
+977421,55681,rimexolone,Ingredient,RxNorm,Valid,Standard
+963987,1999574,apalutamide,Ingredient,RxNorm,Valid,Standard
+933794,18516,attapulgite,Ingredient,RxNorm,Valid,Standard
+40220748,1810569,eteplirsen,Ingredient,RxNorm,Valid,Standard
+40168516,885183,Agkistrodon piscivorus antivenin,Ingredient,RxNorm,Valid,Standard
+40168425,885189,Crotalus scutulatus antivenin,Ingredient,RxNorm,Valid,Standard
+40168423,885187,Crotalus atrox antivenin,Ingredient,RxNorm,Valid,Standard
+40168421,885185,Crotalus adamanteus antivenin,Ingredient,RxNorm,Valid,Standard
+40161669,853491,canakinumab,Ingredient,RxNorm,Valid,Standard
+37498261,2268307,enfortumab,Ingredient,RxNorm,Valid,Standard
+37002532,2390935,risdiplam,Ingredient,RxNorm,Valid,Standard
+19113040,52106,lithium gluconate,Ingredient,RxNorm,Valid,Standard
+19071905,28818,lithium sulfate,Ingredient,RxNorm,Valid,Standard
+19071904,28817,lithium succinate,Ingredient,RxNorm,Valid,Standard
+19066894,9778,silicones,Ingredient,RxNorm,Valid,Standard
+19066433,259274,milk thistle seed extract,Ingredient,RxNorm,Valid,Standard
+1798476,2592,clofazimine,Ingredient,RxNorm,Valid,Standard
+1592954,1927663,delafloxacin,Ingredient,RxNorm,Valid,Standard
+1510970,2121751,solriamfetol,Ingredient,RxNorm,Valid,Standard
+1510328,2044896,fostamatinib,Ingredient,RxNorm,Valid,Standard
+1398753,259462,lutein esters,Ingredient,RxNorm,Valid,Standard
+1123995,7688,metaproterenol,Ingredient,RxNorm,Valid,Standard
+930747,17652,amcinonide,Ingredient,RxNorm,Valid,Standard
+912803,118886,verteporfin,Ingredient,RxNorm,Valid,Standard
+906902,285156,Limosilactobacillus reuteri,Ingredient,RxNorm,Valid,Standard
+19095721,24853,fenoldopam,Ingredient,RxNorm,Valid,Standard
+19059817,9002,pyridoxal,Ingredient,RxNorm,Valid,Standard
+19059142,89795,xanthinol,Ingredient,RxNorm,Valid,Standard
+19054693,435657,olive leaf extract,Ingredient,RxNorm,Valid,Standard
+19048026,21373,cobamamide,Ingredient,RxNorm,Valid,Standard
+19011904,142141,potassium aminobenzoate,Ingredient,RxNorm,Valid,Standard
+1718346,1855735,olaratumab,Ingredient,RxNorm,Valid,Standard
+1511250,2123125,erdafitinib,Ingredient,RxNorm,Valid,Standard
+1366773,50975,histrelin,Ingredient,RxNorm,Valid,Standard
+1359148,477379,Echinacea root extract,Ingredient,RxNorm,Valid,Standard
+1314928,125921,ginger root,Ingredient,RxNorm,Valid,Standard
+1305063,284110,Fe heme polypeptide,Ingredient,RxNorm,Valid,Standard
+1188114,22697,dexchlorpheniramine,Ingredient,RxNorm,Valid,Standard
+1036094,10030,stannous fluoride,Ingredient,RxNorm,Valid,Standard
+946340,8345,piperonyl butoxide,Ingredient,RxNorm,Valid,Standard
+940535,37319,sulconazole,Ingredient,RxNorm,Valid,Standard
+701423,2564025,belumosudil,Ingredient,RxNorm,Valid,Standard
+46221435,1603350,panobinostat,Ingredient,RxNorm,Valid,Standard
+43012888,1367133,polyoxyl 8 stearate,Ingredient,RxNorm,Valid,Standard
+42903904,1314846,silver chloride,Ingredient,RxNorm,Valid,Standard
+42899307,1311533,lithium chloride,Ingredient,RxNorm,Valid,Standard
+36249974,1797118,dotatate,Ingredient,RxNorm,Valid,Standard
+19135810,88188,zinc bromide,Ingredient,RxNorm,Valid,Standard
+19106100,4271,factor XIII,Ingredient,RxNorm,Valid,Standard
+19070955,283571,hawthorn berry extract,Ingredient,RxNorm,Valid,Standard
+19055783,236142,zinc aspartate,Ingredient,RxNorm,Valid,Standard
+19039298,36453,sevoflurane,Ingredient,RxNorm,Valid,Standard
+19026450,341018,anidulafungin,Ingredient,RxNorm,Valid,Standard
+19018322,159151,tocophersolan,Ingredient,RxNorm,Valid,Standard
+19010360,30021,mild silver protein,Ingredient,RxNorm,Valid,Standard
+19004578,283829,cider vinegar,Ingredient,RxNorm,Valid,Standard
+1736999,190548,tipranavir,Ingredient,RxNorm,Valid,Standard
+1704758,10795,triclosan,Ingredient,RxNorm,Valid,Standard
+1594187,1921217,brigatinib,Ingredient,RxNorm,Valid,Standard
+1394337,6674,mechlorethamine,Ingredient,RxNorm,Valid,Standard
+1385800,220982,yohimbine,Ingredient,RxNorm,Valid,Standard
+1378796,578377,Polypodium leucotomos,Ingredient,RxNorm,Valid,Standard
+1189766,6378,levorphanol,Ingredient,RxNorm,Valid,Standard
+1180412,59087,Eucalyptus oil,Ingredient,RxNorm,Valid,Standard
+1145791,2370147,selpercatinib,Ingredient,RxNorm,Valid,Standard
+967496,52151,lodoxamide,Ingredient,RxNorm,Valid,Standard
+954036,8792,propylhexedrine,Ingredient,RxNorm,Valid,Standard
+905531,10824,metipranolol,Ingredient,RxNorm,Valid,Standard
+900093,66870,casanthranol,Ingredient,RxNorm,Valid,Standard
+792737,1986438,tisagenlecleucel,Ingredient,RxNorm,Valid,Standard
+42874258,1306063,zinc glycinate,Ingredient,RxNorm,Valid,Standard
+40239995,1112990,ezogabine,Ingredient,RxNorm,Valid,Standard
+37498491,2272403,lemborexant,Ingredient,RxNorm,Valid,Standard
+37497691,2262435,zanubrutinib,Ingredient,RxNorm,Valid,Standard
+37003174,2462500,silver sulfate,Ingredient,RxNorm,Valid,Standard
+35200163,2053490,patisiran,Ingredient,RxNorm,Valid,Standard
+19079390,58301,zinc picolinate,Ingredient,RxNorm,Valid,Standard
+19064089,9515,safflower oil,Ingredient,RxNorm,Valid,Standard
+19059477,24457,ethanolamine,Ingredient,RxNorm,Valid,Standard
+19049402,20852,chlorophyllin,Ingredient,RxNorm,Valid,Standard
+19048037,847728,lumefantrine,Ingredient,RxNorm,Valid,Standard
+19045290,203219,evening primrose oil,Ingredient,RxNorm,Valid,Standard
+19033634,18343,artemether,Ingredient,RxNorm,Valid,Standard
+19030387,1752,bromelains,Ingredient,RxNorm,Valid,Standard
+19018823,7414,nicotinyl alcohol,Ingredient,RxNorm,Valid,Standard
+19011018,11422,zinc orotate,Ingredient,RxNorm,Valid,Standard
+19007533,2854,corn oil,Ingredient,RxNorm,Valid,Standard
+1710446,3007,cycloserine,Ingredient,RxNorm,Valid,Standard
+1536963,2550714,sotorasib,Ingredient,RxNorm,Valid,Standard
+1366428,2110605,caplacizumab,Ingredient,RxNorm,Valid,Standard
+1317597,325524,garlic powder,Ingredient,RxNorm,Valid,Standard
+1310937,114203,feverfew extract,Ingredient,RxNorm,Valid,Standard
+993979,6606,malathion,Ingredient,RxNorm,Valid,Standard
+992308,23744,dyclonine,Ingredient,RxNorm,Valid,Standard
+959174,477631,butabarbital,Ingredient,RxNorm,Valid,Standard
+745790,8331,pimozide,Ingredient,RxNorm,Valid,Standard
+739665,2475830,vericiguat,Ingredient,RxNorm,Valid,Standard
+723344,33272,phendimetrazine,Ingredient,RxNorm,Valid,Standard
+46287445,1665509,flibanserin,Ingredient,RxNorm,Valid,Standard
+45775578,1546450,radium,Ingredient,RxNorm,Valid,Standard
+40238770,1102129,boceprevir,Ingredient,RxNorm,Valid,Standard
+37499520,2289380,selumetinib,Ingredient,RxNorm,Valid,Standard
+37498602,2274378,tazemetostat,Ingredient,RxNorm,Valid,Standard
+37496558,2199015,istradefylline,Ingredient,RxNorm,Valid,Standard
+37003160,2462152,silver carbonate,Ingredient,RxNorm,Valid,Standard
+19126395,705279,oregano oil,Ingredient,RxNorm,Valid,Standard
+19058549,47610,calcium alginate,Ingredient,RxNorm,Valid,Standard
+19056379,236573,lithium hydrogen aspartate,Ingredient,RxNorm,Valid,Standard
+19006991,285223,cat's claw preparation,Ingredient,RxNorm,Valid,Standard
+19005918,68905,borage oil,Ingredient,RxNorm,Valid,Standard
+19004145,282436,fenugreek seed meal,Ingredient,RxNorm,Valid,Standard
+19002257,27291,hydroxypropylcellulose,Ingredient,RxNorm,Valid,Standard
+1593136,1875229,zinc succinate,Ingredient,RxNorm,Valid,Standard
+1514412,7244,nandrolone,Ingredient,RxNorm,Valid,Standard
+1197736,257844,mefenamate,Ingredient,RxNorm,Valid,Standard
+1172206,54365,pamabrom,Ingredient,RxNorm,Valid,Standard
+1123904,33408,phenyltoloxamine,Ingredient,RxNorm,Valid,Standard
+1037015,104125,bran,Ingredient,RxNorm,Valid,Standard
+989567,23024,difenoxin,Ingredient,RxNorm,Valid,Standard
+987009,618564,trichloroacetate,Ingredient,RxNorm,Valid,Standard
+949459,20877,chloroxylenol,Ingredient,RxNorm,Valid,Standard
+935529,18889,benoxinate,Ingredient,RxNorm,Valid,Standard
+935390,35382,resorcinol,Ingredient,RxNorm,Valid,Standard
+919839,144377,Arnica extract,Ingredient,RxNorm,Valid,Standard
+753860,4328,fenfluramine,Ingredient,RxNorm,Valid,Standard
+752276,8718,procyclidine,Ingredient,RxNorm,Valid,Standard
+732309,8047,pergolide,Ingredient,RxNorm,Valid,Standard
+725822,3389,diethylpropion,Ingredient,RxNorm,Valid,Standard
+46221699,1606274,dinutuximab,Ingredient,RxNorm,Valid,Standard
+45776421,1543095,efmoroctocog alfa,Ingredient,RxNorm,Valid,Standard
+43532257,1427055,copper carbonate,Ingredient,RxNorm,Valid,Standard
+43014062,1368701,disilver oxide,Ingredient,RxNorm,Valid,Standard
+43012401,1363721,niacinamide ascorbate,Ingredient,RxNorm,Valid,Standard
+43012263,1362927,dodecyl sulfate,Ingredient,RxNorm,Valid,Standard
+42898356,1306166,Arnica montana flower extract,Ingredient,RxNorm,Valid,Standard
+40166461,662019,pralatrexate,Ingredient,RxNorm,Valid,Standard
+36026868,2536430,idecabtagene vicleucel,Ingredient,RxNorm,Valid,Standard
+19095462,24506,vinpocetine,Ingredient,RxNorm,Valid,Standard
+19078968,579598,soybean lecithin,Ingredient,RxNorm,Valid,Standard
+19069019,5333,histamine,Ingredient,RxNorm,Valid,Standard
+19055492,235787,Capsicum oleoresin,Ingredient,RxNorm,Valid,Standard
+19037983,36314,secnidazole,Ingredient,RxNorm,Valid,Standard
+19025693,33835,plasma protein fraction,Ingredient,RxNorm,Valid,Standard
+19025138,1599,bismuth,Ingredient,RxNorm,Valid,Standard
+19016725,137939,silver acetate,Ingredient,RxNorm,Valid,Standard
+19006855,285155,kelp preparation,Ingredient,RxNorm,Valid,Standard
+1789521,2296,charcoal,Ingredient,RxNorm,Valid,Standard
+1759270,8984,pyrantel,Ingredient,RxNorm,Valid,Standard
+1718111,1812589,vonicog alfa,Ingredient,RxNorm,Valid,Standard
+990009,23410,dipivefrin,Ingredient,RxNorm,Valid,Standard
+942028,38298,tioconazole,Ingredient,RxNorm,Valid,Standard
+928980,3455,dimethyl sulfoxide,Ingredient,RxNorm,Valid,Standard
+919681,1426,benzyl alcohol,Ingredient,RxNorm,Valid,Standard
+916282,32385,olsalazine,Ingredient,RxNorm,Valid,Standard
+913440,31447,nabilone,Ingredient,RxNorm,Valid,Standard
+909959,299635,alefacept,Ingredient,RxNorm,Valid,Standard
+903459,68091,dolasetron,Ingredient,RxNorm,Valid,Standard
+702004,2571854,ioflupane,Ingredient,RxNorm,Valid,Standard
+701982,2571813,atogepant,Ingredient,RxNorm,Valid,Standard
+43532113,1427222,parathyroid hormone,Ingredient,RxNorm,Valid,Standard
+42903867,1314411,propylene glycol monostearate,Ingredient,RxNorm,Valid,Standard
+42900551,1307815,xanthan gum,Ingredient,RxNorm,Valid,Standard
+42899476,1311070,lanthanum,Ingredient,RxNorm,Valid,Standard
+37499576,2359268,pemigatinib,Ingredient,RxNorm,Valid,Standard
+37499303,2286252,osilodrostat,Ingredient,RxNorm,Valid,Standard
+37002736,2394040,cupric citrate,Ingredient,RxNorm,Valid,Standard
+19100411,37032,stannous chloride,Ingredient,RxNorm,Valid,Standard
+19088328,629565,alglucosidase alfa,Ingredient,RxNorm,Valid,Standard
+19086788,223779,potassium bitartrate,Ingredient,RxNorm,Valid,Standard
+19067303,5175,hemin,Ingredient,RxNorm,Valid,Standard
+19056614,236855,Lactobacillus bifidus,Ingredient,RxNorm,Valid,Standard
+19038562,196319,palifermin,Ingredient,RxNorm,Valid,Standard
+19037035,19079,benzylpenicilloyl polylysine,Ingredient,RxNorm,Valid,Standard
+19035569,1889,calcifediol,Ingredient,RxNorm,Valid,Standard
+19008893,29261,manganese chloride,Ingredient,RxNorm,Valid,Standard
+19005061,68503,ziconotide,Ingredient,RxNorm,Valid,Standard
+1749083,20492,ceftibuten,Ingredient,RxNorm,Valid,Standard
+1727468,34345,pralidoxime,Ingredient,RxNorm,Valid,Standard
+1718211,1855048,bezlotoxumab,Ingredient,RxNorm,Valid,Standard
+1593331,1876119,etelcalcetide,Ingredient,RxNorm,Valid,Standard
+1324250,155097,hawthorn preparation,Ingredient,RxNorm,Valid,Standard
+1319051,742,amyl nitrite,Ingredient,RxNorm,Valid,Standard
+1201272,2637547,perfluorohexyloctane,Ingredient,RxNorm,Valid,Standard
+1145960,2371954,cupric nitrate,Ingredient,RxNorm,Valid,Standard
+1145637,2362165,capmatinib,Ingredient,RxNorm,Valid,Standard
+952538,873,anthralin,Ingredient,RxNorm,Valid,Standard
+915553,319780,Capsicum extract,Ingredient,RxNorm,Valid,Standard
+515671,7288,Neisseria meningitidis,Ingredient,RxNorm,Valid,Standard
+45775584,1546458,picosulfurate,Ingredient,RxNorm,Valid,Standard
+44816322,1495153,"fatty acids, omega-6",Ingredient,RxNorm,Valid,Standard
+43532998,1428217,cupric glycinate,Ingredient,RxNorm,Valid,Standard
+43012270,1363030,"1,3-propanediol",Ingredient,RxNorm,Valid,Standard
+42899344,1311261,maltose,Ingredient,RxNorm,Valid,Standard
+42899025,1309389,emu oil,Ingredient,RxNorm,Valid,Standard
+40168303,877015,levoleucovorin,Ingredient,RxNorm,Valid,Standard
+37497593,2261783,diroximel fumarate,Ingredient,RxNorm,Valid,Standard
+37496447,2197862,entrectinib,Ingredient,RxNorm,Valid,Standard
+37002368,2387211,tafasitamab,Ingredient,RxNorm,Valid,Standard
+35200286,2054968,stiripentol,Ingredient,RxNorm,Valid,Standard
+35200139,2053436,tildrakizumab,Ingredient,RxNorm,Valid,Standard
+19136028,9511,Saccharomyces cerevisiae,Ingredient,RxNorm,Valid,Standard
+19087067,618974,4-aminobenzoate,Ingredient,RxNorm,Valid,Standard
+19086712,33094,peppermint oil,Ingredient,RxNorm,Valid,Standard
+19069133,27823,iron protein succinylate,Ingredient,RxNorm,Valid,Standard
+19018601,1905,calcium fluoride,Ingredient,RxNorm,Valid,Standard
+19011565,11431,zinc-DTPA,Ingredient,RxNorm,Valid,Standard
+19011163,126291,pumpkin seed extract,Ingredient,RxNorm,Valid,Standard
+19008281,10603,tin,Ingredient,RxNorm,Valid,Standard
+1777254,2192,ceftizoxime,Ingredient,RxNorm,Valid,Standard
+1750074,4127,ethionamide,Ingredient,RxNorm,Valid,Standard
+1716721,138099,gemifloxacin,Ingredient,RxNorm,Valid,Standard
+1590418,235479,"thyroid, porcine",Ingredient,RxNorm,Valid,Standard
+1503432,278739,pegvisomant,Ingredient,RxNorm,Valid,Standard
+1503184,6782,mestranol,Ingredient,RxNorm,Valid,Standard
+1356361,2109055,tagraxofusp,Ingredient,RxNorm,Valid,Standard
+1340875,81782,shark cartilage extract,Ingredient,RxNorm,Valid,Standard
+1315140,317825,horse chestnut preparation,Ingredient,RxNorm,Valid,Standard
+1139993,8175,phenylpropanolamine,Ingredient,RxNorm,Valid,Standard
+1115588,319781,Eucalyptus extract,Ingredient,RxNorm,Valid,Standard
+991706,236718,sulfonated phenol,Ingredient,RxNorm,Valid,Standard
+969276,21766,crotamiton,Ingredient,RxNorm,Valid,Standard
+969004,5321,hexylresorcinol,Ingredient,RxNorm,Valid,Standard
+958368,89778,ecothiopate,Ingredient,RxNorm,Valid,Standard
+956630,4537,formic acid,Ingredient,RxNorm,Valid,Standard
+936429,356988,efalizumab,Ingredient,RxNorm,Valid,Standard
+751698,8701,procaine,Ingredient,RxNorm,Valid,Standard
+741578,2619426,teclistamab,Ingredient,RxNorm,Valid,Standard
+739770,2477854,etesevimab,Ingredient,RxNorm,Valid,Standard
+715727,72937,tolcapone,Ingredient,RxNorm,Valid,Standard
+703470,10734,tranylcypromine,Ingredient,RxNorm,Valid,Standard
+702498,2587789,tezepelumab,Ingredient,RxNorm,Valid,Standard
+45775582,1546454,valeric acid,Ingredient,RxNorm,Valid,Standard
+45775146,1546168,peginterferon beta-1a,Ingredient,RxNorm,Valid,Standard
+44816326,1495318,phenolate,Ingredient,RxNorm,Valid,Standard
+43532423,1426872,hexyl 5-aminolevulinate,Ingredient,RxNorm,Valid,Standard
+43014126,1369590,pentetate calcium,Ingredient,RxNorm,Valid,Standard
+43014003,1368625,arachidonate,Ingredient,RxNorm,Valid,Standard
+42900071,1311138,sodium bromide,Ingredient,RxNorm,Valid,Standard
+42873745,1306100,bicisate,Ingredient,RxNorm,Valid,Standard
+40242103,1116979,European house dust mite allergenic extract,Ingredient,RxNorm,Valid,Standard
+40241606,1116977,American house dust mite allergenic extract,Ingredient,RxNorm,Valid,Standard
+37499031,2282660,eptinezumab,Ingredient,RxNorm,Valid,Standard
+37498659,2275602,lumateperone,Ingredient,RxNorm,Valid,Standard
+35606695,1720882,isavuconazole,Ingredient,RxNorm,Valid,Standard
+35201068,2099704,talazoparib,Ingredient,RxNorm,Valid,Standard
+35200416,2055655,damoctocog alfa pegol,Ingredient,RxNorm,Valid,Standard
+19040871,37422,sunflower oil,Ingredient,RxNorm,Valid,Standard
+19038464,196238,soy protein isolate,Ingredient,RxNorm,Valid,Standard
+19026710,78903,capreomycin,Ingredient,RxNorm,Valid,Standard
+19007721,10579,thyrotropin,Ingredient,RxNorm,Valid,Standard
+1759013,2591519,faricimab,Ingredient,RxNorm,Valid,Standard
+1756524,4530,formaldehyde,Ingredient,RxNorm,Valid,Standard
+1586808,618365,"synthetic conjugated estrogens, B",Ingredient,RxNorm,Valid,Standard
+1555887,4494,fluoxymesterone,Ingredient,RxNorm,Valid,Standard
+1536834,2540964,loncastuximab tesirine,Ingredient,RxNorm,Valid,Standard
+1510913,2121085,siponimod,Ingredient,RxNorm,Valid,Standard
+1380472,5920,intrinsic factor,Ingredient,RxNorm,Valid,Standard
+1315286,31805,nilutamide,Ingredient,RxNorm,Valid,Standard
+1307247,285243,alfalfa preparation,Ingredient,RxNorm,Valid,Standard
+1146410,2380373,fostemsavir,Ingredient,RxNorm,Valid,Standard
+1145752,2369389,ripretinib,Ingredient,RxNorm,Valid,Standard
+1145516,2360574,Neisseria meningitidis serogroup Y capsular polysaccharide tetanus toxoid protein conjugate vaccine,Ingredient,RxNorm,Valid,Standard
+1145515,2360573,Neisseria meningitidis serogroup W-135 capsular polysaccharide tetanus toxoid protein conjugate vaccine,Ingredient,RxNorm,Valid,Standard
+1145514,2360572,Neisseria meningitidis serogroup C capsular polysaccharide tetanus toxoid protein conjugate vaccine,Ingredient,RxNorm,Valid,Standard
+1145513,2360571,Neisseria meningitidis serogroup A capsular polysaccharide tetanus toxoid protein conjugate vaccine,Ingredient,RxNorm,Valid,Standard
+998392,25842,gluconolactone,Ingredient,RxNorm,Valid,Standard
+989727,23163,dihydroxyaluminum sodium carbonate,Ingredient,RxNorm,Valid,Standard
+959665,8991,pyrethrins,Ingredient,RxNorm,Valid,Standard
+951980,214817,sacrosidase,Ingredient,RxNorm,Valid,Standard
+942765,38624,triethanolamine polypeptide oleate condensate,Ingredient,RxNorm,Valid,Standard
+941004,37534,tadenan,Ingredient,RxNorm,Valid,Standard
+929542,16728,acetohydroxamic acid,Ingredient,RxNorm,Valid,Standard
+926487,7880,pancreatin,Ingredient,RxNorm,Valid,Standard
+907553,28627,levocabastine,Ingredient,RxNorm,Valid,Standard
+900017,66869,cascara sagrada,Ingredient,RxNorm,Valid,Standard
+793741,1939323,voxilaprevir,Ingredient,RxNorm,Valid,Standard
+779985,2604578,vutrisiran,Ingredient,RxNorm,Valid,Standard
+740924,3752,edrophonium,Ingredient,RxNorm,Valid,Standard
+739856,2479136,lisocabtagene maraleucel,Ingredient,RxNorm,Valid,Standard
+727835,7966,pemoline,Ingredient,RxNorm,Valid,Standard
+712757,719,amobarbital,Ingredient,RxNorm,Valid,Standard
+700253,10493,thiopental,Ingredient,RxNorm,Valid,Standard
+46275491,1659191,sonidegib,Ingredient,RxNorm,Valid,Standard
+44506794,1441386,bazedoxifene,Ingredient,RxNorm,Valid,Standard
+43560728,1435860,magnesium fluoride,Ingredient,RxNorm,Valid,Standard
+43012518,1364504,bedaquiline,Ingredient,RxNorm,Valid,Standard
+43012293,1363352,hydroxyethyl starch 130-0.4,Ingredient,RxNorm,Valid,Standard
+42900477,1311540,hexamethyldisiloxane,Ingredient,RxNorm,Valid,Standard
+40224726,1006469,doconexent,Ingredient,RxNorm,Valid,Standard
+37498055,2266501,butterbur extract,Ingredient,RxNorm,Valid,Standard
+35603109,1720259,asfotase alfa,Ingredient,RxNorm,Valid,Standard
+35602852,1673560,Ginkgo biloba seed extract,Ingredient,RxNorm,Valid,Standard
+35200302,2054984,lusutrombopag,Ingredient,RxNorm,Valid,Standard
+19096743,253157,bee pollen,Ingredient,RxNorm,Valid,Standard
+19095802,24913,ferric sulfate,Ingredient,RxNorm,Valid,Standard
+19071778,285149,banana extract,Ingredient,RxNorm,Valid,Standard
+19069904,9892,sodium morrhuate,Ingredient,RxNorm,Valid,Standard
+19061083,4890,glutathione,Ingredient,RxNorm,Valid,Standard
+19060393,9060,quercetin,Ingredient,RxNorm,Valid,Standard
+19054876,22968,dienogest,Ingredient,RxNorm,Valid,Standard
+19042819,824547,acai extract,Ingredient,RxNorm,Valid,Standard
+19022417,3304,heroin,Ingredient,RxNorm,Valid,Standard
+19014164,72385,wheat germ oil,Ingredient,RxNorm,Valid,Standard
+19012197,1437,berberine,Ingredient,RxNorm,Valid,Standard
+19002770,27340,desflurane,Ingredient,RxNorm,Valid,Standard
+1790692,6398,lincomycin,Ingredient,RxNorm,Valid,Standard
+1728909,3446,succimer,Ingredient,RxNorm,Valid,Standard
+1399063,260025,Echinacea purpurea extract,Ingredient,RxNorm,Valid,Standard
+1362225,9260,reserpine,Ingredient,RxNorm,Valid,Standard
+1355795,2105845,glasdegib,Ingredient,RxNorm,Valid,Standard
+1355705,2105628,larotrectinib,Ingredient,RxNorm,Valid,Standard
+1355650,2104604,emapalumab,Ingredient,RxNorm,Valid,Standard
+1342346,38409,toremifene,Ingredient,RxNorm,Valid,Standard
+1180182,588003,meclofenamate,Ingredient,RxNorm,Valid,Standard
+1153928,4331,fenoprofen,Ingredient,RxNorm,Valid,Standard
+958994,476786,aloe polysaccharide,Ingredient,RxNorm,Valid,Standard
+932196,35255,cisapride,Ingredient,RxNorm,Valid,Standard
+921956,753346,sinecatechins,Ingredient,RxNorm,Valid,Standard
+910888,3022,cysteamine,Ingredient,RxNorm,Valid,Standard
+787362,623,ambenonium,Ingredient,RxNorm,Valid,Standard
+739588,2475077,cabotegravir,Ingredient,RxNorm,Valid,Standard
+738152,3637,doxapram,Ingredient,RxNorm,Valid,Standard
+709699,7019,molindone,Ingredient,RxNorm,Valid,Standard
+532274,804187,yellow fever virus strain 17D-204 live antigen,Ingredient,RxNorm,Valid,Standard
+46221255,1607976,ferric pyrophosphate,Ingredient,RxNorm,Valid,Standard
+45775576,1546446,omacetaxine,Ingredient,RxNorm,Valid,Standard
+45774966,1552337,netupitant,Ingredient,RxNorm,Valid,Standard
+44818499,1537034,vorapaxar,Ingredient,RxNorm,Valid,Standard
+44814600,1490468,tasimelteon,Ingredient,RxNorm,Valid,Standard
+44814322,1491862,hepatitis A virus,Ingredient,RxNorm,Valid,Standard
+43525850,1372255,goldenseal extract,Ingredient,RxNorm,Valid,Standard
+43012169,1361656,propylene glycol alginate,Ingredient,RxNorm,Valid,Standard
+42899495,1310570,laureth-3,Ingredient,RxNorm,Valid,Standard
+42899262,1311595,Garcinia cambogia fruit extract,Ingredient,RxNorm,Valid,Standard
+42898758,1309226,chamomile extract,Ingredient,RxNorm,Valid,Standard
+40238052,1098413,vandetanib,Ingredient,RxNorm,Valid,Standard
+40230159,1039062,corn starch,Ingredient,RxNorm,Valid,Standard
+40161488,851994,Timothy grass pollen extract,Ingredient,RxNorm,Valid,Standard
+37499437,2288236,ozanimod,Ingredient,RxNorm,Valid,Standard
+37498468,2272107,avapritinib,Ingredient,RxNorm,Valid,Standard
+37003171,2462497,Lactobacillus gasseri,Ingredient,RxNorm,Valid,Standard
+36026694,2533837,2-octyl cyanoacrylate,Ingredient,RxNorm,Valid,Standard
+35200881,2059018,sarecycline,Ingredient,RxNorm,Valid,Standard
+35200405,2055641,lanadelumab,Ingredient,RxNorm,Valid,Standard
+19136036,9644,selenomethionine,Ingredient,RxNorm,Valid,Standard
+19123868,62153,exametazime,Ingredient,RxNorm,Valid,Standard
+19098807,259473,American ginseng root,Ingredient,RxNorm,Valid,Standard
+19098769,259471,Korean ginseng root extract,Ingredient,RxNorm,Valid,Standard
+19098765,259470,Korean ginseng preparation,Ingredient,RxNorm,Valid,Standard
+19097682,25696,genistein,Ingredient,RxNorm,Valid,Standard
+19095744,24897,ferric ammonium citrate,Ingredient,RxNorm,Valid,Standard
+19066500,259314,black pepper preparation,Ingredient,RxNorm,Valid,Standard
+19061626,24910,ferric phosphate,Ingredient,RxNorm,Valid,Standard
+19059741,89959,phosphatidylserine,Ingredient,RxNorm,Valid,Standard
+19056805,237115,grape seed,Ingredient,RxNorm,Valid,Standard
+19056705,236908,methyl butetisalicylate,Ingredient,RxNorm,Valid,Standard
+19051642,214470,denileukin diftitox,Ingredient,RxNorm,Valid,Standard
+19047598,845525,"Japanese encephalitis virus vaccine, inactivated",Ingredient,RxNorm,Valid,Standard
+19031378,8016,pepsin A,Ingredient,RxNorm,Valid,Standard
+19017575,325521,thyroid (beef),Ingredient,RxNorm,Valid,Standard
+19014213,314797,potassium lactate,Ingredient,RxNorm,Valid,Standard
+1789428,228656,amprenavir,Ingredient,RxNorm,Valid,Standard
+1525741,7813,oxymetholone,Ingredient,RxNorm,Valid,Standard
+1398740,259460,borage extract,Ingredient,RxNorm,Valid,Standard
+1384360,6066,isoxsuprine,Ingredient,RxNorm,Valid,Standard
+1361535,2184137,relebactam,Ingredient,RxNorm,Valid,Standard
+1360890,487252,Spirulina,Ingredient,RxNorm,Valid,Standard
+1355889,2106338,amifampridine,Ingredient,RxNorm,Valid,Standard
+1316354,1369,bendroflumethiazide,Ingredient,RxNorm,Valid,Standard
+1141018,20220,carbinoxamine,Ingredient,RxNorm,Valid,Standard
+1102917,10636,tolmetin,Ingredient,RxNorm,Valid,Standard
+990413,2354,chlorcyclizine,Ingredient,RxNorm,Valid,Standard
+984801,6102,kaolin,Ingredient,RxNorm,Valid,Standard
+974140,5486,hydrochloric acid,Ingredient,RxNorm,Valid,Standard
+941052,81864,alitretinoin,Ingredient,RxNorm,Valid,Standard
+937725,19476,bismuth subgallate,Ingredient,RxNorm,Valid,Standard
+930604,17609,aluminum acetate,Ingredient,RxNorm,Valid,Standard
+920378,7455,nitrofurazone,Ingredient,RxNorm,Valid,Standard
+918881,32673,oxybenzone,Ingredient,RxNorm,Valid,Standard
+904639,10772,trichlormethiazide,Ingredient,RxNorm,Valid,Standard
+836654,10318,tacrine,Ingredient,RxNorm,Valid,Standard
+794147,6646,maprotiline,Ingredient,RxNorm,Valid,Standard
+766067,9624,secobarbital,Ingredient,RxNorm,Valid,Standard
+745268,4024,"ergoloid mesylates, USP",Ingredient,RxNorm,Valid,Standard
+739739,2477103,tepotinib,Ingredient,RxNorm,Valid,Standard
+719128,1422,benzphetamine,Ingredient,RxNorm,Valid,Standard
+704053,6816,methamphetamine,Ingredient,RxNorm,Valid,Standard
+701696,2567226,belzutifan,Ingredient,RxNorm,Valid,Standard
+701512,2565814,avalglucosidase alfa,Ingredient,RxNorm,Valid,Standard
+45892130,1601988,American aloe stem extract,Ingredient,RxNorm,Valid,Standard
+45776670,1543543,belinostat,Ingredient,RxNorm,Valid,Standard
+44818493,1535944,coagulation factor IX recombinant immunoglobulin G1 fusion protein,Ingredient,RxNorm,Valid,Standard
+44816309,1493693,Gymnema sylvestre leaf extract,Ingredient,RxNorm,Valid,Standard
+44506782,1440856,cholic acid,Ingredient,RxNorm,Valid,Standard
+43525903,1373041,polihexanide,Ingredient,RxNorm,Valid,Standard
+43014053,1368150,cetyl lactate,Ingredient,RxNorm,Valid,Standard
+43013616,1368950,edetate calcium,Ingredient,RxNorm,Valid,Standard
+43012279,1363050,maltodextrin,Ingredient,RxNorm,Valid,Standard
+42899938,1307312,polyethylene glycol 8000,Ingredient,RxNorm,Valid,Standard
+42899776,1307824,Senna alata leaf extract,Ingredient,RxNorm,Valid,Standard
+42899717,1309460,Salvia hispanica seed extract,Ingredient,RxNorm,Valid,Standard
+42709318,1236136,tocopherol,Ingredient,RxNorm,Valid,Standard
+40231459,1044977,panthenol,Ingredient,RxNorm,Valid,Standard
+40182120,978673,heme iron polypeptide,Ingredient,RxNorm,Valid,Standard
+40174604,901805,velaglucerase alfa,Ingredient,RxNorm,Valid,Standard
+40171301,896135,short ragweed pollen extract,Ingredient,RxNorm,Valid,Standard
+40168899,884629,calcium pyruvate,Ingredient,RxNorm,Valid,Standard
+40161071,485858,boswellia preparation,Ingredient,RxNorm,Valid,Standard
+37498969,2282018,isatuximab,Ingredient,RxNorm,Valid,Standard
+37498633,2274803,teprotumumab,Ingredient,RxNorm,Valid,Standard
+37003361,2467540,berotralstat,Ingredient,RxNorm,Valid,Standard
+37002765,2394936,pralsetinib,Ingredient,RxNorm,Valid,Standard
+37002573,2391541,satralizumab,Ingredient,RxNorm,Valid,Standard
+36249484,1794167,Vaccinium macrocarpon whole extract,Ingredient,RxNorm,Valid,Standard
+36026750,2534233,tivozanib,Ingredient,RxNorm,Valid,Standard
+35605425,1731031,lesinurad,Ingredient,RxNorm,Valid,Standard
+35201416,2101717,"alum, ammonium",Ingredient,RxNorm,Valid,Standard
+19135782,8561,polysorbates,Ingredient,RxNorm,Valid,Standard
+19129738,7906,paraffin,Ingredient,RxNorm,Valid,Standard
+19125097,6678,meclofenamic acid,Ingredient,RxNorm,Valid,Standard
+19121338,578285,tocotrienols,Ingredient,RxNorm,Valid,Standard
+19113026,50937,Haemophilus influenzae type b,Ingredient,RxNorm,Valid,Standard
+19112540,47070,beta sitosterol,Ingredient,RxNorm,Valid,Standard
+19100751,382272,"linoleic acids, conjugated",Ingredient,RxNorm,Valid,Standard
+19100575,38022,theanine,Ingredient,RxNorm,Valid,Standard
+19098629,259366,eyebright preparation,Ingredient,RxNorm,Valid,Standard
+19097042,253190,oat bran,Ingredient,RxNorm,Valid,Standard
+19091701,6459,liver extract,Ingredient,RxNorm,Valid,Standard
+19089496,228833,gadoversetamide,Ingredient,RxNorm,Valid,Standard
+19084915,6111,karaya gum,Ingredient,RxNorm,Valid,Standard
+19072699,544488,botulism immune globulin IV human,Ingredient,RxNorm,Valid,Standard
+19069873,9884,sodium iodide,Ingredient,RxNorm,Valid,Standard
+19069046,27100,omacetaxine mepesuccinate,Ingredient,RxNorm,Valid,Standard
+19066891,9774,silicon,Ingredient,RxNorm,Valid,Standard
+19065814,253172,grape extract,Ingredient,RxNorm,Valid,Standard
+19059426,89854,mumps skin test antigen,Ingredient,RxNorm,Valid,Standard
+19059097,2438,cholesterol,Ingredient,RxNorm,Valid,Standard
+19056300,215648,compound benzoin tincture (USP),Ingredient,RxNorm,Valid,Standard
+19052620,221916,chamomile flowers,Ingredient,RxNorm,Valid,Standard
+19050016,4125,ethiodized oil,Ingredient,RxNorm,Valid,Standard
+19027015,3429,dihydrotachysterol,Ingredient,RxNorm,Valid,Standard
+19018545,18994,benznidazole,Ingredient,RxNorm,Valid,Standard
+19018192,153974,chloride ion,Ingredient,RxNorm,Valid,Standard
+19012543,31435,valrubicin,Ingredient,RxNorm,Valid,Standard
+19008374,69627,tea tree oil,Ingredient,RxNorm,Valid,Standard
+19007600,287515,soybean preparation,Ingredient,RxNorm,Valid,Standard
+19000815,10122,strontium,Ingredient,RxNorm,Valid,Standard
+1836503,10207,sulfisoxazole,Ingredient,RxNorm,Valid,Standard
+1758687,2589225,tralokinumab,Ingredient,RxNorm,Valid,Standard
+1636145,10032,stanozolol,Ingredient,RxNorm,Valid,Standard
+1586640,61805,nitisinone,Ingredient,RxNorm,Valid,Standard
+1536935,2549199,amivantamab,Ingredient,RxNorm,Valid,Standard
+1536759,2539932,ferric maltol,Ingredient,RxNorm,Valid,Standard
+1510235,2043855,burosumab,Ingredient,RxNorm,Valid,Standard
+1507558,28656,nafarelin,Ingredient,RxNorm,Valid,Standard
+1398816,259513,Echinacea purpurea root extract,Ingredient,RxNorm,Valid,Standard
+1396458,2170226,onasemnogene abeparvovec,Ingredient,RxNorm,Valid,Standard
+1366610,2119365,esketamine,Ingredient,RxNorm,Valid,Standard
+1366237,5033,guanabenz,Ingredient,RxNorm,Valid,Standard
+1361614,2197490,fedratinib,Ingredient,RxNorm,Valid,Standard
+1361030,2176312,bremelanotide,Ingredient,RxNorm,Valid,Standard
+1353048,42769,licorice,Ingredient,RxNorm,Valid,Standard
+1327978,7973,penbutolol,Ingredient,RxNorm,Valid,Standard
+1319232,328141,Angelica sinensis preparation,Ingredient,RxNorm,Valid,Standard
+1315629,319816,Urtica preparation,Ingredient,RxNorm,Valid,Standard
+1315003,725206,pomegranate extract,Ingredient,RxNorm,Valid,Standard
+1188052,22696,dexbrompheniramine,Ingredient,RxNorm,Valid,Standard
+1150886,21254,chlophedianol,Ingredient,RxNorm,Valid,Standard
+1150836,42330,terfenadine,Ingredient,RxNorm,Valid,Standard
+1146666,2384449,cedazuridine,Ingredient,RxNorm,Valid,Standard
+1145467,2362167,opicapone,Ingredient,RxNorm,Valid,Standard
+1140088,3714,dyphylline,Ingredient,RxNorm,Valid,Standard
+1036690,10328,tannic acid,Ingredient,RxNorm,Valid,Standard
+1036600,10231,sulfuric acid,Ingredient,RxNorm,Valid,Standard
+998394,258439,heavy mineral oil,Ingredient,RxNorm,Valid,Standard
+980867,5942,clioquinol,Ingredient,RxNorm,Valid,Standard
+963859,1998867,brilliant blue G,Ingredient,RxNorm,Valid,Standard
+963747,50110,dichlorodifluoromethane,Ingredient,RxNorm,Valid,Standard
+949453,20875,chloroxine,Ingredient,RxNorm,Valid,Standard
+943852,39841,xylometazoline,Ingredient,RxNorm,Valid,Standard
+942691,38623,triethanolamine,Ingredient,RxNorm,Valid,Standard
+942659,38578,trichlorofluoromethane,Ingredient,RxNorm,Valid,Standard
+924309,155122,phenolphthalein,Ingredient,RxNorm,Valid,Standard
+920064,14997,4-cresyl acetate,Ingredient,RxNorm,Valid,Standard
+915829,135313,isopropyl unoprostone,Ingredient,RxNorm,Valid,Standard
+914244,314881,undecylenate,Ingredient,RxNorm,Valid,Standard
+909358,2977,cyclizine,Ingredient,RxNorm,Valid,Standard
+908360,29151,magaldrate,Ingredient,RxNorm,Valid,Standard
+905273,6860,methyclothiazide,Ingredient,RxNorm,Valid,Standard
+903893,28144,emedastine,Ingredient,RxNorm,Valid,Standard
+793561,1994739,ozenoxacin,Ingredient,RxNorm,Valid,Standard
+792499,1945077,copanlisib,Ingredient,RxNorm,Valid,Standard
+779578,2600351,calcium fructoborate,Ingredient,RxNorm,Valid,Standard
+779180,2595243,pacritinib,Ingredient,RxNorm,Valid,Standard
+766337,50675,guanidine,Ingredient,RxNorm,Valid,Standard
+750146,4136,ethotoin,Ingredient,RxNorm,Valid,Standard
+739531,2474039,naxitamab,Ingredient,RxNorm,Valid,Standard
+705755,10834,trimipramine,Ingredient,RxNorm,Valid,Standard
+702685,6758,mephobarbital,Ingredient,RxNorm,Valid,Standard
+702291,2586068,maribavir,Ingredient,RxNorm,Valid,Standard
+507832,11131,"herpesvirus 3, human",Ingredient,RxNorm,Valid,Standard
+46287389,1665222,uridine triacetate,Ingredient,RxNorm,Valid,Standard
+45776147,1547611,oritavancin,Ingredient,RxNorm,Valid,Standard
+45775207,1592255,Lacticaseibacillus casei,Ingredient,RxNorm,Valid,Standard
+44816310,1494066,miltefosine,Ingredient,RxNorm,Valid,Standard
+44814585,1491625,metreleptin,Ingredient,RxNorm,Valid,Standard
+44784925,1484904,saffron extract,Ingredient,RxNorm,Valid,Standard
+43533097,1431152,fluorosilicate,Ingredient,RxNorm,Valid,Standard
+43533015,1428835,ferric hydroxide,Ingredient,RxNorm,Valid,Standard
+43532433,1426451,kojic acid,Ingredient,RxNorm,Valid,Standard
+43532411,1424910,high-density polyethylene,Ingredient,RxNorm,Valid,Standard
+43532245,1427046,wheat bran extract,Ingredient,RxNorm,Valid,Standard
+43531973,1426478,lanolin alcohols,Ingredient,RxNorm,Valid,Standard
+43531769,1425217,ceresin,Ingredient,RxNorm,Valid,Standard
+43526317,1373446,polyquaternium-6 (15000 MW),Ingredient,RxNorm,Valid,Standard
+43014193,1370769,raspberry extract,Ingredient,RxNorm,Valid,Standard
+43013629,1370467,fennel extract,Ingredient,RxNorm,Valid,Standard
+43012989,1367399,Symphytum uplandicum leaf extract,Ingredient,RxNorm,Valid,Standard
+43012282,1363053,polydextrose,Ingredient,RxNorm,Valid,Standard
+43012200,1362699,indium,Ingredient,RxNorm,Valid,Standard
+42903912,1314858,ribose,Ingredient,RxNorm,Valid,Standard
+42903872,1314416,levo-methamphetamine,Ingredient,RxNorm,Valid,Standard
+42903861,1314382,polyethylene glycol 1500,Ingredient,RxNorm,Valid,Standard
+42903849,1314366,manganese carbonate,Ingredient,RxNorm,Valid,Standard
+42903608,1313302,manganese phosphate,Ingredient,RxNorm,Valid,Standard
+42900454,1308067,origanum oil,Ingredient,RxNorm,Valid,Standard
+42899780,1309247,sesame oil,Ingredient,RxNorm,Valid,Standard
+42899737,1311499,sea salt,Ingredient,RxNorm,Valid,Standard
+42899536,1309210,oil of garlic,Ingredient,RxNorm,Valid,Standard
+42899116,1311095,human papillomavirus,Ingredient,RxNorm,Valid,Standard
+42898757,1309221,chamomile flower oil,Ingredient,RxNorm,Valid,Standard
+42709327,1248798,peginesatide,Ingredient,RxNorm,Valid,Standard
+40172684,899466,onion allergenic extract,Ingredient,RxNorm,Valid,Standard
+40162235,852213,sheep sorrel pollen extract,Ingredient,RxNorm,Valid,Standard
+40161546,1356,beeswax,Ingredient,RxNorm,Valid,Standard
+37497383,2205637,trifarotene,Ingredient,RxNorm,Valid,Standard
+37497314,2204915,brolucizumab,Ingredient,RxNorm,Valid,Standard
+37496826,2200638,salcaprozate,Ingredient,RxNorm,Valid,Standard
+37496518,2198944,lefamulin,Ingredient,RxNorm,Valid,Standard
+37496463,2197878,pitolisant,Ingredient,RxNorm,Valid,Standard
+37003535,2471083,collagen type II,Ingredient,RxNorm,Valid,Standard
+36026813,2535233,dasiglucagon,Ingredient,RxNorm,Valid,Standard
+35605976,1722707,botulinum neurotoxin G immune FAB2,Ingredient,RxNorm,Valid,Standard
+35605974,1722705,botulinum neurotoxin F immune FAB2,Ingredient,RxNorm,Valid,Standard
+35605972,1722703,botulinum neurotoxin E immune FAB2,Ingredient,RxNorm,Valid,Standard
+35605970,1722701,botulinum neurotoxin D immune FAB2,Ingredient,RxNorm,Valid,Standard
+35605968,1722699,botulinum neurotoxin C immune FAB2,Ingredient,RxNorm,Valid,Standard
+35605966,1722697,botulinum neurotoxin A immune FAB2,Ingredient,RxNorm,Valid,Standard
+35605957,1722684,botulinum neurotoxin B immune FAB2,Ingredient,RxNorm,Valid,Standard
+35200990,2099289,inotersen,Ingredient,RxNorm,Valid,Standard
+35200803,2058849,dacomitinib,Ingredient,RxNorm,Valid,Standard
+35200354,2055104,tecovirimat,Ingredient,RxNorm,Valid,Standard
+35200267,2054252,migalastat,Ingredient,RxNorm,Valid,Standard
+19135814,89717,thymol iodide,Ingredient,RxNorm,Valid,Standard
+19125634,69893,pentetreotide,Ingredient,RxNorm,Valid,Standard
+19125582,692863,iodine povacrylex,Ingredient,RxNorm,Valid,Standard
+19123846,618771,gamma-aminobutyrate,Ingredient,RxNorm,Valid,Standard
+19122131,59203,potassium chlorate,Ingredient,RxNorm,Valid,Standard
+19103699,41144,gadodiamide,Ingredient,RxNorm,Valid,Standard
+19100313,36100,salicin,Ingredient,RxNorm,Valid,Standard
+19099102,260038,Korean ginseng root,Ingredient,RxNorm,Valid,Standard
+19097026,253187,manganese aspartate,Ingredient,RxNorm,Valid,Standard
+19092131,237020,wild yam extract,Ingredient,RxNorm,Valid,Standard
+19080512,592464,articaine,Ingredient,RxNorm,Valid,Standard
+19072027,29495,menatetrenone,Ingredient,RxNorm,Valid,Standard
+19071993,29263,manganese dioxide,Ingredient,RxNorm,Valid,Standard
+19071968,2913,creatinine,Ingredient,RxNorm,Valid,Standard
+19071181,283767,manganese citrate,Ingredient,RxNorm,Valid,Standard
+19070953,283569,Gymnema sylvestre preparation,Ingredient,RxNorm,Valid,Standard
+19069907,9894,sodium nitrite,Ingredient,RxNorm,Valid,Standard
+19069760,9880,sodium hydroxide,Ingredient,RxNorm,Valid,Standard
+19068894,263010,tositumomab,Ingredient,RxNorm,Valid,Standard
+19067073,5140,helium,Ingredient,RxNorm,Valid,Standard
+19067036,51296,idebenone,Ingredient,RxNorm,Valid,Standard
+19066602,259449,grapefruit seed extract,Ingredient,RxNorm,Valid,Standard
+19066569,259404,barberry extract,Ingredient,RxNorm,Valid,Standard
+19066274,9640,selenite,Ingredient,RxNorm,Valid,Standard
+19060877,91099,thiosalicylate,Ingredient,RxNorm,Valid,Standard
+19060367,9022,pyrogallol,Ingredient,RxNorm,Valid,Standard
+19052447,42588,chenodeoxycholate,Ingredient,RxNorm,Valid,Standard
+19049038,4094,estriol,Ingredient,RxNorm,Valid,Standard
+19041852,3816,emepronium,Ingredient,RxNorm,Valid,Standard
+19038998,19685,bretylium,Ingredient,RxNorm,Valid,Standard
+19031360,35216,quinfamide,Ingredient,RxNorm,Valid,Standard
+19030673,17610,aluminum chlorohydrate,Ingredient,RxNorm,Valid,Standard
+19027308,34311,potassium hydroxide,Ingredient,RxNorm,Valid,Standard
+19026274,7839,p-hydroxyamphetamine,Ingredient,RxNorm,Valid,Standard
+19023184,7624,clove oil,Ingredient,RxNorm,Valid,Standard
+19021959,753340,sapropterin,Ingredient,RxNorm,Valid,Standard
+19021932,32894,paramethadione,Ingredient,RxNorm,Valid,Standard
+19020477,7456,nitrogen,Ingredient,RxNorm,Valid,Standard
+19018541,18891,benphothiamine,Ingredient,RxNorm,Valid,Standard
+19016494,324031,Carica papaya preparation,Ingredient,RxNorm,Valid,Standard
+19011034,114200,citrate,Ingredient,RxNorm,Valid,Standard
+19011031,114052,pregnenolone,Ingredient,RxNorm,Valid,Standard
+19010459,30077,mivacurium,Ingredient,RxNorm,Valid,Standard
+19008864,29209,malic acid,Ingredient,RxNorm,Valid,Standard
+19008261,11196,viloxazine,Ingredient,RxNorm,Valid,Standard
+19007803,28863,lofexidine,Ingredient,RxNorm,Valid,Standard
+19003206,27781,iopromide,Ingredient,RxNorm,Valid,Standard
+1781314,59744,interferon alfacon-1,Ingredient,RxNorm,Valid,Standard
+1758995,2591497,daridorexant,Ingredient,RxNorm,Valid,Standard
+1758562,2588243,inclisiran,Ingredient,RxNorm,Valid,Standard
+1747005,83682,cefditoren,Ingredient,RxNorm,Valid,Standard
+1741008,3755,edetic acid,Ingredient,RxNorm,Valid,Standard
+1719061,32680,oxychlorosene,Ingredient,RxNorm,Valid,Standard
+1708100,28981,loracarbef,Ingredient,RxNorm,Valid,Standard
+1592513,1872251,brodalumab,Ingredient,RxNorm,Valid,Standard
+1560047,2049549,plazomicin,Ingredient,RxNorm,Valid,Standard
+1537451,2562811,finerenone,Ingredient,RxNorm,Valid,Standard
+1537181,2559612,samidorphan,Ingredient,RxNorm,Valid,Standard
+1537049,2556617,piflufolastat,Ingredient,RxNorm,Valid,Standard
+1525713,2612087,deucravacitinib,Ingredient,RxNorm,Valid,Standard
+1510996,2121777,brexanolone,Ingredient,RxNorm,Valid,Standard
+1502855,10635,tolbutamide,Ingredient,RxNorm,Valid,Standard
+1502809,10633,tolazamide,Ingredient,RxNorm,Valid,Standard
+1398579,259342,cayenne extract,Ingredient,RxNorm,Valid,Standard
+1394027,6623,manganese,Ingredient,RxNorm,Valid,Standard
+1391199,236121,Echinacea angustifolia extract,Ingredient,RxNorm,Valid,Standard
+1385645,612937,interferon alfa-n3,Ingredient,RxNorm,Valid,Standard
+1355548,2104332,cenegermin,Ingredient,RxNorm,Valid,Standard
+1352890,42635,dextran,Ingredient,RxNorm,Valid,Standard
+1332661,17941,anisindione,Ingredient,RxNorm,Valid,Standard
+1307026,285228,kava preparation,Ingredient,RxNorm,Valid,Standard
+1201181,2637134,fezolinetant,Ingredient,RxNorm,Valid,Standard
+1201042,2636589,respiratory syncytial virus pre-fusion F protein,Ingredient,RxNorm,Valid,Standard
+1189596,23088,dihydrocodeine,Ingredient,RxNorm,Valid,Standard
+1186385,221113,levorotatory alkaloids of belladonna,Ingredient,RxNorm,Valid,Standard
+1146077,2373951,inebilizumab,Ingredient,RxNorm,Valid,Standard
+1133993,18600,azatadine,Ingredient,RxNorm,Valid,Standard
+1130585,8001,pentazocine,Ingredient,RxNorm,Valid,Standard
+1105853,10847,tripelennamine,Ingredient,RxNorm,Valid,Standard

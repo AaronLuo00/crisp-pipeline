@@ -1,0 +1,26 @@
+Id,Code,Name,Standard Class,Vocab,Validity,Concept
+9202,OP,Outpatient Visit,Visit,Visit,Valid,Standard
+9201,IP,Inpatient Visit,Visit,Visit,Valid,Standard
+581477,OMOP4822458,Office Visit,Visit,Visit,Valid,Standard
+8717,21,Inpatient Hospital,Visit,CMS Place of Service,Valid,Standard
+9203,ER,Emergency Room Visit,Visit,Visit,Valid,Standard
+8870,23,Emergency Room - Hospital,Visit,CMS Place of Service,Valid,Standard
+581379,OMOP4822042,Inpatient Critical Care Facility,Visit,CMS Place of Service,Valid,Standard
+581385,OMOP4822036,Observation Room,Visit,CMS Place of Service,Valid,Standard
+32037,OMOP4822460,Intensive Care,Visit,Visit,Valid,Standard
+0,No matching concept,No matching concept,Undefined,None,Valid,Non-standard
+38004259,261QR1100X,Ambulatory Research Clinic / Center,Visit,NUCC,Valid,Standard
+38004228,261QI0500X,Ambulatory Infusion Therapy Clinic / Center,Visit,NUCC,Valid,Standard
+38004207,261Q00000X,Ambulatory Clinic / Center,Visit,NUCC,Valid,Standard
+38004294,291U00000X,Clinical Medical Laboratory,Visit,NUCC,Valid,Standard
+581384,OMOP4822037,Inpatient Nursery,Visit,CMS Place of Service,Valid,Standard
+8782,20,Urgent Care Facility,Visit,CMS Place of Service,Valid,Standard
+581458,OMOP4822462,Pharmacy visit,Visit,Visit,Valid,Standard
+8650,25,Birthing Center,Visit,CMS Place of Service,Valid,Standard
+8883,24,Ambulatory Surgical Center,Visit,CMS Place of Service,Valid,Standard
+38004269,261QX0203X,Ambulatory Oncological Radiation Clinic / Center,Visit,NUCC,Valid,Standard
+38004287,284300000X,Special Hospital,Visit,NUCC,Valid,Standard
+38004250,261QR0200X,Ambulatory Radiology Clinic / Center,Visit,NUCC,Valid,Standard
+38004251,261QR0206X,Ambulatory Mammography Clinic / Center,Visit,NUCC,Valid,Standard
+8971,51,Inpatient Psychiatric Facility,Visit,CMS Place of Service,Valid,Standard
+38004311,315D00000X,Inpatient Hospice,Visit,NUCC,Valid,Standard

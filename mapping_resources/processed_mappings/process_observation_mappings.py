@@ -5,11 +5,11 @@ import csv
 from pathlib import Path
 
 # Setup paths
-base_dir = Path(__file__).parent.parent
-processed_dir = Path(__file__).parent
+base_dir = Path(__file__).parent.parent  # mapping_resources directory
+processed_dir = Path(__file__).parent  # processed_mappings directory
 
 # Input files
-original_file = base_dir / "OBSERVATION_observation_concept_id_analysis.csv"
+original_file = base_dir / "original_mappings" / "OBSERVATION_observation_concept_id_analysis.csv"
 mappings_file = base_dir / "non_snomed_concepts" / "mapping_results" / "observation_snomed_mappings.csv"
 
 # Output files

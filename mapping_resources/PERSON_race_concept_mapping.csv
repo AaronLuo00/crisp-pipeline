@@ -1,0 +1,21 @@
+Id,Code,Name,Standard Class,Vocab,Validity,Concept
+8527,8527,White,Race,Race,Valid,Standard
+8516,8516,Black or African American,Race,Race,Valid,Standard
+8552,8552,Unknown,Race,Race,Valid,Standard
+8515,8515,Asian,Race,Race,Valid,Standard
+0,0,No matching concept,Race,None,Valid,Standard
+4190758,4190758,Multiple race,Race,Race,Valid,Standard
+3213494,3213494,Other Race,Race,Race,Valid,Standard
+4188159,4188159,Refuse to answer,Race,Race,Valid,Standard
+8657,8657,American Indian or Alaska Native,Race,Race,Valid,Standard
+4212311,4212311,Native Hawaiian,Race,Race,Valid,Standard
+38003574,38003574,Asian Indian,Race,Race,Valid,Standard
+8557,8557,Native Hawaiian or Other Pacific Islander,Race,Race,Valid,Standard
+4218674,4218674,Korean,Race,Race,Valid,Standard
+38003613,38003613,Chinese,Race,Race,Valid,Standard
+38003581,38003581,Japanese,Race,Race,Valid,Standard
+38003579,38003579,Filipino,Race,Race,Valid,Standard
+8522,8522,Other Pacific Islander,Race,Race,Valid,Standard
+38003592,38003592,Vietnamese,Race,Race,Valid,Standard
+38003585,38003585,Cambodian,Race,Race,Valid,Standard
+38003584,38003584,Laotian,Race,Race,Valid,Standard

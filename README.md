@@ -235,6 +235,10 @@ crisp-pipeline/
 │   ├── 4_standardization/ # Data standardization
 │   ├── 5_extraction/      # Feature extraction
 │   └── run_all_module.py  # Main pipeline runner
+├── mapping_resources/     # Concept mapping resources
+│   ├── *_concept_mapping.csv      # Unified mapping files
+│   ├── original_mappings/         # Original frequency analysis
+│   └── processed_mappings/        # SNOMED mapping references
 ├── output/                # Pipeline outputs (reports & statistics)
 ├── extracted_patient_data/ # Final patient-level data (created after extraction)
 └── data_preparation/      # Data preparation and validation tools
