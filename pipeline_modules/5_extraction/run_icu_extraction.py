@@ -77,10 +77,9 @@ output_dir = output_dir.resolve()
 # Patient data goes to root level, statistics stays in output
 patient_data_dir = project_root / "extracted_patient_data"
 patient_data_dir = patient_data_dir.resolve()
-statistics_dir = output_dir / "statistics"
 
 # Create output directories
-for dir_path in [output_dir, patient_data_dir, statistics_dir]:
+for dir_path in [output_dir, patient_data_dir]:
     dir_path.mkdir(parents=True, exist_ok=True)
 
 # Configuration
@@ -435,8 +434,10 @@ class PatientDataExtractor:
             try:
                 icu_time = pd.to_datetime(icu_info['visit_detail_start_datetime_earliest'])
                 total_count = 0
+                earliest_record = None
+                latest_record = None
                 
-                # Count records in specified tables
+                # Count records in specified tables and find date range
                 for table_name, time_col in PRE_ICU_STAT_TABLES.items():
                     table_path = patient_path / f"{table_name}.csv"
                     if not table_path.exists():
@@ -444,15 +445,79 @@ class PatientDataExtractor:
                     
                     try:
                         df = pd.read_csv(table_path, parse_dates=[time_col], low_memory=False)
-                        # Count records before ICU
-                        count = df[df[time_col] <= icu_time].shape[0]
+                        # Filter records before ICU
+                        pre_icu_df = df[df[time_col] <= icu_time]
+                        count = pre_icu_df.shape[0]
                         total_count += count
+                        
+                        # Track earliest and latest records
+                        if not pre_icu_df.empty:
+                            table_earliest = pre_icu_df[time_col].min()
+                            table_latest = pre_icu_df[time_col].max()
+                            
+                            if earliest_record is None or table_earliest < earliest_record:
+                                earliest_record = table_earliest
+                            if latest_record is None or table_latest > latest_record:
+                                latest_record = table_latest
+                                
                     except Exception as e:
                         logging.warning(f"Error reading {table_path}: {e}")
                 
+                # Calculate days of data before ICU
+                days_of_data = 0
+                if earliest_record and latest_record:
+                    days_of_data = (latest_record - earliest_record).days + 1
+                
+                # Read patient demographics
+                person_path = patient_path / "PERSON.csv"
+                age_at_icu = None
+                gender = None
+                race = None
+                
+                if person_path.exists():
+                    try:
+                        person_df = pd.read_csv(person_path, low_memory=False)
+                        if not person_df.empty:
+                            # Calculate age at ICU admission
+                            birth_year = person_df['year_of_birth'].iloc[0]
+                            if pd.notna(birth_year):
+                                age_at_icu = icu_time.year - int(birth_year)
+                            
+                            # Get gender
+                            gender_id = person_df['gender_concept_id'].iloc[0]
+                            if gender_id == 8507:
+                                gender = 'Male'
+                            elif gender_id == 8532:
+                                gender = 'Female'
+                            else:
+                                gender = f'Other({gender_id})'
+                            
+                            # Get race
+                            race_id = person_df['race_concept_id'].iloc[0]
+                            race_mapping = {
+                                8527: 'White',
+                                8516: 'Black',
+                                8515: 'Asian',
+                                8657: 'Native American',
+                                8557: 'Pacific Islander',
+                                0: 'Unknown'
+                            }
+                            race = race_mapping.get(race_id, f'Other({race_id})')
+                    except Exception as e:
+                        logging.warning(f"Error reading person data for {person_id}: {e}")
+                
+                # Check death record
+                death_path = patient_path / "DEATH.csv"
+                has_death_record = death_path.exists() and death_path.stat().st_size > 0
+                
                 results.append({
                     "patient_id": person_id,
-                    "count_before_icu": total_count
+                    "count_before_icu": total_count,
+                    "days_of_data_before_icu": days_of_data,
+                    "age_at_icu_admission": age_at_icu,
+                    "gender": gender,
+                    "race": race,
+                    "has_death_record": has_death_record
                 })
                 
             except Exception as e:
@@ -465,23 +530,26 @@ class PatientDataExtractor:
         # Save results
         if results:
             results_df = pd.DataFrame(results)
-            results_file = statistics_dir / "patient_before_icu_statistics.csv"
+            results_file = output_dir / "patient_cohort_statistics.csv"
             results_df.to_csv(results_file, index=False)
             
             # Calculate summary statistics
-            self.extraction_results['statistics']['pre_icu_stats'] = {
+            self.extraction_results['statistics']['cohort_stats'] = {
                 'total_patients': len(results),
                 'avg_records_before_icu': float(results_df['count_before_icu'].mean()),
                 'max_records_before_icu': int(results_df['count_before_icu'].max()),
-                'min_records_before_icu': int(results_df['count_before_icu'].min())
+                'min_records_before_icu': int(results_df['count_before_icu'].min()),
+                'avg_days_of_data': float(results_df['days_of_data_before_icu'].mean()),
+                'patients_with_death': int(results_df['has_death_record'].sum()),
+                'avg_age_at_icu': float(results_df['age_at_icu_admission'].mean()) if results_df['age_at_icu_admission'].notna().any() else None
             }
             
-            logging.info(f"Pre-ICU statistics saved to: {results_file}")
+            logging.info(f"Patient cohort statistics saved to: {results_file}")
         
         # Save skipped patients
         if self.skipped_patients:
             skipped_df = pd.DataFrame(self.skipped_patients)
-            skipped_file = statistics_dir / "skipped_patients.csv"
+            skipped_file = output_dir / "skipped_patients.csv"
             skipped_df.to_csv(skipped_file, index=False)
             logging.info(f"Skipped patients saved to: {skipped_file}")
         
@@ -505,12 +573,16 @@ class PatientDataExtractor:
             if 'total_icu_patients' in stats:
                 f.write(f"- **Total ICU patients**: {stats['total_icu_patients']:,}\n")
             
-            if 'pre_icu_stats' in stats:
-                pre_stats = stats['pre_icu_stats']
-                f.write(f"- **Patients with pre-ICU analysis**: {pre_stats['total_patients']:,}\n")
-                f.write(f"- **Average records before ICU**: {pre_stats['avg_records_before_icu']:.2f}\n")
-                f.write(f"- **Max records before ICU**: {pre_stats['max_records_before_icu']}\n")
-                f.write(f"- **Min records before ICU**: {pre_stats['min_records_before_icu']}\n")
+            if 'cohort_stats' in stats:
+                cohort_stats = stats['cohort_stats']
+                f.write(f"- **Patients with pre-ICU analysis**: {cohort_stats['total_patients']:,}\n")
+                f.write(f"- **Average records before ICU**: {cohort_stats['avg_records_before_icu']:.2f}\n")
+                f.write(f"- **Max records before ICU**: {cohort_stats['max_records_before_icu']}\n")
+                f.write(f"- **Min records before ICU**: {cohort_stats['min_records_before_icu']}\n")
+                f.write(f"- **Average days of data before ICU**: {cohort_stats['avg_days_of_data']:.1f}\n")
+                f.write(f"- **Patients with death records**: {cohort_stats['patients_with_death']}\n")
+                if cohort_stats.get('avg_age_at_icu') is not None:
+                    f.write(f"- **Average age at ICU admission**: {cohort_stats['avg_age_at_icu']:.1f} years\n")
             
             f.write(f"- **Skipped patients**: {len(self.skipped_patients):,}\n\n")
             
