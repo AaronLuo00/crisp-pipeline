@@ -152,7 +152,7 @@ def sample_patients(input_file, output_file, sample_size=1000, prefixes=None, ra
             sampled = group.sample(n=sample_count, replace=False, random_state=random_seed)
             sampled_dfs.append(sampled)
             
-            print(f"  Prefix {prefix}: {sample_count} from {group_size:,} ({percentage:.1f}%)")
+            print(f"  Prefix {prefix}: {len(sampled)} from {group_size:,} ({percentage:.1f}%)")
         
         # Combine all samples
         sampled_df = pd.concat(sampled_dfs, ignore_index=True)
