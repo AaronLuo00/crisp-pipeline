@@ -77,6 +77,8 @@ backup/
 # Data directories
 data_1000/
 data_500/
+data_5000/
+data_10000/
 data/*.csv
 
 # Performance optimization testing
