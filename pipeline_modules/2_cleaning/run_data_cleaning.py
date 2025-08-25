@@ -721,7 +721,7 @@ if __name__ == '__main__':
 
     # Determine whether to use parallel processing
     USE_PARALLEL = os.environ.get('PARALLEL_CLEANING', 'true').lower() == 'true'
-    MAX_WORKERS = min(multiprocessing.cpu_count() - 1, 6)  # Leave one CPU free, max 6 workers
+    MAX_WORKERS = max(1, multiprocessing.cpu_count() - 2)  # Reserve 2 cores for system
     MEASUREMENT_SPLITS = int(os.environ.get('MEASUREMENT_SPLITS', '6'))  # Control MEASUREMENT table splits (optimized default)
 
     # Process tables with progress tracking
@@ -730,7 +730,9 @@ if __name__ == '__main__':
     total_merge_time = 0  # Track total merge time
 
     if USE_PARALLEL:
-        print(f"Using parallel processing with {MAX_WORKERS} workers")
+        print(f"[PARALLEL PROCESSING]")
+        print(f"  CPU cores available: {multiprocessing.cpu_count()}")
+        print(f"  Using {MAX_WORKERS} workers (keeping 2 cores for system)")
         print(f"MEASUREMENT table will be split into {MEASUREMENT_SPLITS} parts")
         print("Set PARALLEL_CLEANING=false to disable parallel processing")
         print(f"Set MEASUREMENT_SPLITS=N to change splits (current: {MEASUREMENT_SPLITS})")

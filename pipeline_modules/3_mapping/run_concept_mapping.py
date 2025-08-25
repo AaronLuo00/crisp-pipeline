@@ -44,7 +44,7 @@ else:
     FILE_BUFFER_SIZE = 1 * 1024 * 1024  # 1MB file buffer
 
 # Parallel processing configuration
-MAX_WORKERS = min(multiprocessing.cpu_count(), 6)  # Use up to 6 cores
+MAX_WORKERS = max(1, multiprocessing.cpu_count() - 2)  # Reserve 2 cores for system
 MEASUREMENT_SPLITS = 6  # Split MEASUREMENT table into 6 parts
 LARGE_TABLE_THRESHOLD = 100000  # Tables larger than this will be considered for splitting
 
@@ -1425,7 +1425,9 @@ def main():
     print(f"  Input directory: {input_dir}")
     print(f"  Output directory: {output_dir}")
     print(f"  Processed mappings: {processed_mappings_dir}")
-    print(f"  Parallel workers: {MAX_WORKERS}")
+    print(f"[PARALLEL PROCESSING]")
+    print(f"  CPU cores available: {multiprocessing.cpu_count()}")
+    print(f"  Using {MAX_WORKERS} workers (keeping 2 cores for system)")
     print(f"\nFeatures enabled:")
     print(f"  Low frequency filtering: <={args.min_concept_freq}")
     print(f"  Deduplication: {'DISABLED' if args.no_dedup else 'ENABLED'}")

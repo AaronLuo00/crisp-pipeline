@@ -372,13 +372,14 @@ class DataStandardizer:
     
     def _calculate_statistics_parallel(self, input_file, table_name):
         """Calculate statistics using parallel T-Digest processing."""
+        # Determine number of workers
+        num_workers = max(1, mp.cpu_count() - 2)  # Reserve 2 cores for system
+        
         logging.info(f"Using parallel T-Digest processing for {table_name}")
+        logging.info(f"[PARALLEL PROCESSING] CPU cores available: {mp.cpu_count()}, Using {num_workers} workers")
         
         # Track wall time
         wall_start = time.time()
-        
-        # Determine number of workers
-        num_workers = min(6, mp.cpu_count())
         
         # Split file for parallel processing
         chunks = split_file_for_parallel(str(input_file), num_workers)
@@ -1033,7 +1034,7 @@ class DataStandardizer:
         logging.info(f"Submitting {len(tasks)} parallel tasks...")
         
         # Execute parallel processing
-        with ProcessPoolExecutor(max_workers=6) as executor:
+        with ProcessPoolExecutor(max_workers=max(1, mp.cpu_count() - 2)) as executor:
             futures = []
             
             # Submit MEASUREMENT chunks
@@ -1117,7 +1118,7 @@ class DataStandardizer:
         logging.info(f"Executing {len(tasks)} post-processing tasks...")
         
         # Execute with ProcessPoolExecutor for CPU-bound VISIT processing
-        with ProcessPoolExecutor(max_workers=6) as executor:
+        with ProcessPoolExecutor(max_workers=max(1, mp.cpu_count() - 2)) as executor:
             futures = []
             task_start_times = {}
             
@@ -1553,6 +1554,15 @@ def main():
                         help='Use sequential processing mode instead of parallel')
     
     args = parser.parse_args()
+    
+    # Print parallel processing info
+    print(f"[PARALLEL PROCESSING]")
+    print(f"  CPU cores available: {mp.cpu_count()}")
+    if args.sequential:
+        print(f"  Mode: Sequential (parallel disabled by --sequential flag)")
+    else:
+        num_workers = max(1, mp.cpu_count() - 2)
+        print(f"  Using {num_workers} workers (keeping 2 cores for system)")
     
     # Initialize and run standardizer
     standardizer = DataStandardizer(

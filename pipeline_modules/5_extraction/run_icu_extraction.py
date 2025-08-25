@@ -133,7 +133,7 @@ ICU_CONCEPT_IDS = [581379, 32037]
 ICU_SUMMARY_COL = "visit_detail_start_datetime_earliest"
 
 # Parallel processing configuration
-MAX_WORKERS = min(6, mp.cpu_count())
+MAX_WORKERS = max(1, mp.cpu_count() - 2)  # Reserve 2 cores for system
 MEASUREMENT_CHUNKS = 6
 
 
@@ -756,7 +756,9 @@ class PatientDataExtractor:
         # Simplified startup
         print(f"\nExtracting patient data for {len(TABLES_TO_PROCESS) + len(BASIC_TABLES)} tables...")
         print(f"ICU Concept IDs: {', '.join(map(str, ICU_CONCEPT_IDS))}")
-        print(f"Using parallel processing with {MAX_WORKERS} workers")
+        print(f"[PARALLEL PROCESSING]")
+        print(f"  CPU cores available: {mp.cpu_count()}")
+        print(f"  Using {MAX_WORKERS} workers (keeping 2 cores for system)")
         
         # Group tables by size for optimal parallel processing
         tables_without_measurement = [t for t in TABLES_TO_PROCESS if t != 'MEASUREMENT']

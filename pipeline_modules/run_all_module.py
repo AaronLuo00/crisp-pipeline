@@ -354,6 +354,18 @@ class CRISPPipeline:
         logging.info("CRISP PIPELINE EXECUTION")
         logging.info(f"Run ID: {self.run_id}")
         logging.info(f"Start Time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+        
+        # Print parallel processing configuration
+        import multiprocessing
+        max_workers = self.config.get('max_workers') or max(1, multiprocessing.cpu_count() - 2)
+        if not self.config.get('no_parallel', False):
+            logging.info(f"\n[PARALLEL PROCESSING]")
+            logging.info(f"  CPU cores available: {multiprocessing.cpu_count()}")
+            logging.info(f"  Using {max_workers} workers (keeping 2 cores for system)")
+        else:
+            logging.info(f"\n[SEQUENTIAL MODE]")
+            logging.info(f"  Parallel processing disabled")
+        
         logging.info(f"{'='*60}\n")
         
         # Save configuration
@@ -465,7 +477,9 @@ class CRISPPipeline:
         if not self.config.get('no_parallel', False):
             print(f"\nParallel Processing:")
             print(f"  Mode: Enabled")
-            print(f"  Max Workers: {self.config.get('max_workers', 6)}")
+            import multiprocessing
+            max_workers = self.config.get('max_workers') or max(1, multiprocessing.cpu_count() - 2)
+            print(f"  Max Workers: {max_workers} (keeping 2 cores for system)")
         else:
             print(f"\nParallel Processing: Disabled (Sequential Mode)")
         
@@ -594,7 +608,9 @@ class CRISPPipeline:
                 f.write("### Performance Summary\n\n")
                 if not self.config.get('no_parallel', False):
                     f.write("- **Parallel Processing**: Enabled for all modules\n")
-                    f.write("- **Workers Used**: Up to {} parallel workers\n".format(self.config.get('max_workers', 6)))
+                    import multiprocessing
+                    max_workers = self.config.get('max_workers') or max(1, multiprocessing.cpu_count() - 2)
+                    f.write(f"- **Workers Used**: Up to {max_workers} parallel workers (keeping 2 cores for system)\n")
                     f.write("- **Estimated Speedup**: 3-5x compared to sequential processing\n")
                 else:
                     f.write("- **Parallel Processing**: Disabled (sequential mode)\n")
@@ -655,8 +671,8 @@ def main():
     parser.add_argument(
         '--max-workers',
         type=int,
-        default=6,
-        help='Maximum number of parallel workers (default: 6)'
+        default=None,
+        help='Maximum number of parallel workers (default: all available CPUs)'
     )
     
     parser.add_argument(
@@ -687,7 +703,9 @@ def main():
     config['python_path'] = args.python_path
     config['min_concept_freq'] = args.min_concept_freq
     config['no_parallel'] = args.no_parallel
-    config['max_workers'] = args.max_workers
+    # If max_workers not specified, reserve 2 cores for system
+    import multiprocessing
+    config['max_workers'] = args.max_workers if args.max_workers else max(1, multiprocessing.cpu_count() - 2)
     config['quiet'] = args.quiet
     config['verbose'] = args.verbose
     

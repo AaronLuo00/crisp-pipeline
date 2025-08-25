@@ -37,7 +37,7 @@ else:
 
 # Parallel processing configuration
 PARALLEL_EDA = os.environ.get('PARALLEL_EDA', 'true').lower() == 'true'
-MAX_WORKERS = min(os.cpu_count(), 6)  # Limit to 4 workers max
+MAX_WORKERS = max(1, os.cpu_count() - 2)  # Reserve 2 cores for system
 MEASUREMENT_SPLITS = int(os.environ.get('MEASUREMENT_SPLITS', '6'))  # Split MEASUREMENT table
 
 def get_file_row_count(file_path, silent=False):
@@ -633,7 +633,9 @@ if __name__ == '__main__':
     print(f"Output directory: {output_dir}")
     print(f"Parallel processing: {'enabled' if PARALLEL_EDA else 'disabled'}")
     if PARALLEL_EDA:
-        print(f"Max workers: {MAX_WORKERS}")
+        print(f"[PARALLEL PROCESSING]")
+        print(f"  CPU cores available: {os.cpu_count()}")
+        print(f"  Using {MAX_WORKERS} workers (keeping 2 cores for system)")
         print(f"MEASUREMENT splits: {MEASUREMENT_SPLITS}")
 
     # Start timing
