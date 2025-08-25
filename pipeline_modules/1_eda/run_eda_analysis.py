@@ -934,7 +934,7 @@ if __name__ == '__main__':
 
     # Display performance breakdown
     print("\n" + "="*50)
-    print("PERFORMANCE BREAKDOWN")
+    print("PERFORMANCE BREAKDOWN - Parallel EDA Analysis")
     print("="*50)
 
     # Sum up time spent in each category
@@ -949,25 +949,28 @@ if __name__ == '__main__':
     total_date_range = sum(s.get('time_stats', {}).get('date_range', 0) 
                           for s in eda_results["tables"].values())
 
-    # Calculate the sum of all table processing times
-    total_table_time = sum(s.get('time_stats', {}).get('total', 0) 
-                          for s in eda_results["tables"].values())
+    # Calculate the sum of all table processing times (CPU time)
+    total_cpu_time = sum(s.get('time_stats', {}).get('total', 0) 
+                        for s in eda_results["tables"].values())
 
-    print(f"Row counting:     {total_row_counting:.2f}s ({total_row_counting/total_time*100:.1f}%)")
-    print(f"Chunk reading:    {total_chunk_reading:.2f}s ({total_chunk_reading/total_time*100:.1f}%)")
-    print(f"Missing calc:     {total_missing_calc:.2f}s ({total_missing_calc/total_time*100:.1f}%)")
-    print(f"Unique tracking:  {total_unique_tracking:.2f}s ({total_unique_tracking/total_time*100:.1f}%)")
-    print(f"Date range:       {total_date_range:.2f}s ({total_date_range/total_time*100:.1f}%)")
+    # Calculate speedup and efficiency
+    speedup = total_cpu_time / total_time if total_time > 0 else 1.0
+    efficiency = (speedup / MAX_WORKERS) * 100 if MAX_WORKERS > 0 else 0
 
-    # Calculate overhead (difference between wall time and sum of table times)
-    overhead = total_time - total_table_time
-    print(f"Overhead:         {overhead:.2f}s ({overhead/total_time*100:.1f}%)")
+    # Display CPU time vs wall clock time
+    print(f"\nTotal CPU time:        {total_cpu_time:.2f}s")
+    print(f"Wall clock time:       {total_time:.2f}s")
+    print(f"Speedup:               {speedup:.2f}x")
+    print(f"Parallel efficiency:   {efficiency:.1f}% ({MAX_WORKERS} workers)")
 
-    # Verify timing consistency
-    print(f"\nTiming verification:")
-    print(f"  Wall clock time: {total_time:.2f}s")
-    print(f"  Sum of table times: {total_table_time:.2f}s")
-    print(f"  Difference (overhead): {overhead:.2f}s")
+    # Component breakdown based on CPU time
+    print(f"\nComponent Breakdown (CPU time):")
+    if total_cpu_time > 0:
+        print(f"  Row counting:        {total_row_counting:.2f}s ({total_row_counting/total_cpu_time*100:.1f}%)")
+        print(f"  Chunk reading:       {total_chunk_reading:.2f}s ({total_chunk_reading/total_cpu_time*100:.1f}%)")
+        print(f"  Missing calc:        {total_missing_calc:.2f}s ({total_missing_calc/total_cpu_time*100:.1f}%)")
+        print(f"  Unique tracking:     {total_unique_tracking:.2f}s ({total_unique_tracking/total_cpu_time*100:.1f}%)")
+        print(f"  Date range:          {total_date_range:.2f}s ({total_date_range/total_cpu_time*100:.1f}%)")
 
     # Find slowest tables
     print("\nSlowest tables:")
