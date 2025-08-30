@@ -62,7 +62,13 @@ python pipeline_modules/5_extraction/run_icu_extraction.py
 
 ### Run Complete Pipeline
 ```bash
+# Run from project root directory
 python pipeline_modules/run_all_module.py
+
+# Optional parameters
+python pipeline_modules/run_all_module.py --skip-modules 3_mapping 4_standardization
+python pipeline_modules/run_all_module.py --start-from 3_mapping
+python pipeline_modules/run_all_module.py --quiet  # Reduce output verbosity
 ```
 
 ## Requirements
@@ -72,23 +78,59 @@ python pipeline_modules/run_all_module.py
 - Sufficient memory for processing large OMOP datasets
 - Input data should be in `data/` directory
 
-## Output
+## Output Structure
 
-Pipeline outputs are organized in two locations:
+### Pipeline Execution Outputs
 
-### Reports and Analytics (`output/`)
+When running the complete pipeline with `run_all_module.py`, outputs are organized in a unified structure:
+
+```text
+output/pipeline_runs/run_YYYYMMDD_HHMMSS/
+├── pipeline_config.json       # Pipeline configuration
+├── pipeline_log.txt           # Combined execution log
+├── pipeline_report.md         # Execution summary report
+├── module_results/            # Module result JSON files
+│   ├── 1_eda_result.json
+│   ├── 2_cleaning_result.json
+│   ├── 3_mapping_result.json
+│   ├── 4_standardization_result.json
+│   └── 5_extraction_result.json
+└── module_logs/               # Individual module log files
+    ├── 1_eda.log
+    ├── 2_cleaning.log
+    ├── 3_mapping.log
+    ├── 4_standardization.log
+    └── 5_extraction.log
+```
+
+This unified structure provides:
+
+- **Traceability**: Each run is timestamped and self-contained
+- **Centralized Logs**: All logs and results in one location
+- **Easy Debugging**: Module-specific logs alongside combined pipeline log
+
+### Module-Specific Outputs
+
+Each module also generates outputs in its respective directory:
+
+#### Reports and Analytics (`output/`)
+
 Each module generates results in its respective subdirectory:
+
 - Processed intermediate data files
 - Statistical analysis reports  
 - Visualization plots
 
-### Patient-Level Data (`extracted_patient_data/`)
+#### Patient-Level Data (`extracted_patient_data/`)
+
 The extraction module saves final patient data separately at the project root:
+
 - **Location**: `extracted_patient_data/` (not in `output/`)
 - **Structure**: `<patient_id>/<table_name>.csv`
 - **Content**: Complete OMOP CDM records for each patient
 - **Purpose**: Direct consumption by ML pipelines without navigating deep folder structures
 
 This separation ensures:
+
 - Clean distinction between pipeline artifacts and final data products
 - Easy access to patient data for downstream analysis
