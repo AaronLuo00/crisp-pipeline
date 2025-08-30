@@ -468,15 +468,24 @@ class DataStandardizer:
         concept_values = defaultdict(list)
         concept_counts = Counter()
         
+        # Count total rows for progress bar
+        with open(input_file, 'r') as f:
+            total_rows = sum(1 for _ in f) - 1  # Subtract header
+        
         # Read data to collect values
         df = pd.read_csv(input_file, chunksize=CHUNK_SIZE, low_memory=False)
         chunk_num = 0
+        rows_processed = 0
         
-        for chunk in tqdm(df, desc=f"Standardizing {table_name} (statistics)", 
-                         unit='chunks', leave=False, ncols=100,
-                         mininterval=PROGRESS_INTERVAL,
-                         disable=False):
+        pbar = tqdm(total=total_rows, desc=f"Standardizing {table_name} (statistics)", 
+                   unit='rows', leave=False, ncols=100,
+                   mininterval=PROGRESS_INTERVAL,
+                   disable=False)
+        
+        for chunk in df:
             chunk_num += 1
+            chunk_rows = len(chunk)
+            rows_processed += chunk_rows
             
             # Count concept frequencies
             if concept_col in chunk.columns:
@@ -503,6 +512,12 @@ class DataStandardizer:
                         concept_values[concept_id].extend(values)
                     except:
                         pass
+            
+            # Update progress bar
+            pbar.update(chunk_rows)
+        
+        # Close progress bar
+        pbar.close()
         
         # Calculate outlier thresholds
         self.concept_thresholds[table_name] = {}

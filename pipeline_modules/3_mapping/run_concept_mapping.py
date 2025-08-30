@@ -1310,10 +1310,10 @@ class ConceptMapper:
 def generate_mapping_report(stats, mapper):
     """Generate comprehensive mapping report."""
     report_path = output_dir / "mapping_report.md"
-    stats_path = output_dir / "mapping_statistics.json"
+    results_path = output_dir / "mapping_results.json"  # Changed to match run_all_module pattern
     
-    # Save detailed statistics
-    with open(stats_path, 'w') as f:
+    # Save detailed statistics with name compatible with run_all_module
+    with open(results_path, 'w') as f:
         json.dump(stats, f, indent=2)
     
     # Generate markdown report

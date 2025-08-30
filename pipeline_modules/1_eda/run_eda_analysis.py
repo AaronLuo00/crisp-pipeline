@@ -147,84 +147,94 @@ def process_table_partial(file_path, start_row, end_row, chunk_size=CHUNK_SIZE, 
     # Skip to start position if needed
     skip_rows = list(range(1, start_row + 1)) if start_row > 0 else None
     
-    for chunk in pd.read_csv(file_path, chunksize=chunk_size, low_memory=False, skiprows=skip_rows):
-        # Check if we've read enough rows
-        if end_row != -1 and rows_read + len(chunk) > actual_rows:
-            # Truncate the last chunk
-            remaining_rows = actual_rows - rows_read
-            chunk = chunk.iloc[:remaining_rows]
-        
-        # First chunk: initialize column-based statistics
-        if chunk_num == 0:
-            stats["columns"] = list(chunk.columns)
-            stats["total_columns"] = len(chunk.columns)
-            stats["data_types"] = chunk.dtypes.astype(str).to_dict()
+    # Add progress bar for chunk processing
+    with tqdm(total=actual_rows, desc=f"Reading MEASUREMENT{part_suffix}", 
+              unit="rows", leave=False,
+              disable=False,  # Enable to show processing speed
+              miniters=max(100, actual_rows//100) if actual_rows > 0 else 1,  # Update every 1% or at least 100 rows
+              mininterval=10.0,  # Update at least every 10 seconds
+              ncols=100) as pbar:
+        for chunk in pd.read_csv(file_path, chunksize=chunk_size, low_memory=False, skiprows=skip_rows):
+            # Check if we've read enough rows
+            if end_row != -1 and rows_read + len(chunk) > actual_rows:
+                # Truncate the last chunk
+                remaining_rows = actual_rows - rows_read
+                chunk = chunk.iloc[:remaining_rows]
             
-            # Initialize missing values counter
-            for col in chunk.columns:
-                stats["missing_values"][col] = 0
+            # First chunk: initialize column-based statistics
+            if chunk_num == 0:
+                stats["columns"] = list(chunk.columns)
+                stats["total_columns"] = len(chunk.columns)
+                stats["data_types"] = chunk.dtypes.astype(str).to_dict()
+                
+                # Initialize missing values counter
+                for col in chunk.columns:
+                    stats["missing_values"][col] = 0
+                
+                # Identify column types
+                id_columns = [col for col in chunk.columns if col.endswith('_id')]
+                datetime_columns = [col for col in chunk.columns 
+                                  if 'date' in col.lower() or 'time' in col.lower()]
+                
+                # Initialize unique value trackers for ID columns
+                for col in id_columns:
+                    unique_trackers[col] = set()
             
-            # Identify column types
-            id_columns = [col for col in chunk.columns if col.endswith('_id')]
-            datetime_columns = [col for col in chunk.columns 
-                              if 'date' in col.lower() or 'time' in col.lower()]
+            # Update basic statistics
+            stats["total_records"] += len(chunk)
+            stats["memory_usage_mb"] += chunk.memory_usage(deep=True).sum() / 1024 / 1024
             
-            # Initialize unique value trackers for ID columns
+            # Update missing values - vectorized
+            t1 = time.time()
+            missing_counts = chunk.isnull().sum().to_dict()
+            for col, count in missing_counts.items():
+                stats["missing_values"][col] += count
+            time_stats['missing_calc'] += time.time() - t1
+            
+            # Track unique values for ID columns
+            t1 = time.time()
             for col in id_columns:
-                unique_trackers[col] = set()
-        
-        # Update basic statistics
-        stats["total_records"] += len(chunk)
-        stats["memory_usage_mb"] += chunk.memory_usage(deep=True).sum() / 1024 / 1024
-        
-        # Update missing values - vectorized
-        t1 = time.time()
-        missing_counts = chunk.isnull().sum().to_dict()
-        for col, count in missing_counts.items():
-            stats["missing_values"][col] += count
-        time_stats['missing_calc'] += time.time() - t1
-        
-        # Track unique values for ID columns
-        t1 = time.time()
-        for col in id_columns:
-            if col in chunk.columns:
-                unique_trackers[col].update(chunk[col].dropna().unique())
-        time_stats['unique_tracking'] += time.time() - t1
-        
-        # Table-specific processing
-        if table_name == "PERSON":
-            table_data["all_patients"].update(chunk['person_id'].unique())
-            # Gender distribution
-            gender_counts = chunk['gender_concept_id'].value_counts().to_dict()
-            for gender, count in gender_counts.items():
-                table_data["gender_counts"][int(gender)] = table_data["gender_counts"].get(int(gender), 0) + int(count)
-            # Birth years
-            table_data["birth_years"].extend(chunk['year_of_birth'].tolist())
+                if col in chunk.columns:
+                    unique_trackers[col].update(chunk[col].dropna().unique())
+            time_stats['unique_tracking'] += time.time() - t1
             
-        elif table_name == "VISIT_DETAIL":
-            # Track all patients
-            table_data["all_patients"].update(chunk['person_id'].unique())
-            # Concept distribution
-            concept_counts = chunk['visit_detail_concept_id'].value_counts().to_dict()
-            for concept, count in concept_counts.items():
-                table_data["concept_distributions"][int(concept)] = \
-                    table_data["concept_distributions"].get(int(concept), 0) + int(count)
-            # ICU patients
-            icu_concept_ids = [581379, 32037]
-            icu_chunk = chunk[chunk['visit_detail_concept_id'].isin(icu_concept_ids)]
-            table_data["icu_patients"].update(icu_chunk['person_id'].unique())
+            # Table-specific processing
+            if table_name == "PERSON":
+                table_data["all_patients"].update(chunk['person_id'].unique())
+                # Gender distribution
+                gender_counts = chunk['gender_concept_id'].value_counts().to_dict()
+                for gender, count in gender_counts.items():
+                    table_data["gender_counts"][int(gender)] = table_data["gender_counts"].get(int(gender), 0) + int(count)
+                # Birth years
+                table_data["birth_years"].extend(chunk['year_of_birth'].tolist())
+                
+            elif table_name == "VISIT_DETAIL":
+                # Track all patients
+                table_data["all_patients"].update(chunk['person_id'].unique())
+                # Concept distribution
+                concept_counts = chunk['visit_detail_concept_id'].value_counts().to_dict()
+                for concept, count in concept_counts.items():
+                    table_data["concept_distributions"][int(concept)] = \
+                        table_data["concept_distributions"].get(int(concept), 0) + int(count)
+                # ICU patients
+                icu_concept_ids = [581379, 32037]
+                icu_chunk = chunk[chunk['visit_detail_concept_id'].isin(icu_concept_ids)]
+                table_data["icu_patients"].update(icu_chunk['person_id'].unique())
+                
+            elif table_name == "DEATH":
+                table_data["death_count"] += len(chunk)
+                table_data["all_patients"].update(chunk['person_id'].unique())
             
-        elif table_name == "DEATH":
-            table_data["death_count"] += len(chunk)
-            table_data["all_patients"].update(chunk['person_id'].unique())
-        
-        stats["chunks_processed"] += 1
-        rows_read += len(chunk)
-        chunk_num += 1
-        
-        # Break if we've read all required rows
-        if end_row != -1 and rows_read >= actual_rows:
-            break
+            stats["chunks_processed"] += 1
+            rows_read += len(chunk)
+            chunk_num += 1
+            
+            # Update progress bar
+            pbar.update(len(chunk))
+            
+            # Break if we've read all required rows
+            if end_row != -1 and rows_read >= actual_rows:
+                break
     
     time_stats['chunk_reading'] = time.time() - t0
     
@@ -351,11 +361,11 @@ def process_table_chunked(file_path, chunk_size=CHUNK_SIZE):
     t0 = time.time()
     with tqdm(total=total_rows, desc=f"Reading {table_name}", 
               unit="rows", leave=False,
-              disable=True,  # Disable to avoid nested progress bars
-              miniters=max(1, total_rows//20) if total_rows > 0 else 1,  # Update every 5%
-              mininterval=60.0,  # At least 60 seconds interval
+              disable=False,  # Enable to show processing speed
+              miniters=max(100, total_rows//100) if total_rows > 0 else 1,  # Update every 1% or at least 100 rows
+              mininterval=10.0,  # Update at least every 10 seconds
               position=1,  # Nested position
-              ncols=80) as pbar:
+              ncols=100) as pbar:
         for chunk_num, chunk in enumerate(pd.read_csv(file_path, chunksize=chunk_size, low_memory=False)):
             # First chunk: initialize column-based statistics
             if chunk_num == 0:
@@ -711,7 +721,11 @@ if __name__ == '__main__':
                     if num_parts > 0:
                         # This is a MEASUREMENT part
                         measurement_parts.append(stats)
-                        print(f"  [{completed}/{total_tasks}] {table_name} part {part_num}/{num_parts} completed ({stats['time_stats']['total']:.2f}s)")
+                        # Calculate processing speed
+                        time_taken = stats['time_stats']['total']
+                        rows_processed = stats['total_records']
+                        speed = rows_processed / time_taken if time_taken > 0 else 0
+                        print(f"  [{completed}/{total_tasks}] {table_name} part {part_num}/{num_parts} completed ({time_taken:.2f}s, {speed:,.0f} rows/s)")
                         
                         # Check if all MEASUREMENT parts are done
                         if len(measurement_parts) == MEASUREMENT_SPLITS:
@@ -726,7 +740,9 @@ if __name__ == '__main__':
                         # Display completion
                         if "time_stats" in stats:
                             table_time = stats["time_stats"]['total']
-                            print(f"  [{completed}/{total_tasks}] {table_name} completed ({table_time:.2f}s)")
+                            rows_processed = stats.get('total_records', 0)
+                            speed = rows_processed / table_time if table_time > 0 else 0
+                            print(f"  [{completed}/{total_tasks}] {table_name} completed ({table_time:.2f}s, {speed:,.0f} rows/s)")
                         else:
                             print(f"  [{completed}/{total_tasks}] {table_name} completed")
                         
@@ -748,7 +764,9 @@ if __name__ == '__main__':
             if "time_stats" in stats:
                 ts = stats["time_stats"]
                 table_time = ts['total']
-                print(f" Done ({table_time:.2f}s)")
+                rows_processed = stats.get('total_records', 0)
+                speed = rows_processed / table_time if table_time > 0 else 0
+                print(f" Done ({table_time:.2f}s, {speed:,.0f} rows/s)")
                 print(f"    - Row counting: {ts['row_counting']:.3f}s")
                 print(f"    - Chunk reading: {ts['chunk_reading']:.3f}s")
                 print(f"    - Missing calc: {ts['missing_calc']:.3f}s")
@@ -962,6 +980,10 @@ if __name__ == '__main__':
     print(f"Wall clock time:       {total_time:.2f}s")
     print(f"Speedup:               {speedup:.2f}x")
     print(f"Parallel efficiency:   {efficiency:.1f}% ({MAX_WORKERS} workers)")
+    
+    # Processing speed
+    processing_speed = total_records / total_time if total_time > 0 else 0
+    print(f"\nProcessing speed:      {processing_speed:,.0f} rows/second")
 
     # Component breakdown based on CPU time
     print(f"\nComponent Breakdown (CPU time):")
