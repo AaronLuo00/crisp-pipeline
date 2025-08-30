@@ -14,6 +14,7 @@ import logging
 import argparse
 import subprocess
 import re
+import shutil
 from pathlib import Path
 from datetime import datetime
 from typing import Dict, List, Optional, Tuple
@@ -97,6 +98,10 @@ class CRISPPipeline:
         self.module_results_dir = self.output_dir / "module_results"
         self.module_results_dir.mkdir(exist_ok=True)
         
+        # Setup module logs directory
+        self.module_logs_dir = self.output_dir / "module_logs"
+        self.module_logs_dir.mkdir(exist_ok=True)
+        
         # Setup log file
         self.log_file = self.output_dir / "pipeline_log.txt"
         
@@ -143,6 +148,70 @@ class CRISPPipeline:
         
         logging.info("Environment check passed")
         return True
+    
+    def copy_module_log(self, module_id: str) -> Optional[Path]:
+        """
+        Copy module log file to centralized pipeline logs directory
+        
+        Args:
+            module_id: Module identifier (e.g., '1_eda', '2_cleaning')
+            
+        Returns:
+            Path to copied log file if successful, None otherwise
+        """
+        # Define log file patterns for each module
+        # All logs are in the output directory under each module's folder
+        log_patterns = {
+            '1_eda': ('output/1_eda/logs', 'eda_process_*.log'),
+            '2_cleaning': ('output/2_cleaning/logs', 'cleaning_process_*.log'),
+            '3_mapping': ('output/3_mapping/logs', 'mapping_process_*.log'),
+            '4_standardization': ('output/4_standardization/logs', 'standardization_process_*.log'),
+            '5_extraction': ('output/5_extraction/logs', 'extraction_process_*.log')
+        }
+        
+        if module_id not in log_patterns:
+            return None
+            
+        log_dir, pattern = log_patterns[module_id]
+        log_path = self.project_root / log_dir
+        
+        logging.debug(f"  Looking for logs in: {log_path}")
+        logging.debug(f"  Pattern: {pattern}")
+        
+        if not log_path.exists():
+            logging.debug(f"  Log directory does not exist: {log_path}")
+            return None
+            
+        # Find log files created during this pipeline run
+        # Look for files modified in the last 60 seconds (should cover module execution time)
+        import time as time_module
+        current_time = time_module.time()
+        log_files = []
+        
+        for log_file in log_path.glob(pattern):
+            # Check if file was modified recently (within last 60 seconds)
+            if current_time - log_file.stat().st_mtime < 60:
+                log_files.append(log_file)
+        
+        if not log_files:
+            logging.debug(f"  No recent log files found matching pattern: {pattern} in {log_path}")
+            return None
+            
+        # Get the most recent log file
+        log_files.sort(key=lambda x: x.stat().st_mtime, reverse=True)
+        source_log = log_files[0]
+        logging.debug(f"  Found log file: {source_log}")
+        
+        # Copy to module_logs directory with simplified name
+        dest_log = self.module_logs_dir / f"{module_id}.log"
+        
+        try:
+            shutil.copy2(source_log, dest_log)
+            logging.info(f"  Module log copied to: {dest_log.relative_to(self.project_root)}")
+            return dest_log
+        except Exception as e:
+            logging.warning(f"  Could not copy module log: {e}")
+            return None
     
     def run_module(self, module: Dict) -> Tuple[bool, Dict]:
         """
@@ -328,6 +397,13 @@ class CRISPPipeline:
                     except:
                         pass
             
+            # Copy module log to pipeline run directory
+            # Wait a moment to ensure log file is fully written
+            time.sleep(0.5)
+            copied_log = self.copy_module_log(module_id)
+            if not copied_log:
+                logging.debug(f"  No log file found for module {module_id}")
+            
             logging.info(f"Module {module_name} completed in {execution_time:.2f} seconds")
             return True, results
             
@@ -494,7 +570,8 @@ class CRISPPipeline:
         print(f"\nOutput Locations:")
         print(f"  Pipeline Output: {self.output_dir}")
         print(f"  Module Results: {self.module_results_dir}")
-        print(f"  Log File: {self.log_file}")
+        print(f"  Module Logs: {self.module_logs_dir}")
+        print(f"  Combined Log: {self.log_file}")
         print(f"  Data Outputs: {self.project_root / 'output'}")
         
         # Check if extraction module was successful and show patient data location
@@ -567,7 +644,8 @@ class CRISPPipeline:
             f.write("## Output Locations\n\n")
             f.write(f"- **Pipeline Output**: `{self.output_dir}`\n")
             f.write(f"- **Module Results**: `{self.module_results_dir}`\n")
-            f.write(f"- **Log File**: `{self.log_file}`\n")
+            f.write(f"- **Module Logs**: `{self.module_logs_dir}`\n")
+            f.write(f"- **Combined Log**: `{self.log_file}`\n")
             f.write(f"- **Data Outputs**: `{self.project_root / 'output'}`\n")
             
             # Add extracted patient data location if extraction was successful
