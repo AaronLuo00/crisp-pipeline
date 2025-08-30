@@ -232,6 +232,7 @@ class DataStandardizer:
                 self.date_cache[normalized] = result
                 return result
             except ValueError:
+                logging.warning(f"Could not parse date value in {col}")
                 pass
         
         # Fallback: Fast format detection with regex (if column name detection failed)
@@ -259,6 +260,7 @@ class DataStandardizer:
                     self.date_cache[normalized] = result
                     return result
                 except ValueError:
+                    logging.warning(f"Could not parse date value in {col}")
                     continue
         
         # If all else fails, cache and return original
@@ -318,6 +320,7 @@ class DataStandardizer:
         try:
             value = float(value)
         except:
+            logging.warning(f"Could not parse numeric value: {value}")
             return value, unit_concept_id, None
         
         # Track conversion
@@ -510,6 +513,7 @@ class DataStandardizer:
                         values = group['value_as_number'].astype(float).tolist()
                         concept_values[concept_id].extend(values)
                     except:
+                        logging.warning(f"Could not process value for concept {concept_id}")
                         pass
             
             # Update progress bar
@@ -657,6 +661,7 @@ class DataStandardizer:
                                     'concept_name': thresholds.get('name', 'Unknown')
                                 }
                     except:
+                        logging.warning(f"Could not process value for concept {concept_id}")
                         pass
             
             # Write to appropriate file
@@ -1624,6 +1629,9 @@ def main():
     print("\n" + "="*60)
     print("PERFORMANCE BREAKDOWN - Data Standardization")
     print("="*60)
+    logging.info("="*60)
+    logging.info("PERFORMANCE BREAKDOWN - Data Standardization")
+    logging.info("="*60)
     
     if not is_parallel:
         # Sequential mode breakdown
@@ -1658,16 +1666,23 @@ def main():
         # Display enhanced metrics
         print(f"\nTotal CPU time:        {total_cpu_time:.2f}s")
         print(f"Wall clock time:       {total_time:.2f}s")
+        logging.info(f"Total CPU time:        {total_cpu_time:.2f}s")
+        logging.info(f"Wall clock time:       {total_time:.2f}s")
         if total_cpu_time > total_time:
             print(f"Speedup:               {total_cpu_time/total_time:.2f}x")
+            logging.info(f"Speedup:               {total_cpu_time/total_time:.2f}x")
         
         print(f"\nPhase-specific Performance:")
+        logging.info("Phase-specific Performance:")
         
         # Phase 1: T-Digest Statistics (parallel for MEASUREMENT)
         if standardizer.parallel_stats['wall_time'] > 0:
             print(f"  T-Digest Statistics ({standardizer.parallel_stats['workers_used']} workers):")
             print(f"    CPU time: {standardizer.parallel_stats['cpu_time']:.2f}s, Wall time: {standardizer.parallel_stats['wall_time']:.2f}s")
             print(f"    Speedup: {standardizer.parallel_stats['speedup']:.2f}x, Efficiency: {standardizer.parallel_stats['efficiency']:.1f}%")
+            logging.info(f"  T-Digest Statistics ({standardizer.parallel_stats['workers_used']} workers):")
+            logging.info(f"    CPU time: {standardizer.parallel_stats['cpu_time']:.2f}s, Wall time: {standardizer.parallel_stats['wall_time']:.2f}s")
+            logging.info(f"    Speedup: {standardizer.parallel_stats['speedup']:.2f}x, Efficiency: {standardizer.parallel_stats['efficiency']:.1f}%")
         
         # Phase 2: Data Processing (sequential)
         print(f"  Data Processing (sequential):")
@@ -1689,8 +1704,13 @@ def main():
         print(f"  Concept statistics:    {total_concept_stats_wall:.2f}s ({total_concept_stats_wall/total_time*100:.1f}%)")
         print(f"  Data processing:       {total_data_processing:.2f}s ({total_data_processing/total_time*100:.1f}%)")
         print(f"  File I/O:              {total_file_io:.2f}s ({total_file_io/total_time*100:.1f}%)")
+        logging.info("Detailed Time Breakdown:")
+        logging.info(f"  Concept statistics:    {total_concept_stats_wall:.2f}s ({total_concept_stats_wall/total_time*100:.1f}%)")
+        logging.info(f"  Data processing:       {total_data_processing:.2f}s ({total_data_processing/total_time*100:.1f}%)")
+        logging.info(f"  File I/O:              {total_file_io:.2f}s ({total_file_io/total_time*100:.1f}%)")
         if visit_merge_time > 0:
             print(f"  Visit merging:         {visit_merge_time:.2f}s ({visit_merge_time/total_time*100:.1f}%)")
+            logging.info(f"  Visit merging:         {visit_merge_time:.2f}s ({visit_merge_time/total_time*100:.1f}%)")
         
         # Find slowest tables
         table_times = [(name, stats.get('time_stats', {}).get('total', 0)) 
@@ -1698,9 +1718,11 @@ def main():
         table_times.sort(key=lambda x: x[1], reverse=True)
         
         print("\nSlowest tables:")
+        logging.info("Slowest tables:")
         for name, time_taken in table_times[:3]:
             if time_taken > 0:
                 print(f"  {name}: {time_taken:.2f}s")
+                logging.info(f"  {name}: {time_taken:.2f}s")
         
     else:
         # Parallel mode breakdown
@@ -1721,11 +1743,17 @@ def main():
         
         print(f"\nTotal records processed: {total_input_records:,}")
         print(f"Processing speed:        {processing_speed:,.0f} rows/second")
+        logging.info(f"Total records processed: {total_input_records:,}")
+        logging.info(f"Processing speed:        {processing_speed:,.0f} rows/second")
         
         print(f"\nPhase Breakdown:")
         print(f"  Phase 1 (T-Digest):    {phase1_time:.2f}s ({phase1_time/total_time*100:.1f}%)")
         print(f"  Phase 2 (Processing):  {phase2_time:.2f}s ({phase2_time/total_time*100:.1f}%)")
         print(f"  Phase 3 (Visit Merge): {phase3_time:.2f}s ({phase3_time/total_time*100:.1f}%)")
+        logging.info("Phase Breakdown:")
+        logging.info(f"  Phase 1 (T-Digest):    {phase1_time:.2f}s ({phase1_time/total_time*100:.1f}%)")
+        logging.info(f"  Phase 2 (Processing):  {phase2_time:.2f}s ({phase2_time/total_time*100:.1f}%)")
+        logging.info(f"  Phase 3 (Visit Merge): {phase3_time:.2f}s ({phase3_time/total_time*100:.1f}%)")
         
         # Calculate parallel efficiency if available
         if hasattr(standardizer, 'parallel_stats') and standardizer.parallel_stats.get('cpu_time', 0) > 0:
@@ -1740,8 +1768,14 @@ def main():
             print(f"  Wall time:             {wall_time:.2f}s")
             print(f"  Speedup:               {speedup:.2f}x")
             print(f"  Efficiency:            {efficiency:.1f}% ({workers} workers)")
+            logging.info("Parallel Performance (Phase 1):")
+            logging.info(f"  CPU time:              {cpu_time:.2f}s")
+            logging.info(f"  Wall time:             {wall_time:.2f}s")
+            logging.info(f"  Speedup:               {speedup:.2f}x")
+            logging.info(f"  Efficiency:            {efficiency:.1f}% ({workers} workers)")
     
     print("="*60)
+    logging.info("="*60)
 
 
 if __name__ == "__main__":

@@ -26,6 +26,7 @@ if platform.system() == 'Windows':
             csv.field_size_limit(max_int)
             break
         except OverflowError:
+            logging.warning(f"CSV field size limit overflow, reducing to {int(max_int / 10)}")
             max_int = int(max_int / 10)
     
     # Windows performance settings
@@ -1628,6 +1629,9 @@ def main():
     print("\n" + "="*50)
     print("PERFORMANCE BREAKDOWN - Parallel Concept Mapping")
     print("="*50)
+    logging.info("="*50)
+    logging.info("PERFORMANCE BREAKDOWN - Parallel Concept Mapping")
+    logging.info("="*50)
     
     if total_cpu_time > 0:
         # Display CPU time vs wall clock time
@@ -1638,9 +1642,13 @@ def main():
         print(f"\nTotal CPU time:        {total_cpu_time:.2f}s")
         print(f"Wall clock time:       {total_time:.2f}s")
         print(f"Speedup:               {total_cpu_time/total_time:.2f}x")
+        logging.info(f"Total CPU time:        {total_cpu_time:.2f}s")
+        logging.info(f"Wall clock time:       {total_time:.2f}s")
+        logging.info(f"Speedup:               {total_cpu_time/total_time:.2f}x")
         
         # Calculate phase-specific metrics
         print(f"\nPhase-specific Performance:")
+        logging.info("Phase-specific Performance:")
         
         # Phase 1: Frequency counting (parallel)
         freq_wall_time = freq_count_time
@@ -1650,6 +1658,9 @@ def main():
             print(f"  Frequency Counting ({freq_tasks} tasks, {min(freq_tasks, MAX_WORKERS)} workers active):")
             print(f"    CPU time: {freq_count_cpu_time:.2f}s, Wall time: {freq_wall_time:.2f}s")
             print(f"    Speedup: {freq_speedup:.2f}x, Efficiency: {freq_efficiency:.1f}%")
+            logging.info(f"  Frequency Counting ({freq_tasks} tasks, {min(freq_tasks, MAX_WORKERS)} workers active):")
+            logging.info(f"    CPU time: {freq_count_cpu_time:.2f}s, Wall time: {freq_wall_time:.2f}s")
+            logging.info(f"    Speedup: {freq_speedup:.2f}x, Efficiency: {freq_efficiency:.1f}%")
         
         # Phase 2: Table processing (parallel)
         proc_wall_time = table_processing_wall_time
@@ -1661,6 +1672,9 @@ def main():
             print(f"  Table Processing ({actual_proc_tasks} tasks, {min(actual_proc_tasks, MAX_WORKERS)} workers active):")
             print(f"    CPU time: {table_processing_cpu_time:.2f}s, Wall time: {proc_wall_time:.2f}s") 
             print(f"    Speedup: {proc_speedup:.2f}x, Efficiency: {proc_efficiency:.1f}%")
+            logging.info(f"  Table Processing ({actual_proc_tasks} tasks, {min(actual_proc_tasks, MAX_WORKERS)} workers active):")
+            logging.info(f"    CPU time: {table_processing_cpu_time:.2f}s, Wall time: {proc_wall_time:.2f}s")
+            logging.info(f"    Speedup: {proc_speedup:.2f}x, Efficiency: {proc_efficiency:.1f}%")
         
         # Phase 3: Merging (sequential)
         if merge_time > 0:
@@ -1680,6 +1694,7 @@ def main():
         total_file_writing = sum(s.get('file_writing', 0) for s in all_time_stats)
         
         print(f"\nDetailed CPU Time Breakdown:")
+        logging.info("Detailed CPU Time Breakdown:")
         print(f"  Phase 1 - Frequency Counting: {freq_count_cpu_time:.2f}s ({freq_count_cpu_time/total_cpu_time*100:.1f}%)")
         print(f"    File reading:          {freq_file_reading:.2f}s")
         print(f"    Stats calculation:     {freq_stats_calc:.2f}s")
@@ -1698,6 +1713,8 @@ def main():
     
     print(f"\nTables processed in parallel: {len(ALL_TABLES)}")
     print(f"MEASUREMENT chunks: {MEASUREMENT_SPLITS}")
+    logging.info(f"Tables processed in parallel: {len(ALL_TABLES)}")
+    logging.info(f"MEASUREMENT chunks: {MEASUREMENT_SPLITS}")
 
 if __name__ == "__main__":
     main()

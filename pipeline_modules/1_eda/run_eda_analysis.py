@@ -277,6 +277,7 @@ def process_table_partial(file_path, start_row, end_row, chunk_size=CHUNK_SIZE, 
                         "max": str(dates.max())
                     }
             except:
+                logging.warning(f"Could not parse datetime values in {col}")
                 pass
         time_stats['date_range'] = time.time() - t0
     
@@ -305,8 +306,9 @@ def process_table_partial(file_path, start_row, end_row, chunk_size=CHUNK_SIZE, 
         stats["total_deaths"] = table_data["death_count"]
         stats["unique_patients_died"] = len(table_data["all_patients"])
     
-    # Calculate total time but don't add to stats
+    # Calculate total time and add to stats
     time_stats['total'] = time.time() - table_start
+    stats['time_stats'] = time_stats
     
     return stats
 
@@ -478,6 +480,7 @@ def process_table_chunked(file_path, chunk_size=CHUNK_SIZE):
                         "max": str(all_dates.max())
                     }
             except:
+                logging.warning(f"Could not parse datetime values in {col}")
                 pass
         time_stats['date_range'] = time.time() - t0
     
@@ -506,8 +509,9 @@ def process_table_chunked(file_path, chunk_size=CHUNK_SIZE):
         stats["total_deaths"] = table_data["death_count"]
         stats["unique_patients_died"] = len(table_data["all_patients"])
     
-    # Calculate total time but don't add to stats
+    # Calculate total time and add to stats
     time_stats['total'] = time.time() - table_start
+    stats['time_stats'] = time_stats
     
     return stats
 
@@ -759,7 +763,12 @@ if __name__ == '__main__':
                             print(f"  [{completed}/{total_tasks}] {table_name} completed")
                         
                 except Exception as exc:
-                    print(f"  [{completed}/{total_tasks}] {table_name} part {part_num if num_parts > 0 else ''} failed: {exc}")
+                    if num_parts > 0:
+                        print(f"  [{completed}/{total_tasks}] {table_name} part {part_num}/{num_parts} failed: {exc}")
+                        logging.error(f"Task failed for {table_name} part {part_num}/{num_parts}: {exc}")
+                    else:
+                        print(f"  [{completed}/{total_tasks}] {table_name} failed: {exc}")
+                        logging.error(f"Task failed for {table_name}: {exc}")
     else:
         # Sequential processing (fallback)
         for i, file_path in enumerate(sorted(data_files), 1):
@@ -827,10 +836,25 @@ if __name__ == '__main__':
         **eda_results
     }
     
-    # Save results
+    # Create clean results for JSON output (without time_stats)
+    # This keeps the data clean while preserving time_stats for performance analysis
+    clean_results = {
+        "total_extraction_time": total_time,
+        "analysis_date": eda_results["analysis_date"],
+        "dataset": eda_results["dataset"],
+        "chunk_size": eda_results["chunk_size"],
+        "tables": {}
+    }
+    
+    # Copy table stats without time_stats
+    for table_name, table_stats in eda_results["tables"].items():
+        clean_stats = {k: v for k, v in table_stats.items() if k != 'time_stats'}
+        clean_results["tables"][table_name] = clean_stats
+    
+    # Save clean results
     results_path = output_dir / "eda_results.json"
     with open(results_path, 'w') as f:
-        json.dump(eda_results, f, indent=2, cls=NumpyEncoder)
+        json.dump(clean_results, f, indent=2, cls=NumpyEncoder)
     print(f"\nDetailed results saved to: {results_path}")
     logging.info(f"Detailed results saved to: {results_path}")
 
@@ -974,10 +998,13 @@ if __name__ == '__main__':
     print(f"\nTotal execution time: {total_time:.2f} seconds")
     logging.info(f"Total execution time: {total_time:.2f} seconds")
 
-    # Display performance breakdown
+    # Display and log performance breakdown
     print("\n" + "="*50)
     print("PERFORMANCE BREAKDOWN - Parallel EDA Analysis")
     print("="*50)
+    logging.info("="*50)
+    logging.info("PERFORMANCE BREAKDOWN - Parallel EDA Analysis")
+    logging.info("="*50)
 
     # Sum up time spent in each category
     total_row_counting = sum(s.get('time_stats', {}).get('row_counting', 0) 
@@ -1004,25 +1031,38 @@ if __name__ == '__main__':
     print(f"Wall clock time:       {total_time:.2f}s")
     print(f"Speedup:               {speedup:.2f}x")
     print(f"Parallel efficiency:   {efficiency:.1f}% ({MAX_WORKERS} workers)")
+    logging.info(f"Total CPU time:        {total_cpu_time:.2f}s")
+    logging.info(f"Wall clock time:       {total_time:.2f}s")
+    logging.info(f"Speedup:               {speedup:.2f}x")
+    logging.info(f"Parallel efficiency:   {efficiency:.1f}% ({MAX_WORKERS} workers)")
     
     # Processing speed
     processing_speed = total_records / total_time if total_time > 0 else 0
     print(f"\nProcessing speed:      {processing_speed:,.0f} rows/second")
+    logging.info(f"Processing speed:      {processing_speed:,.0f} rows/second")
 
     # Component breakdown based on CPU time
     print(f"\nComponent Breakdown (CPU time):")
+    logging.info("Component Breakdown (CPU time):")
     if total_cpu_time > 0:
         print(f"  Row counting:        {total_row_counting:.2f}s ({total_row_counting/total_cpu_time*100:.1f}%)")
         print(f"  Chunk reading:       {total_chunk_reading:.2f}s ({total_chunk_reading/total_cpu_time*100:.1f}%)")
         print(f"  Missing calc:        {total_missing_calc:.2f}s ({total_missing_calc/total_cpu_time*100:.1f}%)")
         print(f"  Unique tracking:     {total_unique_tracking:.2f}s ({total_unique_tracking/total_cpu_time*100:.1f}%)")
         print(f"  Date range:          {total_date_range:.2f}s ({total_date_range/total_cpu_time*100:.1f}%)")
+        logging.info(f"  Row counting:        {total_row_counting:.2f}s ({total_row_counting/total_cpu_time*100:.1f}%)")
+        logging.info(f"  Chunk reading:       {total_chunk_reading:.2f}s ({total_chunk_reading/total_cpu_time*100:.1f}%)")
+        logging.info(f"  Missing calc:        {total_missing_calc:.2f}s ({total_missing_calc/total_cpu_time*100:.1f}%)")
+        logging.info(f"  Unique tracking:     {total_unique_tracking:.2f}s ({total_unique_tracking/total_cpu_time*100:.1f}%)")
+        logging.info(f"  Date range:          {total_date_range:.2f}s ({total_date_range/total_cpu_time*100:.1f}%)")
 
     # Find slowest tables
     print("\nSlowest tables:")
+    logging.info("Slowest tables:")
     table_times = [(name, stats.get('time_stats', {}).get('total', 0)) 
                    for name, stats in eda_results["tables"].items()]
     table_times.sort(key=lambda x: x[1], reverse=True)
     for name, time_taken in table_times[:3]:
         if time_taken > 0:
             print(f"  {name}: {time_taken:.2f}s")
+            logging.info(f"  {name}: {time_taken:.2f}s")

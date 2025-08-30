@@ -283,6 +283,7 @@ def clean_table_partial(table_name, start_row=0, end_row=-1, position=0, disable
     # Check if file exists
     if not input_file.exists():
         print(f"Warning: {input_file} not found, skipping...")
+        logging.warning(f"Input file not found: {input_file}")
         return 0
     
     # Get total row count for progress bar
@@ -938,6 +939,7 @@ if __name__ == '__main__':
                         overall_pbar.update(1)
                     except Exception as e:
                         print(f"\nError cleaning {table}: {str(e)}")
+                        logging.error(f"Error cleaning {table}: {str(e)}")
                         cleaning_results["tables"][table] = {"error": str(e)}
                         overall_pbar.update(1)
             
@@ -957,6 +959,7 @@ if __name__ == '__main__':
                 print(f" Done ({time_stats['total']:.2f}s)")
             except Exception as e:
                 print(f"\nError cleaning {table}: {str(e)}")
+                logging.error(f"Error cleaning {table}: {str(e)}")
                 cleaning_results["tables"][table] = {"error": str(e)}
 
     # Calculate total execution time early for JSON
@@ -1187,6 +1190,9 @@ if __name__ == '__main__':
         print("\n" + "="*50)
         print("PERFORMANCE BREAKDOWN - Data Cleaning")
         print("="*50)
+        logging.info("="*50)
+        logging.info("PERFORMANCE BREAKDOWN - Data Cleaning")
+        logging.info("="*50)
         
         # Sum up times from all tables
         total_column_analysis = sum(s.get('column_analysis', 0) for s in all_time_stats)
@@ -1207,9 +1213,13 @@ if __name__ == '__main__':
                 print(f"Total CPU time:        {total_cpu_time:.2f}s (across {len(all_time_stats)} tasks)")
                 print(f"Wall clock time:       {total_time:.2f}s")
                 print(f"Parallelization efficiency: {total_cpu_time/total_time/MAX_WORKERS*100:.1f}%\n")
+                logging.info(f"Total CPU time:        {total_cpu_time:.2f}s (across {len(all_time_stats)} tasks)")
+                logging.info(f"Wall clock time:       {total_time:.2f}s")
+                logging.info(f"Parallelization efficiency: {total_cpu_time/total_time/MAX_WORKERS*100:.1f}%")
                 
                 # Show breakdown as percentage of total CPU time
                 print("CPU Time Breakdown:")
+                logging.info("CPU Time Breakdown:")
                 print(f"  Column analysis:       {total_column_analysis:.2f}s ({total_column_analysis/total_cpu_time*100:.1f}%)")
                 print(f"  CSV reading:           {total_csv_reading:.2f}s ({total_csv_reading/total_cpu_time*100:.1f}%)")
                 print(f"  Data transformation:   {total_data_transformation:.2f}s ({total_data_transformation/total_cpu_time*100:.1f}%)")
@@ -1218,8 +1228,18 @@ if __name__ == '__main__':
                 print(f"  Temporal validation:   {total_temporal_validation:.2f}s ({total_temporal_validation/total_cpu_time*100:.1f}%)")
                 print(f"  File I/O:              {total_file_io:.2f}s ({total_file_io/total_cpu_time*100:.1f}%)")
                 print(f"  Other processing:      {total_other:.2f}s ({total_other/total_cpu_time*100:.1f}%)")
+                logging.info(f"  Column analysis:       {total_column_analysis:.2f}s ({total_column_analysis/total_cpu_time*100:.1f}%)")
+                logging.info(f"  CSV reading:           {total_csv_reading:.2f}s ({total_csv_reading/total_cpu_time*100:.1f}%)")
+                logging.info(f"  Data transformation:   {total_data_transformation:.2f}s ({total_data_transformation/total_cpu_time*100:.1f}%)")
+                logging.info(f"  Duplicate detection:   {total_duplicate_detection:.2f}s ({total_duplicate_detection/total_cpu_time*100:.1f}%)")
+                logging.info(f"  Invalid concept ID:    {total_invalid_concept:.2f}s ({total_invalid_concept/total_cpu_time*100:.1f}%)")
+                logging.info(f"  Temporal validation:   {total_temporal_validation:.2f}s ({total_temporal_validation/total_cpu_time*100:.1f}%)")
+                logging.info(f"  File I/O:              {total_file_io:.2f}s ({total_file_io/total_cpu_time*100:.1f}%)")
+                logging.info(f"  Other processing:      {total_other:.2f}s ({total_other/total_cpu_time*100:.1f}%)")
                 print(f"\nMerging Phase (sequential):")
                 print(f"  Merge time:            {total_merge_time:.2f}s")
+                logging.info(f"Merging Phase (sequential):")
+                logging.info(f"  Merge time:            {total_merge_time:.2f}s")
             else:
                 print("No timing statistics available")
         else:
@@ -1234,9 +1254,11 @@ if __name__ == '__main__':
         # Find slowest operations (skip if using parallel processing with splits)
         if not USE_PARALLEL or len(all_time_stats) == len(KEY_TABLES):
             print("\nSlowest tables:")
+            logging.info("Slowest tables:")
             table_times = [(KEY_TABLES[i], s['total']) for i, s in enumerate(all_time_stats)]
             table_times.sort(key=lambda x: x[1], reverse=True)
             for name, time_taken in table_times[:3]:
                 print(f"  {name}: {time_taken:.2f}s")
+                logging.info(f"  {name}: {time_taken:.2f}s")
     
     print("="*70)

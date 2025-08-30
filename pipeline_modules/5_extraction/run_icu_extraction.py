@@ -27,6 +27,7 @@ try:
         group_tables_by_size
     )
 except ImportError:
+    logging.warning("Using absolute imports for parallel extraction modules")
     from parallel_extraction import (
         process_table_batch,
         process_single_table_worker,
@@ -664,6 +665,9 @@ class PatientDataExtractor:
         print("\n" + "="*60)
         print("PERFORMANCE BREAKDOWN - Parallel ICU Data Extraction")
         print("="*60)
+        logging.info("="*60)
+        logging.info("PERFORMANCE BREAKDOWN - Parallel ICU Data Extraction")
+        logging.info("="*60)
         
         stats = self.extraction_results['statistics']
         phase_stats = self.phase_times
@@ -715,20 +719,32 @@ class PatientDataExtractor:
             print(f"  Speedup:               {speedup:.2f}x")
             print(f"  Parallel efficiency:   {efficiency:.1f}%")
             print(f"  Parallel tasks:        {parallel_tasks}")
+            logging.info("Overall Performance:")
+            logging.info(f"  Total CPU time:        {cpu_time:.2f}s")
+            logging.info(f"  Wall clock time:       {total_time:.2f}s")
+            logging.info(f"  Speedup:               {speedup:.2f}x")
+            logging.info(f"  Parallel efficiency:   {efficiency:.1f}%")
+            logging.info(f"  Parallel tasks:        {parallel_tasks}")
         
         # Phase breakdown
         print(f"\nPhase Breakdown:")
+        logging.info("Phase Breakdown:")
         if phase1_time > 0:
             print(f"  Phase 1 (Parallel Tables): {phase1_time:.2f}s ({phase1_time/total_time*100:.1f}%)")
+            logging.info(f"  Phase 1 (Parallel Tables): {phase1_time:.2f}s ({phase1_time/total_time*100:.1f}%)")
         if phase2_time > 0:
             print(f"  Phase 2 (MEASUREMENT):      {phase2_time:.2f}s ({phase2_time/total_time*100:.1f}%)")
+            logging.info(f"  Phase 2 (MEASUREMENT):      {phase2_time:.2f}s ({phase2_time/total_time*100:.1f}%)")
         if phase3_time > 0:
             print(f"  Phase 3 (Basic Tables):     {phase3_time:.2f}s ({phase3_time/total_time*100:.1f}%)")
+            logging.info(f"  Phase 3 (Basic Tables):     {phase3_time:.2f}s ({phase3_time/total_time*100:.1f}%)")
         if phase4_time > 0:
             print(f"  Phase 4 (Pre-ICU Stats):    {phase4_time:.2f}s ({phase4_time/total_time*100:.1f}%)")
+            logging.info(f"  Phase 4 (Pre-ICU Stats):    {phase4_time:.2f}s ({phase4_time/total_time*100:.1f}%)")
         
         # Individual table performance
         print(f"\nTable Processing Times:")
+        logging.info("Table Processing Times:")
         table_times = []
         for table in TABLES_TO_PROCESS:
             if table in stats and 'processing_time' in stats[table]:
@@ -742,10 +758,13 @@ class PatientDataExtractor:
                 if records > 0:
                     rate = records / time_taken
                     print(f"  {name:20s}: {time_taken:6.2f}s ({records:>10,} records, {rate:>10.0f} rec/s)")
+                    logging.info(f"  {name:20s}: {time_taken:6.2f}s ({records:>10,} records, {rate:>10.0f} rec/s)")
                 else:
                     print(f"  {name:20s}: {time_taken:6.2f}s")
+                    logging.info(f"  {name:20s}: {time_taken:6.2f}s")
         
         print("="*60)
+        logging.info("="*60)
     
     def run(self):
         """Run the complete extraction process with parallel optimization."""
@@ -827,11 +846,13 @@ class PatientDataExtractor:
                             print(f"  [OK] {table_name}: {stats.get('total_records', 0):,} records")
                         else:
                             print(f"  [FAIL] {table_name}: {stats['error']}")
+                            logging.error(f"Failed to extract {table_name}: {stats['error']}")
                             self.extraction_results['errors'].append(f"{table_name}: {stats['error']}")
                 
                 except Exception as e:
                     logging.error(f"Task {key} failed: {e}")
                     print(f"  [FAIL] Task {key} failed: {e}")
+                    # logging.error already called on line 833
                     self.extraction_results['errors'].append(f"Task {key}: {str(e)}")
         
         self.phase_times['phase1'] = time.time() - phase1_start
@@ -864,6 +885,7 @@ class PatientDataExtractor:
                         print(f"  [OK] Chunk {chunk_id + 1}/{MEASUREMENT_CHUNKS} completed")
                     except Exception as e:
                         print(f"  [FAIL] Chunk {i} failed: {e}")
+                        # logging.error already called on line 867
                         logging.error(f"MEASUREMENT chunk {i} failed: {e}")
             
             # Merge chunks
