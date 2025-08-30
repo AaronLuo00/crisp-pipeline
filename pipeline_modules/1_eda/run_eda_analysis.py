@@ -13,6 +13,7 @@ from tqdm import tqdm
 import numpy as np
 import platform
 from concurrent.futures import ProcessPoolExecutor, as_completed
+import logging
 
 # Check pandas version for compatibility
 PANDAS_VERSION = tuple(map(int, pd.__version__.split('.')[:2]))
@@ -304,9 +305,8 @@ def process_table_partial(file_path, start_row, end_row, chunk_size=CHUNK_SIZE, 
         stats["total_deaths"] = table_data["death_count"]
         stats["unique_patients_died"] = len(table_data["all_patients"])
     
-    # Add time statistics
+    # Calculate total time but don't add to stats
     time_stats['total'] = time.time() - table_start
-    stats["time_stats"] = time_stats
     
     return stats
 
@@ -506,9 +506,8 @@ def process_table_chunked(file_path, chunk_size=CHUNK_SIZE):
         stats["total_deaths"] = table_data["death_count"]
         stats["unique_patients_died"] = len(table_data["all_patients"])
     
-    # Add time statistics
+    # Calculate total time but don't add to stats
     time_stats['total'] = time.time() - table_start
-    stats["time_stats"] = time_stats
     
     return stats
 
@@ -617,17 +616,7 @@ def merge_table_part_stats(part_stats_list, table_name):
         merged_stats["total_deaths"] = sum(stats.get("total_deaths", 0) for stats in part_stats_list)
         merged_stats["unique_patients_died"] = max(stats.get("unique_patients_died", 0) for stats in part_stats_list)
     
-    # Merge time statistics - for parallel processing, use the maximum time from all parts
-    # This represents the actual wall clock time since parts run in parallel
-    merged_time_stats = {
-        'total': max(stats["time_stats"]["total"] for stats in part_stats_list),
-        'row_counting': max(stats["time_stats"].get("row_counting", 0) for stats in part_stats_list),
-        'chunk_reading': max(stats["time_stats"].get("chunk_reading", 0) for stats in part_stats_list),
-        'missing_calc': max(stats["time_stats"].get("missing_calc", 0) for stats in part_stats_list),
-        'unique_tracking': max(stats["time_stats"].get("unique_tracking", 0) for stats in part_stats_list),
-        'date_range': max(stats["time_stats"].get("date_range", 0) for stats in part_stats_list)
-    }
-    merged_stats["time_stats"] = merged_time_stats
+    # Don't merge time statistics into the output
     
     return merged_stats
 
@@ -638,15 +627,36 @@ if __name__ == '__main__':
     data_dir = project_root / "data"
     output_dir = project_root / "output" / "1_eda"
     output_dir.mkdir(parents=True, exist_ok=True)
+    
+    # Setup logging
+    log_dir = output_dir / "logs"
+    log_dir.mkdir(parents=True, exist_ok=True)
+    log_file = log_dir / f"eda_process_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(levelname)s - %(message)s',
+        datefmt='%Y-%m-%d %H:%M:%S',
+        handlers=[
+            logging.FileHandler(log_file)  # Only save to file
+        ],
+        force=True
+    )
 
     print("Starting EDA analysis on subdataset_1000...")
+    logging.info("Starting EDA analysis on subdataset_1000...")
     print(f"Output directory: {output_dir}")
+    logging.info(f"Output directory: {output_dir}")
     print(f"Parallel processing: {'enabled' if PARALLEL_EDA else 'disabled'}")
+    logging.info(f"Parallel processing: {'enabled' if PARALLEL_EDA else 'disabled'}")
     if PARALLEL_EDA:
         print(f"[PARALLEL PROCESSING]")
+        logging.info("[PARALLEL PROCESSING]")
         print(f"  CPU cores available: {os.cpu_count()}")
+        logging.info(f"  CPU cores available: {os.cpu_count()}")
         print(f"  Using {MAX_WORKERS} workers (keeping 2 cores for system)")
+        logging.info(f"  Using {MAX_WORKERS} workers (keeping 2 cores for system)")
         print(f"MEASUREMENT splits: {MEASUREMENT_SPLITS}")
+        logging.info(f"MEASUREMENT splits: {MEASUREMENT_SPLITS}")
 
     # Start timing
     start_time = time.time()
@@ -654,7 +664,9 @@ if __name__ == '__main__':
     # Load all CSV files
     data_files = list(data_dir.glob("*.csv"))
     print(f"Found {len(data_files)} data files")
+    logging.info(f"Found {len(data_files)} data files")
     print(f"Using chunk size: {CHUNK_SIZE:,} rows")
+    logging.info(f"Using chunk size: {CHUNK_SIZE:,} rows")
 
     # Store statistics
     eda_results = {
@@ -806,11 +818,21 @@ if __name__ == '__main__':
         print(f"  - Total deaths: {death_stats['total_deaths']:,}")
         print(f"  - Death rate: {death_stats['total_deaths'] / person_stats['unique_patients'] * 100:.1f}%")
 
+    # Calculate total execution time
+    total_time = time.time() - start_time
+    
+    # Add total_extraction_time to the beginning of results
+    eda_results = {
+        "total_extraction_time": total_time,
+        **eda_results
+    }
+    
     # Save results
     results_path = output_dir / "eda_results.json"
     with open(results_path, 'w') as f:
         json.dump(eda_results, f, indent=2, cls=NumpyEncoder)
     print(f"\nDetailed results saved to: {results_path}")
+    logging.info(f"Detailed results saved to: {results_path}")
 
     # Save column analysis for data cleaning module
     column_analysis = {}
@@ -845,6 +867,7 @@ if __name__ == '__main__':
     with open(column_analysis_path, 'w') as f:
         json.dump(column_analysis, f, indent=2)
     print(f"Column analysis saved to: {column_analysis_path}")
+    logging.info(f"Column analysis saved to: {column_analysis_path}")
 
     # Generate visualizations
     print("Generating visualizations...")
@@ -945,10 +968,11 @@ if __name__ == '__main__':
                    f"{death_stats['total_deaths'] / person_stats['unique_patients'] * 100:.1f}%\n")
 
     print(f"Report saved to: {report_path}")
+    logging.info(f"Report saved to: {report_path}")
 
-    # Display total execution time
-    total_time = time.time() - start_time
+    # Display total execution time (already calculated above)
     print(f"\nTotal execution time: {total_time:.2f} seconds")
+    logging.info(f"Total execution time: {total_time:.2f} seconds")
 
     # Display performance breakdown
     print("\n" + "="*50)

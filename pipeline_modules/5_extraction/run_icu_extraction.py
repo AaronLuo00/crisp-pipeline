@@ -47,10 +47,7 @@ else:
     WRITE_BUFFER_SIZE = 20000  # 20K rows batch write
     FILE_BUFFER_SIZE = 1 * 1024 * 1024  # 1MB file buffer
 
-# Setup logging
-logging.basicConfig(level=logging.INFO, 
-                    format='%(asctime)s - %(levelname)s - %(message)s',
-                    datefmt='%Y-%m-%d %H:%M:%S')  # No milliseconds
+# Setup logging will be configured after output_dir is created
 
 # Suppress warnings
 warnings.filterwarnings('ignore', category=pd.errors.DtypeWarning)
@@ -81,6 +78,8 @@ patient_data_dir = patient_data_dir.resolve()
 # Create output directories
 for dir_path in [output_dir, patient_data_dir]:
     dir_path.mkdir(parents=True, exist_ok=True)
+
+# Logging will be configured in main() to avoid multiple initialization in multiprocessing
 
 # Configuration
 TABLES_TO_PROCESS = [
@@ -918,7 +917,12 @@ class PatientDataExtractor:
         
         # Calculate total time
         total_time = time.time() - start_time
-        self.extraction_results['statistics']['total_extraction_time'] = total_time
+        
+        # Add total_extraction_time to the beginning of results
+        self.extraction_results = {
+            "total_extraction_time": total_time,
+            **self.extraction_results
+        }
         
         # Save extraction results
         results_path = output_dir / "extraction_results.json"
@@ -960,6 +964,21 @@ class PatientDataExtractor:
 
 def main():
     """Main execution function."""
+    # Setup logging first (only in main process)
+    log_dir = output_dir / "logs"
+    log_dir.mkdir(parents=True, exist_ok=True)
+    log_file = log_dir / f"extraction_process_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(levelname)s - %(message)s',
+        datefmt='%Y-%m-%d %H:%M:%S',
+        handlers=[
+            logging.FileHandler(log_file),  # Save to file
+            logging.StreamHandler()  # Also output to console
+        ],
+        force=True
+    )
+    
     extractor = PatientDataExtractor()
     extractor.run()
 

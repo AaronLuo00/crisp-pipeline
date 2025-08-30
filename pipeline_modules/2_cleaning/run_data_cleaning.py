@@ -15,6 +15,7 @@ import pandas as pd
 import numpy as np
 from concurrent.futures import ProcessPoolExecutor, as_completed
 import multiprocessing
+import logging
 
 # Performance optimization settings
 if platform.system() == 'Windows':
@@ -596,8 +597,7 @@ def clean_table_partial(table_name, start_row=0, end_row=-1, position=0, disable
             "invalid_concept_id": str(invalid_concept_file),
             "temporal_issues": str(temporal_issues_file)
         },
-        "removed_columns_details": columns_info,
-        "time_stats": table_time_stats
+        "removed_columns_details": columns_info
     }
     
     # Silent completion
@@ -683,13 +683,31 @@ def merge_table_parts(table_name, num_parts):
     return merge_time
 
 if __name__ == '__main__':
+    # Setup logging
+    log_dir = output_dir / "logs"
+    log_dir.mkdir(parents=True, exist_ok=True)
+    log_file = log_dir / f"cleaning_process_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(levelname)s - %(message)s',
+        datefmt='%Y-%m-%d %H:%M:%S',
+        handlers=[
+            logging.FileHandler(log_file)  # Only save to file
+        ],
+        force=True
+    )
+    
     # Start timing
     start_time = time.time()
     
     print("Starting data cleaning on subdataset_1000...")
+    logging.info("Starting data cleaning on subdataset_1000...")
     print(f"Output directory: {output_dir}")
+    logging.info(f"Output directory: {output_dir}")
     print(f"Chunk size: {CHUNK_SIZE:,} rows")
+    logging.info(f"Chunk size: {CHUNK_SIZE:,} rows")
     print(f"Tables to clean: {', '.join(KEY_TABLES)}")
+    logging.info(f"Tables to clean: {', '.join(KEY_TABLES)}")
     
     if column_analysis_path.exists():
         print(f"\nFound column_analysis.json from EDA module, will use cached analysis")
@@ -890,8 +908,7 @@ if __name__ == '__main__':
                                         "duplicates": str(duplicates_dir / f"{table}.csv"),
                                         "invalid_concept_id": str(invalid_concept_dir / f"{table}.csv"),
                                         "temporal_issues": str(temporal_issues_dir / f"{table}.csv")
-                                    },
-                                    "time_stats": aggregated_time_stats
+                                    }
                                 }
                                 tables_completed.add(table)
                         else:
@@ -913,8 +930,7 @@ if __name__ == '__main__':
                                         "duplicates": str(duplicates_dir / f"{table}.csv"),
                                         "invalid_concept_id": str(invalid_concept_dir / f"{table}.csv"),
                                         "temporal_issues": str(temporal_issues_dir / f"{table}.csv")
-                                    },
-                                    "time_stats": time_stats
+                                    }
                                 }
                             overall_pbar.set_postfix_str(f"Completed: {table}")
                             tables_completed.add(table)
@@ -943,6 +959,15 @@ if __name__ == '__main__':
                 print(f"\nError cleaning {table}: {str(e)}")
                 cleaning_results["tables"][table] = {"error": str(e)}
 
+    # Calculate total execution time early for JSON
+    total_time = time.time() - start_time
+    
+    # Add total_extraction_time to the beginning of results
+    cleaning_results = {
+        "total_extraction_time": total_time,
+        **cleaning_results
+    }
+    
     # Save cleaning results
     results_path = output_dir / "cleaning_results.json"
     with open(results_path, 'w') as f:
@@ -952,6 +977,7 @@ if __name__ == '__main__':
     print("CLEANING COMPLETE")
     print('='*60)
     print(f"Detailed results saved to: {results_path}")
+    logging.info(f"Detailed results saved to: {results_path}")
     
     # Generate removed columns analysis
     removed_columns_path = removed_dir / "removed_columns_analysis.csv"
@@ -979,6 +1005,7 @@ if __name__ == '__main__':
                     })
     
     print(f"Removed columns analysis saved to: {removed_columns_path}")
+    logging.info(f"Removed columns analysis saved to: {removed_columns_path}")
     
     # Generate cleaning report
     report_path = output_dir / "cleaning_report.md"
@@ -1044,6 +1071,7 @@ if __name__ == '__main__':
                 f.write("\n")
     
     print(f"Report saved to: {report_path}")
+    logging.info(f"Report saved to: {report_path}")
     
     # Print comprehensive summary
     print("\n" + "="*70)
@@ -1150,9 +1178,9 @@ if __name__ == '__main__':
     print(f"    - {report_path}")
     print(f"    - {removed_columns_path}")
     
-    # Calculate total execution time
-    total_time = time.time() - start_time
+    # Display total execution time (already calculated above)
     print(f"\nTotal execution time: {total_time:.2f} seconds")
+    logging.info(f"Total execution time: {total_time:.2f} seconds")
     
     # Performance breakdown
     if all_time_stats:

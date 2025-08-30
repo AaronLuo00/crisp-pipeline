@@ -49,10 +49,7 @@ else:
     CHUNK_SIZE = 100000  # Default for macOS/Linux
     PROGRESS_INTERVAL = 10.0
 
-# Setup logging
-logging.basicConfig(level=logging.INFO, 
-                    format='%(asctime)s - %(levelname)s - %(message)s',
-                    datefmt='%Y-%m-%d %H:%M:%S')  # No milliseconds
+# Setup logging will be configured after output_dir is created
 
 # Suppress warnings
 warnings.filterwarnings('ignore', category=FutureWarning)
@@ -80,6 +77,8 @@ changes_dir = output_dir / "standardization_changes"
 for dir_path in [output_dir, outliers_percentile_dir, outliers_range_dir, 
                  merged_visit_dir, changes_dir]:
     dir_path.mkdir(parents=True, exist_ok=True)
+
+# Logging will be configured in main() to avoid multiple initialization in multiprocessing
 
 # All tables to standardize (all have been processed by Module 3)
 TABLES_TO_STANDARDIZE = ['MEASUREMENT', 'OBSERVATION', 'PROCEDURE_OCCURRENCE', 
@@ -877,8 +876,7 @@ class DataStandardizer:
         table_time_stats['total'] = time.time() - table_start_time
         table_time_stats['file_io'] = table_time_stats['total'] - table_time_stats['concept_statistics'] - table_time_stats['data_processing']
         
-        # Save statistics
-        stats['time_stats'] = table_time_stats
+        # Save statistics (without time_stats for JSON output)
         self.standardization_results["tables"][table_name] = stats
         
         # Only show detailed summary if changes were made
@@ -1305,6 +1303,16 @@ class DataStandardizer:
             else:
                 return obj
         
+        # Calculate total time
+        total_time = time.time() - total_start
+        
+        # Add total_extraction_time to the beginning of results
+        self.standardization_results = {
+            "total_extraction_time": total_time,
+            **self.standardization_results
+        }
+        
+        # Convert numpy types to Python types for JSON serialization
         json_safe_results = convert_numpy(self.standardization_results)
         
         with open(results_path, 'w') as f:
@@ -1312,8 +1320,6 @@ class DataStandardizer:
         
         # Generate markdown report
         self.generate_markdown_report()
-        
-        total_time = time.time() - total_start
         
         # Print enhanced performance summary
         print("\n" + "="*60)
@@ -1553,6 +1559,21 @@ class DataStandardizer:
 
 def main():
     """Main execution function."""
+    # Setup logging first (only in main process)
+    log_dir = output_dir / "logs"
+    log_dir.mkdir(parents=True, exist_ok=True)
+    log_file = log_dir / f"standardization_process_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(levelname)s - %(message)s',
+        datefmt='%Y-%m-%d %H:%M:%S',
+        handlers=[
+            logging.FileHandler(log_file),  # Save to file
+            logging.StreamHandler()  # Also output to console
+        ],
+        force=True
+    )
+    
     # Start timing
     start_time = time.time()
     

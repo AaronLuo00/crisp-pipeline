@@ -66,17 +66,7 @@ duplicates_dir.mkdir(parents=True, exist_ok=True)
 low_freq_dir = removed_dir / "low_frequency"
 low_freq_dir.mkdir(parents=True, exist_ok=True)
 
-# Setup logging
-log_file = output_dir / f"mapping_process_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s',
-    datefmt='%Y-%m-%d %H:%M:%S',  # No milliseconds
-    handlers=[
-        logging.FileHandler(log_file),
-        logging.StreamHandler()
-    ]
-)
+# Logging will be configured in main() to avoid multiple initialization in multiprocessing
 
 # Tables to map (only those with processed mappings)
 TABLES_WITH_MAPPING = [
@@ -1307,14 +1297,34 @@ class ConceptMapper:
         return extended_fieldnames
     
 
-def generate_mapping_report(stats, mapper):
+def generate_mapping_report(stats, mapper, start_time):
     """Generate comprehensive mapping report."""
     report_path = output_dir / "mapping_report.md"
     results_path = output_dir / "mapping_results.json"  # Changed to match run_all_module pattern
     
+    # Calculate total execution time
+    total_time = time.time() - start_time
+    
+    # Remove time_stats from each table's statistics
+    clean_stats = {}
+    for table_name, table_stats in stats.items():
+        if isinstance(table_stats, dict):
+            clean_table_stats = {k: v for k, v in table_stats.items() if k != 'time_stats'}
+            clean_stats[table_name] = clean_table_stats
+        else:
+            clean_stats[table_name] = table_stats
+    
+    # Restructure stats to have total_extraction_time at the beginning
+    mapping_results = {
+        "total_extraction_time": total_time,
+        "mapping_date": datetime.now().isoformat(),
+        "dataset": "OMOP CDM",
+        "tables": clean_stats
+    }
+    
     # Save detailed statistics with name compatible with run_all_module
     with open(results_path, 'w') as f:
-        json.dump(stats, f, indent=2)
+        json.dump(mapping_results, f, indent=2)
     
     # Generate markdown report
     with open(report_path, 'w') as f:
@@ -1406,6 +1416,21 @@ def generate_mapping_report(stats, mapper):
 
 def main():
     """Main execution function with parallel processing."""
+    # Setup logging first (only in main process)
+    log_dir = output_dir / "logs"
+    log_dir.mkdir(parents=True, exist_ok=True)
+    log_file = log_dir / f"mapping_process_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(levelname)s - %(message)s',
+        datefmt='%Y-%m-%d %H:%M:%S',
+        handlers=[
+            logging.FileHandler(log_file),
+            logging.StreamHandler()
+        ],
+        force=True
+    )
+    
     # Start timing
     start_time = time.time()
     
@@ -1570,7 +1595,7 @@ def main():
     parallel_time = time.time() - parallel_start
     
     # Generate summary report
-    generate_mapping_report(mapper.stats, mapper)
+    generate_mapping_report(mapper.stats, mapper, start_time)
     
     # Calculate total execution time
     total_time = time.time() - start_time
