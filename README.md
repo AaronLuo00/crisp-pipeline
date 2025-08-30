@@ -137,6 +137,8 @@ Example structure:
 ```
 crisp-pipeline/
 ├── output/                          # Pipeline analytics & reports
+│   ├── pipeline_runs/              # Timestamped complete pipeline runs
+│   │   └── run_YYYYMMDD_HHMMSS/   # Individual run with all logs & results
 │   ├── 1_eda/                      # EDA reports and visualizations
 │   ├── 2_cleaning/                 # Cleaning statistics and logs
 │   ├── 3_mapping/                  # Concept mapping reports
