@@ -1599,13 +1599,13 @@ def main():
     total_time = time.time() - start_time
     print(f"\nTotal execution time: {total_time:.2f} seconds")
     
-    # Only show the detailed performance breakdown for sequential mode
-    # Parallel mode already has its own detailed report
+    # Show performance breakdown for both modes with consistent format
+    print("\n" + "="*60)
+    print("PERFORMANCE BREAKDOWN - Data Standardization")
+    print("="*60)
+    
     if not is_parallel:
-        # Performance breakdown
-        print("\n" + "="*50)
-        print("PERFORMANCE BREAKDOWN - Data Standardization")
-        print("="*50)
+        # Sequential mode breakdown
         
         # Aggregate timing from all tables
         total_concept_stats_wall = 0
@@ -1681,7 +1681,46 @@ def main():
             if time_taken > 0:
                 print(f"  {name}: {time_taken:.2f}s")
         
-        print("="*50)
+    else:
+        # Parallel mode breakdown
+        # Get statistics from phase tracking
+        phase1_time = standardizer.phase_stats.get('phase1', {}).get('wall_time', 0)
+        phase2_time = standardizer.phase_stats.get('phase2', {}).get('wall_time', 0)
+        phase3_time = standardizer.phase_stats.get('phase3', {}).get('wall_time', 0)
+        
+        # Calculate total records processed
+        total_input_records = sum(
+            stats.get('input_records', 0) 
+            for stats in standardizer.standardization_results.get('tables', {}).values()
+            if isinstance(stats, dict) and 'input_records' in stats
+        )
+        
+        # Calculate processing speed
+        processing_speed = total_input_records / total_time if total_time > 0 else 0
+        
+        print(f"\nTotal records processed: {total_input_records:,}")
+        print(f"Processing speed:        {processing_speed:,.0f} rows/second")
+        
+        print(f"\nPhase Breakdown:")
+        print(f"  Phase 1 (T-Digest):    {phase1_time:.2f}s ({phase1_time/total_time*100:.1f}%)")
+        print(f"  Phase 2 (Processing):  {phase2_time:.2f}s ({phase2_time/total_time*100:.1f}%)")
+        print(f"  Phase 3 (Visit Merge): {phase3_time:.2f}s ({phase3_time/total_time*100:.1f}%)")
+        
+        # Calculate parallel efficiency if available
+        if hasattr(standardizer, 'parallel_stats') and standardizer.parallel_stats.get('cpu_time', 0) > 0:
+            cpu_time = standardizer.parallel_stats['cpu_time']
+            wall_time = standardizer.parallel_stats['wall_time']
+            workers = standardizer.parallel_stats.get('workers_used', 1)
+            speedup = cpu_time / wall_time if wall_time > 0 else 1
+            efficiency = (speedup / workers) * 100 if workers > 0 else 0
+            
+            print(f"\nParallel Performance (Phase 1):")
+            print(f"  CPU time:              {cpu_time:.2f}s")
+            print(f"  Wall time:             {wall_time:.2f}s")
+            print(f"  Speedup:               {speedup:.2f}x")
+            print(f"  Efficiency:            {efficiency:.1f}% ({workers} workers)")
+    
+    print("="*60)
 
 
 if __name__ == "__main__":
