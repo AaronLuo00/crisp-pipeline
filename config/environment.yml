@@ -6,6 +6,7 @@ name: crisp-pipeline
 channels:
   - conda-forge
   - defaults
+  # - pytorch  # Uncomment when using PyTorch packages
 
 dependencies:
   # Python version
@@ -26,17 +27,36 @@ dependencies:
   - jupyter
   - ipykernel
   
-  # Additional scientific computing
+  # Scientific computing
   - scipy>=1.7.0
   - scikit-learn>=1.0.0
+  
+
+  # Deep Learning (PyTorch) - uncomment when ready to use
+  # - pytorch>=2.0.0
+  # - torchvision>=0.15.0
+  # - cpuonly  # Use 'cudatoolkit=11.8' instead for GPU support
   
   # Development tools (optional)
   - ipython
   - black  # Code formatter
   - pylint  # Code linter
   
-  # Additional packages via pip (if needed)
+  # Additional packages via pip
   - pip
   - pip:
       # Statistical algorithms (not available in conda)
       - tdigest>=0.5.1  # T-Digest algorithm for efficient percentile calculation
+      
+      # Traditional Machine Learning
+      - xgboost>=2.0.0
+      - lightgbm>=4.0.0
+      - imbalanced-learn>=0.11.0
+      
+      # Deep Learning Extensions (uncomment when using deep learning)
+      # - transformers>=4.35.0  # For BERT-based models (BEHRT, ClinicalBERT)
+      # - pytorch-lightning>=2.0.0  # Optional: structured DL training framework
+      
+      # Model Interpretation (optional - uncomment if needed)
+      # - shap>=0.43.0  # SHAP values for model explainability
+      # - lime>=0.2.0  # Local interpretable model-agnostic explanations

@@ -93,3 +93,14 @@ data/.row_counts_cache.json
 extracted_patient_data/*
 !extracted_patient_data/.gitkeep
 
+# Predictive modeling results - exclude experiments but keep structure
+predictive_modeling/modeling_results/experiments/*
+!predictive_modeling/modeling_results/experiments/.gitkeep
+predictive_modeling/modeling_results/trained_models/**/*.pkl
+predictive_modeling/modeling_results/trained_models/**/*.joblib
+predictive_modeling/modeling_results/features/*.csv
+predictive_modeling/modeling_results/logs/*.log
+predictive_modeling/modeling_results/visualizations/**/*.png
+predictive_modeling/modeling_results/visualizations/**/*.jpg
+predictive_modeling/modeling_results/reports/*.html
+
