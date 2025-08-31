@@ -166,18 +166,19 @@ class PatientDataExtractor:
             return patient_data_dir / prefix / person_id
     
     def extract_icu_summaries(self):
-        """Extract ICU visit summaries for each patient."""
+        """Extract ICU visit episodes for each patient."""
         t0 = time.time()
-        logging.info("Extracting ICU visit summaries...")
+        logging.info("Extracting ICU visit episodes...")
         
         visit_detail_file = standardized_dir / "VISIT_DETAIL_standardized.csv"
         if not visit_detail_file.exists():
             logging.error(f"VISIT_DETAIL file not found: {visit_detail_file}")
             return {}
         
-        # Read VISIT_DETAIL and filter ICU visits
-        icu_summaries = {}
+        # Dictionary to store all ICU episodes for each patient
+        all_patient_episodes = {}
         total_icu_patients = 0
+        total_icu_episodes = 0
         
         try:
             # Use sampling to estimate rows and chunks
@@ -187,57 +188,78 @@ class PatientDataExtractor:
                 estimated_chunks = max(1, (estimated_rows + CHUNK_SIZE - 1) // CHUNK_SIZE)
             else:
                 logging.warning(f"VISIT_DETAIL file appears to be empty")
-                return icu_summaries
+                return all_patient_episodes
             
             # Read in chunks for memory efficiency
             chunks = pd.read_csv(visit_detail_file, chunksize=CHUNK_SIZE, dtype={"person_id": str}, low_memory=False)
             
-            # Only use progress bar if we have multiple chunks (avoid tqdm bug on Windows with single chunk)
+            # Only use progress bar if we have multiple chunks
             if estimated_chunks > 1:
                 chunk_iterator = tqdm(chunks, total=estimated_chunks, 
-                                     desc="Extracting ICU visits", 
+                                     desc="Extracting ICU episodes", 
                                      leave=False, 
                                      miniters=1,
                                      mininterval=PROGRESS_INTERVAL)
             else:
-                # For single chunk, don't use progress bar to avoid Windows tqdm bug
                 logging.info(f"Processing single chunk without progress bar")
                 chunk_iterator = chunks
             
+            # Collect all ICU visits first
+            all_icu_visits = []
             for chunk in chunk_iterator:
-                # Filter ICU visits (use .copy() to avoid SettingWithCopyWarning)
+                # Filter ICU visits
                 icu_visits = chunk[chunk['visit_detail_concept_id'].isin(ICU_CONCEPT_IDS)].copy()
-                
                 if not icu_visits.empty:
-                    # Parse datetime columns
-                    icu_visits['visit_detail_start_datetime'] = pd.to_datetime(icu_visits['visit_detail_start_datetime'])
-                    icu_visits['visit_detail_end_datetime'] = pd.to_datetime(icu_visits['visit_detail_end_datetime'])
+                    all_icu_visits.append(icu_visits)
+            
+            # Combine all ICU visits
+            if all_icu_visits:
+                icu_df = pd.concat(all_icu_visits, ignore_index=True)
+                
+                # Parse datetime columns
+                icu_df['visit_detail_start_datetime'] = pd.to_datetime(icu_df['visit_detail_start_datetime'])
+                icu_df['visit_detail_end_datetime'] = pd.to_datetime(icu_df['visit_detail_end_datetime'])
+                
+                # Process each patient's ICU episodes
+                for person_id in icu_df['person_id'].unique():
+                    patient_icu = icu_df[icu_df['person_id'] == person_id].sort_values('visit_detail_start_datetime')
                     
-                    # Group by person_id and get earliest/latest times
-                    grouped = icu_visits.groupby('person_id').agg({
-                        'visit_detail_start_datetime': 'min',
-                        'visit_detail_end_datetime': 'max'
-                    }).rename(columns={
-                        'visit_detail_start_datetime': 'visit_detail_start_datetime_earliest',
-                        'visit_detail_end_datetime': 'visit_detail_end_datetime_latest'
-                    })
+                    # Identify separate ICU episodes
+                    # Since Module 4 already merged visits within 60 minutes, 
+                    # each row here represents a separate episode
+                    episodes = []
+                    for idx, (_, visit) in enumerate(patient_icu.iterrows(), 1):
+                        # Calculate duration in hours
+                        duration = (visit['visit_detail_end_datetime'] - visit['visit_detail_start_datetime']).total_seconds() / 3600
+                        
+                        episodes.append({
+                            'episode_number': idx,
+                            'episode_start': visit['visit_detail_start_datetime'],
+                            'episode_end': visit['visit_detail_end_datetime'],
+                            'duration_hours': round(duration, 2),
+                            'is_first_icu': idx == 1,
+                            'visit_detail_ids': str(visit['visit_detail_id'])
+                        })
                     
-                    # Save to dictionary
-                    for person_id, row in grouped.iterrows():
-                        icu_summaries[person_id] = row.to_dict()
-                        
-                        # Create patient folder and save summary
-                        patient_path = self.get_patient_path(person_id)
-                        patient_path.mkdir(parents=True, exist_ok=True)
-                        
-                        summary_file = patient_path / f"icu_visit_summary_{person_id}.csv"
-                        summary_df = pd.DataFrame([{
-                            'person_id': person_id,
-                            'visit_detail_start_datetime_earliest': row['visit_detail_start_datetime_earliest'],
-                            'visit_detail_end_datetime_latest': row['visit_detail_end_datetime_latest']
-                        }])
-                        summary_df.to_csv(summary_file, index=False)
-                        total_icu_patients += 1
+                    # Store episodes for this patient
+                    all_patient_episodes[person_id] = {
+                        'episodes': episodes,
+                        'first_icu_start': episodes[0]['episode_start'] if episodes else None,
+                        'first_icu_end': episodes[0]['episode_end'] if episodes else None,
+                        'total_episodes': len(episodes)
+                    }
+                    
+                    # Create patient folder and save episodes
+                    patient_path = self.get_patient_path(person_id)
+                    patient_path.mkdir(parents=True, exist_ok=True)
+                    
+                    # Save ICU episodes to CSV
+                    episodes_file = patient_path / "icu_episodes.csv"
+                    episodes_df = pd.DataFrame(episodes)
+                    episodes_df.to_csv(episodes_file, index=False)
+                    
+                    total_icu_patients += 1
+                    total_icu_episodes += len(episodes)
                         
         except Exception as e:
             logging.error(f"Error processing VISIT_DETAIL: {str(e)}")
@@ -250,11 +272,13 @@ class PatientDataExtractor:
             self.extraction_results['errors'].append(f"VISIT_DETAIL processing: {str(e)}")
         
         extraction_time = time.time() - t0
-        logging.info(f"Extracted ICU summaries for {total_icu_patients} patients in {extraction_time:.2f}s")
+        logging.info(f"Extracted {total_icu_episodes} ICU episodes for {total_icu_patients} patients in {extraction_time:.2f}s")
         self.extraction_results['statistics']['total_icu_patients'] = total_icu_patients
+        self.extraction_results['statistics']['total_icu_episodes'] = total_icu_episodes
+        self.extraction_results['statistics']['avg_episodes_per_patient'] = round(total_icu_episodes / total_icu_patients, 2) if total_icu_patients > 0 else 0
         self.extraction_results['statistics']['icu_extraction_time'] = extraction_time
         
-        return icu_summaries
+        return all_patient_episodes
     
     def split_table_by_patient(self, table_name: str):
         """Split a standardized table by patient ID and save to patient folders."""
@@ -398,30 +422,30 @@ class PatientDataExtractor:
             logging.error(f"Error processing {table_name}: {str(e)}")
             self.extraction_results['errors'].append(f"{table_name}: {str(e)}")
     
-    def calculate_pre_icu_statistics(self, icu_summaries: dict):
-        """Calculate statistics for records before ICU admission."""
+    def calculate_pre_icu_statistics(self, all_patient_episodes: dict):
+        """Calculate statistics for records before first ICU admission."""
         t0 = time.time()
-        logging.info("Calculating pre-ICU statistics...")
+        logging.info("Calculating pre-ICU statistics (first ICU only)...")
         
         results = []
         
         # Process each patient with ICU records
-        if not icu_summaries:
+        if not all_patient_episodes:
             logging.info("No ICU patients found, skipping pre-ICU statistics")
             return
         
         # Use progress bar only for sufficient data
-        if len(icu_summaries) >= 100:
-            patient_iterator = tqdm(icu_summaries.items(), 
+        if len(all_patient_episodes) >= 100:
+            patient_iterator = tqdm(all_patient_episodes.items(), 
                                    desc="Calculating pre-ICU stats", 
                                    unit="patients", leave=False, 
                                    mininterval=PROGRESS_INTERVAL)
         else:
             # For small datasets, don't use progress bar
-            logging.info(f"Processing {len(icu_summaries)} ICU patients without progress bar")
-            patient_iterator = icu_summaries.items()
+            logging.info(f"Processing {len(all_patient_episodes)} ICU patients without progress bar")
+            patient_iterator = all_patient_episodes.items()
         
-        for person_id, icu_info in patient_iterator:
+        for person_id, episode_info in patient_iterator:
             patient_path = self.get_patient_path(person_id)
             
             if not patient_path.exists():
@@ -432,7 +456,8 @@ class PatientDataExtractor:
                 continue
             
             try:
-                icu_time = pd.to_datetime(icu_info['visit_detail_start_datetime_earliest'])
+                # Use only the FIRST ICU admission time
+                first_icu_start = pd.to_datetime(episode_info['first_icu_start'])
                 total_count = 0
                 earliest_record = None
                 latest_record = None
@@ -445,8 +470,8 @@ class PatientDataExtractor:
                     
                     try:
                         df = pd.read_csv(table_path, parse_dates=[time_col], low_memory=False)
-                        # Filter records before ICU
-                        pre_icu_df = df[df[time_col] <= icu_time]
+                        # Filter records before FIRST ICU admission
+                        pre_icu_df = df[df[time_col] <= first_icu_start]
                         count = pre_icu_df.shape[0]
                         total_count += count
                         
@@ -478,10 +503,10 @@ class PatientDataExtractor:
                     try:
                         person_df = pd.read_csv(person_path, low_memory=False)
                         if not person_df.empty:
-                            # Calculate age at ICU admission
+                            # Calculate age at first ICU admission
                             birth_year = person_df['year_of_birth'].iloc[0]
                             if pd.notna(birth_year):
-                                age_at_icu = icu_time.year - int(birth_year)
+                                age_at_icu = first_icu_start.year - int(birth_year)
                             
                             # Get gender
                             gender_id = person_df['gender_concept_id'].iloc[0]
@@ -572,6 +597,10 @@ class PatientDataExtractor:
             
             if 'total_icu_patients' in stats:
                 f.write(f"- **Total ICU patients**: {stats['total_icu_patients']:,}\n")
+            if 'total_icu_episodes' in stats:
+                f.write(f"- **Total ICU episodes**: {stats['total_icu_episodes']:,}\n")
+            if 'avg_episodes_per_patient' in stats:
+                f.write(f"- **Average episodes per patient**: {stats['avg_episodes_per_patient']:.2f}\n")
             
             if 'cohort_stats' in stats:
                 cohort_stats = stats['cohort_stats']
@@ -816,17 +845,17 @@ class PatientDataExtractor:
                     )
             
             # Collect parallel results
-            icu_summaries = None
+            all_patient_episodes = None
             completed_tasks = 0
             total_tasks = len(futures)
             
             for key, future in futures.items():
                 try:
                     if key == 'icu':
-                        icu_summaries = future.result(timeout=30)
+                        all_patient_episodes = future.result(timeout=30)
                         completed_tasks += 1
-                        print(f"  [OK] ICU summaries extracted: {len(icu_summaries) if icu_summaries else 0} patients")
-                        self.extraction_results['statistics']['total_icu_patients'] = len(icu_summaries) if icu_summaries else 0
+                        print(f"  [OK] ICU episodes extracted: {len(all_patient_episodes) if all_patient_episodes else 0} patients")
+                        self.extraction_results['statistics']['total_icu_patients'] = len(all_patient_episodes) if all_patient_episodes else 0
                     
                     elif key == 'small_batch':
                         batch_results = future.result(timeout=60)
@@ -927,11 +956,11 @@ class PatientDataExtractor:
         print("\n=== Phase 4: Pre-ICU Statistics ===")
         phase4_start = time.time()
         
-        if icu_summaries:
+        if all_patient_episodes:
             print("Calculating pre-ICU statistics...")
-            self.calculate_pre_icu_statistics(icu_summaries)
+            self.calculate_pre_icu_statistics(all_patient_episodes)
             stats_time = time.time() - phase4_start
-            print(f"  [OK] Completed: {len(icu_summaries)} patients analyzed in {stats_time:.2f}s")
+            print(f"  [OK] Completed: {len(all_patient_episodes)} patients analyzed in {stats_time:.2f}s")
         else:
             print("Skipping pre-ICU statistics (no ICU patients found)")
         
