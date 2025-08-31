@@ -89,7 +89,8 @@ TEMPORAL_FIELDS = {
     'OBSERVATION_PERIOD': ('observation_period_start_date', 'observation_period_end_date'),
     'CONDITION_ERA': ('condition_era_start_date', 'condition_era_end_date'),
     'CONDITION_OCCURRENCE': ('condition_start_datetime', 'condition_end_datetime'),
-    'PROCEDURE_OCCURRENCE': ('procedure_datetime', 'procedure_end_datetime')
+    'PROCEDURE_OCCURRENCE': ('procedure_datetime', 'procedure_end_datetime'),
+    'DEATH': ('death_date', None)  # Special validation for death date
 }
 
 # Define duplicate key columns for each table
@@ -482,9 +483,31 @@ def clean_table_partial(table_name, start_row=0, end_row=-1, position=0, disable
                             if table_name in TEMPORAL_FIELDS:
                                 start_col, end_col = TEMPORAL_FIELDS[table_name]
                                 start = row.get(start_col)
-                                end = row.get(end_col)
+                                end = row.get(end_col) if end_col else None
                             
-                            if start and end and end < start:
+                            # Special handling for DEATH table - check if death_date > 2200
+                            if table_name == 'DEATH' and start:
+                                # Check if death date is beyond reasonable threshold (year 2200)
+                                if start and str(start) > '2200':
+                                    temporal_invalid = True
+                                    temporal_issues += 1
+                                    skip_row = True
+                                    removal_reason = 'temporal_issue'
+                                    
+                                    # Save temporal issue record to buffer
+                                    temporal_row = row.copy()
+                                    temporal_row['temporal_issue_reason'] = f"Death date ({start}) exceeds reasonable threshold (>2200)"
+                                    temporal_row['start_datetime'] = start
+                                    temporal_row['end_datetime'] = ''
+                                    temporal_row['original_row_number'] = original_row_num
+                                    temporal_buffer.append(temporal_row)
+                                    
+                                    # Batch write when buffer is full
+                                    if len(temporal_buffer) >= WRITE_BUFFER_SIZE:
+                                        temporal_writer.writerows(temporal_buffer)
+                                        temporal_buffer = []
+                            # Regular temporal validation for other tables
+                            elif start and end and end < start:
                                 temporal_invalid = True
                                 temporal_issues += 1
                                 skip_row = True
