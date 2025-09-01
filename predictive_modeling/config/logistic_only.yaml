@@ -11,6 +11,7 @@ training:
   test_size: 0.2
   use_smote: true
   cross_validation: 5
+  random_state: 42  # For reproducibility
 
 tasks:
   mortality: true

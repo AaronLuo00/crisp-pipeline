@@ -12,6 +12,7 @@ training:
   test_size: 0.2
   use_smote: true
   cross_validation: 5
+  random_state: 42  # For reproducibility
   # Deep learning specific
   max_epochs: 100
   batch_size: 32
