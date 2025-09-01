@@ -116,6 +116,32 @@ def estimate_file_rows(file_path, sample_size=1024*1024):
     
     return max(1, estimated_lines - 1)  # Subtract header row
 
+# Sepsis-related concept IDs for detection
+SEPSIS_CONCEPTS = {
+    # Core sepsis diagnoses
+    132797: "Sepsis",
+    196236: "Septic shock",
+    37394658: "Severe sepsis",
+    4000938: "Bacterial sepsis",
+    4029281: "Sepsis syndrome",
+    36717263: "Sepsis without acute organ dysfunction",
+    40487101: "Clinical sepsis",
+    
+    # Pathogen-specific sepsis
+    40491960: "Sepsis caused by MRSA",
+    40489907: "Sepsis caused by Staphylococcus aureus",
+    40493038: "Sepsis caused by Gram negative bacteria",
+    40487064: "Sepsis caused by Escherichia coli",
+    40491961: "Sepsis caused by Pseudomonas",
+    42539372: "Sepsis caused by Klebsiella pneumoniae",
+    40486631: "Sepsis caused by anaerobic bacteria",
+    
+    # Source/context-specific sepsis
+    36715430: "Sepsis due to urinary tract infection",
+    44782822: "Postoperative sepsis",
+    40484176: "Neutropenic sepsis",
+}
+
 # Basic tables from cleaning directory
 BASIC_TABLES = ['PERSON', 'DEATH']
 
@@ -499,7 +525,8 @@ class PatientDataExtractor:
             "icu_info": {},
             "mortality": {},
             "readmission": {},
-            "los": {}
+            "los": {},
+            "sepsis": {}
         }
         
         # Fill ICU info based on whether patient has ICU episodes
@@ -600,7 +627,102 @@ class PatientDataExtractor:
                 "last_icu_los_days": 0
             }
         
-        # 7. Add generation timestamp
+        # 7. Calculate Sepsis labels
+        condition_file = patient_path / "CONDITION_OCCURRENCE.csv"
+        has_sepsis_after_icu = False
+        sepsis_within_24h = False
+        sepsis_within_48h = False
+        sepsis_within_7days = False
+        days_to_sepsis = -1
+        sepsis_type = None
+        
+        if has_icu and last_icu_start and condition_file.exists():
+            try:
+                conditions_df = pd.read_csv(condition_file)
+                
+                # Filter for sepsis conditions
+                sepsis_conditions = conditions_df[
+                    conditions_df['condition_concept_id'].isin(SEPSIS_CONCEPTS.keys())
+                ].copy()  # Create a copy to avoid SettingWithCopyWarning
+                
+                if not sepsis_conditions.empty:
+                    # Parse condition dates
+                    sepsis_conditions['condition_start_datetime'] = pd.to_datetime(
+                        sepsis_conditions['condition_start_datetime'], errors='coerce'
+                    )
+                    
+                    # Filter for sepsis AFTER last ICU admission
+                    post_icu_sepsis = sepsis_conditions[
+                        sepsis_conditions['condition_start_datetime'] > last_icu_start
+                    ].copy()
+                    
+                    if not post_icu_sepsis.empty:
+                        has_sepsis_after_icu = True
+                        
+                        # Find earliest post-ICU sepsis
+                        earliest_sepsis = post_icu_sepsis['condition_start_datetime'].min()
+                        hours_to_sepsis = (earliest_sepsis - last_icu_start).total_seconds() / 3600
+                        days_to_sepsis = round(hours_to_sepsis / 24, 2)
+                        
+                        # Check timing categories
+                        sepsis_within_24h = int(hours_to_sepsis <= 24)
+                        sepsis_within_48h = int(hours_to_sepsis <= 48)
+                        sepsis_within_7days = int(hours_to_sepsis <= 168)  # 7 days = 168 hours
+                        
+                        # Determine sepsis type (prioritize by severity)
+                        sepsis_types_found = post_icu_sepsis['condition_concept_id'].unique()
+                        
+                        # Priority order: Septic shock > Severe sepsis > Sepsis > Bacterial/Clinical sepsis > Pathogen-specific > others
+                        if 196236 in sepsis_types_found:  # Septic shock
+                            sepsis_type = "Septic shock"
+                        elif 37394658 in sepsis_types_found:  # Severe sepsis
+                            sepsis_type = "Severe sepsis"
+                        elif 132797 in sepsis_types_found:  # Sepsis
+                            sepsis_type = "Sepsis"
+                        elif 4000938 in sepsis_types_found:  # Bacterial sepsis
+                            sepsis_type = "Bacterial sepsis"
+                        elif 40487101 in sepsis_types_found:  # Clinical sepsis
+                            sepsis_type = "Clinical sepsis"
+                        elif 4029281 in sepsis_types_found:  # Sepsis syndrome
+                            sepsis_type = "Sepsis syndrome"
+                        else:
+                            # Check for pathogen-specific or context-specific sepsis
+                            sepsis_type = None
+                            
+                            # Prioritize pathogen-specific sepsis
+                            pathogen_specific = [40491960, 40489907, 40493038, 40487064, 40491961, 42539372, 40486631]
+                            for concept_id in pathogen_specific:
+                                if concept_id in sepsis_types_found:
+                                    sepsis_type = SEPSIS_CONCEPTS[concept_id]
+                                    break
+                            
+                            # Then check context-specific sepsis
+                            if not sepsis_type:
+                                context_specific = [36715430, 44782822, 40484176]
+                                for concept_id in context_specific:
+                                    if concept_id in sepsis_types_found:
+                                        sepsis_type = SEPSIS_CONCEPTS[concept_id]
+                                        break
+                            
+                            # Finally, use the first available type
+                            if not sepsis_type:
+                                first_concept = sepsis_types_found[0]
+                                sepsis_type = SEPSIS_CONCEPTS.get(first_concept, "Other sepsis")
+                            
+            except Exception as e:
+                logging.warning(f"Error reading conditions for {person_id}: {e}")
+        
+        # Fill sepsis labels
+        labels["sepsis"] = {
+            "has_sepsis_after_icu": int(has_sepsis_after_icu),
+            "sepsis_within_24h": int(sepsis_within_24h),
+            "sepsis_within_48h": int(sepsis_within_48h),
+            "sepsis_within_7days": int(sepsis_within_7days),
+            "days_to_sepsis": days_to_sepsis,
+            "sepsis_type": sepsis_type
+        }
+        
+        # 8. Add generation timestamp
         labels["generated_at"] = datetime.now().isoformat()
         
         return labels
@@ -789,7 +911,7 @@ class PatientDataExtractor:
         if labels_generated > 0:
             logging.info(f"Generated labels for {labels_generated} ICU patients")
             
-            # Count mortality, readmission, and LOS outcomes from saved labels
+            # Count mortality, readmission, LOS, and sepsis outcomes from saved labels
             mortality_48h = 0
             mortality_7day = 0
             mortality_30day = 0
@@ -799,6 +921,10 @@ class PatientDataExtractor:
             readmission_90day = 0
             los_3day = 0
             los_7day = 0
+            sepsis_post_icu = 0
+            sepsis_24h = 0
+            sepsis_48h = 0
+            sepsis_7day = 0
             
             for person_id in all_patient_episodes.keys():
                 patient_path = self.get_patient_path(person_id)
@@ -821,6 +947,12 @@ class PatientDataExtractor:
                         if 'los' in patient_labels:
                             los_3day += patient_labels['los'].get('los_greater_than_3days', 0)
                             los_7day += patient_labels['los'].get('los_greater_than_7days', 0)
+                        # Sepsis labels (check if they exist for backward compatibility)
+                        if 'sepsis' in patient_labels:
+                            sepsis_post_icu += patient_labels['sepsis'].get('has_sepsis_after_icu', 0)
+                            sepsis_24h += patient_labels['sepsis'].get('sepsis_within_24h', 0)
+                            sepsis_48h += patient_labels['sepsis'].get('sepsis_within_48h', 0)
+                            sepsis_7day += patient_labels['sepsis'].get('sepsis_within_7days', 0)
                     except:
                         pass
             
@@ -833,6 +965,10 @@ class PatientDataExtractor:
                         f"90day: {readmission_90day}/{labels_generated} ({readmission_90day/labels_generated*100:.1f}%)")
             logging.info(f"LOS summary - >3days: {los_3day}/{labels_generated} ({los_3day/labels_generated*100:.1f}%), "
                         f">7days: {los_7day}/{labels_generated} ({los_7day/labels_generated*100:.1f}%)")
+            logging.info(f"Sepsis summary - Post-ICU: {sepsis_post_icu}/{labels_generated} ({sepsis_post_icu/labels_generated*100:.1f}%), "
+                        f"24h: {sepsis_24h}/{labels_generated} ({sepsis_24h/labels_generated*100:.1f}%), "
+                        f"48h: {sepsis_48h}/{labels_generated} ({sepsis_48h/labels_generated*100:.1f}%), "
+                        f"7day: {sepsis_7day}/{labels_generated} ({sepsis_7day/labels_generated*100:.1f}%)")
         
         # Record processing time and label statistics
         processing_time = time.time() - t0
