@@ -1,0 +1,19 @@
+# Logistic Regression Only - Quick Baseline
+
+models:
+  traditional:
+    enabled: true
+    types: [LogisticRegression]
+  deep_learning:
+    enabled: false
+
+training:
+  test_size: 0.2
+  use_smote: true
+  cross_validation: 5
+
+tasks:
+  mortality: true
+  readmission: true
+  los: true
+  sepsis: true
