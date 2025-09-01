@@ -420,10 +420,10 @@ class PatientDataExtractor:
             logging.error(f"Error processing {table_name}: {str(e)}")
             self.extraction_results['errors'].append(f"{table_name}: {str(e)}")
     
-    def calculate_mortality_labels(self, person_id: str, patient_path: Path, 
+    def generate_patient_labels(self, person_id: str, patient_path: Path, 
                                   episode_info: dict = None) -> dict:
         """
-        Calculate mortality labels for all patients (with or without ICU).
+        Generate comprehensive patient labels including mortality, readmission, and LOS metrics.
         
         Args:
             person_id: Patient ID
@@ -498,7 +498,8 @@ class PatientDataExtractor:
             "has_icu_admission": 1 if has_icu else 0,
             "icu_info": {},
             "mortality": {},
-            "readmission": {}
+            "readmission": {},
+            "los": {}
         }
         
         # Fill ICU info based on whether patient has ICU episodes
@@ -507,6 +508,7 @@ class PatientDataExtractor:
                 "last_icu_start": last_episode['episode_start'],
                 "last_icu_end": last_episode['episode_end'],
                 "last_icu_duration_hours": last_episode['duration_hours'],
+                "last_icu_duration_days": round(last_episode['duration_hours'] / 24, 2),
                 "total_episodes": len(episodes),
                 "last_episode_number": last_episode['episode_number']
             }
@@ -515,6 +517,7 @@ class PatientDataExtractor:
                 "last_icu_start": None,
                 "last_icu_end": None,
                 "last_icu_duration_hours": 0,
+                "last_icu_duration_days": 0,
                 "total_episodes": 0,
                 "last_episode_number": 0
             }
@@ -581,7 +584,23 @@ class PatientDataExtractor:
                 "readmission_within_90days": 0
             }
         
-        # 6. Add generation timestamp
+        # 6. Calculate LOS labels
+        if has_icu and last_episode:
+            duration_hours = last_episode['duration_hours']
+            duration_days = round(duration_hours / 24, 2)
+            labels["los"] = {
+                "los_greater_than_3days": int(duration_hours > 72),
+                "los_greater_than_7days": int(duration_hours > 168),
+                "last_icu_los_days": duration_days
+            }
+        else:
+            labels["los"] = {
+                "los_greater_than_3days": 0,
+                "los_greater_than_7days": 0,
+                "last_icu_los_days": 0
+            }
+        
+        # 7. Add generation timestamp
         labels["generated_at"] = datetime.now().isoformat()
         
         return labels
@@ -710,12 +729,9 @@ class PatientDataExtractor:
                     "has_death_record": has_death_record
                 })
                 
-                # Generate and save mortality labels
+                # Generate and save patient labels
                 try:
-                    labels = self.calculate_mortality_labels(person_id, patient_path, episode_info)
-                    
-                    # Add hospital statistics
-                    labels["hospital_stats"] = self.calculate_hospital_stats(person_id, patient_path)
+                    labels = self.generate_patient_labels(person_id, patient_path, episode_info)
                     
                     # Save labels to JSON file
                     labels_path = patient_path / "patient_labels.json"
@@ -773,7 +789,7 @@ class PatientDataExtractor:
         if labels_generated > 0:
             logging.info(f"Generated labels for {labels_generated} ICU patients")
             
-            # Count mortality and readmission outcomes from saved labels
+            # Count mortality, readmission, and LOS outcomes from saved labels
             mortality_48h = 0
             mortality_7day = 0
             mortality_30day = 0
@@ -781,6 +797,8 @@ class PatientDataExtractor:
             readmission_7day = 0
             readmission_30day = 0
             readmission_90day = 0
+            los_3day = 0
+            los_7day = 0
             
             for person_id in all_patient_episodes.keys():
                 patient_path = self.get_patient_path(person_id)
@@ -799,6 +817,10 @@ class PatientDataExtractor:
                         readmission_30day += patient_labels['readmission']['readmission_within_30days']
                         if 'readmission_within_90days' in patient_labels['readmission']:
                             readmission_90day += patient_labels['readmission']['readmission_within_90days']
+                        # LOS labels (check if they exist for backward compatibility)
+                        if 'los' in patient_labels:
+                            los_3day += patient_labels['los'].get('los_greater_than_3days', 0)
+                            los_7day += patient_labels['los'].get('los_greater_than_7days', 0)
                     except:
                         pass
             
@@ -809,6 +831,8 @@ class PatientDataExtractor:
                         f"7day: {readmission_7day}/{labels_generated} ({readmission_7day/labels_generated*100:.1f}%), "
                         f"30day: {readmission_30day}/{labels_generated} ({readmission_30day/labels_generated*100:.1f}%), "
                         f"90day: {readmission_90day}/{labels_generated} ({readmission_90day/labels_generated*100:.1f}%)")
+            logging.info(f"LOS summary - >3days: {los_3day}/{labels_generated} ({los_3day/labels_generated*100:.1f}%), "
+                        f">7days: {los_7day}/{labels_generated} ({los_7day/labels_generated*100:.1f}%)")
         
         # Record processing time and label statistics
         processing_time = time.time() - t0
@@ -847,10 +871,7 @@ class PatientDataExtractor:
                     return False
                 
                 # Generate labels for non-ICU patient
-                labels = self.calculate_mortality_labels(person_id, patient_path, None)
-                
-                # Add hospital statistics
-                labels["hospital_stats"] = self.calculate_hospital_stats(person_id, patient_path)
+                labels = self.generate_patient_labels(person_id, patient_path, None)
                 
                 # Save labels to JSON file
                 labels_path = patient_path / "patient_labels.json"
@@ -884,52 +905,6 @@ class PatientDataExtractor:
         
         processing_time = time.time() - t0
         logging.info(f"Label generation for all patients completed in {processing_time:.2f}s")
-    
-    def calculate_hospital_stats(self, person_id: str, patient_path: Path) -> dict:
-        """Calculate basic hospital statistics for a patient."""
-        stats = {
-            "total_visits": 0,
-            "total_procedures": 0,
-            "total_medications": 0,
-            "total_conditions": 0,
-            "total_observations": 0
-        }
-        
-        try:
-            # Count visits
-            visit_file = patient_path / "VISIT_OCCURRENCE.csv"
-            if visit_file.exists():
-                df = pd.read_csv(visit_file)
-                stats["total_visits"] = len(df)
-            
-            # Count procedures
-            procedure_file = patient_path / "PROCEDURE_OCCURRENCE.csv"
-            if procedure_file.exists():
-                df = pd.read_csv(procedure_file)
-                stats["total_procedures"] = len(df)
-            
-            # Count medications
-            drug_file = patient_path / "DRUG_EXPOSURE.csv"
-            if drug_file.exists():
-                df = pd.read_csv(drug_file)
-                stats["total_medications"] = len(df)
-            
-            # Count conditions
-            condition_file = patient_path / "CONDITION_OCCURRENCE.csv"
-            if condition_file.exists():
-                df = pd.read_csv(condition_file)
-                stats["total_conditions"] = len(df)
-            
-            # Count observations
-            observation_file = patient_path / "OBSERVATION.csv"
-            if observation_file.exists():
-                df = pd.read_csv(observation_file)
-                stats["total_observations"] = len(df)
-                
-        except Exception as e:
-            logging.warning(f"Error calculating hospital stats for {person_id}: {e}")
-        
-        return stats
     
     def generate_report(self):
         """Generate extraction report."""
