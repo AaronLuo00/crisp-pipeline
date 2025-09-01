@@ -17,24 +17,22 @@ import warnings
 import multiprocessing as mp
 from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor, as_completed
 
+# Add the current module directory to path for imports
+import sys
+from pathlib import Path as PathImport
+
+module_dir = PathImport(__file__).parent
+if str(module_dir) not in sys.path:
+    sys.path.insert(0, str(module_dir))
+
 # Import parallel processing functions
-try:
-    from .parallel_extraction import (
-        process_table_batch,
-        process_single_table_worker,
-        process_measurement_chunk,
-        merge_measurement_chunks,
-        group_tables_by_size
-    )
-except ImportError:
-    logging.warning("Using absolute imports for parallel extraction modules")
-    from parallel_extraction import (
-        process_table_batch,
-        process_single_table_worker,
-        process_measurement_chunk,
-        merge_measurement_chunks,
-        group_tables_by_size
-    )
+from parallel_extraction import (
+    process_table_batch,
+    process_single_table_worker,
+    process_measurement_chunk,
+    merge_measurement_chunks,
+    group_tables_by_size
+)
 
 # Platform-specific settings for performance optimization
 if platform.system() == 'Windows':
@@ -422,12 +420,179 @@ class PatientDataExtractor:
             logging.error(f"Error processing {table_name}: {str(e)}")
             self.extraction_results['errors'].append(f"{table_name}: {str(e)}")
     
+    def calculate_mortality_labels(self, person_id: str, patient_path: Path, 
+                                  episode_info: dict = None) -> dict:
+        """
+        Calculate mortality labels for all patients (with or without ICU).
+        
+        Args:
+            person_id: Patient ID
+            patient_path: Path to patient data directory
+            episode_info: Dictionary containing ICU episodes information (None for non-ICU patients)
+        
+        Returns:
+            Dictionary containing all labels for saving as patient_labels.json
+        """
+        # Check if patient has ICU episodes
+        has_icu = episode_info is not None and episode_info.get('episodes') and len(episode_info.get('episodes', [])) > 0
+        
+        if has_icu:
+            # 1. Get last ICU episode information
+            episodes = episode_info['episodes']
+            last_episode = episodes[-1]  # Last episode
+            last_icu_start = pd.to_datetime(last_episode['episode_start'])
+            last_icu_end = pd.to_datetime(last_episode['episode_end'])
+        else:
+            # Check if icu_episodes.csv exists (for cases where episode_info not passed)
+            icu_episodes_file = patient_path / "icu_episodes.csv"
+            if icu_episodes_file.exists():
+                try:
+                    icu_df = pd.read_csv(icu_episodes_file)
+                    if not icu_df.empty:
+                        # Convert to list of dicts format
+                        episodes = icu_df.to_dict('records')
+                        last_episode = episodes[-1]  # Last episode
+                        last_icu_start = pd.to_datetime(last_episode['episode_start'])
+                        last_icu_end = pd.to_datetime(last_episode['episode_end'])
+                        has_icu = True
+                    else:
+                        episodes = []
+                        last_episode = None
+                        last_icu_start = None
+                        last_icu_end = None
+                except Exception:
+                    episodes = []
+                    last_episode = None
+                    last_icu_start = None
+                    last_icu_end = None
+            else:
+                # No ICU episodes
+                episodes = []
+                last_episode = None
+                last_icu_start = None
+                last_icu_end = None
+        
+        # 2. Read death information
+        death_file = patient_path / "DEATH.csv"
+        has_death = False
+        death_datetime = None
+        
+        if death_file.exists():
+            try:
+                death_df = pd.read_csv(death_file)
+                if not death_df.empty:
+                    # Priority: death_datetime, then death_date
+                    if 'death_datetime' in death_df.columns and pd.notna(death_df.iloc[0]['death_datetime']):
+                        death_datetime = pd.to_datetime(death_df.iloc[0]['death_datetime'])
+                    elif 'death_date' in death_df.columns and pd.notna(death_df.iloc[0]['death_date']):
+                        death_datetime = pd.to_datetime(death_df.iloc[0]['death_date'])
+                    
+                    if death_datetime is not None:
+                        has_death = True
+            except Exception as e:
+                logging.warning(f"Error reading death file for {person_id}: {e}")
+        
+        # 3. Build labels dictionary
+        labels = {
+            "patient_id": person_id,
+            "has_icu_admission": 1 if has_icu else 0,
+            "icu_info": {},
+            "mortality": {},
+            "readmission": {}
+        }
+        
+        # Fill ICU info based on whether patient has ICU episodes
+        if has_icu:
+            labels["icu_info"] = {
+                "last_icu_start": last_episode['episode_start'],
+                "last_icu_end": last_episode['episode_end'],
+                "last_icu_duration_hours": last_episode['duration_hours'],
+                "total_episodes": len(episodes),
+                "last_episode_number": last_episode['episode_number']
+            }
+        else:
+            labels["icu_info"] = {
+                "last_icu_start": None,
+                "last_icu_end": None,
+                "last_icu_duration_hours": 0,
+                "total_episodes": 0,
+                "last_episode_number": 0
+            }
+        
+        # 4. Calculate mortality labels
+        if has_death and death_datetime is not None:
+            if has_icu and last_icu_start is not None:
+                # Calculate time from last ICU admission to death
+                hours_from_last_admission = (death_datetime - last_icu_start).total_seconds() / 3600
+                days_from_last_admission = hours_from_last_admission / 24
+                
+                labels["mortality"] = {
+                    "mortality_icu_48h": int(hours_from_last_admission <= 48),
+                    "mortality_icu_7day": int(days_from_last_admission <= 7),
+                    "mortality_icu_30day": int(days_from_last_admission <= 30),
+                    "days_to_death": round(days_from_last_admission, 2),
+                    "death_after_discharge": int(death_datetime > last_icu_end),
+                    "death_datetime": death_datetime.isoformat()
+                }
+            else:
+                # Non-ICU patient with death record
+                labels["mortality"] = {
+                    "mortality_icu_48h": 0,  # No ICU admission
+                    "mortality_icu_7day": 0,
+                    "mortality_icu_30day": 0,
+                    "days_to_death": -1,  # Cannot calculate without ICU admission
+                    "death_after_discharge": 0,
+                    "death_datetime": death_datetime.isoformat()
+                }
+        else:
+            # No death record
+            labels["mortality"] = {
+                "mortality_icu_48h": 0,
+                "mortality_icu_7day": 0,
+                "mortality_icu_30day": 0,
+                "days_to_death": -1,  # -1 indicates no death
+                "death_after_discharge": 0,
+                "death_datetime": None
+            }
+        
+        # 5. Calculate readmission labels
+        if len(episodes) > 1:
+            # Days from first ICU discharge to second ICU admission
+            first_episode = episodes[0]
+            second_episode = episodes[1]
+            first_end = pd.to_datetime(first_episode['episode_end'])
+            second_start = pd.to_datetime(second_episode['episode_start'])
+            
+            days_between = (second_start - first_end).days
+            labels["readmission"] = {
+                "has_readmission": 1,
+                "days_to_first_readmission": days_between,
+                "readmission_within_7days": int(days_between <= 7),
+                "readmission_within_30days": int(days_between <= 30),
+                "readmission_within_90days": int(days_between <= 90)
+            }
+        else:
+            # Only one ICU episode, no readmission
+            labels["readmission"] = {
+                "has_readmission": 0,
+                "days_to_first_readmission": -1,
+                "readmission_within_7days": 0,
+                "readmission_within_30days": 0,
+                "readmission_within_90days": 0
+            }
+        
+        # 6. Add generation timestamp
+        labels["generated_at"] = datetime.now().isoformat()
+        
+        return labels
+    
     def calculate_pre_icu_statistics(self, all_patient_episodes: dict):
-        """Calculate statistics for records before first ICU admission."""
+        """Calculate statistics for records before first ICU admission and generate labels."""
         t0 = time.time()
-        logging.info("Calculating pre-ICU statistics (first ICU only)...")
+        logging.info("Calculating pre-ICU statistics and generating labels...")
         
         results = []
+        labels_generated = 0  # Counter for successfully generated labels
         
         # Process each patient with ICU records
         if not all_patient_episodes:
@@ -545,6 +710,32 @@ class PatientDataExtractor:
                     "has_death_record": has_death_record
                 })
                 
+                # Generate and save mortality labels
+                try:
+                    labels = self.calculate_mortality_labels(person_id, patient_path, episode_info)
+                    
+                    # Add hospital statistics
+                    labels["hospital_stats"] = self.calculate_hospital_stats(person_id, patient_path)
+                    
+                    # Save labels to JSON file
+                    labels_path = patient_path / "patient_labels.json"
+                    with open(labels_path, 'w') as f:
+                        json.dump(labels, f, indent=2, default=str)
+                    
+                    labels_generated += 1
+                    # Log only for patients with positive mortality labels or every 50 patients
+                    if (labels['mortality']['mortality_icu_48h'] or 
+                        labels['mortality']['mortality_icu_7day'] or 
+                        labels['mortality']['mortality_icu_30day'] or
+                        labels_generated % 50 == 0):
+                        logging.debug(f"Generated labels for patient {person_id}: "
+                                   f"mortality_icu_48h={labels['mortality']['mortality_icu_48h']}, "
+                                   f"mortality_icu_7day={labels['mortality']['mortality_icu_7day']}, "
+                                   f"mortality_icu_30day={labels['mortality']['mortality_icu_30day']}")
+                    
+                except Exception as label_error:
+                    logging.warning(f"Could not generate labels for patient {person_id}: {label_error}")
+                
             except Exception as e:
                 logging.error(f"Error processing patient {person_id}: {e}")
                 self.skipped_patients.append({
@@ -578,9 +769,167 @@ class PatientDataExtractor:
             skipped_df.to_csv(skipped_file, index=False)
             logging.info(f"Skipped patients saved to: {skipped_file}")
         
-        # Record processing time
+        # Log label generation statistics with mortality summary
+        if labels_generated > 0:
+            logging.info(f"Generated labels for {labels_generated} ICU patients")
+            
+            # Count mortality and readmission outcomes from saved labels
+            mortality_48h = 0
+            mortality_7day = 0
+            mortality_30day = 0
+            readmission_total = 0
+            readmission_7day = 0
+            readmission_30day = 0
+            readmission_90day = 0
+            
+            for person_id in all_patient_episodes.keys():
+                patient_path = self.get_patient_path(person_id)
+                labels_file = patient_path / "patient_labels.json"
+                if labels_file.exists():
+                    try:
+                        with open(labels_file, 'r') as f:
+                            patient_labels = json.load(f)
+                        mortality_48h += patient_labels['mortality']['mortality_icu_48h']
+                        mortality_7day += patient_labels['mortality']['mortality_icu_7day']
+                        mortality_30day += patient_labels['mortality']['mortality_icu_30day']
+                        readmission_total += patient_labels['readmission']['has_readmission']
+                        # Handle both old and new label formats
+                        if 'readmission_within_7days' in patient_labels['readmission']:
+                            readmission_7day += patient_labels['readmission']['readmission_within_7days']
+                        readmission_30day += patient_labels['readmission']['readmission_within_30days']
+                        if 'readmission_within_90days' in patient_labels['readmission']:
+                            readmission_90day += patient_labels['readmission']['readmission_within_90days']
+                    except:
+                        pass
+            
+            logging.info(f"Mortality summary - 48h: {mortality_48h}/{labels_generated} ({mortality_48h/labels_generated*100:.1f}%), "
+                        f"7day: {mortality_7day}/{labels_generated} ({mortality_7day/labels_generated*100:.1f}%), "
+                        f"30day: {mortality_30day}/{labels_generated} ({mortality_30day/labels_generated*100:.1f}%)")
+            logging.info(f"Readmission summary - Total: {readmission_total}/{labels_generated} ({readmission_total/labels_generated*100:.1f}%), "
+                        f"7day: {readmission_7day}/{labels_generated} ({readmission_7day/labels_generated*100:.1f}%), "
+                        f"30day: {readmission_30day}/{labels_generated} ({readmission_30day/labels_generated*100:.1f}%), "
+                        f"90day: {readmission_90day}/{labels_generated} ({readmission_90day/labels_generated*100:.1f}%)")
+        
+        # Record processing time and label statistics
         processing_time = time.time() - t0
         self.extraction_results['statistics']['pre_icu_calculation_time'] = processing_time
+        self.extraction_results['statistics']['labels_generated'] = labels_generated
+    
+    def generate_labels_for_all_patients(self, all_patient_episodes: dict):
+        """Generate labels for all patients including those without ICU admissions."""
+        t0 = time.time()
+        logging.info("Generating labels for all patients (including non-ICU)...")
+        
+        # Get all extracted patients (handle both 2-level and 3-level structures)
+        all_patients = set()
+        if patient_data_dir.exists():
+            # Find all PERSON.csv files and get their parent directory names as patient IDs
+            for person_file in patient_data_dir.rglob("PERSON.csv"):
+                patient_id = person_file.parent.name
+                all_patients.add(patient_id)
+        
+        logging.info(f"Found {len(all_patients)} total extracted patients")
+        
+        # Get ICU patients
+        icu_patients = set(all_patient_episodes.keys()) if all_patient_episodes else set()
+        non_icu_patients = all_patients - icu_patients
+        
+        logging.info(f"ICU patients: {len(icu_patients)}, Non-ICU patients: {len(non_icu_patients)}")
+        
+        # Generate labels for non-ICU patients in parallel
+        non_icu_labels_generated = 0
+        
+        # Function to process a single non-ICU patient
+        def process_non_icu_patient(person_id):
+            try:
+                patient_path = self.get_patient_path(person_id)
+                if not patient_path.exists():
+                    return False
+                
+                # Generate labels for non-ICU patient
+                labels = self.calculate_mortality_labels(person_id, patient_path, None)
+                
+                # Add hospital statistics
+                labels["hospital_stats"] = self.calculate_hospital_stats(person_id, patient_path)
+                
+                # Save labels to JSON file
+                labels_path = patient_path / "patient_labels.json"
+                with open(labels_path, 'w') as f:
+                    json.dump(labels, f, indent=2, default=str)
+                
+                return True
+                
+            except Exception as e:
+                logging.warning(f"Could not generate labels for non-ICU patient {person_id}: {e}")
+                return False
+        
+        # Process non-ICU patients in parallel
+        if non_icu_patients:
+            with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
+                futures = {executor.submit(process_non_icu_patient, pid): pid 
+                          for pid in non_icu_patients}
+                
+                for future in as_completed(futures):
+                    if future.result():
+                        non_icu_labels_generated += 1
+        
+        # Log summary
+        total_labels = len(icu_patients) + non_icu_labels_generated
+        logging.info(f"Generated labels for {non_icu_labels_generated} non-ICU patients")
+        logging.info(f"Total patients with labels: {total_labels}/{len(all_patients)}")
+        
+        # Update statistics
+        self.extraction_results['statistics']['non_icu_labels_generated'] = non_icu_labels_generated
+        self.extraction_results['statistics']['total_labels_generated'] = total_labels
+        
+        processing_time = time.time() - t0
+        logging.info(f"Label generation for all patients completed in {processing_time:.2f}s")
+    
+    def calculate_hospital_stats(self, person_id: str, patient_path: Path) -> dict:
+        """Calculate basic hospital statistics for a patient."""
+        stats = {
+            "total_visits": 0,
+            "total_procedures": 0,
+            "total_medications": 0,
+            "total_conditions": 0,
+            "total_observations": 0
+        }
+        
+        try:
+            # Count visits
+            visit_file = patient_path / "VISIT_OCCURRENCE.csv"
+            if visit_file.exists():
+                df = pd.read_csv(visit_file)
+                stats["total_visits"] = len(df)
+            
+            # Count procedures
+            procedure_file = patient_path / "PROCEDURE_OCCURRENCE.csv"
+            if procedure_file.exists():
+                df = pd.read_csv(procedure_file)
+                stats["total_procedures"] = len(df)
+            
+            # Count medications
+            drug_file = patient_path / "DRUG_EXPOSURE.csv"
+            if drug_file.exists():
+                df = pd.read_csv(drug_file)
+                stats["total_medications"] = len(df)
+            
+            # Count conditions
+            condition_file = patient_path / "CONDITION_OCCURRENCE.csv"
+            if condition_file.exists():
+                df = pd.read_csv(condition_file)
+                stats["total_conditions"] = len(df)
+            
+            # Count observations
+            observation_file = patient_path / "OBSERVATION.csv"
+            if observation_file.exists():
+                df = pd.read_csv(observation_file)
+                stats["total_observations"] = len(df)
+                
+        except Exception as e:
+            logging.warning(f"Error calculating hospital stats for {person_id}: {e}")
+        
+        return stats
     
     def generate_report(self):
         """Generate extraction report."""
@@ -770,6 +1119,10 @@ class PatientDataExtractor:
         if phase4_time > 0:
             print(f"  Phase 4 (Pre-ICU Stats):    {phase4_time:.2f}s ({phase4_time/total_time*100:.1f}%)")
             logging.info(f"  Phase 4 (Pre-ICU Stats):    {phase4_time:.2f}s ({phase4_time/total_time*100:.1f}%)")
+        phase5_time = self.phase_times.get('phase5', 0)
+        if phase5_time > 0:
+            print(f"  Phase 5 (All Labels):       {phase5_time:.2f}s ({phase5_time/total_time*100:.1f}%)")
+            logging.info(f"  Phase 5 (All Labels):       {phase5_time:.2f}s ({phase5_time/total_time*100:.1f}%)")
         
         # Individual table performance
         print(f"\nTable Processing Times:")
@@ -965,6 +1318,17 @@ class PatientDataExtractor:
             print("Skipping pre-ICU statistics (no ICU patients found)")
         
         self.phase_times['phase4'] = time.time() - phase4_start
+        
+        # Step 5: Generate labels for all patients (including non-ICU)
+        print("\n=== Phase 5: Label Generation for All Patients ===")
+        phase5_start = time.time()
+        
+        print("Generating labels for all patients (including non-ICU)...")
+        self.generate_labels_for_all_patients(all_patient_episodes)
+        labels_time = time.time() - phase5_start
+        print(f"  [OK] Completed: Labels generated for all patients in {labels_time:.2f}s")
+        
+        self.phase_times['phase5'] = time.time() - phase5_start
         
         # Calculate total time
         total_time = time.time() - start_time
