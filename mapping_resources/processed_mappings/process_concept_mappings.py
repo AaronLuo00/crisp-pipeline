@@ -26,8 +26,8 @@ MAPPED_TABLES = {
     'PROCEDURE_OCCURRENCE': 'PROCEDURE_OCCURRENCE_procedure_concept_id_analysis_complete.csv'
 }
 
-# Output columns (removing Domain and Frequency)
-OUTPUT_COLUMNS = ['Id', 'Code', 'Name', 'Standard Class', 'Vocab', 'Validity', 'Concept']
+# Output columns (removing Domain but keeping Frequency)
+OUTPUT_COLUMNS = ['Id', 'Code', 'Name', 'Standard Class', 'Vocab', 'Validity', 'Concept', 'Frequency']
 
 
 def load_mapped_concept_ids(table_name: str) -> Set[str]:
@@ -47,12 +47,36 @@ def load_mapped_concept_ids(table_name: str) -> Set[str]:
     return mapped_ids
 
 
+def load_frequency_aggregation_mapping(table_name: str) -> Dict[str, int]:
+    """Build a mapping of SNOMED concept IDs to aggregated frequencies."""
+    frequency_map = {}
+    reference_file = processed_dir / f"{table_name}_mapping_reference.csv"
+    
+    if reference_file.exists():
+        with open(reference_file, 'r') as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                snomed_id = row['snomed_concept_id']
+                frequency = int(row.get('frequency', 0))
+                
+                # Aggregate frequencies for each SNOMED concept
+                if snomed_id in frequency_map:
+                    frequency_map[snomed_id] += frequency
+                else:
+                    frequency_map[snomed_id] = frequency
+        
+        print(f"  Built frequency aggregation for {len(frequency_map)} SNOMED concepts")
+    
+    return frequency_map
+
+
 def process_table_with_mappings(table_name: str, filename: str) -> Dict:
     """Process a table that has SNOMED mappings."""
     print(f"\nProcessing {table_name} (with SNOMED mappings)...")
     
-    # Load mapped concept IDs
+    # Load mapped concept IDs and frequency aggregation
     mapped_ids = load_mapped_concept_ids(table_name)
+    frequency_aggregation = load_frequency_aggregation_mapping(table_name)
     
     # Read original file
     original_file = original_dir / filename
@@ -61,6 +85,7 @@ def process_table_with_mappings(table_name: str, filename: str) -> Dict:
     original_count = 0
     kept_count = 0
     removed_count = 0
+    aggregated_count = 0
     
     with open(original_file, 'r') as infile, open(output_file, 'w', newline='') as outfile:
         reader = csv.DictReader(infile)
@@ -77,19 +102,33 @@ def process_table_with_mappings(table_name: str, filename: str) -> Dict:
             
             # Keep only the desired columns
             output_row = {col: row.get(col, '') for col in OUTPUT_COLUMNS}
+            
+            # Check if this is a SNOMED concept that received mappings
+            if row['Id'] in frequency_aggregation:
+                # Add the aggregated frequency from mapped concepts
+                original_freq = int(row.get('Frequency', 0))
+                aggregated_freq = frequency_aggregation[row['Id']]
+                output_row['Frequency'] = str(original_freq + aggregated_freq)
+                aggregated_count += 1
+            elif 'Frequency' not in output_row:
+                # Ensure Frequency column exists even if empty
+                output_row['Frequency'] = row.get('Frequency', '0')
+            
             writer.writerow(output_row)
             kept_count += 1
     
     print(f"  Original concepts: {original_count:,}")
     print(f"  Removed (mapped to SNOMED): {removed_count:,}")
     print(f"  Kept concepts: {kept_count:,}")
+    print(f"  Concepts with aggregated frequencies: {aggregated_count:,}")
     print(f"  Output: {output_file.name}")
     
     return {
         'table': table_name,
         'original': original_count,
         'removed': removed_count,
-        'kept': kept_count
+        'kept': kept_count,
+        'aggregated': aggregated_count
     }
 
 
@@ -172,21 +211,24 @@ def main():
     print("\n" + "="*70)
     print("SUMMARY STATISTICS")
     print("="*70)
-    print(f"\n{'Table':<35} {'Original':>10} {'Removed':>10} {'Kept':>10}")
-    print("-"*70)
+    print(f"\n{'Table':<35} {'Original':>10} {'Removed':>10} {'Kept':>10} {'Aggregated':>10}")
+    print("-"*90)
     
     total_original = 0
     total_removed = 0
     total_kept = 0
+    total_aggregated = 0
     
     for stat in stats:
-        print(f"{stat['table']:<35} {stat['original']:>10,} {stat['removed']:>10,} {stat['kept']:>10,}")
+        aggregated = stat.get('aggregated', 0)
+        print(f"{stat['table']:<35} {stat['original']:>10,} {stat['removed']:>10,} {stat['kept']:>10,} {aggregated:>10,}")
         total_original += stat['original']
         total_removed += stat['removed']
         total_kept += stat['kept']
+        total_aggregated += aggregated
     
-    print("-"*70)
-    print(f"{'TOTAL':<35} {total_original:>10,} {total_removed:>10,} {total_kept:>10,}")
+    print("-"*90)
+    print(f"{'TOTAL':<35} {total_original:>10,} {total_removed:>10,} {total_kept:>10,} {total_aggregated:>10,}")
     
     print("\n" + "="*70)
     print("PROCESSING COMPLETE")
