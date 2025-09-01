@@ -93,9 +93,17 @@ data/.row_counts_cache.json
 extracted_patient_data/*
 !extracted_patient_data/.gitkeep
 
-# Predictive modeling results - exclude everything except .gitkeep files
-predictive_modeling/modeling_results/**
-!predictive_modeling/modeling_results/
-!predictive_modeling/modeling_results/.gitkeep
+# Predictive modeling results - exclude data files but keep directory structure
+predictive_modeling/modeling_results/**/*.csv
+predictive_modeling/modeling_results/**/*.pkl
+predictive_modeling/modeling_results/**/*.joblib
+predictive_modeling/modeling_results/**/*.json
+predictive_modeling/modeling_results/**/*.png
+predictive_modeling/modeling_results/**/*.jpg
+predictive_modeling/modeling_results/**/*.html
+predictive_modeling/modeling_results/**/*.log
+predictive_modeling/modeling_results/**/*.md
+predictive_modeling/modeling_results/**/*.yaml
+predictive_modeling/modeling_results/**/*.yml
 !predictive_modeling/modeling_results/**/.gitkeep
 
