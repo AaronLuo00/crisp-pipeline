@@ -158,7 +158,7 @@ def train_models(X_train, X_test, y_train, y_test, models: Dict, cv_folds: int =
             'predictions': y_pred_proba
         }
         
-        print(f"      AUROC: {auroc:.3f}, AUPRC: {auprc:.3f}, CV: {cv_scores.mean():.3f}±{cv_scores.std():.3f}")
+        print(f"      AUROC: {auroc:.3f}, AUPRC: {auprc:.3f}, CV: {cv_scores.mean():.3f}+/-{cv_scores.std():.3f}")
     
     return results
 

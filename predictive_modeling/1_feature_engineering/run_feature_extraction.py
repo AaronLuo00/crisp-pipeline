@@ -10,6 +10,8 @@ import json
 from datetime import datetime
 import argparse
 import os
+import sys
+from tqdm import tqdm
 
 def main(args):
     print("="*80)
@@ -64,7 +66,24 @@ def main(args):
     
     # Add all labels for different tasks
     # The labels were already added for mortality, now add the others
-    for patient in patient_labels:
+    print("  Adding labels for readmission and LOS tasks...")
+    
+    # Check if we're in pipeline mode
+    is_terminal = sys.stdout.isatty() and not os.environ.get('PIPELINE_MODE')
+    
+    if is_terminal:
+        iterator = tqdm(patient_labels, desc="  Adding labels", leave=False)
+    else:
+        iterator = patient_labels
+        print("  Adding readmission and LOS labels...")
+        
+    for i, patient in enumerate(iterator):
+        # Show progress in pipeline mode (every 5% or every 100 patients)
+        if not is_terminal and i > 0:
+            progress_interval = min(max(1, len(patient_labels) // 20), 100)  # Every 5% or every 100 patients
+            if i % progress_interval == 0:
+                print(f"    Progress: {i}/{len(patient_labels)} ({i*100//len(patient_labels)}%)")
+            
         patient_id = patient['patient_id']
         if patient_id in df_time_series['patient_id'].values:
             idx = df_time_series[df_time_series['patient_id'] == patient_id].index[0]

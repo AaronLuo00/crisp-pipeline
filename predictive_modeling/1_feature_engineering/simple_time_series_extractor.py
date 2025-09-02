@@ -8,6 +8,8 @@ import pandas as pd
 from pathlib import Path
 from datetime import datetime, timedelta
 import json
+import sys
+import os
 from typing import Dict, List, Optional
 from tqdm import tqdm
 import warnings
@@ -549,7 +551,29 @@ class SimpleTimeSeriesExtractor:
         print(f"Extracting features for {len(patients)} patients...")
         
         all_features = []
-        for patient in tqdm(patients):
+        
+        # Check if we're in a terminal or pipe
+        is_terminal = sys.stdout.isatty() and not os.environ.get('PIPELINE_MODE')
+        
+        if is_terminal:
+            # Use normal tqdm with optimized parameters
+            iterator = tqdm(patients, 
+                          mininterval=1.0,  # Update at most once per second
+                          miniters=5,       # Update after at least 5 items
+                          ncols=80,         # Fixed width
+                          ascii=True)       # ASCII characters only
+        else:
+            # Simple progress for pipeline mode
+            iterator = patients
+            total = len(patients)
+            
+        for i, patient in enumerate(iterator):
+            # Show simple progress in pipeline mode (every 5% or every 100 patients)
+            if not is_terminal and i > 0:
+                progress_interval = min(max(1, total // 20), 100)  # Every 5% or every 100 patients
+                if i % progress_interval == 0:
+                    print(f"  Progress: {i}/{total} ({i*100//total}%)")
+                
             patient_id = patient['patient_id']
             patient_dir = self._get_patient_dir(patient_id, data_dir)
             
