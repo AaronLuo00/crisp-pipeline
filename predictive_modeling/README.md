@@ -196,7 +196,6 @@ modeling_results/
 │   │   └── xgboost/
 │   └── deep_learning/
 │       ├── mlp/
-│       └── resnet/
 ├── evaluation/
 │   ├── plots/
 │   │   ├── mortality_roc_curves.png
