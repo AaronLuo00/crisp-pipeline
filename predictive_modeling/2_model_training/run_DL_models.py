@@ -41,6 +41,91 @@ class TabularDataset(Dataset):
     def __getitem__(self, idx):
         return self.X[idx], self.y[idx]
 
+class SequentialDataset(Dataset):
+    """Dataset for sequential models (LSTM/TCN)"""
+    def __init__(self, X_static, X_temporal, y):
+        """
+        Args:
+            X_static: Static features [batch_size, static_features]
+            X_temporal: Temporal features [batch_size, sequence_length, temporal_features]
+            y: Labels [batch_size]
+        """
+        self.X_static = torch.FloatTensor(X_static)
+        self.X_temporal = torch.FloatTensor(X_temporal)
+        self.y = torch.FloatTensor(y)
+    
+    def __len__(self):
+        return len(self.y)
+    
+    def __getitem__(self, idx):
+        return self.X_static[idx], self.X_temporal[idx], self.y[idx]
+
+def reshape_temporal_features(df, time_window=4):
+    """
+    Reshape flattened temporal features to sequential format
+    
+    Args:
+        df: DataFrame with columns like concept_t0, concept_t1, etc.
+        time_window: Time window in hours (2, 4, or 8)
+    
+    Returns:
+        X_static: Static features array
+        X_temporal: Temporal features array [batch, seq_len, features]
+        feature_cols: List of feature column names
+    """
+    # Identify static columns (demographics and conditions/procedures without _t suffix)
+    static_cols = ['age_at_icu', 'gender', 'race', 'ethnicity']
+    
+    # Find condition and procedure columns (those without _t suffix)
+    for col in df.columns:
+        if col not in static_cols and not col.startswith('mortality') and \
+           not col.startswith('readmission') and not col.startswith('los') and \
+           not col.startswith('sepsis') and not col.startswith('has_sepsis') and \
+           not col.startswith('patient_id') and '_t' not in col:
+            static_cols.append(col)
+    
+    # Identify temporal columns (those with _t0, _t1, etc.)
+    temporal_cols = [col for col in df.columns if '_t' in col]
+    
+    # Extract unique concept IDs and time steps
+    concept_time_map = {}
+    for col in temporal_cols:
+        parts = col.rsplit('_t', 1)
+        if len(parts) == 2:
+            concept_id = parts[0]
+            time_step = int(parts[1])
+            if concept_id not in concept_time_map:
+                concept_time_map[concept_id] = []
+            concept_time_map[concept_id].append((time_step, col))
+    
+    # Determine sequence length
+    if concept_time_map:
+        max_time_step = max([max([t for t, _ in times]) for times in concept_time_map.values()]) + 1
+        seq_length = max_time_step
+    else:
+        # No temporal features found - use dummy sequence
+        seq_length = 1
+    
+    # Extract static features
+    X_static = df[static_cols].values
+    
+    # Build temporal features array
+    n_samples = len(df)
+    if concept_time_map:
+        n_temporal_features = len(concept_time_map)
+        X_temporal = np.zeros((n_samples, seq_length, n_temporal_features))
+        
+        # Fill temporal array
+        for feat_idx, (concept_id, time_cols) in enumerate(concept_time_map.items()):
+            for time_step, col_name in time_cols:
+                if col_name in df.columns:
+                    X_temporal[:, time_step, feat_idx] = df[col_name].values
+    else:
+        # No temporal features - create dummy temporal data
+        X_temporal = np.zeros((n_samples, 1, 1))
+    
+    return X_static, X_temporal, static_cols
+
 class MLP(nn.Module):
     """Multi-Layer Perceptron for tabular data"""
     def __init__(self, input_dim, hidden_dims=[256, 128, 64], dropout=0.3):
@@ -223,8 +308,184 @@ def prepare_data(df: pd.DataFrame, target_col: str, test_size: float = 0.2,
     
     return X_train_scaled, X_test_scaled, y_train.values, y_test.values, scaler, feature_cols
 
-def get_model(model_type: str, input_dim: int, config: Dict) -> nn.Module:
-    """Get deep learning model based on type"""
+class LSTMPredictor(nn.Module):
+    """LSTM model with static and temporal feature fusion"""
+    def __init__(self, static_dim, temporal_dim, hidden_dim=128, num_layers=2, dropout=0.3):
+        super(LSTMPredictor, self).__init__()
+        
+        # Static feature processing
+        self.static_net = nn.Sequential(
+            nn.Linear(static_dim, 64),
+            nn.BatchNorm1d(64),
+            nn.ReLU(),
+            nn.Dropout(dropout),
+            nn.Linear(64, 32),
+            nn.BatchNorm1d(32),
+            nn.ReLU()
+        )
+        
+        # LSTM for temporal features
+        self.lstm = nn.LSTM(
+            input_size=temporal_dim,
+            hidden_size=hidden_dim,
+            num_layers=num_layers,
+            batch_first=True,
+            dropout=dropout if num_layers > 1 else 0,
+            bidirectional=True
+        )
+        
+        # Fusion and output layers
+        fusion_dim = 32 + (hidden_dim * 2)  # Static + bidirectional LSTM
+        self.fusion = nn.Sequential(
+            nn.Linear(fusion_dim, 128),
+            nn.BatchNorm1d(128),
+            nn.ReLU(),
+            nn.Dropout(dropout),
+            nn.Linear(128, 64),
+            nn.BatchNorm1d(64),
+            nn.ReLU(),
+            nn.Dropout(dropout),
+            nn.Linear(64, 1),
+            nn.Sigmoid()
+        )
+    
+    def forward(self, x_static, x_temporal):
+        # Process static features
+        static_out = self.static_net(x_static)
+        
+        # Process temporal features with LSTM
+        lstm_out, (h_n, c_n) = self.lstm(x_temporal)
+        
+        # Use the last hidden state from both directions
+        # h_n shape: [num_layers * num_directions, batch, hidden_dim]
+        # We want the last layer's output from both directions
+        h_forward = h_n[-2, :, :]  # Last layer, forward direction
+        h_backward = h_n[-1, :, :]  # Last layer, backward direction
+        temporal_out = torch.cat([h_forward, h_backward], dim=1)
+        
+        # Fusion
+        combined = torch.cat([static_out, temporal_out], dim=1)
+        output = self.fusion(combined)
+        
+        return output.squeeze()
+
+class TCNBlock(nn.Module):
+    """Temporal Convolutional Block"""
+    def __init__(self, in_channels, out_channels, kernel_size, dilation, dropout=0.3):
+        super(TCNBlock, self).__init__()
+        padding = (kernel_size - 1) * dilation // 2
+        
+        self.conv1 = nn.Conv1d(in_channels, out_channels, kernel_size,
+                               padding=padding, dilation=dilation)
+        self.bn1 = nn.BatchNorm1d(out_channels)
+        self.relu1 = nn.ReLU()
+        self.dropout1 = nn.Dropout(dropout)
+        
+        self.conv2 = nn.Conv1d(out_channels, out_channels, kernel_size,
+                               padding=padding, dilation=dilation)
+        self.bn2 = nn.BatchNorm1d(out_channels)
+        self.relu2 = nn.ReLU()
+        self.dropout2 = nn.Dropout(dropout)
+        
+        # Residual connection
+        self.residual = nn.Conv1d(in_channels, out_channels, 1) if in_channels != out_channels else None
+    
+    def forward(self, x):
+        residual = x
+        
+        out = self.conv1(x)
+        out = self.bn1(out)
+        out = self.relu1(out)
+        out = self.dropout1(out)
+        
+        out = self.conv2(out)
+        out = self.bn2(out)
+        
+        if self.residual is not None:
+            residual = self.residual(residual)
+        
+        out = self.relu2(out + residual)
+        out = self.dropout2(out)
+        
+        return out
+
+class TCNPredictor(nn.Module):
+    """Temporal Convolutional Network with static and temporal feature fusion"""
+    def __init__(self, static_dim, temporal_dim, num_channels=[64, 128, 256], 
+                 kernel_size=3, dropout=0.3):
+        super(TCNPredictor, self).__init__()
+        
+        # Static feature processing
+        self.static_net = nn.Sequential(
+            nn.Linear(static_dim, 64),
+            nn.BatchNorm1d(64),
+            nn.ReLU(),
+            nn.Dropout(dropout),
+            nn.Linear(64, 32),
+            nn.BatchNorm1d(32),
+            nn.ReLU()
+        )
+        
+        # TCN for temporal features
+        layers = []
+        num_levels = len(num_channels)
+        for i in range(num_levels):
+            in_channels = temporal_dim if i == 0 else num_channels[i-1]
+            out_channels = num_channels[i]
+            dilation = 2 ** i
+            layers.append(TCNBlock(in_channels, out_channels, kernel_size, dilation, dropout))
+        
+        self.tcn = nn.Sequential(*layers)
+        
+        # Global pooling
+        self.global_pool = nn.AdaptiveAvgPool1d(1)
+        
+        # Fusion and output layers
+        fusion_dim = 32 + num_channels[-1]  # Static + TCN output
+        self.fusion = nn.Sequential(
+            nn.Linear(fusion_dim, 128),
+            nn.BatchNorm1d(128),
+            nn.ReLU(),
+            nn.Dropout(dropout),
+            nn.Linear(128, 64),
+            nn.BatchNorm1d(64),
+            nn.ReLU(),
+            nn.Dropout(dropout),
+            nn.Linear(64, 1),
+            nn.Sigmoid()
+        )
+    
+    def forward(self, x_static, x_temporal):
+        # Process static features
+        static_out = self.static_net(x_static)
+        
+        # Process temporal features with TCN
+        # TCN expects [batch, channels, sequence_length]
+        x_temporal = x_temporal.transpose(1, 2)
+        tcn_out = self.tcn(x_temporal)
+        
+        # Global pooling over time dimension
+        tcn_out = self.global_pool(tcn_out).squeeze(-1)
+        
+        # Fusion
+        combined = torch.cat([static_out, tcn_out], dim=1)
+        output = self.fusion(combined)
+        
+        return output.squeeze()
+
+def get_model(model_type: str, input_dim: int = None, config: Dict = None, 
+              static_dim: int = None, temporal_dim: int = None) -> nn.Module:
+    """Get deep learning model based on type
+    
+    Args:
+        model_type: Type of model ('MLP', 'ResNet', 'Transformer', 'LSTM', 'TCN')
+        input_dim: Input dimension for tabular models (MLP, ResNet, Transformer)
+        config: Model configuration dictionary
+        static_dim: Static feature dimension for sequential models
+        temporal_dim: Temporal feature dimension for sequential models
+    """
+    if config is None:
+        config = {}
     
     if model_type == 'MLP':
         hidden_dims = config.get('hidden_dims', [256, 128, 64])
@@ -244,12 +505,35 @@ def get_model(model_type: str, input_dim: int, config: Dict) -> nn.Module:
         dropout = config.get('dropout', 0.3)
         return TransformerModel(input_dim, hidden_dim, num_blocks, num_heads, dropout)
     
+    elif model_type == 'LSTM':
+        hidden_dim = config.get('hidden_dim', 128)
+        num_layers = config.get('num_layers', 2)
+        dropout = config.get('dropout', 0.3)
+        return LSTMPredictor(static_dim, temporal_dim, hidden_dim, num_layers, dropout)
+    
+    elif model_type == 'TCN':
+        num_channels = config.get('num_channels', [64, 128, 256])
+        kernel_size = config.get('kernel_size', 3)
+        dropout = config.get('dropout', 0.3)
+        return TCNPredictor(static_dim, temporal_dim, num_channels, kernel_size, dropout)
+    
     else:
         raise ValueError(f"Unknown model type: {model_type}")
 
 def train_model(model: nn.Module, train_loader: DataLoader, val_loader: DataLoader,
-                epochs: int = 100, lr: float = 0.001, patience: int = 10) -> Dict:
-    """Train deep learning model"""
+                epochs: int = 100, lr: float = 0.001, patience: int = 10,
+                model_type: str = 'MLP') -> Dict:
+    """Train deep learning model
+    
+    Args:
+        model: The model to train
+        train_loader: Training data loader
+        val_loader: Validation data loader
+        epochs: Number of epochs
+        lr: Learning rate
+        patience: Early stopping patience
+        model_type: Type of model for handling different input formats
+    """
     
     model = model.to(device)
     criterion = nn.BCELoss()
@@ -263,15 +547,31 @@ def train_model(model: nn.Module, train_loader: DataLoader, val_loader: DataLoad
     train_losses = []
     val_aurocs = []
     
+    # Check if this is a sequential model
+    is_sequential = model_type in ['LSTM', 'TCN']
+    
     for epoch in range(epochs):
         # Training
         model.train()
         train_loss = 0
-        for batch_X, batch_y in train_loader:
-            batch_X, batch_y = batch_X.to(device), batch_y.to(device)
+        for batch_data in train_loader:
+            if is_sequential:
+                # Sequential models: data loader returns (X_static, X_temporal, y)
+                batch_X_static, batch_X_temporal, batch_y = batch_data
+                batch_X_static = batch_X_static.to(device)
+                batch_X_temporal = batch_X_temporal.to(device)
+                batch_y = batch_y.to(device)
+                
+                optimizer.zero_grad()
+                outputs = model(batch_X_static, batch_X_temporal)
+            else:
+                # Tabular models: data loader returns (X, y)
+                batch_X, batch_y = batch_data
+                batch_X, batch_y = batch_X.to(device), batch_y.to(device)
+                
+                optimizer.zero_grad()
+                outputs = model(batch_X)
             
-            optimizer.zero_grad()
-            outputs = model(batch_X)
             loss = criterion(outputs, batch_y)
             loss.backward()
             optimizer.step()
@@ -287,9 +587,17 @@ def train_model(model: nn.Module, train_loader: DataLoader, val_loader: DataLoad
         val_labels = []
         
         with torch.no_grad():
-            for batch_X, batch_y in val_loader:
-                batch_X = batch_X.to(device)
-                outputs = model(batch_X)
+            for batch_data in val_loader:
+                if is_sequential:
+                    batch_X_static, batch_X_temporal, batch_y = batch_data
+                    batch_X_static = batch_X_static.to(device)
+                    batch_X_temporal = batch_X_temporal.to(device)
+                    outputs = model(batch_X_static, batch_X_temporal)
+                else:
+                    batch_X, batch_y = batch_data
+                    batch_X = batch_X.to(device)
+                    outputs = model(batch_X)
+                
                 val_preds.extend(outputs.cpu().numpy())
                 val_labels.extend(batch_y.numpy())
         
@@ -334,16 +642,33 @@ def train_model(model: nn.Module, train_loader: DataLoader, val_loader: DataLoad
         'best_val_auroc': best_val_auroc
     }
 
-def evaluate_model(model: nn.Module, test_loader: DataLoader) -> Tuple[float, float]:
-    """Evaluate model on test set"""
+def evaluate_model(model: nn.Module, test_loader: DataLoader, model_type: str = 'MLP') -> Tuple[float, float]:
+    """Evaluate model on test set
+    
+    Args:
+        model: The trained model
+        test_loader: Test data loader
+        model_type: Type of model for handling different input formats
+    """
     model.eval()
     predictions = []
     labels = []
     
+    # Check if this is a sequential model
+    is_sequential = model_type in ['LSTM', 'TCN']
+    
     with torch.no_grad():
-        for batch_X, batch_y in test_loader:
-            batch_X = batch_X.to(device)
-            outputs = model(batch_X)
+        for batch_data in test_loader:
+            if is_sequential:
+                batch_X_static, batch_X_temporal, batch_y = batch_data
+                batch_X_static = batch_X_static.to(device)
+                batch_X_temporal = batch_X_temporal.to(device)
+                outputs = model(batch_X_static, batch_X_temporal)
+            else:
+                batch_X, batch_y = batch_data
+                batch_X = batch_X.to(device)
+                outputs = model(batch_X)
+            
             predictions.extend(outputs.cpu().numpy())
             labels.extend(batch_y.numpy())
     
@@ -441,50 +766,92 @@ def train_task_models(task_name: str, targets: List[str], input_dir: Path,
             
         X_train, X_test, y_train, y_test, scaler, feature_cols = data
         
-        # Create data loaders
-        train_dataset = TabularDataset(X_train, y_train)
-        test_dataset = TabularDataset(X_test, y_test)
+        # Check if this is a sequential model
+        is_sequential = args.model_type in ['LSTM', 'TCN']
         
+        if is_sequential:
+            # Reshape data for sequential models
+            # First convert back to DataFrame for reshaping
+            train_df = pd.DataFrame(X_train, columns=feature_cols)
+            test_df = pd.DataFrame(X_test, columns=feature_cols)
+            
+            X_train_static, X_train_temporal, _ = reshape_temporal_features(train_df, args.time_window)
+            X_test_static, X_test_temporal, _ = reshape_temporal_features(test_df, args.time_window)
+            
+            # Split train into train/val with stratification on numpy arrays
+            indices = np.arange(len(y_train))
+            train_idx, val_idx = train_test_split(
+                indices, test_size=0.2, random_state=42, stratify=y_train
+            )
+            
+            # Create datasets
+            train_dataset = SequentialDataset(
+                X_train_static[train_idx], X_train_temporal[train_idx], y_train[train_idx]
+            )
+            val_dataset = SequentialDataset(
+                X_train_static[val_idx], X_train_temporal[val_idx], y_train[val_idx]
+            )
+            test_dataset = SequentialDataset(X_test_static, X_test_temporal, y_test)
+            
+            # Get dimensions for model
+            static_dim = X_train_static.shape[1]
+            temporal_dim = X_train_temporal.shape[2]
+            
+            # Model configuration for sequential models
+            model_config = {
+                'dropout': args.dropout,
+                'hidden_dim': int(args.hidden_dims.split(',')[0]),
+                'num_layers': args.num_layers if hasattr(args, 'num_layers') else 2,
+                'num_channels': [int(d) for d in args.hidden_dims.split(',')],
+                'kernel_size': args.kernel_size if hasattr(args, 'kernel_size') else 3
+            }
+            
+            model = get_model(args.model_type, None, model_config, static_dim, temporal_dim)
+        else:
+            # Create tabular datasets
+            train_dataset = TabularDataset(X_train, y_train)
+            test_dataset = TabularDataset(X_test, y_test)
+            
+            # Split train into train/val with stratification
+            X_train_data = train_dataset.X
+            y_train_data = train_dataset.y
+            
+            X_train_split, X_val_split, y_train_split, y_val_split = train_test_split(
+                X_train_data, y_train_data, test_size=0.2, random_state=42, stratify=y_train_data
+            )
+            
+            # Create new datasets
+            train_dataset = TabularDataset(X_train_split, y_train_split)
+            val_dataset = TabularDataset(X_val_split, y_val_split)
+            
+            # Get model
+            input_dim = X_train.shape[1]
+            model_config = {
+                'dropout': args.dropout,
+                'hidden_dims': [int(d) for d in args.hidden_dims.split(',')],
+                'hidden_dim': int(args.hidden_dims.split(',')[0]),
+                'num_blocks': args.num_blocks,
+                'num_heads': args.num_heads
+            }
+            
+            model = get_model(args.model_type, input_dim, model_config)
+        
+        # Create data loaders
         train_loader = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True)
+        val_loader = DataLoader(val_dataset, batch_size=args.batch_size, shuffle=False)
         test_loader = DataLoader(test_dataset, batch_size=args.batch_size, shuffle=False)
         
-        # Split train into train/val with stratification
-        X_train_data = train_dataset.X
-        y_train_data = train_dataset.y
-        
-        # Stratified split for train/validation
-        X_train_split, X_val_split, y_train_split, y_val_split = train_test_split(
-            X_train_data, y_train_data, test_size=0.2, random_state=42, stratify=y_train_data
-        )
-        
-        # Create new datasets
-        train_subset = TabularDataset(X_train_split, y_train_split)
-        val_subset = TabularDataset(X_val_split, y_val_split)
-        
-        train_loader = DataLoader(train_subset, batch_size=args.batch_size, shuffle=True)
-        val_loader = DataLoader(val_subset, batch_size=args.batch_size, shuffle=False)
-        
-        # Get model
-        input_dim = X_train.shape[1]
-        model_config = {
-            'dropout': args.dropout,
-            'hidden_dims': [int(d) for d in args.hidden_dims.split(',')],
-            'hidden_dim': int(args.hidden_dims.split(',')[0]),
-            'num_blocks': args.num_blocks,
-            'num_heads': args.num_heads
-        }
-        
-        model = get_model(args.model_type, input_dim, model_config)
         print(f"    Training {args.model_type} model...")
         
         # Train model
         train_results = train_model(
             model, train_loader, val_loader,
-            epochs=args.epochs, lr=args.lr, patience=args.patience
+            epochs=args.epochs, lr=args.lr, patience=args.patience,
+            model_type=args.model_type
         )
         
         # Evaluate on test set
-        auroc, auprc, _ = evaluate_model(train_results['model'], test_loader)
+        auroc, auprc, _ = evaluate_model(train_results['model'], test_loader, model_type=args.model_type)
         
         print(f"    Test AUROC: {auroc:.3f}, Test AUPRC: {auprc:.3f}")
         
@@ -619,16 +986,20 @@ if __name__ == '__main__':
     
     # Model configuration
     parser.add_argument('--model-type', type=str,
-                       choices=['MLP', 'ResNet', 'Transformer'],
+                       choices=['MLP', 'ResNet', 'Transformer', 'LSTM', 'TCN'],
                        default='MLP',
                        help='Type of deep learning model to train')
     parser.add_argument('--hidden-dims', type=str,
                        default='256,128,64',
-                       help='Comma-separated hidden dimensions for MLP')
+                       help='Comma-separated hidden dimensions for MLP/TCN channels')
     parser.add_argument('--num-blocks', type=int, default=4,
                        help='Number of residual/attention blocks')
     parser.add_argument('--num-heads', type=int, default=8,
                        help='Number of attention heads for Transformer')
+    parser.add_argument('--num-layers', type=int, default=2,
+                       help='Number of LSTM layers')
+    parser.add_argument('--kernel-size', type=int, default=3,
+                       help='Kernel size for TCN')
     parser.add_argument('--dropout', type=float, default=0.3,
                        help='Dropout rate')
     

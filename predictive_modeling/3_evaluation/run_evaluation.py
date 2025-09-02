@@ -32,6 +32,72 @@ except ImportError:
     TORCH_AVAILABLE = False
     print("Warning: PyTorch not available. Deep learning model evaluation will be skipped.")
 
+def reshape_temporal_features(df, time_window=4):
+    """
+    Reshape flattened temporal features to sequential format
+    
+    Args:
+        df: DataFrame with columns like concept_t0, concept_t1, etc.
+        time_window: Time window in hours (2, 4, or 8)
+    
+    Returns:
+        X_static: Static features array
+        X_temporal: Temporal features array [batch, seq_len, features]
+        feature_cols: List of feature column names
+    """
+    # Identify static columns (demographics and conditions/procedures without _t suffix)
+    static_cols = ['age_at_icu', 'gender', 'race', 'ethnicity']
+    
+    # Find condition and procedure columns (those without _t suffix)
+    for col in df.columns:
+        if col not in static_cols and not col.startswith('mortality') and \
+           not col.startswith('readmission') and not col.startswith('los') and \
+           not col.startswith('sepsis') and not col.startswith('has_sepsis') and \
+           not col.startswith('patient_id') and '_t' not in col:
+            static_cols.append(col)
+    
+    # Identify temporal columns (those with _t0, _t1, etc.)
+    temporal_cols = [col for col in df.columns if '_t' in col]
+    
+    # Extract unique concept IDs and time steps
+    concept_time_map = {}
+    for col in temporal_cols:
+        parts = col.rsplit('_t', 1)
+        if len(parts) == 2:
+            concept_id = parts[0]
+            time_step = int(parts[1])
+            if concept_id not in concept_time_map:
+                concept_time_map[concept_id] = []
+            concept_time_map[concept_id].append((time_step, col))
+    
+    # Determine sequence length
+    if concept_time_map:
+        max_time_step = max([max([t for t, _ in times]) for times in concept_time_map.values()]) + 1
+        seq_length = max_time_step
+    else:
+        # No temporal features found - use dummy sequence
+        seq_length = 1
+    
+    # Extract static features
+    X_static = df[static_cols].values
+    
+    # Build temporal features array
+    n_samples = len(df)
+    if concept_time_map:
+        n_temporal_features = len(concept_time_map)
+        X_temporal = np.zeros((n_samples, seq_length, n_temporal_features))
+        
+        # Fill temporal array
+        for feat_idx, (concept_id, time_cols) in enumerate(concept_time_map.items()):
+            for time_step, col_name in time_cols:
+                if col_name in df.columns:
+                    X_temporal[:, time_step, feat_idx] = df[col_name].values
+    else:
+        # No temporal features - create dummy temporal data
+        X_temporal = np.zeros((n_samples, 1, 1))
+    
+    return X_static, X_temporal, static_cols
+
 def load_model(model_path: Path, model_category: str = 'traditional') -> Dict:
     """Load trained model and metadata
     
@@ -74,7 +140,7 @@ def reconstruct_dl_model(checkpoint: Dict, metadata: Dict = None):
     input_dim = checkpoint['input_dim']
     model_class = checkpoint['model_class']
     
-    # Define model architectures (simplified versions)
+    # Define model architectures
     class MLP(nn.Module):
         def __init__(self, input_dim):
             super(MLP, self).__init__()
@@ -98,9 +164,181 @@ def reconstruct_dl_model(checkpoint: Dict, metadata: Dict = None):
         def forward(self, x):
             return self.model(x).squeeze()
     
+    class LSTMPredictor(nn.Module):
+        """LSTM model with static and temporal feature fusion"""
+        def __init__(self, static_dim=104, temporal_dim=477, hidden_dim=128, 
+                     num_layers=2, dropout=0.3):
+            super(LSTMPredictor, self).__init__()
+            
+            # Static feature processing
+            self.static_net = nn.Sequential(
+                nn.Linear(static_dim, 64),
+                nn.BatchNorm1d(64),
+                nn.ReLU(),
+                nn.Dropout(dropout),
+                nn.Linear(64, 32),
+                nn.BatchNorm1d(32),
+                nn.ReLU()
+            )
+            
+            # LSTM for temporal features
+            self.lstm = nn.LSTM(
+                input_size=temporal_dim,
+                hidden_size=hidden_dim,
+                num_layers=num_layers,
+                batch_first=True,
+                dropout=dropout if num_layers > 1 else 0,
+                bidirectional=True
+            )
+            
+            # Fusion and output layers
+            fusion_dim = 32 + (hidden_dim * 2)  # Static + bidirectional LSTM
+            self.fusion = nn.Sequential(
+                nn.Linear(fusion_dim, 128),
+                nn.BatchNorm1d(128),
+                nn.ReLU(),
+                nn.Dropout(dropout),
+                nn.Linear(128, 64),
+                nn.BatchNorm1d(64),
+                nn.ReLU(),
+                nn.Dropout(dropout),
+                nn.Linear(64, 1),
+                nn.Sigmoid()
+            )
+        
+        def forward(self, x_static, x_temporal):
+            # Process static features
+            static_out = self.static_net(x_static)
+            
+            # Process temporal features with LSTM
+            lstm_out, (h_n, c_n) = self.lstm(x_temporal)
+            
+            # Use the last hidden state from both directions
+            h_forward = h_n[-2, :, :]  # Last layer, forward direction
+            h_backward = h_n[-1, :, :]  # Last layer, backward direction
+            temporal_out = torch.cat([h_forward, h_backward], dim=1)
+            
+            # Fusion
+            combined = torch.cat([static_out, temporal_out], dim=1)
+            output = self.fusion(combined)
+            
+            return output.squeeze()
+    
+    class TCNBlock(nn.Module):
+        """Temporal Convolutional Block"""
+        def __init__(self, in_channels, out_channels, kernel_size, dilation, dropout=0.3):
+            super(TCNBlock, self).__init__()
+            padding = (kernel_size - 1) * dilation // 2
+            
+            self.conv1 = nn.Conv1d(in_channels, out_channels, kernel_size,
+                                   padding=padding, dilation=dilation)
+            self.bn1 = nn.BatchNorm1d(out_channels)
+            self.relu1 = nn.ReLU()
+            self.dropout1 = nn.Dropout(dropout)
+            
+            self.conv2 = nn.Conv1d(out_channels, out_channels, kernel_size,
+                                   padding=padding, dilation=dilation)
+            self.bn2 = nn.BatchNorm1d(out_channels)
+            self.relu2 = nn.ReLU()
+            self.dropout2 = nn.Dropout(dropout)
+            
+            # Residual connection
+            self.residual = nn.Conv1d(in_channels, out_channels, 1) if in_channels != out_channels else None
+        
+        def forward(self, x):
+            residual = x
+            
+            out = self.conv1(x)
+            out = self.bn1(out)
+            out = self.relu1(out)
+            out = self.dropout1(out)
+            
+            out = self.conv2(out)
+            out = self.bn2(out)
+            
+            if self.residual is not None:
+                residual = self.residual(residual)
+            
+            out = self.relu2(out + residual)
+            out = self.dropout2(out)
+            
+            return out
+    
+    class TCNPredictor(nn.Module):
+        """Temporal Convolutional Network with static and temporal feature fusion"""
+        def __init__(self, static_dim=104, temporal_dim=477, num_channels=[64, 128, 256], 
+                     kernel_size=3, dropout=0.3):
+            super(TCNPredictor, self).__init__()
+            
+            # Static feature processing
+            self.static_net = nn.Sequential(
+                nn.Linear(static_dim, 64),
+                nn.BatchNorm1d(64),
+                nn.ReLU(),
+                nn.Dropout(dropout),
+                nn.Linear(64, 32),
+                nn.BatchNorm1d(32),
+                nn.ReLU()
+            )
+            
+            # TCN for temporal features
+            layers = []
+            num_levels = len(num_channels)
+            for i in range(num_levels):
+                in_channels = temporal_dim if i == 0 else num_channels[i-1]
+                out_channels = num_channels[i]
+                dilation = 2 ** i
+                layers.append(TCNBlock(in_channels, out_channels, kernel_size, dilation, dropout))
+            
+            self.tcn = nn.Sequential(*layers)
+            
+            # Global pooling
+            self.global_pool = nn.AdaptiveAvgPool1d(1)
+            
+            # Fusion and output layers
+            fusion_dim = 32 + num_channels[-1]  # Static + TCN output
+            self.fusion = nn.Sequential(
+                nn.Linear(fusion_dim, 128),
+                nn.BatchNorm1d(128),
+                nn.ReLU(),
+                nn.Dropout(dropout),
+                nn.Linear(128, 64),
+                nn.BatchNorm1d(64),
+                nn.ReLU(),
+                nn.Dropout(dropout),
+                nn.Linear(64, 1),
+                nn.Sigmoid()
+            )
+        
+        def forward(self, x_static, x_temporal):
+            # Process static features
+            static_out = self.static_net(x_static)
+            
+            # Process temporal features with TCN
+            # TCN expects [batch, channels, sequence_length]
+            x_temporal = x_temporal.transpose(1, 2)
+            tcn_out = self.tcn(x_temporal)
+            
+            # Global pooling to get fixed size representation
+            tcn_out = self.global_pool(tcn_out).squeeze(-1)
+            
+            # Fusion
+            combined = torch.cat([static_out, tcn_out], dim=1)
+            output = self.fusion(combined)
+            
+            return output.squeeze()
+    
     # Create model instance
     if model_class == 'MLP':
         model = MLP(input_dim)
+    elif model_class == 'LSTMPredictor':
+        # Use dimensions that match training (hidden_dim=256 for compatibility)
+        model = LSTMPredictor(static_dim=104, temporal_dim=477, hidden_dim=256, 
+                            num_layers=2, dropout=0.3)
+    elif model_class == 'TCNPredictor':
+        # Use dimensions that match training
+        model = TCNPredictor(static_dim=104, temporal_dim=477, 
+                           num_channels=[256, 128, 64], kernel_size=3, dropout=0.3)
     else:
         raise ValueError(f"Unknown model class: {model_class}")
     
@@ -263,8 +501,23 @@ def evaluate_model(task_name: str, target: str, model_name: str, model_category:
     elif model_category == 'deep_learning' and TORCH_AVAILABLE:
         model.eval()
         with torch.no_grad():
-            X_tensor = torch.FloatTensor(X_scaled)
-            y_pred_proba = model(X_tensor).cpu().numpy()
+            # Check if this is a sequential model (LSTM/TCN)
+            model_type = model_data.get('model_type', model_name)
+            if model_type in ['LSTMPredictor', 'TCNPredictor'] or model_name in ['lstm', 'tcn']:
+                # For sequential models, reshape data
+                df_features = pd.DataFrame(X_scaled, columns=feature_cols)
+                X_static, X_temporal, _ = reshape_temporal_features(df_features, time_window)
+                
+                # Convert to tensors
+                X_static_tensor = torch.FloatTensor(X_static)
+                X_temporal_tensor = torch.FloatTensor(X_temporal)
+                
+                # Make predictions with dual inputs
+                y_pred_proba = model(X_static_tensor, X_temporal_tensor).cpu().numpy()
+            else:
+                # For non-sequential models (MLP, ResNet, Transformer)
+                X_tensor = torch.FloatTensor(X_scaled)
+                y_pred_proba = model(X_tensor).cpu().numpy()
     else:
         return None
     
@@ -330,7 +583,7 @@ def evaluate_all_models_for_task(task_name: str, targets: List[str], model_dir: 
         # Parse model types from argument (backward compatibility)
         traditional_models = [m for m in model_types if m in 
                             ['logisticregression', 'randomforest', 'gradientboosting', 'xgboost']]
-        dl_models = [m for m in model_types if m in ['mlp', 'resnet', 'transformer']]
+        dl_models = [m for m in model_types if m in ['mlp', 'resnet', 'transformer', 'lstm', 'tcn']]
         
         # For each target, evaluate specified models
         for target in targets:
