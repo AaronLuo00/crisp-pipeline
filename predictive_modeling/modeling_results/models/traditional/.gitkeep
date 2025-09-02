@@ -1,0 +1,2 @@
+# This directory stores traditional ML models
+# Models are organized by model type (logisticregression, randomforest, etc.)

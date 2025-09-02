@@ -1,0 +1,2 @@
+# This directory stores deep learning models
+# Models are organized by model type (lstm, gru, transformer, etc.)

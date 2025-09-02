@@ -105,5 +105,9 @@ predictive_modeling/modeling_results/**/*.log
 predictive_modeling/modeling_results/**/*.md
 predictive_modeling/modeling_results/**/*.yaml
 predictive_modeling/modeling_results/**/*.yml
+# Also exclude PyTorch model files
+predictive_modeling/modeling_results/**/*.pt
+predictive_modeling/modeling_results/**/*.pth
+# Keep .gitkeep files
 !predictive_modeling/modeling_results/**/.gitkeep
 
