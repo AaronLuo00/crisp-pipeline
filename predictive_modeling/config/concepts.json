@@ -1,0 +1,3212 @@
+{
+  "MEASUREMENT": [
+    {
+      "id": 3024171,
+      "name": "Respiratory rate"
+    },
+    {
+      "id": 3004249,
+      "name": "Systolic blood pressure"
+    },
+    {
+      "id": 3012888,
+      "name": "Diastolic blood pressure"
+    },
+    {
+      "id": 3020891,
+      "name": "Body temperature"
+    },
+    {
+      "id": 4020553,
+      "name": "Oxygen saturation measurement"
+    },
+    {
+      "id": 4301868,
+      "name": "Pulse rate"
+    },
+    {
+      "id": 4098046,
+      "name": "Pulse oximetry"
+    },
+    {
+      "id": 3027598,
+      "name": "Mean blood pressure"
+    },
+    {
+      "id": 43055141,
+      "name": "Pain severity - 0-10 verbal numeric rating [Score] - Reported"
+    },
+    {
+      "id": 3014315,
+      "name": "Urine output"
+    },
+    {
+      "id": 3036277,
+      "name": "Body height"
+    },
+    {
+      "id": 4326744,
+      "name": "Blood pressure"
+    },
+    {
+      "id": 3024882,
+      "name": "Oxygen/Total gas setting [Volume Fraction] Ventilator"
+    },
+    {
+      "id": 4019545,
+      "name": "Chloride measurement, blood"
+    },
+    {
+      "id": 4245152,
+      "name": "Potassium measurement"
+    },
+    {
+      "id": 3025524,
+      "name": "Oxygen/Gas total Inhaled gas by Gas dilution.rebreath"
+    },
+    {
+      "id": 3005629,
+      "name": "Inhaled oxygen flow rate"
+    },
+    {
+      "id": 3009744,
+      "name": "MCHC [Mass/volume] by Automated count"
+    },
+    {
+      "id": 3023599,
+      "name": "MCV [Entitic volume] by Automated count"
+    },
+    {
+      "id": 3012030,
+      "name": "MCH [Entitic mass] by Automated count"
+    },
+    {
+      "id": 21490852,
+      "name": "Invasive Mean blood pressure"
+    },
+    {
+      "id": 21492241,
+      "name": "Mean blood pressure by Noninvasive"
+    },
+    {
+      "id": 3000963,
+      "name": "Hemoglobin [Mass/volume] in Blood"
+    },
+    {
+      "id": 3015632,
+      "name": "Carbon dioxide, total [Moles/volume] in Serum or Plasma"
+    },
+    {
+      "id": 3024929,
+      "name": "Platelets [#/volume] in Blood by Automated count"
+    },
+    {
+      "id": 4030871,
+      "name": "Red blood cell count"
+    },
+    {
+      "id": 3023314,
+      "name": "Hematocrit [Volume Fraction] of Blood by Automated count"
+    },
+    {
+      "id": 3019897,
+      "name": "Erythrocyte distribution width [Ratio] by Automated count"
+    },
+    {
+      "id": 21490853,
+      "name": "Invasive Systolic blood pressure"
+    },
+    {
+      "id": 21490851,
+      "name": "Invasive Diastolic blood pressure"
+    },
+    {
+      "id": 46236952,
+      "name": "Glomerular filtration rate/1.73 sq M.predicted [Volume Rate/Area] in Serum, Plasma or Blood by Creatinine-based formula (MDRD)"
+    },
+    {
+      "id": 3038553,
+      "name": "Body mass index (BMI) [Ratio]"
+    },
+    {
+      "id": 3000996,
+      "name": "Heart rate method"
+    },
+    {
+      "id": 3000905,
+      "name": "Leukocytes [#/volume] in Blood by Automated count"
+    },
+    {
+      "id": 3011948,
+      "name": "Monocytes/100 leukocytes in Blood by Automated count"
+    },
+    {
+      "id": 4227915,
+      "name": "Bicarbonate measurement"
+    },
+    {
+      "id": 3037511,
+      "name": "Lymphocytes/100 leukocytes in Blood by Automated count"
+    },
+    {
+      "id": 3013762,
+      "name": "Body weight Measured"
+    },
+    {
+      "id": 3010457,
+      "name": "Eosinophils/100 leukocytes in Blood by Automated count"
+    },
+    {
+      "id": 3014080,
+      "name": "Oxygen gas flow Oxygen delivery system"
+    },
+    {
+      "id": 3007194,
+      "name": "Glasgow coma score total"
+    },
+    {
+      "id": 3035519,
+      "name": "Braden scale total score"
+    },
+    {
+      "id": 4017907,
+      "name": "Phosphate measurement"
+    },
+    {
+      "id": 3013650,
+      "name": "Neutrophils [#/volume] in Blood by Automated count"
+    },
+    {
+      "id": 3013869,
+      "name": "Basophils/100 leukocytes in Blood by Automated count"
+    },
+    {
+      "id": 4263457,
+      "name": "Aspartate aminotransferase measurement"
+    },
+    {
+      "id": 4230636,
+      "name": "Alkaline phosphatase measurement"
+    },
+    {
+      "id": 4097664,
+      "name": "Albumin measurement"
+    },
+    {
+      "id": 3043111,
+      "name": "Platelet mean volume [Entitic volume] in Blood by Automated count"
+    },
+    {
+      "id": 3008342,
+      "name": "Neutrophils/100 leukocytes in Blood by Automated count"
+    },
+    {
+      "id": 1616852,
+      "name": "SOFA Total Score"
+    },
+    {
+      "id": 3053283,
+      "name": "Glomerular filtration rate/1.73 sq M.predicted among blacks [Volume Rate/Area] in Serum, Plasma or Blood by Creatinine-based formula (MDRD)"
+    },
+    {
+      "id": 3028615,
+      "name": "Eosinophils [#/volume] in Blood by Automated count"
+    },
+    {
+      "id": 3049187,
+      "name": "Glomerular filtration rate/1.73 sq M.predicted among non-blacks [Volume Rate/Area] in Serum, Plasma or Blood by Creatinine-based formula (MDRD)"
+    },
+    {
+      "id": 3033575,
+      "name": "Monocytes [#/volume] in Blood by Automated count"
+    },
+    {
+      "id": 3013429,
+      "name": "Basophils [#/volume] in Blood by Automated count"
+    },
+    {
+      "id": 3009542,
+      "name": "Hematocrit [Volume Fraction] of Blood"
+    },
+    {
+      "id": 42527086,
+      "name": "Mean airway pressure"
+    },
+    {
+      "id": 3022217,
+      "name": "INR in Platelet poor plasma by Coagulation assay"
+    },
+    {
+      "id": 3034426,
+      "name": "Prothrombin time (PT)"
+    },
+    {
+      "id": 4137083,
+      "name": "Pain intensity rating scale"
+    },
+    {
+      "id": 3032445,
+      "name": "Ideal body weight"
+    },
+    {
+      "id": 4144235,
+      "name": "Glucose measurement, blood"
+    },
+    {
+      "id": 3046900,
+      "name": "Leukocytes [#/volume] corrected for nucleated erythrocytes in Blood by Automated count"
+    },
+    {
+      "id": 4201235,
+      "name": "Body surface area"
+    },
+    {
+      "id": 3030494,
+      "name": "Manual differential performed [Presence] in Blood"
+    },
+    {
+      "id": 3018677,
+      "name": "aPTT in Platelet poor plasma by Coagulation assay"
+    },
+    {
+      "id": 3005424,
+      "name": "Body surface area"
+    },
+    {
+      "id": 21490850,
+      "name": "Invasive Blood pressure"
+    },
+    {
+      "id": 40762636,
+      "name": "Body mass index (BMI) [Percentile]"
+    },
+    {
+      "id": 3022875,
+      "name": "Positive end expiratory pressure setting Ventilator"
+    },
+    {
+      "id": 3014007,
+      "name": "Fractional oxyhemoglobin in Arterial blood"
+    },
+    {
+      "id": 3053331,
+      "name": "Differential cell count method - Blood"
+    },
+    {
+      "id": 21490675,
+      "name": "Central venous pressure (CVP)"
+    },
+    {
+      "id": 3007646,
+      "name": "Breath rate spontaneous and mechanical --on ventilator"
+    },
+    {
+      "id": 4021125,
+      "name": "Oxygen measurement"
+    },
+    {
+      "id": 36684829,
+      "name": "Richmond Agitation-Sedation Scale"
+    },
+    {
+      "id": 3007461,
+      "name": "Platelets [#/volume] in Blood"
+    },
+    {
+      "id": 40758903,
+      "name": "Hemoglobin [Mass/volume] in Blood by Oximetry"
+    },
+    {
+      "id": 3015182,
+      "name": "Erythrocyte distribution width [Entitic volume] by Automated count"
+    },
+    {
+      "id": 3010813,
+      "name": "Leukocytes [#/volume] in Blood"
+    },
+    {
+      "id": 3007469,
+      "name": "Breath rate setting Ventilator"
+    },
+    {
+      "id": 3024386,
+      "name": "Platelet mean volume [Entitic volume] in Blood by Rees-Ecker"
+    },
+    {
+      "id": 3002385,
+      "name": "Erythrocyte distribution width [Ratio]"
+    },
+    {
+      "id": 4149883,
+      "name": "Glucose measurement, urine"
+    },
+    {
+      "id": 3002888,
+      "name": "Erythrocyte distribution width [Entitic volume]"
+    },
+    {
+      "id": 3029925,
+      "name": "Color of Urine by Auto"
+    },
+    {
+      "id": 3032080,
+      "name": "INR in Blood by Coagulation assay"
+    },
+    {
+      "id": 3008939,
+      "name": "Band form neutrophils [#/volume] in Blood by Manual count"
+    },
+    {
+      "id": 40761514,
+      "name": "Nucleated erythrocytes/100 leukocytes [Ratio] in Blood by Automated count"
+    },
+    {
+      "id": 4098519,
+      "name": "LDH blood measurement"
+    },
+    {
+      "id": 3027162,
+      "name": "Color of Urine"
+    },
+    {
+      "id": 3029709,
+      "name": "Clarity in Urine by Refractometry automated"
+    },
+    {
+      "id": 3012677,
+      "name": "Fluid intake oral Measured"
+    },
+    {
+      "id": 3017732,
+      "name": "Neutrophils [#/volume] in Blood"
+    },
+    {
+      "id": 40762365,
+      "name": "Oxygen content in Arterial blood by calculation"
+    },
+    {
+      "id": 3021337,
+      "name": "Troponin I.cardiac [Mass/volume] in Serum or Plasma"
+    },
+    {
+      "id": 3018010,
+      "name": "Neutrophils/100 leukocytes in Blood"
+    },
+    {
+      "id": 3002030,
+      "name": "Lymphocytes/100 leukocytes in Blood"
+    },
+    {
+      "id": 4096101,
+      "name": "Measurement of oxygen saturation at periphery"
+    },
+    {
+      "id": 3006504,
+      "name": "Eosinophils/100 leukocytes in Blood"
+    },
+    {
+      "id": 3040168,
+      "name": "Immature granulocytes [#/volume] in Blood"
+    },
+    {
+      "id": 3012608,
+      "name": "Segmented neutrophils/100 leukocytes in Blood by Automated count"
+    },
+    {
+      "id": 1617534,
+      "name": "Cardiovascular [Score] SOFA"
+    },
+    {
+      "id": 3011987,
+      "name": "Polychromasia [Presence] in Blood by Light microscopy"
+    },
+    {
+      "id": 3022096,
+      "name": "Basophils/100 leukocytes in Blood"
+    },
+    {
+      "id": 3027920,
+      "name": "Ovalocytes [Presence] in Blood by Light microscopy"
+    },
+    {
+      "id": 40769406,
+      "name": "Specimen type"
+    },
+    {
+      "id": 1616355,
+      "name": "Renal [Score] SOFA"
+    },
+    {
+      "id": 3026238,
+      "name": "Oxygen/Inspired gas Respiratory system --on ventilator"
+    },
+    {
+      "id": 4029625,
+      "name": "Tidal volume"
+    },
+    {
+      "id": 3050479,
+      "name": "Immature granulocytes/100 leukocytes in Blood"
+    },
+    {
+      "id": 36304439,
+      "name": "Pressure.plateau Respiratory system airway"
+    },
+    {
+      "id": 4032789,
+      "name": "Triglycerides measurement"
+    },
+    {
+      "id": 3004921,
+      "name": "Ventilation mode Ventilator"
+    },
+    {
+      "id": 3013466,
+      "name": "aPTT in Blood by Coagulation assay"
+    },
+    {
+      "id": 4156045,
+      "name": "ECG finding"
+    },
+    {
+      "id": 1616896,
+      "name": "Coagulation [Score] SOFA"
+    },
+    {
+      "id": 4239408,
+      "name": "Heart rate"
+    },
+    {
+      "id": 3012764,
+      "name": "Erythrocyte morphology finding [Identifier] in Blood"
+    },
+    {
+      "id": 4353621,
+      "name": "Minute volume"
+    },
+    {
+      "id": 3000748,
+      "name": "Prothrombin time (PT) factor substitution in Platelet poor plasma by Coagulation assay --immediately after addition of normal plasma"
+    },
+    {
+      "id": 36032404,
+      "name": "Carbon monoxide/Gas total corrected for ambient CO Exhaled gas --at end expiration"
+    },
+    {
+      "id": 3044331,
+      "name": "Calcium.ionized [Moles/volume] in Arterial blood"
+    },
+    {
+      "id": 4265595,
+      "name": "Creatine kinase measurement"
+    },
+    {
+      "id": 3015746,
+      "name": "Specimen source identified"
+    },
+    {
+      "id": 3035583,
+      "name": "Leukocytes [#/area] in Urine sediment by Microscopy high power field"
+    },
+    {
+      "id": 3004410,
+      "name": "Hemoglobin A1c/Hemoglobin.total in Blood"
+    },
+    {
+      "id": 4246879,
+      "name": "Thyroid stimulating hormone measurement"
+    },
+    {
+      "id": 40480257,
+      "name": "Measurement of expired nitric oxide"
+    },
+    {
+      "id": 4353618,
+      "name": "Expired nitrogen concentration"
+    },
+    {
+      "id": 3026314,
+      "name": "Anisocytosis [Presence] in Blood by Light microscopy"
+    },
+    {
+      "id": 4101694,
+      "name": "Peak inspiratory pressure"
+    },
+    {
+      "id": 3009797,
+      "name": "Basophils/100 leukocytes in Blood by Manual count"
+    },
+    {
+      "id": 4101713,
+      "name": "High density lipoprotein cholesterol measurement"
+    },
+    {
+      "id": 3035819,
+      "name": "Pain assessment panel"
+    },
+    {
+      "id": 3033203,
+      "name": "Carbon dioxide [Partial pressure] adjusted to patient's actual temperature in Blood"
+    },
+    {
+      "id": 36305351,
+      "name": "Heart rate --during anesthesia"
+    },
+    {
+      "id": 3020138,
+      "name": "Lactate [Mass/volume] in Serum or Plasma"
+    },
+    {
+      "id": 3027484,
+      "name": "Hemoglobin [Mass/volume] in Blood by calculation"
+    },
+    {
+      "id": 3009932,
+      "name": "Eosinophils [#/volume] in Blood by Manual count"
+    },
+    {
+      "id": 3017501,
+      "name": "Neutrophils [#/volume] in Blood by Manual count"
+    },
+    {
+      "id": 42869590,
+      "name": "Oxygen/Gas total [Pure volume fraction] Inhaled gas"
+    },
+    {
+      "id": 3004411,
+      "name": "Monocytes/100 leukocytes in Body fluid by Manual count"
+    },
+    {
+      "id": 4239021,
+      "name": "Mean blood pressure"
+    },
+    {
+      "id": 21492832,
+      "name": "Wound assessment [Interpretation]"
+    },
+    {
+      "id": 4156643,
+      "name": "Blood urate measurement"
+    },
+    {
+      "id": 3035124,
+      "name": "Erythrocytes [#/area] in Urine sediment by Microscopy high power field"
+    },
+    {
+      "id": 4310328,
+      "name": "Blood oxygen saturation (calculated)"
+    },
+    {
+      "id": 3006239,
+      "name": "Hemoglobin [Mass/volume] in Arterial blood by Oximetry"
+    },
+    {
+      "id": 706163,
+      "name": "SARS-CoV-2 (COVID-19) RNA [Presence] in Respiratory system specimen by NAA with probe detection"
+    },
+    {
+      "id": 4307029,
+      "name": "Brain natriuretic peptide measurement"
+    },
+    {
+      "id": 4016235,
+      "name": "Red blood cell count, automated, urine"
+    },
+    {
+      "id": 3031040,
+      "name": "Bacteria [#/volume] in Urine by Automated count"
+    },
+    {
+      "id": 3041366,
+      "name": "Crystals [Presence] in Urine by Automated"
+    },
+    {
+      "id": 3022509,
+      "name": "Hyaline casts [#/area] in Urine sediment by Microscopy low power field"
+    },
+    {
+      "id": 3019230,
+      "name": "Fractional oxyhemoglobin in Venous blood"
+    },
+    {
+      "id": 42869452,
+      "name": "Immature granulocytes/100 leukocytes in Blood by Automated count"
+    },
+    {
+      "id": 3035146,
+      "name": "Systemic vascular Resistance"
+    },
+    {
+      "id": 21490724,
+      "name": "Inspiration/Expiration time Ratio"
+    },
+    {
+      "id": 3025809,
+      "name": "Q-T interval"
+    },
+    {
+      "id": 3029879,
+      "name": "Epithelial cells.squamous [#/volume] in Urine by Automated count"
+    },
+    {
+      "id": 3008047,
+      "name": "Systemic vascular Resistance index"
+    },
+    {
+      "id": 4140731,
+      "name": "Expired sevoflurane concentration"
+    },
+    {
+      "id": 36303797,
+      "name": "Glomerular filtration rate/1.73 sq M.predicted among non-blacks [Volume Rate/Area] in Serum, Plasma or Blood by Creatinine-based formula (CKD-EPI)"
+    },
+    {
+      "id": 3032238,
+      "name": "Epithelial cells.non-squamous [Presence] in Urine by Automated"
+    },
+    {
+      "id": 4137519,
+      "name": "Inspired sevoflurane concentration"
+    },
+    {
+      "id": 43055193,
+      "name": "Pathologic casts [Presence] in Urine by Automated"
+    },
+    {
+      "id": 3041084,
+      "name": "Immature granulocytes [#/volume] in Blood by Automated count"
+    },
+    {
+      "id": 3022318,
+      "name": "Heart rate rhythm"
+    },
+    {
+      "id": 3039353,
+      "name": "Urinalysis microscopic panel - Urine Qualitative by Automated"
+    },
+    {
+      "id": 4208414,
+      "name": "C-reactive protein measurement"
+    },
+    {
+      "id": 4012479,
+      "name": "Low density lipoprotein cholesterol measurement"
+    },
+    {
+      "id": 3002173,
+      "name": "Hemoglobin [Mass/volume] in Arterial blood"
+    },
+    {
+      "id": 3029943,
+      "name": "Horowitz index in Arterial blood"
+    },
+    {
+      "id": 3013290,
+      "name": "Carbon dioxide [Partial pressure] in Blood"
+    },
+    {
+      "id": 3034107,
+      "name": "Monocytes [#/volume] in Blood by Manual count"
+    },
+    {
+      "id": 4353936,
+      "name": "Inspired oxygen concentration"
+    },
+    {
+      "id": 3020716,
+      "name": "Inhaled oxygen concentration"
+    },
+    {
+      "id": 3019880,
+      "name": "Schistocytes [Presence] in Blood by Light microscopy"
+    },
+    {
+      "id": 4086522,
+      "name": "Weight change"
+    },
+    {
+      "id": 3002417,
+      "name": "Prothrombin time (PT) in Blood by Coagulation assay"
+    },
+    {
+      "id": 3025255,
+      "name": "Bacteria [#/area] in Urine sediment by Microscopy high power field"
+    },
+    {
+      "id": 4176561,
+      "name": "Ferritin measurement"
+    },
+    {
+      "id": 3000456,
+      "name": "Dacrocytes [Presence] in Blood by Light microscopy"
+    },
+    {
+      "id": 3018229,
+      "name": "Myelocytes/100 leukocytes in Blood by Manual count"
+    },
+    {
+      "id": 44782825,
+      "name": "Airway plateau pressure"
+    },
+    {
+      "id": 3031147,
+      "name": "Carbon dioxide, total [Moles/volume] in Blood by calculation"
+    },
+    {
+      "id": 3006322,
+      "name": "Oral temperature"
+    },
+    {
+      "id": 3045410,
+      "name": "Minute volume setting Ventilator"
+    },
+    {
+      "id": 3003214,
+      "name": "Platelet morphology finding [Identifier] in Blood"
+    },
+    {
+      "id": 3008204,
+      "name": "Clarity of Urine"
+    },
+    {
+      "id": 3043662,
+      "name": "Wound assessment panel"
+    },
+    {
+      "id": 3000666,
+      "name": "Metamyelocytes/100 leukocytes in Blood by Manual count"
+    },
+    {
+      "id": 4154772,
+      "name": "Rate of spontaneous respiration"
+    },
+    {
+      "id": 3006792,
+      "name": "LMW Heparin [Units/volume] in Platelet poor plasma by Chromogenic method"
+    },
+    {
+      "id": 1617043,
+      "name": "Liver [Score] SOFA"
+    },
+    {
+      "id": 4036936,
+      "name": "Oxygen delivery"
+    },
+    {
+      "id": 3003540,
+      "name": "Lymphocytes/100 leukocytes in Body fluid by Manual count"
+    },
+    {
+      "id": 3036453,
+      "name": "Pain severity [Score] Visual analog score"
+    },
+    {
+      "id": 3002317,
+      "name": "Cells Counted Total [#] in Blood"
+    },
+    {
+      "id": 40771922,
+      "name": "Glomerular filtration rate/1.73 sq M.predicted [Volume Rate/Area] in Serum, Plasma or Blood"
+    },
+    {
+      "id": 4178785,
+      "name": "Iron measurement"
+    },
+    {
+      "id": 3022022,
+      "name": "QRS duration"
+    },
+    {
+      "id": 3005854,
+      "name": "Burr cells [Presence] in Blood by Light microscopy"
+    },
+    {
+      "id": 3007794,
+      "name": "P-R Interval"
+    },
+    {
+      "id": 3000185,
+      "name": "Iron saturation [Mass Fraction] in Serum or Plasma"
+    },
+    {
+      "id": 3005131,
+      "name": "Glucose mean value [Mass/volume] in Blood Estimated from glycated hemoglobin"
+    },
+    {
+      "id": 3026258,
+      "name": "Q-T interval corrected"
+    },
+    {
+      "id": 3025616,
+      "name": "Target cells [Presence] in Blood by Light microscopy"
+    },
+    {
+      "id": 3037244,
+      "name": "Yeast [#/area] in Urine sediment by Microscopy high power field"
+    },
+    {
+      "id": 4276028,
+      "name": "Amylase measurement"
+    },
+    {
+      "id": 3003694,
+      "name": "ABO and Rh group [Type] in Blood"
+    },
+    {
+      "id": 3000593,
+      "name": "Cobalamin (Vitamin B12) [Mass/volume] in Serum or Plasma"
+    },
+    {
+      "id": 4165139,
+      "name": "Patient activity checklist"
+    },
+    {
+      "id": 40766725,
+      "name": "Pain severity [Score] [PhenX]"
+    },
+    {
+      "id": 3008598,
+      "name": "Thyroxine (T4) free [Mass/volume] in Serum or Plasma"
+    },
+    {
+      "id": 3033641,
+      "name": "Platelet adequacy [Presence] in Blood by Light microscopy"
+    },
+    {
+      "id": 3025684,
+      "name": "Heparin unfractionated [Units/volume] in Platelet poor plasma by Chromogenic method"
+    },
+    {
+      "id": 3022407,
+      "name": "Monocytes/100 leukocytes in Blood by Manual count"
+    },
+    {
+      "id": 4020682,
+      "name": "Sodium measurement, urine"
+    },
+    {
+      "id": 3035279,
+      "name": "Calcium.ionized [Moles/volume] in Capillary blood"
+    },
+    {
+      "id": 3014111,
+      "name": "Lactate [Moles/volume] in Serum or Plasma"
+    },
+    {
+      "id": 43055251,
+      "name": "Wound dressing panel"
+    },
+    {
+      "id": 21490593,
+      "name": "Intracranial pressure (ICP) Mean"
+    },
+    {
+      "id": 3021044,
+      "name": "Iron binding capacity [Mass/volume] in Serum or Plasma"
+    },
+    {
+      "id": 3008839,
+      "name": "Basophils/100 leukocytes in Body fluid by Manual count"
+    },
+    {
+      "id": 3028108,
+      "name": "Segmented neutrophils/100 leukocytes in Blood by Manual count"
+    },
+    {
+      "id": 4090322,
+      "name": "Static lung compliance"
+    },
+    {
+      "id": 3038058,
+      "name": "Lymphocytes/100 leukocytes in Blood by Manual count"
+    },
+    {
+      "id": 3046731,
+      "name": "Epithelial cells.squamous [#/area] in Urine sediment by Microscopy low power field"
+    },
+    {
+      "id": 21490695,
+      "name": "Cerebral perfusion pressure"
+    },
+    {
+      "id": 3015956,
+      "name": "Eosinophils/100 leukocytes in Blood by Manual count"
+    },
+    {
+      "id": 1616652,
+      "name": "BMI score for risk calculation"
+    },
+    {
+      "id": 3016948,
+      "name": "Activated clotting time (ACT) of Blood by Coagulation assay"
+    },
+    {
+      "id": 3004809,
+      "name": "Band form neutrophils/100 leukocytes in Blood"
+    },
+    {
+      "id": 4296538,
+      "name": "Glasgow coma scale"
+    },
+    {
+      "id": 3007591,
+      "name": "Band form neutrophils/100 leukocytes in Blood by Manual count"
+    },
+    {
+      "id": 3040494,
+      "name": "Transfuse packed erythrocytes units [#]"
+    },
+    {
+      "id": 3036098,
+      "name": "Sensory perception Braden scale"
+    },
+    {
+      "id": 3037318,
+      "name": "Physical activity Braden scale"
+    },
+    {
+      "id": 3035206,
+      "name": "Physical mobility Braden scale"
+    },
+    {
+      "id": 3042184,
+      "name": "Moisture of Skin"
+    },
+    {
+      "id": 3035816,
+      "name": "Nutrition intake pattern Braden scale"
+    },
+    {
+      "id": 3023368,
+      "name": "Bacteria identified in Blood by Culture"
+    },
+    {
+      "id": 3037347,
+      "name": "Friction and shear Braden scale"
+    },
+    {
+      "id": 3036740,
+      "name": "Braden scale skin assessment panel"
+    },
+    {
+      "id": 4271649,
+      "name": "Musculoskeletal measure"
+    },
+    {
+      "id": 4017648,
+      "name": "Folic acid measurement"
+    },
+    {
+      "id": 3020149,
+      "name": "25-hydroxyvitamin D3 [Mass/volume] in Serum or Plasma"
+    },
+    {
+      "id": 3023230,
+      "name": "Hematocrit [Volume Fraction] of Arterial blood"
+    },
+    {
+      "id": 3011163,
+      "name": "Cholesterol.total/Cholesterol in HDL [Mass Ratio] in Serum or Plasma"
+    },
+    {
+      "id": 1616907,
+      "name": "Respiration [Score] SOFA"
+    },
+    {
+      "id": 40765643,
+      "name": "PhenX domain - Psychosocial"
+    },
+    {
+      "id": 3029719,
+      "name": "Indirect antiglobulin test.unspecified reagent [Presence] in Serum or Plasma"
+    },
+    {
+      "id": 4273104,
+      "name": "Hepatitis C antibody measurement"
+    },
+    {
+      "id": 3007876,
+      "name": "Appearance of Urine"
+    },
+    {
+      "id": 4289475,
+      "name": "Gamma glutamyl transferase measurement"
+    },
+    {
+      "id": 3018528,
+      "name": "Giant platelets [Presence] in Blood by Light microscopy"
+    },
+    {
+      "id": 3002052,
+      "name": "WBC casts [#/area] in Urine sediment by Microscopy low power field"
+    },
+    {
+      "id": 3018311,
+      "name": "Urea nitrogen/Creatinine [Mass Ratio] in Serum or Plasma"
+    },
+    {
+      "id": 3037885,
+      "name": "Microcytes [Presence] in Blood by Light microscopy"
+    },
+    {
+      "id": 3011368,
+      "name": "Poikilocytosis [Presence] in Blood by Light microscopy"
+    },
+    {
+      "id": 3024731,
+      "name": "MCV [Entitic volume]"
+    },
+    {
+      "id": 3003338,
+      "name": "MCHC [Mass/volume]"
+    },
+    {
+      "id": 3035941,
+      "name": "MCH [Entitic mass]"
+    },
+    {
+      "id": 3001079,
+      "name": "Blood group antibody screen [Presence] in Serum or Plasma"
+    },
+    {
+      "id": 3021502,
+      "name": "Macrocytes [Presence] in Blood by Light microscopy"
+    },
+    {
+      "id": 3044630,
+      "name": "ABO and Rh group panel - Blood"
+    },
+    {
+      "id": 3001008,
+      "name": "Epithelial cells.squamous [#/area] in Urine sediment by Microscopy high power field"
+    },
+    {
+      "id": 3051593,
+      "name": "INR in Capillary blood by Coagulation assay"
+    },
+    {
+      "id": 3027944,
+      "name": "Amphetamines [Presence] in Urine"
+    },
+    {
+      "id": 3046030,
+      "name": "Erythrocytes [Presence] in Urine sediment by Light microscopy"
+    },
+    {
+      "id": 3003137,
+      "name": "Variant lymphocytes [#/volume] in Blood"
+    },
+    {
+      "id": 4326820,
+      "name": "Ethanol measurement"
+    },
+    {
+      "id": 4086992,
+      "name": "Percentage weight loss"
+    },
+    {
+      "id": 36716965,
+      "name": "Non-invasive blood pressure"
+    },
+    {
+      "id": 4354254,
+      "name": "Non-invasive arterial pressure"
+    },
+    {
+      "id": 3042347,
+      "name": "Dressing for Wound"
+    },
+    {
+      "id": 40763791,
+      "name": "Oxygen content in Venous blood by calculation"
+    },
+    {
+      "id": 3006175,
+      "name": "Mucus [Presence] in Urine sediment by Light microscopy"
+    },
+    {
+      "id": 706160,
+      "name": "SARS-CoV-2 (COVID-19) RdRp gene [Presence] in Respiratory system specimen by NAA with probe detection"
+    },
+    {
+      "id": 4157239,
+      "name": "Behavior rating scale"
+    },
+    {
+      "id": 4272032,
+      "name": "Prostate specific antigen measurement"
+    },
+    {
+      "id": 3043970,
+      "name": "Color of Skin"
+    },
+    {
+      "id": 3026008,
+      "name": "Bacteria identified in Urine by Culture"
+    },
+    {
+      "id": 21490588,
+      "name": "Esophageal temperature"
+    },
+    {
+      "id": 3048530,
+      "name": "Fibrin D-dimer DDU [Mass/volume] in Platelet poor plasma"
+    },
+    {
+      "id": 44808211,
+      "name": "Falls risk assessment tool score"
+    },
+    {
+      "id": 4017498,
+      "name": "Albumin measurement, urine, quantitative"
+    },
+    {
+      "id": 3016171,
+      "name": "Left ventricular Ejection fraction by US"
+    },
+    {
+      "id": 3023520,
+      "name": "Reticulocytes [#/volume] in Blood"
+    },
+    {
+      "id": 4093980,
+      "name": "Percentage change in weight"
+    },
+    {
+      "id": 46235079,
+      "name": "Carbon dioxide, total [Moles/volume] in Serum, Plasma or Blood"
+    },
+    {
+      "id": 3021303,
+      "name": "Hypochromia [Presence] in Blood by Light microscopy"
+    },
+    {
+      "id": 3013115,
+      "name": "Eosinophils [#/volume] in Blood"
+    },
+    {
+      "id": 3024153,
+      "name": "Promyelocytes [#/volume] in Blood by Manual count"
+    },
+    {
+      "id": 3006315,
+      "name": "Basophils [#/volume] in Blood"
+    },
+    {
+      "id": 4143063,
+      "name": "Urine appearance"
+    },
+    {
+      "id": 3015280,
+      "name": "Blasts [#/volume] in Blood by Manual count"
+    },
+    {
+      "id": 3023451,
+      "name": "Erythrocytes [Morphology] in Blood by Automated count"
+    },
+    {
+      "id": 21492838,
+      "name": "Skin integrity"
+    },
+    {
+      "id": 21494963,
+      "name": "Bowel sounds quadrant of Abdomen"
+    },
+    {
+      "id": 3020481,
+      "name": "Respiration rhythm"
+    },
+    {
+      "id": 3003841,
+      "name": "Heart rate Peripheral artery by palpation"
+    },
+    {
+      "id": 3001376,
+      "name": "Heart rate by Pulse oximetry"
+    },
+    {
+      "id": 3001123,
+      "name": "Platelet mean volume [Entitic volume] in Blood"
+    },
+    {
+      "id": 3034862,
+      "name": "Arterial patency Wrist artery --pre arterial puncture"
+    },
+    {
+      "id": 3023643,
+      "name": "Blasts/100 leukocytes in Blood by Manual count"
+    },
+    {
+      "id": 4322628,
+      "name": "D-dimer assay"
+    },
+    {
+      "id": 3034708,
+      "name": "Nucleated erythrocytes/100 leukocytes [Ratio] in Blood"
+    },
+    {
+      "id": 3037234,
+      "name": "Variant lymphocytes/100 leukocytes in Blood by Manual count"
+    },
+    {
+      "id": 40769408,
+      "name": "Clot angle in Blood by Thromboelastography"
+    },
+    {
+      "id": 4278658,
+      "name": "Hepatitis B surface antibody measurement"
+    },
+    {
+      "id": 21490586,
+      "name": "Blood temperature"
+    },
+    {
+      "id": 3007124,
+      "name": "Reticulocytes/100 erythrocytes in Blood by Automated count"
+    },
+    {
+      "id": 4168615,
+      "name": "Hepatitis B surface antigen measurement"
+    },
+    {
+      "id": 3000067,
+      "name": "Parathyrin.intact [Mass/volume] in Serum or Plasma"
+    },
+    {
+      "id": 3001537,
+      "name": "Head Occipital-frontal circumference by Tape measure"
+    },
+    {
+      "id": 3023465,
+      "name": "Gamma globulin [Mass/volume] in Serum or Plasma by Electrophoresis"
+    },
+    {
+      "id": 40762532,
+      "name": "Calcium.ionized [Mass/volume] in Arterial blood"
+    },
+    {
+      "id": 3010910,
+      "name": "Erythrocytes [#/volume] in Body fluid"
+    },
+    {
+      "id": 3011587,
+      "name": "Promyelocytes/100 leukocytes in Blood by Manual count"
+    },
+    {
+      "id": 3015322,
+      "name": "Alpha 1 globulin [Mass/volume] in Serum or Plasma by Electrophoresis"
+    },
+    {
+      "id": 3005229,
+      "name": "Alpha 2 globulin [Mass/volume] in Serum or Plasma by Electrophoresis"
+    },
+    {
+      "id": 3005491,
+      "name": "Lactate [Moles/volume] in Plasma venous"
+    },
+    {
+      "id": 3017278,
+      "name": "Referral lab test name"
+    },
+    {
+      "id": 3033396,
+      "name": "Fungus identified in Isolate"
+    },
+    {
+      "id": 3031246,
+      "name": "Bacteria identified in Isolate"
+    },
+    {
+      "id": 3048270,
+      "name": "Information source"
+    },
+    {
+      "id": 3052202,
+      "name": "Cholesterol non HDL/Cholesterol.total [Mass Ratio] in Serum or Plasma"
+    },
+    {
+      "id": 3041952,
+      "name": "Clot initiation [Time] in Blood by Thromboelastography"
+    },
+    {
+      "id": 3041078,
+      "name": "Clot formation [Time] in Blood by Thromboelastography"
+    },
+    {
+      "id": 3004381,
+      "name": "Toxic granules [Presence] in Blood by Light microscopy"
+    },
+    {
+      "id": 3020509,
+      "name": "Albumin/Globulin [Mass Ratio] in Serum or Plasma"
+    },
+    {
+      "id": 3032971,
+      "name": "Troponin I.cardiac [Mass/volume] in Serum or Plasma by Detection limit <= 0.01 ng/mL"
+    },
+    {
+      "id": 3019069,
+      "name": "Monocytes/100 leukocytes in Blood"
+    },
+    {
+      "id": 3051714,
+      "name": "Fibrin D-dimer FEU [Mass/volume] in Platelet poor plasma"
+    },
+    {
+      "id": 3000333,
+      "name": "Central venous pressure (CVP) Mean"
+    },
+    {
+      "id": 722056,
+      "name": "Critical Care Pain Observation Tool (CPOT): Compliance with the ventilator score"
+    },
+    {
+      "id": 4353857,
+      "name": "Pulmonary artery mean pressure"
+    },
+    {
+      "id": 3036581,
+      "name": "Mucus [#/area] in Urine sediment by Microscopy low power field"
+    },
+    {
+      "id": 40762366,
+      "name": "Oxygen capacity [Volume Fraction] in Arterial blood"
+    },
+    {
+      "id": 4134573,
+      "name": "Bispectral index"
+    },
+    {
+      "id": 3018199,
+      "name": "Band form neutrophils [#/volume] in Blood"
+    },
+    {
+      "id": 3027694,
+      "name": "Calcium.ionized [Mass/volume] in Serum or Plasma"
+    },
+    {
+      "id": 3038234,
+      "name": "Drainage amount of Wound"
+    },
+    {
+      "id": 3019947,
+      "name": "Neutrophils/100 leukocytes in Body fluid by Manual count"
+    },
+    {
+      "id": 3023024,
+      "name": "Carbon dioxide [Partial pressure] in Capillary blood"
+    },
+    {
+      "id": 3008325,
+      "name": "Epithelial cells.squamous [Presence] in Urine sediment by Light microscopy"
+    },
+    {
+      "id": 3014646,
+      "name": "Fractional oxyhemoglobin in Blood"
+    },
+    {
+      "id": 21490752,
+      "name": "Tidal volume expired Respiratory system airway"
+    },
+    {
+      "id": 3017963,
+      "name": "Variant lymphocytes [Presence] in Blood by Automated count"
+    },
+    {
+      "id": 40758328,
+      "name": "Cells karyotyped.total [#] in Blood or Tissue"
+    },
+    {
+      "id": 21490563,
+      "name": "Gas delivery system inspiratory Oxygen setting [VFr/PPres]"
+    },
+    {
+      "id": 3034578,
+      "name": "Cells Counted Total [#] in Body fluid"
+    },
+    {
+      "id": 3047169,
+      "name": "Lambda light chains.free [Mass/volume] in Serum or Plasma"
+    },
+    {
+      "id": 3010189,
+      "name": "Epithelial cells [#/area] in Urine sediment by Microscopy high power field"
+    },
+    {
+      "id": 3040808,
+      "name": "Maximum clot firmness [Length] in Blood by Thromboelastography"
+    },
+    {
+      "id": 3015579,
+      "name": "Color of Body fluid"
+    },
+    {
+      "id": 3007913,
+      "name": "Alveolar-arterial oxygen Partial pressure difference"
+    },
+    {
+      "id": 4108448,
+      "name": "Spontaneous tidal volume"
+    },
+    {
+      "id": 3001604,
+      "name": "Monocytes [#/volume] in Blood"
+    },
+    {
+      "id": 3004562,
+      "name": "Bacteria [Presence] in Urine sediment by Light microscopy"
+    },
+    {
+      "id": 3013652,
+      "name": "Pulmonary vascular Resistance"
+    },
+    {
+      "id": 3052992,
+      "name": "Immunofixation for Serum or Plasma Narrative"
+    },
+    {
+      "id": 3007350,
+      "name": "Amorphous sediment [Presence] in Urine sediment by Light microscopy"
+    },
+    {
+      "id": 4234268,
+      "name": "ANA measurement"
+    },
+    {
+      "id": 3004649,
+      "name": "Leukocytes other/100 leukocytes in Blood by Manual count"
+    },
+    {
+      "id": 3038077,
+      "name": "Color of Cerebral spinal fluid"
+    },
+    {
+      "id": 3004691,
+      "name": "Service comment"
+    },
+    {
+      "id": 40767502,
+      "name": "Oxygen content in Mixed venous blood by calculation"
+    },
+    {
+      "id": 3003311,
+      "name": "Nucleated erythrocytes/100 leukocytes [Ratio] in Blood by Manual count"
+    },
+    {
+      "id": 3022227,
+      "name": "Pathologist review of Blood tests"
+    },
+    {
+      "id": 3001802,
+      "name": "Microalbumin/Creatinine [Mass Ratio] in Urine"
+    },
+    {
+      "id": 3021347,
+      "name": "Calcium.ionized [Moles/volume] in Serum or Plasma"
+    },
+    {
+      "id": 3005481,
+      "name": "Spherocytes [Presence] in Blood by Light microscopy"
+    },
+    {
+      "id": 3043722,
+      "name": "Hyaline casts [#/area] in Urine sediment by Automated count"
+    },
+    {
+      "id": 40765289,
+      "name": "PhenX - tobacco - smoking status - adolescent protocol 030601"
+    },
+    {
+      "id": 3013498,
+      "name": "Variant lymphocytes/100 leukocytes in Blood"
+    },
+    {
+      "id": 3025408,
+      "name": "Oxygen/Inspired gas Respiratory system by O2 Analyzer --on ventilator"
+    },
+    {
+      "id": 3032172,
+      "name": "Bacteria [Presence] in Urine by Automated"
+    },
+    {
+      "id": 4265708,
+      "name": "Temperature of skin"
+    },
+    {
+      "id": 3017855,
+      "name": "Kappa light chains/Lambda light chains [Mass Ratio] in Serum by Immunoassay"
+    },
+    {
+      "id": 4128253,
+      "name": "Life orientation test"
+    },
+    {
+      "id": 3052068,
+      "name": "Kaolin activated time [Units/volume] in Blood"
+    },
+    {
+      "id": 3012410,
+      "name": "Tidal volume setting Ventilator"
+    },
+    {
+      "id": 3005087,
+      "name": "Macrophages/100 leukocytes in Body fluid by Manual count"
+    },
+    {
+      "id": 3046948,
+      "name": "Albumin/Globulin [Mass Ratio] in Serum or Plasma by Electrophoresis"
+    },
+    {
+      "id": 3020091,
+      "name": "Discharge summary"
+    },
+    {
+      "id": 3037637,
+      "name": "Reticulocytes [#/volume] in Blood by calculation"
+    },
+    {
+      "id": 40760007,
+      "name": "HIV 1+2 Ab+HIV1 p24 Ag [Presence] in Serum or Plasma by Immunoassay"
+    },
+    {
+      "id": 3024783,
+      "name": "Stomatocytes [Presence] in Blood by Light microscopy"
+    },
+    {
+      "id": 3022174,
+      "name": "Leukocytes [#/volume] in Body fluid"
+    },
+    {
+      "id": 3048263,
+      "name": "Protein Fractions [Interpretation] in Serum or Plasma by Electrophoresis Narrative"
+    },
+    {
+      "id": 4137697,
+      "name": "Expired isoflurane concentration"
+    },
+    {
+      "id": 4140152,
+      "name": "Inspired isoflurane concentration"
+    },
+    {
+      "id": 3006184,
+      "name": "Hemoglobin [Mass/volume] in Capillary blood"
+    },
+    {
+      "id": 3028167,
+      "name": "CD3+CD4+ (T4 helper) cells [#/volume] in Blood"
+    },
+    {
+      "id": 3009713,
+      "name": "Pulmonary vascular Resistance index"
+    }
+  ],
+  "OBSERVATION": [
+    {
+      "id": 3031680,
+      "name": "Blood pressure measurement site"
+    },
+    {
+      "id": 4290243,
+      "name": "Level of consciousness"
+    },
+    {
+      "id": 4183166,
+      "name": "Orientation"
+    },
+    {
+      "id": 4022057,
+      "name": "Site"
+    },
+    {
+      "id": 3019204,
+      "name": "Body position with respect to gravity"
+    },
+    {
+      "id": 1340204,
+      "name": "History of event"
+    },
+    {
+      "id": 4178501,
+      "name": "Mobility"
+    },
+    {
+      "id": 40483702,
+      "name": "Adelaide pediatric coma score"
+    },
+    {
+      "id": 4093836,
+      "name": "Glasgow coma score"
+    },
+    {
+      "id": 4036936,
+      "name": "Oxygen delivery"
+    },
+    {
+      "id": 4022240,
+      "name": "Pain score"
+    },
+    {
+      "id": 903652,
+      "name": "Findings of tobacco or its derivatives use or exposure"
+    },
+    {
+      "id": 3035225,
+      "name": "Pain primary location - Reported"
+    },
+    {
+      "id": 4311165,
+      "name": "Respiratory secretion"
+    },
+    {
+      "id": 4084277,
+      "name": "Glasgow Coma Score eye opening subscore"
+    },
+    {
+      "id": 4084912,
+      "name": "Glasgow Coma Scale verbal response subscore"
+    },
+    {
+      "id": 4083352,
+      "name": "Glasgow Coma Scale motor response subscore"
+    },
+    {
+      "id": 43054909,
+      "name": "Tobacco smoking status"
+    },
+    {
+      "id": 4117957,
+      "name": "Activity"
+    },
+    {
+      "id": 4078024,
+      "name": "Position"
+    },
+    {
+      "id": 4203722,
+      "name": "Patient encounter procedure"
+    },
+    {
+      "id": 4077569,
+      "name": "Type of catheter"
+    },
+    {
+      "id": 3042184,
+      "name": "Moisture of Skin"
+    },
+    {
+      "id": 4129438,
+      "name": "Method"
+    },
+    {
+      "id": 46273937,
+      "name": "Long-term current use of anticoagulant"
+    },
+    {
+      "id": 4126821,
+      "name": "Type of device"
+    },
+    {
+      "id": 3018668,
+      "name": "Mental status"
+    },
+    {
+      "id": 4089953,
+      "name": "Voided urinary volume"
+    },
+    {
+      "id": 4090797,
+      "name": "Single voided urinary volume"
+    },
+    {
+      "id": 4154920,
+      "name": "Pupil reaction"
+    },
+    {
+      "id": 3016126,
+      "name": "Blood bank studies (set)"
+    },
+    {
+      "id": 443364,
+      "name": "Patient encounter status"
+    },
+    {
+      "id": 4160499,
+      "name": "Readiness to learn"
+    },
+    {
+      "id": 3037347,
+      "name": "Friction and shear Braden scale"
+    },
+    {
+      "id": 4277123,
+      "name": "Radial pulse"
+    },
+    {
+      "id": 40762523,
+      "name": "Fall risk total [Morse Fall Scale]"
+    },
+    {
+      "id": 4179298,
+      "name": "Finding of gait"
+    },
+    {
+      "id": 40762519,
+      "name": "Ambulatory aid [Morse Fall Scale]"
+    },
+    {
+      "id": 4233025,
+      "name": "Environment observable"
+    },
+    {
+      "id": 4190343,
+      "name": "Sensory perception"
+    },
+    {
+      "id": 4298503,
+      "name": "Nutrition"
+    },
+    {
+      "id": 432456,
+      "name": "Alcohol intake - finding"
+    },
+    {
+      "id": 4224130,
+      "name": "Ventilation status"
+    },
+    {
+      "id": 40757642,
+      "name": "Behavior"
+    },
+    {
+      "id": 4042889,
+      "name": "Finding relating to drug misuse behavior"
+    },
+    {
+      "id": 21494983,
+      "name": "Level of consciousness"
+    },
+    {
+      "id": 4265708,
+      "name": "Temperature of skin"
+    },
+    {
+      "id": 21492835,
+      "name": "Respiratory effort"
+    },
+    {
+      "id": 4237854,
+      "name": "Speech observable"
+    },
+    {
+      "id": 4265704,
+      "name": "Skin observable"
+    },
+    {
+      "id": 42529377,
+      "name": "Toileting - functional ability"
+    },
+    {
+      "id": 619635,
+      "name": "Alcoholic beverage intake"
+    },
+    {
+      "id": 46272450,
+      "name": "Long-term current use of drug therapy"
+    },
+    {
+      "id": 4235390,
+      "name": "Learning disability - specialty"
+    },
+    {
+      "id": 4337265,
+      "name": "Bowel sounds"
+    },
+    {
+      "id": 4272021,
+      "name": "Gait"
+    },
+    {
+      "id": 21492826,
+      "name": "Voiding pattern"
+    },
+    {
+      "id": 44806751,
+      "name": "Personal care"
+    },
+    {
+      "id": 4309087,
+      "name": "Transportation details"
+    },
+    {
+      "id": 44816618,
+      "name": "Device name"
+    },
+    {
+      "id": 4239021,
+      "name": "Mean blood pressure"
+    },
+    {
+      "id": 3003798,
+      "name": "Blood pressure method"
+    },
+    {
+      "id": 4143454,
+      "name": "Food appetite"
+    },
+    {
+      "id": 3043970,
+      "name": "Color of Skin"
+    },
+    {
+      "id": 4353713,
+      "name": "Positive end expiratory pressure"
+    },
+    {
+      "id": 43530822,
+      "name": "Surgical incision wound"
+    },
+    {
+      "id": 45766147,
+      "name": "Appearance"
+    },
+    {
+      "id": 4029625,
+      "name": "Tidal volume"
+    },
+    {
+      "id": 4248977,
+      "name": "Psychosocial care"
+    },
+    {
+      "id": 4235714,
+      "name": "Detail of abuse"
+    },
+    {
+      "id": 4301868,
+      "name": "Pulse rate"
+    },
+    {
+      "id": 4305545,
+      "name": "Airway device present"
+    },
+    {
+      "id": 4225856,
+      "name": "Swallowing status"
+    },
+    {
+      "id": 4020646,
+      "name": "Assists"
+    },
+    {
+      "id": 4087179,
+      "name": "Character of cough"
+    },
+    {
+      "id": 37399733,
+      "name": "Suicide risk"
+    },
+    {
+      "id": 4220163,
+      "name": "Tidal volume setting"
+    },
+    {
+      "id": 46272451,
+      "name": "Long-term current use of insulin"
+    },
+    {
+      "id": 4062985,
+      "name": "Ideal body weight"
+    },
+    {
+      "id": 3006292,
+      "name": "Ventilator wave form"
+    },
+    {
+      "id": 42539072,
+      "name": "Confusion Assessment Method short version score"
+    },
+    {
+      "id": 4353715,
+      "name": "Ventilator finding"
+    },
+    {
+      "id": 4266626,
+      "name": "Appearance of stool"
+    },
+    {
+      "id": 40479778,
+      "name": "Rate of blood flow through cardiovascular device"
+    },
+    {
+      "id": 4139633,
+      "name": "Peak pressure"
+    },
+    {
+      "id": 46234705,
+      "name": "Advance directive"
+    },
+    {
+      "id": 4043369,
+      "name": "Activity of daily living"
+    },
+    {
+      "id": 4223743,
+      "name": "Skin condition"
+    },
+    {
+      "id": 44813836,
+      "name": "Expected date of discharge from service"
+    },
+    {
+      "id": 3009497,
+      "name": "Type of GI tube"
+    },
+    {
+      "id": 4144271,
+      "name": "Tobacco smoking consumption"
+    },
+    {
+      "id": 4047982,
+      "name": "Drug indicated"
+    },
+    {
+      "id": 761697,
+      "name": "Wound dressing type"
+    },
+    {
+      "id": 43530807,
+      "name": "Allergic disposition"
+    },
+    {
+      "id": 4270125,
+      "name": "Urinary bladder feature"
+    },
+    {
+      "id": 4216746,
+      "name": "Positive end expiratory pressure setting"
+    },
+    {
+      "id": 4164116,
+      "name": "Sputum"
+    },
+    {
+      "id": 4197461,
+      "name": "Peak flow rate (respiratory)"
+    },
+    {
+      "id": 36203774,
+      "name": "Care team"
+    },
+    {
+      "id": 4076103,
+      "name": "Household composition"
+    },
+    {
+      "id": 4150612,
+      "name": "Respiratory pattern"
+    },
+    {
+      "id": 3013360,
+      "name": "History of Present illness"
+    },
+    {
+      "id": 4060985,
+      "name": "Body mass index 30+ - obesity"
+    },
+    {
+      "id": 36717001,
+      "name": "Long-term current use of aspirin"
+    },
+    {
+      "id": 4203711,
+      "name": "Follow-up status"
+    },
+    {
+      "id": 4148417,
+      "name": "Exercise history"
+    },
+    {
+      "id": 4189711,
+      "name": "Bowel action"
+    },
+    {
+      "id": 4089233,
+      "name": "Consistency of sputum"
+    },
+    {
+      "id": 44786868,
+      "name": "Discharge instructions"
+    },
+    {
+      "id": 4044908,
+      "name": "Action"
+    },
+    {
+      "id": 437643,
+      "name": "Abnormal gait"
+    },
+    {
+      "id": 4022885,
+      "name": "Meat intake"
+    },
+    {
+      "id": 44802820,
+      "name": "Haemodialysis ultrafiltration rate"
+    },
+    {
+      "id": 4143063,
+      "name": "Urine appearance"
+    },
+    {
+      "id": 4088035,
+      "name": "Screening status"
+    },
+    {
+      "id": 4126966,
+      "name": "Patient care statuses"
+    },
+    {
+      "id": 42528029,
+      "name": "Do not resuscitate"
+    },
+    {
+      "id": 3028553,
+      "name": "Vital signs"
+    },
+    {
+      "id": 45766277,
+      "name": "Cardiac implant in situ"
+    },
+    {
+      "id": 36661379,
+      "name": "Whether this is the patient's first test for condition of interest"
+    },
+    {
+      "id": 36661383,
+      "name": "Whether patient resides in a congregate care setting"
+    },
+    {
+      "id": 36661380,
+      "name": "Whether patient is employed in a healthcare setting"
+    },
+    {
+      "id": 4326744,
+      "name": "Blood pressure"
+    },
+    {
+      "id": 42528957,
+      "name": "Pregnancy status"
+    },
+    {
+      "id": 37109774,
+      "name": "Requires vaccination"
+    },
+    {
+      "id": 4073163,
+      "name": "Employment status"
+    },
+    {
+      "id": 40772152,
+      "name": "Instructions"
+    },
+    {
+      "id": 36661381,
+      "name": "Whether the patient has symptoms related to condition of interest"
+    },
+    {
+      "id": 4353718,
+      "name": "Mandatory breath rate"
+    },
+    {
+      "id": 3020278,
+      "name": "Review of systems Narrative - Reported"
+    },
+    {
+      "id": 36661382,
+      "name": "Whether the patient was admitted to intensive care unit (ICU) for condition of interest"
+    },
+    {
+      "id": 46236895,
+      "name": "Whether the patient was hospitalized for condition of interest"
+    },
+    {
+      "id": 4186037,
+      "name": "Aftercare"
+    },
+    {
+      "id": 40479553,
+      "name": "Cardiac pacemaker in situ"
+    },
+    {
+      "id": 4202797,
+      "name": "Drug therapy finding"
+    },
+    {
+      "id": 4183393,
+      "name": "Peripheral pulse"
+    },
+    {
+      "id": 21491507,
+      "name": "Bed type"
+    },
+    {
+      "id": 4256640,
+      "name": "Body mass index 40+ - severely obese"
+    },
+    {
+      "id": 4072482,
+      "name": "First language"
+    },
+    {
+      "id": 4086756,
+      "name": "Breast neoplasm screening status"
+    },
+    {
+      "id": 4175851,
+      "name": "History of difficult intubation"
+    },
+    {
+      "id": 44782678,
+      "name": "Blood glucose monitoring"
+    },
+    {
+      "id": 441207,
+      "name": "Adverse reaction to drug"
+    },
+    {
+      "id": 4232754,
+      "name": "Activity tolerance"
+    },
+    {
+      "id": 40481022,
+      "name": "Automatic implantable cardiac defibrillator in situ"
+    },
+    {
+      "id": 36305514,
+      "name": "Reason for hospitalization"
+    },
+    {
+      "id": 4081759,
+      "name": "Transplant follow-up"
+    },
+    {
+      "id": 4145666,
+      "name": "Admission from establishment"
+    },
+    {
+      "id": 439224,
+      "name": "Allergy to drug"
+    },
+    {
+      "id": 4019967,
+      "name": "Dependence on renal dialysis"
+    },
+    {
+      "id": 40487468,
+      "name": "Hemodialysis technique"
+    },
+    {
+      "id": 435928,
+      "name": "Abnormal weight loss"
+    },
+    {
+      "id": 4155144,
+      "name": "Device used"
+    },
+    {
+      "id": 4027634,
+      "name": "Pattern of drinking"
+    },
+    {
+      "id": 4307024,
+      "name": "Follow-up encounter"
+    },
+    {
+      "id": 4271764,
+      "name": "Employment detail"
+    },
+    {
+      "id": 3656010,
+      "name": "Oral intake"
+    },
+    {
+      "id": 436583,
+      "name": "Fall"
+    },
+    {
+      "id": 3036098,
+      "name": "Sensory perception Braden scale"
+    },
+    {
+      "id": 3037022,
+      "name": "Moisture exposure Braden scale"
+    },
+    {
+      "id": 4167217,
+      "name": "Family history of clinical finding"
+    },
+    {
+      "id": 3009350,
+      "name": "History of Surgical procedures"
+    },
+    {
+      "id": 4150248,
+      "name": "Medical examinations/reports status"
+    },
+    {
+      "id": 4079646,
+      "name": "Surgical follow-up"
+    },
+    {
+      "id": 37311059,
+      "name": "Exposure to SARS-CoV-2"
+    },
+    {
+      "id": 4046550,
+      "name": "Postoperative care"
+    },
+    {
+      "id": 46272452,
+      "name": "Long-term current use of steroid"
+    },
+    {
+      "id": 903654,
+      "name": "Tobacco or its derivatives user"
+    },
+    {
+      "id": 37016200,
+      "name": "Exposure to viral disease"
+    },
+    {
+      "id": 4060705,
+      "name": "Body mass index 25-29 - overweight"
+    },
+    {
+      "id": 4181605,
+      "name": "Language preference"
+    },
+    {
+      "id": 4295661,
+      "name": "Source of information"
+    },
+    {
+      "id": 3027028,
+      "name": "Chief complaint Narrative - Reported"
+    },
+    {
+      "id": 903657,
+      "name": "Cigarette smoker"
+    },
+    {
+      "id": 44802369,
+      "name": "Medicines reconciliation completed"
+    },
+    {
+      "id": 44784283,
+      "name": "Requires influenza virus vaccination"
+    },
+    {
+      "id": 42539099,
+      "name": "Prosthetic heart valve in situ"
+    },
+    {
+      "id": 762460,
+      "name": "Healthcare payer"
+    },
+    {
+      "id": 3046344,
+      "name": "Marital status"
+    },
+    {
+      "id": 4216473,
+      "name": "Medication monitoring"
+    },
+    {
+      "id": 44786861,
+      "name": "Alcohol use [NTDS]"
+    },
+    {
+      "id": 46272734,
+      "name": "Long-term current use of antibiotic"
+    },
+    {
+      "id": 440927,
+      "name": "High risk drug monitoring status"
+    },
+    {
+      "id": 4195981,
+      "name": "Medical records review"
+    },
+    {
+      "id": 40758151,
+      "name": "Pneumococcal vaccine"
+    },
+    {
+      "id": 3012547,
+      "name": "History of Travel"
+    },
+    {
+      "id": 37059134,
+      "name": "Airway pressure delta setting"
+    },
+    {
+      "id": 4179310,
+      "name": "Number of falls"
+    },
+    {
+      "id": 2102041,
+      "name": "CPT4 Code 1160F"
+    },
+    {
+      "id": 443345,
+      "name": "Antineoplastic adverse reaction"
+    },
+    {
+      "id": 432526,
+      "name": "Needs influenza immunization"
+    },
+    {
+      "id": 4238766,
+      "name": "Sexual behavior"
+    },
+    {
+      "id": 4108138,
+      "name": "Ventilator rate"
+    },
+    {
+      "id": 437175,
+      "name": "Fall on same level from slipping, tripping or stumbling"
+    },
+    {
+      "id": 3039194,
+      "name": "Anthropometric Measures"
+    },
+    {
+      "id": 4135421,
+      "name": "Body mass index 20-24 - normal"
+    },
+    {
+      "id": 4196133,
+      "name": "Treatment plan given"
+    },
+    {
+      "id": 40493256,
+      "name": "Duration of hemodialysis session"
+    },
+    {
+      "id": 764609,
+      "name": "Preprocedural examination done"
+    },
+    {
+      "id": 4181669,
+      "name": "Head circumference"
+    }
+  ],
+  "DRUG_EXPOSURE": [
+    {
+      "id": 19079524,
+      "name": "sodium chloride 9 MG/ML Injectable Solution"
+    },
+    {
+      "id": 40221381,
+      "name": "150 ML sodium chloride 9 MG/ML Injection"
+    },
+    {
+      "id": 1125315,
+      "name": "acetaminophen"
+    },
+    {
+      "id": 1367571,
+      "name": "heparin"
+    },
+    {
+      "id": 1154343,
+      "name": "albuterol"
+    },
+    {
+      "id": 36249734,
+      "name": "500 ML glucose 50 MG/ML Injection"
+    },
+    {
+      "id": 1550023,
+      "name": "insulin lispro"
+    },
+    {
+      "id": 1307046,
+      "name": "metoprolol"
+    },
+    {
+      "id": 19135374,
+      "name": "calcium chloride 0.2 MG/ML / potassium chloride 0.3 MG/ML / sodium chloride 6 MG/ML / sodium lactate 3.1 MG/ML Injectable Solution"
+    },
+    {
+      "id": 938268,
+      "name": "sennosides, USP"
+    },
+    {
+      "id": 19076324,
+      "name": "glucose 50 MG/ML Injectable Solution"
+    },
+    {
+      "id": 1154029,
+      "name": "fentanyl"
+    },
+    {
+      "id": 948078,
+      "name": "pantoprazole"
+    },
+    {
+      "id": 941258,
+      "name": "docusate"
+    },
+    {
+      "id": 1112807,
+      "name": "aspirin"
+    },
+    {
+      "id": 40221363,
+      "name": "25 ML sodium chloride 4.5 MG/ML Injection"
+    },
+    {
+      "id": 989878,
+      "name": "lidocaine"
+    },
+    {
+      "id": 1000560,
+      "name": "ondansetron"
+    },
+    {
+      "id": 1707687,
+      "name": "vancomycin"
+    },
+    {
+      "id": 40220357,
+      "name": "1000 ML sodium chloride 9 MG/ML Injection"
+    },
+    {
+      "id": 36249688,
+      "name": "glucose 50 MG/ML / sodium chloride 4.5 MG/ML Injection"
+    },
+    {
+      "id": 956874,
+      "name": "furosemide"
+    },
+    {
+      "id": 797399,
+      "name": "gabapentin"
+    },
+    {
+      "id": 1545958,
+      "name": "atorvastatin"
+    },
+    {
+      "id": 1746114,
+      "name": "piperacillin"
+    },
+    {
+      "id": 1126658,
+      "name": "hydromorphone"
+    },
+    {
+      "id": 19049024,
+      "name": "potassium"
+    },
+    {
+      "id": 19111620,
+      "name": "folic acid"
+    },
+    {
+      "id": 1174888,
+      "name": "hydrocodone"
+    },
+    {
+      "id": 40035968,
+      "name": "diltiazem Oral Tablet"
+    },
+    {
+      "id": 19049105,
+      "name": "potassium chloride"
+    },
+    {
+      "id": 1596977,
+      "name": "insulin, regular, human"
+    },
+    {
+      "id": 1301025,
+      "name": "enoxaparin"
+    },
+    {
+      "id": 1502905,
+      "name": "insulin glargine"
+    },
+    {
+      "id": 1373928,
+      "name": "hydralazine"
+    },
+    {
+      "id": 967823,
+      "name": "sodium chloride"
+    },
+    {
+      "id": 953076,
+      "name": "famotidine"
+    },
+    {
+      "id": 1346823,
+      "name": "carvedilol"
+    },
+    {
+      "id": 1567198,
+      "name": "insulin aspart, human"
+    },
+    {
+      "id": 40220389,
+      "name": "propofol 10 MG/ML Injection"
+    },
+    {
+      "id": 1321341,
+      "name": "norepinephrine"
+    },
+    {
+      "id": 986417,
+      "name": "polyethylene glycol 3350"
+    },
+    {
+      "id": 922570,
+      "name": "nystatin"
+    },
+    {
+      "id": 1771162,
+      "name": "cefazolin"
+    },
+    {
+      "id": 1396131,
+      "name": "ferrous sulfate"
+    },
+    {
+      "id": 1308738,
+      "name": "vitamin B12"
+    },
+    {
+      "id": 36249711,
+      "name": "250 ML glucose 100 MG/ML Injection"
+    },
+    {
+      "id": 46275435,
+      "name": "piperacillin 3000 MG / tazobactam 375 MG Injection [Zosyn]"
+    },
+    {
+      "id": 35603428,
+      "name": "2 ML fentanyl 0.05 MG/ML Injection"
+    },
+    {
+      "id": 19124906,
+      "name": "magnesium"
+    },
+    {
+      "id": 1501700,
+      "name": "levothyroxine"
+    },
+    {
+      "id": 1332418,
+      "name": "amlodipine"
+    },
+    {
+      "id": 711584,
+      "name": "levetiracetam"
+    },
+    {
+      "id": 1110410,
+      "name": "morphine"
+    },
+    {
+      "id": 1551099,
+      "name": "prednisone"
+    },
+    {
+      "id": 35605482,
+      "name": "2 ML ondansetron 2 MG/ML Injection"
+    },
+    {
+      "id": 1518254,
+      "name": "dexamethasone"
+    },
+    {
+      "id": 1124957,
+      "name": "oxycodone"
+    },
+    {
+      "id": 1308216,
+      "name": "lisinopril"
+    },
+    {
+      "id": 932745,
+      "name": "bumetanide"
+    },
+    {
+      "id": 19070224,
+      "name": "soybean oil"
+    },
+    {
+      "id": 1707164,
+      "name": "metronidazole"
+    },
+    {
+      "id": 1310149,
+      "name": "warfarin"
+    },
+    {
+      "id": 1741122,
+      "name": "tazobactam"
+    },
+    {
+      "id": 1127433,
+      "name": "acetaminophen 325 MG Oral Tablet"
+    },
+    {
+      "id": 1790812,
+      "name": "chlorhexidine"
+    },
+    {
+      "id": 19127213,
+      "name": "10 ML sodium chloride 9 MG/ML Prefilled Syringe"
+    },
+    {
+      "id": 40232756,
+      "name": "oxycodone hydrochloride 5 MG Oral Tablet"
+    },
+    {
+      "id": 1129625,
+      "name": "diphenhydramine"
+    },
+    {
+      "id": 908523,
+      "name": "mineral oil"
+    },
+    {
+      "id": 46234049,
+      "name": "3 ML insulin aspart, human 100 UNT/ML Pen Injector [NovoLog]"
+    },
+    {
+      "id": 950637,
+      "name": "tacrolimus"
+    },
+    {
+      "id": 1103314,
+      "name": "tramadol"
+    },
+    {
+      "id": 19005046,
+      "name": "pyridoxine"
+    },
+    {
+      "id": 1560751,
+      "name": "50 ML glucose 500 MG/ML Prefilled Syringe"
+    },
+    {
+      "id": 904453,
+      "name": "esomeprazole"
+    },
+    {
+      "id": 708298,
+      "name": "midazolam"
+    },
+    {
+      "id": 906780,
+      "name": "metoclopramide"
+    },
+    {
+      "id": 1560305,
+      "name": "omega-3 acid ethyl esters (USP)"
+    },
+    {
+      "id": 975125,
+      "name": "hydrocortisone"
+    },
+    {
+      "id": 19035704,
+      "name": "calcium carbonate"
+    },
+    {
+      "id": 19095164,
+      "name": "cholecalciferol"
+    },
+    {
+      "id": 36249687,
+      "name": "1000 ML glucose 50 MG/ML / sodium chloride 4.5 MG/ML Injection"
+    },
+    {
+      "id": 1135766,
+      "name": "phenylephrine"
+    },
+    {
+      "id": 929887,
+      "name": "lansoprazole"
+    },
+    {
+      "id": 19044812,
+      "name": "phytosterols"
+    },
+    {
+      "id": 1797513,
+      "name": "ciprofloxacin"
+    },
+    {
+      "id": 40221386,
+      "name": "250 ML sodium chloride 9 MG/ML Injection"
+    },
+    {
+      "id": 46275280,
+      "name": "50 ML magnesium sulfate 40 MG/ML Injection"
+    },
+    {
+      "id": 1149380,
+      "name": "fluticasone"
+    },
+    {
+      "id": 19010309,
+      "name": "water"
+    },
+    {
+      "id": 987245,
+      "name": "lactulose"
+    },
+    {
+      "id": 1777806,
+      "name": "ceftriaxone"
+    },
+    {
+      "id": 1308368,
+      "name": "midodrine"
+    },
+    {
+      "id": 1136980,
+      "name": "ketorolac"
+    },
+    {
+      "id": 1506270,
+      "name": "methylprednisolone"
+    },
+    {
+      "id": 949279,
+      "name": "carboxymethylcellulose"
+    },
+    {
+      "id": 35603227,
+      "name": "4 ML furosemide 10 MG/ML Injection"
+    },
+    {
+      "id": 1344143,
+      "name": "albumin human, USP"
+    },
+    {
+      "id": 1309944,
+      "name": "amiodarone"
+    }
+  ],
+  "CONDITION_OCCURRENCE": [
+    {
+      "id": 320128,
+      "name": "Essential hypertension"
+    },
+    {
+      "id": 432867,
+      "name": "Hyperlipidemia"
+    },
+    {
+      "id": 313217,
+      "name": "Atrial fibrillation"
+    },
+    {
+      "id": 4193704,
+      "name": "Type 2 diabetes mellitus without complication"
+    },
+    {
+      "id": 4021667,
+      "name": "Wound finding"
+    },
+    {
+      "id": 312437,
+      "name": "Dyspnea"
+    },
+    {
+      "id": 319835,
+      "name": "Congestive heart failure"
+    },
+    {
+      "id": 764123,
+      "name": "Atherosclerosis of coronary artery without angina pectoris"
+    },
+    {
+      "id": 438485,
+      "name": "Postoperative state"
+    },
+    {
+      "id": 44804551,
+      "name": "Multiple pressure ulcers"
+    },
+    {
+      "id": 439777,
+      "name": "Anemia"
+    },
+    {
+      "id": 77670,
+      "name": "Chest pain"
+    },
+    {
+      "id": 201826,
+      "name": "Type 2 diabetes mellitus"
+    },
+    {
+      "id": 197320,
+      "name": "Acute kidney injury"
+    },
+    {
+      "id": 193782,
+      "name": "End-stage renal disease"
+    },
+    {
+      "id": 42539502,
+      "name": "Transplanted kidney present"
+    },
+    {
+      "id": 317576,
+      "name": "Coronary arteriosclerosis"
+    },
+    {
+      "id": 312648,
+      "name": "Benign essential hypertension"
+    },
+    {
+      "id": 316139,
+      "name": "Heart failure"
+    },
+    {
+      "id": 254761,
+      "name": "Cough"
+    },
+    {
+      "id": 443597,
+      "name": "Chronic kidney disease stage 3"
+    },
+    {
+      "id": 255573,
+      "name": "Chronic obstructive pulmonary disease"
+    },
+    {
+      "id": 437827,
+      "name": "Pure hypercholesterolemia"
+    },
+    {
+      "id": 254061,
+      "name": "Pleural effusion"
+    },
+    {
+      "id": 442588,
+      "name": "Obstructive sleep apnea syndrome"
+    },
+    {
+      "id": 437233,
+      "name": "Multiple myeloma"
+    },
+    {
+      "id": 437382,
+      "name": "Urine finding"
+    },
+    {
+      "id": 4177703,
+      "name": "Ulcer"
+    },
+    {
+      "id": 42690761,
+      "name": "Unable to assess risk"
+    },
+    {
+      "id": 433736,
+      "name": "Obesity"
+    },
+    {
+      "id": 140673,
+      "name": "Hypothyroidism"
+    },
+    {
+      "id": 42537742,
+      "name": "Transplanted liver present"
+    },
+    {
+      "id": 81902,
+      "name": "Urinary tract infectious disease"
+    },
+    {
+      "id": 194133,
+      "name": "Low back pain"
+    },
+    {
+      "id": 4154290,
+      "name": "Paroxysmal atrial fibrillation"
+    },
+    {
+      "id": 137809,
+      "name": "Primary malignant neoplasm of female breast"
+    },
+    {
+      "id": 46271022,
+      "name": "Chronic kidney disease"
+    },
+    {
+      "id": 436070,
+      "name": "Vitamin D deficiency"
+    },
+    {
+      "id": 4144111,
+      "name": "Gastroesophageal reflux disease without esophagitis"
+    },
+    {
+      "id": 261880,
+      "name": "Atelectasis"
+    },
+    {
+      "id": 200219,
+      "name": "Abdominal pain"
+    },
+    {
+      "id": 132797,
+      "name": "Sepsis"
+    },
+    {
+      "id": 4311499,
+      "name": "Primary malignant neoplasm of respiratory tract"
+    },
+    {
+      "id": 436096,
+      "name": "Chronic pain"
+    },
+    {
+      "id": 42537729,
+      "name": "Aortocoronary bypass graft present"
+    },
+    {
+      "id": 321052,
+      "name": "Peripheral vascular disease"
+    },
+    {
+      "id": 372887,
+      "name": "Disorder of brain"
+    },
+    {
+      "id": 436659,
+      "name": "Iron deficiency anemia"
+    },
+    {
+      "id": 438720,
+      "name": "Mixed hyperlipidemia"
+    },
+    {
+      "id": 434005,
+      "name": "Morbid obesity"
+    }
+  ],
+  "PROCEDURE_OCCURRENCE": [
+    {
+      "id": 2514408,
+      "name": "CPT4 Code 99232"
+    },
+    {
+      "id": 2514409,
+      "name": "CPT4 Code 99233"
+    },
+    {
+      "id": 2313816,
+      "name": "CPT4 Code 93010"
+    },
+    {
+      "id": 36713195,
+      "name": "Plain X-ray of chest, anteroposterior view"
+    },
+    {
+      "id": 725068,
+      "name": "CPT4 Code 71045"
+    },
+    {
+      "id": 2314047,
+      "name": "CPT4 Code 94760"
+    },
+    {
+      "id": 2514441,
+      "name": "CPT4 Code 99291"
+    },
+    {
+      "id": 2313815,
+      "name": "CPT4 Code 93005"
+    },
+    {
+      "id": 2314026,
+      "name": "CPT4 Code 94640"
+    },
+    {
+      "id": 2314294,
+      "name": "CPT4 Code 97530"
+    },
+    {
+      "id": 4163872,
+      "name": "Plain X-ray of chest"
+    },
+    {
+      "id": 2313869,
+      "name": "CPT4 Code 93306"
+    },
+    {
+      "id": 2211327,
+      "name": "CPT4 Code 70450"
+    },
+    {
+      "id": 2314284,
+      "name": "CPT4 Code 97110"
+    },
+    {
+      "id": 2514407,
+      "name": "CPT4 Code 99231"
+    },
+    {
+      "id": 2211361,
+      "name": "CPT4 Code 71020"
+    },
+    {
+      "id": 2514406,
+      "name": "CPT4 Code 99223"
+    },
+    {
+      "id": 4187078,
+      "name": "Electrocardiographic monitoring"
+    },
+    {
+      "id": 2213283,
+      "name": "CPT4 Code 88305"
+    },
+    {
+      "id": 725069,
+      "name": "CPT4 Code 71046"
+    },
+    {
+      "id": 2314287,
+      "name": "CPT4 Code 97116"
+    },
+    {
+      "id": 2314216,
+      "name": "CPT4 Code 96375"
+    },
+    {
+      "id": 2414398,
+      "name": "CPT4 Code 99214"
+    },
+    {
+      "id": 4335400,
+      "name": "Computed tomography of abdomen and pelvis with contrast"
+    },
+    {
+      "id": 2314213,
+      "name": "CPT4 Code 96372"
+    },
+    {
+      "id": 4181300,
+      "name": "Diagnostic radiography of chest, combined PA and lateral"
+    },
+    {
+      "id": 2314206,
+      "name": "CPT4 Code 96365"
+    },
+    {
+      "id": 2313814,
+      "name": "CPT4 Code 93000"
+    },
+    {
+      "id": 2314049,
+      "name": "CPT4 Code 94762"
+    },
+    {
+      "id": 724944,
+      "name": "CPT4 Code 74018"
+    },
+    {
+      "id": 2314035,
+      "name": "CPT4 Code 94660"
+    },
+    {
+      "id": 2211353,
+      "name": "CPT4 Code 70553"
+    },
+    {
+      "id": 2514414,
+      "name": "CPT4 Code 99239"
+    },
+    {
+      "id": 2314297,
+      "name": "CPT4 Code 97535"
+    },
+    {
+      "id": 2514413,
+      "name": "CPT4 Code 99238"
+    },
+    {
+      "id": 2514405,
+      "name": "CPT4 Code 99222"
+    },
+    {
+      "id": 2314215,
+      "name": "CPT4 Code 96374"
+    },
+    {
+      "id": 2313990,
+      "name": "CPT4 Code 93970"
+    },
+    {
+      "id": 2414397,
+      "name": "CPT4 Code 99213"
+    },
+    {
+      "id": 4212044,
+      "name": "Supine plain X-ray of abdomen"
+    },
+    {
+      "id": 2314229,
+      "name": "CPT4 Code 96413"
+    },
+    {
+      "id": 4327032,
+      "name": "CT of thorax with contrast"
+    },
+    {
+      "id": 36713176,
+      "name": "CT of head without contrast"
+    },
+    {
+      "id": 4090698,
+      "name": "Echography, M-mode"
+    },
+    {
+      "id": 2314205,
+      "name": "CPT4 Code 96361"
+    },
+    {
+      "id": 2211378,
+      "name": "CPT4 Code 71250"
+    },
+    {
+      "id": 2211506,
+      "name": "CPT4 Code 74000"
+    },
+    {
+      "id": 4213297,
+      "name": "Surgical pathology procedure"
+    },
+    {
+      "id": 2109747,
+      "name": "CPT4 Code 51798"
+    },
+    {
+      "id": 44816450,
+      "name": "CPT4 Code 94669"
+    }
+  ]
+}
