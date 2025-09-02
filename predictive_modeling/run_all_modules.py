@@ -41,6 +41,7 @@ def run_module(module_name: str, module_path: str, args: list = None) -> dict:
             text=True,
             bufsize=1,  # Line buffered
             universal_newlines=True,
+            encoding='utf-8',  # Add UTF-8 encoding for Windows compatibility
             env=env  # Pass environment variables
         )
         
@@ -191,18 +192,18 @@ def generate_report(results: list, output_dir: Path):
         "",
         "```",
         "modeling_results/",
-        "├── features/           # Extracted features for each task",
-        "├── models/            # Trained models and results",
-        "├── evaluation/        # Evaluation metrics and plots",
-        "│   ├── plots/        # ROC, PR curves",
-        "│   └── *_report.md   # Performance reports",
-        "└── pipeline_report.md # This report",
+        "+-- features/           # Extracted features for each task",
+        "+-- models/            # Trained models and results",
+        "+-- evaluation/        # Evaluation metrics and plots",
+        "|   +-- plots/        # ROC, PR curves",
+        "|   +-- *_report.md   # Performance reports",
+        "+-- pipeline_report.md # This report",
         "```"
     ])
     
     # Save report
     report_file = output_dir / 'pipeline_report.md'
-    with open(report_file, 'w') as f:
+    with open(report_file, 'w', encoding='utf-8') as f:
         f.write('\n'.join(report_lines))
     
     print(f"\nPipeline report saved: {report_file}")

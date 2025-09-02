@@ -216,7 +216,7 @@ def generate_summary_report(ts_summary, sepsis_summary, output_dir, time_window,
     ])
     
     report_file = output_dir / 'feature_extraction_summary.md'
-    with open(report_file, 'w') as f:
+    with open(report_file, 'w', encoding='utf-8') as f:
         f.write('\n'.join(report_lines))
     
     print(f"   Summary report saved to: {report_file}")

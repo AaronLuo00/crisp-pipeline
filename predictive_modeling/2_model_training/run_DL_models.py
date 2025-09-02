@@ -723,7 +723,7 @@ def save_model(task_name: str, target: str, model: nn.Module, scaler,
     
     # Also save performance metrics separately for easy access
     metrics_file = model_dir / f'{task_name}_{target}_metrics.json'
-    with open(metrics_file, 'w') as f:
+    with open(metrics_file, 'w', encoding='utf-8') as f:
         json.dump(performance, f, indent=2)
 
 def train_task_models(task_name: str, targets: List[str], input_dir: Path, 
@@ -950,7 +950,7 @@ def main(args):
     
     # Save summary
     summary_file = output_dir / f'deep_learning_summary_{args.model_type.lower()}.json'
-    with open(summary_file, 'w') as f:
+    with open(summary_file, 'w', encoding='utf-8') as f:
         json.dump(summary, f, indent=2)
     
     print(f"\nModels saved to: {output_dir}")

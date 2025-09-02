@@ -764,12 +764,12 @@ def main(args):
     
     # Save summary
     summary_file = output_dir / 'evaluation_summary.json'
-    with open(summary_file, 'w') as f:
+    with open(summary_file, 'w', encoding='utf-8') as f:
         json.dump(summary, f, indent=2, default=str)
     
     # Generate markdown report
     report_file = output_dir / 'evaluation_report.md'
-    with open(report_file, 'w') as f:
+    with open(report_file, 'w', encoding='utf-8') as f:
         f.write("# Model Evaluation Report\n\n")
         f.write(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n")
         f.write(f"Time Window: {args.time_window} hours\n\n")

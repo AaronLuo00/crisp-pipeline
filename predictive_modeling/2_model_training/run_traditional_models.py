@@ -194,7 +194,7 @@ def save_models(task_name: str, target: str, results: Dict, scaler,
         
         # Save performance metrics as JSON for easy access
         metrics_file = model_dir / f'{task_name}_{target}_metrics.json'
-        with open(metrics_file, 'w') as f:
+        with open(metrics_file, 'w', encoding='utf-8') as f:
             json.dump({
                 'auroc': result['auroc'],
                 'auprc': result['auprc'],
@@ -348,7 +348,7 @@ def main(args):
     
     # Save summary
     summary_file = output_dir / 'training_summary.json'
-    with open(summary_file, 'w') as f:
+    with open(summary_file, 'w', encoding='utf-8') as f:
         json.dump(summary, f, indent=2)
     
     print(f"\nModels saved to: {output_dir}")
