@@ -32,10 +32,21 @@ dependencies:
   - scikit-learn>=1.0.0
   
 
-  # Deep Learning (PyTorch) - uncomment when ready to use
+  # Deep Learning (PyTorch) - uncomment when ready to use deep learning models
+  # Choose ONE of the following based on your hardware:
+  
+  # For CPU-only (recommended for testing):
   # - pytorch>=2.0.0
-  # - torchvision>=0.15.0
-  # - cpuonly  # Use 'cudatoolkit=11.8' instead for GPU support
+  # - cpuonly
+  
+  # For NVIDIA GPU (CUDA 11.8):
+  # - pytorch>=2.0.0
+  # - pytorch-cuda=11.8
+  # - cudatoolkit=11.8
+  
+  # For NVIDIA GPU (CUDA 12.1):
+  # - pytorch>=2.0.0 
+  # - pytorch-cuda=12.1
   
   # Development tools (optional)
   - ipython
@@ -50,13 +61,6 @@ dependencies:
       
       # Traditional Machine Learning
       - xgboost>=2.0.0
-      - lightgbm>=4.0.0
       - imbalanced-learn>=0.11.0
       
-      # Deep Learning Extensions (uncomment when using deep learning)
-      # - transformers>=4.35.0  # For BERT-based models (BEHRT, ClinicalBERT)
-      # - pytorch-lightning>=2.0.0  # Optional: structured DL training framework
       
-      # Model Interpretation (optional - uncomment if needed)
-      # - shap>=0.43.0  # SHAP values for model explainability
-      # - lime>=0.2.0  # Local interpretable model-agnostic explanations

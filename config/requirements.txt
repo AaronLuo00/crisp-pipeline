@@ -29,7 +29,7 @@ ipykernel
 
 # Traditional Machine Learning
 xgboost>=2.0.0
-lightgbm>=4.0.0
+# lightgbm>=4.0.0  # Not currently used in predictive modeling
 imbalanced-learn>=0.11.0
 
 
@@ -40,37 +40,4 @@ imbalanced-learn>=0.11.0
 
 # PyTorch core
 # torch>=2.0.0
-# torchvision>=0.15.0
 
-# Transformer models for healthcare (BEHRT, ClinicalBERT, etc.)
-# transformers>=4.35.0
-
-# Optional: Structured deep learning training
-# pytorch-lightning>=2.0.0
-
-# ============================================
-# Optional Dependencies (uncomment if needed)
-# ============================================
-
-# Model interpretation
-# shap>=0.43.0  # SHAP values for explainability
-# lime>=0.2.0  # Local interpretable model-agnostic explanations
-
-# Hyperparameter optimization
-# optuna>=3.4.0  # Automated hyperparameter tuning
-# ray[tune]>=2.7.0  # Distributed hyperparameter tuning
-
-# Experiment tracking
-# mlflow>=2.8.0  # ML lifecycle management
-# wandb>=0.15.0  # Weights & Biases tracking
-# tensorboard>=2.14.0  # TensorBoard for PyTorch
-
-# Advanced Deep Learning
-# einops>=0.7.0  # Tensor operations for complex architectures
-# timm>=0.9.0  # PyTorch image models
-
-# Time Series Deep Learning
-# tsai>=0.3.0  # Time series AI for PyTorch
-
-# Healthcare-specific ML
-# pyhealth>=1.1.0  # Healthcare ML toolkit (optional)
