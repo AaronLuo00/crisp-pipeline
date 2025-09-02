@@ -8,13 +8,11 @@ Supports configuration-based execution
 import sys
 import subprocess
 import json
-import yaml
 import os
 from pathlib import Path
 from datetime import datetime
 import argparse
 import time
-from typing import Dict, Optional
 
 def run_module(module_name: str, module_path: str, args: list = None) -> dict:
     """Run a single module with real-time output"""
@@ -84,16 +82,6 @@ def run_module(module_name: str, module_path: str, args: list = None) -> dict:
             'error': str(e)
         }
 
-def load_config(config_path: Optional[str] = None) -> Dict:
-    """Load configuration from YAML file or use defaults"""
-    if config_path and Path(config_path).exists():
-        with open(config_path, 'r') as f:
-            config = yaml.safe_load(f)
-        print(f"Loaded configuration from: {config_path}")
-        return config
-    else:
-        print("Using default configuration")
-        return {}
 
 def check_dependencies():
     """Check if required directories and files exist"""
@@ -226,8 +214,7 @@ def main(args):
     print(f"Run time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print("="*80)
     
-    # Load configuration
-    config = load_config(args.config)
+    # Configuration via command-line args only
     
     # Check dependencies
     print("\nChecking dependencies...")
@@ -261,8 +248,8 @@ def main(args):
             if 'Feature Extraction' in module['name'] or 'Model Training' in module['name']:
                 module['args'].extend(['--time-window', str(args.time_window)])
     
-    # Add deep learning module if enabled in config or requested
-    if config.get('models', {}).get('deep_learning', {}).get('enabled', False) or args.include_dl:
+    # Add deep learning module if requested
+    if args.include_dl:
         dl_module = {
             'name': 'Model Training (Deep Learning)',
             'path': str(script_dir / '2_model_training' / 'run_DL_models.py'),
@@ -349,9 +336,6 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         description='Run predictive modeling pipeline'
     )
-    parser.add_argument('--config', type=str,
-                       default=None,
-                       help='[Deprecated] Path to configuration YAML file')
     parser.add_argument('--time-window', type=int,
                        choices=[2, 4, 8],
                        default=4,
