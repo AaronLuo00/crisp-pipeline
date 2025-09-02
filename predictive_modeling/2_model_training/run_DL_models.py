@@ -293,7 +293,17 @@ def train_model(model: nn.Module, train_loader: DataLoader, val_loader: DataLoad
                 val_preds.extend(outputs.cpu().numpy())
                 val_labels.extend(batch_y.numpy())
         
-        val_auroc = roc_auc_score(val_labels, val_preds)
+        # Calculate AUROC with error handling
+        try:
+            val_auroc = roc_auc_score(val_labels, val_preds)
+        except ValueError as e:
+            if "Only one class present" in str(e):
+                # If only one class, use a default score
+                val_auroc = 0.5  # Random performance
+                print(f"      Warning: Only one class in validation set, using AUROC = 0.5")
+            else:
+                raise e
+        
         val_aurocs.append(val_auroc)
         
         # Learning rate scheduling
@@ -337,8 +347,26 @@ def evaluate_model(model: nn.Module, test_loader: DataLoader) -> Tuple[float, fl
             predictions.extend(outputs.cpu().numpy())
             labels.extend(batch_y.numpy())
     
-    auroc = roc_auc_score(labels, predictions)
-    auprc = average_precision_score(labels, predictions)
+    # Calculate metrics with error handling
+    try:
+        auroc = roc_auc_score(labels, predictions)
+    except ValueError as e:
+        if "Only one class present" in str(e):
+            auroc = 0.5  # Random performance
+            print(f"      Warning: Only one class in test set, using AUROC = 0.5")
+        else:
+            raise e
+    
+    try:
+        auprc = average_precision_score(labels, predictions)
+    except ValueError as e:
+        if "Only one class present" in str(e):
+            # For AUPRC, if only positive class, score = 1.0; if only negative class, use class proportion
+            positive_ratio = np.mean(labels)
+            auprc = positive_ratio if positive_ratio > 0 else 0.0
+            print(f"      Warning: Only one class in test set, using AUPRC = {auprc:.3f}")
+        else:
+            raise e
     
     return auroc, auprc, np.array(predictions)
 
@@ -420,12 +448,18 @@ def train_task_models(task_name: str, targets: List[str], input_dir: Path,
         train_loader = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True)
         test_loader = DataLoader(test_dataset, batch_size=args.batch_size, shuffle=False)
         
-        # Split train into train/val
-        val_size = int(0.2 * len(train_dataset))
-        train_size = len(train_dataset) - val_size
-        train_subset, val_subset = torch.utils.data.random_split(
-            train_dataset, [train_size, val_size]
+        # Split train into train/val with stratification
+        X_train_data = train_dataset.X
+        y_train_data = train_dataset.y
+        
+        # Stratified split for train/validation
+        X_train_split, X_val_split, y_train_split, y_val_split = train_test_split(
+            X_train_data, y_train_data, test_size=0.2, random_state=42, stratify=y_train_data
         )
+        
+        # Create new datasets
+        train_subset = TabularDataset(X_train_split, y_train_split)
+        val_subset = TabularDataset(X_val_split, y_val_split)
         
         train_loader = DataLoader(train_subset, batch_size=args.batch_size, shuffle=True)
         val_loader = DataLoader(val_subset, batch_size=args.batch_size, shuffle=False)
