@@ -1,0 +1,588 @@
+#!/usr/bin/env python
+"""
+Model Evaluation Module
+Comprehensive evaluation of trained models with clinical metrics
+Supports both traditional ML and deep learning models
+"""
+
+import warnings
+warnings.filterwarnings('ignore')
+
+import pandas as pd
+import numpy as np
+import json
+import pickle
+from pathlib import Path
+from datetime import datetime
+import argparse
+from typing import Dict, List, Tuple, Optional
+
+from sklearn.metrics import (
+    roc_auc_score, average_precision_score, roc_curve,
+    precision_recall_curve, confusion_matrix
+)
+import matplotlib.pyplot as plt
+
+# Try to import torch for deep learning models
+try:
+    import torch
+    import torch.nn as nn
+    TORCH_AVAILABLE = True
+except ImportError:
+    TORCH_AVAILABLE = False
+    print("Warning: PyTorch not available. Deep learning model evaluation will be skipped.")
+
+def load_model(model_path: Path, model_category: str = 'traditional') -> Dict:
+    """Load trained model and metadata
+    
+    Args:
+        model_path: Path to model file
+        model_category: 'traditional' or 'deep_learning'
+    """
+    if model_category == 'traditional':
+        with open(model_path, 'rb') as f:
+            model_data = pickle.load(f)
+        return model_data
+    elif model_category == 'deep_learning' and TORCH_AVAILABLE:
+        # Load PyTorch model
+        checkpoint = torch.load(model_path, map_location='cpu')
+        
+        # Load metadata
+        metadata_path = model_path.with_suffix('').with_name(
+            model_path.stem.replace('_model', '_metadata') + '.pkl'
+        )
+        with open(metadata_path, 'rb') as f:
+            metadata = pickle.load(f)
+        
+        # Reconstruct model
+        model = reconstruct_dl_model(checkpoint, metadata)
+        
+        return {
+            'model': model,
+            'scaler': metadata['scaler'],
+            'feature_cols': metadata['feature_cols'],
+            'model_type': metadata['model_type']
+        }
+    else:
+        raise ValueError(f"Unsupported model category: {model_category}")
+
+def reconstruct_dl_model(checkpoint: Dict, metadata: Dict = None):
+    """Reconstruct deep learning model from checkpoint"""
+    if not TORCH_AVAILABLE:
+        return None
+    
+    input_dim = checkpoint['input_dim']
+    model_class = checkpoint['model_class']
+    
+    # Define model architectures (simplified versions)
+    class MLP(nn.Module):
+        def __init__(self, input_dim):
+            super(MLP, self).__init__()
+            self.model = nn.Sequential(
+                nn.Linear(input_dim, 256),
+                nn.BatchNorm1d(256),
+                nn.ReLU(),
+                nn.Dropout(0.3),
+                nn.Linear(256, 128),
+                nn.BatchNorm1d(128),
+                nn.ReLU(),
+                nn.Dropout(0.3),
+                nn.Linear(128, 64),
+                nn.BatchNorm1d(64),
+                nn.ReLU(),
+                nn.Dropout(0.3),
+                nn.Linear(64, 1),
+                nn.Sigmoid()
+            )
+        
+        def forward(self, x):
+            return self.model(x).squeeze()
+    
+    # Create model instance
+    if model_class == 'MLP':
+        model = MLP(input_dim)
+    else:
+        raise ValueError(f"Unknown model class: {model_class}")
+    
+    # Load state dict
+    model.load_state_dict(checkpoint['model_state_dict'])
+    model.eval()
+    
+    return model
+
+def load_test_data(task_name: str, target: str, feature_dir: Path, time_window: int = 4) -> Tuple:
+    """Load test data for evaluation"""
+    
+    # Determine which feature file to use
+    if task_name == 'sepsis':
+        feature_file = feature_dir / 'sepsis_static_features.csv'
+    else:
+        # For mortality, readmission, los tasks
+        feature_file = feature_dir / f'time_series_features_{time_window}h_window.csv'
+    
+    if not feature_file.exists():
+        raise FileNotFoundError(f"Feature file not found: {feature_file}")
+    
+    df = pd.read_csv(feature_file)
+    
+    # Filter to columns needed
+    feature_cols = [col for col in df.columns if col not in ['patient_id', target]
+                   and not col.startswith('mortality_') 
+                   and not col.startswith('readmission_')
+                   and not col.startswith('los_')
+                   and not col.startswith('has_sepsis')
+                   and not col.startswith('sepsis_within')]
+    
+    X = df[feature_cols]
+    y = df[target]
+    
+    # Handle missing values
+    X = X.fillna(X.median())
+    
+    return X, y, df['patient_id']
+
+def calculate_metrics(y_true, y_pred_proba, threshold=0.5) -> Dict:
+    """Calculate essential evaluation metrics"""
+    y_pred = (y_pred_proba >= threshold).astype(int)
+    
+    # Confusion matrix
+    tn, fp, fn, tp = confusion_matrix(y_true, y_pred).ravel()
+    
+    # Core metrics only
+    metrics = {
+        'auroc': roc_auc_score(y_true, y_pred_proba),
+        'auprc': average_precision_score(y_true, y_pred_proba),
+        'sensitivity': tp / (tp + fn) if (tp + fn) > 0 else 0,
+        'specificity': tn / (tn + fp) if (tn + fp) > 0 else 0,
+        'ppv': tp / (tp + fp) if (tp + fp) > 0 else 0,
+        'accuracy': (tp + tn) / (tp + tn + fp + fn),
+        'tp': int(tp),
+        'tn': int(tn),
+        'fp': int(fp),
+        'fn': int(fn)
+    }
+    
+    return metrics
+
+def plot_roc_curve(y_true, y_pred_proba, model_name: str, task_name: str, 
+                   target: str, output_dir: Path):
+    """Plot and save ROC curve"""
+    fpr, tpr, _ = roc_curve(y_true, y_pred_proba)
+    auroc = roc_auc_score(y_true, y_pred_proba)
+    
+    plt.figure(figsize=(8, 6))
+    plt.plot(fpr, tpr, label=f'ROC (AUROC = {auroc:.3f})', linewidth=2)
+    plt.plot([0, 1], [0, 1], 'k--', linewidth=1)
+    plt.xlim([0.0, 1.0])
+    plt.ylim([0.0, 1.05])
+    plt.xlabel('False Positive Rate')
+    plt.ylabel('True Positive Rate')
+    plt.title(f'ROC Curve - {model_name} - {task_name.title()} - {target}')
+    plt.legend(loc="lower right")
+    plt.grid(True, alpha=0.3)
+    
+    plot_dir = output_dir / 'plots' / model_name.lower() / task_name
+    plot_dir.mkdir(parents=True, exist_ok=True)
+    plt.savefig(plot_dir / f'{target}_roc.png', dpi=100, bbox_inches='tight')
+    plt.close()
+
+def plot_pr_curve(y_true, y_pred_proba, model_name: str, task_name: str, 
+                  target: str, output_dir: Path):
+    """Plot and save Precision-Recall curve"""
+    precision, recall, _ = precision_recall_curve(y_true, y_pred_proba)
+    auprc = average_precision_score(y_true, y_pred_proba)
+    
+    plt.figure(figsize=(8, 6))
+    plt.plot(recall, precision, label=f'PR (AUPRC = {auprc:.3f})', linewidth=2)
+    plt.xlim([0.0, 1.0])
+    plt.ylim([0.0, 1.05])
+    plt.xlabel('Recall')
+    plt.ylabel('Precision')
+    plt.title(f'Precision-Recall Curve - {model_name} - {task_name.title()} - {target}')
+    plt.legend(loc="lower left")
+    plt.grid(True, alpha=0.3)
+    
+    plot_dir = output_dir / 'plots' / model_name.lower() / task_name
+    plot_dir.mkdir(parents=True, exist_ok=True)
+    plt.savefig(plot_dir / f'{target}_pr.png', dpi=100, bbox_inches='tight')
+    plt.close()
+
+def evaluate_model(task_name: str, target: str, model_name: str, model_category: str,
+                   model_dir: Path, feature_dir: Path, output_dir: Path, 
+                   time_window: int = 4) -> Optional[Dict]:
+    """Evaluate a single model
+    
+    Args:
+        task_name: Task name (mortality, readmission, etc.)
+        target: Target variable name
+        model_name: Model name (logisticregression, randomforest, mlp, etc.)
+        model_category: 'traditional' or 'deep_learning'
+        model_dir: Base directory for models
+        feature_dir: Directory containing features
+        output_dir: Output directory for results
+        time_window: Time window for features
+    """
+    
+    # Construct model path based on new structure
+    if model_category == 'traditional':
+        model_path = model_dir / 'traditional' / model_name / f'{task_name}_{target}_model.pkl'
+    else:
+        model_path = model_dir / 'deep_learning' / model_name / f'{task_name}_{target}_model.pt'
+    
+    if not model_path.exists():
+        print(f"    Model not found: {model_path}")
+        return None
+    
+    # Load model
+    try:
+        model_data = load_model(model_path, model_category)
+    except Exception as e:
+        print(f"    Error loading model: {e}")
+        return None
+    
+    model = model_data['model']
+    scaler = model_data['scaler']
+    feature_cols = model_data['feature_cols']
+    
+    # Load test data
+    try:
+        X, y, _ = load_test_data(task_name, target, feature_dir, time_window)
+    except FileNotFoundError as e:
+        print(f"    {e}")
+        return None
+    
+    # Ensure we have the right features in the right order
+    X = X[feature_cols]
+    
+    # Scale features
+    X_scaled = scaler.transform(X)
+    
+    # Make predictions
+    if model_category == 'traditional':
+        y_pred_proba = model.predict_proba(X_scaled)[:, 1]
+    elif model_category == 'deep_learning' and TORCH_AVAILABLE:
+        model.eval()
+        with torch.no_grad():
+            X_tensor = torch.FloatTensor(X_scaled)
+            y_pred_proba = model(X_tensor).cpu().numpy()
+    else:
+        return None
+    
+    # Calculate metrics
+    metrics = calculate_metrics(y, y_pred_proba)
+    
+    # Add model info
+    metrics['model_name'] = model_name
+    metrics['model_category'] = model_category
+    metrics['model_type'] = model_data.get('model_type', model_name)
+    metrics['n_samples'] = len(y)
+    metrics['positive_rate'] = float(y.mean())
+    
+    # Generate plots
+    plot_roc_curve(y, y_pred_proba, model_name, task_name, target, output_dir)
+    plot_pr_curve(y, y_pred_proba, model_name, task_name, target, output_dir)
+    
+    return metrics
+
+def discover_available_models(model_dir: Path, task_name: str, target: str) -> Dict[str, List[str]]:
+    """Automatically discover available models in the model directory
+    
+    Returns:
+        Dict with keys 'traditional' and 'deep_learning', each containing list of model names
+    """
+    available_models = {'traditional': [], 'deep_learning': []}
+    
+    # Check traditional models directory
+    traditional_dir = model_dir / 'traditional'
+    if traditional_dir.exists():
+        for model_subdir in traditional_dir.iterdir():
+            if model_subdir.is_dir():
+                # Check if this model has files for the given task and target
+                model_file = model_subdir / f'{task_name}_{target}_model.pkl'
+                if model_file.exists():
+                    available_models['traditional'].append(model_subdir.name)
+    
+    # Check deep learning models directory
+    dl_dir = model_dir / 'deep_learning'
+    if dl_dir.exists() and TORCH_AVAILABLE:
+        for model_subdir in dl_dir.iterdir():
+            if model_subdir.is_dir():
+                # Check if this model has files for the given task and target
+                model_file = model_subdir / f'{task_name}_{target}_model.pt'
+                if model_file.exists():
+                    available_models['deep_learning'].append(model_subdir.name)
+    
+    return available_models
+
+def evaluate_all_models_for_task(task_name: str, targets: List[str], model_dir: Path,
+                                 feature_dir: Path, output_dir: Path, 
+                                 time_window: int = 4,
+                                 model_types: Optional[List[str]] = None) -> Dict:
+    """Evaluate all available models for a task"""
+    
+    print(f"\n{task_name.upper()} EVALUATION")
+    print("-" * 60)
+    
+    task_results = {}
+    
+    # If model_types specified, use those; otherwise discover available models
+    if model_types is not None:
+        # Parse model types from argument (backward compatibility)
+        traditional_models = [m for m in model_types if m in 
+                            ['logisticregression', 'randomforest', 'gradientboosting', 'xgboost']]
+        dl_models = [m for m in model_types if m in ['mlp', 'resnet', 'transformer']]
+        
+        # For each target, evaluate specified models
+        for target in targets:
+            print(f"\n  Target: {target}")
+            target_results = {}
+            
+            # Evaluate traditional models
+            for model_name in traditional_models:
+                print(f"    Evaluating {model_name}...")
+                metrics = evaluate_model(
+                    task_name, target, model_name, 'traditional',
+                    model_dir, feature_dir, output_dir, time_window
+                )
+                if metrics:
+                    target_results[model_name] = metrics
+                    print(f"      AUROC: {metrics['auroc']:.3f}, AUPRC: {metrics['auprc']:.3f}")
+            
+            # Evaluate deep learning models
+            for model_name in dl_models:
+                print(f"    Evaluating {model_name}...")
+                metrics = evaluate_model(
+                    task_name, target, model_name, 'deep_learning',
+                    model_dir, feature_dir, output_dir, time_window
+                )
+                if metrics:
+                    target_results[model_name] = metrics
+                    print(f"      AUROC: {metrics['auroc']:.3f}, AUPRC: {metrics['auprc']:.3f}")
+            
+            if target_results:
+                # Find best model for this target
+                best_model = max(target_results.items(), key=lambda x: x[1]['auroc'])
+                print(f"    Best model: {best_model[0]} (AUROC: {best_model[1]['auroc']:.3f})")
+                task_results[target] = target_results
+    else:
+        # Auto-discover models for each target
+        for target in targets:
+            print(f"\n  Target: {target}")
+            
+            # Discover available models for this task and target
+            available_models = discover_available_models(model_dir, task_name, target)
+            
+            if not available_models['traditional'] and not available_models['deep_learning']:
+                print(f"    No models found for {task_name}_{target}")
+                continue
+            
+            print(f"    Found models: Traditional={available_models['traditional']}, "
+                  f"Deep Learning={available_models['deep_learning']}")
+            
+            target_results = {}
+            
+            # Evaluate discovered traditional models
+            for model_name in available_models['traditional']:
+                print(f"    Evaluating {model_name} (traditional)...")
+                metrics = evaluate_model(
+                    task_name, target, model_name, 'traditional',
+                    model_dir, feature_dir, output_dir, time_window
+                )
+                if metrics:
+                    target_results[model_name] = metrics
+                    print(f"      AUROC: {metrics['auroc']:.3f}, AUPRC: {metrics['auprc']:.3f}")
+            
+            # Evaluate discovered deep learning models
+            for model_name in available_models['deep_learning']:
+                print(f"    Evaluating {model_name} (deep learning)...")
+                metrics = evaluate_model(
+                    task_name, target, model_name, 'deep_learning',
+                    model_dir, feature_dir, output_dir, time_window
+                )
+                if metrics:
+                    target_results[model_name] = metrics
+                    print(f"      AUROC: {metrics['auroc']:.3f}, AUPRC: {metrics['auprc']:.3f}")
+            
+            if target_results:
+                # Find best model for this target
+                best_model = max(target_results.items(), key=lambda x: x[1]['auroc'])
+                print(f"    Best model: {best_model[0]} (AUROC: {best_model[1]['auroc']:.3f})")
+                task_results[target] = target_results
+    
+    return task_results
+
+def main(args):
+    """Main evaluation function"""
+    print("=" * 80)
+    print("MODEL EVALUATION MODULE")
+    print(f"Run time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    print(f"Time window: {args.time_window} hours")
+    print(f"Tasks: {args.tasks}")
+    if args.models:
+        print(f"Models: {args.models}")
+    print("=" * 80)
+    
+    # Setup paths
+    model_dir = Path(args.model_dir)
+    feature_dir = Path(args.feature_dir)
+    output_dir = Path(args.output_dir)
+    output_dir.mkdir(exist_ok=True, parents=True)
+    
+    # Define default targets for each task
+    default_targets = {
+        'mortality': ['mortality_7day', 'mortality_30day'],  # Only 7-day and 30-day mortality
+        'readmission': ['readmission_7days', 'readmission_30days', 'readmission_90days'],
+        'los': ['los_greater_3days', 'los_greater_7days'],
+        'sepsis': ['has_sepsis_after_icu', 'sepsis_within_48h', 'sepsis_within_7days']
+    }
+    
+    # Parse tasks and models
+    tasks_to_evaluate = args.tasks.split(',')
+    model_types = args.models.split(',') if args.models else None
+    
+    all_results = {}
+    
+    # Evaluate each task
+    for task_name in tasks_to_evaluate:
+        if task_name not in default_targets:
+            print(f"\nSkipping {task_name} (unknown task)")
+            continue
+        
+        targets = default_targets[task_name]
+        
+        task_results = evaluate_all_models_for_task(
+            task_name, targets, model_dir, feature_dir, output_dir,
+            args.time_window, model_types
+        )
+        all_results[task_name] = task_results
+    
+    # Save comprehensive report
+    print("\n" + "=" * 80)
+    print("EVALUATION SUMMARY")
+    print("=" * 80)
+    
+    summary = {
+        'run_time': datetime.now().isoformat(),
+        'time_window': args.time_window,
+        'tasks': all_results,
+        'statistics': {}
+    }
+    
+    for task_name, task_targets in all_results.items():
+        if task_targets:
+            # Calculate average metrics across all targets and models
+            all_aurocs = []
+            all_auprcs = []
+            best_models = {}
+            
+            for target, models in task_targets.items():
+                if models:
+                    # Find best model for this target
+                    best = max(models.items(), key=lambda x: x[1]['auroc'])
+                    best_models[target] = {
+                        'model': best[0],
+                        'auroc': best[1]['auroc'],
+                        'auprc': best[1]['auprc']
+                    }
+                    
+                    # Collect all metrics
+                    for model_metrics in models.values():
+                        all_aurocs.append(model_metrics['auroc'])
+                        all_auprcs.append(model_metrics['auprc'])
+            
+            if all_aurocs:
+                summary['statistics'][task_name] = {
+                    'avg_auroc': np.mean(all_aurocs),
+                    'avg_auprc': np.mean(all_auprcs),
+                    'best_auroc': max(all_aurocs),
+                    'best_auprc': max(all_auprcs),
+                    'n_models_evaluated': len(all_aurocs),
+                    'best_models': best_models
+                }
+                
+                print(f"\n{task_name.upper()}:")
+                print(f"  Models evaluated: {len(all_aurocs)}")
+                print(f"  Average AUROC: {np.mean(all_aurocs):.3f}")
+                print(f"  Best AUROC: {max(all_aurocs):.3f}")
+                
+                # Show best model for each target
+                for target, info in best_models.items():
+                    print(f"  {target}: {info['model']} (AUROC={info['auroc']:.3f})")
+    
+    # Save summary
+    summary_file = output_dir / 'evaluation_summary.json'
+    with open(summary_file, 'w') as f:
+        json.dump(summary, f, indent=2, default=str)
+    
+    # Generate markdown report
+    report_file = output_dir / 'evaluation_report.md'
+    with open(report_file, 'w') as f:
+        f.write("# Model Evaluation Report\n\n")
+        f.write(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n")
+        f.write(f"Time Window: {args.time_window} hours\n\n")
+        
+        for task_name, task_targets in all_results.items():
+            if not task_targets:
+                continue
+                
+            f.write(f"## {task_name.title()}\n\n")
+            
+            for target, models in task_targets.items():
+                if not models:
+                    continue
+                    
+                f.write(f"### {target}\n\n")
+                f.write("| Model | Category | AUROC | AUPRC | Sensitivity | Specificity | PPV |\n")
+                f.write("|-------|----------|-------|-------|-------------|-------------|-----|\n")
+                
+                # Sort models by AUROC
+                sorted_models = sorted(models.items(), key=lambda x: x[1]['auroc'], reverse=True)
+                
+                for model_name, metrics in sorted_models:
+                    f.write(f"| {model_name} | {metrics['model_category']} | "
+                           f"{metrics['auroc']:.3f} | {metrics['auprc']:.3f} | "
+                           f"{metrics['sensitivity']:.3f} | {metrics['specificity']:.3f} | "
+                           f"{metrics['ppv']:.3f} |\n")
+                
+                f.write("\n")
+    
+    print(f"\nEvaluation results saved to: {output_dir}")
+    print(f"Summary saved to: {summary_file}")
+    print(f"Report saved to: {report_file}")
+    
+    print("\n" + "=" * 80)
+    print("Evaluation completed successfully!")
+    print("=" * 80)
+    
+    return summary
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='Evaluate trained models')
+    
+    # Data paths
+    parser.add_argument('--model-dir', type=str,
+                       default='predictive_modeling/modeling_results/models',
+                       help='Directory containing trained models')
+    parser.add_argument('--feature-dir', type=str,
+                       default='predictive_modeling/modeling_results/features',
+                       help='Directory containing feature files')
+    parser.add_argument('--output-dir', type=str,
+                       default='predictive_modeling/modeling_results/evaluation',
+                       help='Directory to save evaluation results')
+    
+    # Feature parameters
+    parser.add_argument('--time-window', type=int,
+                       choices=[2, 4, 8],
+                       default=4,
+                       help='Time window in hours for time series features (2, 4, or 8)')
+    
+    # Task and model configuration
+    parser.add_argument('--tasks', type=str,
+                       default='mortality,readmission,los,sepsis',
+                       help='Comma-separated list of tasks to evaluate')
+    parser.add_argument('--models', type=str,
+                       default=None,
+                       help='Comma-separated list of models to evaluate (e.g., logisticregression,randomforest,mlp)')
+    
+    args = parser.parse_args()
+    main(args)
