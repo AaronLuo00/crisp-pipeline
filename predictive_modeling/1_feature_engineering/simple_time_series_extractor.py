@@ -8,7 +8,6 @@ import pandas as pd
 from pathlib import Path
 from datetime import datetime, timedelta
 import json
-import yaml
 from typing import Dict, List, Optional
 from tqdm import tqdm
 import warnings
@@ -18,52 +17,40 @@ warnings.filterwarnings('ignore')
 class SimpleTimeSeriesExtractor:
     """Simplified time series feature extractor with unified configuration"""
     
-    def __init__(self, config_path: str = '../config/time_series_config.yaml',
+    def __init__(self, time_window: int,
+                 minimum_observation_hours: int,
                  concepts_path: str = '../config/concepts.json',
-                 time_window: Optional[int] = None,
-                 minimum_observation_hours: Optional[int] = None):
+                 aggregation: str = 'median'):
         """
         Initialize the simplified extractor
         
         Args:
-            config_path: Path to time series configuration
+            time_window: Time window in hours (must be 2, 4, or 8)
+            minimum_observation_hours: Minimum observation hours (must be 24, 48, or 72)
             concepts_path: Path to concepts JSON
-            time_window: Override time window from config (must be 2, 4, or 8)
-            minimum_observation_hours: Override minimum observation from config (must be 24, 48, or 72)
+            aggregation: Aggregation method ('median', 'mean', 'max', 'min')
         """
-        # Load configurations
-        with open(config_path, 'r') as f:
-            self.config = yaml.safe_load(f)
+        # Validate parameters
+        if time_window not in [2, 4, 8]:
+            raise ValueError(f"time_window must be 2, 4, or 8 hours, got {time_window}")
+        if minimum_observation_hours not in [24, 48, 72]:
+            raise ValueError(f"minimum_observation_hours must be 24, 48, or 72 hours, got {minimum_observation_hours}")
         
+        # Set parameters
+        self.time_window = time_window
+        self.minimum_observation_hours = minimum_observation_hours
+        self.total_hours = minimum_observation_hours  # Extract data for the minimum period
+        self.aggregation = aggregation
+        
+        # Default fill strategy (previously from config)
+        self.fill_strategy = {
+            'no_value': 'forward_fill',
+            'first_window': 'zero'
+        }
+        
+        # Load concepts
         with open(concepts_path, 'r') as f:
             self.concepts = json.load(f)
-        
-        # Setup parameters with validation
-        # Time window validation
-        if time_window is not None:
-            if time_window not in [2, 4, 8]:
-                raise ValueError(f"time_window must be 2, 4, or 8 hours, got {time_window}")
-            self.time_window = time_window
-        else:
-            self.time_window = self.config['time_window']
-            if self.time_window not in [2, 4, 8]:
-                raise ValueError(f"time_window in config must be 2, 4, or 8 hours, got {self.time_window}")
-        
-        # Minimum observation hours validation
-        if minimum_observation_hours is not None:
-            if minimum_observation_hours not in [24, 48, 72]:
-                raise ValueError(f"minimum_observation_hours must be 24, 48, or 72 hours, got {minimum_observation_hours}")
-            self.minimum_observation_hours = minimum_observation_hours
-        else:
-            self.minimum_observation_hours = self.config.get('minimum_observation_hours', 24)
-            if self.minimum_observation_hours not in [24, 48, 72]:
-                raise ValueError(f"minimum_observation_hours must be 24, 48, or 72 hours, got {self.minimum_observation_hours}")
-        
-        # Set total_hours based on minimum_observation_hours (extract data for the minimum period)
-        self.total_hours = self.minimum_observation_hours
-        
-        self.aggregation = self.config['aggregation']
-        self.fill_strategy = self.config['fill_strategy']
         
         # Calculate number of time windows
         self.n_windows = self.total_hours // self.time_window

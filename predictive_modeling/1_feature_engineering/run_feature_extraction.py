@@ -38,10 +38,9 @@ def main(args):
     config_dir = script_dir.parent / 'config'
     
     extractor = SimpleTimeSeriesExtractor(
-        config_path=str(config_dir / 'time_series_config.yaml'),
-        concepts_path=str(config_dir / 'concepts.json'),
         time_window=args.time_window,
-        minimum_observation_hours=args.min_observation
+        minimum_observation_hours=args.min_observation,
+        concepts_path=str(config_dir / 'concepts.json')
     )
     
     # Create output directory
@@ -221,13 +220,13 @@ if __name__ == '__main__':
     
     parser.add_argument('--time-window', type=int,
                        choices=[2, 4, 8],
-                       default=None,
-                       help='Time window in hours (2, 4, or 8). If not specified, uses config value.')
+                       default=4,
+                       help='Time window in hours (2, 4, or 8). Default: 4 hours.')
     
     parser.add_argument('--min-observation', type=int,
                        choices=[24, 48, 72],
-                       default=None,
-                       help='Minimum observation hours (24, 48, or 72). If not specified, uses config value.')
+                       default=24,
+                       help='Minimum observation hours (24, 48, or 72). Default: 24 hours.')
     
     args = parser.parse_args()
     main(args)
