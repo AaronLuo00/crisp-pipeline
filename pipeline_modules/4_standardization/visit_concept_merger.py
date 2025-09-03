@@ -272,7 +272,7 @@ class VisitConceptMerger:
         from tqdm import tqdm
         for patient_id in tqdm(patients, desc=f"Standardizing {table_name} visits",
                               miniters=max(10, len(patients)//100),  # Update every 1% or at least 10 patients
-                              mininterval=PROGRESS_INTERVAL,
+                              mininterval=PROGRESS_INTERVAL, ascii=True,
                               leave=False, ncols=100):
             patient_results, patient_mappings = self.merge_visits_for_patient(df, patient_id)
             

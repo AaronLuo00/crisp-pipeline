@@ -481,7 +481,7 @@ class CRISPPipeline:
         with tqdm(total=len(modules_to_run), 
                  desc="Pipeline Progress",
                  bar_format='{desc}: {percentage:3.0f}%|{bar}| {n_fmt}/{total_fmt} [{elapsed}<{remaining}]',
-                 ncols=100) as pbar:
+                 ncols=100, ascii=True) as pbar:  # ASCII for Windows compatibility
             for module in modules_to_run:
                 pbar.set_description(f"Module {module['id']}")
                 

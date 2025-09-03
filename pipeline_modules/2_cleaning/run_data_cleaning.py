@@ -398,7 +398,7 @@ def clean_table_partial(table_name, start_row=0, end_row=-1, position=0, disable
             desc_text = f"Cleaning {table_name}{part_suffix}" if part_suffix else f"Cleaning {table_name}"
             # Check if we're in a logged environment (dumb terminal means logging)
             is_logged = os.environ.get('TERM') == 'dumb'
-            with tqdm(total=total_rows, desc=desc_text, unit="rows",
+            with tqdm(total=total_rows, desc=desc_text, unit="rows", ascii=True,
                      miniters=max(100, total_rows//100) if total_rows > 0 else 1,  # Update every 1% or at least 100 rows
                      mininterval=PROGRESS_INTERVAL,
                      position=0 if is_logged else position,  # Don't use positions when logging
@@ -845,7 +845,7 @@ if __name__ == '__main__':
             table_parts_results = defaultdict(list)  # Store results for each part
             
             is_logged = os.environ.get('TERM') == 'dumb'
-            with tqdm(total=total_tasks, desc="Overall progress", position=0, 
+            with tqdm(total=total_tasks, desc="Overall progress", position=0, ascii=True, 
                      ascii=is_logged, leave=True) as overall_pbar:
                 for future in as_completed(future_to_info):
                     table, part_num, num_parts = future_to_info[future]

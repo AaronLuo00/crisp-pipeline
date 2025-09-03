@@ -1041,7 +1041,7 @@ class ConceptMapper:
                 # Process with progress bar
                 with tqdm(total=total_rows, desc=f"Processing {table_name}",
                          unit="rows", miniters=max(100, total_rows//100) if total_rows > 0 else 1,
-                         mininterval=PROGRESS_INTERVAL, leave=False, ncols=100) as pbar:
+                         mininterval=PROGRESS_INTERVAL, leave=False, ncols=100, ascii=True) as pbar:
                     
                     chunk = []
                     row_idx = 0

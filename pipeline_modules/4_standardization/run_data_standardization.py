@@ -394,7 +394,8 @@ class DataStandardizer:
                 total=len(chunks),
                 desc=f"Processing {table_name} chunks",
                 unit='chunks',
-                leave=False
+                leave=False,
+                ascii=True
             ))
         
         # Extract statistics and CPU times
@@ -479,7 +480,7 @@ class DataStandardizer:
         chunk_num = 0
         rows_processed = 0
         
-        pbar = tqdm(total=total_rows, desc=f"Standardizing {table_name} (statistics)", 
+        pbar = tqdm(total=total_rows, desc=f"Standardizing {table_name} (statistics)", ascii=True, 
                    unit='rows', leave=False, ncols=100,
                    mininterval=PROGRESS_INTERVAL,
                    disable=False)

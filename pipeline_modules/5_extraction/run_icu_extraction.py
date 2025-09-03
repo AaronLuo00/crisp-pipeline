@@ -221,7 +221,7 @@ class PatientDataExtractor:
             if estimated_chunks > 1:
                 chunk_iterator = tqdm(chunks, total=estimated_chunks, 
                                      desc="Extracting ICU episodes", 
-                                     leave=False, 
+                                     leave=False, ascii=True, 
                                      miniters=1,
                                      mininterval=PROGRESS_INTERVAL)
             else:
@@ -332,7 +332,7 @@ class PatientDataExtractor:
             show_progress = total_rows > 10000  # Show progress for tables > 10k rows
             
             # Create progress bar with row-based tracking (consistent with Module 4)
-            pbar = tqdm(total=total_rows, desc=f"Processing {table_name}",
+            pbar = tqdm(total=total_rows, desc=f"Processing {table_name}", ascii=True,
                        unit='rows',
                        miniters=max(100, total_rows//100 if total_rows > 0 else 100),  # Update every 1% or at least 100 rows
                        mininterval=PROGRESS_INTERVAL,  # Update at most once per 10 seconds
@@ -418,7 +418,7 @@ class PatientDataExtractor:
             # Group by person_id
             grouped = df.groupby("person_id")
             
-            for person_id, group_df in tqdm(grouped, desc=f"Processing {table_name}", 
+            for person_id, group_df in tqdm(grouped, desc=f"Processing {table_name}", ascii=True, 
                                            unit="patients", leave=False, 
                                            disable=True):  # Keep disabled for basic tables
                 # Get patient folder
@@ -742,7 +742,7 @@ class PatientDataExtractor:
         
         # Use progress bar only for sufficient data
         if len(all_patient_episodes) >= 100:
-            patient_iterator = tqdm(all_patient_episodes.items(), 
+            patient_iterator = tqdm(all_patient_episodes.items(), ascii=True, 
                                    desc="Calculating pre-ICU stats", 
                                    unit="patients", leave=False, 
                                    mininterval=PROGRESS_INTERVAL)
