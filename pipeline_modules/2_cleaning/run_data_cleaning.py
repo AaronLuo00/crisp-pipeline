@@ -403,7 +403,6 @@ def clean_table_partial(table_name, start_row=0, end_row=-1, position=0, disable
                      mininterval=PROGRESS_INTERVAL,
                      position=0 if is_logged else position,  # Don't use positions when logging
                      leave=False, ncols=100,
-                     ascii=is_logged,  # Use ASCII characters when logging
                      disable=disable_progress) as pbar:
                 chunk = []
                 
@@ -846,7 +845,7 @@ if __name__ == '__main__':
             
             is_logged = os.environ.get('TERM') == 'dumb'
             with tqdm(total=total_tasks, desc="Overall progress", position=0, ascii=True, 
-                     ascii=is_logged, leave=True) as overall_pbar:
+                     leave=True) as overall_pbar:
                 for future in as_completed(future_to_info):
                     table, part_num, num_parts = future_to_info[future]
                     try:
