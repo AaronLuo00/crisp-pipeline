@@ -72,11 +72,6 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r config/requirements.txt
 ```
 
-### Important Version Requirements
-
-- **tqdm >= 4.65.0** - Required to avoid AttributeError: 'tqdm' object has no attribute 'last_print_t'
-- If you encounter tqdm-related errors, please upgrade: `pip install --upgrade tqdm`
-
 ### Your First Run
 
 **Step 1: Prepare your data**
