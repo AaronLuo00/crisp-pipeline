@@ -19,7 +19,7 @@
 
 ## 🏥 About the CRITICAL Consortium
 
-CRISP was developed to unlock the full potential of the **[CRITICAL](https://critical.fsm.northwestern.edu/data-access)** (Collaborative Resource for Intensive-care Translational science, Informatics, Comprehensive Analytics, and Learning) dataset—a multi-institutional, de-identified clinical dataset with ~400,000 patients and 571.7M records from 4 geographically diverse CTSA sites.
+The **[CRITICAL](https://critical.fsm.northwestern.edu/data-access)** (Collaborative Resource for Intensive-care Translational science, Informatics, Comprehensive Analytics, and Learning) dataset is a multi-institutional, de-identified clinical dataset with ~400,000 patients and 571.7M records from 4 geographically diverse CTSA sites.
 
 Learn more: [The CRITICAL Consortium and Dataset (AMIA Webinar)](https://amia.org/webinar-library/critical-consortium-and-dataset) | [Data Access](https://critical.fsm.northwestern.edu/data-access)
 
@@ -76,7 +76,7 @@ pip install -r config/requirements.txt
 
 **Step 1: Prepare your data**
 
-> **Important**: Even if you have your full dataset ready (e.g., 300GB), we strongly recommend testing with a small sample (1000 patients) first to ensure pipeline configuration is correct.
+> **Important**: Even if you have your full dataset ready (~400,000 patients, ~300GB), we strongly recommend testing with a small sample (1000 patients) first to ensure pipeline configuration is correct.
 
 **Option A: If starting fresh (Recommended)**
 ```bash
@@ -155,14 +155,6 @@ crisp-pipeline/
         └── ...
 ```
 
-## 🖥️ Platform Optimization
-
-We recommend different chunk sizes for different platforms:
-- **macOS/Linux**: 100K rows (default)
-- **Windows**: 500K rows (better I/O performance)
-
-The pipeline automatically detects your OS and applies these settings. We suggest testing with a subset of your data to determine the optimal chunk size before processing the full dataset.
-
 ## 🤖 Predictive Modeling (Optional)
 
 CRISP includes a complete machine learning pipeline for ICU outcome prediction:
@@ -197,7 +189,7 @@ See [predictive_modeling/README.md](predictive_modeling/README.md) for detailed 
 
 ## 📊 Pipeline Architecture
 
-CRISP implements a **5-stage progressive pipeline**, each module building upon the previous:
+CRISP implements a **5-stage data cleaning pipeline**, each module building upon the previous:
 
 ```
 Raw Data → [EDA] → [Cleaning] → [Mapping] → [Standardization] → [Extraction] → ML-Ready
@@ -207,7 +199,7 @@ Raw Data → [EDA] → [Cleaning] → [Mapping] → [Standardization] → [Extra
 ```
 
 ### Stage 1: Exploratory Data Analysis (EDA)
-- **Purpose**: Understand your dataset's characteristics
+- **Purpose**: Understand dataset characteristics
 - **Key Features**: 
   - Comprehensive statistical analysis and data profiling
   - Automated data quality metrics
