@@ -93,6 +93,10 @@ def process_table_partial(file_path, start_row, end_row, chunk_size=CHUNK_SIZE, 
     table_name = file_path.stem
     part_name = f"{table_name}{part_suffix}" if part_suffix else table_name
     
+    # Skip hidden or system files (Windows/Mac)
+    if file_path.name.startswith('._') or file_path.name.startswith('~$'):
+        return None
+    
     # Initialize time statistics
     time_stats = {
         'total': 0,
@@ -154,7 +158,7 @@ def process_table_partial(file_path, start_row, end_row, chunk_size=CHUNK_SIZE, 
               disable=False,  # Enable to show processing speed
               miniters=max(100, actual_rows//100) if actual_rows > 0 else 1,  # Update every 1% or at least 100 rows
               mininterval=10.0,  # Update at least every 10 seconds
-              ncols=100) as pbar:
+              ncols=100, ascii=True) as pbar:
         for chunk in pd.read_csv(file_path, chunksize=chunk_size, low_memory=False, skiprows=skip_rows):
             # Check if we've read enough rows
             if end_row != -1 and rows_read + len(chunk) > actual_rows:
@@ -263,12 +267,22 @@ def process_table_partial(file_path, start_row, end_row, chunk_size=CHUNK_SIZE, 
         for col in datetime_columns:
             try:
                 # Pandas 2.0+ automatically infers format, older versions need explicit parameter
-                if USE_INFER_FORMAT:
+                # Try common OMOP date formats
+                # First try ISO format (YYYY-MM-DD) which is most common in OMOP
+                dates = pd.to_datetime(sample_chunk[col], 
+                                      format='%Y-%m-%d',
+                                      errors='coerce').dropna()
+                
+                # If no valid dates found, try with datetime format
+                if len(dates) == 0:
+                    dates = pd.to_datetime(sample_chunk[col], 
+                                          format='%Y-%m-%d %H:%M:%S',
+                                          errors='coerce').dropna()
+                
+                # If still no dates, fallback to automatic parsing
+                if len(dates) == 0 and USE_INFER_FORMAT:
                     dates = pd.to_datetime(sample_chunk[col], 
                                           infer_datetime_format=True,
-                                          errors='coerce').dropna()
-                else:
-                    dates = pd.to_datetime(sample_chunk[col], 
                                           errors='coerce').dropna()
                 
                 if len(dates) > 0:
@@ -315,6 +329,10 @@ def process_table_partial(file_path, start_row, end_row, chunk_size=CHUNK_SIZE, 
 def process_table_chunked(file_path, chunk_size=CHUNK_SIZE):
     """Process a table in chunks and return aggregated statistics."""
     table_name = file_path.stem
+    
+    # Skip hidden or system files (Windows/Mac)
+    if file_path.name.startswith('._') or file_path.name.startswith('~$'):
+        return None
     
     # Initialize time statistics
     time_stats = {
@@ -367,7 +385,7 @@ def process_table_chunked(file_path, chunk_size=CHUNK_SIZE):
               miniters=max(100, total_rows//100) if total_rows > 0 else 1,  # Update every 1% or at least 100 rows
               mininterval=10.0,  # Update at least every 10 seconds
               position=1,  # Nested position
-              ncols=100) as pbar:
+              ncols=100, ascii=True) as pbar:  # ASCII for Windows compatibility
         for chunk_num, chunk in enumerate(pd.read_csv(file_path, chunksize=chunk_size, low_memory=False)):
             # First chunk: initialize column-based statistics
             if chunk_num == 0:
@@ -459,18 +477,38 @@ def process_table_chunked(file_path, chunk_size=CHUNK_SIZE):
         for col in datetime_columns:
             try:
                 # Pandas 2.0+ automatically infers format, older versions need explicit parameter
-                if USE_INFER_FORMAT:
+                # Try common OMOP date formats (YYYY-MM-DD first, then datetime)
+                try:
+                    # Try ISO date format first
                     first_dates = pd.to_datetime(first_chunk[col], 
-                                                infer_datetime_format=True,
+                                                format='%Y-%m-%d',
                                                 errors='coerce')
                     last_dates = pd.to_datetime(last_chunk[col], 
-                                               infer_datetime_format=True,
+                                               format='%Y-%m-%d',
                                                errors='coerce')
-                else:
-                    first_dates = pd.to_datetime(first_chunk[col], 
-                                                errors='coerce')
-                    last_dates = pd.to_datetime(last_chunk[col], 
-                                               errors='coerce')
+                except:
+                    # If that fails, try datetime format
+                    try:
+                        first_dates = pd.to_datetime(first_chunk[col], 
+                                                    format='%Y-%m-%d %H:%M:%S',
+                                                    errors='coerce')
+                        last_dates = pd.to_datetime(last_chunk[col], 
+                                                   format='%Y-%m-%d %H:%M:%S',
+                                                   errors='coerce')
+                    except:
+                        # Fallback to automatic parsing if enabled
+                        if USE_INFER_FORMAT:
+                            first_dates = pd.to_datetime(first_chunk[col], 
+                                                        infer_datetime_format=True,
+                                                        errors='coerce')
+                            last_dates = pd.to_datetime(last_chunk[col], 
+                                                       infer_datetime_format=True,
+                                                       errors='coerce')
+                        else:
+                            first_dates = pd.to_datetime(first_chunk[col], 
+                                                        errors='coerce')
+                            last_dates = pd.to_datetime(last_chunk[col], 
+                                                       errors='coerce')
                 
                 all_dates = pd.concat([first_dates, last_dates])
                 all_dates = all_dates.dropna()
@@ -665,8 +703,9 @@ if __name__ == '__main__':
     # Start timing
     start_time = time.time()
 
-    # Load all CSV files
-    data_files = list(data_dir.glob("*.csv"))
+    # Load all CSV files (excluding hidden/system files)
+    data_files = [f for f in data_dir.glob("*.csv") 
+                  if not (f.name.startswith('._') or f.name.startswith('~$'))]
     print(f"Found {len(data_files)} data files")
     logging.info(f"Found {len(data_files)} data files")
     print(f"Using chunk size: {CHUNK_SIZE:,} rows")
@@ -734,6 +773,10 @@ if __name__ == '__main__':
                 try:
                     stats = future.result()
                     
+                    # Skip None results (from hidden/system files)
+                    if stats is None:
+                        continue
+                    
                     if num_parts > 0:
                         # This is a MEASUREMENT part
                         measurement_parts.append(stats)
@@ -777,6 +820,10 @@ if __name__ == '__main__':
             
             # Process table
             stats = process_table_chunked(file_path, CHUNK_SIZE)
+            
+            # Skip None results (from hidden/system files)
+            if stats is None:
+                continue
             
             # Store results
             eda_results["tables"][table_name] = stats

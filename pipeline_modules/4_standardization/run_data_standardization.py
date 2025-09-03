@@ -232,7 +232,7 @@ class DataStandardizer:
                 self.date_cache[normalized] = result
                 return result
             except ValueError:
-                logging.warning(f"Could not parse date value in {col}")
+                logging.warning(f"Could not parse date value in {column_name}: {normalized}")
                 pass
         
         # Fallback: Fast format detection with regex (if column name detection failed)
@@ -260,12 +260,14 @@ class DataStandardizer:
                     self.date_cache[normalized] = result
                     return result
                 except ValueError:
-                    logging.warning(f"Could not parse date value in {col}")
+                    logging.warning(f"Could not parse date value in {column_name}: {normalized}")
                     continue
         
-        # If all else fails, cache and return original
-        self.date_cache[dt_string] = dt_string
-        return dt_string
+        # If all else fails, cache and return normalized (with milliseconds removed)
+        # This ensures that even if we can't parse the date format, we at least remove milliseconds
+        self.date_cache[dt_string] = normalized
+        self.date_cache[normalized] = normalized
+        return normalized
     
     def batch_standardize_dates_in_rows(self, rows, table_name):
         """Batch-process date standardization for optimal performance."""
@@ -394,7 +396,8 @@ class DataStandardizer:
                 total=len(chunks),
                 desc=f"Processing {table_name} chunks",
                 unit='chunks',
-                leave=False
+                leave=False,
+                ascii=True
             ))
         
         # Extract statistics and CPU times
@@ -479,7 +482,7 @@ class DataStandardizer:
         chunk_num = 0
         rows_processed = 0
         
-        pbar = tqdm(total=total_rows, desc=f"Standardizing {table_name} (statistics)", 
+        pbar = tqdm(total=total_rows, desc=f"Standardizing {table_name} (statistics)", ascii=True, 
                    unit='rows', leave=False, ncols=100,
                    mininterval=PROGRESS_INTERVAL,
                    disable=False)
@@ -601,7 +604,7 @@ class DataStandardizer:
                     date_cols = [col for col in headers if 'datetime' in col.lower() or 'date' in col.lower()]
                 
                 for col in date_cols:
-                    if col in row:
+                    if col in row and row[col]:  # Check that value is not None or empty
                         original = row[col]
                         standardized = self.standardize_datetime(original, col)
                         if original != standardized:
@@ -715,7 +718,7 @@ class DataStandardizer:
                     date_cols = [col for col in headers if 'datetime' in col.lower() or 'date' in col.lower()]
                 
                 for col in date_cols:
-                    if col in row:
+                    if col in row and row[col]:  # Check that value is not None or empty
                         original = row[col]
                         standardized = self.standardize_datetime(original, col)
                         if original != standardized:

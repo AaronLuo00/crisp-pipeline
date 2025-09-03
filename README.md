@@ -174,9 +174,9 @@ CRISP implements a **5-stage progressive pipeline**, each module building upon t
 
 ```
 Raw Data → [EDA] → [Cleaning] → [Mapping] → [Standardization] → [Extraction] → ML-Ready
-                                                                                     ↓
-                                                                        [Predictive Modeling]
-                                                                         (Optional ML Pipeline)
+                                                                                ↓
+                                                                    [Predictive Modeling]
+                                                                    (Optional ML Pipeline)
 ```
 
 ### Stage 1: Exploratory Data Analysis (EDA)
