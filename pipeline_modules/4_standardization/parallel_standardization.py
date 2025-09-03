@@ -14,6 +14,7 @@ from pathlib import Path
 from typing import Dict, List, Tuple, Any
 from collections import defaultdict
 import logging
+import re
 
 # Import from main module for unit conversion
 import sys
@@ -180,9 +181,14 @@ def process_measurement_chunk(args: Tuple) -> Tuple[int, Dict, float]:
                         pass
                 
                 # Standardize datetime fields
-                if 'measurement_datetime' in row and row['measurement_datetime']:
-                    # Simple datetime standardization
-                    stats['datetime_standardized'] += 1
+                for col in ['measurement_date', 'measurement_datetime']:
+                    if col in row and row[col]:
+                        # Remove fractional seconds (milliseconds/microseconds)
+                        original = row[col]
+                        standardized = re.sub(r'(\d{2}:\d{2}:\d{2})\.\d+', r'\1', str(original))
+                        if original != standardized:
+                            row[col] = standardized
+                            stats['datetime_standardized'] += 1
                 
                 # Add non-outlier record to buffer
                 write_buffer.append(row)
@@ -250,9 +256,13 @@ def process_standard_table(args: Tuple) -> Tuple[str, Dict, float]:
         if table_name in DATE_COLUMNS:
             for col in DATE_COLUMNS[table_name]:
                 if col in df.columns:
-                    # Count non-null datetime values
-                    non_null = df[col].notna().sum()
+                    # Remove milliseconds/microseconds from datetime columns
+                    # Convert to string, remove fractional seconds, and keep as string
+                    mask = df[col].notna()
+                    non_null = mask.sum()
                     if non_null > 0:
+                        # Convert to string and remove fractional seconds
+                        df.loc[mask, col] = df.loc[mask, col].astype(str).str.replace(r'(\d{2}:\d{2}:\d{2})\.\d+', r'\1', regex=True)
                         stats['datetime_standardized'] += non_null
         
         # No outlier removal for non-MEASUREMENT tables

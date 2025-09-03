@@ -604,7 +604,7 @@ class DataStandardizer:
                     date_cols = [col for col in headers if 'datetime' in col.lower() or 'date' in col.lower()]
                 
                 for col in date_cols:
-                    if col in row:
+                    if col in row and row[col]:  # Check that value is not None or empty
                         original = row[col]
                         standardized = self.standardize_datetime(original, col)
                         if original != standardized:
@@ -718,7 +718,7 @@ class DataStandardizer:
                     date_cols = [col for col in headers if 'datetime' in col.lower() or 'date' in col.lower()]
                 
                 for col in date_cols:
-                    if col in row:
+                    if col in row and row[col]:  # Check that value is not None or empty
                         original = row[col]
                         standardized = self.standardize_datetime(original, col)
                         if original != standardized:
