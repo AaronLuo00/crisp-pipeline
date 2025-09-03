@@ -93,6 +93,10 @@ def process_table_partial(file_path, start_row, end_row, chunk_size=CHUNK_SIZE, 
     table_name = file_path.stem
     part_name = f"{table_name}{part_suffix}" if part_suffix else table_name
     
+    # Skip hidden or system files (Windows/Mac)
+    if file_path.name.startswith('._') or file_path.name.startswith('~$'):
+        return None
+    
     # Initialize time statistics
     time_stats = {
         'total': 0,
@@ -315,6 +319,10 @@ def process_table_partial(file_path, start_row, end_row, chunk_size=CHUNK_SIZE, 
 def process_table_chunked(file_path, chunk_size=CHUNK_SIZE):
     """Process a table in chunks and return aggregated statistics."""
     table_name = file_path.stem
+    
+    # Skip hidden or system files (Windows/Mac)
+    if file_path.name.startswith('._') or file_path.name.startswith('~$'):
+        return None
     
     # Initialize time statistics
     time_stats = {
@@ -665,8 +673,9 @@ if __name__ == '__main__':
     # Start timing
     start_time = time.time()
 
-    # Load all CSV files
-    data_files = list(data_dir.glob("*.csv"))
+    # Load all CSV files (excluding hidden/system files)
+    data_files = [f for f in data_dir.glob("*.csv") 
+                  if not (f.name.startswith('._') or f.name.startswith('~$'))]
     print(f"Found {len(data_files)} data files")
     logging.info(f"Found {len(data_files)} data files")
     print(f"Using chunk size: {CHUNK_SIZE:,} rows")
@@ -734,6 +743,10 @@ if __name__ == '__main__':
                 try:
                     stats = future.result()
                     
+                    # Skip None results (from hidden/system files)
+                    if stats is None:
+                        continue
+                    
                     if num_parts > 0:
                         # This is a MEASUREMENT part
                         measurement_parts.append(stats)
@@ -777,6 +790,10 @@ if __name__ == '__main__':
             
             # Process table
             stats = process_table_chunked(file_path, CHUNK_SIZE)
+            
+            # Skip None results (from hidden/system files)
+            if stats is None:
+                continue
             
             # Store results
             eda_results["tables"][table_name] = stats
