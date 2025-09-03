@@ -526,7 +526,15 @@ def evaluate_model(task_name: str, target: str, model_name: str, model_category:
     
     # Add model info
     metrics['model_name'] = model_name
-    metrics['model_category'] = model_category
+    # Use specific model name as category for traditional models
+    if model_category == 'traditional':
+        # Use the actual model name as the category
+        if model_name in ['logisticregression', 'randomforest', 'gradientboosting', 'xgboost']:
+            metrics['model_category'] = model_name
+        else:
+            metrics['model_category'] = model_category
+    else:
+        metrics['model_category'] = model_category
     metrics['model_type'] = model_data.get('model_type', model_name)
     metrics['n_samples'] = len(y)
     metrics['positive_rate'] = float(y.mean())

@@ -169,6 +169,9 @@ CRISP implements a **5-stage progressive pipeline**, each module building upon t
 
 ```
 Raw Data → [EDA] → [Cleaning] → [Mapping] → [Standardization] → [Extraction] → ML-Ready
+                                                                                     ↓
+                                                                        [Predictive Modeling]
+                                                                         (Optional ML Pipeline)
 ```
 
 ### Stage 1: Exploratory Data Analysis (EDA)
@@ -208,7 +211,39 @@ Raw Data → [EDA] → [Cleaning] → [Mapping] → [Standardization] → [Extra
 - **Key Features**:
   - Cohort-specific extraction
   - Feature aggregation
-  - ML model baselines *(coming soon)*
+  - Patient-level data organization
+
+## 🤖 Predictive Modeling (Optional)
+
+CRISP includes a complete machine learning pipeline for ICU outcome prediction:
+
+### What It Does
+Predicts 4 critical ICU outcomes using extracted patient data:
+- **Mortality**: 7-day and 30-day ICU mortality
+- **Readmission**: 7-day, 30-day, and 90-day readmission
+- **Length of Stay**: Extended stays (>3 days, >7 days)
+- **Sepsis**: Post-ICU sepsis detection (24h, 48h, during ICU)
+
+### Quick Start
+```bash
+# Run complete ML pipeline (after data extraction)
+python predictive_modeling/run_all_modules.py
+
+# Custom time window analysis (2H, 4H, or 8H)
+python predictive_modeling/run_all_modules.py --time-window 8
+
+# Include deep learning models
+python predictive_modeling/run_all_modules.py --include-dl
+```
+
+### Key Features
+- **Flexible Time Windows**: 2H, 4H, 8H configurable feature aggregation
+- **Multiple Model Types**: Traditional ML (XGBoost, Random Forest) and Deep Learning (MLP, LSTM, TCN)
+- **Automated Pipeline**: Feature engineering → Model training → Comprehensive evaluation
+- **Class Imbalance Handling**: SMOTE for balanced training
+- **Rich Evaluation**: AUROC, AUPRC, calibration plots, comparative analysis
+
+See [predictive_modeling/README.md](predictive_modeling/README.md) for detailed documentation.
 
 ## ⚡ Performance Optimizations
 
@@ -237,6 +272,12 @@ crisp-pipeline/
 │   ├── 4_standardization/ # Data standardization
 │   ├── 5_extraction/      # Feature extraction
 │   └── run_all_module.py  # Main pipeline runner
+├── predictive_modeling/   # ML pipeline (optional)
+│   ├── 1_feature_engineering/  # Time-series feature extraction
+│   ├── 2_model_training/       # Traditional & deep learning models
+│   ├── 3_evaluation/           # Model evaluation & comparison
+│   ├── modeling_results/       # Generated outputs
+│   └── run_all_modules.py      # ML pipeline orchestrator
 ├── mapping_resources/     # Concept mapping resources
 │   ├── *_concept_mapping.csv      # Unified mapping files
 │   ├── original_mappings/         # Original frequency analysis
