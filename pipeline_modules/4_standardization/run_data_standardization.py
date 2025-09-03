@@ -232,7 +232,7 @@ class DataStandardizer:
                 self.date_cache[normalized] = result
                 return result
             except ValueError:
-                logging.warning(f"Could not parse date value in {col}")
+                logging.warning(f"Could not parse date value in {column_name}: {normalized}")
                 pass
         
         # Fallback: Fast format detection with regex (if column name detection failed)
@@ -260,12 +260,14 @@ class DataStandardizer:
                     self.date_cache[normalized] = result
                     return result
                 except ValueError:
-                    logging.warning(f"Could not parse date value in {col}")
+                    logging.warning(f"Could not parse date value in {column_name}: {normalized}")
                     continue
         
-        # If all else fails, cache and return original
-        self.date_cache[dt_string] = dt_string
-        return dt_string
+        # If all else fails, cache and return normalized (with milliseconds removed)
+        # This ensures that even if we can't parse the date format, we at least remove milliseconds
+        self.date_cache[dt_string] = normalized
+        self.date_cache[normalized] = normalized
+        return normalized
     
     def batch_standardize_dates_in_rows(self, rows, table_name):
         """Batch-process date standardization for optimal performance."""
