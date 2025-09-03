@@ -163,6 +163,38 @@ We recommend different chunk sizes for different platforms:
 
 The pipeline automatically detects your OS and applies these settings. We suggest testing with a subset of your data to determine the optimal chunk size before processing the full dataset.
 
+## 🤖 Predictive Modeling (Optional)
+
+CRISP includes a complete machine learning pipeline for ICU outcome prediction:
+
+### What It Does
+Predicts 4 critical ICU outcomes using extracted patient data:
+- **Mortality**: 7-day and 30-day ICU mortality
+- **Readmission**: 7-day, 30-day, and 90-day readmission
+- **Length of Stay**: Extended stays (>3 days, >7 days)
+- **Sepsis**: Post-ICU sepsis detection (24h, 48h, during ICU)
+
+### Quick Start
+```bash
+# Run complete ML pipeline (after data extraction)
+python predictive_modeling/run_all_modules.py
+
+# Custom time window analysis (2H, 4H, or 8H)
+python predictive_modeling/run_all_modules.py --time-window 8
+
+# Include deep learning models
+python predictive_modeling/run_all_modules.py --include-dl
+```
+
+### Key Features
+- **Flexible Time Windows**: 2H, 4H, 8H configurable feature aggregation
+- **Multiple Model Types**: Traditional ML (XGBoost, Random Forest) and Deep Learning (MLP, LSTM, TCN)
+- **Automated Pipeline**: Feature engineering → Model training → Comprehensive evaluation
+- **Class Imbalance Handling**: SMOTE for balanced training
+- **Rich Evaluation**: AUROC, AUPRC, calibration plots, comparative analysis
+
+See [predictive_modeling/README.md](predictive_modeling/README.md) for detailed documentation.
+
 ## 📊 Pipeline Architecture
 
 CRISP implements a **5-stage progressive pipeline**, each module building upon the previous:
@@ -212,38 +244,6 @@ Raw Data → [EDA] → [Cleaning] → [Mapping] → [Standardization] → [Extra
   - Cohort-specific extraction
   - Feature aggregation
   - Patient-level data organization
-
-## 🤖 Predictive Modeling (Optional)
-
-CRISP includes a complete machine learning pipeline for ICU outcome prediction:
-
-### What It Does
-Predicts 4 critical ICU outcomes using extracted patient data:
-- **Mortality**: 7-day and 30-day ICU mortality
-- **Readmission**: 7-day, 30-day, and 90-day readmission
-- **Length of Stay**: Extended stays (>3 days, >7 days)
-- **Sepsis**: Post-ICU sepsis detection (24h, 48h, during ICU)
-
-### Quick Start
-```bash
-# Run complete ML pipeline (after data extraction)
-python predictive_modeling/run_all_modules.py
-
-# Custom time window analysis (2H, 4H, or 8H)
-python predictive_modeling/run_all_modules.py --time-window 8
-
-# Include deep learning models
-python predictive_modeling/run_all_modules.py --include-dl
-```
-
-### Key Features
-- **Flexible Time Windows**: 2H, 4H, 8H configurable feature aggregation
-- **Multiple Model Types**: Traditional ML (XGBoost, Random Forest) and Deep Learning (MLP, LSTM, TCN)
-- **Automated Pipeline**: Feature engineering → Model training → Comprehensive evaluation
-- **Class Imbalance Handling**: SMOTE for balanced training
-- **Rich Evaluation**: AUROC, AUPRC, calibration plots, comparative analysis
-
-See [predictive_modeling/README.md](predictive_modeling/README.md) for detailed documentation.
 
 ## ⚡ Performance Optimizations
 
