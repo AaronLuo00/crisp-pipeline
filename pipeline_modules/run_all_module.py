@@ -257,14 +257,9 @@ class CRISPPipeline:
         
         # Module 2 (cleaning) and Module 5 (extraction) have built-in parallel processing
         
-        # Set environment variables to control tqdm behavior
+        # Use default environment - don't modify tqdm settings
+        # as they can cause division by zero errors in child processes
         env = os.environ.copy()
-        env['TQDM_DISABLE'] = '0'  # Enable tqdm but control nesting
-        env['TQDM_POSITION'] = '0'  # Force single line
-        env['TQDM_NESTED'] = 'false'  # Disable nesting
-        # Use ASCII characters and disable ANSI escape sequences for cleaner logs
-        env['TQDM_ASCII'] = '1'  # Use ASCII characters instead of Unicode
-        env['TERM'] = 'dumb'  # Prevent ANSI escape sequences in subprocess
         
         # Execute module
         start_time = time.time()
