@@ -17,7 +17,7 @@ dependencies:
   - numpy>=1.21.0
   
   # Progress bars
-  - tqdm>=4.62.0
+  - tqdm>=4.65.0
   
   # Visualization
   - matplotlib>=3.4.0
