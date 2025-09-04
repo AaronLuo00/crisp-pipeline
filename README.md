@@ -2,7 +2,7 @@
 
 <div align="center">
 
-<img src="asset/logo_transparent.png" alt="CRISP Logo" width="320">
+<img src="asset/images/logo_transparent.png" alt="CRISP Logo" width="320">
 
 <br>
 
@@ -250,16 +250,16 @@ The pipeline has been optimized with parallel processing capabilities:
 
 ## 📚 Documentation
 
-- [Getting Started Guide](docs/getting_started.md) - Detailed setup and first steps
-- [Pipeline Guide](docs/pipeline_guide.md) - In-depth module documentation
+- [Getting Started Guide](asset/docs/getting_started.md) - Detailed setup and first steps
+- [Pipeline Guide](asset/docs/pipeline_guide.md) - In-depth module documentation
 
 ## 🏗️ Project Structure
 
 ```
 crisp-pipeline/
+├── asset/                  # All project resources (Images and Docs)
 ├── config/                 # Configuration files
 ├── data/                   # Working datasets (sampled or full)
-├── docs/                   # Documentation
 ├── notebooks/              # Jupyter notebooks for exploration
 ├── pipeline_modules/       # Core processing modules
 │   ├── 1_eda/             # Exploratory data analysis
