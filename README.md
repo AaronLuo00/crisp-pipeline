@@ -2,6 +2,10 @@
 
 <div align="center">
 
+<img src="asset/logo_transparent.png" alt="CRISP Logo" width="450">
+
+<br>
+
 ![CRISP Pipeline](https://img.shields.io/badge/CRISP-Pipeline-blue?style=flat-square)
 [![OMOP CDM](https://img.shields.io/badge/OMOP%20CDM-v5.3-orange?style=flat-square)](https://ohdsi.github.io/CommonDataModel/cdm53.html)
 [![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)](LICENSE)
