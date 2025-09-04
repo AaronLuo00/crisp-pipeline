@@ -2,7 +2,7 @@
 
 <div align="center">
 
-<img src="asset/images/logo_transparent.png" alt="CRISP Logo" width="320">
+<img src="asset/images/logo_transparent.png" alt="CRISP Logo" width="240">
 
 <br>
 
