@@ -21,6 +21,7 @@ from sklearn.metrics import (
     roc_auc_score, average_precision_score, roc_curve,
     precision_recall_curve, confusion_matrix
 )
+from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
 
 # Try to import torch for deep learning models
@@ -373,11 +374,20 @@ def load_test_data(task_name: str, target: str, feature_dir: Path, time_window: 
     
     X = df[feature_cols]
     y = df[target]
+    patient_ids = df['patient_id']
     
     # Handle missing values
     X = X.fillna(X.median())
     
-    return X, y, df['patient_id']
+    # Split data - keep consistent with training (20% test set, same random_state)
+    _, X_test, _, y_test, _, patient_ids_test = train_test_split(
+        X, y, patient_ids,
+        test_size=0.2,
+        random_state=42,
+        stratify=y
+    )
+    
+    return X_test, y_test, patient_ids_test
 
 def calculate_metrics(y_true, y_pred_proba, threshold=0.5) -> Dict:
     """Calculate essential evaluation metrics"""
