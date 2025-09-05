@@ -48,6 +48,133 @@ DATE_COLUMNS = {
     'SPECIMEN': ['specimen_date', 'specimen_datetime']
 }
 
+# ID columns that should be formatted as integers (remove .0)
+ID_COLUMNS_TO_FORMAT = {
+    # Common ID columns across all tables
+    'ALL': ['person_id'],
+    
+    # Table-specific ID columns
+    'CONDITION_OCCURRENCE': [
+        'provider_id', 'visit_occurrence_id', 'visit_detail_id',
+        'condition_source_concept_id', 'condition_status_concept_id'
+    ],
+    'DEVICE_EXPOSURE': [
+        'unique_device_id', 'provider_id', 'visit_occurrence_id', 
+        'visit_detail_id', 'device_source_concept_id'
+    ],
+    'DRUG_EXPOSURE': [
+        'route_concept_id', 'provider_id', 'visit_occurrence_id',
+        'visit_detail_id', 'drug_source_concept_id'
+    ],
+    'MEASUREMENT': [
+        'operator_concept_id', 'value_as_concept_id', 'unit_concept_id',
+        'provider_id', 'visit_occurrence_id', 'visit_detail_id',
+        'measurement_source_concept_id'
+    ],
+    'OBSERVATION': [
+        'value_as_concept_id', 'qualifier_concept_id', 'provider_id',
+        'visit_occurrence_id', 'visit_detail_id', 
+        'observation_source_concept_id'
+    ],
+    'PROCEDURE_OCCURRENCE': [
+        'modifier_concept_id', 'provider_id', 'visit_occurrence_id',
+        'visit_detail_id', 'procedure_source_concept_id'
+    ],
+    'SPECIMEN': [
+        'unit_concept_id', 'anatomic_site_concept_id'
+    ],
+    'VISIT_DETAIL': [
+        'provider_id', 'care_site_id', 'visit_detail_source_concept_id',
+        'admitting_source_concept_id', 'preceding_visit_detail_id'
+    ],
+    'VISIT_OCCURRENCE': [
+        'provider_id', 'care_site_id', 'visit_source_concept_id',
+        'admitting_source_concept_id', 'discharge_to_concept_id',
+        'preceding_visit_occurrence_id'
+    ]
+}
+
+def format_id_columns_df(df, table_name):
+    """
+    Format ID columns in DataFrame by removing .0 suffix.
+    Handles both float64 columns and object columns with float string values.
+    
+    Args:
+        df: DataFrame to format
+        table_name: Name of the table for column lookup
+    
+    Returns:
+        Modified DataFrame with formatted ID columns
+    """
+    # Get ID columns for this table
+    id_columns = ID_COLUMNS_TO_FORMAT.get('ALL', []) + \
+                 ID_COLUMNS_TO_FORMAT.get(table_name, [])
+    
+    for col in id_columns:
+        if col in df.columns:
+            # Handle float64 columns
+            if df[col].dtype == 'float64':
+                # For columns with NaN, format non-null values
+                mask = df[col].notna()
+                if mask.any():
+                    # Convert to string, removing .0 for integers
+                    df.loc[mask, col] = df.loc[mask, col].apply(
+                        lambda x: str(int(x)) if x == int(x) else str(x)
+                    )
+            # Handle object (string) columns that may contain float representations
+            elif df[col].dtype == 'object':
+                # Process non-null string values
+                mask = df[col].notna() & (df[col] != '')
+                if mask.any():
+                    def format_value(val):
+                        if isinstance(val, str) and '.' in val:
+                            try:
+                                float_val = float(val)
+                                if float_val == int(float_val):
+                                    return str(int(float_val))
+                            except (ValueError, TypeError):
+                                pass
+                        return val
+                    
+                    df.loc[mask, col] = df.loc[mask, col].apply(format_value)
+    
+    return df
+
+def format_id_columns_row(row, table_name):
+    """
+    Format ID columns in a dictionary row by removing .0 suffix.
+    Similar to format_id_columns_df but works on a single row dictionary.
+    
+    Args:
+        row: Dictionary row from CSV reader
+        table_name: Name of the table for column lookup
+    
+    Returns:
+        Modified row with formatted ID columns
+    """
+    # Get ID columns for this table
+    id_columns = ID_COLUMNS_TO_FORMAT.get('ALL', []) + \
+                 ID_COLUMNS_TO_FORMAT.get(table_name, [])
+    
+    for col in id_columns:
+        if col in row and row[col]:  # Column exists and is not empty
+            value = row[col]
+            try:
+                # Handle string representation of float
+                if isinstance(value, str) and '.' in value:
+                    float_val = float(value)
+                    if float_val == int(float_val):  # No decimal part
+                        row[col] = str(int(float_val))
+                # Handle float type directly (shouldn't happen with CSV reader, but just in case)
+                elif isinstance(value, float):
+                    if value == int(value):  # No decimal part
+                        row[col] = str(int(value))
+            except (ValueError, TypeError, OverflowError):
+                # Keep original value if conversion fails
+                pass
+    
+    return row
+
 
 def process_measurement_chunk(args: Tuple) -> Tuple[int, Dict, float]:
     """
@@ -190,8 +317,11 @@ def process_measurement_chunk(args: Tuple) -> Tuple[int, Dict, float]:
                             row[col] = standardized
                             stats['datetime_standardized'] += 1
                 
+                # Format ID columns before adding to buffer
+                formatted_row = format_id_columns_row(row, 'MEASUREMENT')
+                
                 # Add non-outlier record to buffer
-                write_buffer.append(row)
+                write_buffer.append(formatted_row)
                 
                 # Batch write when buffer is full
                 if len(write_buffer) >= WRITE_BUFFER_SIZE:
@@ -267,6 +397,9 @@ def process_standard_table(args: Tuple) -> Tuple[str, Dict, float]:
         
         # No outlier removal for non-MEASUREMENT tables
         stats['output_records'] = len(df)
+        
+        # Format ID columns before saving
+        df = format_id_columns_df(df, table_name)
         
         # Save output
         output_file = Path(output_dir) / f"{table_name}_standardized.csv"

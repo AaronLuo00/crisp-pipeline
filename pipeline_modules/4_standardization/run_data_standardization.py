@@ -110,6 +110,52 @@ DATE_COLUMNS = {
     'SPECIMEN': ['specimen_date', 'specimen_datetime']
 }
 
+# ID columns that should be formatted as integers (remove .0)
+ID_COLUMNS_TO_FORMAT = {
+    # Common ID columns across all tables
+    'ALL': ['person_id'],
+    
+    # Table-specific ID columns
+    'CONDITION_OCCURRENCE': [
+        'provider_id', 'visit_occurrence_id', 'visit_detail_id',
+        'condition_source_concept_id', 'condition_status_concept_id'
+    ],
+    'DEVICE_EXPOSURE': [
+        'unique_device_id', 'provider_id', 'visit_occurrence_id', 
+        'visit_detail_id', 'device_source_concept_id'
+    ],
+    'DRUG_EXPOSURE': [
+        'route_concept_id', 'provider_id', 'visit_occurrence_id',
+        'visit_detail_id', 'drug_source_concept_id'
+    ],
+    'MEASUREMENT': [
+        'operator_concept_id', 'value_as_concept_id', 'unit_concept_id',
+        'provider_id', 'visit_occurrence_id', 'visit_detail_id',
+        'measurement_source_concept_id'
+    ],
+    'OBSERVATION': [
+        'value_as_concept_id', 'qualifier_concept_id', 'provider_id',
+        'visit_occurrence_id', 'visit_detail_id', 
+        'observation_source_concept_id'
+    ],
+    'PROCEDURE_OCCURRENCE': [
+        'modifier_concept_id', 'provider_id', 'visit_occurrence_id',
+        'visit_detail_id', 'procedure_source_concept_id'
+    ],
+    'SPECIMEN': [
+        'unit_concept_id', 'anatomic_site_concept_id'
+    ],
+    'VISIT_DETAIL': [
+        'provider_id', 'care_site_id', 'visit_detail_source_concept_id',
+        'admitting_source_concept_id', 'preceding_visit_detail_id'
+    ],
+    'VISIT_OCCURRENCE': [
+        'provider_id', 'care_site_id', 'visit_source_concept_id',
+        'admitting_source_concept_id', 'discharge_to_concept_id',
+        'preceding_visit_occurrence_id'
+    ]
+}
+
 # Concept-specific reasonable ranges
 # Using SNOMED IDs for concepts that have been mapped, keeping original IDs for unmapped concepts
 CONCEPT_RANGES = {
@@ -573,6 +619,42 @@ class DataStandardizer:
         
         return False, None
     
+    def format_id_columns(self, row, table_name):
+        """
+        Format ID columns by removing unnecessary .0 suffix from float values.
+        Maintains streaming processing with zero memory overhead.
+        
+        Args:
+            row: Dictionary of current row data
+            table_name: Name of the table being processed
+        
+        Returns:
+            The row with formatted ID columns (modified in place)
+        """
+        # Get ID columns for this table
+        id_columns = ID_COLUMNS_TO_FORMAT.get('ALL', []) + \
+                    ID_COLUMNS_TO_FORMAT.get(table_name, [])
+        
+        for col in id_columns:
+            if col in row and row[col]:  # Column exists and is not empty
+                value = row[col]
+                try:
+                    # Handle string representation of float
+                    if isinstance(value, str) and '.' in value:
+                        float_val = float(value)
+                        if float_val == int(float_val):  # No decimal part
+                            row[col] = str(int(float_val))
+                    # Handle float type directly
+                    elif isinstance(value, float):
+                        if value == int(value):  # No decimal part
+                            row[col] = str(int(value))
+                    # Keep other values as-is
+                except (ValueError, TypeError, OverflowError):
+                    # Keep original value if conversion fails
+                    pass
+        
+        return row
+    
     def _process_rows_with_outliers(self, reader, writer, perc_writer, range_writer, 
                                    change_writer, stats, table_name, concept_col, input_file):
         """Process rows for MEASUREMENT table with outlier checking."""
@@ -681,7 +763,9 @@ class DataStandardizer:
                     stats['outliers_removed_range'] += 1
                     range_writer.writerow(removed_row)
             else:
-                writer.writerow(new_row)
+                # Format ID columns before writing
+                formatted_row = self.format_id_columns(new_row, table_name)
+                writer.writerow(formatted_row)
                 stats['output_records'] += 1
                 
                 # Write changes
@@ -739,7 +823,9 @@ class DataStandardizer:
                 removed_row['original_row_number'] = row_num
                 removed_row['additional_info'] = json.dumps(removal_info)
             else:
-                writer.writerow(new_row)
+                # Format ID columns before writing
+                formatted_row = self.format_id_columns(new_row, table_name)
+                writer.writerow(formatted_row)
                 stats['output_records'] += 1
                 
                 # Write changes
