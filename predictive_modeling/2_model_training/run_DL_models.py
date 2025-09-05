@@ -12,6 +12,7 @@ import pandas as pd
 import numpy as np
 import json
 import pickle
+import random
 from pathlib import Path
 from datetime import datetime
 import argparse
@@ -25,6 +26,16 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import roc_auc_score, average_precision_score
 from imblearn.over_sampling import SMOTE
+
+# Set random seeds for reproducibility
+SEED = 42
+random.seed(SEED)
+np.random.seed(SEED)
+torch.manual_seed(SEED)
+torch.cuda.manual_seed(SEED)
+torch.cuda.manual_seed_all(SEED)  # if using multi-GPU
+torch.backends.cudnn.deterministic = True
+torch.backends.cudnn.benchmark = False
 
 # Set device
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -836,10 +847,17 @@ def train_task_models(task_name: str, targets: List[str], input_dir: Path,
             
             model = get_model(args.model_type, input_dim, model_config)
         
-        # Create data loaders
-        train_loader = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True)
-        val_loader = DataLoader(val_dataset, batch_size=args.batch_size, shuffle=False)
-        test_loader = DataLoader(test_dataset, batch_size=args.batch_size, shuffle=False)
+        # Create data loaders with fixed seed for workers
+        def worker_init_fn(worker_id):
+            np.random.seed(SEED + worker_id)
+            random.seed(SEED + worker_id)
+        
+        train_loader = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True, 
+                                  worker_init_fn=worker_init_fn, generator=torch.Generator().manual_seed(SEED))
+        val_loader = DataLoader(val_dataset, batch_size=args.batch_size, shuffle=False,
+                                worker_init_fn=worker_init_fn)
+        test_loader = DataLoader(test_dataset, batch_size=args.batch_size, shuffle=False,
+                                 worker_init_fn=worker_init_fn)
         
         print(f"    Training {args.model_type} model...")
         
