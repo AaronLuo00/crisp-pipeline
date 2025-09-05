@@ -170,7 +170,7 @@ Predicts 4 critical ICU outcomes using extracted patient data:
 - **Length of Stay**: Extended stays (>3 days, >7 days)
 - **Sepsis**: Post-ICU sepsis detection (24h, 48h, during ICU)
 
-### Quick Start
+### Quick Start (Command Line)
 ```bash
 # Run complete ML pipeline (after data extraction)
 python predictive_modeling/run_all_modules.py
@@ -181,6 +181,11 @@ python predictive_modeling/run_all_modules.py --time-window 8
 # Include deep learning models
 python predictive_modeling/run_all_modules.py --include-dl
 ```
+See [predictive_modeling/README.md](predictive_modeling/README.md) for detailed documentation.
+
+### Quick Start (Jupyter)
+
+See [notebooks/02_ml_modeling_example.ipynb](notebooks/02_ml_modeling_example.ipynb) for detailed documentation.
 
 ### Key Features
 - **Flexible Time Windows**: 2H, 4H, 8H configurable feature aggregation
@@ -188,8 +193,6 @@ python predictive_modeling/run_all_modules.py --include-dl
 - **Automated Pipeline**: Feature engineering → Model training → Comprehensive evaluation
 - **Class Imbalance Handling**: SMOTE for balanced training
 - **Rich Evaluation**: AUROC, AUPRC, calibration plots, comparative analysis
-
-See [predictive_modeling/README.md](predictive_modeling/README.md) for detailed documentation.
 
 ## 📊 Pipeline Architecture
 
