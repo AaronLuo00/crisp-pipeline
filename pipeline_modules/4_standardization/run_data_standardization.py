@@ -652,7 +652,7 @@ class DataStandardizer:
         return row
     
     def _process_rows_with_outliers(self, reader, writer, perc_writer, range_writer, 
-                                   change_writer, stats, table_name, concept_col, input_file):
+                                   change_writer, stats, table_name, concept_col, input_file, changes):
         """Process rows for MEASUREMENT table with outlier checking."""
         headers = writer.fieldnames
         
@@ -770,7 +770,7 @@ class DataStandardizer:
                     change_writer.writerow(change)
     
     def _process_rows_without_outliers(self, reader, writer, 
-                                      change_writer, stats, table_name, concept_col, input_file):
+                                      change_writer, stats, table_name, concept_col, input_file, changes):
         """Process rows for non-MEASUREMENT tables without outlier checking."""
         headers = writer.fieldnames
         
@@ -845,6 +845,9 @@ class DataStandardizer:
             'file_writing': 0
         }
         table_start_time = time.time()
+        
+        # Initialize changes list to track all modifications
+        changes = []
         
         logging.info(f"\n{'='*60}")
         logging.info(f"Standardizing {table_name}")
@@ -942,7 +945,7 @@ class DataStandardizer:
                     # Process rows with outlier checking
                     self._process_rows_with_outliers(reader, writer, perc_writer, range_writer, 
                                                    change_writer, stats, 
-                                                   table_name, concept_col, input_file)
+                                                   table_name, concept_col, input_file, changes)
             else:
                 # For other tables, only open necessary files (no outlier files)
                 with open(output_file, 'w', encoding='utf-8', newline='') as outfile, \
@@ -960,12 +963,26 @@ class DataStandardizer:
                     # Process rows without outlier checking
                     self._process_rows_without_outliers(reader, writer, 
                                                       change_writer, stats, 
-                                                      table_name, concept_col, input_file)
+                                                      table_name, concept_col, input_file, changes)
         
         # Calculate times
         table_time_stats['data_processing'] = time.time() - t0
         table_time_stats['total'] = time.time() - table_start_time
         table_time_stats['file_io'] = table_time_stats['total'] - table_time_stats['concept_statistics'] - table_time_stats['data_processing']
+        
+        # Save changes to file if any changes were made
+        if changes:
+            changes_dir = output_dir / 'standardization_changes'
+            changes_dir.mkdir(exist_ok=True)
+            changes_file = changes_dir / f'{table_name}_changes.csv'
+            changes_df = pd.DataFrame(changes)
+            changes_df.to_csv(changes_file, index=False)
+            logging.info(f"  - Saved {len(changes):,} changes to {changes_file.name}")
+            
+            # Add unit conversion details to statistics
+            unit_conversions = [c for c in changes if c.get('change_type', '').startswith('unit_')]
+            if unit_conversions:
+                stats['unit_conversion_details'] = len(unit_conversions)
         
         # Save statistics (without time_stats for JSON output)
         self.standardization_results["tables"][table_name] = stats
@@ -1159,13 +1176,15 @@ class DataStandardizer:
                     futures.append(('table', future))
             
             # Collect results
+            all_changes = []  # Collect changes from all chunks
             for task_type, future in futures:
                 try:
                     result = future.result(timeout=300)
                     if task_type == 'measurement':
-                        chunk_id, stats, elapsed = result
+                        chunk_id, stats, elapsed, chunk_changes = result
                         measurement_stats[chunk_id] = stats
                         total_cpu_time += elapsed
+                        all_changes.extend(chunk_changes)  # Collect changes
                         logging.info(f"MEASUREMENT chunk {chunk_id+1}/6: {stats['records_processed']} records")
                     else:
                         table_name, stats, elapsed = result
@@ -1174,6 +1193,15 @@ class DataStandardizer:
                         logging.info(f"{table_name}: {stats['input_records']} -> {stats['output_records']} records")
                 except Exception as e:
                     logging.error(f"Task failed: {e}")
+        
+        # Save collected changes to file
+        if all_changes:
+            changes_dir = output_dir / 'standardization_changes'
+            changes_dir.mkdir(exist_ok=True)
+            changes_file = changes_dir / 'MEASUREMENT_changes.csv'
+            changes_df = pd.DataFrame(all_changes)
+            changes_df.to_csv(changes_file, index=False)
+            logging.info(f"  - Saved {len(all_changes):,} unit conversion changes to {changes_file.name}")
         
         # Aggregate MEASUREMENT statistics
         if measurement_stats:
@@ -1186,6 +1214,8 @@ class DataStandardizer:
                 'units_converted': sum(s['units_converted'] for s in measurement_stats.values()),
                 'datetime_standardized': sum(s['datetime_standardized'] for s in measurement_stats.values())
             }
+            if all_changes:
+                aggregated['unit_conversion_details'] = len(all_changes)
             self.standardization_results['tables']['MEASUREMENT'] = aggregated
         
         self.phase_stats['phase2']['wall_time'] = time.time() - phase2_start

@@ -209,7 +209,7 @@ def standardize_units_parallel(value, unit_concept_id, measurement_concept_id):
     return value, unit_concept_id, False
 
 
-def process_measurement_chunk(args: Tuple) -> Tuple[int, Dict, float]:
+def process_measurement_chunk(args: Tuple) -> Tuple[int, Dict, float, List]:
     """
     Process a chunk of MEASUREMENT table for standardization.
     
@@ -230,6 +230,10 @@ def process_measurement_chunk(args: Tuple) -> Tuple[int, Dict, float]:
         'units_converted': 0,
         'datetime_standardized': 0
     }
+    
+    # List to collect unit conversion changes (limited to avoid memory issues)
+    changes = []
+    max_changes = 100000  # Limit changes per chunk to avoid memory issues
     
     # Output files
     output_dir = Path(output_dir)
@@ -337,6 +341,18 @@ def process_measurement_chunk(args: Tuple) -> Tuple[int, Dict, float]:
                                 value, row['unit_concept_id'], concept_id
                             )
                             if converted:
+                                # Record change if under limit
+                                if len(changes) < max_changes:
+                                    changes.append({
+                                        'row_number': stats['records_processed'],
+                                        'measurement_id': row.get('measurement_id', ''),
+                                        'concept_id': concept_id,
+                                        'original_value': value,
+                                        'original_unit_id': row['unit_concept_id'],
+                                        'new_value': new_value,
+                                        'new_unit_id': new_unit_id,
+                                        'change_type': 'unit_conversion'
+                                    })
                                 row['value_as_number'] = new_value
                                 row['unit_concept_id'] = new_unit_id
                                 stats['units_converted'] += 1
@@ -388,7 +404,7 @@ def process_measurement_chunk(args: Tuple) -> Tuple[int, Dict, float]:
     logging.info(f"MEASUREMENT chunk {chunk_id+1}/{total_chunks} completed: "
                  f"{stats['records_processed']} records in {elapsed:.2f}s")
     
-    return chunk_id, stats, elapsed
+    return chunk_id, stats, elapsed, changes
 
 
 def process_standard_table(args: Tuple) -> Tuple[str, Dict, float]:
