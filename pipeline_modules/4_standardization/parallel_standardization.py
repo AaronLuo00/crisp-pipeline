@@ -20,6 +20,9 @@ import re
 import sys
 sys.path.append(str(Path(__file__).parent))
 
+# Import unit conversion mappings
+from unit_conversions import UNIT_ID_CONVERSIONS
+
 # Platform-specific settings for performance optimization
 if platform.system() == 'Windows':
     CHUNK_SIZE = 500000  # Larger chunks for Windows (better I/O performance)
@@ -176,6 +179,36 @@ def format_id_columns_row(row, table_name):
     return row
 
 
+def standardize_units_parallel(value, unit_concept_id, measurement_concept_id):
+    """Standardize measurement units (parallel version)."""
+    if not value or not unit_concept_id:
+        return value, unit_concept_id, False
+        
+    try:
+        value_float = float(value)
+        unit_id = int(float(unit_concept_id))
+    except:
+        return value, unit_concept_id, False
+    
+    # Check if this unit needs conversion
+    if unit_id in UNIT_ID_CONVERSIONS:
+        conversion = UNIT_ID_CONVERSIONS[unit_id]
+        
+        # Only convert if this measurement type needs it
+        if measurement_concept_id in conversion['for_concepts']:
+            # Apply conversion
+            if 'factor' in conversion:
+                new_value = value_float * conversion['factor']
+            elif 'formula' in conversion:
+                new_value = conversion['formula'](value_float)
+            
+            # Update to target unit
+            new_unit_id = conversion['target_id']
+            return str(new_value), str(new_unit_id), True
+    
+    return value, unit_concept_id, False
+
+
 def process_measurement_chunk(args: Tuple) -> Tuple[int, Dict, float]:
     """
     Process a chunk of MEASUREMENT table for standardization.
@@ -298,11 +331,15 @@ def process_measurement_chunk(args: Tuple) -> Tuple[int, Dict, float]:
                             if is_outlier:
                                 continue  # Skip this record
                         
-                        # Unit conversion would go here
-                        # For now, just count if unit_concept_id exists
-                        if 'unit_concept_id' in row and row['unit_concept_id']:
-                            # Simplified unit conversion tracking
-                            pass
+                        # Unit conversion
+                        if 'unit_concept_id' in row and row['unit_concept_id'] and value:
+                            new_value, new_unit_id, converted = standardize_units_parallel(
+                                value, row['unit_concept_id'], concept_id
+                            )
+                            if converted:
+                                row['value_as_number'] = new_value
+                                row['unit_concept_id'] = new_unit_id
+                                stats['units_converted'] += 1
                     
                     except (ValueError, TypeError):
                         pass

@@ -10,6 +10,7 @@ import logging
 from tdigest import TDigest
 import multiprocessing as mp
 import time
+from unit_conversions import UNIT_ID_CONVERSIONS
 
 
 def process_measurement_chunk(args: Tuple[str, int, int, Optional[int]]) -> Tuple[Dict, float]:
@@ -108,15 +109,37 @@ def process_measurement_chunk(args: Tuple[str, int, int, Optional[int]]) -> Tupl
                 # Process measurements with numeric values
                 valid_measurements = df_chunk[df_chunk['value_as_number'].notna()]
                 
+                # Helper function for unit conversion
+                def convert_units(value, unit_concept_id, measurement_concept_id):
+                    """Convert units before adding to T-Digest."""
+                    if not value or not unit_concept_id:
+                        return value
+                    try:
+                        unit_id = int(float(unit_concept_id))
+                        if unit_id in UNIT_ID_CONVERSIONS:
+                            conversion = UNIT_ID_CONVERSIONS[unit_id]
+                            if measurement_concept_id in conversion['for_concepts']:
+                                if 'factor' in conversion:
+                                    return value * conversion['factor']
+                                elif 'formula' in conversion:
+                                    return conversion['formula'](value)
+                    except:
+                        pass
+                    return value
+                
                 # Group by concept and update T-Digests
                 for concept_id, group in valid_measurements.groupby('measurement_concept_id'):
                     if concept_id not in concept_digests:
                         concept_digests[concept_id] = TDigest(delta=0.01, K=25)
                     
-                    # Add all values to the digest
-                    for value in group['value_as_number'].values:
+                    # Add all values to the digest after unit conversion
+                    for idx, row in group.iterrows():
+                        value = row['value_as_number']
                         if not np.isnan(value) and np.isfinite(value):
-                            concept_digests[concept_id].update(value)
+                            # Convert units before adding to T-Digest
+                            unit_id = row.get('unit_concept_id', np.nan)
+                            converted_value = convert_units(value, unit_id, concept_id)
+                            concept_digests[concept_id].update(converted_value)
     
     # Serialize T-Digest states
     result = {}

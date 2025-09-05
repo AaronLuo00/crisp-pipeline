@@ -162,7 +162,7 @@ CONCEPT_RANGES = {
     # Glucose measurements
     4151414: {'name': 'glucose_urine', 'min': 0, 'max': 500, 'unit': 'mg/dL'},  # SNOMED for urine glucose
     4018317: {'name': 'glucose_serum', 'min': 0, 'max': 500, 'unit': 'mg/dL'},  # SNOMED for serum/plasma glucose
-    3020891: {'name': 'temperature', 'min': 35, 'max': 42, 'unit': 'C'},  # Original LOINC (not mapped)
+    3020891: {'name': 'temperature', 'min': 30, 'max': 45, 'unit': 'C'},  # Original LOINC (not mapped)
     37174455: {'name': 'weight', 'min': 0.5, 'max': 300, 'unit': 'kg'},  # SNOMED
     4212065: {'name': 'ESR', 'min': 0, 'max': 150, 'unit': 'mm/hr'},  # SNOMED for ESR (corrected from height)
     4324383: {'name': 'creatinine', 'min': 0, 'max': 20, 'unit': 'mg/dL'},  # SNOMED
@@ -172,22 +172,8 @@ CONCEPT_RANGES = {
     3036277: {'name': 'height', 'min': 30, 'max': 250, 'unit': 'cm'}  # Body height LOINC concept
 }
 
-# Unit conversion mappings
-UNIT_CONVERSIONS = {
-    # Glucose conversions (using SNOMED IDs)
-    'mmol/L': {'target': 'mg/dL', 'factor': 18.0182, 'concepts': [4151414, 4018317]},
-    
-    # Temperature conversions (using original LOINC ID as not mapped to SNOMED)
-    'Fahrenheit': {'target': 'Celsius', 'formula': lambda f: (f - 32) * 5/9, 'concepts': [3020891]},
-    
-    # Weight conversions (using SNOMED ID)
-    'lb': {'target': 'kg', 'factor': 0.453592, 'concepts': [37174455]},
-    'lbs': {'target': 'kg', 'factor': 0.453592, 'concepts': [37174455]},
-    
-    # Height conversions (using LOINC ID as common height concept)
-    'in': {'target': 'cm', 'factor': 2.54, 'concepts': [3036277]},
-    'inch': {'target': 'cm', 'factor': 2.54, 'concepts': [3036277]},
-}
+# Import unit conversion configurations
+from unit_conversions import UNIT_CONCEPT_MAP, UNIT_ID_CONVERSIONS, LEGACY_UNIT_CONVERSIONS
 
 class DataStandardizer:
     def __init__(self, outlier_percentile=99.0, 
@@ -362,40 +348,44 @@ class DataStandardizer:
     
     def standardize_units(self, value, unit_concept_id, measurement_concept_id):
         """Standardize measurement units based on concept IDs."""
-        if not value:
+        if not value or not unit_concept_id:
             return value, unit_concept_id, None
             
         try:
             value = float(value)
+            unit_id = int(float(unit_concept_id))
         except:
-            logging.warning(f"Could not parse numeric value: {value}")
+            logging.warning(f"Could not parse value/unit: {value}/{unit_concept_id}")
             return value, unit_concept_id, None
         
-        # Track conversion
-        conversion_info = None
-        
-        # Check if this measurement type needs unit conversion
-        if measurement_concept_id in CONCEPT_RANGES:
-            test_type = CONCEPT_RANGES[measurement_concept_id]['name']
+        # Check if this unit needs conversion
+        if unit_id in UNIT_ID_CONVERSIONS:
+            conversion = UNIT_ID_CONVERSIONS[unit_id]
             
-            # Apply conversions based on unit concept ID
-            for unit, conversion in UNIT_CONVERSIONS.items():
-                if measurement_concept_id in conversion.get('concepts', []):
-                    original_value = value
-                    if 'factor' in conversion:
-                        value = value * conversion['factor']
-                    elif 'formula' in conversion:
-                        value = conversion['formula'](value)
-                    
-                    if value != original_value:
-                        conversion_info = {
-                            'type': 'unit_conversion',
-                            'original_value': original_value,
-                            'new_value': value,
-                            'conversion': f"{unit} to {conversion['target']}"
-                        }
+            # Only convert if this measurement type needs it
+            if measurement_concept_id in conversion['for_concepts']:
+                original_value = value
+                
+                # Apply conversion
+                if 'factor' in conversion:
+                    value = value * conversion['factor']
+                elif 'formula' in conversion:
+                    value = conversion['formula'](value)
+                
+                # Update unit concept ID to target unit
+                new_unit_id = conversion['target_id']
+                
+                conversion_info = {
+                    'type': 'unit_conversion',
+                    'original_value': original_value,
+                    'new_value': value,
+                    'original_unit_id': unit_id,
+                    'new_unit_id': new_unit_id
+                }
+                
+                return value, new_unit_id, conversion_info
         
-        return value, unit_concept_id, conversion_info
+        return value, unit_concept_id, None
     
     def calculate_concept_statistics(self, table_name):
         """Calculate outlier thresholds for MEASUREMENT table."""
@@ -559,8 +549,14 @@ class DataStandardizer:
                 for concept_id, group in valid_rows.groupby(concept_col):
                     try:
                         concept_id = int(concept_id)
-                        values = group['value_as_number'].astype(float).tolist()
-                        concept_values[concept_id].extend(values)
+                        # Convert units before collecting values for statistics
+                        for idx, row in group.iterrows():
+                            value = float(row['value_as_number'])
+                            unit_id = row.get('unit_concept_id', '')
+                            
+                            # Perform unit conversion for correct statistics
+                            converted_value, _, _ = self.standardize_units(value, unit_id, concept_id)
+                            concept_values[concept_id].append(float(converted_value))
                     except:
                         logging.warning(f"Could not process value for concept {concept_id}")
                         pass
@@ -715,11 +711,12 @@ class DataStandardizer:
                         if conversion_info:
                             stats['units_converted'] += 1
                             new_row['value_as_number'] = str(new_value)
+                            new_row['unit_concept_id'] = str(new_unit_id)  # Update unit_concept_id
                             changes.append({
                                 'row_number': row_num,
-                                'field': 'value_as_number',
-                                'original_value': value,
-                                'new_value': new_value,
+                                'field': 'value_as_number,unit_concept_id',
+                                'original_value': f"{value} (unit_id={conversion_info['original_unit_id']})",
+                                'new_value': f"{new_value} (unit_id={new_unit_id})",
                                 'change_type': conversion_info['type']
                             })
                             value = new_value
