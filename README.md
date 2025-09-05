@@ -229,7 +229,8 @@ Raw Data → [EDA] → [Cleaning] → [Mapping] → [Standardization] → [Extra
 ### Stage 4: Data Standardization
 - **Purpose**: Normalize values and formats
 - **Key Features**:
-  - DateTime standardization to ISO 8601
+  - Format standardization: DateTime to ISO 8601, missing values as NaN, ID columns as integers, measurements as floats
+  - Unit harmonization: standardizes measurement units across institutions (e.g., temperatures to Celsius, weights to kg)
   - Statistical outlier detection and removal
   - Visit episode merging (configurable window)
   - Comprehensive statistics calculation
