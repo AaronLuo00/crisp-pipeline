@@ -22,7 +22,8 @@ class SimpleTimeSeriesExtractor:
     def __init__(self, time_window: int,
                  minimum_observation_hours: int,
                  concepts_path: str = '../config/concepts.json',
-                 aggregation: str = 'median'):
+                 aggregation: str = 'median',
+                 verbose: bool = True):
         """
         Initialize the simplified extractor
         
@@ -31,6 +32,7 @@ class SimpleTimeSeriesExtractor:
             minimum_observation_hours: Minimum observation hours (must be 24, 48, or 72)
             concepts_path: Path to concepts JSON
             aggregation: Aggregation method ('median', 'mean', 'max', 'min')
+            verbose: Whether to print initialization messages
         """
         # Validate parameters
         if time_window not in [2, 4, 8]:
@@ -57,12 +59,14 @@ class SimpleTimeSeriesExtractor:
         # Calculate number of time windows
         self.n_windows = self.total_hours // self.time_window
         
-        print(f"Initialized extractor with:")
-        print(f"  - Time window: {self.time_window} hours")
-        print(f"  - Minimum observation: {self.minimum_observation_hours} hours")
-        print(f"  - Total windows: {self.n_windows}")
-        print(f"  - Aggregation: {self.aggregation}")
-        print(f"  - Total concepts: {sum(len(v) for v in self.concepts.values())}")
+        # Only print if verbose and if we're the main extractor (not in parallel worker)
+        if verbose:
+            print(f"Initialized extractor with:")
+            print(f"  - Time window: {self.time_window} hours")
+            print(f"  - Minimum observation: {self.minimum_observation_hours} hours")
+            print(f"  - Total windows: {self.n_windows}")
+            print(f"  - Aggregation: {self.aggregation}")
+            print(f"  - Total concepts: {sum(len(v) for v in self.concepts.values())}")
     
     def extract_patient_features(self, patient_id: str, patient_dir: Path, 
                                 icu_start: str) -> Dict:
@@ -620,7 +624,7 @@ class SimpleTimeSeriesExtractor:
             all_features.append(features)
         
         # Create DataFrame
-        df = pd.DataFrame(all_features).fillna(0)
+        df = pd.DataFrame(all_features).fillna(0.0)
         
         # Reorganize columns: patient_id, static features, windowed features, labels
         df = self._reorganize_columns(df)
