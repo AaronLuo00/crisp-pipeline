@@ -81,6 +81,7 @@ data_5000/
 data_10000/
 data_20000/
 data_50000/
+data_full/
 data/*.csv
 
 # Performance optimization testing
