@@ -39,7 +39,7 @@ else:
 # Parallel processing configuration
 PARALLEL_EDA = os.environ.get('PARALLEL_EDA', 'true').lower() == 'true'
 MAX_WORKERS = max(1, os.cpu_count() - 2)  # Reserve 2 cores for system
-MEASUREMENT_SPLITS = int(os.environ.get('MEASUREMENT_SPLITS', '6'))  # Split MEASUREMENT table
+MEASUREMENT_SPLITS = int(os.environ.get('MEASUREMENT_SPLITS', '8'))  # Split MEASUREMENT table
 
 def get_file_row_count(file_path, silent=False):
     """Get the number of rows in a CSV file with caching."""

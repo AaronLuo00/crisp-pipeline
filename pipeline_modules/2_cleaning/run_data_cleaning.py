@@ -763,7 +763,7 @@ if __name__ == '__main__':
     # Determine whether to use parallel processing
     USE_PARALLEL = os.environ.get('PARALLEL_CLEANING', 'true').lower() == 'true'
     MAX_WORKERS = max(1, multiprocessing.cpu_count() - 2)  # Reserve 2 cores for system
-    MEASUREMENT_SPLITS = int(os.environ.get('MEASUREMENT_SPLITS', '6'))  # Control MEASUREMENT table splits (optimized default)
+    MEASUREMENT_SPLITS = int(os.environ.get('MEASUREMENT_SPLITS', '8'))  # Control MEASUREMENT table splits (optimized default)
 
     # Process tables with progress tracking
     print("\nCleaning tables...")

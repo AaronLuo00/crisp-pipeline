@@ -3,6 +3,7 @@
 
 import csv
 import sys
+import os
 import json
 import shutil
 import logging
@@ -46,7 +47,7 @@ else:
 
 # Parallel processing configuration
 MAX_WORKERS = max(1, multiprocessing.cpu_count() - 2)  # Reserve 2 cores for system
-MEASUREMENT_SPLITS = 6  # Split MEASUREMENT table into 6 parts
+MEASUREMENT_SPLITS = int(os.environ.get('MEASUREMENT_SPLITS', '8'))  # Split MEASUREMENT table into parts (configurable via env)
 LARGE_TABLE_THRESHOLD = 100000  # Tables larger than this will be considered for splitting
 
 # Setup

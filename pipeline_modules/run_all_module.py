@@ -261,6 +261,10 @@ class CRISPPipeline:
         # as they can cause division by zero errors in child processes
         env = os.environ.copy()
         
+        # Pass MEASUREMENT_SPLITS configuration to all modules via environment variable
+        if self.config.get('measurement_splits'):
+            env['MEASUREMENT_SPLITS'] = str(self.config['measurement_splits'])
+        
         # Execute module
         start_time = time.time()
         try:
@@ -736,6 +740,13 @@ def main():
     )
     
     parser.add_argument(
+        '--measurement-splits',
+        type=int,
+        default=8,
+        help='Number of splits for MEASUREMENT table processing (default: 8)'
+    )
+    
+    parser.add_argument(
         '--no-parallel',
         action='store_true',
         help='Disable parallel processing (default: enabled for all modules)'
@@ -775,6 +786,7 @@ def main():
     # Override with command line arguments
     config['python_path'] = args.python_path
     config['min_concept_freq'] = args.min_concept_freq
+    config['measurement_splits'] = args.measurement_splits
     config['no_parallel'] = args.no_parallel
     # If max_workers not specified, reserve 2 cores for system
     import multiprocessing
