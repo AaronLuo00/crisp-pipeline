@@ -38,6 +38,7 @@ except ImportError:
         process_visit_patient_chunk,
         merge_visit_chunks
     )
+import os
 import multiprocessing as mp
 from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor, as_completed
 
@@ -48,6 +49,9 @@ if platform.system() == 'Windows':
 else:
     CHUNK_SIZE = 100000  # Default for macOS/Linux
     PROGRESS_INTERVAL = 10.0
+
+# Get MEASUREMENT_SPLITS from environment variable (default: 8)
+MEASUREMENT_SPLITS = int(os.environ.get('MEASUREMENT_SPLITS', '8'))
 
 # Setup logging will be configured after output_dir is created
 
@@ -1136,11 +1140,11 @@ class DataStandardizer:
         # Prepare tasks
         tasks = []
         
-        # Add MEASUREMENT chunks (6 tasks)
+        # Add MEASUREMENT chunks (configurable number of tasks)
         measurement_file = self.get_input_path('MEASUREMENT')
         if measurement_file.exists():
-            for i in range(6):
-                tasks.append(('measurement_chunk', i, 6, measurement_file))
+            for i in range(MEASUREMENT_SPLITS):
+                tasks.append(('measurement_chunk', i, MEASUREMENT_SPLITS, measurement_file))
         
         # Add other tables
         other_tables = ['OBSERVATION', 'DRUG_EXPOSURE', 'CONDITION_OCCURRENCE',
@@ -1185,7 +1189,7 @@ class DataStandardizer:
                         measurement_stats[chunk_id] = stats
                         total_cpu_time += elapsed
                         all_changes.extend(chunk_changes)  # Collect changes
-                        logging.info(f"MEASUREMENT chunk {chunk_id+1}/6: {stats['records_processed']} records")
+                        logging.info(f"MEASUREMENT chunk {chunk_id+1}/{MEASUREMENT_SPLITS}: {stats['records_processed']} records")
                     else:
                         table_name, stats, elapsed = result
                         self.standardization_results['tables'][table_name] = stats
@@ -1259,7 +1263,7 @@ class DataStandardizer:
             # Submit MEASUREMENT merge task
             if any(task[0] == 'merge_measurement' for task in tasks):
                 task_start_times[('merge_measurement', None)] = time.time()
-                future = executor.submit(merge_measurement_chunks, output_dir, 6)
+                future = executor.submit(merge_measurement_chunks, output_dir, MEASUREMENT_SPLITS)
                 futures.append(('merge_measurement', None, future))
             
             # Submit VISIT chunk processing tasks
@@ -1275,16 +1279,16 @@ class DataStandardizer:
                         df_sample = pd.read_csv(input_file, usecols=['person_id'], low_memory=False)
                         patients = df_sample['person_id'].unique()
                         
-                        # Split patients into 6 chunks
+                        # Split patients into configurable chunks
                         import numpy as np
-                        patient_chunks = np.array_split(patients, 6)
+                        patient_chunks = np.array_split(patients, MEASUREMENT_SPLITS)
                         
                         # Submit chunk processing tasks
                         chunk_futures = []
                         for i, patient_chunk in enumerate(patient_chunks):
                             chunk_future = executor.submit(
                                 process_visit_patient_chunk,
-                                (i, 6, input_file, output_dir, patient_chunk.tolist(), 
+                                (i, MEASUREMENT_SPLITS, input_file, output_dir, patient_chunk.tolist(), 
                                  table_name, self.merge_threshold_hours)
                             )
                             chunk_futures.append(('visit_chunk', table_name, i, chunk_future))
@@ -1319,7 +1323,7 @@ class DataStandardizer:
                 merge_start = time.time()
                 
                 # Merge the chunk files
-                merge_stats = merge_visit_chunks(output_dir, table_name, 6)
+                merge_stats = merge_visit_chunks(output_dir, table_name, MEASUREMENT_SPLITS)
                 
                 # Generate statistics file
                 self._generate_visit_statistics(table_name, visit_chunk_results[table_name])
