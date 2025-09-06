@@ -30,8 +30,7 @@ from parallel_extraction import (
     process_table_batch,
     process_single_table_worker,
     process_measurement_chunk,
-    merge_measurement_chunks,
-    group_tables_by_size
+    merge_measurement_chunks
 )
 
 # Platform-specific settings for performance optimization
@@ -1283,16 +1282,22 @@ class PatientDataExtractor:
         print(f"  CPU cores available: {mp.cpu_count()}")
         print(f"  Using {MAX_WORKERS} workers (keeping 2 cores for system)")
         
-        # Group tables by size for optimal parallel processing
+        # Hard-coded table grouping for consistent processing
+        # All tables will be processed regardless of size
         tables_without_measurement = [t for t in TABLES_TO_PROCESS if t != 'MEASUREMENT']
-        small_tables, medium_tables, large_tables = group_tables_by_size(
-            tables_without_measurement, standardized_dir
-        )
         
-        print(f"\nTable grouping:")
-        print(f"  Small tables ({len(small_tables)}): {', '.join(small_tables) if small_tables else 'None'}")
-        print(f"  Medium tables ({len(medium_tables)}): {', '.join(medium_tables) if medium_tables else 'None'}")
-        print(f"  Large tables: MEASUREMENT")
+        # Process all non-MEASUREMENT tables individually in parallel
+        # This ensures every table gets processed
+        tables_to_process = []
+        for table in tables_without_measurement:
+            file_path = standardized_dir / f"{table}_standardized.csv"
+            if file_path.exists():
+                tables_to_process.append(table)
+            else:
+                logging.warning(f"Table {table} file not found: {file_path}")
+        
+        print(f"\nTables to process ({len(tables_to_process)}): {', '.join(tables_to_process)}")
+        print(f"  (MEASUREMENT will be processed separately with parallel chunks)")
         
         # Phase 1: Parallel processing of ICU summaries and tables
         print("\n=== Phase 1: Parallel Processing ===")
@@ -1302,21 +1307,14 @@ class PatientDataExtractor:
             futures = {}
             
             # Step 1: Submit ICU summaries extraction (independent task)
-            print("\nStep 1/4: Extracting ICU visit summaries (parallel)...")
+            print("\nStep 1/3: Extracting ICU visit summaries (parallel)...")
             futures['icu'] = executor.submit(self.extract_icu_summaries)
             
-            # Step 2a: Submit small tables as batch (if any)
-            if small_tables:
-                print(f"\nStep 2a/4: Processing {len(small_tables)} small tables as batch...")
-                futures['small_batch'] = executor.submit(
-                    process_table_batch, small_tables, standardized_dir, patient_data_dir
-                )
-            
-            # Step 2b: Submit medium tables individually
-            if medium_tables:
-                print(f"\nStep 2b/4: Processing {len(medium_tables)} medium tables in parallel...")
-                for table in medium_tables:
-                    futures[f'medium_{table}'] = executor.submit(
+            # Step 2: Submit all non-MEASUREMENT tables for parallel processing
+            if tables_to_process:
+                print(f"\nStep 2/3: Processing {len(tables_to_process)} tables in parallel...")
+                for table in tables_to_process:
+                    futures[f'table_{table}'] = executor.submit(
                         process_single_table_worker, table, standardized_dir, patient_data_dir
                     )
             
@@ -1333,17 +1331,8 @@ class PatientDataExtractor:
                         print(f"  [OK] ICU episodes extracted: {len(all_patient_episodes) if all_patient_episodes else 0} patients")
                         self.extraction_results['statistics']['total_icu_patients'] = len(all_patient_episodes) if all_patient_episodes else 0
                     
-                    elif key == 'small_batch':
-                        batch_results = future.result()  # No timeout
-                        completed_tasks += 1
-                        print(f"  [OK] Small tables batch completed")
-                        for table, stats in batch_results.items():
-                            if 'error' not in stats:
-                                self.extraction_results['statistics'][table] = stats
-                                print(f"    - {table}: {stats.get('total_records', 0):,} records")
-                    
-                    elif key.startswith('medium_'):
-                        table_name = key.replace('medium_', '')
+                    elif key.startswith('table_'):
+                        table_name = key.replace('table_', '')
                         stats = future.result()  # No timeout
                         completed_tasks += 1
                         if 'error' not in stats:
@@ -1367,6 +1356,7 @@ class PatientDataExtractor:
         
         # Phase 2: MEASUREMENT parallel chunk processing
         print("\n=== Phase 2: MEASUREMENT Parallel Processing ===")
+        print(f"Step 3/3: Processing MEASUREMENT table...")
         phase2_start = time.time()
         measurement_file = standardized_dir / "MEASUREMENT_standardized.csv"
         
