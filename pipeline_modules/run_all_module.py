@@ -139,7 +139,7 @@ class CRISPPipeline:
                 [python_path, '--version'],
                 capture_output=True,
                 text=True,
-                timeout=5
+                timeout=10
             )
             logging.info(f"Python version: {result.stdout.strip()}")
         except Exception as e:

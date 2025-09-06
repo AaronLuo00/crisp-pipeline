@@ -1063,7 +1063,8 @@ class DataStandardizer:
         # Save the merged result as the standardized output
         # This overwrites the standardized file with the merged version
         output_file = output_dir / f"{table_name}_standardized.csv"
-        merged_df.to_csv(output_file, index=False)
+        # Use date_format to preserve time component even when it's 00:00:00
+        merged_df.to_csv(output_file, index=False, date_format='%Y-%m-%d %H:%M:%S')
         logging.info(f"Saved merged {table_name} to: {output_file}")
         
         # Save mapping file to merged subdirectory
@@ -1183,7 +1184,7 @@ class DataStandardizer:
             all_changes = []  # Collect changes from all chunks
             for task_type, future in futures:
                 try:
-                    result = future.result(timeout=300)
+                    result = future.result()  # No timeout - let tasks complete naturally
                     if task_type == 'measurement':
                         chunk_id, stats, elapsed, chunk_changes = result
                         measurement_stats[chunk_id] = stats
@@ -1300,7 +1301,7 @@ class DataStandardizer:
             for future_data in futures:
                 try:
                     if future_data[0] == 'merge_measurement':
-                        result = future_data[2].result(timeout=60)
+                        result = future_data[2].result()  # No timeout for merging
                         task_time = time.time() - task_start_times[('merge_measurement', None)]
                         self.phase_stats['phase3']['task_times']['MEASUREMENT_merge'] = task_time
                         logging.info(f"MEASUREMENT chunks merged successfully in {task_time:.2f}s")
@@ -1308,7 +1309,7 @@ class DataStandardizer:
                     elif future_data[0] == 'visit_chunk':
                         table_name = future_data[1]
                         chunk_id = future_data[2]
-                        chunk_result = future_data[3].result(timeout=120)
+                        chunk_result = future_data[3].result()  # No timeout for visit chunks
                         
                         if table_name not in visit_chunk_results:
                             visit_chunk_results[table_name] = []

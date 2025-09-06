@@ -240,9 +240,16 @@ class PatientDataExtractor:
             if all_icu_visits:
                 icu_df = pd.concat(all_icu_visits, ignore_index=True)
                 
-                # Parse datetime columns
-                icu_df['visit_detail_start_datetime'] = pd.to_datetime(icu_df['visit_detail_start_datetime'])
-                icu_df['visit_detail_end_datetime'] = pd.to_datetime(icu_df['visit_detail_end_datetime'])
+                # Parse datetime columns with explicit format for consistency
+                # Use specific format since Module 4 now guarantees this format
+                icu_df['visit_detail_start_datetime'] = pd.to_datetime(
+                    icu_df['visit_detail_start_datetime'], 
+                    format='%Y-%m-%d %H:%M:%S'
+                )
+                icu_df['visit_detail_end_datetime'] = pd.to_datetime(
+                    icu_df['visit_detail_end_datetime'], 
+                    format='%Y-%m-%d %H:%M:%S'
+                )
                 
                 # Process each patient's ICU episodes
                 for person_id in icu_df['person_id'].unique():
@@ -286,7 +293,10 @@ class PatientDataExtractor:
                     total_icu_episodes += len(episodes)
                         
         except Exception as e:
+            import traceback
+            error_detail = traceback.format_exc()
             logging.error(f"Error processing VISIT_DETAIL: {str(e)}")
+            logging.error(f"Full traceback:\n{error_detail}")
             logging.error(f"File path: {visit_detail_file}")
             if visit_detail_file.exists():
                 logging.error(f"File size: {visit_detail_file.stat().st_size} bytes")
@@ -294,6 +304,8 @@ class PatientDataExtractor:
             if 'estimated_chunks' in locals():
                 logging.error(f"Estimated chunks: {estimated_chunks}")
             self.extraction_results['errors'].append(f"VISIT_DETAIL processing: {str(e)}")
+            # Re-raise the exception to be caught by the parent process
+            raise
         
         extraction_time = time.time() - t0
         logging.info(f"Extracted {total_icu_episodes} ICU episodes for {total_icu_patients} patients in {extraction_time:.2f}s")
@@ -1316,13 +1328,13 @@ class PatientDataExtractor:
             for key, future in futures.items():
                 try:
                     if key == 'icu':
-                        all_patient_episodes = future.result(timeout=30)
+                        all_patient_episodes = future.result()  # No timeout - let it complete
                         completed_tasks += 1
                         print(f"  [OK] ICU episodes extracted: {len(all_patient_episodes) if all_patient_episodes else 0} patients")
                         self.extraction_results['statistics']['total_icu_patients'] = len(all_patient_episodes) if all_patient_episodes else 0
                     
                     elif key == 'small_batch':
-                        batch_results = future.result(timeout=60)
+                        batch_results = future.result()  # No timeout
                         completed_tasks += 1
                         print(f"  [OK] Small tables batch completed")
                         for table, stats in batch_results.items():
@@ -1332,7 +1344,7 @@ class PatientDataExtractor:
                     
                     elif key.startswith('medium_'):
                         table_name = key.replace('medium_', '')
-                        stats = future.result(timeout=120)
+                        stats = future.result()  # No timeout
                         completed_tasks += 1
                         if 'error' not in stats:
                             self.extraction_results['statistics'][table_name] = stats
@@ -1343,9 +1355,12 @@ class PatientDataExtractor:
                             self.extraction_results['errors'].append(f"{table_name}: {stats['error']}")
                 
                 except Exception as e:
-                    logging.error(f"Task {key} failed: {e}")
+                    import traceback
+                    error_detail = traceback.format_exc()
+                    logging.error(f"Task {key} failed: {e}\nTraceback:\n{error_detail}")
                     print(f"  [FAIL] Task {key} failed: {e}")
-                    # logging.error already called on line 833
+                    if key == 'icu':
+                        print(f"  ICU extraction error details: {str(e)}")
                     self.extraction_results['errors'].append(f"Task {key}: {str(e)}")
         
         self.phase_times['phase1'] = time.time() - phase1_start
@@ -1373,12 +1388,11 @@ class PatientDataExtractor:
                 chunk_results = []
                 for i, future in enumerate(as_completed(chunk_futures)):
                     try:
-                        chunk_id, patient_counts, temp_dir = future.result(timeout=120)
+                        chunk_id, patient_counts, temp_dir = future.result()  # No timeout - let it complete
                         chunk_results.append((chunk_id, patient_counts, temp_dir))
                         print(f"  [OK] Chunk {chunk_id + 1}/{MEASUREMENT_CHUNKS} completed")
                     except Exception as e:
                         print(f"  [FAIL] Chunk {i} failed: {e}")
-                        # logging.error already called on line 867
                         logging.error(f"MEASUREMENT chunk {i} failed: {e}")
             
             # Merge chunks

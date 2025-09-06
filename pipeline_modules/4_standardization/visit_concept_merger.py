@@ -318,7 +318,8 @@ class VisitConceptMerger:
         
         # Save merged visits
         merged_file = output_dir / f"{table_name}_merged.csv"
-        merged_df.to_csv(merged_file, index=False)
+        # Use date_format to preserve time component even when it's 00:00:00
+        merged_df.to_csv(merged_file, index=False, date_format='%Y-%m-%d %H:%M:%S')
         logging.info(f"Saved merged visits to {merged_file}")
         
         # Save mappings

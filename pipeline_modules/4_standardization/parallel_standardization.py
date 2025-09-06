@@ -456,7 +456,8 @@ def process_standard_table(args: Tuple) -> Tuple[str, Dict, float]:
         
         # Save output
         output_file = Path(output_dir) / f"{table_name}_standardized.csv"
-        df.to_csv(output_file, index=False)
+        # Use date_format to preserve time component even when it's 00:00:00
+        df.to_csv(output_file, index=False, date_format='%Y-%m-%d %H:%M:%S')
         
     except Exception as e:
         logging.error(f"Error processing {table_name}: {e}")
@@ -627,7 +628,8 @@ def process_visit_patient_chunk(args: Tuple) -> Tuple[int, Dict, float]:
     
     # Save results
     if not merged_df.empty:
-        merged_df.to_csv(temp_output, index=False)
+        # Use date_format to preserve time component even when it's 00:00:00
+        merged_df.to_csv(temp_output, index=False, date_format='%Y-%m-%d %H:%M:%S')
     
     if not mapping_df.empty:
         mapping_df.to_csv(temp_mapping, index=False)
