@@ -2356,7 +2356,7 @@
     },
     {
       "id": 2102041,
-      "name": "CPT4 Code 1160F"
+      "name": "Review of all medications by a prescribing practitioner or clinical pharmacist (such as, prescriptions, OTCs, herbal therapies and supplements) documented in the medical record (COA)"
     },
     {
       "id": 443345,
@@ -3010,15 +3010,15 @@
   "PROCEDURE_OCCURRENCE": [
     {
       "id": 2514408,
-      "name": "CPT4 Code 99232"
+      "name": "Subsequent hospital inpatient care, per day, for evaluation and management of patient requiring medically appropriate examination and history and moderate level of medical decision making. If using time, at least 35 minutes total time on encounter date must be met."
     },
     {
       "id": 2514409,
-      "name": "CPT4 Code 99233"
+      "name": "Subsequent hospital inpatient care, per day, for evaluation and management of patient requiring medically appropriate examination and high level of medical decision making. If using time, at least 50 minutes total time on encounter date must be met."
     },
     {
       "id": 2313816,
-      "name": "CPT4 Code 93010"
+      "name": "Electrocardiogram, routine ECG with at least 12 leads; interpretation and report only"
     },
     {
       "id": 36713195,
@@ -3026,27 +3026,27 @@
     },
     {
       "id": 725068,
-      "name": "CPT4 Code 71045"
+      "name": "Radiologic examination, chest; single view"
     },
     {
       "id": 2314047,
-      "name": "CPT4 Code 94760"
+      "name": "Noninvasive ear or pulse oximetry for oxygen saturation; single determination"
     },
     {
       "id": 2514441,
-      "name": "CPT4 Code 99291"
+      "name": "Critical care, evaluation and management of the critically ill or critically injured patient; first 30-74 minutes"
     },
     {
       "id": 2313815,
-      "name": "CPT4 Code 93005"
+      "name": "Electrocardiogram, routine ECG with at least 12 leads; tracing only, without interpretation and report"
     },
     {
       "id": 2314026,
-      "name": "CPT4 Code 94640"
+      "name": "Pressurized or nonpressurized inhalation treatment for acute airway obstruction for therapeutic purposes and/or for diagnostic purposes such as sputum induction with an aerosol generator, nebulizer, metered dose inhaler or intermittent positive pressur..."
     },
     {
       "id": 2314294,
-      "name": "CPT4 Code 97530"
+      "name": "Therapeutic activities, direct (one-on-one) patient contact (use of dynamic activities to improve functional performance), each 15 minutes"
     },
     {
       "id": 4163872,
@@ -3054,27 +3054,27 @@
     },
     {
       "id": 2313869,
-      "name": "CPT4 Code 93306"
+      "name": "Echocardiography, transthoracic, real-time with image documentation (2D), includes M-mode recording, when performed, complete, with spectral Doppler echocardiography, and with color flow Doppler echocardiography"
     },
     {
       "id": 2211327,
-      "name": "CPT4 Code 70450"
+      "name": "Computed tomography, head or brain; without contrast material"
     },
     {
       "id": 2314284,
-      "name": "CPT4 Code 97110"
+      "name": "Therapeutic procedure, 1 or more areas, each 15 minutes; therapeutic exercises to develop strength and endurance, range of motion and flexibility"
     },
     {
       "id": 2514407,
-      "name": "CPT4 Code 99231"
+      "name": "Subsequent hospital inpatient or observation care, per day, for the evaluation and management of a patient, which requires a medically appropriate history and/or examination and straightforward or low level of medical decision making. When using total..."
     },
     {
       "id": 2211361,
-      "name": "CPT4 Code 71020"
+      "name": "Radiologic examination, chest, 2 views, frontal and lateral (Deprecated)"
     },
     {
       "id": 2514406,
-      "name": "CPT4 Code 99223"
+      "name": "Initial hospital inpatient or observation care, per day, for the evaluation and management of a patient, which requires a medically appropriate history and/or examination and straightforward or low level medical decision making. When using total time o..."
     },
     {
       "id": 4187078,
@@ -3082,23 +3082,23 @@
     },
     {
       "id": 2213283,
-      "name": "CPT4 Code 88305"
+      "name": "Level IV - Surgical pathology, gross and microscopic examination Abortion - spontaneous/missed Artery, biopsy Bone marrow, biopsy Bone exostosis Brain/meninges, other than for tumor resection Breast, biopsy, not requiring microscopic evaluation of surg..."
     },
     {
       "id": 725069,
-      "name": "CPT4 Code 71046"
+      "name": "Radiologic examination, chest; 2 views"
     },
     {
       "id": 2314287,
-      "name": "CPT4 Code 97116"
+      "name": "Therapeutic procedure, 1 or more areas, each 15 minutes; gait training (includes stair climbing)"
     },
     {
       "id": 2314216,
-      "name": "CPT4 Code 96375"
+      "name": "Therapeutic, prophylactic, or diagnostic injection (specify substance or drug); each additional sequential intravenous push of a new substance/drug (List separately in addition to code for primary procedure)"
     },
     {
       "id": 2414398,
-      "name": "CPT4 Code 99214"
+      "name": "Office or other outpatient visit for the evaluation and management of an established patient, which requires a medically appropriate history and/or examination and straightforward medical decision making. When using total time on the date of the encoun..."
     },
     {
       "id": 4335400,
@@ -3106,7 +3106,7 @@
     },
     {
       "id": 2314213,
-      "name": "CPT4 Code 96372"
+      "name": "Therapeutic, prophylactic, or diagnostic injection (specify substance or drug); subcutaneous or intramuscular"
     },
     {
       "id": 4181300,
@@ -3114,55 +3114,55 @@
     },
     {
       "id": 2314206,
-      "name": "CPT4 Code 96365"
+      "name": "Intravenous infusion, for therapy, prophylaxis, or diagnosis (specify substance or drug); initial, up to 1 hour"
     },
     {
       "id": 2313814,
-      "name": "CPT4 Code 93000"
+      "name": "Electrocardiogram, routine ECG with at least 12 leads; with interpretation and report"
     },
     {
       "id": 2314049,
-      "name": "CPT4 Code 94762"
+      "name": "Noninvasive ear or pulse oximetry for oxygen saturation; by continuous overnight monitoring (separate procedure)"
     },
     {
       "id": 724944,
-      "name": "CPT4 Code 74018"
+      "name": "Radiologic examination, abdomen; 1 view"
     },
     {
       "id": 2314035,
-      "name": "CPT4 Code 94660"
+      "name": "Continuous positive airway pressure ventilation (CPAP), initiation and management"
     },
     {
       "id": 2211353,
-      "name": "CPT4 Code 70553"
+      "name": "Magnetic resonance (eg, proton) imaging, brain (including brain stem); without contrast material, followed by contrast material(s) and further sequences"
     },
     {
       "id": 2514414,
-      "name": "CPT4 Code 99239"
+      "name": "Hospital inpatient or observation discharge day management; more than 30 minutes on the date of the encounter"
     },
     {
       "id": 2314297,
-      "name": "CPT4 Code 97535"
+      "name": "Self-care/home management training (eg, activities of daily living (ADL) and compensatory training, meal preparation, safety procedures, and instructions in use of assistive technology devices/adaptive equipment) direct one-on-one contact, each 15 minutes"
     },
     {
       "id": 2514413,
-      "name": "CPT4 Code 99238"
+      "name": "Hospital inpatient or observation discharge day management; 30 minutes or less on the date of the encounter"
     },
     {
       "id": 2514405,
-      "name": "CPT4 Code 99222"
+      "name": "Initial hospital inpatient or observation care, per day, for the evaluation and management of a patient, which requires a medically appropriate history and/or examination and straightforward or low level medical decision making. When using total time o..."
     },
     {
       "id": 2314215,
-      "name": "CPT4 Code 96374"
+      "name": "Therapeutic, prophylactic, or diagnostic injection (specify substance or drug); intravenous push, single or initial substance/drug"
     },
     {
       "id": 2313990,
-      "name": "CPT4 Code 93970"
+      "name": "Duplex scan of extremity veins including responses to compression and other maneuvers; complete bilateral study"
     },
     {
       "id": 2414397,
-      "name": "CPT4 Code 99213"
+      "name": "Office or other outpatient visit for the evaluation and management of an established patient, which requires a medically appropriate history and/or examination and straightforward medical decision making. When using total time on the date of the encoun..."
     },
     {
       "id": 4212044,
@@ -3170,7 +3170,7 @@
     },
     {
       "id": 2314229,
-      "name": "CPT4 Code 96413"
+      "name": "Chemotherapy administration, intravenous infusion technique; up to 1 hour, single or initial substance/drug"
     },
     {
       "id": 4327032,
@@ -3186,15 +3186,15 @@
     },
     {
       "id": 2314205,
-      "name": "CPT4 Code 96361"
+      "name": "Intravenous infusion, hydration; each additional hour (List separately in addition to code for primary procedure)"
     },
     {
       "id": 2211378,
-      "name": "CPT4 Code 71250"
+      "name": "Computed tomography, thorax, diagnostic; without contrast material"
     },
     {
       "id": 2211506,
-      "name": "CPT4 Code 74000"
+      "name": "Radiologic examination, abdomen; single anteroposterior view (Deprecated)"
     },
     {
       "id": 4213297,
@@ -3202,11 +3202,11 @@
     },
     {
       "id": 2109747,
-      "name": "CPT4 Code 51798"
+      "name": "Measurement of post-voiding residual urine and/or bladder capacity by ultrasound, non-imaging"
     },
     {
       "id": 44816450,
-      "name": "CPT4 Code 94669"
+      "name": "Mechanical chest wall oscillation to facilitate lung function, per session"
     }
   ]
 }
