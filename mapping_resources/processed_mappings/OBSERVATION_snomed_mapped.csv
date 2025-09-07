@@ -1306,7 +1306,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency,Original_Id,
 4179235,429011007,Family history of malignant neoplasm of lung,Context-dependent,Observation,SNOMED,Valid,Standard,167,4179235,429011007,Family history of malignant neoplasm of lung,SNOMED,No,
 4224654,84489001,Mold,Clinical Observation,Observation,SNOMED,Valid,Non-standard,166,45951856,162539,Mold,CIEL,Yes,Maps to
 4224654,84489001,Mold,Organism,Observation,SNOMED,Valid,Standard,166,4224654,84489001,Mold,SNOMED,No,
-40192479,SDOH_45,Mold,Answer,Observation,PPI,Valid,Non-standard,166,40192479,SDOH_45,Mold,PPI,No,
+37117131,16090331000119101,Exposure to mold,Event,Observation,SNOMED,Valid,Standard,166,40192479,SDOH_45,Mold,PPI,Yes,Maps to
 1618899,LP428280-4,Mold,LOINC Component,Observation,LOINC,Valid,Non-standard,166,1618899,LP428280-4,Mold,LOINC,No,
 443448,408672009,Adverse reaction to viral vaccine,Disorder,Observation,SNOMED,Valid,Standard,165,443448,408672009,Adverse reaction to viral vaccine,SNOMED,No,
 4296894,76197007,Hyperplasia,Morph Abnormality,Observation,SNOMED,Valid,Standard,165,4296894,76197007,Hyperplasia,SNOMED,No,

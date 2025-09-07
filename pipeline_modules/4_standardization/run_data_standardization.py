@@ -167,7 +167,7 @@ CONCEPT_RANGES = {
     4151414: {'name': 'glucose_urine', 'min': 0, 'max': 500, 'unit': 'mg/dL'},  # SNOMED for urine glucose
     4018317: {'name': 'glucose_serum', 'min': 0, 'max': 500, 'unit': 'mg/dL'},  # SNOMED for serum/plasma glucose
     3020891: {'name': 'temperature', 'min': 30, 'max': 45, 'unit': 'C'},  # Original LOINC (not mapped)
-    37174455: {'name': 'weight', 'min': 0.5, 'max': 300, 'unit': 'kg'},  # SNOMED
+    37174455: {'name': 'weight', 'min': 0.5, 'max': 650, 'unit': 'kg'},  # SNOMED
     4212065: {'name': 'ESR', 'min': 0, 'max': 150, 'unit': 'mm/hr'},  # SNOMED for ESR (corrected from height)
     4324383: {'name': 'creatinine', 'min': 0, 'max': 20, 'unit': 'mg/dL'},  # SNOMED
     4097430: {'name': 'sodium', 'min': 110, 'max': 170, 'unit': 'mEq/L'},  # SNOMED

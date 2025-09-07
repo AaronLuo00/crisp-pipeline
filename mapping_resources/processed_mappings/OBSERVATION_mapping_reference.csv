@@ -17,6 +17,7 @@ original_concept_id,original_code,original_name,original_vocab,snomed_concept_id
 3341086,260154005,Dog dander,Nebraska Lexicon,4128602,260154005,Dog dander,SNOMED,Maps to,100
 3421369,442571000124108,Tree nut,Nebraska Lexicon,36713251,442571000124108,Tree nut,SNOMED,Maps to,95
 3354837,256307007,Banana,Nebraska Lexicon,4106295,256307007,Banana,SNOMED,Maps to,67
+40192479,SDOH_45,Mold,PPI,37117131,16090331000119101,Exposure to mold,SNOMED,Maps to,166
 3334607,256277009,Grass pollen,Nebraska Lexicon,4117479,256277009,Grass pollen,SNOMED,Maps to,67
 3353751,256313003,Pineapple,Nebraska Lexicon,4106297,256313003,Pineapple,SNOMED,Maps to,53
 3173276,20680001000004108,Family history of Addison's disease,Nebraska Lexicon,4050799,160301004,Family history of endocrine disorders,SNOMED,Subsumes,52
