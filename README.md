@@ -324,7 +324,7 @@ TBA
 
 - **Issues**: [GitHub Issues](https://github.com/AaronLuo00/crisp-pipeline/issues)
 - **Discussions**: [GitHub Discussions](https://github.com/AaronLuo00/crisp-pipeline/discussions)
-- **Email**: xiaolongluo@fas.harvard.edu
+<!-- - **Email**: xiaolongluo@fas.harvard.edu -->
 
 ---
 
