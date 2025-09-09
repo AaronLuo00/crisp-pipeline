@@ -23,7 +23,7 @@
 
 ## 🏥 About the CRITICAL Consortium
 
-The **[CRITICAL](https://critical.fsm.northwestern.edu/data-access)** (Collaborative Resource for Intensive-care Translational science, Informatics, Comprehensive Analytics, and Learning) dataset is a multi-institutional, de-identified clinical dataset with ~400,000 patients and 571.7M records from 4 geographically diverse CTSA sites.
+The **[CRITICAL](https://critical.fsm.northwestern.edu/data-access)** (Collaborative Resource for Intensive-care Translational science, Informatics, Comprehensive Analytics, and Learning) dataset is a multi-institutional, de-identified clinical dataset with ~400,000 patients and 1.95 billion records from 4 geographically diverse CTSA sites.
 
 Learn more: [The CRITICAL Consortium and Dataset (AMIA Webinar)](https://amia.org/webinar-library/critical-consortium-and-dataset) | [Data Access](https://critical.fsm.northwestern.edu/data-access)
 
@@ -31,7 +31,7 @@ Learn more: [The CRITICAL Consortium and Dataset (AMIA Webinar)](https://amia.or
 
 ## 🌟 Overview
 
-CRISP (CRITICAL Records Integrated Standardization Pipeline) unlocks the full potential of the CRITICAL dataset—**571.7M records** from **~400K patients** across **4 geographically diverse CTSA institutions**. Originally developed to handle this unprecedented scale and diversity, CRISP transforms raw OMOP CDM data into ML-ready datasets through:
+CRISP (CRITICAL Records Integrated Standardization Pipeline) unlocks the full potential of the CRITICAL dataset—**1.95 billion records** from **~400K patients** across **4 geographically diverse CTSA institutions**. Originally developed to handle this unprecedented scale and diversity, CRISP transforms raw OMOP CDM data into ML-ready datasets through:
 
 | Feature | Description |
 |---------|-------------|
