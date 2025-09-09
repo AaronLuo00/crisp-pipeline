@@ -149,14 +149,18 @@ crisp-pipeline/
 │   ├── 4_standardization/          # Standardization statistics
 │   └── 5_extraction/               # Extraction reports and summaries
 └── extracted_patient_data/         # Final ML-ready data
-    ├── 400000000026076/           # Patient folder
-    │   ├── PERSON.csv
-    │   ├── MEASUREMENT.csv
-    │   ├── OBSERVATION.csv
-    │   ├── DRUG_EXPOSURE.csv
+    ├── 400000001/                 # Direct patient folders for 4* prefix
+    │   ├── 400000001106796/       # Individual patient folder
+    │   │   ├── PERSON.csv
+    │   │   ├── MEASUREMENT.csv
+    │   │   ├── OBSERVATION.csv
+    │   │   ├── DRUG_EXPOSURE.csv
+    │   │   └── ...
     │   └── ...
-    └── 600000071123456/
-        └── ...
+    └── 600000071/                 # Special 3-level hierarchy for 600000071 prefix
+        └── 197000-197999/         # Grouped by thousands
+            └── 600000071197101/   # Individual patient folder
+                └── ...
 ```
 
 ## 🤖 Predictive Modeling (Optional)
