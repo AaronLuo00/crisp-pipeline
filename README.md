@@ -10,10 +10,13 @@
 [![OMOP CDM](https://img.shields.io/badge/OMOP%20CDM-v5.3-orange?style=flat-square)](https://ohdsi.github.io/CommonDataModel/cdm53.html)
 [![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)](LICENSE)
 ![Status](https://img.shields.io/badge/Status-Active-success?style=flat-square)
+[![arXiv](https://img.shields.io/badge/arXiv-2509.08247-b31b1b?style=flat-square)](https://arxiv.org/abs/2509.08247)
 
 **Transforming Multi-Institutional Critical Care Data into ML-Ready Datasets**
 
 *An open-source pipeline for harmonizing and standardizing large-scale OMOP CDM data from the [CRITICAL consortium](https://amia.org/webinar-library/critical-consortium-and-dataset)*
+
+📖 **[Read the full paper on arXiv](https://arxiv.org/abs/2509.08247)**
 
 [Getting Started](#-getting-started) • [Documentation](#-documentation) • [Pipeline Modules](#-pipeline-architecture) • [Contributing](#-contributing)
 
@@ -28,6 +31,7 @@ The **[CRITICAL](https://critical.fsm.northwestern.edu/data-access)** (Collabora
 Learn more: [The CRITICAL Consortium and Dataset (AMIA Webinar)](https://amia.org/webinar-library/critical-consortium-and-dataset) | [Data Access](https://critical.fsm.northwestern.edu/data-access)
 
 ---
+
 
 ## 🌟 Overview
 
@@ -312,7 +316,17 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 If you use CRISP in your research, please cite:
 
-TBA
+```bibtex
+@misc{luo2025criticalrecordsintegratedstandardization,
+      title={The CRITICAL Records Integrated Standardization Pipeline (CRISP): End-to-End Processing of Large-scale Multi-institutional OMOP CDM Data}, 
+      author={Xiaolong Luo and Michael Lingzhi Li},
+      year={2025},
+      eprint={2509.08247},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2509.08247}, 
+}
+```
 
 ## 🙏 Acknowledgments
 
