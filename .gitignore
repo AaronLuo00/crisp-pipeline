@@ -114,3 +114,6 @@ predictive_modeling/modeling_results/**/*.pth
 # Keep .gitkeep files
 !predictive_modeling/modeling_results/**/.gitkeep
 
+# Unmapped concepts check directory
+mapping_resources/processed_mappings/unmapped_check/
+

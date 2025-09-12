@@ -1293,7 +1293,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4248366,407359000,Norovirus,Organism,SNOMED,Valid,Standard,167
 4179235,429011007,Family history of malignant neoplasm of lung,Context-dependent,SNOMED,Valid,Standard,167
 4224654,84489001,Mold,Organism,SNOMED,Valid,Standard,332
-40192479,SDOH_45,Mold,Answer,PPI,Valid,Non-standard,166
 1618899,LP428280-4,Mold,LOINC Component,LOINC,Valid,Non-standard,166
 443448,408672009,Adverse reaction to viral vaccine,Disorder,SNOMED,Valid,Standard,165
 4296894,76197007,Hyperplasia,Morph Abnormality,SNOMED,Valid,Standard,165
@@ -1815,7 +1814,7 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 42742431,3395F,"Quantitative non-HER2 immunohistochemistry (IHC) evaluation of breast cancer (eg, testing for estrogen or progesterone receptors [ER/PR]) performed (PATH)",CPT4,CPT4,Valid,Standard,68
 4116804,301338002,Finding of head circumference,Clinical Finding,SNOMED,Valid,Standard,68
 40792478,LP16066-0,ceFAZolin,LOINC Component,LOINC,Valid,Non-standard,68
-37117131,16090331000119101,Exposure to mold,Event,SNOMED,Valid,Standard,68
+37117131,16090331000119101,Exposure to mold,Event,SNOMED,Valid,Standard,234
 35816891,744-1141180450,cefazolin,Value,UK Biobank,Valid,Non-standard,68
 35816890,4-1141180450,cefazolin,Value,UK Biobank,Valid,Non-standard,68
 44787269,LP171630-9,Pravastatin,LOINC Component,LOINC,Valid,Non-standard,67
