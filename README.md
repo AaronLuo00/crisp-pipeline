@@ -35,6 +35,8 @@ Learn more: [The CRITICAL Consortium and Dataset (AMIA Webinar)](https://amia.or
 
 ## 🌟 Overview
 
+**[Read our paper on arXiv →](https://arxiv.org/abs/2509.08247)**
+
 CRISP (CRITICAL Records Integrated Standardization Pipeline) unlocks the full potential of the CRITICAL dataset—**1.95 billion records** from **~400K patients** across **4 geographically diverse CTSA institutions**. Originally developed to handle this unprecedented scale and diversity, CRISP transforms raw OMOP CDM data into ML-ready datasets through:
 
 | Feature | Description |
