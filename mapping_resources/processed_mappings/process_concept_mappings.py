@@ -167,7 +167,6 @@ def process_table_with_mappings(table_name: str, filename: str) -> Dict:
     original_count = 0
     kept_count = 0
     removed_count = 0
-    aggregated_count = 0
     added_snomed_count = 0
     
     # Track existing concept IDs to avoid duplicates
@@ -196,7 +195,6 @@ def process_table_with_mappings(table_name: str, filename: str) -> Dict:
                 original_freq = int(row.get('Frequency', 0))
                 aggregated_freq = frequency_aggregation[row['Id']]
                 output_row['Frequency'] = str(original_freq + aggregated_freq)
-                aggregated_count += 1
             elif 'Frequency' not in output_row:
                 # Ensure Frequency column exists even if empty
                 output_row['Frequency'] = row.get('Frequency', '0')
@@ -247,7 +245,6 @@ def process_table_with_mappings(table_name: str, filename: str) -> Dict:
     print(f"  Original concepts: {original_count:,}")
     print(f"  Removed (mapped to SNOMED): {removed_count:,}")
     print(f"  Kept concepts: {kept_count:,}")
-    print(f"  Concepts with aggregated frequencies: {aggregated_count:,}")
     print(f"  Added new SNOMED concepts: {added_snomed_count:,}")
     print(f"  Total output concepts: {len(rows_to_write):,}")
     print(f"  Output: {output_file.name}")
@@ -257,7 +254,6 @@ def process_table_with_mappings(table_name: str, filename: str) -> Dict:
         'original': original_count,
         'removed': removed_count,
         'kept': kept_count,
-        'aggregated': aggregated_count,
         'added_snomed': added_snomed_count
     }
 
@@ -341,30 +337,27 @@ def main():
     print("\n" + "="*70)
     print("SUMMARY STATISTICS")
     print("="*70)
-    print(f"\n{'Table':<35} {'Original':>10} {'Removed':>10} {'Total_Rows':>10} {'Kept':>10} {'New_SNOMED':>10} {'Aggregated':>10}")
-    print("-"*127)
+    print(f"\n{'Table':<35} {'Original':>10} {'Removed':>10} {'Total_Rows':>10} {'Kept':>10} {'New_SNOMED':>10}")
+    print("-"*110)
     
     total_original = 0
     total_removed = 0
     total_kept = 0
     total_added = 0
-    total_aggregated = 0
     total_final = 0
     
     for stat in stats:
-        aggregated = stat.get('aggregated', 0)
         added = stat.get('added_snomed', 0)
         final_rows = stat['kept'] + added  # Calculate total rows in output file
-        print(f"{stat['table']:<35} {stat['original']:>10,} {stat['removed']:>10,} {final_rows:>10,} {stat['kept']:>10,} {added:>10,} {aggregated:>10,}")
+        print(f"{stat['table']:<35} {stat['original']:>10,} {stat['removed']:>10,} {final_rows:>10,} {stat['kept']:>10,} {added:>10,}")
         total_original += stat['original']
         total_removed += stat['removed']
         total_kept += stat['kept']
         total_added += added
-        total_aggregated += aggregated
         total_final += final_rows
     
-    print("-"*127)
-    print(f"{'TOTAL':<35} {total_original:>10,} {total_removed:>10,} {total_final:>10,} {total_kept:>10,} {total_added:>10,} {total_aggregated:>10,}")
+    print("-"*110)
+    print(f"{'TOTAL':<35} {total_original:>10,} {total_removed:>10,} {total_final:>10,} {total_kept:>10,} {total_added:>10,}")
     
     print("\n" + "="*70)
     print("PROCESSING COMPLETE")
