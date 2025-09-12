@@ -173,3 +173,6 @@ original_concept_id,original_code,original_name,original_vocab,snomed_concept_id
 3215958,103597001,Spearmint,Nebraska Lexicon,4013442,103597001,Mentha spicata,SNOMED,Maps to,1
 3176911,90563009,Juniper,Nebraska Lexicon,4235129,90563009,Juniperus,SNOMED,Maps to,1
 2617334,G0249,"Provision of test materials and equipment for home inr monitoring of patient with either mechanical heart valve(s), chronic atrial fibrillation, or venous thromboembolism who meets medicare coverage criteria; includes: provision of materials for use in...",HCPCS,4204919,439202006,Monitoring of international normalized ratio,SNOMED,Subsumes,1
+38002161,0738,Rasburicase,APC,4216952,395858003,Rasburicase,SNOMED,Maps to,6
+38002751,7035,Teniposide,APC,4299061,387460005,Teniposide,SNOMED,Maps to,1
+38002644,1683,Basiliximab,APC,4305237,386978004,Basiliximab,SNOMED,Maps to,1

@@ -12782,3 +12782,911 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 36802291,02F13ZZ,"Fragmentation in Coronary Artery, Two Arteries, Percutaneous Approach",ICD10PCS,ICD10PCS,Valid,Standard,1
 2795238,F0FZDZZ,"Caregiver Training in Application, Proper Use and Care of Devices",ICD10PCS,ICD10PCS,Valid,Standard,1
 2785921,30263X0,"Transfusion of Autologous Cord Blood Stem Cells into Central Artery, Percutaneous Approach (Deprecated)",ICD10PCS,ICD10PCS,Valid,Standard,1
+4080877,278110001,Radiographic imaging - action,Procedure,SNOMED,Valid,Standard,93002
+4045049,129284003,Surgical action,Procedure,SNOMED,Valid,Standard,157204
+4163858,45444009,Ventilation,Procedure,SNOMED,Valid,Standard,128882
+4195956,44567001,Tracheal structure,Procedure,SNOMED,Valid,Standard,57264
+4321906,9632001,Nursing procedure,Procedure,SNOMED,Valid,Standard,45746
+4040722,118955007,Implantation to cardiovascular system,Procedure,SNOMED,Valid,Standard,67964
+4013298,103388001,Percutaneous approach,Procedure,SNOMED,Valid,Standard,258031
+4106470,257867005,Insertion - action,Procedure,SNOMED,Valid,Standard,67261
+4217142,80891009,Heart structure,Procedure,SNOMED,Valid,Standard,101906
+4105895,281706009,Injection of substance,Procedure,SNOMED,Valid,Standard,26935
+4044378,129236007,Open approach,Procedure,SNOMED,Valid,Standard,234008
+4042840,118961005,Introduction to urinary tract,Procedure,SNOMED,Valid,Standard,34836
+4326835,430925007,Measurement of substance,Procedure,SNOMED,Valid,Non-standard,23719
+4065366,20139000,Structure of respiratory system,Procedure,SNOMED,Valid,Standard,27164
+4044177,129266000,Measurement - action,Procedure,SNOMED,Valid,Standard,44501
+4044379,129237003,Closed approach,Procedure,SNOMED,Valid,Standard,20533
+4219601,39937001,Skin structure,Procedure,SNOMED,Valid,Standard,24892
+4290594,37270008,Endoscope,Procedure,SNOMED,Valid,Standard,89448
+4177209,42826002,Systemic arterial pressure monitoring,Procedure,SNOMED,Valid,Standard,13107
+4146765,30315005,Structure of small intestine,Procedure,SNOMED,Valid,Standard,22359
+4029572,108044001,Penis excision,Procedure,SNOMED,Valid,Standard,10064
+4194767,67922002,Serum,Procedure,SNOMED,Valid,Standard,9449
+4044700,129445006,Administration - action,Procedure,SNOMED,Valid,Standard,11022
+4224504,8499008,Pulse,Procedure,SNOMED,Valid,Standard,9308
+4040551,118804001,Procedure on blood vessel,Procedure,SNOMED,Valid,Standard,15788
+4162085,399684003,Development of care plan,Procedure,SNOMED,Valid,Standard,8321
+42538685,762449006,Behavioral counseling,Procedure,SNOMED,Valid,Standard,6747
+4201409,302199004,Examination - action,Procedure,SNOMED,Valid,Standard,11992
+4168710,274794006,Examination of nose,Procedure,SNOMED,Valid,Standard,6549
+4283824,67516001,Detoxification therapy,Procedure,SNOMED,Valid,Standard,6491
+4133895,262202000,Therapeutic,Procedure,SNOMED,Valid,Standard,18601
+4259231,410198006,Respiratory function management,Procedure,SNOMED,Valid,Standard,6285
+4117981,257903006,Repair - action,Procedure,SNOMED,Valid,Standard,24568
+4087901,18590009,Cardiac pacing,Procedure,SNOMED,Valid,Standard,5555
+4034270,113276009,Intestinal structure,Procedure,SNOMED,Valid,Standard,9744
+4190196,373453009,Nutritional supplement,Procedure,SNOMED,Valid,Standard,4980
+4180941,363691001,Procedure categorized by device involved,Procedure,SNOMED,Valid,Standard,6236
+4288283,69695003,Stomach structure,Procedure,SNOMED,Valid,Standard,5391
+4238738,91251008,Physical therapy procedure,Procedure,SNOMED,Valid,Standard,8580
+4209116,313395003,Cardiac rehabilitation,Procedure,SNOMED,Valid,Standard,8745
+4171200,49281003,Diagnostic procedure on lower respiratory tract,Procedure,SNOMED,Valid,Standard,14890
+4236835,57942008,Therapeutic electrical stimulation,Procedure,SNOMED,Valid,Standard,4203
+4198260,51860002,Diagnostic procedure on musculoskeletal system,Procedure,SNOMED,Valid,Standard,5754
+4044539,129357001,Closure - action,Procedure,SNOMED,Valid,Standard,4248
+4145283,34202007,Aortic valve structure,Procedure,SNOMED,Valid,Standard,4103
+4193195,312251004,Computed tomography imaging - action,Procedure,SNOMED,Valid,Standard,13410
+4043843,129317004,Debridement - action,Procedure,SNOMED,Valid,Standard,3310
+4029919,13924000,Wound,Procedure,SNOMED,Valid,Standard,5135
+4044176,129265001,Evaluation - action,Procedure,SNOMED,Valid,Standard,6333
+4306074,387662008,Respiratory tract procedure,Procedure,SNOMED,Valid,Standard,3577
+4078442,276272002,Catheter procedure,Procedure,SNOMED,Valid,Standard,2965
+4232481,89837001,Urinary bladder structure,Procedure,SNOMED,Valid,Standard,3851
+4242893,59820001,Blood vessel structure,Procedure,SNOMED,Valid,Standard,2737
+40485353,442837002,Excision debridement - action,Procedure,SNOMED,Valid,Standard,2590
+4042529,22943007,Trunk structure,Procedure,SNOMED,Valid,Standard,4270
+4299735,386811000,Fetal procedure,Procedure,SNOMED,Valid,Standard,2405
+4115931,256241002,Direct current,Procedure,SNOMED,Valid,Standard,2240
+4044182,129287005,Incision - action,Procedure,SNOMED,Valid,Standard,4448
+4120835,303789009,Imaging of lower limb with contrast,Procedure,SNOMED,Valid,Standard,4175
+4084319,24174009,Bronchoscope,Procedure,SNOMED,Valid,Standard,3510
+4083508,281615006,Exploration - action,Procedure,SNOMED,Valid,Standard,2122
+4022675,105590001,Substance,Procedure,SNOMED,Valid,Standard,3088
+37303856,818997006,Soft tissue of abdomen,Procedure,SNOMED,Valid,Standard,3005
+4203162,53085002,Right cardiac ventricular structure,Procedure,SNOMED,Valid,Standard,1872
+4145752,34289000,Operation on vertebra,Procedure,SNOMED,Valid,Standard,3884
+4044550,129419002,Dilation - action,Procedure,SNOMED,Valid,Standard,9619
+4098799,252793002,Intraoperative neurophysiological monitoring,Procedure,SNOMED,Valid,Standard,2314
+4130396,261571005,Tissue graft - material,Procedure,SNOMED,Valid,Standard,8022
+4063669,21483005,Structure of central nervous system,Procedure,SNOMED,Valid,Standard,1624
+4229604,88937006,Prosthetic procedure,Procedure,SNOMED,Valid,Standard,5098
+4337734,232704006,Tracheobronchial lavage,Procedure,SNOMED,Valid,Standard,1574
+4162054,432102000,Administration of substance,Procedure,SNOMED,Valid,Standard,3364
+4154333,272673000,Bone structure,Procedure,SNOMED,Valid,Standard,8290
+4271678,64033007,Kidney structure,Procedure,SNOMED,Valid,Standard,3504
+4271189,62834003,Upper gastrointestinal tract structure,Procedure,SNOMED,Valid,Standard,1569
+4124304,287819005,Pylorectomy,Procedure,SNOMED,Valid,Standard,1514
+4100474,27711007,Destructive procedure on heart,Procedure,SNOMED,Valid,Standard,1657
+4020510,174919009,Xenograft mitral valve replacement,Procedure,SNOMED,Valid,Standard,1590
+4232650,360021005,Bypass - action,Procedure,SNOMED,Valid,Standard,4110
+4168140,48428001,Cardiovascular monitoring,Procedure,SNOMED,Valid,Standard,1369
+4142287,426395009,Diagnostic audiology,Procedure,SNOMED,Valid,Standard,1393
+4042671,118793007,Procedure on bronchus,Procedure,SNOMED,Valid,Standard,5092
+4127468,261449002,Transluminal approach,Procedure,SNOMED,Valid,Standard,9688
+4244588,60184004,Sigmoid colon structure,Procedure,SNOMED,Valid,Standard,1867
+4231638,439487004,Procedure on jugular vein using imaging guidance,Procedure,SNOMED,Valid,Standard,1915
+4263631,361140007,Cardiac assist implant,Procedure,SNOMED,Valid,Standard,1875
+4118437,303786002,Imaging of neck with contrast,Procedure,SNOMED,Valid,Standard,3876
+4169265,49062001,Device,Procedure,SNOMED,Valid,Standard,2109
+37109311,384051000119103,Fluoroscopy of esophagus with contrast,Procedure,SNOMED,Valid,Standard,1124
+4169626,419840005,Ultrasonography of pericardium,Procedure,SNOMED,Valid,Standard,1595
+437312,131148009,Bleeding,Procedure,SNOMED,Valid,Standard,1095
+4205536,308730000,Head and neck contrast procedure,Procedure,SNOMED,Valid,Standard,5581
+4160209,371305003,Skin structure of thigh,Procedure,SNOMED,Valid,Standard,2926
+4299338,385420005,Contrast media,Procedure,SNOMED,Valid,Standard,6001
+4304358,103693007,Diagnostic procedure,Procedure,SNOMED,Valid,Standard,2038
+40492306,445772004,Biopsy of skin and/or subcutaneous tissue,Procedure,SNOMED,Valid,Standard,2830
+4122959,303968006,Removal of surgical material,Procedure,SNOMED,Valid,Standard,1445
+4182117,43145003,"Abdominal aortography, positive contrast",Procedure,SNOMED,Valid,Standard,1255
+4043018,118673008,Procedure on digestive system,Procedure,SNOMED,Valid,Standard,3778
+4009105,10200004,Liver structure,Procedure,SNOMED,Valid,Standard,1268
+4170285,275227003,Myocardial revascularization,Procedure,SNOMED,Valid,Standard,974
+4045083,129408000,Manipulation - action,Procedure,SNOMED,Valid,Standard,953
+4126156,304062003,Structure of intrathoracic blood vessel,Procedure,SNOMED,Valid,Standard,1637
+4042478,118824002,Procedure on biliary tract,Procedure,SNOMED,Valid,Standard,1383
+4001709,120215003,Removal from artery of thorax,Procedure,SNOMED,Valid,Standard,1404
+4338971,87784001,Soft tissue,Procedure,SNOMED,Valid,Standard,911
+4312338,86117002,Internal carotid artery structure,Procedure,SNOMED,Valid,Standard,4366
+4129646,261004008,Diagnostic intent,Procedure,SNOMED,Valid,Standard,4980
+4114363,255238004,Continuous,Procedure,SNOMED,Valid,Standard,1968
+4044524,129303008,Removal - action,Procedure,SNOMED,Valid,Standard,10939
+4143592,306869008,Muscle or tendon operation,Procedure,SNOMED,Valid,Standard,2942
+4118609,303946001,Respiratory system fluoroscopy,Procedure,SNOMED,Valid,Standard,896
+4280677,65818007,Stent,Procedure,SNOMED,Valid,Standard,6789
+4207313,312250003,Magnetic resonance imaging - action,Procedure,SNOMED,Valid,Standard,4466
+4026040,225680006,Hearing aid procedure,Procedure,SNOMED,Valid,Standard,763
+4112238,255248002,Third trimester,Procedure,SNOMED,Valid,Standard,768
+4298444,76752008,Breast structure,Procedure,SNOMED,Valid,Standard,842
+4199473,51185008,Thoracic structure,Procedure,SNOMED,Valid,Standard,1210
+4030778,107996003,Lymphatic system excision,Procedure,SNOMED,Valid,Standard,721
+4054327,12611008,Bone structure of tibia,Procedure,SNOMED,Valid,Standard,2731
+4254204,408816000,Artificial rupture of membranes,Procedure,SNOMED,Valid,Standard,713
+4090786,280369009,Brain tissue structure,Procedure,SNOMED,Valid,Standard,1613
+4310816,85234005,Structure of vertebral artery,Procedure,SNOMED,Valid,Standard,1712
+4044908,129264002,Action,Procedure,SNOMED,Valid,Standard,691
+4325458,71616004,Muscle structure,Procedure,SNOMED,Valid,Standard,708
+4236068,360129009,Cardiac pacemaker lead,Procedure,SNOMED,Valid,Standard,1538
+4169744,49076000,Knee joint structure,Procedure,SNOMED,Valid,Standard,2074
+4043351,118959001,Removal from urinary tract,Procedure,SNOMED,Valid,Standard,963
+4039916,229286000,Respiratory expansion exercises,Procedure,SNOMED,Valid,Standard,647
+4040721,118950002,Procedure on head AND/OR neck,Procedure,SNOMED,Valid,Standard,656
+4144541,34402009,Rectum structure,Procedure,SNOMED,Valid,Standard,1696
+4025356,106181007,Immunologic substance,Procedure,SNOMED,Valid,Non-standard,687
+4212625,5785009,Forensic autopsy,Procedure,SNOMED,Valid,Standard,635
+4133034,12738006,Brain structure,Procedure,SNOMED,Valid,Standard,865
+4042518,118670006,Procedure on upper respiratory tract,Procedure,SNOMED,Valid,Standard,596
+4029619,14016003,Bone marrow structure,Procedure,SNOMED,Valid,Standard,1357
+4067406,2033006,Structure of right fallopian tube,Procedure,SNOMED,Valid,Standard,588
+4043861,129415008,Extraction - action,Procedure,SNOMED,Valid,Standard,560
+4261981,35764002,Brain ventricle structure,Procedure,SNOMED,Valid,Standard,785
+4069509,21514008,Structure of genitourinary system,Procedure,SNOMED,Valid,Standard,666
+4166532,47990007,"Structure of artery of head, neck AND/OR brain",Procedure,SNOMED,Valid,Standard,530
+4167648,48345005,Superior vena cava structure,Procedure,SNOMED,Valid,Standard,1021
+4139456,32622004,Descending colon structure,Procedure,SNOMED,Valid,Standard,916
+4159470,372688009,Antineoplastic agent,Procedure,SNOMED,Valid,Standard,642
+4140098,32849002,Esophageal structure,Procedure,SNOMED,Valid,Standard,512
+4047487,122489005,Urinary system structure,Procedure,SNOMED,Valid,Standard,2150
+4059064,168818005,Pelvic contrast radiography,Procedure,SNOMED,Valid,Standard,1243
+4155005,371795005,Intravascular ultrasound device,Procedure,SNOMED,Valid,Standard,1743
+4188658,373249005,Anti-infective agent,Procedure,SNOMED,Valid,Standard,531
+4034048,113305005,Cerebellar structure,Procedure,SNOMED,Valid,Standard,917
+4003552,120079006,Spinal cord reconstruction,Procedure,SNOMED,Valid,Standard,443
+4296384,386329003,Treatment of hypothermia,Procedure,SNOMED,Valid,Standard,538
+42690466,1076851000000101,Ultrasonography of kidney and bladder,Procedure,SNOMED,Valid,Non-standard,429
+4233312,439976001,Measurement of recirculation in hemodialysis vascular access,Procedure,SNOMED,Valid,Standard,413
+4142383,265499009,Transluminal operations on aorta,Procedure,SNOMED,Valid,Standard,1182
+4195128,7970006,Allograft,Procedure,SNOMED,Valid,Standard,809
+4155548,272726003,Gastrostomy,Procedure,SNOMED,Valid,Standard,401
+4001728,119576002,Musculoskeletal system transposition,Procedure,SNOMED,Valid,Standard,16932
+4301593,78089009,Transfer training,Procedure,SNOMED,Valid,Standard,508
+4012339,112966006,Operation on vitreous,Procedure,SNOMED,Valid,Standard,383
+36715044,720510004,Education about chronic kidney disease,Procedure,SNOMED,Valid,Standard,376
+4207319,312275004,Fluoroscopic imaging - action,Procedure,SNOMED,Valid,Standard,1087
+4044193,129339002,Intubation - action,Procedure,SNOMED,Valid,Standard,374
+4021188,225428008,Bathing procedures,Procedure,SNOMED,Valid,Standard,500
+4303821,418549007,Fluoroscopic angiography of pulmonary artery with contrast,Procedure,SNOMED,Valid,Standard,971
+4234756,359665005,Ambulation training,Procedure,SNOMED,Valid,Standard,720
+4096246,25087005,Structure of nervous system,Procedure,SNOMED,Valid,Standard,890
+4043006,118622000,Fistula,Procedure,SNOMED,Valid,Standard,533
+4193369,79095000,Complete excision,Procedure,SNOMED,Valid,Standard,534
+4044893,129202001,Procedure on fibula,Procedure,SNOMED,Valid,Standard,775
+4074813,245257001,Cervical lymph node group,Procedure,SNOMED,Valid,Standard,383
+4111663,284468008,Bilateral electroconvulsive therapy,Procedure,SNOMED,Valid,Standard,348
+4283683,66754008,Appendix structure,Procedure,SNOMED,Valid,Standard,485
+4230029,89546000,Bone structure of cranium,Procedure,SNOMED,Valid,Standard,968
+4044526,129309007,Amputation - action,Procedure,SNOMED,Valid,Standard,333
+4027561,128304007,Surgical extraction,Procedure,SNOMED,Valid,Standard,3471
+4149383,268551005,Obesity screening,Procedure,SNOMED,Valid,Standard,323
+46270676,708629005,Laparoscopic bypass gastrojejunostomy,Procedure,SNOMED,Valid,Standard,323
+4219982,41801008,Coronary artery structure,Procedure,SNOMED,Valid,Standard,374
+4049115,122774002,Structure of vein of lower limb,Procedure,SNOMED,Valid,Standard,776
+4099912,2748008,Spinal cord structure,Procedure,SNOMED,Valid,Standard,404
+4020513,174936001,Xenograft tricuspid valve replacement,Procedure,SNOMED,Valid,Standard,347
+4211392,56873002,Bone structure of sternum,Procedure,SNOMED,Valid,Standard,374
+4000738,119583009,Trunk excision,Procedure,SNOMED,Valid,Standard,2478
+4075957,225125000,Scalp cooling,Procedure,SNOMED,Valid,Standard,651
+4034054,113345001,Abdomen,Procedure,SNOMED,Valid,Standard,446
+4104340,29092000,Venous structure,Procedure,SNOMED,Valid,Standard,291
+4252576,74160004,Skin structure of chest,Procedure,SNOMED,Valid,Standard,561
+4148467,30660002,Destructive procedure of large intestine,Procedure,SNOMED,Valid,Standard,288
+4149295,310229004,Shock wave lithotripter,Procedure,SNOMED,Valid,Standard,300
+4142401,426413004,Closed reduction - action,Procedure,SNOMED,Valid,Standard,348
+4140114,265511008,Iliac and/or femoral artery operations,Procedure,SNOMED,Valid,Standard,995
+4337739,232727003,Percutaneous directional coronary atherectomy,Procedure,SNOMED,Valid,Standard,294
+4044710,129003000,Dressing,Procedure,SNOMED,Valid,Standard,493
+4220499,39856007,Imaging of arteries of lower extremities,Procedure,SNOMED,Valid,Standard,274
+4280364,66643007,Skin structure of back,Procedure,SNOMED,Valid,Standard,523
+4165732,41216001,Prostatic structure,Procedure,SNOMED,Valid,Standard,316
+37016717,712822003,Grafting of fat,Procedure,SNOMED,Valid,Standard,306
+4324450,429892002,Guidance intent,Procedure,SNOMED,Valid,Standard,546
+4050628,12415007,Endoscopic destruction of lesion of duodenum,Procedure,SNOMED,Valid,Standard,268
+46270911,708907008,Closed reduction of fracture of pelvis and internal fixation,Procedure,SNOMED,Valid,Standard,265
+4116366,255231005,Revision - value,Procedure,SNOMED,Valid,Standard,385
+45765309,702215009,Intracardiac pacemaker,Procedure,SNOMED,Valid,Standard,263
+4113625,286850002,Personal hygiene activities,Procedure,SNOMED,Valid,Standard,497
+4033259,14869003,Endoscopic destruction of lesion of stomach,Procedure,SNOMED,Valid,Standard,293
+37303858,818995003,Abdominal skeletal muscle,Procedure,SNOMED,Valid,Standard,763
+4328894,22083002,Structure of splenic artery,Procedure,SNOMED,Valid,Standard,453
+4029359,128994009,Excision of upper extremity structure,Procedure,SNOMED,Valid,Standard,979
+4042647,118705005,Procedure on elbow,Procedure,SNOMED,Valid,Standard,665
+3667159,860986005,Structure of vein of abdominal cross-sectional segment of trunk,Procedure,SNOMED,Valid,Standard,771
+4042330,118745001,Procedure on joint,Procedure,SNOMED,Valid,Standard,275
+4045069,129371009,Fixation - action,Procedure,SNOMED,Valid,Standard,852
+4178501,363803005,Mobility,Procedure,SNOMED,Valid,Standard,413
+4164917,45631007,Structure of radial artery,Procedure,SNOMED,Valid,Standard,287
+4083129,183382003,Psychotherapy - behavioral,Procedure,SNOMED,Valid,Standard,343
+44782621,700016008,Structure of internal part of mouth,Procedure,SNOMED,Valid,Standard,226
+4044197,129384000,Decortication - action,Procedure,SNOMED,Valid,Standard,224
+4082375,182796001,Intracranial pressure monitoring regime,Procedure,SNOMED,Valid,Standard,222
+4045077,129392009,Cauterization - action,Procedure,SNOMED,Valid,Standard,220
+4113140,255247007,Second trimester,Procedure,SNOMED,Valid,Standard,234
+4041249,118635009,Revision,Procedure,SNOMED,Valid,Standard,1517
+4022121,225333008,Behavior management,Procedure,SNOMED,Valid,Standard,215
+4045895,122860000,Intra-abdominal artery,Procedure,SNOMED,Valid,Standard,364
+4309029,8367003,Clipping nails of patient,Procedure,SNOMED,Valid,Standard,207
+4093089,281232002,Vascular structure of head and/or neck,Procedure,SNOMED,Valid,Standard,226
+4198252,51282000,Bone structure of spine,Procedure,SNOMED,Valid,Standard,572
+4287390,69536005,Head structure,Procedure,SNOMED,Valid,Standard,197
+4203155,53065001,Female genital structure,Procedure,SNOMED,Valid,Standard,237
+4167002,45653009,Structure of upper lobe of lung,Procedure,SNOMED,Valid,Standard,370
+4224342,84820005,Structure of fascia,Procedure,SNOMED,Valid,Standard,201
+4169104,420034009,Fluoroscopic angiography of superior mesenteric artery with contrast,Procedure,SNOMED,Valid,Standard,190
+4045430,13024002,Tendon structure,Procedure,SNOMED,Valid,Standard,323
+4240284,91512002,Diagnostic procedure on breast,Procedure,SNOMED,Valid,Standard,187
+4197908,80504003,Speech pathology procedure,Procedure,SNOMED,Valid,Standard,295
+4166295,275023007,Pancreas endoscopic operation,Procedure,SNOMED,Valid,Standard,561
+4051774,23451007,Adrenal structure,Procedure,SNOMED,Valid,Standard,184
+4324529,71056003,Oral cavity function,Procedure,SNOMED,Valid,Standard,188
+4217445,81266008,Heart revascularization,Procedure,SNOMED,Valid,Standard,375
+4207989,55572008,Left colon structure,Procedure,SNOMED,Valid,Standard,180
+4029838,108371006,Bone structure of tarsus,Procedure,SNOMED,Valid,Standard,180
+4149192,35039007,Uterine structure,Procedure,SNOMED,Valid,Standard,206
+4302621,419413002,Fluoroscopy of biliary tract,Procedure,SNOMED,Valid,Standard,279
+4294663,75559006,Spinal cord meninges structure,Procedure,SNOMED,Valid,Standard,279
+4227534,422092000,Presbyopia - correcting intraocular len implant,Procedure,SNOMED,Valid,Standard,176
+4040386,118643004,Cast,Procedure,SNOMED,Valid,Standard,180
+4082856,24142002,Nipple structure,Procedure,SNOMED,Valid,Standard,172
+4165622,273989008,Cranial puncture,Procedure,SNOMED,Valid,Standard,172
+4313302,86174004,Laparoscope,Procedure,SNOMED,Valid,Standard,557
+4099331,2739003,Endometrial structure,Procedure,SNOMED,Valid,Standard,171
+4047437,20699002,Structure of cephalic vein,Procedure,SNOMED,Valid,Standard,214
+4128335,289928003,Surgical reduction,Procedure,SNOMED,Valid,Standard,175
+4222297,83908009,Abdominal wall,Procedure,SNOMED,Valid,Standard,315
+4001881,119686008,Foot excision,Procedure,SNOMED,Valid,Standard,306
+4038335,11810009,Operation on male genital system,Procedure,SNOMED,Valid,Standard,174
+4260843,45048000,Neck structure,Procedure,SNOMED,Valid,Standard,584
+4216088,71917006,Repair of lip,Procedure,SNOMED,Valid,Standard,163
+4044186,129306000,Surgical removal - action,Procedure,SNOMED,Valid,Standard,846
+4336756,232994005,Operation on inferior vena cava,Procedure,SNOMED,Valid,Standard,163
+4266067,62413002,Bone structure of radius,Procedure,SNOMED,Valid,Standard,375
+4004055,120216002,Removal from artery of abdomen,Procedure,SNOMED,Valid,Standard,1233
+4153589,268945009,Examination of genitourinary system,Procedure,SNOMED,Valid,Standard,159
+4011919,103228002,Hemoglobin saturation with oxygen,Procedure,SNOMED,Valid,Standard,162
+4000517,119281005,Structure of lobe of thyroid gland,Procedure,SNOMED,Valid,Standard,158
+4027551,128266009,Diagnostic procedure on female genital system,Procedure,SNOMED,Valid,Standard,391
+40483398,445428001,Person centered counseling,Procedure,SNOMED,Valid,Standard,219
+4045056,129316008,Aspiration - action,Procedure,SNOMED,Valid,Standard,174
+4308414,83419000,Femoral vein structure,Procedure,SNOMED,Valid,Standard,152
+4170904,420013002,Fluoroscopic angiography of renal artery with contrast,Procedure,SNOMED,Valid,Standard,255
+4003041,119580007,Trunk incision,Procedure,SNOMED,Valid,Standard,382
+4171739,419870000,Fluoroscopic venography of upper limb with contrast,Procedure,SNOMED,Valid,Standard,451
+4133169,12745006,Operative procedure on pelvis,Procedure,SNOMED,Valid,Standard,358
+4084428,281501002,Intra-abdominal digestive structure,Procedure,SNOMED,Valid,Standard,309
+4347686,241175004,Cholecystography,Procedure,SNOMED,Valid,Standard,224
+4042486,118879005,Procedure on nerve,Procedure,SNOMED,Valid,Standard,135
+4044522,129298006,Division - action,Procedure,SNOMED,Valid,Standard,687
+4182195,297173004,Lumbosacral region of spine structure,Procedure,SNOMED,Valid,Standard,131
+4346628,241220000,Angiography of external carotid artery,Procedure,SNOMED,Valid,Standard,201
+4076390,245857005,Stoma,Procedure,SNOMED,Valid,Standard,125
+4055927,181463001,Entire fallopian tube,Procedure,SNOMED,Valid,Standard,224
+4311330,9454009,Structure of subclavian vein,Procedure,SNOMED,Valid,Standard,533
+4235763,90572001,Structure of lower lobe of lung,Procedure,SNOMED,Valid,Standard,194
+4158691,373188003,Replacement procedure,Procedure,SNOMED,Valid,Standard,165
+4045660,122496007,Lumbar spine structure,Procedure,SNOMED,Valid,Standard,398
+4182963,297935002,Structure of upper female genital system,Procedure,SNOMED,Valid,Standard,122
+4083056,278252000,Conduction,Procedure,SNOMED,Valid,Standard,125
+4084439,281568006,Fetal heart monitoring,Procedure,SNOMED,Valid,Standard,142
+4064380,171226003,Aortic aneurysm screening,Procedure,SNOMED,Valid,Standard,116
+4088217,18629005,Administration of medication,Procedure,SNOMED,Valid,Standard,116
+4240393,91609006,Bone structure of mandible,Procedure,SNOMED,Valid,Standard,299
+4338736,231708006,Correction of astigmatism,Procedure,SNOMED,Valid,Standard,112
+4002535,119807004,Thoracic artery closure,Procedure,SNOMED,Valid,Standard,265
+4085442,241461002,Ultrasound angiography of thoracic aorta,Procedure,SNOMED,Valid,Standard,110
+4062546,19898001,Inferior esophageal sphincter structure,Procedure,SNOMED,Valid,Standard,144
+4182240,43067004,Skin structure of scalp,Procedure,SNOMED,Valid,Standard,379
+4080221,182168000,Entire glenohumeral joint,Procedure,SNOMED,Valid,Standard,196
+4049448,15497006,Ovarian structure,Procedure,SNOMED,Valid,Standard,250
+4321108,7087005,Intermittent,Procedure,SNOMED,Valid,Standard,129
+40482679,442261001,Maintenance of gastric band,Procedure,SNOMED,Valid,Standard,106
+4121349,258623008,Vascular catheter,Procedure,SNOMED,Valid,Standard,106
+4001731,119589008,Trunk closure,Procedure,SNOMED,Valid,Standard,108
+40489371,446784007,Venography of lower extremity using contrast,Procedure,SNOMED,Valid,Standard,349
+4141110,3360004,Anastomosis of bile ducts,Procedure,SNOMED,Valid,Standard,117
+4002547,119845003,Skin of trunk repair,Procedure,SNOMED,Valid,Standard,145
+4184733,54790000,Transfusion of blood component,Procedure,SNOMED,Valid,Standard,202
+4074414,176867001,Therapeutic endoscopic operations on uterus,Procedure,SNOMED,Valid,Standard,156
+4044525,129304002,Excision - action,Procedure,SNOMED,Valid,Standard,106
+4244368,38199008,Tooth structure,Procedure,SNOMED,Valid,Standard,102
+37204251,782792007,Full thickness graft of skin,Procedure,SNOMED,Valid,Standard,942
+4090133,280119005,Pyloric structure of stomach,Procedure,SNOMED,Valid,Standard,97
+4303242,419683002,Fluoroscopy of lumbar spine,Procedure,SNOMED,Valid,Standard,119
+4227006,87568004,Hormone,Procedure,SNOMED,Valid,Standard,96
+4012669,165242000,Wheelchair mobility,Procedure,SNOMED,Valid,Standard,178
+4058478,169250003,US scan of gallbladder,Procedure,SNOMED,Valid,Standard,94
+4055324,21203009,Palmar aponeurosis structure,Procedure,SNOMED,Valid,Standard,93
+4170424,420135007,Whole blood,Procedure,SNOMED,Valid,Standard,92
+4297004,76288004,Change in muscle and/or tendon length,Procedure,SNOMED,Valid,Standard,91
+4049768,15776009,Pancreatic structure,Procedure,SNOMED,Valid,Standard,91
+4323581,71341001,Bone structure of femur,Procedure,SNOMED,Valid,Standard,98
+4234745,359623004,Total lobectomy of lung,Procedure,SNOMED,Valid,Standard,225
+4324400,70948008,Structure of transplanted kidney,Procedure,SNOMED,Valid,Standard,90
+4003727,119833007,Skin of neck excision,Procedure,SNOMED,Valid,Standard,85
+4048952,230922007,Angioplasty of intracranial artery,Procedure,SNOMED,Valid,Standard,84
+4121242,287834004,Gastroenterostomy - no gastrectomy,Procedure,SNOMED,Valid,Standard,84
+4148780,30675005,Suprapubic approach,Procedure,SNOMED,Valid,Standard,83
+4001203,119196003,Laryngeal part,Procedure,SNOMED,Valid,Standard,81
+4027404,107737002,Musculoskeletal system excision,Procedure,SNOMED,Valid,Standard,80
+4139593,32672002,Structure of descending thoracic aorta,Procedure,SNOMED,Valid,Standard,148
+4012314,112872005,Suture of large intestine,Procedure,SNOMED,Valid,Standard,79
+4108399,181246003,Entire stomach,Procedure,SNOMED,Valid,Standard,78
+4081836,278292003,Ultrasound imaging - action,Procedure,SNOMED,Valid,Standard,78
+4143498,265522007,Transluminal operations on iliac artery,Procedure,SNOMED,Valid,Standard,109
+4033546,14693006,Subcutaneous mammectomy of bilateral breasts,Procedure,SNOMED,Valid,Standard,77
+4183274,53266006,Operation on diaphragm,Procedure,SNOMED,Valid,Standard,76
+4035421,23973005,Indwelling urinary catheter,Procedure,SNOMED,Valid,Standard,76
+4210595,56361007,Excision of soft tissue,Procedure,SNOMED,Valid,Standard,76
+4044545,129382001,Destruction - action,Procedure,SNOMED,Valid,Standard,485
+4043008,118633002,Artery of thorax,Procedure,SNOMED,Valid,Standard,107
+4325271,71252005,Cervix uteri structure,Procedure,SNOMED,Valid,Standard,146
+4193513,78904004,Chest wall structure,Procedure,SNOMED,Valid,Standard,357
+4044209,129411004,Traction - action,Procedure,SNOMED,Valid,Standard,82
+4028232,13363002,Structure of posterior tibial artery,Procedure,SNOMED,Valid,Standard,141
+4211548,57034009,Aortic arch structure,Procedure,SNOMED,Valid,Standard,127
+4125478,234303003,Drainage of lymphatics,Procedure,SNOMED,Valid,Standard,75
+4064377,171207006,Depression screening,Procedure,SNOMED,Valid,Standard,71
+4303105,419644004,Fluoroscopic urethrography,Procedure,SNOMED,Valid,Standard,107
+4078461,276342005,Ophthalmological and optical investigations,Procedure,SNOMED,Valid,Standard,127
+4070238,173028001,Endoscopic destruction of lesion of larynx,Procedure,SNOMED,Valid,Standard,88
+4271834,64234005,Bone structure of patella,Procedure,SNOMED,Valid,Standard,198
+4297077,386015005,Vacuum extractor,Procedure,SNOMED,Valid,Standard,69
+4184974,413528009,Anastomosis of blood vessel,Procedure,SNOMED,Valid,Standard,69
+4111453,181206009,Entire ethmoid sinus,Procedure,SNOMED,Valid,Standard,165
+4049537,233252007,Transluminal operations on brachial artery,Procedure,SNOMED,Valid,Standard,114
+4032953,14975008,Forearm structure,Procedure,SNOMED,Valid,Standard,668
+40492375,447380008,Dissection of retroperitoneum,Procedure,SNOMED,Valid,Standard,91
+4099608,27398004,Omentum structure,Procedure,SNOMED,Valid,Standard,67
+37303873,816991004,Cavity of true pelvis,Procedure,SNOMED,Valid,Standard,67
+4002545,119842000,Skin of head transposition,Procedure,SNOMED,Valid,Standard,80
+4062656,171208001,Alcohol consumption screening,Procedure,SNOMED,Valid,Standard,65
+43531116,608815006,Open reduction of fracture of bone of anterior ring of pelvis with internal fixation,Procedure,SNOMED,Valid,Standard,63
+4012305,112827002,Excision of lower limb artery,Procedure,SNOMED,Valid,Standard,168
+4002706,119190009,Femur part,Procedure,SNOMED,Valid,Standard,62
+4160360,371548008,Procedure on eye region,Procedure,SNOMED,Valid,Standard,194
+4049896,15825003,Aortic structure,Procedure,SNOMED,Valid,Standard,61
+4177505,50630003,Diagnostic procedure on pericardium,Procedure,SNOMED,Valid,Standard,78
+4105110,281474009,Intrathoracic systemic vein,Procedure,SNOMED,Valid,Standard,60
+4113139,255246003,First trimester,Procedure,SNOMED,Valid,Standard,62
+4000749,119647009,Hand excision,Procedure,SNOMED,Valid,Standard,116
+4240970,59066005,Mastoid structure,Procedure,SNOMED,Valid,Standard,59
+4049534,233246006,Transluminal operations on celiac artery,Procedure,SNOMED,Valid,Standard,97
+4214466,39352004,Joint structure,Procedure,SNOMED,Valid,Standard,59
+4237077,91397008,Bone structure of face,Procedure,SNOMED,Valid,Standard,166
+4208803,312332007,Operation on the atrial septum,Procedure,SNOMED,Valid,Standard,88
+4055261,243141005,Mechanically assisted spontaneous ventilation,Procedure,SNOMED,Valid,Standard,94
+4288222,397423009,Transjugular intrahepatic portosystemic shunt,Procedure,SNOMED,Valid,Standard,397
+4214428,41447009,Incision of skin,Procedure,SNOMED,Valid,Standard,55
+4337318,233010008,Right atrial operation,Procedure,SNOMED,Valid,Standard,71
+40483708,443887000,Transapical implantation of aortic valve,Procedure,SNOMED,Valid,Standard,55
+4159959,373392003,Vascular surgery procedure on abdominal region,Procedure,SNOMED,Valid,Standard,53
+4047651,123851003,Mouth region structure,Procedure,SNOMED,Valid,Standard,53
+4171541,419127002,Fluoroscopic venography,Procedure,SNOMED,Valid,Standard,63
+4098198,25238003,Cranial nerve structure,Procedure,SNOMED,Valid,Standard,52
+36714941,720364002,Imaging of central nervous system,Procedure,SNOMED,Valid,Standard,61
+4023061,116373007,Structure of artery of pelvic region,Procedure,SNOMED,Valid,Standard,52
+4099175,27352000,Diagnostic procedure on heart,Procedure,SNOMED,Valid,Standard,75
+4330099,430927004,Thoracoscopic procedure,Procedure,SNOMED,Valid,Standard,57
+4147878,310802004,Urethroscope,Procedure,SNOMED,Valid,Standard,113
+4145617,34201000,Structure of soft tissue of head and/or neck,Procedure,SNOMED,Valid,Standard,55
+40479548,441504007,Surgical manipulation - action,Procedure,SNOMED,Valid,Standard,49
+4040400,118717007,Procedure on organ,Procedure,SNOMED,Valid,Standard,49
+4323586,71376004,Excision of lesion of soft tissue of hand,Procedure,SNOMED,Valid,Standard,48
+4259149,44800008,Revision of anastomosis of vein,Procedure,SNOMED,Valid,Standard,73
+4338837,88058003,Perfusion,Procedure,SNOMED,Valid,Standard,47
+4168155,48477009,Lip structure,Procedure,SNOMED,Valid,Standard,46
+4013062,112982007,Lysis of adhesions of stomach,Procedure,SNOMED,Valid,Standard,49
+4070019,172892001,Operation on sphenoid sinus,Procedure,SNOMED,Valid,Standard,191
+4045067,129366002,Closure by buckling - action,Procedure,SNOMED,Valid,Standard,45
+4249459,72914001,Palatal structure,Procedure,SNOMED,Valid,Standard,45
+4001861,119616003,Pelvis repair,Procedure,SNOMED,Valid,Standard,50
+4121438,288078009,Tendon transposition,Procedure,SNOMED,Valid,Standard,87
+4351863,244228006,Spinal artery,Procedure,SNOMED,Valid,Standard,90
+4193397,391281002,Mental health assessment,Procedure,SNOMED,Valid,Standard,44
+4041107,118630004,Division,Procedure,SNOMED,Valid,Standard,164
+4331086,430033006,Infusion pump,Procedure,SNOMED,Valid,Standard,69
+4212786,57931004,Puncture of artery,Procedure,SNOMED,Valid,Standard,42
+4138029,425764006,Transection - action,Procedure,SNOMED,Valid,Standard,55
+4166873,417974003,Fluoroscopic angiography of inferior mesenteric artery with contrast,Procedure,SNOMED,Valid,Standard,42
+4002544,119841007,Skin of neck transposition,Procedure,SNOMED,Valid,Standard,42
+4107452,257940003,Transposition - action,Procedure,SNOMED,Valid,Standard,112
+4247919,72481006,Structure of middle lobe of right lung,Procedure,SNOMED,Valid,Standard,39
+4246082,60726007,Crushing,Procedure,SNOMED,Valid,Standard,174
+4168543,275072000,Bladder outlet operations,Procedure,SNOMED,Valid,Standard,69
+4163021,372222001,Part of lobe of thyroid gland,Procedure,SNOMED,Valid,Standard,39
+4030247,13793006,Extracapsular extraction of lens,Procedure,SNOMED,Valid,Standard,38
+4049387,23121008,Electrocoagulation of lesion of rectum,Procedure,SNOMED,Valid,Standard,38
+4094183,281145005,Right inguinal canal,Procedure,SNOMED,Valid,Standard,79
+4322976,71388002,Procedure,Procedure,SNOMED,Valid,Standard,38
+4044034,12921003,Pelvic region,Procedure,SNOMED,Valid,Standard,42
+4020515,174945000,Xenograft pulmonary valve replacement,Procedure,SNOMED,Valid,Standard,37
+4286488,68304009,Reconstruction of eyelid with graft,Procedure,SNOMED,Valid,Standard,36
+4294659,75531005,Structure of artery of upper limb,Procedure,SNOMED,Valid,Standard,58
+4000904,119814002,Artery of extremity closure,Procedure,SNOMED,Valid,Standard,231
+4123419,235381007,Repair of anal sphincter,Procedure,SNOMED,Valid,Standard,35
+4180074,51018000,Iliofemoral shunt,Procedure,SNOMED,Valid,Standard,141
+4027715,128397006,Operative procedure on intracranial vein,Procedure,SNOMED,Valid,Standard,67
+4040564,118840004,Procedure on sigmoid colon,Procedure,SNOMED,Valid,Standard,59
+4162270,372207006,Part of bone of face,Procedure,SNOMED,Valid,Standard,33
+4198096,51998003,Therapeutic exercise,Procedure,SNOMED,Valid,Standard,33
+4124567,303918003,Ultrasonography of male genital system,Procedure,SNOMED,Valid,Standard,36
+4043372,129007004,Feeding,Procedure,SNOMED,Valid,Standard,40
+4082864,241464005,Ultrasound angiography of blood vessel of lower limb,Procedure,SNOMED,Valid,Standard,85
+4303096,419595006,Fluoroscopic duodenography,Procedure,SNOMED,Valid,Standard,39
+4049536,233251000,Transluminal operations on vertebral artery,Procedure,SNOMED,Valid,Standard,156
+4101099,27926003,Construction of artificial larynx,Procedure,SNOMED,Valid,Standard,31
+4040299,16453004,Operation on stomach,Procedure,SNOMED,Valid,Standard,36
+4049890,15808000,Introduction of therapeutic substance into soft tissue,Procedure,SNOMED,Valid,Standard,31
+42872711,450703003,Repair of iliac artery,Procedure,SNOMED,Valid,Standard,69
+4067256,172801000,Operation on nasal turbinate,Procedure,SNOMED,Valid,Standard,38
+4336143,232151004,External auditory canal operation,Procedure,SNOMED,Valid,Standard,57
+4138544,32424008,"Excision of lesion of eyelid, minor",Procedure,SNOMED,Valid,Standard,30
+4043859,129407005,Grafting - action,Procedure,SNOMED,Valid,Standard,30
+4305381,418507002,Fluoroscopic laryngography,Procedure,SNOMED,Valid,Standard,42
+4328345,76015000,Hepatic artery,Procedure,SNOMED,Valid,Standard,29
+4145467,266069000,Thoracoscopy and biopsy of intrathoracic organ,Procedure,SNOMED,Valid,Standard,29
+4133963,127954009,Skeletal muscle structure,Procedure,SNOMED,Valid,Standard,28
+4107527,30021000,Lower leg structure,Procedure,SNOMED,Valid,Standard,133
+4146820,34707002,Biliary tract structure,Procedure,SNOMED,Valid,Standard,49
+4043007,118632007,Structure of tendon within hand,Procedure,SNOMED,Valid,Standard,30
+46270817,708791005,Laceration of mouth,Procedure,SNOMED,Valid,Standard,27
+4074287,176757001,Upper female genital tract operation,Procedure,SNOMED,Valid,Standard,27
+4164150,45148003,Repair of great vessels,Procedure,SNOMED,Valid,Standard,26
+4043851,129354008,Exteriorization - action,Procedure,SNOMED,Valid,Standard,28
+4042851,118507000,Entire thymus,Procedure,SNOMED,Valid,Standard,36
+46273033,711507002,Doppler transesophageal echocardiography,Procedure,SNOMED,Valid,Standard,26
+4314892,86762007,Structure of digestive system,Procedure,SNOMED,Valid,Standard,25
+4197730,315336003,Partial excision of bone of upper limb,Procedure,SNOMED,Valid,Standard,26
+4144732,427257009,Laparoscopic ultrasound examination of bile duct,Procedure,SNOMED,Valid,Standard,25
+4042646,118699001,Procedure on pelvis,Procedure,SNOMED,Valid,Standard,51
+4338294,233076006,Left ventricular operation,Procedure,SNOMED,Valid,Standard,30
+4097552,26731003,Repair of tendon of hand by suture,Procedure,SNOMED,Valid,Standard,24
+4078929,19257004,Defibrillator,Procedure,SNOMED,Valid,Standard,24
+4002380,119663001,Transposition of tissue of hand,Procedure,SNOMED,Valid,Standard,80
+4000740,119595009,Trunk destructive procedure,Procedure,SNOMED,Valid,Standard,78
+4178631,429287007,Angioplasty of carotid artery,Procedure,SNOMED,Valid,Standard,43
+43531531,609250001,Removal of device from head,Procedure,SNOMED,Valid,Standard,79
+4030170,108221006,Evaluation AND/OR management - established patient,Procedure,SNOMED,Valid,Standard,23
+4267861,61685007,Lower limb structure,Procedure,SNOMED,Valid,Standard,23
+4193450,312533001,Structure of mouth and/or pharynx,Procedure,SNOMED,Valid,Standard,30
+42537535,736974006,Excision of middle lobe of right lung,Procedure,SNOMED,Valid,Standard,22
+4294042,385294005,Salivary gland structure,Procedure,SNOMED,Valid,Standard,22
+4204388,54944003,Dural sinus,Procedure,SNOMED,Valid,Standard,51
+4190927,373782009,Diagnostic substance,Procedure,SNOMED,Valid,Standard,56
+4048015,20613002,Cystoscope,Procedure,SNOMED,Valid,Standard,23
+4045890,122775001,Structure of vein of upper limb,Procedure,SNOMED,Valid,Standard,51
+4067169,20115005,Structure of brachial vein,Procedure,SNOMED,Valid,Standard,40
+4324546,71145001,Suture of esophagus,Procedure,SNOMED,Valid,Standard,21
+4240081,57874002,Abdominal phlebectomy,Procedure,SNOMED,Valid,Standard,21
+4086422,241705007,Intravenous sedation,Procedure,SNOMED,Valid,Standard,37
+4042650,118710009,Procedure on lower extremity,Procedure,SNOMED,Valid,Standard,45
+4019004,115984004,Male perineal structure,Procedure,SNOMED,Valid,Standard,104
+4209441,56381008,Calculus,Procedure,SNOMED,Valid,Standard,38
+4049532,233244009,Transluminal operations on superior mesenteric artery,Procedure,SNOMED,Valid,Standard,26
+40480925,441875004,Imaging of head,Procedure,SNOMED,Valid,Standard,22
+4227147,87642003,Dislocation,Procedure,SNOMED,Valid,Standard,39
+4163025,372243000,Vulval part,Procedure,SNOMED,Valid,Standard,20
+4287469,397158004,Perianal region structure,Procedure,SNOMED,Valid,Standard,28
+4000750,119648004,Wrist excision,Procedure,SNOMED,Valid,Standard,43
+4282628,67328008,Structure of soft tissues of lower limb,Procedure,SNOMED,Valid,Standard,25
+4042424,16650009,Splint,Procedure,SNOMED,Valid,Standard,152
+4003899,120060008,Fallopian tube closure,Procedure,SNOMED,Valid,Standard,27
+4067285,21371007,Operation on abdominal region,Procedure,SNOMED,Valid,Standard,46
+4147281,35009002,Destruction of lesion of retina,Procedure,SNOMED,Valid,Standard,19
+4131757,12691009,Structure of brachiocephalic artery,Procedure,SNOMED,Valid,Standard,36
+4043179,118817003,Procedure on oral cavity,Procedure,SNOMED,Valid,Standard,19
+4090121,281237008,Vascular structure of upper limb,Procedure,SNOMED,Valid,Standard,28
+4191508,38934000,Upper eyelid structure,Procedure,SNOMED,Valid,Standard,52
+37111279,725959008,Transurethral insertion of prostatic urethral lift implant,Procedure,SNOMED,Valid,Standard,21
+4212492,57671007,Vas deferens structure,Procedure,SNOMED,Valid,Standard,19
+40489295,446715000,Laparoscopic total ureterectomy,Procedure,SNOMED,Valid,Standard,68
+4124035,235435008,Extubation of gastrointestinal tract,Procedure,SNOMED,Valid,Standard,19
+4237060,91318002,Hyperbaric chamber,Procedure,SNOMED,Valid,Standard,31
+4251052,74251004,Physiatric mobilization of joint,Procedure,SNOMED,Valid,Standard,18
+4179860,362894002,Adrenal part,Procedure,SNOMED,Valid,Standard,18
+4076620,224898003,Orthotic device,Procedure,SNOMED,Valid,Standard,21
+4219631,82433009,Continuous negative pressure ventilation treatment,Procedure,SNOMED,Valid,Standard,42
+4120825,303747001,Imaging of respiratory system with contrast,Procedure,SNOMED,Valid,Standard,23
+4211098,56459004,Foot structure,Procedure,SNOMED,Valid,Standard,144
+4242748,59656001,Incision of pancreas,Procedure,SNOMED,Valid,Standard,17
+4044535,129331004,Perfusion - action,Procedure,SNOMED,Valid,Standard,17
+40486221,449266005,Excision of intracranial vascular structure,Procedure,SNOMED,Valid,Standard,17
+4181507,363653001,Conjunctival and corneal surface structure,Procedure,SNOMED,Valid,Standard,17
+36695581,770804008,Structure of nail unit of digit of hand,Procedure,SNOMED,Valid,Standard,31
+4244256,59180001,Injection into skin of head,Procedure,SNOMED,Valid,Standard,17
+4336461,232708009,Removal of device from airway,Procedure,SNOMED,Valid,Standard,17
+4041261,118675001,Procedure on female genital system,Procedure,SNOMED,Valid,Standard,17
+4119730,287425000,Palate excision,Procedure,SNOMED,Valid,Standard,16
+4199457,51114001,Arterial structure,Procedure,SNOMED,Valid,Standard,17
+4143309,33626005,Structure of left auricular appendage,Procedure,SNOMED,Valid,Standard,37
+4044528,129312005,Enucleation - action,Procedure,SNOMED,Valid,Standard,30
+4234981,90456006,Sympathetic nerve structure,Procedure,SNOMED,Valid,Standard,31
+4093400,280401006,Spinal cerebrospinal fluid pathway,Procedure,SNOMED,Valid,Standard,16
+4338315,232778005,Tricuspid valve operation,Procedure,SNOMED,Valid,Standard,18
+4253809,74386004,Nasal bone structure,Procedure,SNOMED,Valid,Standard,16
+4050749,23411009,Maxillary antrectomy,Procedure,SNOMED,Valid,Standard,35
+4254083,74670003,Wrist joint structure,Procedure,SNOMED,Valid,Standard,82
+4159428,361931007,Entire nasal turbinate,Procedure,SNOMED,Valid,Standard,19
+4024275,19417000,Debridement of open fracture of foot,Procedure,SNOMED,Valid,Standard,15
+4296015,76743004,Technetium-99,Procedure,SNOMED,Valid,Standard,44
+4086016,24642003,Psychiatry procedure or service,Procedure,SNOMED,Valid,Standard,39
+4074743,177730008,Repair of a nail,Procedure,SNOMED,Valid,Standard,15
+4122000,303244009,Removal of substance from skin or subcutaneous tissue,Procedure,SNOMED,Valid,Standard,50
+4140400,265796001,Entire vulva,Procedure,SNOMED,Valid,Standard,17
+4122590,234900007,Cheek operation,Procedure,SNOMED,Valid,Standard,14
+4000752,119658000,Hand destructive procedure,Procedure,SNOMED,Valid,Standard,16
+4158919,361370006,Entire bone of lower extremity,Procedure,SNOMED,Valid,Standard,14
+4175338,42685002,Adhesion,Procedure,SNOMED,Valid,Standard,24
+4232493,89457008,Radioactive isotope,Procedure,SNOMED,Valid,Standard,163
+4188445,415588005,Stoma AND/OR site of stoma,Procedure,SNOMED,Valid,Standard,14
+4261482,44984001,Structure of ulnar artery,Procedure,SNOMED,Valid,Standard,21
+4097520,26864007,Structure of product of conception,Procedure,SNOMED,Valid,Standard,16
+4168709,274791003,Examination of lower limb,Procedure,SNOMED,Valid,Standard,44
+4047006,230896003,Intracranial vascular operation,Procedure,SNOMED,Valid,Standard,13
+4238947,362162009,Entire ascending colon,Procedure,SNOMED,Valid,Standard,13
+4231016,360152008,Monitoring - action,Procedure,SNOMED,Valid,Standard,13
+4033554,14742008,Structure of large intestine,Procedure,SNOMED,Valid,Standard,14
+4070766,21756005,Repair of rectal fistula,Procedure,SNOMED,Valid,Standard,13
+4034658,23938008,Structure of ramus of mandible,Procedure,SNOMED,Valid,Standard,13
+40489807,446818009,"Urinary panendoscope, device",Procedure,SNOMED,Valid,Standard,13
+4116614,301049003,Arthroscopic irrigation of joint,Procedure,SNOMED,Valid,Standard,12
+4250773,73897004,Skin structure of face,Procedure,SNOMED,Valid,Standard,12
+4216314,39499005,Structure of artery of thorax AND/OR abdomen,Procedure,SNOMED,Valid,Standard,18
+4020471,116368001,Gallbladder part,Procedure,SNOMED,Valid,Standard,12
+4213387,417121007,Breech extraction,Procedure,SNOMED,Valid,Standard,12
+4119966,304582006,Structure of upper urinary system,Procedure,SNOMED,Valid,Standard,17
+4205290,55253009,Replacement of tricuspid valve with tissue graft,Procedure,SNOMED,Valid,Standard,26
+4215793,71861002,Implantation,Procedure,SNOMED,Valid,Standard,59
+4047655,123865001,Procedure on larynx,Procedure,SNOMED,Valid,Standard,13
+4044544,129379006,Fusion - action,Procedure,SNOMED,Valid,Standard,18
+4106054,281839004,Exenteration - action,Procedure,SNOMED,Valid,Standard,11
+4117960,257742003,Direct anastomosis - action,Procedure,SNOMED,Valid,Standard,11
+4182234,54215007,Ethmoid sinus structure,Procedure,SNOMED,Valid,Standard,19
+4122949,303940007,Fluoroscopy of head,Procedure,SNOMED,Valid,Standard,11
+4058174,169003001,Fluoroscopy - lungs,Procedure,SNOMED,Valid,Standard,19
+4134150,128320002,Structure of intracranial vein,Procedure,SNOMED,Valid,Standard,41
+4234542,90228003,Hard palate structure,Procedure,SNOMED,Valid,Standard,21
+4002550,119857007,Lip excision,Procedure,SNOMED,Valid,Standard,19
+4147290,35054001,Structure of papillary muscle,Procedure,SNOMED,Valid,Standard,10
+4184784,43919006,Repair of artery of neck with vein graft,Procedure,SNOMED,Valid,Standard,17
+4335476,232638008,Excision of segment of left upper lobe,Procedure,SNOMED,Valid,Standard,13
+4279164,65473004,Microscope,Procedure,SNOMED,Valid,Standard,14
+4100790,27824001,First metatarsophalangeal joint structure,Procedure,SNOMED,Valid,Standard,10
+4304791,38864007,Perineal structure,Procedure,SNOMED,Valid,Standard,11
+37204303,782901001,Insertion procedure,Procedure,SNOMED,Valid,Standard,10
+4043071,228557008,Cognitive and behavioral therapy,Procedure,SNOMED,Valid,Standard,16
+4003374,120112007,Eyelid transposition,Procedure,SNOMED,Valid,Standard,44
+40490431,448529008,Bypass of femoral artery by anastomosis of femoral artery to tibial artery using vein graft,Procedure,SNOMED,Valid,Standard,30
+4042825,118892008,Procedure on external ear,Procedure,SNOMED,Valid,Standard,32
+4117491,257741005,Anastomosis - action,Procedure,SNOMED,Valid,Standard,12
+4197082,79741001,Common bile duct structure,Procedure,SNOMED,Valid,Standard,9
+4230533,359940006,Partial breech extraction,Procedure,SNOMED,Valid,Standard,9
+4298279,386373004,Nutrition therapy,Procedure,SNOMED,Valid,Standard,13
+4091147,252632002,Gastrointestinal manometry,Procedure,SNOMED,Valid,Standard,14
+4269235,63190004,Structure of jugular vein,Procedure,SNOMED,Valid,Standard,28
+4041079,118508005,Structure of ileal conduit,Procedure,SNOMED,Valid,Standard,16
+4034302,239516002,Monitoring procedure,Procedure,SNOMED,Valid,Standard,20
+4090123,281241007,Musculoskeletal structure of head,Procedure,SNOMED,Valid,Standard,22
+4003703,120217006,Forearm incision,Procedure,SNOMED,Valid,Standard,29
+46273535,708741006,Biopsy of soft palate,Procedure,SNOMED,Valid,Standard,8
+4147849,3041000,Repair of stomach,Procedure,SNOMED,Valid,Standard,8
+4302160,78072001,Repair of urethral fistula,Procedure,SNOMED,Valid,Standard,8
+4165741,41242001,Transthoracic approach,Procedure,SNOMED,Valid,Standard,11
+4043694,129222002,Intracapsular approach,Procedure,SNOMED,Valid,Standard,8
+4121257,287919006,Hand plastic operation with graft,Procedure,SNOMED,Valid,Standard,9
+4063122,17102003,Nasogastric tube,Procedure,SNOMED,Valid,Standard,8
+4149607,310653000,Drug addiction therapy - methadone,Procedure,SNOMED,Valid,Standard,9
+4047490,122495006,Thoracic spine structure,Procedure,SNOMED,Valid,Standard,9
+4329644,431870006,Fluoroscopy of neck,Procedure,SNOMED,Valid,Standard,8
+4034396,239471004,Arthroplasty of elbow,Procedure,SNOMED,Valid,Standard,11
+4044902,129235006,Procedure on renal pelvis,Procedure,SNOMED,Valid,Standard,17
+4083232,241625000,MRI of pancreas,Procedure,SNOMED,Valid,Standard,8
+4230801,89002000,Therapeutic ultrasound,Procedure,SNOMED,Valid,Standard,9
+4305329,81745001,Eye structure,Procedure,SNOMED,Valid,Standard,8
+4208651,312030006,Urinary endoscope,Procedure,SNOMED,Valid,Standard,10
+4043023,118695007,Procedure on thorax,Procedure,SNOMED,Valid,Standard,27
+4002699,119964005,Tonsil destructive procedure,Procedure,SNOMED,Valid,Standard,7
+4027403,107733003,Introduction procedure,Procedure,SNOMED,Valid,Standard,8
+4100253,25342003,Middle ear structure,Procedure,SNOMED,Valid,Standard,7
+4108283,181131000,Entire breast,Procedure,SNOMED,Valid,Standard,8
+4220781,417259006,Interphalangeal joint of hand structure,Procedure,SNOMED,Valid,Standard,7
+40487518,447980000,Excision of joint of foot,Procedure,SNOMED,Valid,Standard,7
+4049682,233406003,Insertion of thoracic aorta stent,Procedure,SNOMED,Valid,Standard,13
+4171537,419119006,Fluoroscopic venography of renal vein with contrast,Procedure,SNOMED,Valid,Standard,31
+4177386,42687005,Lymphangiogram,Procedure,SNOMED,Valid,Standard,7
+4172592,49960007,Transposition of vaginal tissue,Procedure,SNOMED,Valid,Standard,10
+4086409,241666000,MRI of thoracic aorta,Procedure,SNOMED,Valid,Standard,7
+4042480,118827009,Procedure on tongue,Procedure,SNOMED,Valid,Standard,8
+4192131,74966009,Operation on tracheobronchial tree,Procedure,SNOMED,Valid,Standard,6
+4194797,79373005,Transposition procedure of small intestine,Procedure,SNOMED,Valid,Standard,6
+4034431,113288006,Structure of accessory pancreatic duct,Procedure,SNOMED,Valid,Standard,9
+4029553,107793001,Operative procedure on ankle AND/OR foot,Procedure,SNOMED,Valid,Standard,19
+4116178,302697001,Drainage of skin lesion,Procedure,SNOMED,Valid,Standard,41
+4236080,360190002,External approach,Procedure,SNOMED,Valid,Standard,6
+4302674,387746009,Operation on conjunctiva,Procedure,SNOMED,Valid,Standard,9
+4099008,27088001,Spinal cord white matter structure,Procedure,SNOMED,Valid,Standard,6
+4080965,182744004,Extracorporeal circulation procedure,Procedure,SNOMED,Valid,Standard,6
+4289174,70060006,Closed reduction of fracture of phalanx of foot,Procedure,SNOMED,Valid,Standard,6
+4000505,119228002,Fallopian tube part,Procedure,SNOMED,Valid,Standard,6
+4103760,25466008,Anastomosis of urinary bladder,Procedure,SNOMED,Valid,Standard,8
+46273729,709192002,Local excision of lesion of duodenum,Procedure,SNOMED,Valid,Standard,6
+4002037,119781009,Neck artery excision,Procedure,SNOMED,Valid,Standard,9
+4028983,1368003,Iodine-131,Procedure,SNOMED,Valid,Standard,6
+4107083,29836001,Hip region structure,Procedure,SNOMED,Valid,Standard,31
+4046592,122972007,Structure of vein of pulmonary circulation,Procedure,SNOMED,Valid,Standard,18
+4229847,438616002,Procedure on coronary artery using imaging guidance,Procedure,SNOMED,Valid,Standard,8
+4079649,179399002,Arthroscopy and biopsy of knee,Procedure,SNOMED,Valid,Standard,10
+4021428,176049007,Therapeutic nephroscopic operations on ureter,Procedure,SNOMED,Valid,Standard,17
+4040556,118818008,Procedure on tooth,Procedure,SNOMED,Valid,Standard,11
+4229131,88481005,Sublingual gland structure,Procedure,SNOMED,Valid,Standard,7
+4208703,56400007,Structure of renal vein,Procedure,SNOMED,Valid,Standard,18
+4033377,1490004,Structure of soft tissue of trunk,Procedure,SNOMED,Valid,Standard,12
+4028660,13554000,Incision of thigh,Procedure,SNOMED,Valid,Standard,11
+4042477,118815006,Procedure on lip,Procedure,SNOMED,Valid,Standard,14
+4042813,118835007,Procedure on ileum,Procedure,SNOMED,Valid,Standard,16
+4262229,4596009,Laryngeal structure,Procedure,SNOMED,Valid,Standard,10
+4051578,2095001,Nasal sinus structure,Procedure,SNOMED,Valid,Standard,5
+4200712,53496003,Irrigation of nasal sinus,Procedure,SNOMED,Valid,Standard,5
+4185545,55931003,Lysis of anterior adhesions of iris,Procedure,SNOMED,Valid,Standard,5
+4044196,129350004,Surgical shortening - action,Procedure,SNOMED,Valid,Standard,9
+4005176,11048003,Structure of body of mandible,Procedure,SNOMED,Valid,Standard,5
+4049603,15926001,Brainstem structure,Procedure,SNOMED,Valid,Standard,7
+4042488,118884004,Procedure on spinal cord,Procedure,SNOMED,Valid,Standard,11
+4014241,113257007,Structure of cardiovascular system,Procedure,SNOMED,Valid,Standard,5
+4040549,118794001,Procedure on lung,Procedure,SNOMED,Valid,Standard,9
+4304549,418919001,Fluoroscopy of lower limb,Procedure,SNOMED,Valid,Standard,5
+4006785,111002,Parathyroid structure,Procedure,SNOMED,Valid,Standard,5
+4036356,117725006,Detection of bacteria,Procedure,SNOMED,Valid,Standard,5
+4030784,108031006,Ureter destructive procedure,Procedure,SNOMED,Valid,Standard,7
+4034554,239613002,Operation involving external fixators,Procedure,SNOMED,Valid,Standard,10
+4161003,399035005,Tomographic imaging - action,Procedure,SNOMED,Valid,Standard,9
+4044517,129289008,Drainage - action,Procedure,SNOMED,Valid,Standard,21
+4081566,24110008,Anoscope,Procedure,SNOMED,Valid,Standard,4
+4027872,13288007,Monitor,Procedure,SNOMED,Valid,Standard,8
+4111456,181212004,Entire larynx,Procedure,SNOMED,Valid,Standard,5
+4233953,8993003,Structure of hepatic vein,Procedure,SNOMED,Valid,Standard,6
+4003734,119867002,Mouth destructive procedure,Procedure,SNOMED,Valid,Standard,4
+4150663,31168004,Operation on pleural cavity,Procedure,SNOMED,Valid,Standard,4
+4108400,181247007,Entire duodenum,Procedure,SNOMED,Valid,Standard,4
+4178802,363074004,Diagnostic procedure on respiratory system structure by site,Procedure,SNOMED,Valid,Standard,4
+4070760,21814001,Cardiac ventricular structure,Procedure,SNOMED,Valid,Standard,4
+4034272,113279002,Gingival structure,Procedure,SNOMED,Valid,Standard,4
+4195854,67635009,Arteriectomy of abdominal aorta,Procedure,SNOMED,Valid,Standard,4
+4209460,56438006,Neuroanastomosis,Procedure,SNOMED,Valid,Standard,4
+43021556,473280004,Incision of bile duct for obstruction,Procedure,SNOMED,Valid,Standard,4
+4276939,65083005,"Angiography of artery of head, neck and/or brain",Procedure,SNOMED,Valid,Standard,4
+4269636,62277007,Excision of soft tissue of hand,Procedure,SNOMED,Valid,Standard,4
+4113230,299706009,Bone structure of wrist and/or hand,Procedure,SNOMED,Valid,Standard,4
+4202366,53620006,Temporomandibular joint structure,Procedure,SNOMED,Valid,Standard,5
+4090125,281244004,Musculoskeletal structure of lower limb,Procedure,SNOMED,Valid,Standard,4
+4106573,29751003,Open reduction of fracture of phalanges of hand,Procedure,SNOMED,Valid,Standard,4
+4183710,43719000,Structure of epiphysis,Procedure,SNOMED,Valid,Standard,5
+4020519,174961003,Revision of plastic repair of aortic valve,Procedure,SNOMED,Valid,Standard,7
+37397149,717193008,Cone beam CT,Procedure,SNOMED,Valid,Standard,4
+4047246,13152008,Structure of pelvic vein,Procedure,SNOMED,Valid,Standard,12
+4318654,22012003,Structure of spinal motor nerve,Procedure,SNOMED,Valid,Standard,4
+4254097,74540000,Somatosensory testing,Procedure,SNOMED,Valid,Standard,4
+4042326,118733005,Procedure on femur,Procedure,SNOMED,Valid,Standard,5
+4048375,123014005,Excision of pelvis,Procedure,SNOMED,Valid,Standard,4
+4301379,78718001,Muscle function,Procedure,SNOMED,Valid,Standard,6
+4028920,108313002,Family psychotherapy procedure,Procedure,SNOMED,Valid,Standard,4
+4004042,120168003,Diaphragm transposition,Procedure,SNOMED,Valid,Standard,4
+4201706,302052009,Endoscopic biopsy of lesion of colon,Procedure,SNOMED,Valid,Standard,7
+4021580,176178006,Diagnostic cystoscopy,Procedure,SNOMED,Valid,Standard,4
+4083247,239460000,Drainage of joint cavity,Procedure,SNOMED,Valid,Standard,7
+4029044,108372004,Entire tarsal bone,Procedure,SNOMED,Valid,Standard,7
+4215871,81087007,Articular system structure,Procedure,SNOMED,Valid,Standard,5
+4141257,307639008,Anastomosis of transverse colon to rectum,Procedure,SNOMED,Valid,Standard,3
+4043173,118790005,Procedure on vocal cord,Procedure,SNOMED,Valid,Standard,17
+4008013,102297006,Main bronchus structure,Procedure,SNOMED,Valid,Standard,6
+4150840,31319008,Endoscopic destruction of lesion of anus,Procedure,SNOMED,Valid,Standard,3
+4075101,245543004,Dentition,Procedure,SNOMED,Valid,Standard,6
+4223279,420730005,Structure of mandibular tooth,Procedure,SNOMED,Valid,Standard,8
+4046751,122547000,Biopsy of upper aerodigestive tract,Procedure,SNOMED,Valid,Standard,3
+4283796,6682007,Reattachment of amputated ear,Procedure,SNOMED,Valid,Standard,3
+4204374,5489004,Diagnostic procedure on radius,Procedure,SNOMED,Valid,Standard,3
+4294508,76135002,Repair of conjunctiva,Procedure,SNOMED,Valid,Standard,3
+4106460,257822003,Extracapsular extraction,Procedure,SNOMED,Valid,Standard,3
+4302625,419428002,Structure of vestibulogingival sulcus,Procedure,SNOMED,Valid,Standard,3
+4317407,955009,Bronchial structure,Procedure,SNOMED,Valid,Standard,3
+4302605,78961009,Splenic structure,Procedure,SNOMED,Valid,Standard,3
+4164269,45189000,Destruction of lesion of stomach,Procedure,SNOMED,Valid,Standard,3
+4043842,129314006,Biopsy - action,Procedure,SNOMED,Valid,Standard,3
+4032167,14572004,Repair of ovary,Procedure,SNOMED,Valid,Standard,10
+4185266,43981004,Structure of left ovary,Procedure,SNOMED,Valid,Standard,3
+4184454,54527006,Fetal head structure,Procedure,SNOMED,Valid,Standard,3
+4232203,360499006,Structure of intervertebral disc,Procedure,SNOMED,Valid,Standard,7
+4297767,76505004,Thumb structure,Procedure,SNOMED,Valid,Standard,3
+4144368,33849009,Diagnostic physical therapy procedure,Procedure,SNOMED,Valid,Standard,3
+4284241,67329000,Administration of antidote,Procedure,SNOMED,Valid,Standard,5
+43531071,609637006,Procedure on pelvic region of trunk,Procedure,SNOMED,Valid,Standard,19
+4045050,129299003,Release - action,Procedure,SNOMED,Valid,Standard,3
+4147074,30162009,Destructive procedure of pericardium,Procedure,SNOMED,Valid,Standard,5
+4160550,430230000,Biopsy of trunk,Procedure,SNOMED,Valid,Standard,5
+4300156,385422002,Procedure on artery of head,Procedure,SNOMED,Valid,Standard,4
+4292206,401049002,Communication skills,Procedure,SNOMED,Valid,Standard,3
+4207916,311764000,Family counseling,Procedure,SNOMED,Valid,Standard,3
+4187143,372805007,Clonidine,Procedure,SNOMED,Valid,Standard,3
+37303867,818983003,Abdomen,Procedure,SNOMED,Valid,Standard,5
+4202585,433174005,MRI of femur with contrast,Procedure,SNOMED,Valid,Standard,4
+4183678,55761000,Echogynography,Procedure,SNOMED,Valid,Standard,3
+4194537,79097008,Sphenoid endoscopy with biopsy,Procedure,SNOMED,Valid,Standard,3
+4064903,171121004,HIV screening,Procedure,SNOMED,Valid,Standard,3
+4339465,232199004,Inflation of Eustachian tube using balloon,Procedure,SNOMED,Valid,Non-standard,3
+4101560,27967008,Functional reconstruction of internal nose,Procedure,SNOMED,Valid,Standard,3
+4041269,118700000,Procedure on female perineum,Procedure,SNOMED,Valid,Standard,3
+37019081,713824006,Structure of renal artery of transplanted kidney,Procedure,SNOMED,Valid,Standard,3
+4077311,18911002,Penile structure,Procedure,SNOMED,Valid,Standard,4
+4001534,120036009,Vagina closure,Procedure,SNOMED,Valid,Standard,3
+4044228,23043003,Structure of uterine adnexa,Procedure,SNOMED,Valid,Standard,11
+4110208,181422007,Entire prostate,Procedure,SNOMED,Valid,Standard,3
+4221211,420393006,Structure of maxillary tooth,Procedure,SNOMED,Valid,Standard,11
+4170794,274323008,Endoscopic biopsy of colon,Procedure,SNOMED,Valid,Standard,2
+4234161,440588003,Endoscopic procedure on appendix,Procedure,SNOMED,Valid,Standard,7
+4001223,119287009,Biopsy of large intestine,Procedure,SNOMED,Valid,Standard,3
+4266061,62392005,Excision of nasolacrimal duct,Procedure,SNOMED,Valid,Standard,3
+4325615,71688005,Diagnostic procedure on conjunctiva,Procedure,SNOMED,Valid,Standard,2
+4065684,172261006,Drainage of lesion of eyelid,Procedure,SNOMED,Valid,Standard,4
+4048636,232512001,Biopsy of frontal sinus,Procedure,SNOMED,Valid,Standard,5
+4166943,274015000,Tympanic membrane operation,Procedure,SNOMED,Valid,Standard,3
+42873090,450342000,Destruction of sympathetic nerve,Procedure,SNOMED,Valid,Standard,2
+4231864,90084008,MRI without contrast,Procedure,SNOMED,Valid,Standard,2
+4058617,169368002,Radiotherapy: temporary thorax implant,Procedure,SNOMED,Valid,Standard,2
+4330369,431458003,Injection of sacroiliac joint using fluoroscopic guidance,Procedure,SNOMED,Valid,Non-standard,2
+4157933,370776007,Assessment of history of substance abuse,Procedure,SNOMED,Valid,Standard,3
+4029480,13895009,Repair of punctum of lacrimal system,Procedure,SNOMED,Valid,Standard,2
+4234382,90010006,Ligation of blood vessel,Procedure,SNOMED,Valid,Standard,2
+4184817,41296002,Iris structure,Procedure,SNOMED,Valid,Standard,2
+4052533,233552008,Vascular cannula replacement,Procedure,SNOMED,Valid,Standard,2
+4250789,73954008,Structure of ethmoidal artery,Procedure,SNOMED,Valid,Standard,2
+4019038,175379001,Transluminal operations on carotid artery,Procedure,SNOMED,Valid,Standard,3
+4032245,108246006,Tonometry AND/OR tonography procedure,Procedure,SNOMED,Valid,Standard,2
+4082516,24136001,Hip joint structure,Procedure,SNOMED,Valid,Standard,2
+4207210,53843000,Structure of rectouterine pouch,Procedure,SNOMED,Valid,Standard,2
+4005326,110540008,Muscle structure of hand,Procedure,SNOMED,Valid,Standard,2
+4201588,53418001,Structure of vertebral region of back,Procedure,SNOMED,Valid,Standard,2
+4081507,278312000,Reattachment - action,Procedure,SNOMED,Valid,Standard,2
+4139100,32859001,Structure of inferior mesenteric vein,Procedure,SNOMED,Valid,Standard,2
+4235177,362072009,Saphenous vein structure,Procedure,SNOMED,Valid,Standard,3
+4237831,91134007,Mitral valve structure,Procedure,SNOMED,Valid,Standard,2
+4143877,307244005,Dilation of rectal stricture,Procedure,SNOMED,Valid,Standard,2
+4069880,172696001,Tympanoplasty using biological graft,Procedure,SNOMED,Valid,Standard,2
+4216178,394902000,High dose brachytherapy,Procedure,SNOMED,Valid,Standard,2
+4040709,118880008,Procedure on peripheral nerve,Procedure,SNOMED,Valid,Standard,3
+4187506,47293000,Radiographic procedure on lower extremity and pelvis,Procedure,SNOMED,Valid,Standard,4
+4171408,419109000,Fluoroscopic arthrography,Procedure,SNOMED,Valid,Standard,3
+4328673,430420007,Fluoroscopic arthrography of zygapophyseal joint of lumbar spine with contrast,Procedure,SNOMED,Valid,Standard,3
+4208948,312508004,Structure of peripheral lymphatic vessel,Procedure,SNOMED,Valid,Standard,2
+44788943,196731000000103,Speech assessment,Procedure,SNOMED,Valid,Standard,2
+4242541,38266002,Entire body as a whole,Procedure,SNOMED,Valid,Standard,8
+4011851,113197003,Bone structure of rib,Procedure,SNOMED,Valid,Standard,4
+44807141,815911000000106,Variable rate intravenous infusion of insulin,Procedure,SNOMED,Valid,Standard,2
+37310740,144711000000105,Application of dermal substitute,Procedure,SNOMED,Valid,Standard,3
+4120969,234291006,Drainage of lesion of abdominal lymph node,Procedure,SNOMED,Valid,Standard,2
+4223087,84755001,Radiation therapy treatment management,Procedure,SNOMED,Valid,Standard,2
+4154906,28439007,Arthrectomy of wrist,Procedure,SNOMED,Valid,Standard,4
+4247641,61354007,Arthrectomy of hand,Procedure,SNOMED,Valid,Standard,4
+4160439,399097000,Administration of anesthesia,Procedure,SNOMED,Valid,Standard,4
+4137449,31847002,Hyperthermia treatment,Procedure,SNOMED,Valid,Standard,2
+4082264,182777000,Monitoring of patient,Procedure,SNOMED,Valid,Standard,3
+4270618,63165001,Quantitative venous flow studies,Procedure,SNOMED,Valid,Standard,2
+4104246,25489000,Pericardial cavity structure,Procedure,SNOMED,Valid,Standard,2
+4232301,89545001,Face structure,Procedure,SNOMED,Valid,Standard,3
+4075292,178273001,Drainage of muscle,Procedure,SNOMED,Valid,Standard,1
+4075091,245502004,Entire epiglottis,Procedure,SNOMED,Valid,Standard,1
+4171831,48508003,Biopsy of bile ducts,Procedure,SNOMED,Valid,Standard,1
+4240829,58117001,Destructive procedure of shoulder and arm,Procedure,SNOMED,Valid,Standard,1
+4003699,120208006,Inguinal region destructive procedure,Procedure,SNOMED,Valid,Standard,2
+4139992,265447007,Bile duct operation,Procedure,SNOMED,Valid,Standard,2
+4042337,118768005,Procedure on salivary gland,Procedure,SNOMED,Valid,Standard,4
+4013348,11276004,Lysis of adhesions of eyelid,Procedure,SNOMED,Valid,Standard,2
+4001897,119741002,Bronchus destructive procedure,Procedure,SNOMED,Valid,Standard,1
+4002067,119892004,Large intestine closure,Procedure,SNOMED,Valid,Standard,1
+4111459,181216001,Entire lung,Procedure,SNOMED,Valid,Standard,1
+4218255,81965001,Structure of head of humerus,Procedure,SNOMED,Valid,Standard,1
+4042342,118775006,Procedure on nipple,Procedure,SNOMED,Valid,Standard,2
+4202698,316232007,Grafting of nipple,Procedure,SNOMED,Valid,Standard,2
+4143807,265780004,Entire nipple,Procedure,SNOMED,Valid,Standard,1
+4002366,119594008,Neck destructive procedure,Procedure,SNOMED,Valid,Standard,5
+4299647,77452001,Cystic duct structure,Procedure,SNOMED,Valid,Standard,1
+4022012,116026007,Total jejunectomy,Procedure,SNOMED,Valid,Standard,1
+4044532,129325002,Introduction - action,Procedure,SNOMED,Valid,Standard,1
+4111524,284372008,Examination of upper limb,Procedure,SNOMED,Valid,Standard,6
+4093453,25903009,Entire skeletal muscle of face,Procedure,SNOMED,Valid,Standard,1
+4195703,67923007,Hypothalamic structure,Procedure,SNOMED,Valid,Standard,2
+4029620,14019005,Diagnostic spinal drainage,Procedure,SNOMED,Valid,Standard,1
+4209146,56052001,Facial nerve structure,Procedure,SNOMED,Valid,Standard,1
+4194895,312851005,Screening for disorder,Procedure,SNOMED,Valid,Non-standard,1
+4265743,397516006,Photorefractive keratoplasty,Procedure,SNOMED,Valid,Non-standard,1
+4121753,287952000,Intrauterine fetal defect correction,Procedure,SNOMED,Valid,Standard,1
+4032737,236894009,Frozen embryo transfer,Procedure,SNOMED,Valid,Standard,1
+4030173,108243003,Sleep disorder test AND/OR procedure,Procedure,SNOMED,Valid,Standard,1
+40480470,441754003,Percutaneous transhepatic transplantation of pancreatic islet cell using fluoroscopic guidance,Procedure,SNOMED,Valid,Standard,1
+4018570,174962005,Revision of plastic repair of tricuspid valve,Procedure,SNOMED,Valid,Standard,1
+4191610,39057004,Pulmonary valve structure,Procedure,SNOMED,Valid,Standard,3
+4010666,102298001,Structure of chordae tendineae cordis,Procedure,SNOMED,Valid,Standard,1
+4339733,232811004,Tricuspid valvectomy,Procedure,SNOMED,Valid,Standard,1
+4237681,90989000,Arteriectomy of thoracic aorta,Procedure,SNOMED,Valid,Standard,1
+4044187,129311003,Evisceration - action,Procedure,SNOMED,Valid,Standard,1
+4033677,14789005,Prosthetic implant,Procedure,SNOMED,Valid,Standard,1
+4207332,312336005,Opening - action,Procedure,SNOMED,Valid,Standard,1
+4078373,19227008,Foreign body,Procedure,SNOMED,Valid,Standard,1
+4299600,386607008,Iridotomy,Procedure,SNOMED,Valid,Standard,1
+4117456,303413003,Vascular structure of adrenal gland,Procedure,SNOMED,Valid,Standard,1
+4308653,387659005,Partial excision of lacrimal gland,Procedure,SNOMED,Valid,Standard,1
+4238922,91491008,Diagnostic procedure on uterus and supporting structures,Procedure,SNOMED,Valid,Standard,1
+4044518,129292007,Evacuation - action,Procedure,SNOMED,Valid,Standard,1
+4100338,27575008,Change in bone length of carpals and metacarpals,Procedure,SNOMED,Valid,Standard,1
+4189847,392250009,Operation on fallopian tube,Procedure,SNOMED,Valid,Standard,1
+4197119,51289009,Digestive tract structure,Procedure,SNOMED,Valid,Standard,1
+43021696,473357005,Diagnostic procedure on pancreas,Procedure,SNOMED,Valid,Standard,1
+4042819,118856009,Procedure on urethra,Procedure,SNOMED,Valid,Standard,1
+4105594,29561007,Repair of epididymis and spermatic cord,Procedure,SNOMED,Valid,Standard,1
+42872693,450684001,Bypass of brachial artery,Procedure,SNOMED,Valid,Standard,1
+4045717,133891005,Care planning session,Procedure,SNOMED,Valid,Standard,1
+4118729,288060004,Separated epiphysis - closed reduction,Procedure,SNOMED,Valid,Standard,1
+4045289,229065009,Exercise therapy,Procedure,SNOMED,Valid,Standard,1
+4043703,129283009,Training - action,Procedure,SNOMED,Valid,Standard,1
+4296022,76784001,Vaginal structure,Procedure,SNOMED,Valid,Standard,1
+4230986,360037004,Imaging - action,Procedure,SNOMED,Valid,Standard,1
+4204191,309104000,Musculoskeletal specimen,Procedure,SNOMED,Valid,Standard,1
+4310972,85537004,Glenohumeral joint structure,Procedure,SNOMED,Valid,Standard,1
+4106053,281838007,Disarticulation - action,Procedure,SNOMED,Valid,Standard,1
+4130112,261238005,Free flap,Procedure,SNOMED,Valid,Standard,1
+4184771,55965002,Plain X-ray of skull,Procedure,SNOMED,Valid,Standard,1
+4001190,119399004,Specimen from eye,Procedure,SNOMED,Valid,Standard,1
+4002049,119821002,Vein transposition,Procedure,SNOMED,Valid,Standard,1
+4331460,22737002,Blepharectomy,Procedure,SNOMED,Valid,Standard,2
+4159952,373366005,Diagnostic procedure on eye region,Procedure,SNOMED,Valid,Standard,1
+4135229,31636006,Anterior chamber of eye structure,Procedure,SNOMED,Valid,Standard,1
+4001901,119759004,Cardiovascular system closure,Procedure,SNOMED,Valid,Standard,2
+4304003,38679003,Destructive procedure of eyelid,Procedure,SNOMED,Valid,Standard,1
+4322977,71394005,Endoscopic procedure on thymus,Procedure,SNOMED,Valid,Standard,1
+4170037,48027003,Structure of internal mammary lymphatic vessel,Procedure,SNOMED,Valid,Standard,1
+4144867,265505005,Transluminal operation on subclavian artery,Procedure,SNOMED,Valid,Standard,1
+4049533,233245005,Transluminal operations on inferior mesenteric artery,Procedure,SNOMED,Valid,Standard,2
+4145343,266052002,Structure of colic artery,Procedure,SNOMED,Valid,Standard,1
+4308915,424184006,Wheelchair tolerance assessment,Procedure,SNOMED,Valid,Standard,1
+4196753,433866007,CT guided laser ablation of lesion of liver,Procedure,SNOMED,Valid,Standard,1
+4206791,56031009,Biopsy of gallbladder,Procedure,SNOMED,Valid,Standard,1
+4287099,68426009,Nasal septum structure,Procedure,SNOMED,Valid,Standard,1
+4074732,177712001,Removal of inserted substance from subcutaneous tissue,Procedure,SNOMED,Valid,Standard,1
+4004520,110474005,Whole body hyperbaric oxygen therapy,Procedure,SNOMED,Valid,Non-standard,1
+4086099,243636003,Surgical repair of vertebral column,Procedure,SNOMED,Valid,Standard,1
+4111527,284385006,Examination of toe,Procedure,SNOMED,Valid,Standard,1
+4232749,404939002,Myofascial release,Procedure,SNOMED,Valid,Standard,1
+4045057,129333001,Insufflation - action,Procedure,SNOMED,Valid,Standard,2
+4232403,439794000,Extracorporeal shock wave therapy,Procedure,SNOMED,Valid,Standard,1
+4170249,418180008,Magnetic resonance angiography of artery of lower limb,Procedure,SNOMED,Valid,Standard,1
+4302819,387854002,Massage physiotherapy,Procedure,SNOMED,Valid,Standard,1
+4046464,229224000,Participation in yoga,Procedure,SNOMED,Valid,Standard,1
+4145130,34112007,Physiatric manipulation of back,Procedure,SNOMED,Valid,Standard,1
+4025208,106079008,Digestive system function,Procedure,SNOMED,Valid,Standard,1
+37396829,716777001,Hemodynamic monitoring,Procedure,SNOMED,Valid,Standard,2
+4059953,169430000,Electrotherapy,Procedure,SNOMED,Valid,Standard,3
+4057704,181769001,Connective tissue,Procedure,SNOMED,Valid,Standard,1
+4200396,53120007,Upper limb structure,Procedure,SNOMED,Valid,Standard,1
+4041251,118645006,Bone structure of pelvis,Procedure,SNOMED,Valid,Standard,4
+4305707,418687005,Fluoroscopy of humerus,Procedure,SNOMED,Valid,Standard,1
+4110368,18157004,Orthotic procedure,Procedure,SNOMED,Valid,Standard,1
+4145254,307808008,Neuropsychological testing,Procedure,SNOMED,Valid,Standard,1
+4187379,4719001,Psychologic cognitive testing and assessment,Procedure,SNOMED,Valid,Standard,1
+4325532,430436009,CT of lower leg with contrast,Procedure,SNOMED,Valid,Standard,2
+4118604,303919006,US scan of musculoskeletal system,Procedure,SNOMED,Valid,Standard,1
+4118606,303924009,US scan of hand,Procedure,SNOMED,Valid,Standard,1
+4070460,1765002,Structure of lymphatic vessel of thorax,Procedure,SNOMED,Valid,Standard,1
+37116850,733864003,Assessment of fine motor function,Procedure,SNOMED,Valid,Standard,1
+4125530,303917008,US urinary tract,Procedure,SNOMED,Valid,Standard,1
+4287701,68818006,Structure of cervical intervertebral disc,Procedure,SNOMED,Valid,Standard,2
+4182739,43081002,Skin structure of neck,Procedure,SNOMED,Valid,Standard,1
+4221351,420529003,Radiation plaque therapy,Procedure,SNOMED,Valid,Standard,3
+4189705,392089008,Breast procedure,Procedure,SNOMED,Valid,Standard,1
+4058317,168999000,Fluoroscopy of cervical vertebral column,Procedure,SNOMED,Valid,Standard,1
+4219320,39723000,Sacroiliac joint structure,Procedure,SNOMED,Valid,Standard,1
+4218142,72143005,Sacrococcygeal region structure,Procedure,SNOMED,Valid,Standard,1
+4130103,261200006,External fixation system,Procedure,SNOMED,Valid,Standard,1
+4106395,29707007,Toe structure,Procedure,SNOMED,Valid,Standard,1
+4044885,129170001,Procedure on tunica vaginalis testis,Procedure,SNOMED,Valid,Standard,1
+4101271,27907006,Structure of hymen,Procedure,SNOMED,Valid,Standard,1
+4208601,439475006,CT venography of pulmonary vein with contrast,Procedure,SNOMED,Valid,Standard,1
+4168547,274483006,Brace removal,Procedure,SNOMED,Valid,Standard,1

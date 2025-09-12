@@ -708,3 +708,14 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 2614782,A4356,"External urethral clamp or compression device (not to be used for catheter clamp), each",HCPCS,HCPCS,Valid,Standard,1
 2614749,A4313,"Insertion tray without drainage bag with indwelling catheter, foley type, three-way, for continuous irrigation",HCPCS,HCPCS,Valid,Standard,1
 1314557,L1852,"Knee orthosis (ko), double upright, thigh and calf, with adjustable flexion and extension joint (unicentric or polycentric), medial-lateral and rotation control, with or without varus/valgus adjustment, prefabricated, off-the-shelf",HCPCS,HCPCS,Valid,Standard,1
+4235761,90564003,Field block design and fabrication,Procedure,SNOMED,Valid,Standard,7835
+4036582,228595003,Provision of orthosis,Procedure,SNOMED,Valid,Standard,480
+4030855,14490000,Orthotic device construction and fitting,Procedure,SNOMED,Valid,Standard,315
+4305581,3895009,Application of dressing,Procedure,SNOMED,Valid,Standard,298
+4297706,384728007,Replacement of device,Procedure,SNOMED,Valid,Standard,245
+4227418,87750000,Insertion of nasogastric tube,Procedure,SNOMED,Valid,Standard,14
+4208804,312346007,Provision of foot orthosis,Procedure,SNOMED,Valid,Standard,8
+4242396,38162008,Disarticulation of hip,Procedure,SNOMED,Valid,Standard,3
+4030398,13995008,Amputation of arm through shoulder,Procedure,SNOMED,Valid,Standard,4
+4052082,23425005,Amputation of arm through elbow,Procedure,SNOMED,Valid,Standard,1
+4042650,118710009,Procedure on lower extremity,Procedure,SNOMED,Valid,Standard,1

@@ -3930,7 +3930,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4020871,212976008,Asphyxia by strangulation,Event,SNOMED,Valid,Standard,6
 4019913,115239009,Bone tumor,Morph Abnormality,SNOMED,Valid,Standard,6
 4019842,105436006,Elderly person,Social Context,SNOMED,Valid,Non-standard,6
-38002161,0738,Rasburicase,APC,APC,Valid,Standard,6
 37309619,16863481000119103,Long-term current use of benzodiazepine,Context-dependent,SNOMED,Valid,Standard,6
 37117646,15625451000119105,Long-term current use of tofacitinib,Context-dependent,SNOMED,Valid,Standard,6
 37108958,15929581000119100,Long-term current use of antidepressant medication,Context-dependent,SNOMED,Valid,Standard,6
@@ -6403,8 +6402,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4004259,10083006,Cannabis sativa,Organism,SNOMED,Valid,Standard,3
 4002790,1007001,Brassica oleracea,Organism,SNOMED,Valid,Standard,10
 3967777,LP434045-3,Dupilumab,LOINC Component,LOINC,Valid,Non-standard,1
-38002751,7035,Teniposide,APC,APC,Valid,Standard,1
-38002644,1683,Basiliximab,APC,APC,Valid,Standard,1
 37397760,737661000168109,Sucroferric oxyhydroxide,Substance,SNOMED,Valid,Non-standard,1
 37396718,716624002,Alfalfa,Substance,SNOMED,Valid,Standard,2
 37395744,715295006,Cariprazine,Substance,SNOMED,Valid,Non-standard,1
@@ -6735,3 +6732,57 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 1176806,LP17268-1,Ceftibuten,LOINC Component,LOINC,Valid,Non-standard,1
 1176668,LP158089-5,Telavancin,LOINC Component,LOINC,Valid,Non-standard,1
 1012583,LP183635-4,GEL,LOINC Method,LOINC,Valid,Non-standard,1
+4050798,160299006,FH: neoplasm of uterus,Clinical Observation,SNOMED,Valid,Standard,1165
+4225586,84756000,Adhesive tape,Clinical Observation,SNOMED,Valid,Non-standard,603
+4053374,160298003,FH: neoplasm of cervix,Clinical Observation,SNOMED,Valid,Standard,414
+4328724,75413007,Arachis hypogaea,Clinical Observation,SNOMED,Valid,Non-standard,188
+4208416,55242003,Lycopersicon esculentum,Clinical Observation,SNOMED,Valid,Non-standard,43
+4278230,65256004,Triticum aestivum - wheat,Clinical Observation,SNOMED,Valid,Non-standard,41
+4194764,6788000,Triticum - wheat,Clinical Observation,SNOMED,Valid,Non-standard,41
+4239367,69334009,Ambrosia,Clinical Observation,SNOMED,Valid,Non-standard,40
+4024608,225314003,Risk management,Clinical Observation,SNOMED,Valid,Standard,38
+4041848,229824005,Positioning patient,Clinical Observation,SNOMED,Valid,Standard,63
+4088561,185316007,Indirect encounter,Clinical Observation,SNOMED,Valid,Standard,32
+4087403,2447002,Zea - corn,Clinical Observation,SNOMED,Valid,Non-standard,30
+4213608,80397000,Allium cepa,Clinical Observation,SNOMED,Valid,Non-standard,30
+4151052,28140004,Persea americana,Clinical Observation,SNOMED,Valid,Non-standard,24
+4328090,75618005,Prunus persica,Clinical Observation,SNOMED,Valid,Non-standard,23
+4339307,88161000,Mangifera indica,Clinical Observation,SNOMED,Valid,Non-standard,22
+4249532,406951002,Silver stain,Clinical Observation,SNOMED,Valid,Non-standard,20
+4263597,46051000,Malus,Clinical Observation,SNOMED,Valid,Non-standard,19
+4245761,59627001,Allium ameloprasum,Clinical Observation,SNOMED,Valid,Non-standard,18
+4238863,69240000,Juglans,Clinical Observation,SNOMED,Valid,Non-standard,15
+4249182,73622002,Prunus cerasus,Clinical Observation,SNOMED,Valid,Non-standard,10
+4107479,256435007,Feather,Clinical Observation,SNOMED,Valid,Non-standard,9
+4183007,54803003,Cucumis,Clinical Observation,SNOMED,Valid,Non-standard,7
+4101623,25352004,Pear,Clinical Observation,SNOMED,Valid,Non-standard,7
+4049301,15784008,Prunus armeniaca,Clinical Observation,SNOMED,Valid,Non-standard,6
+4098704,26949008,Avena,Clinical Observation,SNOMED,Valid,Non-standard,6
+4246456,9424004,Cultivated oat,Clinical Observation,SNOMED,Valid,Non-standard,6
+4303810,418504009,Oat,Clinical Observation,SNOMED,Valid,Non-standard,6
+37312705,787979009,Cyanocobalamin- and folic acid- and pyridoxine-containing product,Clinical Observation,SNOMED,Valid,Standard,6
+4070772,21655001,Cassia acutifolia,Clinical Observation,SNOMED,Valid,Non-standard,5
+4066239,2003004,Hordeum,Clinical Observation,SNOMED,Valid,Non-standard,5
+4217986,72903004,Rheum rhaponicum,Clinical Observation,SNOMED,Valid,Non-standard,4
+4026892,227150003,Mussel,Clinical Observation,SNOMED,Valid,Non-standard,4
+4245370,396529002,Meleagris - turkeys,Clinical Observation,SNOMED,Valid,Standard,3
+4024333,10646007,Fagopyrum esculentum,Clinical Observation,SNOMED,Valid,Non-standard,3
+4013438,103584003,Carica papaya - papaya,Clinical Observation,SNOMED,Valid,Non-standard,3
+4050520,1590002,Irish potato,Clinical Observation,SNOMED,Valid,Non-standard,3
+4013888,103589008,Citrus limon,Clinical Observation,SNOMED,Valid,Non-standard,3
+44807134,815751000000108,Shared decision making with decision support,Clinical Observation,SNOMED,Valid,Standard,2
+4013441,103596005,Mentha,Clinical Observation,SNOMED,Valid,Non-standard,2
+4013444,103599003,Mentha piperita,Clinical Observation,SNOMED,Valid,Non-standard,2
+4219373,8206006,Myristica fragrans,Clinical Observation,SNOMED,Valid,Non-standard,2
+46271909,710178007,Linseed,Clinical Observation,SNOMED,Valid,Non-standard,2
+4075576,1785003,Prunus domestica,Clinical Observation,SNOMED,Valid,Non-standard,2
+37155722,30141000087107,SARS-CoV-2 virus-like particle antigen vaccine,Clinical Observation,SNOMED,Valid,Standard,1
+4183294,54688007,Fire ant,Clinical Observation,SNOMED,Valid,Non-standard,1
+4086467,18424005,Medicago sativa,Clinical Observation,SNOMED,Valid,Non-standard,1
+4302743,7852009,Lima bean,Clinical Observation,SNOMED,Valid,Non-standard,1
+4013442,103597001,Mentha spicata,Clinical Observation,SNOMED,Valid,Non-standard,1
+4235129,90563009,Juniperus,Clinical Observation,SNOMED,Valid,Non-standard,1
+4204919,439202006,Monitoring of international normalized ratio,Clinical Observation,SNOMED,Valid,Standard,1
+4216952,395858003,Rasburicase,Substance,SNOMED,Valid,Non-standard,6
+4299061,387460005,Teniposide,Substance,SNOMED,Valid,Non-standard,1
+4305237,386978004,Basiliximab,Substance,SNOMED,Valid,Non-standard,1

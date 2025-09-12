@@ -5488,3 +5488,1148 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 1001986,93693-0,Nonalcoholic steatohepatitis grade in Serum or Plasma Qualitative,Lab Test,LOINC,Valid,Standard,1
 1001921,93697-1,Liver steatosis interpretation in Serum or Plasma Qualitative,Lab Test,LOINC,Valid,Standard,1
 1001762,93696-3,Liver steatosis grade in Serum or Plasma Qualitative,Lab Test,LOINC,Valid,Standard,1
+3560198,891771000000103,Heart rate,Clinical Observation,SNOMED,Valid,Standard,77549128
+37174455,55491000237100,Patient weight,Clinical Observation,SNOMED,Valid,Standard,13677510
+4018317,104688003,"Glucose measurement, quantitative",Clinical Observation,SNOMED,Valid,Standard,26198412
+4074649,24509005,Urea nitrogen measurement,Clinical Observation,SNOMED,Valid,Standard,12643635
+40489885,446889005,Measurement of fractional excretion of calcium,Clinical Observation,SNOMED,Valid,Standard,12870030
+4097430,25197003,Sodium measurement,Clinical Observation,SNOMED,Valid,Standard,12697835
+4324383,70901006,Creatinine measurement,Clinical Observation,SNOMED,Valid,Standard,12943109
+40493191,445881001,Measurement of fractional excretion of magnesium,Clinical Observation,SNOMED,Valid,Standard,6801807
+4118986,302787001,Bilirubin measurement,Clinical Observation,SNOMED,Valid,Standard,6885464
+4193435,312474003,Blood electrolyte measurement,Clinical Observation,SNOMED,Valid,Standard,10061336
+4250176,74040009,Protein measurement,Clinical Observation,SNOMED,Valid,Standard,4630385
+4095055,250637003,ALT - blood measurement,Clinical Observation,SNOMED,Valid,Standard,4248940
+37174016,67541000237108,Lymphocyte count in blood,Clinical Observation,SNOMED,Valid,Standard,5448895
+37175121,25231000237103,PO2 (partial pressure of oxygen) in arterial blood,Clinical Observation,SNOMED,Valid,Standard,2726372
+1075460,1304152003,Partial pressure of carbon dioxide in arterial blood,Clinical Observation,SNOMED,Valid,Standard,2622744
+4215028,81065003,pH measurement,Clinical Observation,SNOMED,Valid,Standard,3485097
+4194291,312471006,Blood bicarbonate measurement,Clinical Observation,SNOMED,Valid,Standard,3637154
+37172941,55701000237103,Potassium molar concentration in blood,Clinical Observation,SNOMED,Valid,Standard,2271120
+37172736,54381000237109,Sodium molar concentration in blood,Clinical Observation,SNOMED,Valid,Standard,2133404
+4012826,165426009,Nucleated red blood cell count procedure,Clinical Observation,SNOMED,Valid,Standard,2053417
+37172618,53481000237103,Lactate molar concentration in blood,Clinical Observation,SNOMED,Valid,Standard,1684118
+37172939,55681000237100,Ionised calcium molar concentration in blood,Clinical Observation,SNOMED,Valid,Standard,2294467
+4098199,252384001,Urine dipstick for bilirubin,Clinical Observation,SNOMED,Valid,Standard,1541872
+4154501,271348005,Urine dipstick for pH,Clinical Observation,SNOMED,Valid,Standard,1530252
+4097313,25164004,"Ketone bodies measurement, quantitative",Clinical Observation,SNOMED,Valid,Standard,1357924
+4151414,269879003,Urine dipstick for glucose,Clinical Observation,SNOMED,Valid,Standard,1354953
+4120299,302791006,Urine dipstick for nitrite,Clinical Observation,SNOMED,Valid,Standard,1526090
+4098200,252385000,Urine dipstick for leukocyte esterase,Clinical Observation,SNOMED,Valid,Standard,1469096
+4154500,271346009,Urine dipstick for protein,Clinical Observation,SNOMED,Valid,Standard,1364480
+35609595,1083751000000108,Urine specific gravity,Clinical Observation,SNOMED,Valid,Standard,1561592
+4018181,104553007,"Bilirubin, non-glucuronidated measurement",Clinical Observation,SNOMED,Valid,Standard,723627
+4299360,77068002,Cholesterol measurement,Clinical Observation,SNOMED,Valid,Standard,677825
+4150628,271285000,Blood magnesium measurement,Clinical Observation,SNOMED,Valid,Standard,581879
+4094436,250346004,Fibrinogen measurement,Clinical Observation,SNOMED,Valid,Standard,616653
+4017496,104479001,Alanine measurement,Clinical Observation,SNOMED,Valid,Standard,555607
+4310327,391379002,Blood tacrolimus level,Clinical Observation,SNOMED,Valid,Standard,660506
+4042747,167022003,Blood pH abnormal,Clinical Observation,SNOMED,Valid,Standard,538862
+4055306,167321001,Urine dipstick for urobilinogen,Clinical Observation,SNOMED,Valid,Standard,869137
+37171781,42331000237103,White blood cell count in urine,Clinical Observation,SNOMED,Valid,Standard,500383
+4017058,104613001,Creatine kinase MB measurement,Clinical Observation,SNOMED,Valid,Standard,487109
+4021288,104988000,Triacylglycerol lipase measurement,Clinical Observation,SNOMED,Valid,Standard,446800
+4077492,275714003,Urine dipstick for hemoglobin,Clinical Observation,SNOMED,Valid,Standard,625607
+4150621,271260009,"Creatinine measurement, urine",Clinical Observation,SNOMED,Valid,Standard,480439
+37175108,6021000237109,Oxygen partial pressure in venous blood,Clinical Observation,SNOMED,Valid,Standard,376960
+4192889,394957003,Mixed venous carbon dioxide level,Clinical Observation,SNOMED,Valid,Standard,533784
+37392672,1007071000000105,Blood venous pH,Clinical Observation,SNOMED,Valid,Standard,340135
+37172169,44961000237104,CMV (cytomegalovirus) DNA arbitrary concentration by nucleic acid amplification,Clinical Observation,SNOMED,Valid,Standard,341038
+4211845,57378007,Urine protein measurement,Clinical Observation,SNOMED,Valid,Standard,386471
+4013576,103762001,Specimen volume measurement,Clinical Observation,SNOMED,Valid,Standard,368862
+44794807,293821000000103,Non high density lipoprotein cholesterol measurement,Clinical Observation,SNOMED,Valid,Standard,288841
+4015166,104099000,"Myelocyte count, blood",Clinical Observation,SNOMED,Valid,Standard,292999
+4204561,54937007,"Methemoglobin measurement, quantitative",Clinical Observation,SNOMED,Valid,Standard,468098
+37174446,54711000237100,Metamyelocyte count in blood,Clinical Observation,SNOMED,Valid,Standard,249880
+4017625,104569000,"Carboxyhemoglobin measurement, quantitative",Clinical Observation,SNOMED,Valid,Standard,452145
+4235029,359982005,Transferrin measurement,Clinical Observation,SNOMED,Valid,Standard,205752
+4268330,62970001,Osmolarity,Clinical Observation,SNOMED,Valid,Standard,298603
+4020703,105001004,Troponin T cardiac measurement,Clinical Observation,SNOMED,Valid,Standard,402587
+4286674,68939003,Vancomycin measurement,Clinical Observation,SNOMED,Valid,Standard,346377
+4212065,416838001,Erythrocyte sedimentation rate measurement,Clinical Observation,SNOMED,Valid,Standard,273888
+44791466,284031000000106,Procalcitonin measurement,Clinical Observation,SNOMED,Valid,Standard,163114
+4006392,10187009,"Ketone bodies measurement, qualitative",Clinical Observation,SNOMED,Valid,Standard,175608
+4150340,271070001,"Benzodiazepine measurement, urine",Clinical Observation,SNOMED,Valid,Standard,232345
+4103511,28862001,"Barbiturates measurement, qualitative",Clinical Observation,SNOMED,Valid,Standard,226191
+4153114,271072009,"Cocaine measurement, urine",Clinical Observation,SNOMED,Valid,Standard,177292
+4283360,67410005,"Urobilinogen measurement, urine",Clinical Observation,SNOMED,Valid,Standard,151975
+4193433,312467008,Urine cannabinoid measurement,Clinical Observation,SNOMED,Valid,Standard,174999
+37151757,15371000237102,Ammonia molar concentration in plasma,Clinical Observation,SNOMED,Valid,Standard,146717
+4096222,250562006,Measurement of oxygen dissolved in mixed venous blood,Clinical Observation,SNOMED,Valid,Standard,132789
+4006916,10140002,Qualitative measurement of opiate agonist,Clinical Observation,SNOMED,Valid,Standard,179211
+4216186,81410005,Beta-2-microglobulin measurement,Clinical Observation,SNOMED,Valid,Standard,129261
+4020695,104986001,Transthyretin measurement,Clinical Observation,SNOMED,Valid,Standard,187022
+4135810,31651002,Immunoglobulin A measurement,Clinical Observation,SNOMED,Valid,Standard,120349
+37173195,57951000237108,"Carbon dioxide, total (calculated) molar concentration in arterial blood",Clinical Observation,SNOMED,Valid,Standard,190306
+4164130,45764000,Immunoglobulin M measurement,Clinical Observation,SNOMED,Valid,Standard,108297
+4163378,45293001,Immunoglobulin G measurement,Clinical Observation,SNOMED,Valid,Standard,96775
+4191725,394960005,Arterial blood lactate level,Clinical Observation,SNOMED,Valid,Standard,156509
+4154346,271073004,"Methadone measurement, urine",Clinical Observation,SNOMED,Valid,Standard,116270
+4265057,62037009,Cortisol measurement,Clinical Observation,SNOMED,Valid,Standard,109639
+4020122,105013009,"Urea nitrogen measurement, urine",Clinical Observation,SNOMED,Valid,Standard,105268
+4015164,104096007,"Segmented neutrophil count, blood",Clinical Observation,SNOMED,Valid,Standard,90654
+37172583,53131000237109,TSH (thyroid stimulating hormone) receptor antibody arbitrary concentration in serum,Clinical Observation,SNOMED,Valid,Standard,78731
+4021442,105094004,Buprenorphine measurement,Clinical Observation,SNOMED,Valid,Standard,78072
+40481003,443308002,Measurement of haptoglobin,Clinical Observation,SNOMED,Valid,Standard,75876
+4033092,14663000,"Chloride measurement, urine",Clinical Observation,SNOMED,Valid,Standard,76207
+37172908,55611000237105,Kappa free light chains mass concentration in serum,Clinical Observation,SNOMED,Valid,Standard,72462
+4005508,121802008,Kappa light chain measurement,Clinical Observation,SNOMED,Valid,Standard,70014
+4222478,84130004,Measurement of protein in cerebrospinal fluid specimen,Clinical Observation,SNOMED,Valid,Standard,68975
+4230546,359992002,"Bilirubin measurement, urine",Clinical Observation,SNOMED,Valid,Standard,79554
+44810216,896651000000105,Qualitative detection test for oxycodone in urine specimen,Clinical Observation,SNOMED,Valid,Standard,67195
+4006333,121318006,6-Monoacetylmorphine measurement,Clinical Observation,SNOMED,Valid,Standard,62883
+4049508,20857001,Phencyclidine measurement,Clinical Observation,SNOMED,Valid,Standard,66349
+4007662,121803003,Lambda light chain measurement,Clinical Observation,SNOMED,Valid,Standard,61905
+37172455,51841000237107,Influenza A virus H1 RNA nucleic acid amplification qualitative result,Clinical Observation,SNOMED,Valid,Standard,66479
+4206973,439261002,Measurement of mycophenolic acid,Clinical Observation,SNOMED,Valid,Standard,79629
+4097887,250589001,Digoxin blood measurement,Clinical Observation,SNOMED,Valid,Standard,55255
+37172472,52041000237109,Influenza B virus RNA nucleic acid amplification qualitative result,Clinical Observation,SNOMED,Valid,Standard,73610
+4183195,43323006,"Turbidity test, qualitative",Clinical Observation,SNOMED,Valid,Standard,88697
+4286945,69125006,"Glucose measurement, CSF",Clinical Observation,SNOMED,Valid,Standard,51452
+4097888,250597008,Acetaminophen blood measurement,Clinical Observation,SNOMED,Valid,Standard,51139
+4016392,103759004,"Metamyelocyte count, blood",Clinical Observation,SNOMED,Valid,Standard,43695
+37169735,16901000237101,Red blood cell count in CSF,Clinical Observation,SNOMED,Valid,Standard,72368
+37173412,60481000237104,Human metapneumovirus RNA nucleic acid amplification qualitative result,Clinical Observation,SNOMED,Valid,Standard,58196
+37172439,51681000237102,MRSA (methicillin resistant Staphylococcus aureus) DNA nucleic acid amplification qualitative result,Clinical Observation,SNOMED,Valid,Standard,41899
+37172441,51701000237100,Human RSV (respiratory syncytial virus) RNA nucleic acid amplification qualitative result,Clinical Observation,SNOMED,Valid,Standard,70511
+37173651,63881000237109,Parainfluenza virus 1 RNA nucleic acid amplification qualitative result,Clinical Observation,SNOMED,Valid,Standard,50831
+37173609,62841000237108,Parainfluenza virus 2 RNA nucleic acid amplification qualitative result,Clinical Observation,SNOMED,Valid,Standard,50831
+37173820,66161000237104,Parainfluenza virus 3 RNA nucleic acid amplification qualitative result,Clinical Observation,SNOMED,Valid,Standard,50830
+4136581,412833008,Blood sirolimus measurement,Clinical Observation,SNOMED,Valid,Standard,39857
+37160897,11701000237105,White blood cell count in CSF,Clinical Observation,SNOMED,Valid,Standard,62318
+44810247,867551000000106,"LACE (length of stay, acuity of admission, comorbidities and emergency department visits) index score",Clinical Observation,SNOMED,Valid,Standard,37627
+4135587,31483002,C4 complement assay,Clinical Observation,SNOMED,Valid,Standard,36128
+4195474,43992003,C-3 complement assay,Clinical Observation,SNOMED,Valid,Standard,35384
+4094598,250668004,Triiodothyronine measurement,Clinical Observation,SNOMED,Valid,Standard,34869
+4020107,104957004,Testosterone measurement,Clinical Observation,SNOMED,Valid,Standard,33919
+4154493,271289006,Urine ethanol measurement,Clinical Observation,SNOMED,Valid,Standard,35859
+37155919,39331000237108,Hepatitis C virus RNA arbitrary concentration by nucleic acid amplification,Clinical Observation,SNOMED,Valid,Standard,34556
+4020243,105083003,Benzoylecgonine measurement,Clinical Observation,SNOMED,Valid,Standard,37220
+4248132,72765002,Thyroxine measurement,Clinical Observation,SNOMED,Valid,Standard,33983
+4209258,313656007,Blood cyclosporin measurement,Clinical Observation,SNOMED,Valid,Standard,69524
+4039857,118139004,Mesothelial cell count,Clinical Observation,SNOMED,Valid,Standard,32213
+4241990,59582004,Hepatitis B core antibody measurement,Clinical Observation,SNOMED,Valid,Standard,41483
+37173306,58731000237102,Urine pH ordinal value,Clinical Observation,SNOMED,Valid,Standard,27013
+37160145,11541000237101,"Magnesium, red blood cell molar concentration in blood",Clinical Observation,SNOMED,Valid,Standard,26980
+37173592,62321000237107,Hepatitis B virus surface antibody in serum qualitative result,Clinical Observation,SNOMED,Valid,Standard,26960
+4097891,250601008,Phenytoin blood measurement,Clinical Observation,SNOMED,Valid,Standard,26746
+40486051,447678008,Measurement of 25-hydroxyergocalciferol,Clinical Observation,SNOMED,Valid,Standard,26608
+37173421,60681000237102,Hepatitis B virus core IgM antibody in serum qualitative result,Clinical Observation,SNOMED,Valid,Standard,24882
+4241221,59388001,"Cell count, body fluid",Clinical Observation,SNOMED,Valid,Standard,24236
+4212810,391463002,Urine phencyclidine level,Clinical Observation,SNOMED,Valid,Standard,23799
+37173953,66721000237109,Rhinovirus RNA nucleic acid amplification qualitative result,Clinical Observation,SNOMED,Valid,Standard,23013
+1246795,372461000119109,Lactate in blood,Clinical Observation,SNOMED,Valid,Standard,22851
+4016229,104101007,"Prolymphocyte count, blood",Clinical Observation,SNOMED,Valid,Standard,23558
+4164784,40939009,Cancer antigen 19-9 measurement,Clinical Observation,SNOMED,Valid,Standard,26497
+4152984,270994009,Serum globulin measurement,Clinical Observation,SNOMED,Valid,Standard,33290
+4152683,269890008,Urine amphetamine measurement,Clinical Observation,SNOMED,Valid,Standard,25116
+37170087,20611000237103,Human polyomavirus 1 DNA arbitrary concentration by nucleic acid amplification,Clinical Observation,SNOMED,Valid,Standard,20403
+4146313,307821001,Urine blood test,Clinical Observation,SNOMED,Valid,Standard,18751
+4189516,6159009,Galactose measurement,Clinical Observation,SNOMED,Valid,Standard,18027
+4052871,23567003,Biotinidase measurement,Clinical Observation,SNOMED,Valid,Standard,18025
+4211848,574005,Benzodiazepine measurement,Clinical Observation,SNOMED,Valid,Standard,17720
+4046599,122272004,Methicillin resistant Staphylococcus aureus culture,Clinical Observation,SNOMED,Valid,Standard,18724
+4204380,54921001,Rheumatoid factor measurement,Clinical Observation,SNOMED,Valid,Standard,17310
+4198725,313584005,Blood porphyrin measurement,Clinical Observation,SNOMED,Valid,Standard,17130
+37172506,52411000237104,SARS (severe acute respiratory syndrome) coronavirus RNA nucleic acid amplification qualitative result,Clinical Observation,SNOMED,Valid,Standard,17791
+37172211,4671000237106,dsDNA (double stranded DNA) antibody arbitrary concentration in Crithidia luciliae,Clinical Observation,SNOMED,Valid,Standard,17059
+37172337,50661000237100,Influenza A virus RNA nucleic acid amplification qualitative result,Clinical Observation,SNOMED,Valid,Standard,29055
+37172841,55131000237108,La (SSB - Sjögren's syndrome B) antibody arbitrary concentration in serum,Clinical Observation,SNOMED,Valid,Standard,17967
+4094585,250561004,Measurement of oxygen dissolved in arterial blood,Clinical Observation,SNOMED,Valid,Standard,16620
+44790027,222191000000107,Cytomegalovirus IgG (immunoglobulin G) avidity test,Clinical Observation,SNOMED,Valid,Standard,36768
+4020862,105192003,Fentanyl measurement,Clinical Observation,SNOMED,Valid,Standard,26234
+37173428,6081000237105,Ro (SSA - Sjögren's syndrome A) antibody arbitrary concentration in serum,Clinical Observation,SNOMED,Valid,Standard,15244
+4260399,44787002,Tricyclic antidepressant measurement,Clinical Observation,SNOMED,Valid,Standard,16669
+37172322,50501000237103,EBV VCA (Epstein-Barr virus viral capsid antigen) IgG antibody in serum qualitative result,Clinical Observation,SNOMED,Valid,Standard,17844
+4261615,45074006,"Arsenic measurement, blood",Clinical Observation,SNOMED,Valid,Standard,15019
+37173676,64561000237102,Treponema pallidum IgG antibody in serum qualitative result,Clinical Observation,SNOMED,Valid,Standard,14925
+37172427,51571000237100,EBV VCA (Epstein-Barr virus viral capsid antigen) IgM antibody in serum qualitative result,Clinical Observation,SNOMED,Valid,Standard,17284
+37173328,59001000237103,Bordetella pertussis DNA nucleic acid amplification qualitative result,Clinical Observation,SNOMED,Valid,Standard,14312
+40484118,443927003,Quantitative measurement of follicle stimulating hormone in baseline serum or plasma specimen,Clinical Observation,SNOMED,Valid,Standard,14225
+4047226,13070009,"Hepatitis A virus antibody, IgG type",Clinical Observation,SNOMED,Valid,Standard,16557
+4195107,7962001,Ethosuximide measurement,Clinical Observation,SNOMED,Valid,Standard,13670
+37172333,50611000237102,Treponema pallidum antibody in serum qualitative result,Clinical Observation,SNOMED,Valid,Standard,13529
+4231374,439206009,Measurement of oxycodone in urine,Clinical Observation,SNOMED,Valid,Standard,13807
+4015177,104141003,Semi-quantitative measurement of total hemoglobin in blood specimen,Clinical Observation,SNOMED,Valid,Standard,13452
+4020707,105025007,Valine measurement,Clinical Observation,SNOMED,Valid,Standard,14821
+4017210,104811002,Methionine measurement,Clinical Observation,SNOMED,Valid,Standard,14722
+4020983,104710009,Glycine measurement,Clinical Observation,SNOMED,Valid,Standard,14723
+4014900,104525007,Arginine measurement,Clinical Observation,SNOMED,Valid,Standard,14713
+4021124,104841000,Ornithine measurement,Clinical Observation,SNOMED,Valid,Standard,14713
+4007651,121765002,Decanoylcarnitine measurement,Clinical Observation,SNOMED,Valid,Standard,13434
+4005386,121789009,Hexanoylcarnitine measurement,Clinical Observation,SNOMED,Valid,Standard,13438
+4007343,121861004,Tetradecadienoylcarnitine measurement,Clinical Observation,SNOMED,Valid,Standard,13433
+4006197,121824008,Oleoylcarnitine measurement,Clinical Observation,SNOMED,Valid,Standard,13388
+4007338,121844002,Propionylcarnitine measurement,Clinical Observation,SNOMED,Valid,Standard,13433
+4005514,121822007,Octanoylcarnitine measurement,Clinical Observation,SNOMED,Valid,Standard,13433
+4018172,104535001,Argininosuccinate measurement,Clinical Observation,SNOMED,Valid,Standard,13040
+4007335,121831007,Palmitoylcarnitine measurement,Clinical Observation,SNOMED,Valid,Standard,13434
+4007802,121862006,Tetradecenoylcarnitine measurement,Clinical Observation,SNOMED,Valid,Standard,13433
+4225595,84796003,Tyrosine measurement,Clinical Observation,SNOMED,Valid,Standard,14918
+4296616,76819007,Phenylalanine measurement,Clinical Observation,SNOMED,Valid,Standard,20559
+4016955,104600007,Citrulline measurement,Clinical Observation,SNOMED,Valid,Standard,14719
+4004363,121296007,3-Hydroxypalmitoylcarnitine measurement,Clinical Observation,SNOMED,Valid,Standard,13433
+4006330,121295006,3-Hydroxyoleoylcarnitine measurement,Clinical Observation,SNOMED,Valid,Standard,13388
+4029634,13661007,Lidocaine measurement,Clinical Observation,SNOMED,Valid,Standard,13245
+4216716,71860001,17 Hydroxyprogesterone measurement,Clinical Observation,SNOMED,Valid,Standard,13883
+37172603,53331000237107,Cardiolipin IgG antibody arbitrary concentration in serum,Clinical Observation,SNOMED,Valid,Standard,12806
+37173310,58781000237103,Cardiolipin IgM antibody arbitrary concentration in serum,Clinical Observation,SNOMED,Valid,Standard,12702
+4175470,50794000,Specific gravity,Clinical Observation,SNOMED,Valid,Standard,15174
+4337961,87365002,Ceruloplasmin measurement,Clinical Observation,SNOMED,Valid,Standard,12474
+4051641,23463002,Gentamicin measurement,Clinical Observation,SNOMED,Valid,Standard,20380
+4020124,105019008,"Urobilinogen measurement, urine, qualitative",Clinical Observation,SNOMED,Valid,Standard,12442
+1077392,648131000005102,Presence of erythrocytes in urine,Clinical Observation,SNOMED,Valid,Standard,12311
+4259681,439900008,Qualitative measurement of myoglobin in urine,Clinical Observation,SNOMED,Valid,Standard,11981
+4324147,71530002,Alpha-1-antitrypsin measurement,Clinical Observation,SNOMED,Valid,Standard,13551
+37159171,4861000237102,Jo-1 antibody arbitrary concentration in serum,Clinical Observation,SNOMED,Valid,Standard,11364
+4197997,313952006,Plasma ammonia measurement,Clinical Observation,SNOMED,Valid,Standard,11302
+4329022,22189001,Methotrexate measurement,Clinical Observation,SNOMED,Valid,Standard,11390
+40484144,443950009,Measurement of lutropin in baseline serum or plasma specimen,Clinical Observation,SNOMED,Valid,Standard,10756
+40483741,445430004,Measurement of cancer antigen 27-29,Clinical Observation,SNOMED,Valid,Standard,10868
+4006204,121289005,3-Hydroxybutyrate measurement,Clinical Observation,SNOMED,Valid,Standard,18539
+37170032,1841000237100,Scl-70 antibody arbitrary concentration in serum,Clinical Observation,SNOMED,Valid,Standard,10838
+4018310,104670006,Fructose-bisphosphate aldolase measurement,Clinical Observation,SNOMED,Valid,Standard,10165
+37170233,24771000237109,Hepatitis B virus DNA arbitrary concentration by nucleic acid amplification,Clinical Observation,SNOMED,Valid,Standard,11323
+4191367,389000,Tobramycin measurement,Clinical Observation,SNOMED,Valid,Standard,24995
+37172383,51141000237103,Parainfluenza virus 4 RNA nucleic acid amplification qualitative result,Clinical Observation,SNOMED,Valid,Standard,16859
+4310469,391511006,Plasma ACTH level,Clinical Observation,SNOMED,Valid,Standard,9428
+4004235,121275000,Carbohydrate deficient transferrin measurement,Clinical Observation,SNOMED,Valid,Standard,9254
+4020540,104815006,Methylmalonate measurement,Clinical Observation,SNOMED,Valid,Standard,8564
+44789179,194701000000102,Levetiracetam measurement,Clinical Observation,SNOMED,Valid,Standard,9728
+4195408,79104007,Somatomedin-C measurement,Clinical Observation,SNOMED,Valid,Standard,8416
+4304801,118002003,Measurement of thyroperoxidase antibody,Clinical Observation,SNOMED,Valid,Standard,8234
+4070937,20469004,Protein S assay,Clinical Observation,SNOMED,Valid,Standard,13136
+4156820,271284001,Blood zinc measurement,Clinical Observation,SNOMED,Valid,Standard,7874
+42537408,736785003,Partial pressure of carbon dioxide in umbilical cord venous blood,Clinical Observation,SNOMED,Valid,Standard,8795
+4241825,59260005,Antibody to SS-A measurement,Clinical Observation,SNOMED,Valid,Standard,10804
+4095049,250587004,Carbamazepine blood measurement,Clinical Observation,SNOMED,Valid,Standard,7917
+4156817,271261008,"Creatine measurement, urine",Clinical Observation,SNOMED,Valid,Standard,7320
+4304958,118007009,Vancomycin resistant Enterococcus culture,Clinical Observation,SNOMED,Valid,Standard,7139
+4154636,271510004,Hemoglobin S measurement,Clinical Observation,SNOMED,Valid,Standard,9993
+4007654,121772001,Dodecanoylcarnitine measurement,Clinical Observation,SNOMED,Valid,Standard,7313
+4292703,37538009,Estradiol measurement,Clinical Observation,SNOMED,Valid,Standard,7267
+4168929,48627002,"Protein C, assay",Clinical Observation,SNOMED,Valid,Standard,12606
+4153274,271287008,Blood copper measurement,Clinical Observation,SNOMED,Valid,Standard,10237
+4133753,413001005,Anti B2 glycoprotein 1 IgG antibody measurement,Clinical Observation,SNOMED,Valid,Standard,7813
+4060873,16890009,Insulin measurement,Clinical Observation,SNOMED,Valid,Standard,7238
+4195205,313776008,Urine cotinine measurement,Clinical Observation,SNOMED,Valid,Standard,7565
+37171285,33731000237107,Varicella zoster virus IgG antibody arbitrary concentration in serum,Clinical Observation,SNOMED,Valid,Standard,11082
+4208541,55323000,Thrombin time,Clinical Observation,SNOMED,Valid,Standard,5999
+37169883,1631000237106,Rheumatoid factor arbitrary concentration in serum,Clinical Observation,SNOMED,Valid,Standard,5918
+37172334,50621000237106,Toxoplasma gondii IgG antibody in serum qualitative result,Clinical Observation,SNOMED,Valid,Standard,5985
+4018318,104692005,Glucose-6-phosphate dehydrogenase measurement,Clinical Observation,SNOMED,Valid,Standard,5975
+4020406,105297002,Phenylephrine measurement,Clinical Observation,SNOMED,Valid,Standard,5802
+4209123,313476009,Hepatitis B e antigen test,Clinical Observation,SNOMED,Valid,Standard,5811
+4015457,104328008,Antibody to mitochondria measurement,Clinical Observation,SNOMED,Valid,Standard,9865
+4179789,50744001,Smooth muscle antibody measurement,Clinical Observation,SNOMED,Valid,Standard,14196
+42537369,736730002,Partial pressure of carbon dioxide in umbilical cord arterial blood,Clinical Observation,SNOMED,Valid,Standard,6896
+37310257,1240471000000102,Measurement of SARS-CoV-2 antigen,Clinical Observation,SNOMED,Valid,Standard,5694
+4048263,1550000,Amikacin measurement,Clinical Observation,SNOMED,Valid,Standard,8052
+4187794,46093004,Acetaminophen measurement,Clinical Observation,SNOMED,Valid,Standard,5529
+1246792,364351000119103,Detection of Streptococcus pneumoniae antigen in urine,Clinical Observation,SNOMED,Valid,Standard,5586
+37172641,53671000237103,tTG (tissue transglutaminase) IgA antibody arbitrary concentration in serum,Clinical Observation,SNOMED,Valid,Standard,10028
+4222728,40093005,Hepatitis A virus measurement,Clinical Observation,SNOMED,Valid,Standard,5958
+40484180,443983002,Quantitative measurement of IgM in body fluid specimen,Clinical Observation,SNOMED,Valid,Standard,5367
+4135562,413003008,Anti B2 glycoprotein 1 IgM antibody measurement,Clinical Observation,SNOMED,Valid,Standard,7799
+1247087,375091000119101,Thiamine in whole blood,Clinical Observation,SNOMED,Valid,Standard,6304
+4174045,49235003,"Barbiturates measurement, quantitative",Clinical Observation,SNOMED,Valid,Standard,4977
+44806429,791921000000101,Partial pressure of oxygen in umbilical cord venous blood,Clinical Observation,SNOMED,Valid,Standard,5499
+1247078,365331000119108,Immunoglobulin G antibody to cyclic citrullinated peptide,Clinical Observation,SNOMED,Valid,Standard,4851
+4021304,105050005,Acetone measurement,Clinical Observation,SNOMED,Valid,Standard,4770
+4193432,312466004,Urine opiate measurement,Clinical Observation,SNOMED,Valid,Standard,4718
+37175045,1251445000,Metastatic neuroblastoma to abdominothoracic structure,Clinical Observation,SNOMED,Valid,Standard,4701
+44806428,791911000000107,pH of umbilical cord venous blood,Clinical Observation,SNOMED,Valid,Standard,5864
+4013180,113058009,Cancer antigen 15-3 measurement,Clinical Observation,SNOMED,Valid,Standard,4662
+4251322,73668004,"Calcium measurement, urine",Clinical Observation,SNOMED,Valid,Standard,9144
+37171515,3601000237103,IgG antibody subclass 4 mass concentration in serum,Clinical Observation,SNOMED,Valid,Standard,4562
+4147163,269474002,Disseminated malignancy NOS,Clinical Observation,SNOMED,Valid,Standard,4288
+37160070,51411000237109,Human coronavirus RNA nucleic acid amplification qualitative result,Clinical Observation,SNOMED,Valid,Standard,4284
+37173711,65121000237103,Parainfluenza virus RNA nucleic acid amplification qualitative result,Clinical Observation,SNOMED,Valid,Standard,4283
+37170094,21091000237108,Rubella IgG antibody arbitrary concentration in serum,Clinical Observation,SNOMED,Valid,Standard,4117
+4022984,105222003,Lamotrigine measurement,Clinical Observation,SNOMED,Valid,Standard,4088
+37172422,51531000237102,Human polyomavirus 1 DNA nucleic acid amplification qualitative result,Clinical Observation,SNOMED,Valid,Standard,4863
+4255168,408200008,Cyclic citrullinated peptide antibody measurement,Clinical Observation,SNOMED,Valid,Standard,3914
+37172378,51101000237101,Varicella zoster virus total antibody in serum qualitative result,Clinical Observation,SNOMED,Valid,Standard,3910
+4082602,24753003,Sex hormone binding globulin measurement,Clinical Observation,SNOMED,Valid,Standard,3880
+44806434,791971000000102,pH of umbilical cord arterial blood,Clinical Observation,SNOMED,Valid,Standard,5011
+37171704,4101000237109,IgG antibody subclass 1 mass concentration in serum,Clinical Observation,SNOMED,Valid,Standard,3826
+4005839,121403006,Nitrate measurement,Clinical Observation,SNOMED,Valid,Standard,3714
+4036693,118092009,Measurement of myeloperoxidase antibody,Clinical Observation,SNOMED,Valid,Standard,8301
+37170755,2971000237108,IgG antibody subclass 3 mass concentration in serum,Clinical Observation,SNOMED,Valid,Standard,3619
+37173971,6711000237103,IgG antibody subclass 2 mass concentration in serum,Clinical Observation,SNOMED,Valid,Standard,3618
+37172346,50751000237105,Human parvovirus B19 DNA nucleic acid amplification qualitative result,Clinical Observation,SNOMED,Valid,Standard,3503
+37172421,51521000237104,Herpes simplex type 1 IgG antibody in serum qualitative result,Clinical Observation,SNOMED,Valid,Standard,3440
+4006180,121754007,Chromogranin A measurement,Clinical Observation,SNOMED,Valid,Standard,5346
+4198724,313579004,Urine methamphetamine measurement,Clinical Observation,SNOMED,Valid,Standard,3941
+4231790,438322002,Measurement of tricyclic antidepressant in urine,Clinical Observation,SNOMED,Valid,Standard,3299
+37175048,1251457009,Metastatic neuroblastoma to central nervous system,Clinical Observation,SNOMED,Valid,Standard,3293
+37173353,59121000237109,EBNA (Epstein-Barr nuclear antigen) IgG antibody in serum qualitative result,Clinical Observation,SNOMED,Valid,Standard,3273
+37173625,63161000237108,Herpes simplex type 2 IgG antibody in serum qualitative result,Clinical Observation,SNOMED,Valid,Standard,3177
+37175047,1251456000,Metastatic neuroblastoma to brain,Clinical Observation,SNOMED,Valid,Standard,3046
+4103067,28804003,Measurement of Human immunodeficiency virus 1 antibody,Clinical Observation,SNOMED,Valid,Standard,3017
+4304816,117987007,Measurement of proteinase 3 antibody,Clinical Observation,SNOMED,Valid,Standard,7472
+4092661,252047007,Spermatozoa measurement,Clinical Observation,SNOMED,Valid,Standard,4990
+40485025,444114007,Quantitative measurement of cryoglobulin in serum specimen,Clinical Observation,SNOMED,Valid,Standard,2871
+37172229,47971000237104,Mycoplasma pneumoniae IgG antibody in serum arbitrary concentration test result,Clinical Observation,SNOMED,Valid,Standard,2853
+1243996,375701000119105,Presence of white blood cells in stool,Clinical Observation,SNOMED,Valid,Standard,2874
+1247074,364321000119106,Detection of Legionella pneumophila antigen in urine,Clinical Observation,SNOMED,Valid,Standard,2786
+4176275,50880007,Serotonin measurement,Clinical Observation,SNOMED,Valid,Standard,2713
+4147544,30320005,"Rheumatoid factor, qualitative",Clinical Observation,SNOMED,Valid,Standard,2791
+4005510,121810009,Methylmalonylcarnitine measurement,Clinical Observation,SNOMED,Valid,Standard,2873
+36683556,781465003,3-hydroxybutyrylcarnitine measurement,Clinical Observation,SNOMED,Valid,Standard,3018
+4004863,121293004,3-Hydroxyisovalerylcarnitine measurement,Clinical Observation,SNOMED,Valid,Standard,3018
+4258406,439212004,Measurement of hydrocodone in urine,Clinical Observation,SNOMED,Valid,Standard,2776
+3548087,1321571000000102,SARS-CoV-2 (severe acute respiratory syndrome coronavirus 2) IgG detection result negative,Clinical Observation,SNOMED,Valid,Standard,2614
+4136584,412843006,Blood cystatin C measurement,Clinical Observation,SNOMED,Valid,Standard,2601
+4007807,121873004,Tryptase measurement,Clinical Observation,SNOMED,Valid,Standard,2590
+4101677,27994007,"Theophylline measurement, blood",Clinical Observation,SNOMED,Valid,Standard,2820
+4016949,104585005,VLDL cholesterol measurement,Clinical Observation,SNOMED,Valid,Standard,3199
+37159799,1021000237103,RNP 68 kD (ribonucleoprotein 68 kiloDalton) antibody arbitrary concentration in serum,Clinical Observation,SNOMED,Valid,Standard,2502
+40651916,94216004,Secondary malignant neoplasm of bone and articular cartilage,Clinical Observation,SNOMED,Valid,Standard,2462
+4263754,46264006,Progesterone measurement,Clinical Observation,SNOMED,Valid,Standard,2444
+4197856,313773000,Cerebrospinal fluid albumin measurement,Clinical Observation,SNOMED,Valid,Standard,2422
+4197842,313708008,Urine reducing substance measurement,Clinical Observation,SNOMED,Valid,Standard,2710
+4037770,117658009,Norfentanyl measurement,Clinical Observation,SNOMED,Valid,Standard,2412
+4039690,117907009,Measurement of glutamate decarboxylase 65 antibody,Clinical Observation,SNOMED,Valid,Standard,5142
+37175097,1268390002,Metastatic undifferentiated carcinoma to liver and intrahepatic biliary tract,Clinical Observation,SNOMED,Valid,Standard,2264
+4308581,83679004,Aldosterone measurement,Clinical Observation,SNOMED,Valid,Standard,2223
+37173512,6151000237100,Anti-gliadin IgA antibody arbitrary concentration in serum,Clinical Observation,SNOMED,Valid,Standard,3475
+4310333,391411009,Urine monoacetyl morphine level,Clinical Observation,SNOMED,Valid,Standard,2184
+37173205,58061000237108,CCP (cyclic citrullinated peptide) antibody arbitrary concentration in serum,Clinical Observation,SNOMED,Valid,Standard,2167
+4135428,412814003,Tissue transglutaminase IgA measurement,Clinical Observation,SNOMED,Valid,Standard,2150
+4040367,117893000,Measurement of beta 2-glycoprotein 1 antibody,Clinical Observation,SNOMED,Valid,Standard,2139
+4118985,302784008,Paul-Bunnell test,Clinical Observation,SNOMED,Valid,Standard,3442
+37172660,53871000237102,tTG (tissue transglutaminase) IgG antibody arbitrary concentration in serum,Clinical Observation,SNOMED,Valid,Standard,2062
+4209264,313683008,Cerebrospinal fluid IgG measurement,Clinical Observation,SNOMED,Valid,Standard,2918
+37172338,50671000237105,Cryptococcus antigen in serum qualitative result,Clinical Observation,SNOMED,Valid,Standard,2299
+4133530,412815002,Tissue transglutaminase IgG measurement,Clinical Observation,SNOMED,Valid,Standard,1995
+4018174,104540009,Aspartate measurement,Clinical Observation,SNOMED,Valid,Standard,2555
+4184276,5422005,"Amylase measurement, peritoneal fluid",Clinical Observation,SNOMED,Valid,Standard,1929
+37173754,65841000237104,Herpes simplex virus total antibody in serum qualitative result,Clinical Observation,SNOMED,Valid,Standard,1926
+4154344,271052004,Alkaline phosphatase - bone isoenzyme measurement,Clinical Observation,SNOMED,Valid,Standard,2866
+4216288,415223004,Pyridoxal 5 phosphate level,Clinical Observation,SNOMED,Valid,Standard,1921
+4005505,121795005,IgG synthesis rate measurement,Clinical Observation,SNOMED,Valid,Standard,1917
+4296150,7606004,"Methemoglobin measurement, qualitative",Clinical Observation,SNOMED,Valid,Standard,1903
+4057002,167961009,Pleural fluid protein content measurement,Clinical Observation,SNOMED,Valid,Standard,1874
+4047153,122211000,Cytomegalovirus culture,Clinical Observation,SNOMED,Valid,Standard,1891
+40485040,444128001,Quantitative measurement of glucose in pleural fluid specimen,Clinical Observation,SNOMED,Valid,Standard,1851
+4135658,413050004,Pleural fluid lactate dehydrogenase measurement,Clinical Observation,SNOMED,Valid,Standard,1849
+37173759,66081000237107,Helicobacter pylori antigen in faeces qualitative result,Clinical Observation,SNOMED,Valid,Standard,1936
+4020999,104778008,Leucine measurement,Clinical Observation,SNOMED,Valid,Standard,1783
+4017198,104762006,Isoleucine measurement,Clinical Observation,SNOMED,Valid,Standard,1782
+4336961,87535006,Gastrin measurement,Clinical Observation,SNOMED,Valid,Standard,1754
+40484574,444006004,Quantitative measurement of calprotectin in stool specimen,Clinical Observation,SNOMED,Valid,Standard,1750
+4021281,104965001,Threonine measurement,Clinical Observation,SNOMED,Valid,Standard,1684
+4014131,166008006,RNP antibody measurement,Clinical Observation,SNOMED,Valid,Standard,2128
+4017348,104954006,Taurine measurement,Clinical Observation,SNOMED,Valid,Standard,1681
+4017081,104698009,Glutamine measurement,Clinical Observation,SNOMED,Valid,Standard,1681
+4020980,104697004,Glutamate measurement,Clinical Observation,SNOMED,Valid,Standard,1681
+4017341,104931002,Serine measurement,Clinical Observation,SNOMED,Valid,Standard,1681
+4019989,104893003,Proline measurement,Clinical Observation,SNOMED,Valid,Standard,1677
+4017768,104730008,Histidine measurement,Clinical Observation,SNOMED,Valid,Standard,1674
+4017789,104796004,Lysine measurement,Clinical Observation,SNOMED,Valid,Standard,1674
+37174957,1237516000,Metastatic carcinoma to lower lobe of lung,Clinical Observation,SNOMED,Valid,Standard,1620
+4099476,27220002,"Alpha-1-Fetoprotein measurement, amniotic fluid",Clinical Observation,SNOMED,Valid,Standard,3198
+37173515,61601000237104,Mumps virus total antibody in serum qualitative result,Clinical Observation,SNOMED,Valid,Standard,1603
+40483626,442518003,Measurement of albumin in peritoneal fluid specimen,Clinical Observation,SNOMED,Valid,Standard,1566
+4225404,85015001,Blood viscosity,Clinical Observation,SNOMED,Valid,Standard,1580
+44806058,790461000000105,10-hydroxycarbazepine measurement,Clinical Observation,SNOMED,Valid,Standard,1562
+4100657,27709003,Ascorbic acid measurement,Clinical Observation,SNOMED,Valid,Standard,1561
+4084176,24205003,"Uric acid measurement, urine",Clinical Observation,SNOMED,Valid,Standard,2650
+4008121,121762004,Cysteine measurement,Clinical Observation,SNOMED,Valid,Standard,1540
+4235103,408227007,Urine beta 2 microglobulin level,Clinical Observation,SNOMED,Valid,Standard,2156
+4017218,104835007,Normetanephrine measurement,Clinical Observation,SNOMED,Valid,Standard,1495
+4212822,391542001,Urine metadrenaline level,Clinical Observation,SNOMED,Valid,Standard,1525
+4017492,104469003,Adenosine 5'-triphosphate measurement,Clinical Observation,SNOMED,Valid,Standard,1412
+4100469,27494001,Measurement of Human immunodeficiency virus 2 antibody,Clinical Observation,SNOMED,Valid,Standard,1404
+4235099,408219003,Epstein-Barr virus serology,Clinical Observation,SNOMED,Valid,Standard,1365
+4018608,104399008,Acetylcholine receptor blocking antibody measurement,Clinical Observation,SNOMED,Valid,Standard,1362
+4020112,104972000,Thyroid stimulating immunoglobulins measurement,Clinical Observation,SNOMED,Valid,Standard,1346
+4045507,122158004,Measurement of neuronal nuclear type 2 antibody,Clinical Observation,SNOMED,Valid,Standard,2265
+4133679,412961003,Serum voltage-gated potassium channel antibody measurement,Clinical Observation,SNOMED,Valid,Standard,1295
+4196837,313526009,Cerebrospinal fluid lactate measurement,Clinical Observation,SNOMED,Valid,Standard,1248
+37173599,62521000237100,Measles virus IgG antibody in serum qualitative result,Clinical Observation,SNOMED,Valid,Standard,1264
+4155233,269822005,Hemoglobin A2 measurement,Clinical Observation,SNOMED,Valid,Standard,1156
+4199033,313995005,Hemoglobin A measurement,Clinical Observation,SNOMED,Valid,Standard,1154
+4300166,7740009,Fructosamine measurement,Clinical Observation,SNOMED,Valid,Standard,1133
+4007666,121840006,Phytonadione measurement,Clinical Observation,SNOMED,Valid,Standard,1107
+4306371,388810005,House dust mite (Df) specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,1545
+4263368,36174000,Carnitine measurement,Clinical Observation,SNOMED,Valid,Standard,1074
+44807536,817111000000102,Coronavirus RNA (ribonucleic acid) measurement by NAAT (nucleic acid amplification test),Clinical Observation,SNOMED,Valid,Standard,1055
+37173745,65441000237101,Mumps virus IgG antibody in serum qualitative result,Clinical Observation,SNOMED,Valid,Standard,1051
+4295436,75918007,Quantitative measurement of opiate agonist,Clinical Observation,SNOMED,Valid,Standard,1022
+4198596,315169005,Parvovirus B19 IgM measurement,Clinical Observation,SNOMED,Valid,Standard,1020
+4018607,104398000,Acetylcholine receptor modulating antibody measurement,Clinical Observation,SNOMED,Valid,Standard,1197
+4192541,391479001,Plasma renin level,Clinical Observation,SNOMED,Valid,Standard,1845
+4307157,390973000,Urine normetadrenaline level,Clinical Observation,SNOMED,Valid,Standard,971
+37171821,42561000237101,Clostridium difficile culture qualitative result,Clinical Observation,SNOMED,Valid,Standard,968
+4104671,29142004,Cocaine measurement,Clinical Observation,SNOMED,Valid,Standard,1088
+4101536,27965000,Methamphetamine measurement,Clinical Observation,SNOMED,Valid,Standard,1037
+4273557,63817004,Amphetamine measurement,Clinical Observation,SNOMED,Valid,Standard,947
+4019433,104463002,Prostatic acid phosphatase measurement,Clinical Observation,SNOMED,Valid,Standard,947
+40483574,442471001,Quantitative measurement of cannabinoids,Clinical Observation,SNOMED,Valid,Standard,945
+37173741,65281000237106,Hepatitis C virus RNA nucleic acid amplification qualitative result,Clinical Observation,SNOMED,Valid,Standard,1887
+37172677,54061000237100,Cardiolipin IgA antibody arbitrary concentration in serum,Clinical Observation,SNOMED,Valid,Standard,923
+4188814,413669005,Blood ethylene glycol level,Clinical Observation,SNOMED,Valid,Standard,918
+4147378,3025001,Calcitonin measurement,Clinical Observation,SNOMED,Valid,Standard,892
+4188884,392478007,Alternaria alternata specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,1319
+4136993,32375007,"Myoglobin measurement, urine",Clinical Observation,SNOMED,Valid,Standard,840
+4012467,113034005,Streptokinase antibody measurement,Clinical Observation,SNOMED,Valid,Standard,836
+4353510,250707004,Globulin measurement,Clinical Observation,SNOMED,Valid,Standard,822
+4311185,392381003,Oak specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,1213
+37172404,51371000237105,Toxoplasma gondii IgM antibody in serum qualitative result,Clinical Observation,SNOMED,Valid,Standard,821
+4191016,392345001,Box elder specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,1330
+4213892,80874005,Growth hormone measurement,Clinical Observation,SNOMED,Valid,Standard,983
+4209250,313613002,Hepatitis A antibody test,Clinical Observation,SNOMED,Valid,Standard,811
+4203316,5338000,Nicotine measurement,Clinical Observation,SNOMED,Valid,Standard,1333
+4213425,392402007,Cat dander specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,1349
+4261656,35391003,"Magnesium measurement, urine",Clinical Observation,SNOMED,Valid,Standard,767
+4020823,105063004,Amiodarone measurement,Clinical Observation,SNOMED,Valid,Standard,765
+4311175,392324008,Rough marshelder specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,1113
+4311189,392388009,American elm specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,1273
+4017063,104633002,Desethylamiodarone measurement,Clinical Observation,SNOMED,Valid,Standard,813
+4045644,122205003,Streptococcus pyogenes culture,Clinical Observation,SNOMED,Valid,Standard,749
+37172905,5531000237107,Anti-gliadin IgG antibody arbitrary concentration in serum,Clinical Observation,SNOMED,Valid,Standard,811
+4311195,392411007,Dog dander specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,1449
+4230508,89283001,Antibody to Ku measurement,Clinical Observation,SNOMED,Valid,Standard,712
+4045652,122228002,Measurement of polymyositis-scleroderma extractable nuclear antibody,Clinical Observation,SNOMED,Valid,Standard,711
+4150616,271249000,Urine epinephrine measurement,Clinical Observation,SNOMED,Valid,Standard,708
+4036221,117688000,Acetylcarnitine measurement,Clinical Observation,SNOMED,Valid,Standard,698
+4295006,401075003,Urine microscopy: yeasts,Clinical Observation,SNOMED,Valid,Standard,697
+4213543,392486007,Cladosporium herbarum specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,1249
+4297026,76381007,HIV-1 indirect immunofluorescence assay,Clinical Observation,SNOMED,Valid,Standard,686
+4020552,104844008,Osteocalcin measurement,Clinical Observation,SNOMED,Valid,Standard,684
+4303720,388812002,House dust mite (Dp) specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,1364
+4191005,392301001,Common ragweed specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,1332
+4039001,117788006,Measurement of Human coxsackievirus B 1 antibody,Clinical Observation,SNOMED,Valid,Standard,655
+4148297,30581005,"Dopamine measurement, urine",Clinical Observation,SNOMED,Valid,Standard,754
+40480900,441852006,Measurement of carcinoembryonic antigen in body fluid specimen,Clinical Observation,SNOMED,Valid,Standard,649
+4047151,122204004,Beta-hemolytic Streptococcus culture,Clinical Observation,SNOMED,Valid,Standard,642
+4020710,105029001,Vitamin D3 measurement,Clinical Observation,SNOMED,Valid,Standard,636
+4191134,392533006,German cockroach specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,662
+37173394,60041000237104,Legionella antigen in urine qualitative result,Clinical Observation,SNOMED,Valid,Standard,623
+4150617,271250000,Urine norepinephrine measurement,Clinical Observation,SNOMED,Valid,Standard,709
+4038852,117750009,HIV 1 p24 antigen assay,Clinical Observation,SNOMED,Valid,Standard,606
+4242993,38503009,"Selenium measurement, blood",Clinical Observation,SNOMED,Valid,Standard,745
+4005853,121469007,Busulfan measurement,Clinical Observation,SNOMED,Valid,Standard,593
+4017336,104917002,Pyruvate measurement,Clinical Observation,SNOMED,Valid,Standard,587
+4052691,23529001,"Mercury measurement, blood",Clinical Observation,SNOMED,Valid,Standard,579
+4136731,413017004,Cerebrospinal fluid oligoclonal band screening test,Clinical Observation,SNOMED,Valid,Standard,571
+4141885,33966007,Cotinine measurement,Clinical Observation,SNOMED,Valid,Standard,561
+4007828,121967001,Measurement of Coccidioides immitis antibody,Clinical Observation,SNOMED,Valid,Standard,929
+4006169,121709006,Topiramate measurement,Clinical Observation,SNOMED,Valid,Standard,553
+37174770,1254735000,Bilateral metastatic large cell carcinoma to lungs,Clinical Observation,SNOMED,Valid,Standard,550
+4277286,65667006,"Hemosiderin measurement, urine",Clinical Observation,SNOMED,Valid,Standard,566
+4290342,37076009,Insulin antibody measurement,Clinical Observation,SNOMED,Valid,Standard,792
+37171747,4181000237101,Centromere antibody arbitrary concentration in serum,Clinical Observation,SNOMED,Valid,Standard,540
+37155983,50771000237103,Borrelia burgdorferi total antibody in serum qualitative result,Clinical Observation,SNOMED,Valid,Standard,537
+4213300,392287001,Timothy grass specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,869
+4020276,105217003,Isopropanol measurement,Clinical Observation,SNOMED,Valid,Standard,1006
+4192530,391430009,Blood zinc protoporphyrin level,Clinical Observation,SNOMED,Valid,Standard,528
+4311051,392272006,Bermuda grass specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,955
+4147623,35785002,Measurement of gamma-enolase,Clinical Observation,SNOMED,Valid,Standard,499
+4045496,122118001,Measurement of Streptococcus pneumoniae Danish serotype 9N antibody,Clinical Observation,SNOMED,Valid,Standard,494
+4045313,122108006,Measurement of Streptococcus pneumoniae Danish serotype 19F antibody,Clinical Observation,SNOMED,Valid,Standard,494
+4017617,104531005,Apolipoproteins B measurement,Clinical Observation,SNOMED,Valid,Standard,494
+4212375,57582005,"Alcohol, methyl measurement",Clinical Observation,SNOMED,Valid,Standard,491
+3529853,506111000000104,"Glasgow coma score, original version",Clinical Observation,SNOMED,Valid,Standard,487
+4188885,392479004,Aspergillus fumigatus specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,959
+4149410,30895001,"Dopamine measurement, blood",Clinical Observation,SNOMED,Valid,Standard,479
+4304754,388500008,Peanut specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,847
+4153272,271259004,Urine urea measurement,Clinical Observation,SNOMED,Valid,Standard,476
+4007820,121934000,Measurement of Blastomyces dermatitidis antibody,Clinical Observation,SNOMED,Valid,Standard,557
+40483546,442446004,Quantitative measurement of acylcarnitine in blood specimen,Clinical Observation,SNOMED,Valid,Standard,469
+37175029,1254734001,Metastatic large cell carcinoma to left lung,Clinical Observation,SNOMED,Valid,Standard,462
+4197608,313457007,"Measurement of 3,4-methylenedioxymethamphetamine in urine",Clinical Observation,SNOMED,Valid,Standard,890
+4022503,105296006,Phentermine measurement,Clinical Observation,SNOMED,Valid,Standard,486
+4193859,313662002,Urine methylenedioxyamphetamine measurement,Clinical Observation,SNOMED,Valid,Standard,594
+3574630,1321341000000103,SARS-CoV-2 (severe acute respiratory syndrome coronavirus 2) IgG arbitrary concentration in serum,Clinical Observation,SNOMED,Valid,Standard,456
+4175795,49641003,"Myelin basic protein measurement, spinal fluid",Clinical Observation,SNOMED,Valid,Standard,449
+4007969,122083001,Measurement of Saccharomonospora viridis antibody,Clinical Observation,SNOMED,Valid,Standard,510
+4006660,121614003,Itraconazole measurement,Clinical Observation,SNOMED,Valid,Standard,477
+4016236,104126003,"White blood cell count, automated, synovial fluid",Clinical Observation,SNOMED,Valid,Standard,431
+40481004,443309005,Measurement of apolipoprotein A-I,Clinical Observation,SNOMED,Valid,Standard,417
+37172507,52421000237108,Bartonella henselae IgG antibody in serum qualitative result,Clinical Observation,SNOMED,Valid,Standard,416
+37173542,6211000237105,ANA (antinuclear antibody) arbitrary concentration in serum,Clinical Observation,SNOMED,Valid,Standard,415
+4017228,104890000,Proinsulin measurement,Clinical Observation,SNOMED,Valid,Standard,407
+4286509,68388009,Immunoglobulin D measurement,Clinical Observation,SNOMED,Valid,Standard,407
+37173947,66401000237109,Bartonella quintana IgG antibody in serum qualitative result,Clinical Observation,SNOMED,Valid,Standard,405
+4233062,407692000,Urine buprenorphine level,Clinical Observation,SNOMED,Valid,Standard,400
+4296480,76693007,"Copper measurement, urine",Clinical Observation,SNOMED,Valid,Standard,447
+37172371,51041000237104,Bartonella henselae IgM antibody in serum qualitative result,Clinical Observation,SNOMED,Valid,Standard,399
+4004865,121299000,3-Hydroxytetradecenoylcarnitine measurement,Clinical Observation,SNOMED,Valid,Standard,395
+4007659,121785003,Glutarylcarnitine measurement,Clinical Observation,SNOMED,Valid,Standard,394
+4007655,121773006,Dodecenoylcarnitine measurement,Clinical Observation,SNOMED,Valid,Standard,394
+4006196,121823002,Octenoylcarnitine measurement,Clinical Observation,SNOMED,Valid,Standard,394
+4338515,87998001,"Morphine measurement, quantitative",Clinical Observation,SNOMED,Valid,Standard,475
+4095047,250563001,Measurement of oxygen dissolved in venous blood,Clinical Observation,SNOMED,Valid,Standard,386
+4213418,392376007,Cottonwood specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,724
+4240487,59014001,Procainamide measurement,Clinical Observation,SNOMED,Valid,Standard,377
+37172282,50091000237102,Mycobacterium tuberculosis DNA nucleic acid amplification qualitative result,Clinical Observation,SNOMED,Valid,Standard,374
+46284145,940691000000102,Serum anti-Mullerian hormone measurement,Clinical Observation,SNOMED,Valid,Standard,373
+4190007,388664006,Walnut specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,711
+200348,94365007,Metastatic malignant neoplasm to large intestine,Clinical Observation,SNOMED,Valid,Standard,361
+37172411,51441000237105,Enterovirus RNA nucleic acid amplification qualitative result,Clinical Observation,SNOMED,Valid,Standard,799
+4214344,392492001,Penicillium chrysogenum specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,707
+37173409,60401000237107,Borrelia burgdorferi IgG antibody in serum qualitative result,Clinical Observation,SNOMED,Valid,Standard,360
+4189894,388631006,Egg white specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,696
+4007342,121856001,Suberylcarnitine measurement,Clinical Observation,SNOMED,Valid,Standard,350
+4008110,121737004,Adipoylcarnitine measurement,Clinical Observation,SNOMED,Valid,Standard,349
+4006192,121805005,Linoleoylcarnitine measurement,Clinical Observation,SNOMED,Valid,Standard,349
+4213415,392360003,White ash specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,661
+4303591,388652003,Soybean specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,634
+4214130,392299008,Common pigweed specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,661
+72266,94493005,Metastatic malignant neoplasm to pleura,Clinical Observation,SNOMED,Valid,Standard,338
+4014887,104471003,Adenosine deaminase measurement,Clinical Observation,SNOMED,Valid,Standard,427
+4209252,313620009,Plasma epinephrine measurement,Clinical Observation,SNOMED,Valid,Standard,337
+4036527,117917004,Measurement of neuronal antinuclear antibody,Clinical Observation,SNOMED,Valid,Standard,415
+4209397,313760004,Plasma norepinephrine measurement,Clinical Observation,SNOMED,Valid,Standard,334
+4306363,388790001,Wheat specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,628
+4020392,105251004,N-acetylprocainamide measurement,Clinical Observation,SNOMED,Valid,Standard,331
+4133536,412837009,Blood serotonin measurement,Clinical Observation,SNOMED,Valid,Standard,327
+44790868,244921000000103,Inhibin A measurement,Clinical Observation,SNOMED,Valid,Standard,373
+37173327,58961000237107,Bartonella quintana IgM antibody in serum qualitative result,Clinical Observation,SNOMED,Valid,Standard,327
+4189057,388708004,Shrimp specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,619
+4006857,121294005,3-Hydroxylinoleoylcarnitine measurement,Clinical Observation,SNOMED,Valid,Standard,323
+4166837,45516006,"Amylase measurement, pleural fluid",Clinical Observation,SNOMED,Valid,Standard,322
+4193434,312472004,Blood calcium measurement,Clinical Observation,SNOMED,Valid,Standard,321
+4213411,392337006,Russian thistle specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,631
+37172523,52571000237108,HIV (human immunodeficiency virus) 1 provirus DNA nucleic acid amplification qualitative result,Clinical Observation,SNOMED,Valid,Standard,408
+44795663,409701000000100,[X]Secondary malignant neoplasm of bladder and other and unspecified urinary organs,Clinical Observation,SNOMED,Valid,Standard,312
+4311184,392375006,Maple leaf sycamore specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,612
+4310352,391477004,Cow milk specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,618
+37173616,63041000237106,Borrelia burgdorferi IgM antibody in serum qualitative result,Clinical Observation,SNOMED,Valid,Standard,310
+4019444,104503001,Alpha-2-macroglobulin measurement,Clinical Observation,SNOMED,Valid,Standard,311
+4191024,392367000,Mulberry specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,531
+4214226,392361004,California black walnut (pollen) specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,600
+37172369,51021000237109,Borrelia burgdorferi DNA nucleic acid amplification qualitative result,Clinical Observation,SNOMED,Valid,Standard,497
+4189999,388646004,Codfish specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,574
+4015456,104320001,Measurement of Hepatitis delta virus antibody,Clinical Observation,SNOMED,Valid,Standard,301
+37172376,51091000237107,MSSA (methicillin sensitive Staphylococcus aureus) DNA nucleic acid amplification qualitative result,Clinical Observation,SNOMED,Valid,Standard,478
+37174938,1237490005,Metastatic carcinoma to genital organ,Clinical Observation,SNOMED,Valid,Standard,295
+4260891,412910008,Plasma catecholamine measurement,Clinical Observation,SNOMED,Valid,Standard,293
+4014638,104298002,Measurement of Cryptococcus species antibody,Clinical Observation,SNOMED,Valid,Standard,288
+4045506,122157009,Measurement of liver and kidney microsomal antibody,Clinical Observation,SNOMED,Valid,Standard,466
+37172492,52231000237109,Trichomonas vaginalis DNA nucleic acid amplification qualitative result,Clinical Observation,SNOMED,Valid,Standard,565
+37172454,51831000237100,Candida spp DNA nucleic acid amplification qualitative result,Clinical Observation,SNOMED,Valid,Standard,362
+37172445,51731000237109,CMV (Cytomegalovirus) total antibody in serum qualitative result,Clinical Observation,SNOMED,Valid,Standard,281
+4221394,82681007,Androstenedione measurement,Clinical Observation,SNOMED,Valid,Standard,279
+4037201,117678001,Hydroxyitraconazole measurement,Clinical Observation,SNOMED,Valid,Standard,272
+40479580,441533008,Measurement of tramadol in urine specimen,Clinical Observation,SNOMED,Valid,Standard,271
+4018600,104361001,"Complement C1 esterase inhibitor, total measurement",Clinical Observation,SNOMED,Valid,Standard,270
+4220804,39897000,Citrate measurement,Clinical Observation,SNOMED,Valid,Standard,268
+4292203,401042006,Urine oxazepam level,Clinical Observation,SNOMED,Valid,Standard,271
+37172519,52531000237106,Parvovirus B19 IgM antibody in serum qualitative result,Clinical Observation,SNOMED,Valid,Standard,339
+37172273,50021000237100,Parvovirus B19 IgG antibody in serum qualitative result,Clinical Observation,SNOMED,Valid,Standard,263
+4150618,271253003,Measurement of vanillylmandelic acid in urine specimen,Clinical Observation,SNOMED,Valid,Standard,431
+40481784,442044007,Measurement of chloride in stool specimen,Clinical Observation,SNOMED,Valid,Standard,324
+4042076,167010001,Blood methanol measurement,Clinical Observation,SNOMED,Valid,Standard,378
+4188290,414519004,Insulin-like growth factor binding protein 3 level,Clinical Observation,SNOMED,Valid,Standard,317
+4007818,121917008,Measurement of Histoplasma capsulatum mycelial antibody,Clinical Observation,SNOMED,Valid,Standard,257
+4005538,121918003,Measurement of Histoplasma capsulatum yeast antibody,Clinical Observation,SNOMED,Valid,Standard,256
+4021452,105140007,Clozapine measurement,Clinical Observation,SNOMED,Valid,Standard,252
+4307159,390982006,Red cell magnesium measurement,Clinical Observation,SNOMED,Valid,Standard,422
+37310458,1082601000112109,Metastatic malignant neoplasm to viscera,Clinical Observation,SNOMED,Valid,Standard,250
+3548089,1321631000000103,SARS-CoV-2 (severe acute respiratory syndrome coronavirus 2) IgM detection result equivocal,Clinical Observation,SNOMED,Valid,Standard,249
+4017633,104612006,Creatine measurement,Clinical Observation,SNOMED,Valid,Standard,249
+4006363,121420005,Oxymorphone measurement,Clinical Observation,SNOMED,Valid,Standard,347
+37172796,54951000237104,Chloride molar concentration in sweat,Clinical Observation,SNOMED,Valid,Standard,249
+4045494,122110008,Measurement of Streptococcus pneumoniae Danish serotype 23F antibody,Clinical Observation,SNOMED,Valid,Standard,247
+4047038,122104008,Measurement of Streptococcus pneumoniae Danish serotype 12F antibody,Clinical Observation,SNOMED,Valid,Standard,247
+4045174,122106005,Measurement of Streptococcus pneumoniae Danish serotype 18C antibody,Clinical Observation,SNOMED,Valid,Standard,247
+4207482,312464001,Urine codeine measurement,Clinical Observation,SNOMED,Valid,Standard,312
+4008281,121914001,Measurement of Histoplasma capsulatum antibody,Clinical Observation,SNOMED,Valid,Standard,363
+4205488,439394002,Measurement of hydromorphone in urine,Clinical Observation,SNOMED,Valid,Standard,477
+4096948,188448008,Secondary malignant neoplasm of other digestive organ,Clinical Observation,SNOMED,Valid,Standard,240
+4018198,104630004,Deoxyhemoglobin measurement,Clinical Observation,SNOMED,Valid,Standard,458
+4005840,121409005,Norclozapine measurement,Clinical Observation,SNOMED,Valid,Standard,235
+4040227,117879007,Measurement of streptococcal deoxyribonuclease B antibody,Clinical Observation,SNOMED,Valid,Standard,234
+4014766,104394003,Insulin human antibody measurement,Clinical Observation,SNOMED,Valid,Standard,232
+37171209,32931000237100,EBV (Epstein-Barr virus) DNA arbitrary concentration by nucleic acid amplification,Clinical Observation,SNOMED,Valid,Standard,231
+4190020,388713000,Scallop specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,446
+4008284,121923003,Measurement of Aspergillus fumigatus antibody,Clinical Observation,SNOMED,Valid,Standard,238
+4045498,122129002,Measurement of Thermoactinomyces vulgaris antibody,Clinical Observation,SNOMED,Valid,Standard,223
+4225975,421388001,Measurement of Saccharopolyspora rectivirgula antibody,Clinical Observation,SNOMED,Valid,Standard,318
+4309120,391543006,Blood thiopurine methyltransferase level,Clinical Observation,SNOMED,Valid,Standard,225
+4302115,388493003,Cashew nut specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,432
+37172372,51061000237103,Hepatitis B surface antigen in serum qualitative result,Clinical Observation,SNOMED,Valid,Standard,220
+4311179,392362006,Mountain juniper specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,425
+4150332,271008007,Urine oxalate measurement,Clinical Observation,SNOMED,Valid,Standard,279
+37172324,50511000237101,HIV (human immunodeficiency virus) 1 RNA nucleic acid amplification qualitative result,Clinical Observation,SNOMED,Valid,Standard,218
+4269017,401040003,Hemoglobin C measurement,Clinical Observation,SNOMED,Valid,Standard,216
+4006856,121281008,Carnitine ester measurement,Clinical Observation,SNOMED,Valid,Standard,210
+1076140,1335901007,Detection of Adenovirus antibody,Clinical Observation,SNOMED,Valid,Standard,209
+4005662,121920000,Measurement of Aspergillus flavus antibody,Clinical Observation,SNOMED,Valid,Standard,206
+4206154,309618006,Urine catecholamine measurement,Clinical Observation,SNOMED,Valid,Standard,217
+4007180,121580005,Gabapentin measurement,Clinical Observation,SNOMED,Valid,Standard,208
+4020398,105263009,Nordazepam measurement,Clinical Observation,SNOMED,Valid,Standard,207
+4017061,104624004,Dehydroepiandrosterone measurement,Clinical Observation,SNOMED,Valid,Standard,195
+4189880,388590003,Hazel nut specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,257
+4136727,412994000,Blood B-galactocerebrosidase measurement,Clinical Observation,SNOMED,Valid,Standard,191
+4107614,25652006,alpha-L-iduronidase measurement,Clinical Observation,SNOMED,Valid,Standard,191
+4135564,413008004,Blood A-galactosidase measurement,Clinical Observation,SNOMED,Valid,Standard,209
+4017347,104946009,Succinylacetone measurement,Clinical Observation,SNOMED,Valid,Standard,191
+4020990,104746000,Iduronate-2-sulfatase measurement,Clinical Observation,SNOMED,Valid,Standard,191
+4036364,117745003,Herpes simplex virus antigen assay,Clinical Observation,SNOMED,Valid,Standard,188
+4322453,70451005,Glucagon measurement,Clinical Observation,SNOMED,Valid,Standard,187
+434875,94409002,Metastatic malignant neoplasm to mediastinum,Clinical Observation,SNOMED,Valid,Standard,183
+4268036,61966007,Antidiuretic hormone measurement,Clinical Observation,SNOMED,Valid,Standard,181
+4193697,313406008,Fatty acid measurement,Clinical Observation,SNOMED,Valid,Standard,193
+4152457,28378007,"Amylase measurement, urine",Clinical Observation,SNOMED,Valid,Standard,181
+37172526,52601000237103,Streptococcus pneumoniae DNA nucleic acid amplification qualitative result,Clinical Observation,SNOMED,Valid,Standard,321
+37173605,62721000237108,Neisseria meningitidis DNA nucleic acid amplification qualitative result,Clinical Observation,SNOMED,Valid,Standard,352
+4022986,105226000,Lorazepam measurement,Clinical Observation,SNOMED,Valid,Standard,183
+4098639,2507007,5' Nucleotidase measurement,Clinical Observation,SNOMED,Valid,Standard,177
+37173430,60921000237105,Norovirus RNA nucleic acid amplification qualitative result,Clinical Observation,SNOMED,Valid,Standard,286
+4292202,401037003,Urine temazepam level,Clinical Observation,SNOMED,Valid,Standard,182
+4095051,250603006,Primidone blood measurement,Clinical Observation,SNOMED,Valid,Standard,177
+4019984,104883005,"Porphobilinogen measurement, quantitative, urine",Clinical Observation,SNOMED,Valid,Standard,226
+4174033,49204009,C-1q complement assay,Clinical Observation,SNOMED,Valid,Standard,173
+4006867,121324000,alpha-Hydroxyalprazolam measurement,Clinical Observation,SNOMED,Valid,Standard,174
+4019544,104584009,IDL cholesterol measurement,Clinical Observation,SNOMED,Valid,Standard,168
+4193418,391405006,Plasma somatostatin level,Clinical Observation,SNOMED,Valid,Standard,168
+4039200,117931004,Measurement of Purkinje cell antibody,Clinical Observation,SNOMED,Valid,Standard,278
+4022838,105142004,Codeine measurement,Clinical Observation,SNOMED,Valid,Standard,187
+37171510,3591000237107,Epstein-Barr virus nuclear IgG antibody arbitrary concentration in serum,Clinical Observation,SNOMED,Valid,Standard,164
+4303709,388755009,Sesame seed specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,305
+4008285,121925005,Measurement of Aspergillus niger antibody,Clinical Observation,SNOMED,Valid,Standard,161
+4303715,388797003,Corn specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,306
+4189066,388739002,Clam specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,302
+4007481,121926006,Measurement of Aureobasidium pullulans antibody,Clinical Observation,SNOMED,Valid,Standard,159
+4036377,117787001,Measurement of Human coxsackievirus B antibody,Clinical Observation,SNOMED,Valid,Standard,156
+4039527,117778005,Measurement of Human coxsackievirus A antibody,Clinical Observation,SNOMED,Valid,Standard,156
+4008441,122021001,Measurement of Legionella pneumophila serogroup 1 antibody,Clinical Observation,SNOMED,Valid,Standard,153
+4019458,104552002,Bile acid measurement,Clinical Observation,SNOMED,Valid,Standard,235
+4020535,104798003,Lysozyme measurement,Clinical Observation,SNOMED,Valid,Standard,153
+4146656,34924001,"Mercury measurement, urine",Clinical Observation,SNOMED,Valid,Standard,193
+4154639,271548009,Alkaline phosphatase liver isoenzyme measurement,Clinical Observation,SNOMED,Valid,Standard,185
+4328883,22031009,"Porphyrin, quantitative measurement, urine",Clinical Observation,SNOMED,Valid,Standard,298
+4007658,121781007,Fetal fibronectin measurement,Clinical Observation,SNOMED,Valid,Standard,169
+4187217,415121006,Pneumocystis jirovecii antigen assay,Clinical Observation,SNOMED,Valid,Standard,148
+44783816,698001009,Creatine kinase MM isoenzyme measurement,Clinical Observation,SNOMED,Valid,Standard,152
+44783815,698000005,Creatine kinase BB isoenzyme measurement,Clinical Observation,SNOMED,Valid,Standard,152
+4093859,24831009,Intestinal alkaline phosphatase measurement,Clinical Observation,SNOMED,Valid,Standard,151
+4228843,88433003,Estrogen measurement,Clinical Observation,SNOMED,Valid,Standard,146
+4005832,121373009,Methylenedioxymethamphetamine measurement,Clinical Observation,SNOMED,Valid,Standard,145
+4007647,121741000,Benzoylcarnitine measurement,Clinical Observation,SNOMED,Valid,Standard,145
+44804888,782591000000100,Apolipoprotein B-100 measurement,Clinical Observation,SNOMED,Valid,Standard,144
+37172487,52191000237102,Anaplasma phagocytophilum IgG antibody in serum qualitative result,Clinical Observation,SNOMED,Valid,Standard,142
+37173266,58351000237108,Ribosome P protein antibody arbitrary concentration in serum,Clinical Observation,SNOMED,Valid,Standard,141
+4019455,104538004,Asparagine measurement,Clinical Observation,SNOMED,Valid,Standard,141
+4161282,399852008,Cladosporium cladosporiodes specific IgG antibody measurement,Clinical Observation,SNOMED,Valid,Standard,139
+4045340,122210004,Streptococcus agalactiae culture,Clinical Observation,SNOMED,Valid,Standard,139
+40481838,442093002,Measurement of zonisamide,Clinical Observation,SNOMED,Valid,Standard,139
+4182561,54582002,C-2 complement assay,Clinical Observation,SNOMED,Valid,Standard,140
+4008119,121759002,Cortisone measurement,Clinical Observation,SNOMED,Valid,Standard,170
+4204548,55131002,Pancreatic polypeptide measurement,Clinical Observation,SNOMED,Valid,Standard,137
+4245134,59478003,Vasoactive intestinal polypeptide measurement,Clinical Observation,SNOMED,Valid,Standard,204
+40479187,441477004,Measurement of albumin in pleural fluid specimen,Clinical Observation,SNOMED,Valid,Standard,136
+4018187,104587002,Cholic acid measurement,Clinical Observation,SNOMED,Valid,Standard,135
+4039004,117792004,Measurement of Human coxsackievirus B 5 antibody,Clinical Observation,SNOMED,Valid,Standard,133
+4111031,255124004,Metastasis to peripheral nerve,Clinical Observation,SNOMED,Valid,Standard,132
+40485486,444223000,Quantitative measurement of creatinine in peritoneal fluid specimen,Clinical Observation,SNOMED,Valid,Standard,132
+4017197,104759008,Iodine measurement,Clinical Observation,SNOMED,Valid,Standard,142
+4109233,285609003,Metastasis to small intestine of unknown primary,Clinical Observation,SNOMED,Valid,Standard,131
+4007187,121602006,Hydroxyethylflurazepam measurement,Clinical Observation,SNOMED,Valid,Standard,133
+44808563,830131000000101,7-aminoclonazepam measurement,Clinical Observation,SNOMED,Valid,Standard,133
+37169879,1501000237101,Hu antibody (ANNA-1 - anti-neuronal nuclear antibody type 1) arbitrary concentration in serum,Clinical Observation,SNOMED,Valid,Standard,131
+40480934,441883005,Measurement of cobalt in blood specimen,Clinical Observation,SNOMED,Valid,Standard,139
+4039002,117789003,Measurement of Human coxsackievirus B 2 antibody,Clinical Observation,SNOMED,Valid,Standard,128
+4039530,117791006,Measurement of Human coxsackievirus B 4 antibody,Clinical Observation,SNOMED,Valid,Standard,128
+4039698,117933001,Measurement of ribosomal P protein antibody,Clinical Observation,SNOMED,Valid,Standard,212
+4190040,388781008,Tuna specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,235
+4039531,117793009,Measurement of Human coxsackievirus B 6 antibody,Clinical Observation,SNOMED,Valid,Standard,128
+4039003,117790007,Measurement of Human coxsackievirus B 3 antibody,Clinical Observation,SNOMED,Valid,Standard,128
+4233795,90690006,"Arsenic measurement, urine",Clinical Observation,SNOMED,Valid,Standard,220
+37175046,1251454002,Metastatic neuroblastoma to adrenal gland,Clinical Observation,SNOMED,Valid,Standard,127
+4303704,388727005,Pistachio specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,241
+37396199,715921001,Pecan nut specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,233
+37173380,59641000237109,Hepatitis D virus IgM antibody in serum qualitative result,Clinical Observation,SNOMED,Valid,Standard,119
+4220047,399803009,Gliadin specific IgA antibody measurement,Clinical Observation,SNOMED,Valid,Standard,157
+44807602,797521000000100,Methylenedioxyethylamphetamine measurement,Clinical Observation,SNOMED,Valid,Standard,122
+37175039,1264357006,Metastatic mucinous cystadenocarcinoma to ovary,Clinical Observation,SNOMED,Valid,Standard,118
+4017062,104627006,Deoxycholate measurement,Clinical Observation,SNOMED,Valid,Standard,117
+4019569,105099009,Carboxy tetrahydrocannabinol measurement,Clinical Observation,SNOMED,Valid,Standard,173
+4176873,49315002,Pentobarbital measurement,Clinical Observation,SNOMED,Valid,Standard,132
+4007168,121528001,Dexamethasone measurement,Clinical Observation,SNOMED,Valid,Standard,116
+4133528,412811006,Urine kappa light chain measurement,Clinical Observation,SNOMED,Valid,Standard,134
+4136577,412812004,Urine lambda light chain measurement,Clinical Observation,SNOMED,Valid,Standard,133
+4198108,313955008,Fecal A1 antitrypsin measurement,Clinical Observation,SNOMED,Valid,Standard,115
+4189086,388803004,House dust (Hollister-Stier Labs) specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,138
+4190999,392282007,Rye grass specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,111
+4193709,313450009,"Reducing substance measurement, stool",Clinical Observation,SNOMED,Valid,Standard,109
+4017646,104657002,Estrone measurement,Clinical Observation,SNOMED,Valid,Standard,108
+4190029,388742008,Salmon specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,190
+4005663,121921001,Aspergillus fumigatus 1 antibody assay,Clinical Observation,SNOMED,Valid,Standard,106
+4018188,104590008,"Chloride measurement, body fluid",Clinical Observation,SNOMED,Valid,Standard,105
+37151796,16131000237108,Faeces pH,Clinical Observation,SNOMED,Valid,Standard,104
+4045317,122127000,Measurement of Thermoactinomyces sacchari antibody,Clinical Observation,SNOMED,Valid,Standard,110
+4005376,121753001,2-Aminobutyrate measurement,Clinical Observation,SNOMED,Valid,Standard,102
+4018177,104542001,Beta-alanine measurement,Clinical Observation,SNOMED,Valid,Standard,102
+4021293,105006009,Tryptophan measurement,Clinical Observation,SNOMED,Valid,Standard,102
+4007811,121891009,3-Aminoisobutyrate measurement,Clinical Observation,SNOMED,Valid,Standard,102
+4204713,55112008,Hydroxyproline measurement,Clinical Observation,SNOMED,Valid,Standard,102
+4004868,121307006,4-Aminobutyrate measurement,Clinical Observation,SNOMED,Valid,Standard,102
+4019554,104620008,Cystathionine measurement,Clinical Observation,SNOMED,Valid,Standard,102
+4017339,104929006,Sarcosine measurement,Clinical Observation,SNOMED,Valid,Standard,102
+4017502,104500003,alpha-Aminoadipate measurement,Clinical Observation,SNOMED,Valid,Standard,102
+4103068,28805002,Carotene measurement,Clinical Observation,SNOMED,Valid,Standard,125
+4014774,104437007,1-Methylhistidine measurement,Clinical Observation,SNOMED,Valid,Standard,101
+4019430,104453005,3-methylhistidine measurement,Clinical Observation,SNOMED,Valid,Standard,101
+4164148,45144001,"Aluminum measurement, blood",Clinical Observation,SNOMED,Valid,Standard,101
+4018308,104658007,Ethanolamine measurement,Clinical Observation,SNOMED,Valid,Standard,101
+4020859,105186009,Felbamate measurement,Clinical Observation,SNOMED,Valid,Standard,100
+4196800,51106007,Leukocyte alkaline phosphatase score,Clinical Observation,SNOMED,Valid,Standard,116
+4021149,104923007,Riboflavin measurement,Clinical Observation,SNOMED,Valid,Standard,100
+253717,94515004,Metastatic malignant neoplasm to respiratory tract,Clinical Observation,SNOMED,Valid,Standard,97
+4172928,47889002,Cold agglutinin measurement,Clinical Observation,SNOMED,Valid,Standard,102
+4191018,392349007,Common silver birch specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,171
+4010414,113086001,Flecainide measurement,Clinical Observation,SNOMED,Valid,Standard,93
+37171492,3561000237103,GPCA (gastric parietal cell antibody) arbitrary concentration in serum,Clinical Observation,SNOMED,Valid,Standard,91
+4012480,113082004,"Porphobilinogen measurement, qualitative, urine",Clinical Observation,SNOMED,Valid,Standard,90
+601141,353571000119109,Metastatic malignant neoplasm to right adrenal gland,Clinical Observation,SNOMED,Valid,Standard,88
+37175084,1263639008,Metastatic transitional cell carcinoma to urinary bladder,Clinical Observation,SNOMED,Valid,Standard,88
+4022512,105337001,Thiocyanate measurement,Clinical Observation,SNOMED,Valid,Standard,87
+4191023,392363001,Cedar specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,168
+40492789,445861002,Measurement of norbuprenorphine in urine specimen,Clinical Observation,SNOMED,Valid,Standard,158
+4213301,392290007,Meadow grass specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,157
+4039545,117857002,Measurement of Human poliovirus 1 antibody,Clinical Observation,SNOMED,Valid,Standard,82
+4040221,117859004,Measurement of Human poliovirus 3 antibody,Clinical Observation,SNOMED,Valid,Standard,82
+40484181,443984008,Quantitative measurement of hydrocortisone in saliva specimen,Clinical Observation,SNOMED,Valid,Standard,78
+601143,353721000119100,Metastatic malignant neoplasm to left adrenal gland,Clinical Observation,SNOMED,Valid,Standard,77
+4190996,392274007,Cocksfoot specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,152
+37172284,50101000237108,Hepatitis D virus RNA nucleic acid amplification qualitative result,Clinical Observation,SNOMED,Valid,Standard,76
+4021451,105131008,Clobazam measurement,Clinical Observation,SNOMED,Valid,Standard,75
+4039688,117901005,Measurement of deoxyribonucleoprotein antibody,Clinical Observation,SNOMED,Valid,Standard,72
+608866,15930821000119105,Bilateral metastatic malignant neoplasm to ovaries,Clinical Observation,SNOMED,Valid,Standard,87
+4193842,313554002,Blood cadmium measurement,Clinical Observation,SNOMED,Valid,Standard,79
+4021000,104789001,Lipoproteins measurement,Clinical Observation,SNOMED,Valid,Standard,287
+4209246,313606002,Urine coproporphyrin measurement,Clinical Observation,SNOMED,Valid,Standard,70
+4193850,313619003,Urine uroporphyrin measurement,Clinical Observation,SNOMED,Valid,Standard,80
+4019987,104889009,Pregnenolone measurement,Clinical Observation,SNOMED,Valid,Standard,69
+4005371,121742007,Beta-2-transferrin measurement,Clinical Observation,SNOMED,Valid,Standard,68
+4020132,105055000,Alprazolam measurement,Clinical Observation,SNOMED,Valid,Standard,80
+4045478,122266004,Neisseria gonorrhoeae culture,Clinical Observation,SNOMED,Valid,Standard,75
+4304795,388656000,Lobster specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,107
+4022489,105247001,Midazolam measurement,Clinical Observation,SNOMED,Valid,Standard,75
+4195184,313694007,Urine cystine measurement,Clinical Observation,SNOMED,Valid,Standard,111
+37173593,62361000237101,Mycoplasma pneumoniae IgM antibody in serum qualitative result,Clinical Observation,SNOMED,Valid,Standard,65
+4007656,121776003,Elastase measurement,Clinical Observation,SNOMED,Valid,Standard,65
+4076704,17888004,High density lipoprotein measurement,Clinical Observation,SNOMED,Valid,Standard,109
+4044791,122126009,Measurement of Thermoactinomyces candidus antibody,Clinical Observation,SNOMED,Valid,Standard,64
+4007166,121523005,Desmethylclobazam measurement,Clinical Observation,SNOMED,Valid,Standard,63
+4094060,26052003,Manganese measurement,Clinical Observation,SNOMED,Valid,Standard,82
+37172428,51581000237103,Rickettsia spotted fever group IgG antibody in serum qualitative result,Clinical Observation,SNOMED,Valid,Standard,60
+4150341,271074005,Urine morphine measurement,Clinical Observation,SNOMED,Valid,Standard,63
+37173392,60001000237102,Rickettsia spotted fever group IgM antibody in serum qualitative result,Clinical Observation,SNOMED,Valid,Standard,60
+4260773,412836000,Serum anti-ganglioside Q1b IgG measurement,Clinical Observation,SNOMED,Valid,Standard,58
+4309884,388544006,Crab specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,108
+4016242,104143000,Measurement of total hemoglobin concentration in urine specimen,Clinical Observation,SNOMED,Valid,Standard,55
+40479591,441543006,Measurement of amino acid,Clinical Observation,SNOMED,Valid,Standard,54
+3530971,533951000000104,Secondary malignant neoplasm of skin NOS,Clinical Observation,SNOMED,Valid,Standard,53
+3574631,1321351000000100,SARS-CoV-2 (severe acute respiratory syndrome coronavirus 2) IgM arbitrary concentration in serum,Clinical Observation,SNOMED,Valid,Standard,52
+4017352,104973005,Thyrotropin binding inhibitory immunoglobulins measurement,Clinical Observation,SNOMED,Valid,Standard,52
+37170653,28751000237108,Milk specific IgE antibody arbitrary concentration in serum,Clinical Observation,SNOMED,Valid,Standard,52
+4018473,104288008,Measurement of Leptospira species antibody,Clinical Observation,SNOMED,Valid,Standard,51
+4260899,412932004,Monomeric prolactin measurement,Clinical Observation,SNOMED,Valid,Standard,50
+4230204,88820003,"Aldosterone measurement, urine",Clinical Observation,SNOMED,Valid,Standard,91
+4309874,388512007,Brazil nut specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,82
+4055551,167742002,CSF chloride measurement,Clinical Observation,SNOMED,Valid,Standard,47
+4008427,121978009,Measurement of Cryptococcus neoformans antibody,Clinical Observation,SNOMED,Valid,Standard,46
+4191014,392336002,Sheep sorrel specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,73
+4147892,34889009,Estriol measurement,Clinical Observation,SNOMED,Valid,Standard,71
+4103391,28846007,Histamine measurement,Clinical Observation,SNOMED,Valid,Standard,43
+4191112,392434003,Mouse urine proteins specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,74
+4195577,7932007,Clonazepam measurement,Clinical Observation,SNOMED,Valid,Standard,47
+4007008,121372004,Methylenedioxyamphetamine measurement,Clinical Observation,SNOMED,Valid,Standard,52
+4150223,31161005,Methadone measurement,Clinical Observation,SNOMED,Valid,Standard,38
+4303584,388632004,Egg yolk specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,68
+4017504,104504007,alpha-2 Retinol binding protein measurement,Clinical Observation,SNOMED,Valid,Standard,37
+4265451,397650007,Exserohilum rostratum specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,36
+37172327,50541000237100,West Nile virus IgM antibody in serum qualitative result,Clinical Observation,SNOMED,Valid,Standard,38
+4004859,121274001,Insulin-like growth factor binding protein 1 measurement,Clinical Observation,SNOMED,Valid,Standard,42
+1247073,364061000119103,Presence of Streptococcus agalactiae in genital system by organism specific culture,Clinical Observation,SNOMED,Valid,Standard,34
+37175061,1263601000,Metastatic scirrhous carcinoma to breast,Clinical Observation,SNOMED,Valid,Standard,34
+4036376,117781000,Coxsackievirus A16 antibody assay,Clinical Observation,SNOMED,Valid,Standard,34
+4040202,117780004,Measurement of Human coxsackievirus A 10 antibody,Clinical Observation,SNOMED,Valid,Standard,34
+4039528,117786005,Measurement of Human coxsackievirus A 9 antibody,Clinical Observation,SNOMED,Valid,Standard,34
+4039000,117785009,Measurement of Human coxsackievirus A 7 antibody,Clinical Observation,SNOMED,Valid,Standard,34
+4038999,117784008,Measurement of Human coxsackievirus A 4 antibody,Clinical Observation,SNOMED,Valid,Standard,34
+4264354,4475004,Cyanide measurement,Clinical Observation,SNOMED,Valid,Standard,35
+4040203,117782007,Measurement of Human coxsackievirus A 2 antibody,Clinical Observation,SNOMED,Valid,Standard,34
+4150378,31140003,Nortryptyline measurement,Clinical Observation,SNOMED,Valid,Standard,34
+4019541,104581001,Chenodeoxycholic acid measurement,Clinical Observation,SNOMED,Valid,Standard,33
+4309896,388587009,Coconut specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,65
+4311058,392305005,Mugwort specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,44
+4246450,94217008,Metastatic malignant neoplasm to bone marrow,Clinical Observation,SNOMED,Valid,Standard,31
+4297974,76803000,"Organic acid screen, qualitative",Clinical Observation,SNOMED,Valid,Standard,31
+4193431,312465000,Urine dihydrocodeine measurement,Clinical Observation,SNOMED,Valid,Standard,35
+4230514,359843007,Oxalate measurement,Clinical Observation,SNOMED,Valid,Standard,31
+4166553,416399002,Procollagen type I amino-terminal propeptide level,Clinical Observation,SNOMED,Valid,Standard,30
+4045500,122137005,Measurement of Trypanosoma cruzi antibody,Clinical Observation,SNOMED,Valid,Standard,29
+4047943,12319000,Mexiletine measurement,Clinical Observation,SNOMED,Valid,Standard,29
+4014635,104284005,Measurement of Francisella tularensis antibody,Clinical Observation,SNOMED,Valid,Standard,29
+37171077,31541000237108,Setomelanomma rostrata (Helminthosporium halodes) specific IgE antibody arbitrary concentration in serum,Clinical Observation,SNOMED,Valid,Standard,29
+4191008,392314000,Lamb's quarters specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,54
+37173420,60641000237108,West Nile virus RNA nucleic acid amplification qualitative result,Clinical Observation,SNOMED,Valid,Standard,28
+4303693,388681002,Tomato specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,43
+4258008,440187001,Measurement of phenobarbital in urine,Clinical Observation,SNOMED,Valid,Standard,28
+4303717,388802009,House dust (Greer Labs) specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,48
+4265461,61241003,Phytanate measurement,Clinical Observation,SNOMED,Valid,Standard,27
+4232703,440090009,Measurement of pregnancy associated plasma protein A concentration,Clinical Observation,SNOMED,Valid,Standard,27
+4188887,392483004,Candida albicans specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,50
+37168935,12911000237103,11-nor-9-carboxy-tetrahydrocannabinol cannabis metabolite mass concentration in urine,Clinical Observation,SNOMED,Valid,Standard,29
+4005520,121841005,Pristanate measurement,Clinical Observation,SNOMED,Valid,Standard,26
+4213410,392335003,Plantain (English) specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,47
+4304771,388566004,Casein specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,51
+44810924,871481000000104,Behenic acid measurement,Clinical Observation,SNOMED,Valid,Standard,26
+4303700,388704002,Oyster specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,47
+4046245,122395005,Yeast culture,Clinical Observation,SNOMED,Valid,Standard,24
+4214132,392303003,Giant ragweed specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,45
+4312290,94246001,Metastatic malignant neoplasm to cerebral meninges,Clinical Observation,SNOMED,Valid,Standard,23
+4004383,121389007,N-Desalkylflurazepam measurement,Clinical Observation,SNOMED,Valid,Standard,27
+4047938,123023008,Hydroxyalprazolam measurement,Clinical Observation,SNOMED,Valid,Standard,23
+4213302,392293009,Cultivated rye (pollen) specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,23
+4260774,412841008,Blood coproporphyrin measurement,Clinical Observation,SNOMED,Valid,Standard,23
+4188888,392487003,Epicoccum purpurascens specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,40
+4216050,81341007,"Cadmium measurement, urine",Clinical Observation,SNOMED,Valid,Standard,43
+4213402,392294003,Johnson grass specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,36
+4188768,392475005,Latex specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,41
+4189062,388724003,Pine nut specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,42
+4287647,397605005,Urine N-telopeptide cross links measurement,Clinical Observation,SNOMED,Valid,Standard,22
+44810215,896631000000103,Qualitative detection test for tramadol in urine specimen,Clinical Observation,SNOMED,Valid,Standard,22
+4096228,250592002,Ethosuximide blood measurement,Clinical Observation,SNOMED,Valid,Standard,20
+4150619,271254009,Measurement of homovanillic acid in urine,Clinical Observation,SNOMED,Valid,Standard,21
+4305110,118037000,Herpes simplex virus 2 antigen assay,Clinical Observation,SNOMED,Valid,Standard,20
+4019671,105173000,Ephedrine measurement,Clinical Observation,SNOMED,Valid,Standard,19
+37170236,24931000237105,Brucella spp IgM antibody arbitrary concentration in serum,Clinical Observation,SNOMED,Valid,Standard,19
+4047167,122254005,Chlamydia trachomatis culture,Clinical Observation,SNOMED,Valid,Standard,19
+37155903,39011000237100,Bordetella pertussis IgG antibody arbitrary concentration in serum,Clinical Observation,SNOMED,Valid,Standard,22
+4190997,392277000,Meadow fescue specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,36
+4252098,73638008,11-deoxycortisol measurement,Clinical Observation,SNOMED,Valid,Standard,19
+4304967,118036009,Herpes simplex virus 1 antigen assay,Clinical Observation,SNOMED,Valid,Standard,19
+44789246,200121000000101,Pregabalin level,Clinical Observation,SNOMED,Valid,Standard,18
+4313992,86228006,Uric acid measurement,Clinical Observation,SNOMED,Valid,Standard,18
+4006037,121686006,Sulfamethoxazole measurement,Clinical Observation,SNOMED,Valid,Standard,18
+4295874,76586001,Arachidonate measurement,Clinical Observation,SNOMED,Valid,Standard,18
+4306224,388728000,Pea specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,33
+4007164,121505002,Cocaethylene measurement,Clinical Observation,SNOMED,Valid,Standard,27
+4191128,392516004,Sunflower seed specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,34
+37172444,51721000237107,Candida albicans IgG antibody in serum qualitative result,Clinical Observation,SNOMED,Valid,Standard,17
+4213562,392546001,American cockroach specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,30
+4304792,388644001,Strawberry specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,29
+4006534,121606009,Inorganic arsenic measurement,Clinical Observation,SNOMED,Valid,Standard,19
+4221099,399784008,Candida albicans specific IgG antibody measurement,Clinical Observation,SNOMED,Valid,Standard,17
+4190001,388651005,Gluten specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,32
+4215159,81171006,Secobarbital measurement,Clinical Observation,SNOMED,Valid,Standard,24
+4288159,69652002,Amitriptyline measurement,Clinical Observation,SNOMED,Valid,Standard,24
+4231524,439392003,Measurement of amobarbital in urine,Clinical Observation,SNOMED,Valid,Standard,16
+4303701,388706000,Ovomucoid specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,29
+37170564,2791000237109,LKM 1 (liver-kidney microsomal 1) antibody arbitrary concentration in serum,Clinical Observation,SNOMED,Valid,Standard,16
+40484575,444007008,Quantitative measurement of glucose in synovial fluid specimen,Clinical Observation,SNOMED,Valid,Standard,16
+4189893,388630007,Egg (yolk and white) specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,30
+4309873,388510004,Oat specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,30
+4191121,392482009,Aureobasidium pullulans specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,30
+4303698,388699005,Trout specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,18
+4040993,16572002,Butalbital measurement,Clinical Observation,SNOMED,Valid,Standard,22
+4007965,122078009,Measurement of Rabies virus antibody,Clinical Observation,SNOMED,Valid,Standard,23
+4198737,313668003,Urine vitamin C measurement,Clinical Observation,SNOMED,Valid,Standard,15
+4311176,392339009,Goldenrod specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,26
+37172343,50711000237106,Varicella zoster virus IgM antibody in serum qualitative result,Clinical Observation,SNOMED,Valid,Standard,14
+4040208,117807005,Measurement of Human echovirus antibody,Clinical Observation,SNOMED,Valid,Standard,14
+4219437,399768007,Aspergillus fumigatus specific IgG antibody measurement,Clinical Observation,SNOMED,Valid,Standard,14
+4295860,76530001,Phosphatidylglycerol measurement,Clinical Observation,SNOMED,Valid,Standard,14
+4189878,388585001,Orange specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,26
+4304793,388647008,Chicken meat specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,23
+4039386,117697001,Octadecanoate measurement,Clinical Observation,SNOMED,Valid,Standard,13
+4214342,392490009,Mucor racemosus specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,24
+4214860,392552000,Potato specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,22
+4017632,104607005,11-deoxycorticosterone measurement,Clinical Observation,SNOMED,Valid,Standard,13
+4184156,55949003,Methaqualone measurement,Clinical Observation,SNOMED,Valid,Standard,13
+4189079,388767006,Pork specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,25
+4191124,392494000,Rhizopus nigricans specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,24
+4214247,392432004,Mouse epithelium specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,24
+4129218,12652004,"Zinc measurement, urine",Clinical Observation,SNOMED,Valid,Standard,12
+4022499,105278002,Oxycodone measurement,Clinical Observation,SNOMED,Valid,Standard,23
+4022981,105207008,Hydromorphone measurement,Clinical Observation,SNOMED,Valid,Standard,21
+4022980,105206004,Hydrocodone measurement,Clinical Observation,SNOMED,Valid,Standard,22
+4310908,388476003,Penicilloyl G specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,22
+4306216,388693006,Banana specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,22
+37172484,52131000237103,Aspergillus galactomannan antigen in bronchoalveolar lavage qualitative result,Clinical Observation,SNOMED,Valid,Standard,11
+37170502,27451000237103,Curvularia lunata specific IgE antibody arbitrary concentration in serum,Clinical Observation,SNOMED,Valid,Standard,11
+4018342,104773004,Lactoferrin measurement,Clinical Observation,SNOMED,Valid,Standard,16
+4306214,388685006,Apple specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,20
+4189864,388525004,Beef specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,21
+4014748,104356003,Complement C4a measurement,Clinical Observation,SNOMED,Valid,Standard,11
+4019548,104597006,Chylomicrons measurement,Clinical Observation,SNOMED,Valid,Standard,20
+4181914,54540001,Meperidine measurement,Clinical Observation,SNOMED,Valid,Standard,16
+4213298,392283002,Bahia grass specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,12
+4214341,392488008,Fusarium moniliforme specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,11
+4331302,22644003,Low density lipoprotein measurement,Clinical Observation,SNOMED,Valid,Standard,21
+4188922,388655001,Halibut specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,20
+4303699,388703008,Rice specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,20
+4006186,121775004,Eicosanoate measurement,Clinical Observation,SNOMED,Valid,Standard,10
+4017634,104616009,Cryofibrinogen measurement,Clinical Observation,SNOMED,Valid,Standard,10
+4021004,104804001,Meat fibers measurement,Clinical Observation,SNOMED,Valid,Standard,10
+4018331,104734004,Homocystine measurement,Clinical Observation,SNOMED,Valid,Standard,10
+4189073,388754008,Rye specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,19
+4018171,104532003,Apolipoproteins C measurement,Clinical Observation,SNOMED,Valid,Standard,10
+4017915,104279004,Measurement of Brucella species antibody,Clinical Observation,SNOMED,Valid,Standard,9
+4269563,36478006,"Acetylcholinesterase measurement, amniotic fluid",Clinical Observation,SNOMED,Valid,Standard,9
+4019675,105193008,Flunitrazepam measurement,Clinical Observation,SNOMED,Valid,Standard,9
+4213442,392460002,Yellow jacket venom specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,14
+4243613,37999005,Caffeine measurement,Clinical Observation,SNOMED,Valid,Standard,9
+4309868,388494009,Pineapple specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,17
+4213441,392455001,Honey bee venom specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,16
+4045167,122065009,Measurement of Human parainfluenza virus 1 antibody,Clinical Observation,SNOMED,Valid,Standard,9
+4091442,252254007,Tolbutamide tolerance test,Clinical Observation,SNOMED,Valid,Standard,15
+4017342,104932009,Sialate measurement,Clinical Observation,SNOMED,Valid,Standard,9
+4040044,117659001,Norflunitrazepam measurement,Clinical Observation,SNOMED,Valid,Standard,9
+4020255,105124009,Chlorpropamide measurement,Clinical Observation,SNOMED,Valid,Standard,15
+4020420,105342009,Tolazamide measurement,Clinical Observation,SNOMED,Valid,Standard,15
+4047030,122067001,Measurement of Human parainfluenza virus 3 antibody,Clinical Observation,SNOMED,Valid,Standard,9
+4311201,392427000,Guinea pig epithelium specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,17
+37172269,50011000237109,West Nile virus IgG antibody in serum qualitative result,Clinical Observation,SNOMED,Valid,Standard,12
+4020969,105201009,Glyburide measurement,Clinical Observation,SNOMED,Valid,Standard,15
+4141880,33959006,"Manganese measurement, urine",Clinical Observation,SNOMED,Valid,Standard,9
+4008117,121756009,Collagen crosslinked N-telopeptide measurement,Clinical Observation,SNOMED,Valid,Standard,9
+4014777,104447005,17-Hydroxypregnenolone measurement,Clinical Observation,SNOMED,Valid,Standard,17
+4019677,105200005,Glipizide measurement,Clinical Observation,SNOMED,Valid,Standard,15
+4046960,122066005,Measurement of Human parainfluenza virus 2 antibody,Clinical Observation,SNOMED,Valid,Standard,9
+4304774,388577005,Chick pea specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,16
+4306220,388714006,Avocado specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,16
+4214133,392304009,Wormwood specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,16
+4193621,78949001,Viscosity,Clinical Observation,SNOMED,Valid,Standard,8
+37172336,50651000237103,Human papilloma virus DNA nucleic acid amplification qualitative result,Clinical Observation,SNOMED,Valid,Standard,8
+4303696,388696003,Blue mussel specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,10
+4143758,33470005,Flucytosine measurement,Clinical Observation,SNOMED,Valid,Standard,8
+4210758,56919009,Butabarbital measurement,Clinical Observation,SNOMED,Valid,Standard,11
+4191117,392458004,Paper wasp venom specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,15
+4303706,388733001,Peach specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,15
+4017473,105066007,Amobarbital measurement,Clinical Observation,SNOMED,Valid,Standard,8
+4107047,29802007,Titanium measurement,Clinical Observation,SNOMED,Valid,Standard,8
+4189049,388683004,Mackerel specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,14
+4191116,392456000,Yellow hornet venom specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,13
+4191110,392429002,Horse dander specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,15
+4012481,113085002,Desipramine measurement,Clinical Observation,SNOMED,Valid,Standard,8
+4302232,388571006,"Cheese, cheddar type specific IgE antibody measurement",Clinical Observation,SNOMED,Valid,Standard,14
+4303711,388787007,Pacific squid specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,14
+4191123,392489000,Phoma betae specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,14
+44789223,194871000000100,Macroprolactin measurement,Clinical Observation,SNOMED,Valid,Standard,7
+44806308,791351000000105,Porphobilinogen deaminase measurement,Clinical Observation,SNOMED,Valid,Standard,7
+4191020,392355002,Hazel (pollen) specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,11
+4191015,392343008,Cocklebur specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,12
+4189058,388710002,Poppy seed specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,9
+4191109,392428005,Hamster epithelium specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,12
+4188928,388674009,Lentil specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,12
+4219435,399764009,Cladosporium herbarum specific IgG antibody measurement,Clinical Observation,SNOMED,Valid,Standard,6
+37173670,64401000237100,Brucella spp IgM antibody in serum qualitative result,Clinical Observation,SNOMED,Valid,Standard,6
+37173690,65041000237107,Brucella spp IgG antibody in serum qualitative result,Clinical Observation,SNOMED,Valid,Standard,6
+4190692,38929004,Thyroxine binding globulin measurement,Clinical Observation,SNOMED,Valid,Standard,6
+4023009,105328001,Streptomycin measurement,Clinical Observation,SNOMED,Valid,Standard,6
+4218297,72234007,Doxepin measurement,Clinical Observation,SNOMED,Valid,Standard,6
+4311200,392425008,Goose feathers specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,11
+4190011,388688008,Turkey meat specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,9
+4189084,388800001,Alpha-lactalbumin specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,10
+4214332,392457009,White faced hornet venom specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,11
+4020844,105155003,Dextromethorphan measurement,Clinical Observation,SNOMED,Valid,Standard,6
+4022840,105149008,Cycloserine measurement,Clinical Observation,SNOMED,Valid,Standard,6
+4022365,105213004,Imipramine measurement,Clinical Observation,SNOMED,Valid,Standard,6
+4019575,105122008,Chlorpheniramine measurement,Clinical Observation,SNOMED,Valid,Standard,5
+4211691,57173006,"Acetaminophen measurement, urine",Clinical Observation,SNOMED,Valid,Standard,9
+4309883,388540002,Mustard specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,10
+4302113,388489009,Garlic specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,10
+4189085,388801002,Beta-lactoglobulin specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,5
+44791892,303021000000101,Pumpkin (seed) RAST test,Clinical Observation,SNOMED,Valid,Standard,5
+40385468,190146004,[X]Secondary malignant neoplasm of other and unspecified digestive organs,Clinical Observation,SNOMED,Valid,Standard,5
+37171936,43171000237109,Chlamydia trachomatis IgM antibody arbitrary concentration in serum,Clinical Observation,SNOMED,Valid,Standard,5
+37169786,17251000237109,Toxocara spp antibody arbitrary concentration in serum,Clinical Observation,SNOMED,Valid,Standard,5
+4164629,399848008,Alternaria alternata specific IgG antibody measurement,Clinical Observation,SNOMED,Valid,Standard,5
+4262244,46057001,Flurazepam measurement,Clinical Observation,SNOMED,Valid,Standard,5
+4311049,392270003,False oat grass specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,5
+4019460,104558003,Biotin measurement,Clinical Observation,SNOMED,Valid,Standard,5
+37170637,28591000237106,Mannose binding lectin mass concentration in serum,Clinical Observation,SNOMED,Valid,Standard,5
+4311202,392440005,Rabbit epithelium specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,9
+4023132,105354009,Vanadium measurement,Clinical Observation,SNOMED,Valid,Standard,5
+4039546,117858007,Measurement of Human poliovirus 2 antibody,Clinical Observation,SNOMED,Valid,Standard,5
+37170462,27081000237101,Pumpkin seed specific IgE antibody arbitrary concentration in serum,Clinical Observation,SNOMED,Valid,Standard,5
+4019816,105350000,Trimethoprim measurement,Clinical Observation,SNOMED,Valid,Standard,5
+4211328,413484007,Alpha carotene level,Clinical Observation,SNOMED,Valid,Standard,5
+4234303,439207000,Measurement of carisoprodol in urine,Clinical Observation,SNOMED,Valid,Standard,5
+4135433,412850005,Urine ketamine measurement,Clinical Observation,SNOMED,Valid,Standard,5
+4022516,105347003,Triazolam measurement,Clinical Observation,SNOMED,Valid,Standard,9
+4020104,104948005,Sulfate measurement,Clinical Observation,SNOMED,Valid,Standard,5
+4020131,105049005,Acetohexamide measurement,Clinical Observation,SNOMED,Valid,Standard,5
+4037771,117660006,Norketamine measurement,Clinical Observation,SNOMED,Valid,Standard,5
+4023135,105359004,Zolpidem measurement,Clinical Observation,SNOMED,Valid,Standard,7
+4189065,388735008,Pear specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,8
+4189852,388486002,Mushroom-champignon specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,8
+4311047,392267002,Redtop specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,8
+4190035,388775000,Cocoa specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,8
+4306215,388686007,Mango specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,7
+4213428,392416002,Duck feathers specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,7
+4304957,118003008,Measurement of thyrotropin antibody,Clinical Observation,SNOMED,Valid,Standard,4
+37397951,993911000000103,Whole blood viscosity,Clinical Observation,SNOMED,Valid,Standard,4
+4290896,3735002,Coproporphyrin III measurement,Clinical Observation,SNOMED,Valid,Standard,4
+4258431,439383001,Measurement of nortriptyline in urine,Clinical Observation,SNOMED,Valid,Standard,8
+4136586,412848002,Urine hexaporphyrin measurement,Clinical Observation,SNOMED,Valid,Standard,5
+4191115,392445000,Rat epithelium specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,7
+4337268,87051007,Coproporphyrin I measurement,Clinical Observation,SNOMED,Valid,Standard,4
+4196288,315114007,Diphtheria antibody level,Clinical Observation,SNOMED,Valid,Standard,4
+4019666,105134000,Clomipramine measurement,Clinical Observation,SNOMED,Valid,Standard,6
+4133538,412846003,Urine heptaporphyrin concentration measurement,Clinical Observation,SNOMED,Valid,Standard,5
+4019686,105264003,Nordoxepin measurement,Clinical Observation,SNOMED,Valid,Standard,6
+4133540,412852002,Urine pentaporphyrin concentration measurement,Clinical Observation,SNOMED,Valid,Standard,5
+4152997,271010009,Urine mucopolysaccharide measurement,Clinical Observation,SNOMED,Valid,Standard,4
+4191122,392484005,Cephalosporium acremonium specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,4
+4252867,409689006,"Dengue virus antibody measurement, IgM type",Clinical Observation,SNOMED,Valid,Standard,4
+4309889,388569006,Sweet chestnut specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,7
+37159891,51051000237101,HEV (hepatitis E virus) IgG antibody in serum qualitative result,Clinical Observation,SNOMED,Valid,Standard,4
+4007981,121681001,Risperidone measurement,Clinical Observation,SNOMED,Valid,Standard,4
+37160479,52271000237106,HEV (hepatitis E virus) IgM antibody in serum qualitative result,Clinical Observation,SNOMED,Valid,Standard,4
+4189851,388485003,Kiwi specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,7
+4004858,121272002,Uroporphyrin III measurement,Clinical Observation,SNOMED,Valid,Standard,4
+4004234,121271009,Uroporphyrin I measurement,Clinical Observation,SNOMED,Valid,Standard,4
+4309893,388579008,Cinnamon specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,6
+4309867,388487006,Onion specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,6
+4190003,388658004,Barley specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,6
+44805775,788831000000101,Fibroblast growth factor 23 measurement,Clinical Observation,SNOMED,Valid,Standard,3
+4269756,399800007,Thermoactinomyces vulgaris specific IgG antibody measurement,Clinical Observation,SNOMED,Valid,Standard,4
+37173505,61321000237103,Coccidioides immitis antibody in serum qualitative result,Clinical Observation,SNOMED,Valid,Standard,3
+4020971,105211002,Ibuprofen measurement,Clinical Observation,SNOMED,Valid,Standard,3
+4007321,122030009,Measurement of Legionella pneumophila antibody,Clinical Observation,SNOMED,Valid,Standard,3
+4020264,105157006,Dextropropoxyphene measurement,Clinical Observation,SNOMED,Valid,Standard,3
+4020399,105268000,Norfluoxetine measurement,Clinical Observation,SNOMED,Valid,Standard,5
+4150381,31152005,Uroporphyrin measurement,Clinical Observation,SNOMED,Valid,Standard,3
+4017367,105034002,Xylose measurement,Clinical Observation,SNOMED,Valid,Standard,9
+4004857,121266002,Pentacarboxylporphyrin measurement,Clinical Observation,SNOMED,Valid,Standard,3
+4040366,117889006,Measurement of 21-hydroxylase antibody,Clinical Observation,SNOMED,Valid,Standard,3
+4018327,104723002,Heptacarboxylporphyrin measurement,Clinical Observation,SNOMED,Valid,Standard,3
+4023844,10670006,Oxazepam measurement,Clinical Observation,SNOMED,Valid,Standard,3
+4005051,121267006,Hexacarboxylporphyrin measurement,Clinical Observation,SNOMED,Valid,Standard,3
+4017344,104937003,Insulin-like growth factor-II measurement,Clinical Observation,SNOMED,Valid,Standard,3
+4140240,33264001,Protoporphyrin measurement,Clinical Observation,SNOMED,Valid,Standard,3
+4005211,121596008,Hyaluronate measurement,Clinical Observation,SNOMED,Valid,Standard,3
+4017506,104507000,alpha-Melanocyte stimulating hormone measurement,Clinical Observation,SNOMED,Valid,Standard,3
+4214225,392359008,American beech specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,3
+4193407,391339006,Plasma neurotensin level,Clinical Observation,SNOMED,Valid,Standard,3
+4309902,388607001,Melon specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,4
+4189871,388550001,Chili pepper specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,4
+4191113,392436001,Pigeon feathers specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,4
+4302235,388580006,Watermelon specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,4
+4189889,388620003,Carrot specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,4
+4309894,388582003,Lemon specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,4
+4214241,392410008,Budgerigar feathers specific immunoglobulin E antibody measurement,Clinical Observation,SNOMED,Valid,Standard,4
+4306221,388716008,Green bean specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,4
+4303714,388791002,Blueberry specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,4
+4214345,392495004,Stemphylium botryosum specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,4
+44810770,889111000000107,Adiponectin measurement,Clinical Observation,SNOMED,Valid,Standard,2
+37172326,50531000237107,Chikungunya virus RNA nucleic acid amplification qualitative result,Clinical Observation,SNOMED,Valid,Standard,2
+4004371,121319003,7-Aminoflunitrazepam measurement,Clinical Observation,SNOMED,Valid,Standard,2
+4219126,417193000,Magnesium ammonium phosphate level,Clinical Observation,SNOMED,Valid,Standard,2
+4007015,121408002,Norchlordiazepoxide measurement,Clinical Observation,SNOMED,Valid,Standard,2
+4281076,66809000,"Chlordiazepoxide measurement, blood",Clinical Observation,SNOMED,Valid,Standard,2
+4006502,121483009,Carbon tetrachloride measurement,Clinical Observation,SNOMED,Valid,Standard,2
+4021437,105081001,Benzene measurement,Clinical Observation,SNOMED,Valid,Standard,2
+4006014,121577009,Fluvoxamine measurement,Clinical Observation,SNOMED,Valid,Standard,2
+4006172,121715006,Trichloroethane measurement,Clinical Observation,SNOMED,Valid,Standard,2
+4007188,121603001,Hydroxytriazolam measurement,Clinical Observation,SNOMED,Valid,Standard,2
+4292201,401032009,Urine diazepam level,Clinical Observation,SNOMED,Valid,Standard,2
+4264755,61087000,Protriptyline measurement,Clinical Observation,SNOMED,Valid,Standard,2
+4023008,105321007,Sertraline measurement,Clinical Observation,SNOMED,Valid,Standard,2
+4019699,105305002,Prazepam measurement,Clinical Observation,SNOMED,Valid,Standard,2
+4214229,392373004,Pine specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,2
+4006201,121284000,Tetrachloroethylene measurement,Clinical Observation,SNOMED,Valid,Standard,2
+4234464,439381004,Measurement of doxepin in urine,Clinical Observation,SNOMED,Valid,Standard,2
+4005368,121730002,Venlafaxine measurement,Clinical Observation,SNOMED,Valid,Standard,2
+4288873,69632003,"Chlordiazepoxide measurement, urine",Clinical Observation,SNOMED,Valid,Standard,2
+4005841,121425000,Paroxetine measurement,Clinical Observation,SNOMED,Valid,Standard,2
+4005862,121499003,Chloroform measurement,Clinical Observation,SNOMED,Valid,Standard,2
+4006866,121321008,9-Hydroxyrisperidone measurement,Clinical Observation,SNOMED,Valid,Standard,2
+4005361,121691007,Temazepam measurement,Clinical Observation,SNOMED,Valid,Standard,2
+4006998,121350001,"1,2-Dichlorobenzene measurement",Clinical Observation,SNOMED,Valid,Standard,2
+4139670,425470001,Fluoxetine measurement,Clinical Observation,SNOMED,Valid,Standard,3
+4007000,121352009,"1,3-Dichlorobenzene measurement",Clinical Observation,SNOMED,Valid,Standard,2
+4006687,121716007,Trichloroethylene measurement,Clinical Observation,SNOMED,Valid,Standard,2
+37173684,64801000237103,Aspergillus fumigatus IgG antibody in serum qualitative result,Clinical Observation,SNOMED,Valid,Standard,2
+4292200,401030001,Urine flunitrazepam level,Clinical Observation,SNOMED,Valid,Standard,2
+4016511,103835000,Tissue plasminogen activator assay,Clinical Observation,SNOMED,Valid,Standard,2
+4017494,10447005,Maprotiline measurement,Clinical Observation,SNOMED,Valid,Standard,2
+37170708,29231000237101,Pyruvate molar concentration in CSF,Clinical Observation,SNOMED,Valid,Standard,2
+4045646,122209009,Clostridium difficile culture,Clinical Observation,SNOMED,Valid,Standard,2
+4004860,121283006,Methylene chloride measurement,Clinical Observation,SNOMED,Valid,Standard,2
+4004378,121354005,"1,4-Dichlorobenzene measurement",Clinical Observation,SNOMED,Valid,Standard,2
+4023130,105351001,Trimipramine measurement,Clinical Observation,SNOMED,Valid,Standard,2
+4242527,38204002,Diazepam measurement,Clinical Observation,SNOMED,Valid,Standard,2
+4248253,73189009,Amoxapine measurement,Clinical Observation,SNOMED,Valid,Standard,2
+4104512,29141006,Trazodone measurement,Clinical Observation,SNOMED,Valid,Standard,2
+40485041,444129009,Quantitative measurement of flurazepam in urine specimen,Clinical Observation,SNOMED,Valid,Standard,2
+4006352,121383008,Mitotane measurement,Clinical Observation,SNOMED,Valid,Standard,2
+4020547,104830002,Niacin measurement,Clinical Observation,SNOMED,Valid,Standard,2
+4236395,438832001,Measurement of desipramine in urine,Clinical Observation,SNOMED,Valid,Standard,2
+4152682,269889004,Urine imipramine measurement,Clinical Observation,SNOMED,Valid,Standard,2
+4096080,25104002,Haloperidol measurement,Clinical Observation,SNOMED,Valid,Standard,2
+4260896,412923001,Cerebrospinal fluid Tau protein measurement,Clinical Observation,SNOMED,Valid,Standard,2
+4029112,238012003,Thiopurine methyltransferase deficiency,Clinical Observation,SNOMED,Valid,Standard,2
+37173755,6591000237101,U1 snRNP (uridine 1 small nuclear ribonucleoprotein) antibody arbitrary concentration in serum,Clinical Observation,SNOMED,Valid,Standard,1
+4020397,105259002,Niacinamide measurement,Clinical Observation,SNOMED,Valid,Standard,1
+4017091,104732000,Homocitrulline measurement,Clinical Observation,SNOMED,Valid,Standard,1
+4188895,392532001,Mosquito specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,2
+4136436,412619006,Coffee specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,2
+4306373,388814001,Ascaris specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,2
+4311057,392302008,Western ragweed specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,2
+4189063,388725002,Green pepper specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,2
+4303697,388698002,Common octopus specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,2
+4304777,388589007,Coriander specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,1
+4306365,388794005,Grape specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,2
+4303692,388678007,Linseed specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,2
+4190002,388653008,Goat milk specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,2
+4005673,121964008,Clostridium difficile toxin B assay,Clinical Observation,SNOMED,Valid,Standard,1
+4005664,121924009,Measurement of Aspergillus glaucus antibody,Clinical Observation,SNOMED,Valid,Standard,1
+37151640,1285370002,"Concentration of 1,5-anhydroglucitol",Clinical Observation,SNOMED,Valid,Standard,1
+37172508,52431000237105,HDV (hepatitis D virus) antibody in serum qualitative result,Clinical Observation,SNOMED,Valid,Standard,1
+37172433,51621000237103,Toxocara canis IgG antibody in serum qualitative result,Clinical Observation,SNOMED,Valid,Standard,1
+4006530,121592005,Hexachlorobenzene measurement,Clinical Observation,SNOMED,Valid,Standard,1
+4007990,121712009,trans-Nonachlor measurement,Clinical Observation,SNOMED,Valid,Standard,1
+4047155,122214008,Helicobacter pylori culture,Clinical Observation,SNOMED,Valid,Standard,1
+4297452,77031000,Alpha-galactosidase measurement,Clinical Observation,SNOMED,Valid,Standard,1
+4146228,34448000,Serologic test for respiratory syncytial virus,Clinical Observation,SNOMED,Valid,Standard,1
+37172387,51201000237108,Aspergillus niger IgG antibody in serum qualitative result,Clinical Observation,SNOMED,Valid,Standard,1
+4005208,121581009,Gamma chlordane measurement,Clinical Observation,SNOMED,Valid,Standard,1
+37170394,26491000237106,Botrytis cinerea specific IgE antibody arbitrary concentration in serum,Clinical Observation,SNOMED,Valid,Standard,1
+4007172,121543004,Dieldrin measurement,Clinical Observation,SNOMED,Valid,Standard,1
+4004553,121537001,Dichlorodiphenyltrichloroethane measurement,Clinical Observation,SNOMED,Valid,Standard,1
+4214231,392382005,Goat willow specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,1
+4006199,121279006,gamma-Benzene hexachloride measurement,Clinical Observation,SNOMED,Valid,Standard,1
+4006997,121349001,"1,1-Dichloro-2,2-bis(p-chlorophenyl)ethane measurement",Clinical Observation,SNOMED,Valid,Standard,1
+4017193,104742003,Hydroxylysine measurement,Clinical Observation,SNOMED,Valid,Standard,1
+4017200,104770001,18-Hydroxycorticosterone measurement,Clinical Observation,SNOMED,Valid,Standard,1
+4303586,388638000,Buckwheat specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,1
+4190013,388697007,Basil specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,1
+4138179,425954005,D-lactate measurement,Clinical Observation,SNOMED,Valid,Standard,1
+4324980,71413001,"17-Ketosteroids measurement, fractionation, urine",Clinical Observation,SNOMED,Valid,Standard,1
+4220847,82650003,Quinidine measurement,Clinical Observation,SNOMED,Valid,Standard,1
+40481937,443519003,Measurement of alloisoleucine,Clinical Observation,SNOMED,Valid,Standard,1
+4039535,117805002,Measurement of Human echovirus 7 antibody,Clinical Observation,SNOMED,Valid,Standard,1
+4306370,388809000,House dust mite (Bt) specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,1
+4014902,104530006,Apolipoproteins A measurement,Clinical Observation,SNOMED,Valid,Standard,1
+4017630,104604003,Corticosterone measurement,Clinical Observation,SNOMED,Valid,Standard,1
+4188222,468008,Glutathione measurement,Clinical Observation,SNOMED,Valid,Standard,1
+4040207,117806001,Measurement of Human echovirus 9 antibody,Clinical Observation,SNOMED,Valid,Standard,1
+4004394,121419004,Oxychlordane measurement,Clinical Observation,SNOMED,Valid,Standard,1
+4039532,117795002,Measurement of Human echovirus 11 antibody,Clinical Observation,SNOMED,Valid,Standard,1
+4265864,397585002,Chicken feathers specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,1
+37170778,29821000237104,Yeast specific IgE antibody arbitrary concentration in serum,Clinical Observation,SNOMED,Valid,Standard,1
+4293720,401093002,Haemophilus influenzae type b IgG measurement,Clinical Observation,SNOMED,Valid,Standard,1
+4005350,121639007,Methoxychlor measurement,Clinical Observation,SNOMED,Valid,Standard,1
+37155567,25431000237102,Cow whey specific IgE antibody arbitrary concentration in serum,Clinical Observation,SNOMED,Valid,Standard,1
+4189076,388761007,Eggplant specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,1
+4004552,121536005,Dichlorodiphenyldichloroethylene measurement,Clinical Observation,SNOMED,Valid,Standard,1
+4190025,388731004,Cherry specific IgE antibody measurement,Clinical Observation,SNOMED,Valid,Standard,1
+4039293,16391003,"Cystine measurement, quantitative",Clinical Observation,SNOMED,Valid,Standard,1
+4253532,74817006,"Aluminum measurement, urine",Clinical Observation,SNOMED,Valid,Standard,2
+4106906,29849006,Warfarin measurement,Clinical Observation,SNOMED,Valid,Standard,1
+4007184,121590002,Heptachlor measurement,Clinical Observation,SNOMED,Valid,Standard,1
+4039006,117801006,Measurement of Human echovirus 30 antibody,Clinical Observation,SNOMED,Valid,Standard,1
+37173326,58921000237101,Aspergillus flavus IgG antibody in serum qualitative result,Clinical Observation,SNOMED,Valid,Standard,1
+4007185,121591003,Heptachlorepoxide measurement,Clinical Observation,SNOMED,Valid,Standard,1
