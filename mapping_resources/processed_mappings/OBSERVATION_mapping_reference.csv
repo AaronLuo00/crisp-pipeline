@@ -191,3 +191,75 @@ original_concept_id,original_code,original_name,original_vocab,snomed_concept_id
 903660,OMOP5181841,Moderate cigarette smoker (10-19 cigarettes per day),OMOP Extension,40298660,,Moderate cigarette smoker (10-19 cigs/day),SNOMED,Maps to,20
 903663,OMOP5181845,Pipe smoker,OMOP Extension,40298674,,Pipe smoker,SNOMED,Maps to,12
 903653,OMOP5181834,Never used tobacco or its derivatives,OMOP Extension,45765920,,Never used tobacco,SNOMED,Maps to,3
+19392130,D008892,Milk,MeSH,4323432,,Milk,SNOMED,Exact name match,99
+19395127,D015363,Quinolones,MeSH,40459042,,Quinolones,SNOMED,Exact name match,46
+19416298,C010882,chlorhexidine gluconate,MeSH,4032059,,Chlorhexidine gluconate,SNOMED,Exact name match,40
+19394455,D013754,Tetracyclines,MeSH,40534548,,Tetracyclines,SNOMED,Exact name match,36
+19424598,C040738,cefuroxime axetil,MeSH,4232770,,Cefuroxime axetil,SNOMED,Exact name match,29
+19473919,D000068718,Rosuvastatin Calcium,MeSH,4227704,,Rosuvastatin calcium,SNOMED,Exact name match,25
+19390742,D005737,Garlic,MeSH,42536289,,Garlic,SNOMED,Exact name match,18
+45618199,D014635,Valproic Acid,MeSH,4305262,,Valproic acid,SNOMED,Exact name match,17
+19389257,D002611,Cheese,MeSH,4008485,,Cheese,SNOMED,Exact name match,15
+19391194,D006722,Honey,MeSH,4028010,,Honey,SNOMED,Exact name match,15
+19299161,C433085,ragweed pollen,MeSH,4103592,,Ragweed pollen,SNOMED,Exact name match,14
+45617153,D019818,Clavulanic Acid,MeSH,4193945,,Clavulanic acid,SNOMED,Exact name match,12
+19390184,D004529,Egg White,MeSH,4103922,,Egg white,SNOMED,Exact name match,11
+19473999,D000069447,Tiotropium Bromide,MeSH,4140913,,Tiotropium bromide,SNOMED,Exact name match,10
+19394965,D014935,Wool,MeSH,4135901,,Wool,SNOMED,Exact name match,9
+19411869,C000711671,enoxaparin sodium,MeSH,4031593,,Enoxaparin sodium,SNOMED,Exact name match,7
+19393994,D012758,Shellfish,MeSH,4183412,,Shellfish,SNOMED,Exact name match,7
+19475097,D013743,Tetanus Antitoxin,MeSH,4145859,,Tetanus antitoxin,SNOMED,Exact name match,7
+19438559,C084813,propoxyphene napsylate,MeSH,4134525,,Propoxyphene napsylate,SNOMED,Exact name match,6
+19438468,C084582,clemizole,MeSH,4134581,,Clemizole,SNOMED,Exact name match,6
+19415042,C007084,clindamycin phosphate,MeSH,4293596,,Clindamycin phosphate,SNOMED,Exact name match,6
+19475897,D061267,Insulin Aspart,MeSH,4139431,,Insulin aspart,SNOMED,Exact name match,6
+19390185,D004530,Egg Yolk,MeSH,4103921,,Egg yolk,SNOMED,Exact name match,5
+19386333,D000067796,Whey,MeSH,4025779,,Whey,SNOMED,Exact name match,5
+19474536,D005446,Fluocinolone Acetonide,MeSH,4217134,,Fluocinolone acetonide,SNOMED,Exact name match,4
+19390406,D005052,Eucalyptus,MeSH,4137928,,Eucalyptus,SNOMED,Exact name match,4
+19389491,D003069,Coffee,MeSH,4162308,,Coffee,SNOMED,Exact name match,4
+19388295,D000504,Aloe,MeSH,4038914,,Aloe,SNOMED,Exact name match,4
+19473981,D000068557,Olmesartan Medoxomil,MeSH,4136021,,Olmesartan medoxomil,SNOMED,Exact name match,3
+19415972,C009935,prednisolone acetate,MeSH,4320367,,Prednisolone acetate,SNOMED,Exact name match,3
+19473980,D000068438,Brimonidine Tartrate,MeSH,40280082,,Brimonidine tartrate,SNOMED,Exact name match,3
+19399119,D035264,Flowers,MeSH,4042227,,Flowers,SNOMED,Exact name match,3
+19473983,D000068677,Sildenafil Citrate,MeSH,4032406,,Sildenafil citrate,SNOMED,Exact name match,3
+45614260,D006024,Glycopyrrolate,MeSH,4304294,,Glycopyrrolate,SNOMED,Exact name match,3
+19473995,D000069348,Quetiapine Fumarate,MeSH,4029048,,Quetiapine fumarate,SNOMED,Exact name match,3
+19475527,D020160,Sodium Benzoate,MeSH,4053618,,Sodium benzoate,SNOMED,Exact name match,3
+19393250,D011200,Poultry,MeSH,4151383,,Poultry,SNOMED,Exact name match,2
+19395004,D015014,Yogurt,MeSH,4026735,,Yogurt,SNOMED,Exact name match,2
+979843,C000614965,Iodine-131,MeSH,4028983,,Iodine-131,SNOMED,Exact name match,2
+19473991,D000068900,Sitagliptin Phosphate,MeSH,4137858,,Sitagliptin phosphate,SNOMED,Exact name match,2
+19432081,C062843,carboprost tromethamine,MeSH,4032093,,Carboprost tromethamine,SNOMED,Exact name match,2
+19474490,D004659,Enbucrilate,MeSH,4237636,,Enbucrilate,SNOMED,Exact name match,2
+19475652,D047011,Silk,MeSH,4259065,,Silk,SNOMED,Exact name match,2
+45614535,D013011,Sorbic Acid,MeSH,4154902,,Sorbic acid,SNOMED,Exact name match,2
+45615928,D019817,Benzoic Acid,MeSH,40351141,,Benzoic acid,SNOMED,Exact name match,2
+19436583,C077793,candesartan cilexetil,MeSH,4297532,,Candesartan cilexetil,SNOMED,Exact name match,2
+19416497,C011462,erythromycin stearate,MeSH,4309115,,Erythromycin stearate,SNOMED,Exact name match,1
+19428875,C053267,cefpodoxime proxetil,MeSH,4320182,,Cefpodoxime proxetil,SNOMED,Exact name match,1
+19420916,C029424,hydrazine,MeSH,4146805,,Hydrazine,SNOMED,Exact name match,1
+19420359,C027556,histamine phosphate,MeSH,4309858,,Histamine phosphate,SNOMED,Exact name match,1
+19418212,C017610,fluphenazine enanthate,MeSH,4006822,,Fluphenazine enanthate,SNOMED,Exact name match,1
+19417969,C016713,quinidine gluconate,MeSH,4300855,,Quinidine gluconate,SNOMED,Exact name match,1
+19392873,D010405,Penicillinase,MeSH,4234582,,Penicillinase,SNOMED,Exact name match,1
+19414564,C005900,triamcinolone hexacetonide,MeSH,4134531,,Triamcinolone hexacetonide,SNOMED,Exact name match,1
+19414225,C004648,testosterone enanthate,MeSH,4023390,,Testosterone enanthate,SNOMED,Exact name match,1
+19408202,C000615114,Thallium-201,MeSH,4247145,,Thallium-201,SNOMED,Exact name match,1
+19460486,C473384,lumiracoxib,MeSH,4322104,,Lumiracoxib,SNOMED,Exact name match,1
+19430293,C057710,cefditoren pivoxil,MeSH,4156401,,Cefditoren pivoxil,SNOMED,Exact name match,1
+19474686,D007372,Interferons,MeSH,40526755,,Interferons,SNOMED,Exact name match,1
+19465798,C542859,aclidinium bromide,MeSH,45766700,,Aclidinium bromide,SNOMED,Exact name match,1
+19473982,D000068656,Mometasone Furoate,MeSH,4193809,,Mometasone furoate,SNOMED,Exact name match,1
+46256318,D010931,Plague Vaccine,MeSH,4043015,,Plague vaccine,SNOMED,Exact name match,1
+45616692,D007778,Lactobacillus,MeSH,4185121,,Lactobacillus,SNOMED,Exact name match,1
+45615506,D006820,Hyaluronic Acid,MeSH,4243930,,Hyaluronic acid,SNOMED,Exact name match,1
+45613079,D007485,Ioxaglic Acid,MeSH,35625974,,Ioxaglic acid,SNOMED,Exact name match,1
+45610500,D004205,Cromolyn Sodium,MeSH,4298924,,Cromolyn sodium,SNOMED,Exact name match,1
+19474803,D009268,Nalidixic Acid,MeSH,4299023,,Nalidixic acid,SNOMED,Exact name match,1
+19474551,D005680,gamma-Aminobutyric Acid,MeSH,4123523,,Gamma-aminobutyric acid,SNOMED,Exact name match,1
+19474061,D000077557,Ibandronic Acid,MeSH,4225166,,Ibandronic acid,SNOMED,Exact name match,1
+19474003,D000069468,Desvenlafaxine Succinate,MeSH,4198916,,Desvenlafaxine succinate,SNOMED,Exact name match,1
+19473998,D000069446,Atazanavir Sulfate,MeSH,40577337,,Atazanavir sulfate,SNOMED,Exact name match,1
+19473984,D000068717,Glatiramer Acetate,MeSH,4032572,,Glatiramer acetate,SNOMED,Exact name match,1

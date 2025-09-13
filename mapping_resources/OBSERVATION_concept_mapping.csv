@@ -1574,7 +1574,7 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4128602,260154005,Dog dander,Substance,SNOMED,Valid,Standard,200
 40775767,LP13938-3,Dog dander,LOINC Component,LOINC,Valid,Non-standard,100
 440607,218099004,Accident caused by explosive material,Event,SNOMED,Valid,Standard,99
-4323432,70813002,Milk,Substance,SNOMED,Valid,Standard,99
+4323432,70813002,Milk,Substance,SNOMED,Valid,Standard,198
 4204929,309012006,Referral statuses,Clinical Finding,SNOMED,Valid,Standard,99
 4129922,261665006,Unknown,Qualifier Value,SNOMED,Valid,Standard,99
 4106207,282017000,3 part fracture,Morph Abnormality,SNOMED,Valid,Standard,99
@@ -1584,7 +1584,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 35816881,744-1140873020,cefaclor,Value,UK Biobank,Valid,Non-standard,99
 35816880,4-1140873020,cefaclor,Value,UK Biobank,Valid,Non-standard,99
 35627124,0565c7d0-1d08-409e-b297-ce72efdcc2fc,"Retired SNOMED UK Drug extension concept, do not use, use concept indicated by the CONCEPT_RELATIONSHIP table, if any",Qualifier Value,SNOMED,Valid,Non-standard,99
-19392130,D008892,Milk,Main Heading,MeSH,Valid,Non-standard,99
 1031783,LP7431-2,Milk,LOINC System,LOINC,Valid,Non-standard,99
 763007,434861000124105,Family history of endometriosis,Context-dependent,SNOMED,Valid,Standard,98
 44782749,134571000119103,Family disruption due to extended absence of family member,Clinical Finding,SNOMED,Valid,Standard,98
@@ -2096,7 +2095,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4059498,160770002,Social worker involved,Clinical Finding,SNOMED,Valid,Standard,46
 35823567,4-1140867878,sertraline,Value,UK Biobank,Valid,Non-standard,46
 35821800,4-1140865634,omeprazole,Value,UK Biobank,Valid,Non-standard,46
-19395127,D015363,Quinolones,Main Heading,MeSH,Valid,Non-standard,46
 765839,432761000124108,Medication dose increased,Context-dependent,SNOMED,Valid,Standard,45
 618895,878899005,Inadequate intake of plant fiber,Clinical Finding,SNOMED,Valid,Standard,45
 601856,471811000124106,Allergy to empagliflozin,Clinical Finding,SNOMED,Valid,Non-standard,45
@@ -2206,7 +2204,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4034133,113727004,Vancomycin resistant Enterococcus,Organism,SNOMED,Valid,Standard,40
 3667030,860604008,Allergy to apple,Clinical Finding,SNOMED,Valid,Non-standard,40
 35820763,4-1140869848,methotrexate,Value,UK Biobank,Valid,Non-standard,40
-19416298,C010882,chlorhexidine gluconate,Suppl Concept,MeSH,Valid,Non-standard,40
 443375,293383005,Vitamin products adverse reaction,Disorder,SNOMED,Valid,Standard,39
 437740,218069008,Accident caused by explosion of pressure vessel,Event,SNOMED,Valid,Standard,39
 436591,217543007,Accident caused directly by controlled fire in private dwelling,Event,SNOMED,Valid,Standard,39
@@ -2271,7 +2268,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 35817286,4-1140883468,clonidine,Value,UK Biobank,Valid,Non-standard,36
 3519001,372805007,Clonidine,Substance,Nebraska Lexicon,Valid,Non-standard,36
 2108631,4110F,"Internal mammary artery graft performed for primary, isolated coronary artery bypass graft procedure (CABG)",CPT4,CPT4,Valid,Non-standard,36
-19394455,D013754,Tetracyclines,Main Heading,MeSH,Valid,Non-standard,36
 765879,449681000124101,Long-term current use of antiplatelet drug,Context-dependent,SNOMED,Valid,Standard,35
 441205,216898000,Foreign object left in body during surgical operation,Event,SNOMED,Valid,Standard,35
 4327724,430808009,Family history of nephrotic syndrome,Context-dependent,SNOMED,Valid,Standard,35
@@ -2442,7 +2438,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 35819892,100690-1,Iron,Answer,UK Biobank,Valid,Standard,29
 35819891,100630-5,Iron,Answer,UK Biobank,Valid,Standard,29
 3318983,372871004,Promethazine,Substance,Nebraska Lexicon,Valid,Non-standard,29
-19424598,C040738,cefuroxime axetil,Suppl Concept,MeSH,Valid,Non-standard,29
 763705,445001000124104,Vaccination delayed,Clinical Finding,SNOMED,Valid,Standard,28
 763397,440301000124106,Below expected growth rate,Clinical Finding,SNOMED,Valid,Standard,28
 46270580,64431000119101,Family history of alpha thalassemia,Context-dependent,SNOMED,Valid,Standard,28
@@ -2577,7 +2572,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 36306828,LP61793-3,tiZANidine,LOINC Component,LOINC,Valid,Non-standard,25
 35824378,4-1141153186,tizanidine,Value,UK Biobank,Valid,Non-standard,25
 35817920,4-1140884488,diclofenac,Value,UK Biobank,Valid,Non-standard,25
-19473919,D000068718,Rosuvastatin Calcium,Main Heading,MeSH,Valid,Non-standard,25
 1619605,LP419914-9,Aspartame,LOINC Component,LOINC,Valid,Non-standard,25
 764374,454161000124103,Medication non-compliance due to cognitive impairment,Clinical Finding,SNOMED,Valid,Standard,24
 761104,14830001000004107,Family history of hyperparathyroidism,Context-dependent,SNOMED,Valid,Standard,24
@@ -2834,7 +2828,7 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 42539369,762492001,Underweight in adolescence,Clinical Finding,SNOMED,Valid,Standard,18
 42539211,16090691000119109,Occupational exposure to dust,Event,SNOMED,Valid,Standard,18
 42537733,737284009,Mandibular implant in situ,Clinical Finding,SNOMED,Valid,Non-standard,18
-42536289,735030001,Garlic,Substance,SNOMED,Valid,Standard,36
+42536289,735030001,Garlic,Substance,SNOMED,Valid,Standard,54
 4253174,407564000,Angiotensin converting enzyme inhibitor not tolerated,Context-dependent,SNOMED,Valid,Standard,18
 4212601,57741007,Fall from bridge,Event,SNOMED,Valid,Standard,18
 4188173,414446006,Ice hockey,Qualifier Value,SNOMED,Valid,Standard,18
@@ -2874,9 +2868,7 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 35627024,b04d3158-8b30-4465-a772-978b877d88b0,"Retired SNOMED UK Drug extension concept, do not use, use concept indicated by the CONCEPT_RELATIONSHIP table, if any",Qualifier Value,SNOMED,Valid,Non-standard,18
 3518949,395814003,Oxaliplatin,Substance,Nebraska Lexicon,Valid,Non-standard,18
 3053809,387413002,Colchicine,Substance,Nebraska Lexicon,Valid,Non-standard,18
-19390742,D005737,Garlic,Main Heading,MeSH,Valid,Non-standard,18
 46273759,709462001,Fetal exposure to alcohol,Context-dependent,SNOMED,Valid,Standard,17
-45618199,D014635,Valproic Acid,Main Heading,MeSH,Valid,Non-standard,17
 44809930,876521000000105,Requires course of tick-borne encephalitis vaccination,Clinical Finding,SNOMED,Valid,Standard,17
 44782770,286261000119105,Bypass stent graft present,Clinical Finding,SNOMED,Valid,Non-standard,17
 442504,213911003,"Fall in, on, or from train",Event,SNOMED,Valid,Standard,17
@@ -3000,8 +2992,8 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4054442,160497005,Fostered,Clinical Finding,SNOMED,Valid,Standard,15
 4051566,160311006,FH: Obesity,Context-dependent,SNOMED,Valid,Standard,15
 4029665,128834007,Chronic neutrophilic leukemia,Morph Abnormality,SNOMED,Valid,Standard,15
-4028010,227598003,Honey,Substance,SNOMED,Valid,Standard,30
-4008485,102264005,Cheese,Substance,SNOMED,Valid,Standard,30
+4028010,227598003,Honey,Substance,SNOMED,Valid,Standard,45
+4008485,102264005,Cheese,Substance,SNOMED,Valid,Standard,45
 37068695,LP101036-4,PACLitaxel,LOINC Component,LOINC,Valid,Non-standard,15
 36713114,32941000119104,Ingestion of toxic substance,Disorder,SNOMED,Valid,Standard,15
 35823461,4-1140910492,scopolamine,Value,UK Biobank,Valid,Non-standard,15
@@ -3012,8 +3004,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 35627108,f021d26f-5288-4b6d-9528-9a45dbe863a6,"Retired SNOMED UK Drug extension concept, do not use, use concept indicated by the CONCEPT_RELATIONSHIP table, if any",Qualifier Value,SNOMED,Valid,Non-standard,15
 35611148,8b706065-1d29-48be-ae29-283399fe2435,"Retired SNOMED UK Drug extension concept, do not use, use concept indicated by the CONCEPT_RELATIONSHIP table, if any",Qualifier Value,SNOMED,Valid,Non-standard,15
 2106771,3250F,Specimen site other than anatomic location of primary tumor (PATH),CPT4,CPT4,Valid,Standard,15
-19391194,D006722,Honey,Main Heading,MeSH,Valid,Non-standard,15
-19389257,D002611,Cheese,Main Heading,MeSH,Valid,Non-standard,15
 1030047,LP7137-5,Cheese,LOINC System,LOINC,Valid,Non-standard,15
 764771,6071000124102,Medication overuse,Clinical Finding,SNOMED,Valid,Standard,14
 764545,456441000124100,Family history of malignant tumor of rectum,Context-dependent,SNOMED,Valid,Standard,14
@@ -3046,7 +3036,7 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4139705,305599003,Under care of podiatrist,Clinical Finding,SNOMED,Valid,Standard,14
 4117507,257729003,Ablation - action,Qualifier Value,SNOMED,Valid,Standard,14
 4113964,285895001,Does use cooking utensils,Clinical Finding,SNOMED,Valid,Standard,14
-4103592,256303006,Ragweed pollen,Substance,SNOMED,Valid,Standard,28
+4103592,256303006,Ragweed pollen,Substance,SNOMED,Valid,Standard,42
 4101557,28054005,Cutaneous T-cell lymphoma,Morph Abnormality,SNOMED,Valid,Non-standard,14
 4096879,293075007,Rifampicin adverse reaction,Disorder,SNOMED,Valid,Standard,14
 4086519,248330001,General growth finding,Clinical Finding,SNOMED,Valid,Standard,14
@@ -3080,7 +3070,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 3518906,386905002,Carboplatin,Substance,Nebraska Lexicon,Valid,Non-standard,14
 3518492,406458000,Memantine,Substance,Nebraska Lexicon,Valid,Non-standard,14
 2618135,H0036,"Community psychiatric supportive treatment, face-to-face, per 15 minutes",HCPCS,HCPCS,Valid,Standard,14
-19299161,C433085,ragweed pollen,Suppl Concept,MeSH,Valid,Non-standard,14
 46274090,64121000119107,Family history of achondroplasia,Context-dependent,SNOMED,Valid,Standard,13
 46273439,94721000119105,Family history of craniosynostosis,Context-dependent,SNOMED,Valid,Standard,13
 45766885,704144000,Maternal history of diabetes mellitus,Context-dependent,SNOMED,Valid,Standard,13
@@ -3155,7 +3144,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 763412,440491000124109,Excessive caffeine intake,Clinical Finding,SNOMED,Valid,Standard,12
 710054,98971,"Nonphysician qualified health care professional online digital assessment and management, for an established patient, for up to 7 days, cumulative time during the 7 days; 11-20 minutes",CPT4,CPT4,Valid,Standard,12
 46270130,143461000119107,Family history of malignant neoplasm of breast in first degree relative less than 50 years of age,Context-dependent,SNOMED,Valid,Standard,12
-45617153,D019818,Clavulanic Acid,Main Heading,MeSH,Valid,Non-standard,12
 44787714,LP14829-3,Nystatin,LOINC Component,LOINC,Valid,Non-standard,12
 44787285,LP171646-5,valACYclovir,LOINC Component,LOINC,Valid,Non-standard,12
 44787280,LP171641-6,Sucralfate,LOINC Component,LOINC,Valid,Non-standard,12
@@ -3269,7 +3257,7 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4145979,427090001,Body mass index less than 16.5,Clinical Finding,SNOMED,Valid,Standard,11
 4145433,34310006,Waterskiing,Qualifier Value,SNOMED,Valid,Standard,11
 4117981,257903006,Repair - action,Qualifier Value,SNOMED,Valid,Standard,11
-4103922,256443002,Egg white,Substance,SNOMED,Valid,Standard,22
+4103922,256443002,Egg white,Substance,SNOMED,Valid,Standard,33
 4103794,256417003,Horse dander,Substance,SNOMED,Valid,Standard,22
 4096931,26496005,Atypical fibrous histiocytoma,Morph Abnormality,SNOMED,Valid,Standard,11
 40795858,LP16276-5,Salicylates,LOINC Component,LOINC,Valid,Non-standard,11
@@ -3319,7 +3307,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 2108688,4177F,Counseling about the benefits and/or risks of the Age-Related Eye Disease Study (AREDS) formulation for preventing progression of age-related macular degeneration (AMD) provided to patient and/or caregiver(s) (EC),CPT4,CPT4,Valid,Standard,11
 201449,91559009,Unilateral traumatic amputation of leg below knee without complication,Context-dependent,SNOMED,Valid,Non-standard,11
 19475026,D012459,Salicylates,Main Heading,MeSH,Valid,Non-standard,11
-19390184,D004529,Egg White,Main Heading,MeSH,Valid,Non-standard,11
 1176519,LP101308-7,Oseltamivir,LOINC Component,LOINC,Valid,Non-standard,11
 1032917,LP75394-4,Pneumococcal vaccine,LOINC Component,LOINC,Valid,Non-standard,11
 764318,453421000124103,Adverse drug interaction with prescription medication,Disorder,SNOMED,Valid,Standard,10
@@ -3403,7 +3390,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 3283295,67079006,Dextrose,Substance,Nebraska Lexicon,Valid,Non-standard,10
 3229455,129497004,Iron sucrose,Substance,Nebraska Lexicon,Valid,Non-standard,10
 3221303,91598004,Benzoyl peroxide,Substance,Nebraska Lexicon,Valid,Non-standard,10
-19473999,D000069447,Tiotropium Bromide,Main Heading,MeSH,Valid,Non-standard,10
 765534,27390001000004106,Family history of malignant tumor of hypopharynx,Context-dependent,SNOMED,Valid,Standard,9
 763736,445381000124106,Nutrition impaired due to imbalance of nutrients,Clinical Finding,SNOMED,Valid,Standard,9
 608189,1156975001,Rhabdomyoma,Morph Abnormality,SNOMED,Valid,Standard,9
@@ -3463,7 +3449,7 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4153198,370890000,Medication administered in error,Event,SNOMED,Valid,Standard,9
 4144278,266944002,Has a prison record,Clinical Finding,SNOMED,Valid,Standard,9
 4136453,412749001,Family history of development disorder,Context-dependent,SNOMED,Valid,Standard,9
-4135901,412161004,Wool,Substance,SNOMED,Valid,Standard,18
+4135901,412161004,Wool,Substance,SNOMED,Valid,Standard,27
 4130722,264579008,Thrombosis,Qualifier Value,SNOMED,Valid,Standard,9
 4125389,260167008,Sesame seed,Substance,SNOMED,Valid,Standard,18
 4125262,288885009,Unable to eat,Clinical Finding,SNOMED,Valid,Standard,9
@@ -3517,7 +3503,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 3253245,373467000,Butorphanol,Substance,Nebraska Lexicon,Valid,Non-standard,9
 2314342,99000,Handling and/or conveyance of specimen for transfer from the office to a laboratory,CPT4,CPT4,Valid,Standard,9
 19474893,D010640,Phenothiazines,Main Heading,MeSH,Valid,Non-standard,9
-19394965,D014935,Wool,Main Heading,MeSH,Valid,Non-standard,9
 1032890,LP7536-8,Red Blood Cells,LOINC System,LOINC,Valid,Non-standard,9
 765465,5261000175106,Hospital inpatient stay within past 30 days,Context-dependent,SNOMED,Valid,Non-standard,8
 765111,3450001000004101,Family history of liver transplantation,Context-dependent,SNOMED,Valid,Non-standard,8
@@ -3687,7 +3672,7 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4204525,55021007,Follicular adenoma,Morph Abnormality,SNOMED,Valid,Standard,7
 4193751,79143006,Mucinous cystadenocarcinoma,Morph Abnormality,SNOMED,Valid,Standard,7
 4187861,373147003,Medication not administered because contraindicated,Context-dependent,SNOMED,Valid,Standard,7
-4183412,54787006,Shellfish,Organism,SNOMED,Valid,Standard,21
+4183412,54787006,Shellfish,Organism,SNOMED,Valid,Standard,28
 4180866,42841002,Zinc oxide,Substance,SNOMED,Valid,Non-standard,7
 4179212,428994006,Family history of malignant neoplasm of biliary tract,Context-dependent,SNOMED,Valid,Standard,7
 4175132,48720009,Shaft,Qualifier Value,SNOMED,Valid,Standard,7
@@ -3776,10 +3761,7 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 3308358,42841002,Zinc oxide,Substance,Nebraska Lexicon,Valid,Non-standard,7
 3170161,386841003,Desflurane,Substance,Nebraska Lexicon,Valid,Non-standard,7
 2514491,99349,"Home or residence visit for the evaluation and management of an established patient, which requires a medically appropriate history and/or examination and moderate level of medical decision making. When using total time on the date of the encounte...",CPT4,CPT4,Valid,Standard,7
-19475097,D013743,Tetanus Antitoxin,Main Heading,MeSH,Valid,Non-standard,7
 19474162,D000617,Aminoglycosides,Main Heading,MeSH,Valid,Non-standard,7
-19411869,C000711671,enoxaparin sodium,Suppl Concept,MeSH,Valid,Non-standard,7
-19393994,D012758,Shellfish,Main Heading,MeSH,Valid,Non-standard,7
 1176920,LP28719-0,Gatifloxacin,LOINC Component,LOINC,Valid,Non-standard,7
 1176876,LP14848-3,Terbinafine,LOINC Component,LOINC,Valid,Non-standard,7
 764743,5780001000004109,Family history of cirrhosis of liver,Context-dependent,SNOMED,Valid,Standard,6
@@ -3960,10 +3942,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 3225764,387145002,Dobutamine,Substance,Nebraska Lexicon,Valid,Non-standard,6
 2617619,G8209,Clinician did not document an order was given to discontinue prophylactic antibiotics within 48 hours of surgical end time (Deprecated),HCPCS,HCPCS,Valid,Standard,6
 21495408,LP201674-1,Glucosamine,LOINC Component,LOINC,Valid,Non-standard,6
-19475897,D061267,Insulin Aspart,Main Heading,MeSH,Valid,Non-standard,6
-19438559,C084813,propoxyphene napsylate,Suppl Concept,MeSH,Valid,Non-standard,6
-19438468,C084582,clemizole,Suppl Concept,MeSH,Valid,Non-standard,6
-19415042,C007084,clindamycin phosphate,Suppl Concept,MeSH,Valid,Non-standard,6
 19394999,D015002,"Yeast, Dried",Main Heading,MeSH,Valid,Non-standard,6
 1176716,LP19441-2,Silver sulfADIAZINE,LOINC Component,LOINC,Valid,Non-standard,6
 765921,16224551000119108,Allergy to hornet venom,Clinical Finding,SNOMED,Valid,Non-standard,5
@@ -4061,7 +4039,7 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4121742,257759008,Fine needle aspiration biopsy - action,Qualifier Value,SNOMED,Valid,Standard,5
 4105753,29696001,Prolapse,Morph Abnormality,SNOMED,Valid,Standard,5
 4105261,281575007,Family social history,Context-dependent,SNOMED,Valid,Standard,5
-4103921,256442007,Egg yolk,Substance,SNOMED,Valid,Standard,10
+4103921,256442007,Egg yolk,Substance,SNOMED,Valid,Standard,15
 4103779,256329006,Spinach,Substance,SNOMED,Valid,Standard,10
 4103602,256354006,Bean,Substance,SNOMED,Valid,Standard,10
 4100554,253081009,Secretory meningioma,Morph Abnormality,SNOMED,Valid,Standard,5
@@ -4112,7 +4090,7 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4030271,128849004,"Serous cystadenoma, borderline malignancy",Morph Abnormality,SNOMED,Valid,Standard,5
 4030223,13687007,Human alphaherpesvirus 2,Organism,SNOMED,Valid,Standard,5
 4028720,128856005,Thymoma,Morph Abnormality,SNOMED,Valid,Non-standard,5
-4025779,226770007,Whey,Substance,SNOMED,Valid,Standard,10
+4025779,226770007,Whey,Substance,SNOMED,Valid,Standard,15
 4020479,116395006,Enterohemorrhagic Escherichia coli,Organism,SNOMED,Valid,Standard,5
 4014020,103678008,Endometriotic cyst,Morph Abnormality,SNOMED,Valid,Standard,5
 4013212,112633009,Surgical wound,Morph Abnormality,SNOMED,Valid,Standard,5
@@ -4166,8 +4144,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 19475676,D049971,Thiazides,Main Heading,MeSH,Valid,Non-standard,5
 19474241,D001463,Barbiturates,Main Heading,MeSH,Valid,Non-standard,5
 19397591,D020939,Zingiber officinale,Main Heading,MeSH,Valid,Non-standard,5
-19390185,D004530,Egg Yolk,Main Heading,MeSH,Valid,Non-standard,5
-19386333,D000067796,Whey,Main Heading,MeSH,Valid,Non-standard,5
 1030105,LP7193-8,Egg yolk,LOINC System,LOINC,Valid,Non-standard,5
 1020155,LP30431-8,Whey,LOINC System,LOINC,Valid,Non-standard,5
 765849,441911000124103,Excessive vitamin intake,Clinical Finding,SNOMED,Valid,Standard,4
@@ -4299,7 +4275,7 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4162901,293454008,Thiazide diuretic adverse reaction,Disorder,SNOMED,Valid,Standard,4
 4162734,371900001,Medication not administered,Context-dependent,SNOMED,Valid,Standard,4
 4162349,434298003,Family history of cholecystectomy,Context-dependent,SNOMED,Valid,Non-standard,4
-4162308,29263009,Coffee,Substance,SNOMED,Valid,Standard,8
+4162308,29263009,Coffee,Substance,SNOMED,Valid,Standard,12
 4148585,269790003,Mechanical asphyxia accident,Event,SNOMED,Valid,Standard,4
 4146833,35359004,Family,Social Context,SNOMED,Valid,Non-standard,4
 4145650,266710000,Drugs not taken/completed,Context-dependent,SNOMED,Valid,Standard,4
@@ -4309,7 +4285,7 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4139964,263903005,Transplant,Qualifier Value,SNOMED,Valid,Standard,4
 4139889,305824005,Seen by palliative care medicine service,Clinical Finding,SNOMED,Valid,Standard,4
 4138060,305439002,Under care of counselor,Clinical Finding,SNOMED,Valid,Standard,4
-4137928,32354004,Eucalyptus,Organism,SNOMED,Valid,Standard,8
+4137928,32354004,Eucalyptus,Organism,SNOMED,Valid,Standard,12
 4136656,32322008,Subchondral bone cyst,Morph Abnormality,SNOMED,Valid,Standard,4
 4132896,278906000,Nutritional support,Procedure,SNOMED,Valid,Standard,4
 4126078,288301009,X-ray exposure accident,Event,SNOMED,Valid,Standard,4
@@ -4368,7 +4344,7 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4044732,129089003,Radiofrequency ablation procedure phase,Qualifier Value,SNOMED,Valid,Standard,4
 4044513,129257004,Strangulated hernia,Morph Abnormality,SNOMED,Valid,Standard,4
 4042856,11854003,Fibrous nodule,Morph Abnormality,SNOMED,Valid,Standard,4
-4038914,16326002,Aloe,Organism,SNOMED,Valid,Standard,8
+4038914,16326002,Aloe,Organism,SNOMED,Valid,Standard,12
 4038065,162480005,Cough aggravates symptom,Clinical Finding,SNOMED,Valid,Standard,4
 4038063,162475001,Food aggravates symptom,Clinical Finding,SNOMED,Valid,Standard,4
 4036092,228528009,Range of motion activity,Procedure,SNOMED,Valid,Standard,4
@@ -4452,11 +4428,7 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 2108646,4115F,Beta blocker administered within 24 hours prior to surgical incision (CABG),CPT4,CPT4,Valid,Non-standard,4
 2101842,0520F,Radiation dose limits to normal tissues established prior to the initiation of a course of 3D conformal radiation for a minimum of 2 tissue/organ (ONC),CPT4,CPT4,Valid,Standard,4
 19475241,D015780,Carbapenems,Main Heading,MeSH,Valid,Non-standard,4
-19474536,D005446,Fluocinolone Acetonide,Main Heading,MeSH,Valid,Non-standard,4
 19397596,D020948,Cat's Claw,Main Heading,MeSH,Valid,Non-standard,4
-19390406,D005052,Eucalyptus,Main Heading,MeSH,Valid,Non-standard,4
-19389491,D003069,Coffee,Main Heading,MeSH,Valid,Non-standard,4
-19388295,D000504,Aloe,Main Heading,MeSH,Valid,Non-standard,4
 1619841,LP419901-6,Acetylcysteine,LOINC Component,LOINC,Valid,Non-standard,4
 765840,432801000124104,Medication dosing interval increased,Context-dependent,SNOMED,Valid,Standard,3
 765776,430891000124105,Dialysis regime,Procedure,SNOMED,Valid,Standard,3
@@ -4478,7 +4450,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 45766930,704197006,Admits alcohol use,Clinical Finding,SNOMED,Valid,Standard,3
 45766729,703955006,Prescription telephone order,Context-dependent,SNOMED,Valid,Non-standard,3
 45766705,703928002,Allergy to guinea pig dander,Clinical Finding,SNOMED,Valid,Non-standard,3
-45614260,D006024,Glycopyrrolate,Main Heading,MeSH,Valid,Non-standard,3
 44787284,LP171645-7,Tolterodine,LOINC Component,LOINC,Valid,Non-standard,3
 44787278,LP171639-0,Simethicone,LOINC Component,LOINC,Valid,Non-standard,3
 44787272,LP171633-3,Raloxifene,LOINC Component,LOINC,Valid,Non-standard,3
@@ -4696,7 +4667,7 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4055959,16741004,Pleomorphic carcinoma,Morph Abnormality,SNOMED,Valid,Standard,3
 4054014,242292001,Accidental exposure to corrosive or caustic chemical,Event,SNOMED,Valid,Standard,3
 4053818,125565008,Interstitial fibrosis,Morph Abnormality,SNOMED,Valid,Standard,3
-4053618,125706008,Sodium benzoate,Substance,SNOMED,Valid,Standard,6
+4053618,125706008,Sodium benzoate,Substance,SNOMED,Valid,Standard,9
 4053111,160870005,Child in care,Clinical Finding,SNOMED,Valid,Standard,3
 4052476,160671006,Gluten free diet,Clinical Finding,SNOMED,Valid,Standard,3
 4052464,160618006,Current non-smoker,Clinical Finding,SNOMED,Valid,Non-standard,3
@@ -4712,7 +4683,7 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4047846,135896002,Salter-Harris type I,Morph Abnormality,SNOMED,Valid,Standard,3
 4045719,133896000,Care of immunosuppressed patient,Procedure,SNOMED,Valid,Standard,3
 4044190,129326001,Injection - action,Qualifier Value,SNOMED,Valid,Standard,3
-4042227,16719004,Flowers,Substance,SNOMED,Valid,Standard,6
+4042227,16719004,Flowers,Substance,SNOMED,Valid,Standard,9
 4033080,14621004,Anticipatory grief,Clinical Finding,SNOMED,Valid,Standard,3
 4031360,14317002,Acute erythroid leukemia,Morph Abnormality,SNOMED,Valid,Standard,3
 4030576,1428003,Asphyxia due to foreign body in larynx,Event,SNOMED,Valid,Standard,3
@@ -4818,17 +4789,9 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 2108525,4000F,"Tobacco use cessation intervention, counseling (COPD, CAP, CAD, Asthma) (DM) (PV)",CPT4,CPT4,Valid,Standard,3
 2106382,3112F,"CT or MRI of the brain performed greater than 24 hours after arrival to the hospital or performed in an outpatient imaging center for purpose other than confirmation of initial diagnosis of stroke, TIA, or intracranial hemorrhage (STR)",CPT4,CPT4,Valid,Non-standard,3
 2102010,1152F,"Documentation of advanced disease diagnosis, goals of care prioritize comfort (Pall Cr)",CPT4,CPT4,Valid,Standard,3
-19475527,D020160,Sodium Benzoate,Main Heading,MeSH,Valid,Non-standard,3
-19473995,D000069348,Quetiapine Fumarate,Main Heading,MeSH,Valid,Non-standard,3
-19473983,D000068677,Sildenafil Citrate,Main Heading,MeSH,Valid,Non-standard,3
-19473981,D000068557,Olmesartan Medoxomil,Main Heading,MeSH,Valid,Non-standard,3
-19473980,D000068438,Brimonidine Tartrate,Main Heading,MeSH,Valid,Non-standard,3
-19415972,C009935,prednisolone acetate,Suppl Concept,MeSH,Valid,Non-standard,3
-19399119,D035264,Flowers,Main Heading,MeSH,Valid,Non-standard,3
 1762408,LP432576-9,Kale,LOINC Component,LOINC,Valid,Non-standard,3
 1177118,LP14809-5,Clotrimazole,LOINC Component,LOINC,Valid,Non-standard,3
 1020191,LP30447-4,Catheter,LOINC System,LOINC,Valid,Non-standard,3
-979843,C000614965,Iodine-131,Suppl Concept,MeSH,Valid,Non-standard,2
 765816,432311000124109,Documentation of current medication usage,Procedure,SNOMED,Valid,Standard,2
 765788,440291000124105,Below expected nutrient requirement,Clinical Finding,SNOMED,Valid,Standard,2
 765783,5611000175106,Ineffective medication administration routine at home,Clinical Finding,SNOMED,Valid,Standard,2
@@ -4862,8 +4825,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 45767299,704661003,Noncompliance with immunization regimen,Clinical Finding,SNOMED,Valid,Standard,2
 45765812,702837008,Vilazodone,Substance,SNOMED,Valid,Non-standard,2
 45763908,700441006,Saccharomyces boulardii,Substance,SNOMED,Valid,Non-standard,2
-45615928,D019817,Benzoic Acid,Main Heading,MeSH,Valid,Non-standard,2
-45614535,D013011,Sorbic Acid,Main Heading,MeSH,Valid,Non-standard,2
 44817378,LP30650-3,Zaleplon,LOINC Component,LOINC,Valid,Non-standard,2
 44816509,1504F,Patient has respiratory insufficiency (ALS),CPT4,CPT4,Valid,Standard,2
 44787727,LP63637-0,Fondaparinux,LOINC Component,LOINC,Valid,Non-standard,2
@@ -4955,7 +4916,7 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4260683,45083001,Urothelial papilloma,Morph Abnormality,SNOMED,Valid,Standard,2
 4260332,409801009,Extended spectrum beta-lactamase producing Klebsiella pneumoniae,Organism,SNOMED,Valid,Standard,2
 4259199,412247000,Methotrexate sodium,Substance,SNOMED,Valid,Non-standard,2
-4259065,412156001,Silk,Substance,SNOMED,Valid,Standard,4
+4259065,412156001,Silk,Substance,SNOMED,Valid,Standard,6
 4256367,410394004,Lab findings surveillance,Procedure,SNOMED,Valid,Standard,2
 4254376,409058006,Medication action/side effects care,Procedure,SNOMED,Valid,Standard,2
 42539596,736121002,Requires lifelong warfarin therapy,Clinical Finding,SNOMED,Valid,Standard,2
@@ -5092,7 +5053,7 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4155106,269665009,Submersion and drowning due to boat overturning,Event,SNOMED,Valid,Standard,2
 4152025,268463003,Uses postcoital contraception,Clinical Finding,SNOMED,Valid,Standard,2
 4152023,268459005,Oral contraceptive advice,Clinical Finding,SNOMED,Valid,Standard,2
-4151383,28230009,Poultry,Substance,SNOMED,Valid,Standard,2
+4151383,28230009,Poultry,Substance,SNOMED,Valid,Standard,4
 4149347,35233000,Polyvinyl chloride,Substance,SNOMED,Valid,Non-standard,2
 4148582,269734009,Assault by manual strangulation,Event,SNOMED,Valid,Standard,2
 4148579,269719003,Accidental burning caused by acid,Event,SNOMED,Valid,Standard,2
@@ -5253,7 +5214,7 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4034697,15052009,Diphenoxylate,Substance,SNOMED,Valid,Non-standard,2
 4034635,113669008,Burkholderia cepacia,Organism,SNOMED,Valid,Standard,2
 4029673,128857001,Sertoli cell tumor,Morph Abnormality,SNOMED,Valid,Non-standard,2
-4028983,1368003,Iodine-131,Substance,SNOMED,Valid,Non-standard,2
+4028983,1368003,Iodine-131,Substance,SNOMED,Valid,Non-standard,4
 4028877,128623006,Myelodysplastic neoplasm,Morph Abnormality,SNOMED,Valid,Standard,2
 4028786,237363008,Intrauterine death of one twin,Event,SNOMED,Valid,Standard,2
 4028557,128726006,"Endometrial stromal sarcoma, low grade",Morph Abnormality,SNOMED,Valid,Standard,2
@@ -5262,7 +5223,7 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4027997,227549007,Mayonnaise,Substance,SNOMED,Valid,Standard,4
 4027958,227411006,Sage,Substance,SNOMED,Valid,Standard,4
 4026995,226041007,Mint,Substance,SNOMED,Valid,Standard,2
-4026735,226863004,Yogurt,Substance,SNOMED,Valid,Standard,2
+4026735,226863004,Yogurt,Substance,SNOMED,Valid,Standard,4
 4026198,227408005,Paprika,Substance,SNOMED,Valid,Standard,4
 4025400,227350006,Lentils,Substance,SNOMED,Valid,Standard,4
 4024511,116566001,Steroid,Substance,SNOMED,Valid,Non-standard,2
@@ -5425,16 +5386,9 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 2106967,3315F,Estrogen receptor (ER) or progesterone receptor (PR) positive breast cancer (ONC),CPT4,CPT4,Valid,Standard,2
 2106386,3120F,12-Lead ECG Performed (EM),CPT4,CPT4,Valid,Non-standard,2
 2106305,3089F,"Major depressive disorder, moderate (MDD)",CPT4,CPT4,Valid,Non-standard,2
-19475652,D047011,Silk,Main Heading,MeSH,Valid,Non-standard,2
 19474919,D010936,Plant Extracts,Main Heading,MeSH,Valid,Non-standard,2
-19474490,D004659,Enbucrilate,Main Heading,MeSH,Valid,Non-standard,2
 19474441,D004071,Digitalis Glycosides,Main Heading,MeSH,Valid,Non-standard,2
-19473991,D000068900,Sitagliptin Phosphate,Main Heading,MeSH,Valid,Non-standard,2
-19436583,C077793,candesartan cilexetil,Suppl Concept,MeSH,Valid,Non-standard,2
-19432081,C062843,carboprost tromethamine,Suppl Concept,MeSH,Valid,Non-standard,2
 19401193,D052999,Quinazolinones,Main Heading,MeSH,Valid,Non-standard,2
-19395004,D015014,Yogurt,Main Heading,MeSH,Valid,Non-standard,2
-19393250,D011200,Poultry,Main Heading,MeSH,Valid,Non-standard,2
 1762390,LP432409-3,Guanfacine,LOINC Component,LOINC,Valid,Non-standard,2
 1620223,LP422026-7,Flaxseed,LOINC Component,LOINC,Valid,Non-standard,2
 1619867,LP426478-6,Asenapine,LOINC Component,LOINC,Valid,Non-standard,2
@@ -5490,7 +5444,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 46270574,64111000119100,Family history of combined hyperlipidemia,Context-dependent,SNOMED,Valid,Standard,1
 46270568,63901000119104,Family history of Tay-Sachs disease,Context-dependent,SNOMED,Valid,Standard,1
 46257689,3775F,Adenoma(s) or other neoplasm detected during screening colonoscopy (SCADR),CPT4,CPT4,Valid,Standard,1
-46256318,D010931,Plague Vaccine,Main Heading,MeSH,Valid,Non-standard,1
 46255989,D011819,Rabies Vaccines,Main Heading,MeSH,Valid,Non-standard,1
 46255982,D008596,Menotropins,Main Heading,MeSH,Valid,Non-standard,1
 45957602,ee618f72-e5f2-4982-affa-01558a0406a8,"Retired SNOMED UK Drug extension concept, do not use, use concept indicated by the CONCEPT_RELATIONSHIP table, if any",Substance,SNOMED,Valid,Non-standard,1
@@ -5515,10 +5468,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 45763713,700193001,Family history of squamous cell carcinoma of skin,Context-dependent,SNOMED,Valid,Standard,1
 45757205,1082641000119102,Allergy to existing dental restorative material,Clinical Finding,SNOMED,Valid,Non-standard,1
 45757178,10761551000119100,Supervision of high risk pregnancy with history of previous molar pregnancy done,Context-dependent,SNOMED,Valid,Non-standard,1
-45616692,D007778,Lactobacillus,Main Heading,MeSH,Valid,Non-standard,1
-45615506,D006820,Hyaluronic Acid,Main Heading,MeSH,Valid,Non-standard,1
-45613079,D007485,Ioxaglic Acid,Main Heading,MeSH,Valid,Non-standard,1
-45610500,D004205,Cromolyn Sodium,Main Heading,MeSH,Valid,Non-standard,1
 44816457,9004F,Aortic aneurysm 6.0 cm or greater maximum diameter on centerline formatted CT or minor diameter on axial formatted CT (NMA-No Measure Associated),CPT4,CPT4,Valid,Standard,1
 44787724,LP94829-6,Atovaquone,LOINC Component,LOINC,Valid,Non-standard,1
 44787472,LP15767-4,Oxytocin,LOINC Component,LOINC,Valid,Non-standard,1
@@ -5700,7 +5649,7 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4250190,74082008,Pin/tong site care,Procedure,SNOMED,Valid,Standard,1
 4250157,73982001,Gemistocytic astrocytoma,Morph Abnormality,SNOMED,Valid,Standard,1
 4248667,408569007,Diagnostic procedure declined,Context-dependent,SNOMED,Valid,Non-standard,1
-4247145,60057003,Thallium-201,Substance,SNOMED,Valid,Standard,1
+4247145,60057003,Thallium-201,Substance,SNOMED,Valid,Standard,2
 4247119,408446006,Gynecological oncology,Qualifier Value,SNOMED,Valid,Standard,1
 4245771,59674005,Nocardia,Organism,SNOMED,Valid,Standard,1
 4245743,59545008,Pesticide,Substance,SNOMED,Valid,Standard,2
@@ -5817,7 +5766,7 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4188025,414283008,Follow up substance misuse assessment,Procedure,SNOMED,Valid,Standard,1
 4186932,46710009,Esthesioneurocytoma,Morph Abnormality,SNOMED,Valid,Standard,1
 4185237,54731003,Deglutition,Observable Entity,SNOMED,Valid,Standard,1
-4185121,43690008,Lactobacillus,Organism,SNOMED,Valid,Standard,1
+4185121,43690008,Lactobacillus,Organism,SNOMED,Valid,Standard,2
 4184783,43917008,Giant cell granuloma,Morph Abnormality,SNOMED,Valid,Standard,1
 4183001,54775004,Reverse airflow,Observable Entity,SNOMED,Valid,Standard,1
 4182001,366205004,Coronary stent patency - finding,Clinical Finding,SNOMED,Valid,Standard,1
@@ -5985,7 +5934,7 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4147301,35098001,Imidazole,Substance,SNOMED,Valid,Non-standard,1
 4147200,30386001,Radiation injury with necrosis,Morph Abnormality,SNOMED,Valid,Standard,1
 4147090,309926000,Gastroenterology department,Location,SNOMED,Valid,Non-standard,1
-4146805,34641002,Hydrazine,Substance,SNOMED,Valid,Non-standard,1
+4146805,34641002,Hydrazine,Substance,SNOMED,Valid,Non-standard,2
 4146319,307892003,Patient record status,Clinical Finding,SNOMED,Valid,Standard,1
 4145430,34305007,"Fracture, multiple, closed",Morph Abnormality,SNOMED,Valid,Standard,1
 4143443,306694006,Discharge to nursing home,Procedure,SNOMED,Valid,Standard,1
@@ -6038,7 +5987,7 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4125245,259916004,Anti-phospholipid antibody,Substance,SNOMED,Valid,Standard,1
 4124299,287799004,Thrombosed hemorrhoid incised,Context-dependent,SNOMED,Valid,Non-standard,1
 4124097,305547000,Under care of pediatric surgeon,Clinical Finding,SNOMED,Valid,Standard,1
-4123523,259100002,Gamma-aminobutyric acid,Substance,SNOMED,Valid,Standard,2
+4123523,259100002,Gamma-aminobutyric acid,Substance,SNOMED,Valid,Standard,3
 4123351,260188004,Chestnut,Substance,SNOMED,Valid,Standard,1
 4122539,259221006,Methanol,Substance,SNOMED,Valid,Non-standard,1
 4121609,287908008,Hand tendon repaired,Context-dependent,SNOMED,Valid,Non-standard,1
@@ -6683,33 +6632,12 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 1991597,LP429469-2,Brexpiprazole,LOINC Component,LOINC,Valid,Non-standard,1
 1991596,LP429468-4,Cariprazine,LOINC Component,LOINC,Valid,Non-standard,1
 19475075,D013388,Succinimides,Main Heading,MeSH,Valid,Non-standard,1
-19474803,D009268,Nalidixic Acid,Main Heading,MeSH,Valid,Non-standard,1
-19474686,D007372,Interferons,Main Heading,MeSH,Valid,Non-standard,1
-19474551,D005680,gamma-Aminobutyric Acid,Main Heading,MeSH,Valid,Non-standard,1
 19474261,D001645,Biguanides,Main Heading,MeSH,Valid,Non-standard,1
-19474061,D000077557,Ibandronic Acid,Main Heading,MeSH,Valid,Non-standard,1
-19474003,D000069468,Desvenlafaxine Succinate,Main Heading,MeSH,Valid,Non-standard,1
-19473998,D000069446,Atazanavir Sulfate,Main Heading,MeSH,Valid,Non-standard,1
-19473984,D000068717,Glatiramer Acetate,Main Heading,MeSH,Valid,Non-standard,1
-19473982,D000068656,Mometasone Furoate,Main Heading,MeSH,Valid,Non-standard,1
-19465798,C542859,aclidinium bromide,Suppl Concept,MeSH,Valid,Non-standard,1
-19460486,C473384,lumiracoxib,Suppl Concept,MeSH,Valid,Non-standard,1
-19430293,C057710,cefditoren pivoxil,Suppl Concept,MeSH,Valid,Non-standard,1
 19430157,C057291,piroxicam cinnamate,Suppl Concept,MeSH,Valid,Non-standard,1
-19428875,C053267,cefpodoxime proxetil,Suppl Concept,MeSH,Valid,Non-standard,1
-19420916,C029424,hydrazine,Suppl Concept,MeSH,Valid,Non-standard,1
-19420359,C027556,histamine phosphate,Suppl Concept,MeSH,Valid,Non-standard,1
-19418212,C017610,fluphenazine enanthate,Suppl Concept,MeSH,Valid,Non-standard,1
-19417969,C016713,quinidine gluconate,Suppl Concept,MeSH,Valid,Non-standard,1
-19416497,C011462,erythromycin stearate,Suppl Concept,MeSH,Valid,Non-standard,1
-19414564,C005900,triamcinolone hexacetonide,Suppl Concept,MeSH,Valid,Non-standard,1
-19414225,C004648,testosterone enanthate,Suppl Concept,MeSH,Valid,Non-standard,1
-19408202,C000615114,Thallium-201,Suppl Concept,MeSH,Valid,Non-standard,1
 19401515,D054327,Lubricants,Main Heading,MeSH,Valid,Non-standard,1
 19398641,D031584,Hibiscus,Main Heading,MeSH,Valid,Non-standard,1
 19398178,D029588,Moringa oleifera,Main Heading,MeSH,Valid,Non-standard,1
 19394987,D014970,Xanthines,Main Heading,MeSH,Valid,Non-standard,1
-19392873,D010405,Penicillinase,Main Heading,MeSH,Valid,Non-standard,1
 19337748,C514136,calcium propionate,Suppl Concept,MeSH,Valid,Non-standard,1
 1619373,LP422273-5,Propylparaben,LOINC Component,LOINC,Valid,Non-standard,1
 1177113,LP35848-8,Dalbavancin,LOINC Component,LOINC,Valid,Non-standard,1
@@ -6785,3 +6713,52 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 40298660,,Moderate cigarette smoker (10-19 cigs/day),Clinical Finding,SNOMED,Valid,Standard,20
 40298674,,Pipe smoker,Clinical Finding,SNOMED,Valid,Standard,12
 45765920,,Never used tobacco,Clinical Finding,SNOMED,Valid,Standard,3
+40459042,40459042,Quinolones,Main Heading,SNOMED,Valid,Non-standard,46
+4032059,4032059,Chlorhexidine gluconate,Suppl Concept,SNOMED,Valid,Non-standard,40
+40534548,40534548,Tetracyclines,Main Heading,SNOMED,Valid,Non-standard,36
+4232770,4232770,Cefuroxime axetil,Suppl Concept,SNOMED,Valid,Non-standard,29
+4227704,4227704,Rosuvastatin calcium,Main Heading,SNOMED,Valid,Non-standard,25
+4305262,4305262,Valproic acid,Main Heading,SNOMED,Valid,Non-standard,17
+4193945,4193945,Clavulanic acid,Main Heading,SNOMED,Valid,Non-standard,12
+4140913,4140913,Tiotropium bromide,Main Heading,SNOMED,Valid,Non-standard,10
+4031593,4031593,Enoxaparin sodium,Suppl Concept,SNOMED,Valid,Non-standard,7
+4145859,4145859,Tetanus antitoxin,Main Heading,SNOMED,Valid,Non-standard,7
+4134525,4134525,Propoxyphene napsylate,Suppl Concept,SNOMED,Valid,Non-standard,6
+4134581,4134581,Clemizole,Suppl Concept,SNOMED,Valid,Non-standard,6
+4293596,4293596,Clindamycin phosphate,Suppl Concept,SNOMED,Valid,Non-standard,6
+4139431,4139431,Insulin aspart,Main Heading,SNOMED,Valid,Non-standard,6
+4217134,4217134,Fluocinolone acetonide,Main Heading,SNOMED,Valid,Non-standard,4
+4136021,4136021,Olmesartan medoxomil,Main Heading,SNOMED,Valid,Non-standard,3
+4320367,4320367,Prednisolone acetate,Suppl Concept,SNOMED,Valid,Non-standard,3
+40280082,40280082,Brimonidine tartrate,Main Heading,SNOMED,Valid,Non-standard,3
+4032406,4032406,Sildenafil citrate,Main Heading,SNOMED,Valid,Non-standard,3
+4304294,4304294,Glycopyrrolate,Main Heading,SNOMED,Valid,Non-standard,3
+4029048,4029048,Quetiapine fumarate,Main Heading,SNOMED,Valid,Non-standard,3
+4137858,4137858,Sitagliptin phosphate,Main Heading,SNOMED,Valid,Non-standard,2
+4032093,4032093,Carboprost tromethamine,Suppl Concept,SNOMED,Valid,Non-standard,2
+4237636,4237636,Enbucrilate,Main Heading,SNOMED,Valid,Non-standard,2
+4154902,4154902,Sorbic acid,Main Heading,SNOMED,Valid,Non-standard,2
+40351141,40351141,Benzoic acid,Main Heading,SNOMED,Valid,Non-standard,2
+4297532,4297532,Candesartan cilexetil,Suppl Concept,SNOMED,Valid,Non-standard,2
+4309115,4309115,Erythromycin stearate,Suppl Concept,SNOMED,Valid,Non-standard,1
+4320182,4320182,Cefpodoxime proxetil,Suppl Concept,SNOMED,Valid,Non-standard,1
+4309858,4309858,Histamine phosphate,Suppl Concept,SNOMED,Valid,Non-standard,1
+4006822,4006822,Fluphenazine enanthate,Suppl Concept,SNOMED,Valid,Non-standard,1
+4300855,4300855,Quinidine gluconate,Suppl Concept,SNOMED,Valid,Non-standard,1
+4234582,4234582,Penicillinase,Main Heading,SNOMED,Valid,Non-standard,1
+4134531,4134531,Triamcinolone hexacetonide,Suppl Concept,SNOMED,Valid,Non-standard,1
+4023390,4023390,Testosterone enanthate,Suppl Concept,SNOMED,Valid,Non-standard,1
+4322104,4322104,Lumiracoxib,Suppl Concept,SNOMED,Valid,Non-standard,1
+4156401,4156401,Cefditoren pivoxil,Suppl Concept,SNOMED,Valid,Non-standard,1
+40526755,40526755,Interferons,Main Heading,SNOMED,Valid,Non-standard,1
+45766700,45766700,Aclidinium bromide,Suppl Concept,SNOMED,Valid,Non-standard,1
+4193809,4193809,Mometasone furoate,Main Heading,SNOMED,Valid,Non-standard,1
+4043015,4043015,Plague vaccine,Main Heading,SNOMED,Valid,Non-standard,1
+4243930,4243930,Hyaluronic acid,Main Heading,SNOMED,Valid,Non-standard,1
+35625974,35625974,Ioxaglic acid,Main Heading,SNOMED,Valid,Non-standard,1
+4298924,4298924,Cromolyn sodium,Main Heading,SNOMED,Valid,Non-standard,1
+4299023,4299023,Nalidixic acid,Main Heading,SNOMED,Valid,Non-standard,1
+4225166,4225166,Ibandronic acid,Main Heading,SNOMED,Valid,Non-standard,1
+4198916,4198916,Desvenlafaxine succinate,Main Heading,SNOMED,Valid,Non-standard,1
+40577337,40577337,Atazanavir sulfate,Main Heading,SNOMED,Valid,Non-standard,1
+4032572,4032572,Glatiramer acetate,Main Heading,SNOMED,Valid,Non-standard,1
