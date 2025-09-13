@@ -2345,3 +2345,4 @@ original_concept_id,original_code,original_name,original_vocab,snomed_concept_id
 1175754,91141-2,TPMT activity in RBC by production of 6-MMP,LOINC,4309120,391543006,Blood thiopurine methyltransferase level,SNOMED,Is a,1
 1175613,91143-8,TPMT activity in RBC by production of 6-MTG riboside,LOINC,4309120,391543006,Blood thiopurine methyltransferase level,SNOMED,Is a,1
 1175529,91142-0,TPMT activity in RBC by production of 6-MMP riboside,LOINC,4309120,391543006,Blood thiopurine methyltransferase level,SNOMED,Is a,1
+756055,OMOP4873969,Measurement of Severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2),OMOP Extension,37310257,,Measurement of SARS-CoV-2 antigen,SNOMED,Is a,40

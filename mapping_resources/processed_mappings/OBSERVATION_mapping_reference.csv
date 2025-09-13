@@ -176,3 +176,18 @@ original_concept_id,original_code,original_name,original_vocab,snomed_concept_id
 38002161,0738,Rasburicase,APC,4216952,395858003,Rasburicase,SNOMED,Maps to,6
 38002751,7035,Teniposide,APC,4299061,387460005,Teniposide,SNOMED,Maps to,1
 38002644,1683,Basiliximab,APC,4305237,386978004,Basiliximab,SNOMED,Maps to,1
+1340204,OMOP5165859,History of event,OMOP Extension,4025368,,General information qualifier,SNOMED,Subsumes,6084327
+903652,OMOP5181832,Findings of tobacco or its derivatives use or exposure,OMOP Extension,4005823,,Tobacco user,SNOMED,Maps to,3013420
+903654,OMOP5181835,Tobacco or its derivatives user,OMOP Extension,4005823,,Tobacco user,SNOMED,Maps to,72597
+903657,OMOP5181838,Cigarette smoker,OMOP Extension,40299108,,Cigarette smoker,SNOMED,Maps to,65088
+704996,OMOP4912978,Patient meets COVID-19 laboratory diagnostic criteria,OMOP Extension,703441,,COVID-19 confirmed by laboratory test,SNOMED,Maps to,22363
+903656,OMOP5181837,Passive smoker,OMOP Extension,40298675,,Passive smoker,SNOMED,Maps to,1056
+903667,OMOP5181849,Chewing tobacco user,OMOP Extension,40562282,,Chews tobacco,SNOMED,Maps to,565
+903659,OMOP5181840,Light cigarette smoker (1-9 cigarettes per day),OMOP Extension,40298659,,Light cigarette smoker (1-9 cigs/day),SNOMED,Maps to,140
+903661,OMOP5181842,Heavy cigarette smoker (20-39 cigarettes per day),OMOP Extension,40298661,,Heavy cigarette smoker (20-39 cigs/day),SNOMED,Maps to,108
+903664,OMOP5181846,Cigar smoker,OMOP Extension,40298676,,Cigar smoker,SNOMED,Maps to,68
+903666,OMOP5181848,Smokeless tobacco user,OMOP Extension,37017610,,User of smokeless tobacco,SNOMED,Maps to,33
+903668,OMOP5181850,Snuff user,OMOP Extension,4043053,,Snuff user,SNOMED,Maps to,20
+903660,OMOP5181841,Moderate cigarette smoker (10-19 cigarettes per day),OMOP Extension,40298660,,Moderate cigarette smoker (10-19 cigs/day),SNOMED,Maps to,20
+903663,OMOP5181845,Pipe smoker,OMOP Extension,40298674,,Pipe smoker,SNOMED,Maps to,12
+903653,OMOP5181834,Never used tobacco or its derivatives,OMOP Extension,45765920,,Never used tobacco,SNOMED,Maps to,3
