@@ -4,7 +4,7 @@ Process concept mapping files by removing already-mapped concepts and standardiz
 
 This script:
 1. For tables with SNOMED mappings: removes concepts that have been mapped to SNOMED
-2. For all tables: removes Domain and Frequency columns
+2. For all tables: removes Domain column, keeps Frequency column
 3. Outputs standardized concept_mapping files
 """
 
@@ -27,6 +27,17 @@ MAPPED_TABLES = {
 
 # Output columns (removing Domain but keeping Frequency)
 OUTPUT_COLUMNS = ['Id', 'Code', 'Name', 'Standard Class', 'Vocab', 'Validity', 'Concept', 'Frequency']
+
+
+def get_default_domain(table_name: str) -> str:
+    """Get default domain based on table name."""
+    domain_map = {
+        'DEVICE_EXPOSURE': 'Device',
+        'MEASUREMENT': 'Measurement', 
+        'OBSERVATION': 'Observation',
+        'PROCEDURE_OCCURRENCE': 'Procedure'
+    }
+    return domain_map.get(table_name, 'Observation')
 
 
 def load_mapped_concept_ids(table_name: str) -> Set[str]:
@@ -103,7 +114,7 @@ def load_snomed_replacements(table_name: str) -> Dict[str, Dict]:
                                 'snomed_code': row['Code'],
                                 'snomed_name': row['Name'],
                                 'standard_class': row.get('Standard Class', ''),
-                                'domain': row.get('Domain', 'Observation'),
+                                'domain': row.get('Domain', get_default_domain(table_name)),
                                 'validity': row.get('Validity', ''),
                                 'concept': row.get('Concept', ''),
                                 'frequency': int(row.get('Frequency', 0)),
@@ -121,7 +132,7 @@ def load_snomed_replacements(table_name: str) -> Dict[str, Dict]:
                         'snomed_code': '',
                         'snomed_name': '',
                         'standard_class': '',
-                        'domain': 'Observation',
+                        'domain': get_default_domain(table_name),
                         'validity': '',
                         'concept': '',
                         'frequency': 0,
@@ -139,7 +150,7 @@ def load_snomed_replacements(table_name: str) -> Dict[str, Dict]:
                         'snomed_code': row['snomed_concept_code'],
                         'snomed_name': row['snomed_concept_name'],
                         'standard_class': '',
-                        'domain': 'Observation',
+                        'domain': get_default_domain(table_name),
                         'validity': '',
                         'concept': '',
                         'frequency': int(row.get('frequency', 0)),
@@ -189,7 +200,8 @@ def process_table_with_mappings(table_name: str, filename: str) -> Dict:
             # Keep only the desired columns
             output_row = {col: row.get(col, '') for col in OUTPUT_COLUMNS}
             
-            # Check if this is a SNOMED concept that received mappings
+            # Check if this is a SNOMED concept that received mappings from other vocabularies
+            # If so, aggregate the frequencies (handles many-to-one mappings)
             if row['Id'] in frequency_aggregation:
                 # Add the aggregated frequency from mapped concepts
                 original_freq = int(row.get('Frequency', 0))
@@ -203,7 +215,8 @@ def process_table_with_mappings(table_name: str, filename: str) -> Dict:
             kept_count += 1
     
     # Second pass: add new SNOMED concepts that don't exist in original file
-    # Group replacements by SNOMED ID to handle many-to-one mappings
+    # This ensures the pipeline knows about SNOMED concepts that replaced mapped concepts
+    # Group replacements by SNOMED ID to handle many-to-one mappings (multiple original concepts -> one SNOMED)
     unique_snomed_concepts = {}
     for _, snomed_info in snomed_replacements.items():
         snomed_id = snomed_info['snomed_id']
