@@ -3259,7 +3259,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 3047352,43994-3,Trisomy 18 risk [Likelihood] in Fetus,Lab Test,LOINC,Valid,Standard,41
 3006070,6954-2,Bartonella henselae IgG Ab [Titer] in Serum by Immunofluorescence,Lab Test,LOINC,Valid,Standard,41
 3000699,3528-7,Tetrahydrocannabinol [Mass/volume] in Serum or Plasma,Lab Test,LOINC,Valid,Standard,41
-756055,OMOP4873969,Measurement of Severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2),Lab Test,OMOP Extension,Valid,Standard,40
 4338222,88159009,"Hepatitis A virus antibody, IgM type",Procedure,SNOMED,Valid,Standard,44048
 36305170,86951-1,Lipoprotein associated phospholipase A2 [Enzymatic activity/volume] in Serum or Plasma,Lab Test,LOINC,Valid,Standard,40
 36204321,86609-5,Noroxymorphone/Creatinine [Mass Ratio] in Urine by Confirmatory method,Lab Test,LOINC,Valid,Standard,40
@@ -5723,7 +5722,7 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4015457,104328008,Antibody to mitochondria measurement,Clinical Observation,SNOMED,Valid,Standard,9865
 4179789,50744001,Smooth muscle antibody measurement,Clinical Observation,SNOMED,Valid,Standard,14196
 42537369,736730002,Partial pressure of carbon dioxide in umbilical cord arterial blood,Clinical Observation,SNOMED,Valid,Standard,6896
-37310257,1240471000000102,Measurement of SARS-CoV-2 antigen,Clinical Observation,SNOMED,Valid,Standard,5694
+37310257,1240471000000102,Measurement of SARS-CoV-2 antigen,Clinical Observation,SNOMED,Valid,Standard,5734
 4048263,1550000,Amikacin measurement,Clinical Observation,SNOMED,Valid,Standard,8052
 4187794,46093004,Acetaminophen measurement,Clinical Observation,SNOMED,Valid,Standard,5529
 1246792,364351000119103,Detection of Streptococcus pneumoniae antigen in urine,Clinical Observation,SNOMED,Valid,Standard,5586

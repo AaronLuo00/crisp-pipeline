@@ -4,13 +4,11 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4183166,43173001,Orientation,Observable Entity,SNOMED,Valid,Standard,10252132
 4022057,10546003,Site,Attribute,SNOMED,Valid,Non-standard,8894565
 3019204,8361-8,Body position with respect to gravity,Clinical Observation,LOINC,Valid,Standard,7905348
-1340204,OMOP5165859,History of event,Context-dependent,OMOP Extension,Valid,Standard,6084327
 4178501,363803005,Mobility,Observable Entity,SNOMED,Valid,Standard,6004509
 40483702,443881004,Adelaide pediatric coma score,Observable Entity,SNOMED,Valid,Non-standard,5348763
 4093836,248241002,Glasgow coma score,Observable Entity,SNOMED,Valid,Non-standard,4395002
 4036936,16206004,Oxygen delivery,Observable Entity,SNOMED,Valid,Standard,4182867
 4022240,225908003,Pain score,Observable Entity,SNOMED,Valid,Standard,3330790
-903652,OMOP5181832,Findings of tobacco or its derivatives use or exposure,Clinical Finding,OMOP Extension,Valid,Standard,3013420
 3035225,38204-4,Pain primary location - Reported,Clinical Observation,LOINC,Valid,Standard,2668441
 4311165,423662002,Respiratory secretion,Substance,SNOMED,Valid,Standard,2563599
 4084277,281395000,Glasgow Coma Score eye opening subscore,Observable Entity,SNOMED,Valid,Non-standard,2515535
@@ -167,13 +165,11 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 37311059,840546002,Exposure to SARS-CoV-2,Event,SNOMED,Valid,Standard,74963
 4046550,133899007,Postoperative care,Procedure,SNOMED,Valid,Standard,74470
 46272452,710816000,Long-term current use of steroid,Context-dependent,SNOMED,Valid,Standard,72939
-903654,OMOP5181835,Tobacco or its derivatives user,Clinical Finding,OMOP Extension,Valid,Standard,72597
 37016200,150781000119103,Exposure to viral disease,Event,SNOMED,Valid,Standard,72397
 4060705,162863004,Body mass index 25-29 - overweight,Clinical Finding,SNOMED,Valid,Standard,71080
 4181605,428996008,Language preference,Observable Entity,SNOMED,Valid,Standard,69483
 4295661,385438008,Source of information,Attribute,SNOMED,Valid,Non-standard,67747
 3027028,10154-3,Chief complaint Narrative - Reported,Clinical Observation,LOINC,Valid,Standard,66393
-903657,OMOP5181838,Cigarette smoker,Clinical Finding,OMOP Extension,Valid,Standard,65088
 44802369,526421000000109,Medicines reconciliation completed,Context-dependent,SNOMED,Valid,Non-standard,63466
 44784283,698353005,Requires influenza virus vaccination,Clinical Finding,SNOMED,Valid,Standard,63276
 42539099,737277001,Prosthetic heart valve in situ,Clinical Finding,SNOMED,Valid,Non-standard,60433
@@ -235,7 +231,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 40661253,G8553,Prescription(s) generated and transmitted via a qualified erx system (Deprecated),HCPCS,HCPCS,Valid,Standard,23387
 4229881,89362005,Weight loss,Clinical Finding,SNOMED,Valid,Standard,22928
 4032520,129818000,Activity of daily living (ADL) alteration,Clinical Finding,SNOMED,Valid,Standard,22849
-704996,OMOP4912978,Patient meets COVID-19 laboratory diagnostic criteria,Clinical Finding,OMOP Extension,Valid,Standard,22363
 45765728,702738006,Supervision of high risk pregnancy,Procedure,SNOMED,Valid,Standard,22019
 4322482,7058009,Noncompliance with treatment,Clinical Finding,SNOMED,Valid,Standard,21727
 4256891,408676007,Patient preferred name,Observable Entity,SNOMED,Valid,Standard,21664
@@ -643,7 +638,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 606878,1148757008,Microcephaly,Clinical Finding,SNOMED,Valid,Standard,1064
 4267895,61814002,Dysplastic nevus,Morph Abnormality,SNOMED,Valid,Standard,1061
 4228483,405749004,Newly diagnosed diabetes,Disorder,SNOMED,Valid,Standard,1060
-903656,OMOP5181837,Passive smoker,Clinical Finding,OMOP Extension,Valid,Standard,1056
 40479782,444482005,Exposure to Severe acute respiratory syndrome coronavirus,Event,SNOMED,Valid,Standard,1035
 4022895,11671000,Adenoid cystic carcinoma,Morph Abnormality,SNOMED,Valid,Standard,1029
 2101934,1111F,Discharge medications reconciled with the current medication list in outpatient medical record (COA) (GER),CPT4,CPT4,Valid,Non-standard,1028
@@ -808,7 +802,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 441193,302981008,Accident caused by nonpowered hand tools and implements,Event,SNOMED,Valid,Standard,568
 4102387,253053003,Benign hemangioma,Morph Abnormality,SNOMED,Valid,Standard,567
 4202016,308252005,Admission to radiotherapy department,Procedure,SNOMED,Valid,Standard,566
-903667,OMOP5181849,Chewing tobacco user,Clinical Finding,OMOP Extension,Valid,Standard,565
 4216727,71893005,Struck by falling object,Event,SNOMED,Valid,Standard,565
 4188203,46744002,"Follicular lymphoma, grade 1",Morph Abnormality,SNOMED,Valid,Standard,565
 4219855,39781001,Primitive neuroectodermal tumor,Morph Abnormality,SNOMED,Valid,Standard,561
@@ -1376,7 +1369,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 35822884,4-1140868170,prochlorperazine,Value,UK Biobank,Valid,Non-standard,141
 35817236,744-1140873634,clarithromycin,Value,UK Biobank,Valid,Non-standard,141
 35817235,4-1140873634,clarithromycin,Value,UK Biobank,Valid,Non-standard,141
-903659,OMOP5181840,Light cigarette smoker (1-9 cigarettes per day),Clinical Finding,OMOP Extension,Valid,Standard,140
 443602,430136001,Adverse reaction to antiparkinsonism drug,Disorder,SNOMED,Valid,Standard,140
 4171312,294472005,Allergy to azithromycin,Clinical Finding,SNOMED,Valid,Non-standard,140
 4041659,230126006,Finding relating to infant feeding,Clinical Finding,SNOMED,Valid,Standard,140
@@ -1536,7 +1528,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 37117057,90311000119107,Vaccination declined by caregiver,Context-dependent,SNOMED,Valid,Standard,110
 4126015,260864003,Frequency,Attribute,SNOMED,Valid,Non-standard,109
 4050799,160301004,Family history of endocrine disorders,Context-dependent,SNOMED,Valid,Standard,161
-903661,OMOP5181842,Heavy cigarette smoker (20-39 cigarettes per day),Clinical Finding,OMOP Extension,Valid,Standard,108
 46270587,65021000119105,Family history of neurofibromatosis,Context-dependent,SNOMED,Valid,Standard,108
 436874,217935007,Accident caused by agricultural machine,Event,SNOMED,Valid,Standard,108
 433939,417928002,Abuse,Event,SNOMED,Valid,Standard,108
@@ -1807,7 +1798,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4098402,292853000,Hydroxychloroquine adverse reaction,Disorder,SNOMED,Valid,Standard,69
 40772539,LP14732-9,Phenytoin,LOINC Component,LOINC,Valid,Non-standard,69
 35822341,4-2038460076,phenytoin,Value,UK Biobank,Valid,Non-standard,69
-903664,OMOP5181846,Cigar smoker,Clinical Finding,OMOP Extension,Valid,Standard,68
 4353833,251031008,Coronary stent occluded,Clinical Finding,SNOMED,Valid,Standard,68
 4327278,429954004,Family history of cleft lip,Context-dependent,SNOMED,Valid,Standard,68
 4304355,103688009,Acute myeloid leukemia with CBFB::MYH11 fusion,Morph Abnormality,SNOMED,Valid,Standard,68
@@ -2321,7 +2311,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 35817976,4-1140879806,diltiazem,Value,UK Biobank,Valid,Non-standard,34
 2514503,99364,"Anticoagulant management for an outpatient taking warfarin, physician review and interpretation of International Normalized Ratio (INR) testing, patient instructions, dosage adjustment (as needed), and ordering of additional tests; each su... (Dep...",CPT4,CPT4,Valid,Standard,34
 2313972,93798,Physician or other qualified health care professional services for outpatient cardiac rehabilitation; with continuous ECG monitoring (per session),CPT4,CPT4,Valid,Standard,34
-903666,OMOP5181848,Smokeless tobacco user,Clinical Finding,OMOP Extension,Valid,Standard,33
 765524,440321000124101,Inadequate oral intake,Clinical Finding,SNOMED,Valid,Standard,33
 44787131,LP31801-1,Escitalopram,LOINC Component,LOINC,Valid,Non-standard,33
 44786552,G9357,"Post-partum screenings, evaluations and education performed",HCPCS,HCPCS,Valid,Standard,33
@@ -2729,8 +2718,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 35817285,4-1140872150,clonazepam,Value,UK Biobank,Valid,Non-standard,21
 35816206,4-1140869930,azathioprine,Value,UK Biobank,Valid,Non-standard,21
 35627032,6f183ba1-a7d3-4fd0-a598-04688d26cc5c,"Retired SNOMED UK Drug extension concept, do not use, use concept indicated by the CONCEPT_RELATIONSHIP table, if any",Qualifier Value,SNOMED,Valid,Non-standard,21
-903668,OMOP5181850,Snuff user,Clinical Finding,OMOP Extension,Valid,Standard,20
-903660,OMOP5181841,Moderate cigarette smoker (10-19 cigarettes per day),Clinical Finding,OMOP Extension,Valid,Standard,20
 607782,1155942004,Allergy to metal and/or metal compound,Clinical Finding,SNOMED,Valid,Standard,20
 45942438,83916,SILVER,Misc,CIEL,Valid,Non-standard,20
 44787428,LP14346-8,Famotidine,LOINC Component,LOINC,Valid,Non-standard,20
@@ -3163,7 +3150,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 3518835,116601002,Prednisolone,Substance,Nebraska Lexicon,Valid,Non-standard,13
 3393958,372657005,Trimethobenzamide,Substance,Nebraska Lexicon,Valid,Non-standard,13
 2106869,3284F,Intraocular pressure (IOP) reduced by a value of greater than or equal to 15% from the pre-intervention level (EC),CPT4,CPT4,Valid,Standard,13
-903663,OMOP5181845,Pipe smoker,Clinical Finding,OMOP Extension,Valid,Standard,12
 765812,7310001000004107,Family history of Graves disease,Context-dependent,SNOMED,Valid,Standard,12
 763509,441901000124101,Inadequate vitamin intake,Clinical Finding,SNOMED,Valid,Standard,12
 763412,440491000124109,Excessive caffeine intake,Clinical Finding,SNOMED,Valid,Standard,12
@@ -4472,7 +4458,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 19389491,D003069,Coffee,Main Heading,MeSH,Valid,Non-standard,4
 19388295,D000504,Aloe,Main Heading,MeSH,Valid,Non-standard,4
 1619841,LP419901-6,Acetylcysteine,LOINC Component,LOINC,Valid,Non-standard,4
-903653,OMOP5181834,Never used tobacco or its derivatives,Clinical Finding,OMOP Extension,Valid,Standard,3
 765840,432801000124104,Medication dosing interval increased,Context-dependent,SNOMED,Valid,Standard,3
 765776,430891000124105,Dialysis regime,Procedure,SNOMED,Valid,Standard,3
 765721,4751000124100,Prescription medication discontinued,Context-dependent,SNOMED,Valid,Standard,3
@@ -6786,3 +6771,17 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4216952,395858003,Rasburicase,Substance,SNOMED,Valid,Non-standard,6
 4299061,387460005,Teniposide,Substance,SNOMED,Valid,Non-standard,1
 4305237,386978004,Basiliximab,Substance,SNOMED,Valid,Non-standard,1
+4025368,,General information qualifier,Context-dependent,SNOMED,Valid,Standard,6084327
+4005823,,Tobacco user,Clinical Finding,SNOMED,Valid,Standard,3086017
+40299108,,Cigarette smoker,Clinical Finding,SNOMED,Valid,Standard,65088
+703441,,COVID-19 confirmed by laboratory test,Clinical Finding,SNOMED,Valid,Standard,22363
+40298675,,Passive smoker,Clinical Finding,SNOMED,Valid,Standard,1056
+40562282,,Chews tobacco,Clinical Finding,SNOMED,Valid,Standard,565
+40298659,,Light cigarette smoker (1-9 cigs/day),Clinical Finding,SNOMED,Valid,Standard,140
+40298661,,Heavy cigarette smoker (20-39 cigs/day),Clinical Finding,SNOMED,Valid,Standard,108
+40298676,,Cigar smoker,Clinical Finding,SNOMED,Valid,Standard,68
+37017610,,User of smokeless tobacco,Clinical Finding,SNOMED,Valid,Standard,33
+4043053,,Snuff user,Clinical Finding,SNOMED,Valid,Standard,20
+40298660,,Moderate cigarette smoker (10-19 cigs/day),Clinical Finding,SNOMED,Valid,Standard,20
+40298674,,Pipe smoker,Clinical Finding,SNOMED,Valid,Standard,12
+45765920,,Never used tobacco,Clinical Finding,SNOMED,Valid,Standard,3
