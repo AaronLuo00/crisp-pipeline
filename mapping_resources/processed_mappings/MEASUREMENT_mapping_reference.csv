@@ -2346,3 +2346,31 @@ original_concept_id,original_code,original_name,original_vocab,snomed_concept_id
 1175613,91143-8,TPMT activity in RBC by production of 6-MTG riboside,LOINC,4309120,391543006,Blood thiopurine methyltransferase level,SNOMED,Is a,1
 1175529,91142-0,TPMT activity in RBC by production of 6-MMP riboside,LOINC,4309120,391543006,Blood thiopurine methyltransferase level,SNOMED,Is a,1
 756055,OMOP4873969,Measurement of Severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2),OMOP Extension,37310257,,Measurement of SARS-CoV-2 antigen,SNOMED,Is a,40
+35918306,410,Laterality,NAACCR,4157989,,Laterality,SNOMED,Exact name match,5410
+35918328,440,Grade,NAACCR,4013739,,Grade,SNOMED,Exact name match,2277
+35917774,myeloma_plasma_cell_disorder@2890,Durie-Salmon Staging System,NAACCR,1074424,,Durie-Salmon staging system,SNOMED,Exact name match,65
+35917160,kidney_parenchyma@2930,Fuhrman Nuclear Grade,NAACCR,4262472,,Fuhrman nuclear grade,SNOMED,Exact name match,60
+35917176,melanoma_skin@2890,Ulceration,NAACCR,4136248,,Ulceration,SNOMED,Exact name match,56
+35918413,3836,FIGO Stage,NAACCR,4137662,,FIGO Stage,SNOMED,Exact name match,56
+35917591,corpus_carcinoma@2862,Omentectomy,NAACCR,4300662,,Omentectomy,SNOMED,Exact name match,55
+35917871,corpus_carcinoma@2880,FIGO Stage,NAACCR,4137662,,FIGO Stage,SNOMED,Exact name match,55
+35917600,ovary@2920,Malignant Ascites,NAACCR,192735,,Malignant ascites,SNOMED,Exact name match,44
+35917718,ovary@2890,FIGO Stage,NAACCR,4137662,,FIGO Stage,SNOMED,Exact name match,44
+35918455,3936,Ulceration,NAACCR,4136248,,Ulceration,SNOMED,Exact name match,41
+35916288,cervix@2880,FIGO Stage,NAACCR,4137662,,FIGO Stage,SNOMED,Exact name match,13
+35917776,peritoneum_female_gen@2920,Malignant Ascites,NAACCR,192735,,Malignant ascites,SNOMED,Exact name match,12
+35918091,peritoneum_female_gen@2890,FIGO Stage,NAACCR,4137662,,FIGO Stage,SNOMED,Exact name match,12
+35917161,vulva@2864,FIGO Stage,NAACCR,4137662,,FIGO Stage,SNOMED,Exact name match,7
+35917542,skin@2864,Clark Level,NAACCR,4126703,,Clark level,SNOMED,Exact name match,6
+35918620,3913,Pleural Effusion,NAACCR,254061,,Pleural effusion,SNOMED,Exact name match,5
+35918514,3917,Primary Sclerosing Cholangitis,NAACCR,4058821,,Primary sclerosing cholangitis,SNOMED,Exact name match,5
+35917463,fallopian_tube@2880,FIGO Stage,NAACCR,4137662,,FIGO Stage,SNOMED,Exact name match,3
+35917469,pleura@2900,History of Asbestos Exposure,NAACCR,4058422,,History of asbestos exposure,SNOMED,Exact name match,3
+35918148,pleura@2880,Pleural Effusion,NAACCR,254061,,Pleural effusion,SNOMED,Exact name match,3
+35918824,3885,Lymphocytosis,NAACCR,4281826,,Lymphocytosis,SNOMED,Exact name match,3
+35918846,3933,Thrombocytopenia,NAACCR,40624797,,Thrombocytopenia,SNOMED,Exact name match,3
+35918546,3811,Anemia,NAACCR,439777,,Anemia,SNOMED,Exact name match,3
+35917873,corpus_sarcoma@2862,Omentectomy,NAACCR,4300662,,Omentectomy,SNOMED,Exact name match,3
+35917945,corpus_sarcoma@2880,FIGO Stage,NAACCR,4137662,,FIGO Stage,SNOMED,Exact name match,3
+35917713,lymphoma_ocular_adnexa@2864,Sicca Syndrome,NAACCR,40352977,,Sicca syndrome,SNOMED,Exact name match,2
+35917809,lymphoma_ocular_adnexa@2861,Rheumatoid Arthritis,NAACCR,80809,,Rheumatoid arthritis,SNOMED,Exact name match,2
