@@ -539,9 +539,7 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4205407,308537004,Monitoring status,Clinical Finding,SNOMED,Valid,Standard,1686
 4314985,216319000,"Place of occurrence of accident or poisoning, noninstitutional place of residence",Location,SNOMED,Valid,Non-standard,1684
 40772521,LP14319-5,Penicillin,LOINC Component,LOINC,Valid,Non-standard,1672
-35822237,744-1140882498,penicillin,Value,UK Biobank,Valid,Non-standard,1672
-35822236,4-1140882498,penicillin,Value,UK Biobank,Valid,Non-standard,1672
-35622457,764146007,Penicillin,Substance,SNOMED,Valid,Non-standard,1672
+35622457,764146007,Penicillin,Substance,SNOMED,Valid,Non-standard,5016
 3302677,764146007,Penicillin,Substance,Nebraska Lexicon,Valid,Non-standard,1672
 4187628,41329004,Polyp,Morph Abnormality,SNOMED,Valid,Standard,1654
 4230704,439144005,Closed compression fracture,Morph Abnormality,SNOMED,Valid,Standard,1646
@@ -701,10 +699,7 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 43021867,288531000119103,Problem related to social environment,Clinical Finding,SNOMED,Valid,Non-standard,801
 4049909,15949004,"Thymoma, malignant",Morph Abnormality,SNOMED,Valid,Standard,800
 40792483,LP16093-4,Codeine,LOINC Component,LOINC,Valid,Non-standard,799
-35817343,100688-4,Codeine,Answer,UK Biobank,Valid,Standard,799
-35817342,4-1140884444,codeine,Value,UK Biobank,Valid,Non-standard,799
 44787260,LP171618-4,Lisinopril,LOINC Component,LOINC,Valid,Non-standard,795
-35820395,4-1140860696,lisinopril,Value,UK Biobank,Valid,Non-standard,795
 4325190,427858005,Family history of malignant melanoma,Context-dependent,SNOMED,Valid,Standard,791
 4326265,75148009,Employment problem,Clinical Finding,SNOMED,Valid,Standard,789
 4008070,111088007,Latex,Substance,SNOMED,Valid,Non-standard,781
@@ -725,7 +720,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4303690,418420002,Intentionally harming self,Event,SNOMED,Valid,Standard,758
 4271006,400061001,Abrasion,Morph Abnormality,SNOMED,Valid,Standard,758
 40795773,LP15174-3,Morphine,LOINC Component,LOINC,Valid,Non-standard,758
-35821057,4-1140871692,morphine,Value,UK Biobank,Valid,Non-standard,758
 40482357,443596009,Dependence on peritoneal dialysis,Clinical Finding,SNOMED,Valid,Standard,756
 4230587,40411000,"Follicular lymphoma, grade 3",Morph Abnormality,SNOMED,Valid,Standard,747
 4301716,386091000,Finding related to compliance with treatment,Clinical Finding,SNOMED,Valid,Standard,739
@@ -766,8 +760,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4114538,255417007,Cirrhotic,Qualifier Value,SNOMED,Valid,Standard,640
 4263845,60818005,Aphagia,Clinical Finding,SNOMED,Valid,Standard,634
 40789187,LP15265-9,Amoxicillin,LOINC Component,LOINC,Valid,Non-standard,634
-35815792,744-1141180226,amoxicillin,Value,UK Biobank,Valid,Non-standard,634
-35815791,4-1141180226,amoxicillin,Value,UK Biobank,Valid,Non-standard,634
 4095177,250018006,Toe-walking gait,Clinical Finding,SNOMED,Valid,Standard,629
 4051255,160427003,Family history with explicit context pertaining to mother,Context-dependent,SNOMED,Valid,Standard,627
 438872,267023007,Excessive eating,Clinical Finding,SNOMED,Valid,Standard,626
@@ -837,17 +829,12 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4053378,160316001,FH: Blood disorder,Context-dependent,SNOMED,Valid,Standard,485
 4062344,170993004,Counseled by a nurse,Context-dependent,SNOMED,Valid,Non-standard,480
 4035673,130951007,Urinary bladder retention of urine,Observable Entity,SNOMED,Valid,Standard,480
-35816080,100688-1,Aspirin,Answer,UK Biobank,Valid,Standard,479
-35816079,100628-1,Aspirin,Answer,UK Biobank,Valid,Standard,479
-35816078,4-1140868226,aspirin,Value,UK Biobank,Valid,Non-standard,479
 43533318,G8997,"Swallowing functional limitation, projected goal status, at therapy episode outset, at reporting intervals, and at discharge or to end reporting (Deprecated)",HCPCS,HCPCS,Valid,Standard,474
 443347,292162001,General anesthetic drug adverse reaction,Disorder,SNOMED,Valid,Standard,473
 43533285,G8996,"Swallowing functional limitation, current status at therapy episode outset and at reporting intervals (Deprecated)",HCPCS,HCPCS,Valid,Standard,472
 4167781,293597001,Allergy to codeine,Clinical Finding,SNOMED,Valid,Non-standard,472
 4050929,160406008,FH: Skin disease,Context-dependent,SNOMED,Valid,Standard,472
 40779218,LP15380-6,Ciprofloxacin,LOINC Component,LOINC,Valid,Non-standard,470
-35817196,744-1140874138,ciprofloxacin,Value,UK Biobank,Valid,Non-standard,470
-35817195,4-1140874138,ciprofloxacin,Value,UK Biobank,Valid,Non-standard,470
 4179232,429000004,Family history of malignant neoplasm of pancreas,Context-dependent,SNOMED,Valid,Standard,469
 4132309,26636000,Sudden death,Event,SNOMED,Valid,Standard,469
 40484566,444000005,Short stature for age,Clinical Finding,SNOMED,Valid,Standard,469
@@ -861,8 +848,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4053377,160314003,FH: Hypercholesterolemia,Context-dependent,SNOMED,Valid,Standard,453
 4146976,35468003,Crushed in between objects,Event,SNOMED,Valid,Standard,452
 40772730,LP17276-4,levoFLOXacin,LOINC Component,LOINC,Valid,Non-standard,448
-35820334,744-1141162668,levofloxacin,Value,UK Biobank,Valid,Non-standard,448
-35820333,4-1141162668,levofloxacin,Value,UK Biobank,Valid,Non-standard,448
 4147001,35566002,Hematoma,Morph Abnormality,SNOMED,Valid,Standard,447
 43530675,1431000119101,Exposure to tuberculosis,Event,SNOMED,Valid,Standard,445
 36717636,717795009,Supervision of pregnancy with history of insufficient antenatal care,Procedure,SNOMED,Valid,Standard,445
@@ -878,7 +863,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 43020469,288231000119101,Cares for dependent relative at home,Clinical Finding,SNOMED,Valid,Standard,436
 4296024,76799001,Family disruption due to divorce,Clinical Finding,SNOMED,Valid,Standard,436
 40782765,LP18112-0,traMADol,LOINC Component,LOINC,Valid,Non-standard,436
-35824439,4-1140864992,tramadol,Value,UK Biobank,Valid,Non-standard,436
 437748,309535002,Industrial accident,Event,SNOMED,Valid,Standard,434
 432532,418019003,Accidental event,Event,SNOMED,Valid,Standard,433
 4215695,395125009,FH: Aortic aneurysm,Context-dependent,SNOMED,Valid,Standard,433
@@ -934,10 +918,7 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4307013,3875003,Tophus,Morph Abnormality,SNOMED,Valid,Standard,378
 4317416,9482002,Human papillomavirus,Organism,SNOMED,Valid,Standard,374
 44787240,LP171386-8,Atorvastatin,LOINC Component,LOINC,Valid,Non-standard,372
-35816115,4-1141146234,atorvastatin,Value,UK Biobank,Valid,Non-standard,372
 40795863,LP16306-0,Vancomycin,LOINC Component,LOINC,Valid,Non-standard,371
-35824759,744-1140873850,vancomycin,Value,UK Biobank,Valid,Non-standard,371
-35824758,4-1140873850,vancomycin,Value,UK Biobank,Valid,Non-standard,371
 4058255,161155000,School problem,Clinical Finding,SNOMED,Valid,Non-standard,369
 35622840,765060000,Ketogenic diet,Procedure,SNOMED,Valid,Standard,369
 3661813,871529001,Adverse reaction to hormone,Disorder,SNOMED,Valid,Standard,368
@@ -975,7 +956,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4308510,390952000,Allergy to dust,Clinical Finding,SNOMED,Valid,Non-standard,334
 4145796,266907002,FH: Musculoskeletal disease,Context-dependent,SNOMED,Valid,Standard,334
 40772639,LP16165-0,Ibuprofen,LOINC Component,LOINC,Valid,Non-standard,334
-35819715,4-1140871310,ibuprofen,Value,UK Biobank,Valid,Non-standard,334
 4307028,390915000,FH: Cardiomyopathy,Context-dependent,SNOMED,Valid,Standard,332
 4082383,182833002,Medication given,Context-dependent,SNOMED,Valid,Non-standard,332
 441201,14047009,Fall from building,Event,SNOMED,Valid,Standard,327
@@ -1005,8 +985,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 43533326,G8985,"Carrying, moving and handling objects, projected goal status, at therapy episode outset, at reporting intervals, and at discharge or to end reporting (Deprecated)",HCPCS,HCPCS,Valid,Standard,316
 443340,292371003,Neuroleptic adverse reaction,Disorder,SNOMED,Valid,Standard,314
 40782574,LP15264-2,Cephalexin,LOINC Component,LOINC,Valid,Non-standard,314
-35816960,744-1140873288,cephalexin,Value,UK Biobank,Valid,Non-standard,314
-35816959,4-1140873288,cephalexin,Value,UK Biobank,Valid,Non-standard,314
 440925,44301001,Suicide,Event,SNOMED,Valid,Standard,312
 4168046,418161006,Vehicle accident,Event,SNOMED,Valid,Standard,311
 440910,292826004,Antiviral drug adverse reaction,Disorder,SNOMED,Valid,Standard,310
@@ -1023,8 +1001,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 42709970,449842009,Nasogastric tube in situ,Clinical Finding,SNOMED,Valid,Non-standard,298
 40779197,LP15115-6,Erythromycin,LOINC Component,LOINC,Valid,Non-standard,298
 4019958,105480006,Refusal of treatment by patient,Context-dependent,SNOMED,Valid,Non-standard,298
-35818617,744-1140873608,erythromycin,Value,UK Biobank,Valid,Non-standard,298
-35818616,4-1140873608,erythromycin,Value,UK Biobank,Valid,Non-standard,298
 4332641,430337004,Family history of sleep apnea,Context-dependent,SNOMED,Valid,Standard,297
 2108550,4044F,Documentation that an order was given for venous thromboembolism (VTE) prophylaxis to be given within 24 hours prior to incision time or 24 hours after surgery end time (PERI 2),CPT4,CPT4,Valid,Standard,297
 4168648,418060005,Running,Observable Entity,SNOMED,Valid,Standard,296
@@ -1051,7 +1027,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 40756989,4255F,"Duration of general or neuraxial anesthesia 60 minutes or longer, as documented in the anesthesia record (CRIT) (Peri2)",CPT4,CPT4,Valid,Standard,276
 40479434,444459008,Exposure to Rabies virus,Event,SNOMED,Valid,Standard,276
 40789374,LP17989-2,Gabapentin,LOINC Component,LOINC,Valid,Non-standard,275
-35819233,4-1140872228,gabapentin,Value,UK Biobank,Valid,Non-standard,275
 4340252,235719002,Intolerance to food,Clinical Finding,SNOMED,Valid,Standard,274
 37109048,16234971000119108,Long-term current use of diuretic,Context-dependent,SNOMED,Valid,Standard,274
 4017170,170577003,Good hypertension control,Clinical Finding,SNOMED,Valid,Standard,273
@@ -1064,8 +1039,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 36713467,717805009,Singleton liveborn unspecified as to place of birth,Context-dependent,SNOMED,Valid,Standard,267
 4165467,293619005,Allergy to ibuprofen,Clinical Finding,SNOMED,Valid,Non-standard,266
 40782581,LP15427-5,Clindamycin,LOINC Component,LOINC,Valid,Non-standard,266
-35817252,744-1140873650,clindamycin,Value,UK Biobank,Valid,Non-standard,266
-35817251,4-1140873650,clindamycin,Value,UK Biobank,Valid,Non-standard,266
 3518653,372786004,Clindamycin,Substance,Nebraska Lexicon,Valid,Non-standard,266
 4084913,281399006,Did not attend,Clinical Finding,SNOMED,Valid,Non-standard,264
 4074458,224496005,Caregiver not readily available,Clinical Finding,SNOMED,Valid,Standard,264
@@ -1083,7 +1056,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4311442,424423005,Language barrier impedes ability to use community resources,Clinical Finding,SNOMED,Valid,Standard,255
 4051256,160433007,Family history with explicit context pertaining to father,Context-dependent,SNOMED,Valid,Standard,255
 37397195,717252006,Colostomy care,Procedure,SNOMED,Valid,Standard,255
-35815762,4-1140879802,amlodipine,Value,UK Biobank,Valid,Non-standard,255
 765265,15929301000119104,Problem related to living in residential institution,Clinical Finding,SNOMED,Valid,Standard,254
 4307211,83208000,Exposure to mechanical force,Event,SNOMED,Valid,Standard,254
 4290926,70555003,"Endometrial stromal sarcoma, high grade",Morph Abnormality,SNOMED,Valid,Standard,252
@@ -1132,8 +1104,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 40772632,LP16090-0,Azithromycin,LOINC Component,LOINC,Valid,Non-standard,232
 4050742,23382007,Stress fracture,Morph Abnormality,SNOMED,Valid,Standard,232
 37018631,85151000119101,Accident due to mechanical fall without injury,Event,SNOMED,Valid,Standard,232
-35816211,744-1140873642,azithromycin,Value,UK Biobank,Valid,Non-standard,232
-35816210,4-1140873642,azithromycin,Value,UK Biobank,Valid,Non-standard,232
 4311087,85583005,Pheochromocytoma,Morph Abnormality,SNOMED,Valid,Standard,231
 4302038,78838008,Pleomorphic xanthoastrocytoma,Morph Abnormality,SNOMED,Valid,Standard,231
 4200657,302117003,Finding of musculoskeletal device,Clinical Finding,SNOMED,Valid,Standard,231
@@ -1141,7 +1111,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 40789151,LP14712-1,Acetaminophen,LOINC Component,LOINC,Valid,Non-standard,230
 40484646,444071008,Exposure to organism,Event,SNOMED,Valid,Standard,230
 37117779,733842007,Isocitrate dehydrogenase mutant diffuse astrocytoma,Morph Abnormality,SNOMED,Valid,Standard,230
-35815399,4-1140888772,acetaminophen,Value,UK Biobank,Valid,Non-standard,230
 4028246,128306009,Cataract,Morph Abnormality,SNOMED,Valid,Non-standard,229
 2106805,3260F,"PT category (primary tumor), pN category (regional lymph nodes), and histologic grade documented in pathology report (PATH)",CPT4,CPT4,Valid,Non-standard,229
 4303944,418611001,Exposure to heat,Event,SNOMED,Valid,Standard,228
@@ -1211,7 +1180,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4056965,182884001,Drug compliance good,Clinical Finding,SNOMED,Valid,Standard,197
 4167767,293515005,Cardiac inotropic agent adverse reaction,Disorder,SNOMED,Valid,Standard,195
 40796088,LP30698-2,Egg,LOINC Component,LOINC,Valid,Non-standard,195
-35818449,6314-27,egg,Value,UK Biobank,Valid,Standard,195
 1030104,LP7192-0,Egg,LOINC System,LOINC,Valid,Non-standard,195
 43533233,G9171,"Voice functional limitation, current status at therapy episode outset and at reporting intervals (Deprecated)",HCPCS,HCPCS,Valid,Standard,193
 43533284,G8988,"Self care functional limitation, projected goal status, at therapy episode outset, at reporting intervals, and at discharge or to end reporting (Deprecated)",HCPCS,HCPCS,Valid,Standard,192
@@ -1230,9 +1198,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 42538933,762952008,Peanut,Substance,SNOMED,Valid,Standard,188
 40795833,LP15998-5,Heparin,LOINC Component,LOINC,Valid,Non-standard,188
 40782645,LP16184-1,Meperidine,LOINC Component,LOINC,Valid,Non-standard,188
-35820748,4-1140884600,metformin,Value,UK Biobank,Valid,Non-standard,188
-35820694,4-1140910700,meperidine,Value,UK Biobank,Valid,Non-standard,188
-35819535,4-1140881842,heparin,Value,UK Biobank,Valid,Non-standard,188
 3285389,372567009,Metformin,Substance,Nebraska Lexicon,Valid,Non-standard,188
 439987,218130004,"Accident caused by hot liquid and vapor, including steam",Event,SNOMED,Valid,Standard,187
 4240646,91931000,Allergy to erythromycin,Clinical Finding,SNOMED,Valid,Non-standard,187
@@ -1244,8 +1209,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4309352,84427001,Mullerian mixed tumor,Morph Abnormality,SNOMED,Valid,Non-standard,185
 42538416,761960006,Orthopedic hardware in situ,Clinical Finding,SNOMED,Valid,Non-standard,185
 40789168,LP14992-9,Doxycycline,LOINC Component,LOINC,Valid,Non-standard,185
-35818310,744-1140873394,doxycycline,Value,UK Biobank,Valid,Non-standard,185
-35818309,4-1140873394,doxycycline,Value,UK Biobank,Valid,Non-standard,185
 4031370,129844000,Alteration in nutrition,Clinical Finding,SNOMED,Valid,Standard,184
 4010094,112641009,Telangiectasis,Morph Abnormality,SNOMED,Valid,Standard,184
 4212379,57596004,Oxyphilic adenocarcinoma,Morph Abnormality,SNOMED,Valid,Standard,183
@@ -1267,7 +1230,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4307834,422759001,Pre-procedure evaluation check,Procedure,SNOMED,Valid,Standard,174
 4166877,417992006,Sebaceous cyst,Morph Abnormality,SNOMED,Valid,Standard,174
 40795956,LP18109-6,predniSONE,LOINC Component,LOINC,Valid,Non-standard,174
-35822586,4-1140868364,prednisone,Value,UK Biobank,Valid,Non-standard,174
 3518842,116602009,Prednisone,Substance,Nebraska Lexicon,Valid,Non-standard,174
 4112479,285592006,Personal care activity,Observable Entity,SNOMED,Valid,Standard,173
 4163801,294002003,Allergy to amlodipine,Clinical Finding,SNOMED,Valid,Non-standard,172
@@ -1292,8 +1254,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4053385,160362009,FH: Atherosclerosis,Context-dependent,SNOMED,Valid,Standard,165
 40479856,444563003,Exposure to Hepatitis C virus,Event,SNOMED,Valid,Standard,165
 40772650,LP16237-7,Penicillin G,LOINC Component,LOINC,Valid,Non-standard,164
-35822239,744-1140909716,penicillin g,Value,UK Biobank,Valid,Non-standard,164
-35822238,4-1140909716,penicillin g,Value,UK Biobank,Valid,Non-standard,164
 436594,292847000,Antimalarial drug adverse reaction,Disorder,SNOMED,Valid,Standard,162
 4166675,45361006,Imprisonment,Clinical Finding,SNOMED,Valid,Standard,162
 2213598,90989,"Dialysis training, patient, including helper where applicable, any mode, completed course",CPT4,CPT4,Valid,Standard,162
@@ -1343,7 +1303,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4050813,160346003,FH: Eye disorder,Context-dependent,SNOMED,Valid,Standard,180
 4016922,170578008,Poor hypertension control,Clinical Finding,SNOMED,Valid,Standard,147
 36684846,457611000124104,Patient understands importance of medication adherence,Clinical Finding,SNOMED,Valid,Standard,147
-35818877,4-1140880956,fentanyl,Value,UK Biobank,Valid,Non-standard,147
 4188316,415510005,Sedentary lifestyle,Clinical Finding,SNOMED,Valid,Standard,146
 439655,162432007,Symptom: generalized,Clinical Finding,SNOMED,Valid,Standard,145
 437742,219019005,Adverse reaction to skeletal muscle relaxants,Disorder,SNOMED,Valid,Standard,145
@@ -1366,9 +1325,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4171457,294585005,Allergy to doxycycline,Clinical Finding,SNOMED,Valid,Non-standard,141
 40792070,LP102316-9,Prochlorperazine,LOINC Component,LOINC,Valid,Non-standard,141
 40772581,LP15406-9,Clarithromycin,LOINC Component,LOINC,Valid,Non-standard,141
-35822884,4-1140868170,prochlorperazine,Value,UK Biobank,Valid,Non-standard,141
-35817236,744-1140873634,clarithromycin,Value,UK Biobank,Valid,Non-standard,141
-35817235,4-1140873634,clarithromycin,Value,UK Biobank,Valid,Non-standard,141
 443602,430136001,Adverse reaction to antiparkinsonism drug,Disorder,SNOMED,Valid,Standard,140
 4171312,294472005,Allergy to azithromycin,Clinical Finding,SNOMED,Valid,Non-standard,140
 4041659,230126006,Finding relating to infant feeding,Clinical Finding,SNOMED,Valid,Standard,140
@@ -1387,7 +1343,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 40786049,LP17995-9,Metoclopramide,LOINC Component,LOINC,Valid,Non-standard,136
 40481489,443430002,Requires assistance with all daily activities,Clinical Finding,SNOMED,Valid,Standard,136
 37109077,16468541000119105,Exposure to Zika virus,Event,SNOMED,Valid,Standard,136
-35820787,4-1140879494,metoclopramide,Value,UK Biobank,Valid,Non-standard,136
 4231692,89811004,Gluten,Substance,SNOMED,Valid,Standard,270
 4190809,390800000,Goal achievement finding,Clinical Finding,SNOMED,Valid,Standard,135
 4160623,371776003,Neglect or abandonment,Event,SNOMED,Valid,Standard,135
@@ -1398,9 +1353,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 40789257,LP16286-4,Tetracycline,LOINC Component,LOINC,Valid,Non-standard,134
 40772644,LP16204-7,Metoprolol,LOINC Component,LOINC,Valid,Non-standard,134
 4051565,160309002,Family history of cystic fibrosis,Context-dependent,SNOMED,Valid,Standard,134
-35824250,744-1140873450,tetracycline,Value,UK Biobank,Valid,Non-standard,134
-35824249,4-1140873450,tetracycline,Value,UK Biobank,Valid,Non-standard,134
-35820791,4-1140879818,metoprolol,Value,UK Biobank,Valid,Non-standard,134
 4313552,218129009,"Accidents caused by hot substance or object, caustic or corrosive material and steam",Event,SNOMED,Valid,Standard,133
 42872775,450767000,Allergy to tramadol,Clinical Finding,SNOMED,Valid,Non-standard,133
 4154097,315640000,Influenza vaccination declined,Context-dependent,SNOMED,Valid,Standard,133
@@ -1417,7 +1369,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 43021819,61601000119107,Life circumstance problem,Clinical Finding,SNOMED,Valid,Non-standard,130
 4181604,428987008,Subcutaneous contraceptive implant present,Clinical Finding,SNOMED,Valid,Non-standard,130
 4098981,292229001,Methotrexate adverse reaction,Disorder,SNOMED,Valid,Standard,130
-35823363,4-1141192410,rosuvastatin,Value,UK Biobank,Valid,Non-standard,130
 44787279,LP171640-8,Simvastatin,LOINC Component,LOINC,Valid,Non-standard,129
 438938,288297000,Accident with controlled fire,Event,SNOMED,Valid,Standard,129
 433644,300913006,Allergy to shellfish,Clinical Finding,SNOMED,Valid,Non-standard,129
@@ -1425,7 +1376,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4252223,408359002,Drug monitoring done,Context-dependent,SNOMED,Valid,Non-standard,129
 4091035,249486008,Unable to swallow,Clinical Finding,SNOMED,Valid,Standard,129
 40775847,LP15003-4,oxyCODONE,LOINC Component,LOINC,Valid,Non-standard,129
-35823540,4-1140861958,simvastatin,Value,UK Biobank,Valid,Non-standard,129
 45773082,703396000,Combination internal cardiac defibrillator and pacemaker in situ,Clinical Finding,SNOMED,Valid,Non-standard,128
 443007,214403005,"Motor vehicle traffic accident due to motor vehicle going out of control due to excessive speed, without collision on the highway, motor cyclist injured",Event,SNOMED,Valid,Standard,128
 438638,217779001,Inhalation and ingestion of food causing obstruction of respiratory tract or suffocation,Event,SNOMED,Valid,Standard,128
@@ -1456,7 +1406,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4167568,418098005,Accidental exposure to potentially harmful entity,Event,SNOMED,Valid,Standard,121
 4150599,278840001,Shrimp,Substance,SNOMED,Valid,Standard,121
 40779294,LP16215-3,Naproxen,LOINC Component,LOINC,Valid,Non-standard,121
-35821205,4-1140871462,naproxen,Value,UK Biobank,Valid,Non-standard,121
 3518773,372588000,Naproxen,Substance,Nebraska Lexicon,Valid,Non-standard,121
 19474323,D002511,Cephalosporins,Main Heading,MeSH,Valid,Non-standard,121
 40774645,LP61621-6,Pregabalin,LOINC Component,LOINC,Valid,Non-standard,120
@@ -1464,27 +1413,22 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4050806,160329001,FH: Depression,Context-dependent,SNOMED,Valid,Standard,120
 4048671,123737005,"Fracture, closed, comminuted, with displacement",Morph Abnormality,SNOMED,Valid,Standard,120
 4048169,232350006,Allergy to dust mite protein,Clinical Finding,SNOMED,Valid,Non-standard,120
-35822829,4-1141200004,pregabalin,Value,UK Biobank,Valid,Non-standard,120
 437477,41411008,Fall from playground equipment,Event,SNOMED,Valid,Standard,119
 4271564,63264007,Carcinosarcoma,Morph Abnormality,SNOMED,Valid,Standard,119
 4244886,59238007,Epithelioid sarcoma,Morph Abnormality,SNOMED,Valid,Standard,119
 40785911,LP16028-0,Amiodarone,LOINC Component,LOINC,Valid,Non-standard,119
 40776032,LP17165-9,Cefepime,LOINC Component,LOINC,Valid,Non-standard,119
 40757059,4256F,"Duration of general or neuraxial anesthesia less than 60 minutes, as documented in the anesthesia record (CRIT) (Peri2)",CPT4,CPT4,Valid,Standard,119
-35815748,4-1140888502,amiodarone,Value,UK Biobank,Valid,Non-standard,119
 439337,214267005,"Motor vehicle traffic accident involving collision, on highway, between motor vehicle and animal, passenger of motor vehicle injured",Event,SNOMED,Valid,Standard,118
 43531593,921000119109,Vaccine declined by parent,Context-dependent,SNOMED,Valid,Standard,118
 40795843,LP16160-1,hydroCHLOROthiazide,LOINC Component,LOINC,Valid,Non-standard,118
 4036629,162358006,Unilateral earache,Context-dependent,SNOMED,Valid,Non-standard,118
-35819617,4-1140866162,hydrochlorothiazide,Value,UK Biobank,Valid,Non-standard,118
 4256118,409513009,Event related to biological agent,Event,SNOMED,Valid,Standard,117
 4145793,266897007,FH: Myocardial infarction,Context-dependent,SNOMED,Valid,Standard,117
 4126324,304252001,For resuscitation,Clinical Finding,SNOMED,Valid,Standard,117
 40785834,LP14997-8,metroNIDAZOLE,LOINC Component,LOINC,Valid,Non-standard,117
 37116835,733840004,Isocitrate dehydrogenase wild-type anaplastic astrocytoma,Morph Abnormality,SNOMED,Valid,Standard,117
 37110752,725118003,Family history of aneurysm of abdominal aorta,Context-dependent,SNOMED,Valid,Standard,117
-35820816,744-1140874014,metronidazole,Value,UK Biobank,Valid,Non-standard,117
-35820815,4-1140874014,metronidazole,Value,UK Biobank,Valid,Non-standard,117
 763366,4391000175105,Left before being seen,Clinical Finding,SNOMED,Valid,Standard,116
 443378,293218006,Anabolic steroids adverse reaction,Disorder,SNOMED,Valid,Standard,116
 4290437,37304002,Basosquamous carcinoma,Morph Abnormality,SNOMED,Valid,Standard,116
@@ -1493,7 +1437,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 40789255,LP16280-7,Spironolactone,LOINC Component,LOINC,Valid,Non-standard,116
 4028719,128855009,Glucagonoma of uncertain behavior,Morph Abnormality,SNOMED,Valid,Non-standard,116
 4022062,105471006,Bone marrow donor,Social Context,SNOMED,Valid,Non-standard,116
-35823813,4-1140866236,spironolactone,Value,UK Biobank,Valid,Non-standard,116
 443050,214435005,Noncollision motor vehicle traffic accident while boarding or alighting,Event,SNOMED,Valid,Standard,115
 4304110,419474003,Allergy to mold,Clinical Finding,SNOMED,Valid,Non-standard,115
 44782674,698460003,Antiviral therapy declined,Context-dependent,SNOMED,Valid,Standard,114
@@ -1506,7 +1449,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4247665,73017001,Lymphangiomyomatosis,Morph Abnormality,SNOMED,Valid,Standard,113
 4211332,413492003,American or Canadian football - sport,Qualifier Value,SNOMED,Valid,Standard,113
 36674965,770981003,Bite of arthropod,Event,SNOMED,Valid,Standard,113
-35820110,4-1140884558,ketorolac,Value,UK Biobank,Valid,Non-standard,113
 4206914,56208002,Ulcer,Morph Abnormality,SNOMED,Valid,Standard,112
 4204650,308429009,Hypertension screening status,Clinical Finding,SNOMED,Valid,Standard,112
 44787261,LP171619-2,Losartan,LOINC Component,LOINC,Valid,Non-standard,111
@@ -1519,9 +1461,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4108462,250869005,Equipment finding,Clinical Finding,SNOMED,Valid,Standard,111
 4097925,292452004,Calcium-channel blocker adverse reaction,Disorder,SNOMED,Valid,Standard,111
 40792423,LP15260-0,cefTRIAXone,LOINC Component,LOINC,Valid,Non-standard,111
-35820461,4-1140916356,losartan,Value,UK Biobank,Valid,Non-standard,111
-35816931,744-1140873434,ceftriaxone,Value,UK Biobank,Valid,Non-standard,111
-35816930,4-1140873434,ceftriaxone,Value,UK Biobank,Valid,Non-standard,111
 35622818,765021002,Vegetarian diet,Procedure,SNOMED,Valid,Standard,111
 4085481,185970004,Patient awaiting medical adm,Clinical Finding,SNOMED,Valid,Standard,110
 4051240,160364005,FH: Congenital heart disease,Context-dependent,SNOMED,Valid,Standard,110
@@ -1538,17 +1477,14 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 440896,213770003,Railway accident,Event,SNOMED,Valid,Standard,107
 4219051,82375006,Adenomatous polyp,Morph Abnormality,SNOMED,Valid,Standard,107
 4177710,429069001,Requires Bacillus Calmette-Guerin vaccination,Clinical Finding,SNOMED,Valid,Standard,107
-35816947,4-1141176662,celecoxib,Value,UK Biobank,Valid,Non-standard,107
 4298084,386152007,Hydrocele,Morph Abnormality,SNOMED,Valid,Standard,106
 4178539,297243001,Family history of pernicious anemia,Context-dependent,SNOMED,Valid,Standard,106
 40792492,LP16176-7,LORazepam,LOINC Component,LOINC,Valid,Non-standard,106
-35820457,4-1140863302,lorazepam,Value,UK Biobank,Valid,Non-standard,106
 433374,242397005,Fall due to roller skates or skateboard,Event,SNOMED,Valid,Standard,105
 4244400,5933001,Clostridioides difficile,Organism,SNOMED,Valid,Standard,105
 4239303,58538004,Bumped into other person,Event,SNOMED,Valid,Standard,105
 40775856,LP15169-3,hydrALAZINE,LOINC Component,LOINC,Valid,Non-standard,105
 4031491,14345008,Parent/child conflict,Clinical Finding,SNOMED,Valid,Standard,105
-35819611,4-1140888686,hydralazine,Value,UK Biobank,Valid,Non-standard,105
 443346,292176000,Local anesthetic drug adverse reaction,Disorder,SNOMED,Valid,Standard,104
 4328801,430534005,Family history of malignant neoplasm of thyroid,Context-dependent,SNOMED,Valid,Standard,103
 4168974,420008001,Travel,Event,SNOMED,Valid,Standard,103
@@ -1581,8 +1517,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4093906,26036001,Obstruction,Morph Abnormality,SNOMED,Valid,Standard,99
 40779125,LP14176-9,Cefaclor,LOINC Component,LOINC,Valid,Non-standard,99
 40772883,LP29290-1,Milk,LOINC Component,LOINC,Valid,Non-standard,99
-35816881,744-1140873020,cefaclor,Value,UK Biobank,Valid,Non-standard,99
-35816880,4-1140873020,cefaclor,Value,UK Biobank,Valid,Non-standard,99
 35627124,0565c7d0-1d08-409e-b297-ce72efdcc2fc,"Retired SNOMED UK Drug extension concept, do not use, use concept indicated by the CONCEPT_RELATIONSHIP table, if any",Qualifier Value,SNOMED,Valid,Non-standard,99
 1031783,LP7431-2,Milk,LOINC System,LOINC,Valid,Non-standard,99
 763007,434861000124105,Family history of endometriosis,Context-dependent,SNOMED,Valid,Standard,98
@@ -1619,15 +1553,11 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4164687,293606006,Allergy to meperidine,Clinical Finding,SNOMED,Valid,Non-standard,94
 40795842,LP16140-3,Nitrofurantoin,LOINC Component,LOINC,Valid,Non-standard,94
 40792489,LP16158-5,Haloperidol,LOINC Component,LOINC,Valid,Non-standard,94
-35821420,744-1140874126,nitrofurantoin,Value,UK Biobank,Valid,Non-standard,94
-35821419,4-1140874126,nitrofurantoin,Value,UK Biobank,Valid,Non-standard,94
-35819497,4-1140867168,haloperidol,Value,UK Biobank,Valid,Non-standard,94
 4267438,62592009,Klebsiella aerogenes,Organism,SNOMED,Valid,Standard,93
 40782549,LP14887-1,Niacin,LOINC Component,LOINC,Valid,Non-standard,93
 4068353,20255002,Blushing,Observable Entity,SNOMED,Valid,Standard,93
 4031375,129880000,Finding related to dependent adult care,Clinical Finding,SNOMED,Valid,Standard,93
 37049469,LP128648-5,Chlorhexidine,LOINC Component,LOINC,Valid,Non-standard,93
-35821368,4-1140910670,niacin,Value,UK Biobank,Valid,Non-standard,93
 433934,218047001,Accident caused by needle,Event,SNOMED,Valid,Standard,92
 4331069,429962007,Family history of hereditary disease,Context-dependent,SNOMED,Valid,Standard,92
 4330994,22495007,Abnormal weight,Clinical Finding,SNOMED,Valid,Standard,92
@@ -1717,9 +1647,7 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 40779378,LP17255-8,Zolpidem,LOINC Component,LOINC,Valid,Non-standard,79
 4064391,171277005,Sensitivity contraindicated - immunization,Context-dependent,SNOMED,Valid,Standard,79
 36715465,721151003,Maternal history of gestational diabetes,Context-dependent,SNOMED,Valid,Standard,79
-35825323,4-1140865016,zolpidem,Value,UK Biobank,Valid,Non-standard,79
 40775942,LP16155-1,Furosemide,LOINC Component,LOINC,Valid,Non-standard,78
-35819222,4-1140909708,furosemide,Value,UK Biobank,Valid,Non-standard,78
 2102873,2029F,Complete physical skin exam performed (ML),CPT4,CPT4,Valid,Standard,78
 762851,432811000124101,Medication course changed,Context-dependent,SNOMED,Valid,Standard,77
 442212,215189007,Animal-drawn vehicle accident,Event,SNOMED,Valid,Standard,77
@@ -1759,7 +1687,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4086349,248122005,Binging,Clinical Finding,SNOMED,Valid,Non-standard,74
 4055737,19633006,Mucous cyst,Morph Abnormality,SNOMED,Valid,Standard,74
 4035929,228324005,Drinking session,Clinical Finding,SNOMED,Valid,Standard,74
-35818359,4-1141200564,duloxetine,Value,UK Biobank,Valid,Non-standard,74
 436605,287186005,Attempted suicide - jumping from a high place,Event,SNOMED,Valid,Standard,73
 4230179,406225007,Reproductive technology management,Procedure,SNOMED,Valid,Standard,73
 4166788,293924006,Allergy to haloperidol,Clinical Finding,SNOMED,Valid,Non-standard,73
@@ -1796,7 +1723,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4099820,253079007,Malignant pineal germinoma,Morph Abnormality,SNOMED,Valid,Standard,69
 4098402,292853000,Hydroxychloroquine adverse reaction,Disorder,SNOMED,Valid,Standard,69
 40772539,LP14732-9,Phenytoin,LOINC Component,LOINC,Valid,Non-standard,69
-35822341,4-2038460076,phenytoin,Value,UK Biobank,Valid,Non-standard,69
 4353833,251031008,Coronary stent occluded,Clinical Finding,SNOMED,Valid,Standard,68
 4327278,429954004,Family history of cleft lip,Context-dependent,SNOMED,Valid,Standard,68
 4304355,103688009,Acute myeloid leukemia with CBFB::MYH11 fusion,Morph Abnormality,SNOMED,Valid,Standard,68
@@ -1804,8 +1730,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4116804,301338002,Finding of head circumference,Clinical Finding,SNOMED,Valid,Standard,68
 40792478,LP16066-0,ceFAZolin,LOINC Component,LOINC,Valid,Non-standard,68
 37117131,16090331000119101,Exposure to mold,Event,SNOMED,Valid,Standard,234
-35816891,744-1141180450,cefazolin,Value,UK Biobank,Valid,Non-standard,68
-35816890,4-1141180450,cefazolin,Value,UK Biobank,Valid,Non-standard,68
 44787269,LP171630-9,Pravastatin,LOINC Component,LOINC,Valid,Non-standard,67
 435432,292410009,Central stimulant adverse reaction,Disorder,SNOMED,Valid,Standard,67
 434850,219203009,Assault by shotgun,Event,SNOMED,Valid,Standard,67
@@ -1818,9 +1742,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 40792723,LP28566-5,levETIRAcetam,LOINC Component,LOINC,Valid,Non-standard,67
 40792607,LP17988-4,Allopurinol,LOINC Component,LOINC,Valid,Non-standard,67
 37109436,53081000119101,Long-term current use of testosterone replacement therapy,Context-dependent,SNOMED,Valid,Standard,67
-35822573,4-1140888648,pravastatin,Value,UK Biobank,Valid,Non-standard,67
-35820322,4-1141171932,levetiracetam,Value,UK Biobank,Valid,Non-standard,67
-35815610,4-1140875408,allopurinol,Value,UK Biobank,Valid,Non-standard,67
 35626999,2cf7710f-ee5d-466a-8347-158538e9d38c,"Retired SNOMED UK Drug extension concept, do not use, use concept indicated by the CONCEPT_RELATIONSHIP table, if any",Qualifier Value,SNOMED,Valid,Non-standard,67
 44787553,LP17866-2,NIFEdipine,LOINC Component,LOINC,Valid,Non-standard,66
 44787244,LP171391-8,Clopidogrel,LOINC Component,LOINC,Valid,Non-standard,66
@@ -1837,9 +1758,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 40483084,442327001,Twin liveborn born in hospital,Context-dependent,SNOMED,Valid,Standard,66
 4013560,103636002,"Atypical squamous cells of uncertain significance, probably benign",Morph Abnormality,SNOMED,Valid,Standard,66
 37017058,713242006,Supervision of high risk pregnancy with poor reproductive history,Procedure,SNOMED,Valid,Standard,66
-35821393,4-1140861088,nifedipine,Value,UK Biobank,Valid,Non-standard,66
-35817289,4-1141168318,clopidogrel,Value,UK Biobank,Valid,Non-standard,66
-35816611,4-1141176854,bupropion,Value,UK Biobank,Valid,Non-standard,66
 761094,14560001000004102,Family history of Factor V Leiden mutation,Context-dependent,SNOMED,Valid,Standard,65
 438668,217631001,Accidents due to travel and motion,Event,SNOMED,Valid,Standard,65
 4316727,217147000,Fall from embankment,Event,SNOMED,Valid,Standard,65
@@ -1855,8 +1773,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 40792724,LP28720-8,Moxifloxacin,LOINC Component,LOINC,Valid,Non-standard,65
 37396891,716872004,Antineoplastic chemotherapy regimen,Procedure,SNOMED,Valid,Standard,65
 37108852,151201000119107,Allergy to insect venom,Clinical Finding,SNOMED,Valid,Non-standard,65
-35821087,744-1141187100,moxifloxacin,Value,UK Biobank,Valid,Non-standard,65
-35821086,4-1141187100,moxifloxacin,Value,UK Biobank,Valid,Non-standard,65
 35622676,764795004,Transplant recipient EBV (Epstein Barr virus) antibody positive,Context-dependent,SNOMED,Valid,Standard,65
 2617822,G8422,"Bmi not documented, documentation the patient is not eligible for bmi calculation (Deprecated)",HCPCS,HCPCS,Valid,Standard,65
 44783516,699006006,Ventricular shunt in situ,Clinical Finding,SNOMED,Valid,Non-standard,64
@@ -1879,8 +1795,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4054576,242503001,Burning due to contact with water from hot tap,Event,SNOMED,Valid,Standard,63
 40480877,441831003,Gluten sensitivity,Clinical Finding,SNOMED,Valid,Non-standard,63
 4029181,128852007,Mucinous cystic tumor of borderline malignancy,Morph Abnormality,SNOMED,Valid,Standard,63
-35815846,744-1140872748,ampicillin,Value,UK Biobank,Valid,Non-standard,63
-35815845,4-1140872748,ampicillin,Value,UK Biobank,Valid,Non-standard,63
 4327587,430711004,Family history of seizure disorder,Context-dependent,SNOMED,Valid,Standard,62
 4203148,53041004,Substance with alcohol structure,Substance,SNOMED,Valid,Non-standard,62
 4085931,243822005,Depot contraceptive status,Clinical Finding,SNOMED,Valid,Standard,62
@@ -1919,7 +1833,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4139890,305825006,Seen by rehabilitation service,Clinical Finding,SNOMED,Valid,Standard,59
 4054297,242094005,Motor vehicle on road in collision with road-side fixed object,Event,SNOMED,Valid,Standard,59
 4051245,160386006,FH: Crohn's disease,Context-dependent,SNOMED,Valid,Standard,59
-35821821,4-1140868134,ondansetron,Value,UK Biobank,Valid,Non-standard,59
 762843,432701000124107,Medication therapy changed,Context-dependent,SNOMED,Valid,Standard,58
 46274036,151181000119106,Family history of chronic respiratory disease,Context-dependent,SNOMED,Valid,Standard,58
 45765732,702742009,Supervision of high risk pregnancy for social problem,Procedure,SNOMED,Valid,Standard,58
@@ -1952,11 +1865,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4061532,169667002,Antenatal ultrasound scan for slow growth,Clinical Finding,SNOMED,Valid,Standard,56
 4053867,242402009,Fall on same level due to accidental impact with another person,Event,SNOMED,Valid,Standard,56
 4027637,228315001,Binge drinker,Clinical Finding,SNOMED,Valid,Standard,56
-35825047,4-1140888266,warfarin,Value,UK Biobank,Valid,Non-standard,56
-35820776,4-1140874976,methylprednisolone,Value,UK Biobank,Valid,Non-standard,56
-35818550,4-1140888770,epinephrine,Value,UK Biobank,Valid,Non-standard,56
-35817908,4-1140863152,diazepam,Value,UK Biobank,Valid,Non-standard,56
-35816841,4-1140909368,carvedilol,Value,UK Biobank,Valid,Non-standard,56
 3519003,116593003,Methylprednisolone,Substance,Nebraska Lexicon,Valid,Non-standard,56
 1340207,OMOP5165862,History of event longer than 1 year ago,Context-dependent,OMOP Extension,Valid,Standard,56
 762409,3490001000004106,Family history of polycythemia,Context-dependent,SNOMED,Valid,Standard,55
@@ -1970,7 +1878,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 40775966,LP16297-1,traZODone,LOINC Component,LOINC,Valid,Non-standard,55
 4052186,160871009,Child in foster care,Clinical Finding,SNOMED,Valid,Standard,55
 4014153,169741004,Breastfed,Clinical Finding,SNOMED,Valid,Standard,55
-35824473,4-1140879634,trazodone,Value,UK Biobank,Valid,Non-standard,55
 19464214,C514822,oxycodone-acetaminophen,Suppl Concept,MeSH,Valid,Non-standard,55
 4269785,6250003,Fibromyxosarcoma,Morph Abnormality,SNOMED,Valid,Non-standard,54
 4182039,298310004,Romberg's sign positive,Context-dependent,SNOMED,Valid,Standard,54
@@ -1994,7 +1901,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4106297,256313003,Pineapple,Substance,SNOMED,Valid,Standard,106
 4053380,160331005,FH: Manic-depressive state,Context-dependent,SNOMED,Valid,Standard,53
 4035931,228326007,Drinking binge,Clinical Finding,SNOMED,Valid,Standard,53
-35823949,4-1140909702,sulfasalazine,Value,UK Biobank,Valid,Non-standard,53
 35627038,1cdb221c-d1df-42ea-a87e-fafbca9cc582,"Retired SNOMED UK Drug extension concept, do not use, use concept indicated by the CONCEPT_RELATIONSHIP table, if any",Qualifier Value,SNOMED,Valid,Non-standard,53
 763986,449371000124105,Long-term current use of hormonal contraceptive,Context-dependent,SNOMED,Valid,Standard,52
 436619,219329006,Hanging of unknown intent,Event,SNOMED,Valid,Standard,52
@@ -2025,7 +1931,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4037849,162655003,Full examination performed,Context-dependent,SNOMED,Valid,Standard,51
 4027234,128488006,House dust,Substance,SNOMED,Valid,Standard,102
 37108956,15929341000119102,Long-term current use of antipsychotic medication,Context-dependent,SNOMED,Valid,Standard,51
-35823008,4-1141152848,quetiapine,Value,UK Biobank,Valid,Non-standard,51
 3518850,386850001,Quetiapine,Substance,Nebraska Lexicon,Valid,Non-standard,51
 4334183,432805000,Suspected deep vein thrombosis,Context-dependent,SNOMED,Valid,Standard,50
 4303202,78691002,Staggering gait,Clinical Finding,SNOMED,Valid,Standard,50
@@ -2038,7 +1943,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 40782554,LP15017-4,Propoxyphene,LOINC Component,LOINC,Valid,Non-standard,50
 40772771,LP18092-4,Nitroglycerin,LOINC Component,LOINC,Valid,Non-standard,50
 4048064,123629008,Hemorrhagic diverticulitis,Morph Abnormality,SNOMED,Valid,Standard,50
-35821423,4-1140910570,nitroglycerin,Value,UK Biobank,Valid,Non-standard,50
 46270577,64181000119106,Family history of Marfan syndrome,Context-dependent,SNOMED,Valid,Standard,49
 44787250,LP171397-5,Ezetimibe,LOINC Component,LOINC,Valid,Non-standard,49
 435146,218164000,Accident caused by electric current,Event,SNOMED,Valid,Standard,49
@@ -2047,8 +1951,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4140691,33522002,Serratia marcescens,Organism,SNOMED,Valid,Standard,49
 4052804,160469004,FH: Allergy,Context-dependent,SNOMED,Valid,Standard,49
 36675020,771257008,Bite of spider,Event,SNOMED,Valid,Standard,49
-35820676,4-1140926732,meloxicam,Value,UK Biobank,Valid,Non-standard,49
-35818777,4-1141192736,ezetimibe,Value,UK Biobank,Valid,Non-standard,49
 35615059,15971181000119105,Right femoral hernia,Disorder,SNOMED,Valid,Standard,49
 440292,417895009,Topical agent adverse reaction,Disorder,SNOMED,Valid,Standard,48
 4312098,85804007,Congestion,Morph Abnormality,SNOMED,Valid,Standard,48
@@ -2065,9 +1967,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4012171,112674009,Fibrosis,Morph Abnormality,SNOMED,Valid,Standard,48
 37312222,789537001,Oral contraceptive prescribed,Context-dependent,SNOMED,Valid,Non-standard,48
 36684378,782594005,Allergy to soy protein,Clinical Finding,SNOMED,Valid,Non-standard,48
-35820724,744-1140917228,meropenem,Value,UK Biobank,Valid,Non-standard,48
-35820723,4-1140917228,meropenem,Value,UK Biobank,Valid,Non-standard,48
-35817510,4-1141173346,cortisone,Value,UK Biobank,Valid,Non-standard,48
 2101942,1124F,"Advance Care Planning discussed and documented in the medical record, patient did not wish or was not able to name a surrogate decision maker or provide an advance care plan (DEM) (GER, Pall Cr)",CPT4,CPT4,Valid,Non-standard,48
 45773566,707738004,Lower limb length discrepancy,Observable Entity,SNOMED,Valid,Standard,47
 4313252,217785008,Choked on food,Event,SNOMED,Valid,Standard,47
@@ -2093,8 +1992,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 40782649,LP16207-0,Midazolam,LOINC Component,LOINC,Valid,Non-standard,46
 40772727,LP17242-6,Sertraline,LOINC Component,LOINC,Valid,Non-standard,46
 4059498,160770002,Social worker involved,Clinical Finding,SNOMED,Valid,Standard,46
-35823567,4-1140867878,sertraline,Value,UK Biobank,Valid,Non-standard,46
-35821800,4-1140865634,omeprazole,Value,UK Biobank,Valid,Non-standard,46
 765839,432761000124108,Medication dose increased,Context-dependent,SNOMED,Valid,Standard,45
 618895,878899005,Inadequate intake of plant fiber,Clinical Finding,SNOMED,Valid,Standard,45
 601856,471811000124106,Allergy to empagliflozin,Clinical Finding,SNOMED,Valid,Non-standard,45
@@ -2128,7 +2025,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4023166,105523009,Gambling,Clinical Finding,SNOMED,Valid,Standard,44
 4019964,105488004,Difficulty with parents,Clinical Finding,SNOMED,Valid,Standard,44
 37017954,714332003,Allergy to banana,Clinical Finding,SNOMED,Valid,Non-standard,44
-35823047,4-1140860806,ramipril,Value,UK Biobank,Valid,Non-standard,44
 2101832,0503F,Postpartum care visit (Prenatal),CPT4,CPT4,Valid,Non-standard,44
 44787281,LP171642-4,Tamsulosin,LOINC Component,LOINC,Valid,Non-standard,43
 42536194,734881000,Tomato,Substance,SNOMED,Valid,Standard,86
@@ -2140,8 +2036,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4072660,242080009,Hit by railway vehicle,Event,SNOMED,Valid,Standard,43
 4046988,135840009,Blood pressure monitoring,Procedure,SNOMED,Valid,Standard,43
 4022061,105470007,Blood donor,Social Context,SNOMED,Valid,Non-standard,43
-35824101,4-1140926934,tamsulosin,Value,UK Biobank,Valid,Non-standard,43
-35816799,4-2038459704,carbamazepine,Value,UK Biobank,Valid,Non-standard,43
 35627056,763eb037-c621-4e17-bbb6-cec82fe7e39f,"Retired SNOMED UK Drug extension concept, do not use, use concept indicated by the CONCEPT_RELATIONSHIP table, if any",Qualifier Value,SNOMED,Valid,Non-standard,43
 3518916,42692007,Naproxen sodium,Substance,Nebraska Lexicon,Valid,Non-standard,43
 45757816,46131000119108,Counseling for infertility done,Context-dependent,SNOMED,Valid,Non-standard,42
@@ -2164,7 +2058,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 40772874,LP28864-4,Mushroom,LOINC Component,LOINC,Valid,Non-standard,42
 4062643,171154002,Cancer cervix screening - not needed,Clinical Finding,SNOMED,Valid,Standard,42
 4050803,160320002,Family history of sickle cell anemia,Context-dependent,SNOMED,Valid,Standard,42
-35822114,4-1140929012,pantoprazole,Value,UK Biobank,Valid,Non-standard,42
 35627028,274d6328-bff3-4363-ba09-b0d1cdf63606,"Retired SNOMED UK Drug extension concept, do not use, use concept indicated by the CONCEPT_RELATIONSHIP table, if any",Qualifier Value,SNOMED,Valid,Non-standard,42
 35613628,8b998a8d-bf68-4c63-b507-f667334c3a66,"Retired SNOMED UK Drug extension concept, do not use, use concept indicated by the CONCEPT_RELATIONSHIP table, if any",Qualifier Value,SNOMED,Valid,Non-standard,42
 602208,1326121000000101,Allergy to ezetimibe,Clinical Finding,SNOMED,Valid,Non-standard,41
@@ -2186,7 +2079,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4028716,128844009,Essential thrombocythemia,Morph Abnormality,SNOMED,Valid,Standard,41
 4010818,102424008,Exposure to polluted air,Event,SNOMED,Valid,Standard,41
 37063553,LP207986-3,Lactase,LOINC Component,LOINC,Valid,Non-standard,41
-35818525,4-1140861588,enoxaparin,Value,UK Biobank,Valid,Non-standard,41
 2108254,36592,"Collection of blood specimen using established central or peripheral catheter, venous, not otherwise specified",CPT4,CPT4,Valid,Standard,41
 762815,432321000124101,Taking medication for chronic disease,Clinical Finding,SNOMED,Valid,Standard,40
 607211,1149345007,Excessive weight gain during pregnancy,Clinical Finding,SNOMED,Valid,Standard,40
@@ -2203,7 +2095,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4049041,206567004,Overfeeding in newborn,Clinical Finding,SNOMED,Valid,Standard,40
 4034133,113727004,Vancomycin resistant Enterococcus,Organism,SNOMED,Valid,Standard,40
 3667030,860604008,Allergy to apple,Clinical Finding,SNOMED,Valid,Non-standard,40
-35820763,4-1140869848,methotrexate,Value,UK Biobank,Valid,Non-standard,40
 443375,293383005,Vitamin products adverse reaction,Disorder,SNOMED,Valid,Standard,39
 437740,218069008,Accident caused by explosion of pressure vessel,Event,SNOMED,Valid,Standard,39
 436591,217543007,Accident caused directly by controlled fire in private dwelling,Event,SNOMED,Valid,Standard,39
@@ -2262,10 +2153,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 40772808,LP19239-0,Topiramate,LOINC Component,LOINC,Valid,Non-standard,36
 4065060,171408004,Medicolegal examination,Procedure,SNOMED,Valid,Standard,36
 37016732,712838009,Allergy to cashew nut,Clinical Finding,SNOMED,Valid,Non-standard,36
-35824424,4-1140923484,topiramate,Value,UK Biobank,Valid,Non-standard,36
-35820198,4-1140872290,lamotrigine,Value,UK Biobank,Valid,Non-standard,36
-35818505,4-1140888552,enalapril,Value,UK Biobank,Valid,Non-standard,36
-35817286,4-1140883468,clonidine,Value,UK Biobank,Valid,Non-standard,36
 3519001,372805007,Clonidine,Substance,Nebraska Lexicon,Valid,Non-standard,36
 2108631,4110F,"Internal mammary artery graft performed for primary, isolated coronary artery bypass graft procedure (CABG)",CPT4,CPT4,Valid,Non-standard,36
 765879,449681000124101,Long-term current use of antiplatelet drug,Context-dependent,SNOMED,Valid,Standard,35
@@ -2286,8 +2173,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4031374,129866007,Deficient knowledge of medication regimen,Clinical Finding,SNOMED,Valid,Standard,35
 4022064,105479008,Truancy,Clinical Finding,SNOMED,Valid,Standard,35
 37018474,715034003,Unable to take medication,Clinical Finding,SNOMED,Valid,Standard,35
-35816885,744-1140873098,cefadroxil,Value,UK Biobank,Valid,Non-standard,35
-35816884,4-1140873098,cefadroxil,Value,UK Biobank,Valid,Non-standard,35
 45769827,71271000119107,Family history of retinitis pigmentosa,Context-dependent,SNOMED,Valid,Standard,34
 44787287,LP171649-9,Valsartan,LOINC Component,LOINC,Valid,Non-standard,34
 4302940,418589001,Accidental physical contact with animal,Event,SNOMED,Valid,Standard,34
@@ -2302,9 +2187,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4034538,11385001,Assault and battery,Event,SNOMED,Valid,Standard,34
 4031667,14537002,Hodgkin lymphoma,Morph Abnormality,SNOMED,Valid,Non-standard,34
 36717637,717806005,Twin liveborn born outside hospital,Context-dependent,SNOMED,Valid,Standard,34
-35824743,4-1141145660,valsartan,Value,UK Biobank,Valid,Non-standard,34
-35819046,4-1140879540,fluoxetine,Value,UK Biobank,Valid,Non-standard,34
-35817976,4-1140879806,diltiazem,Value,UK Biobank,Valid,Non-standard,34
 2514503,99364,"Anticoagulant management for an outpatient taking warfarin, physician review and interpretation of International Normalized Ratio (INR) testing, patient instructions, dosage adjustment (as needed), and ordering of additional tests; each su... (Dep...",CPT4,CPT4,Valid,Standard,34
 2313972,93798,Physician or other qualified health care professional services for outpatient cardiac rehabilitation; with continuous ECG monitoring (per session),CPT4,CPT4,Valid,Standard,34
 765524,440321000124101,Inadequate oral intake,Clinical Finding,SNOMED,Valid,Standard,33
@@ -2327,8 +2209,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4022929,116329008,Finding of walking,Clinical Finding,SNOMED,Valid,Standard,33
 36713466,717804008,Singleton liveborn born outside hospital,Context-dependent,SNOMED,Valid,Standard,33
 36306279,LP18968-5,guaiFENesin,LOINC Component,LOINC,Valid,Non-standard,33
-35818649,4-1141180212,escitalopram,Value,UK Biobank,Valid,Non-standard,33
-35815664,4-1140863308,alprazolam,Value,UK Biobank,Valid,Non-standard,33
 44787539,LP17857-1,Baclofen,LOINC Component,LOINC,Valid,Non-standard,32
 4313249,217780003,Asphyxia by inhalation of food,Event,SNOMED,Valid,Standard,32
 43020486,288541000119107,Problem related to upbringing,Clinical Finding,SNOMED,Valid,Standard,32
@@ -2344,9 +2224,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4046874,134328007,Lipoma,Morph Abnormality,SNOMED,Valid,Standard,32
 40335666,170337005,Pneumococcal vaccination given,Context-dependent,SNOMED,Valid,Non-standard,32
 37061621,LP19208-5,Red dye,LOINC Component,LOINC,Valid,Non-standard,32
-35824817,4-1140916282,venlafaxine,Value,UK Biobank,Valid,Non-standard,32
-35823992,4-1140884412,sumatriptan,Value,UK Biobank,Valid,Non-standard,32
-35816227,4-1140875420,baclofen,Value,UK Biobank,Valid,Non-standard,32
 1340220,OMOP5165875,History of event within 2 months,Context-dependent,OMOP Extension,Valid,Standard,32
 764032,449891000124104,No advance directive,Clinical Finding,SNOMED,Valid,Standard,31
 763480,441361000124104,Unintentional weight gain,Clinical Finding,SNOMED,Valid,Standard,31
@@ -2374,7 +2251,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 37018983,712828004,Continuous positive airway pressure ventilation treatment not tolerated,Context-dependent,SNOMED,Valid,Standard,31
 36717003,11861000122107,Allergy to pantoprazole,Clinical Finding,SNOMED,Valid,Non-standard,31
 36674376,773569005,Sting by wasp,Event,SNOMED,Valid,Standard,31
-35819665,4-1140884308,hydroxychloroquine,Value,UK Biobank,Valid,Non-standard,31
 1177008,LP33354-9,DAPTOmycin,LOINC Component,LOINC,Valid,Non-standard,31
 45763675,700132008,Ventriculoperitoneal shunt in situ,Clinical Finding,SNOMED,Valid,Non-standard,30
 443349,292130004,Antiemetic adverse reaction,Disorder,SNOMED,Valid,Standard,30
@@ -2399,8 +2275,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 40483677,443859009,Possible clinical finding,Context-dependent,SNOMED,Valid,Standard,30
 36712774,113521000119108,Long term current use of adalimumab therapy,Context-dependent,SNOMED,Valid,Standard,30
 3661839,871684001,Adverse reaction to thyroid hormone,Disorder,SNOMED,Valid,Standard,30
-35819022,4-1140874272,fluconazole,Value,UK Biobank,Valid,Non-standard,30
-35815751,4-1140879616,amitriptyline,Value,UK Biobank,Valid,Non-standard,30
 35611146,61ea37e8-0db4-4e4f-8f84-1751489e370d,"Retired SNOMED UK Drug extension concept, do not use, use concept indicated by the CONCEPT_RELATIONSHIP table, if any",Qualifier Value,SNOMED,Valid,Non-standard,30
 3266192,412357001,Corn,Substance,Nebraska Lexicon,Valid,Non-standard,30
 45934658,160557,No known allergies,Question,CIEL,Valid,Non-standard,29
@@ -2434,9 +2308,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4037139,162596006,Suspected victim of child abuse,Context-dependent,SNOMED,Valid,Standard,29
 4012070,162024005,Difficulty swallowing solids,Clinical Finding,SNOMED,Valid,Standard,29
 37117111,289361000119106,Family disruption due to child returning to or placed in foster care,Clinical Finding,SNOMED,Valid,Standard,29
-35819893,74-486,Iron,Value,UK Biobank,Valid,Standard,29
-35819892,100690-1,Iron,Answer,UK Biobank,Valid,Standard,29
-35819891,100630-5,Iron,Answer,UK Biobank,Valid,Standard,29
 3318983,372871004,Promethazine,Substance,Nebraska Lexicon,Valid,Non-standard,29
 763705,445001000124104,Vaccination delayed,Clinical Finding,SNOMED,Valid,Standard,28
 763397,440301000124106,Below expected growth rate,Clinical Finding,SNOMED,Valid,Standard,28
@@ -2464,11 +2335,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4059718,21181001,"Thymoma, benign",Morph Abnormality,SNOMED,Valid,Standard,28
 4054296,242090001,Motor vehicle on road in collision with vehicle running on rails,Event,SNOMED,Valid,Standard,28
 4054011,242278007,Accidental exposure to phenoxyacid derivative herbicide,Event,SNOMED,Valid,Standard,28
-35824826,4-1140888510,verapamil,Value,UK Biobank,Valid,Non-standard,28
-35823307,4-1140867444,risperidone,Value,UK Biobank,Valid,Non-standard,28
-35816933,744-1140873138,cefuroxime,Value,UK Biobank,Valid,Non-standard,28
-35816932,4-1140873138,cefuroxime,Value,UK Biobank,Valid,Non-standard,28
-35816102,4-1140866738,atenolol,Value,UK Biobank,Valid,Non-standard,28
 3518883,386840002,Risperidone,Substance,Nebraska Lexicon,Valid,Non-standard,28
 442605,6476001,Death by electrocution,Event,SNOMED,Valid,Standard,27
 438952,242923007,Assault by striking with motor vehicle,Event,SNOMED,Valid,Standard,27
@@ -2495,8 +2361,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 37018867,87691000119105,Comfort care only status,Clinical Finding,SNOMED,Valid,Standard,27
 36676636,773580005,Sting by insect,Event,SNOMED,Valid,Standard,27
 36305281,87721-7,County of residence [Location],Clinical Observation,LOINC,Valid,Standard,27
-35824529,744-1140873966,trimethoprim,Value,UK Biobank,Valid,Non-standard,27
-35824528,4-1140873966,trimethoprim,Value,UK Biobank,Valid,Non-standard,27
 3052558,46499-0,State of residence,Clinical Observation,LOINC,Valid,Standard,27
 608135,1156904003,Benign pituitary adenoma,Morph Abnormality,SNOMED,Valid,Standard,26
 45763712,700192006,Family history of long QT syndrome,Context-dependent,SNOMED,Valid,Standard,26
@@ -2527,10 +2391,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4021231,115964003,Exposure to non-mechanical force,Event,SNOMED,Valid,Standard,26
 37116848,733862004,"Diffuse midline glioma, point mutation K27M in histone H3",Morph Abnormality,SNOMED,Valid,Standard,26
 36715429,721103006,Diabetic retinopathy of eye not detected,Context-dependent,SNOMED,Valid,Standard,26
-35822323,4-1140910706,phenobarbital,Value,UK Biobank,Valid,Non-standard,26
-35820937,4-1141152732,mirtazapine,Value,UK Biobank,Valid,Non-standard,26
-35820914,744-1140873480,minocycline,Value,UK Biobank,Valid,Non-standard,26
-35820913,4-1140873480,minocycline,Value,UK Biobank,Valid,Non-standard,26
 3381697,412583005,Bee pollen,Substance,Nebraska Lexicon,Valid,Non-standard,26
 765467,428191000124101,Documentation of current medications,Procedure,SNOMED,Valid,Standard,25
 44787241,LP171387-6,Benazepril,LOINC Component,LOINC,Valid,Non-standard,25
@@ -2570,8 +2430,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4017281,11526002,Aspartame,Substance,SNOMED,Valid,Non-standard,25
 37059454,LP18904-0,Benzonatate,LOINC Component,LOINC,Valid,Non-standard,25
 36306828,LP61793-3,tiZANidine,LOINC Component,LOINC,Valid,Non-standard,25
-35824378,4-1141153186,tizanidine,Value,UK Biobank,Valid,Non-standard,25
-35817920,4-1140884488,diclofenac,Value,UK Biobank,Valid,Non-standard,25
 1619605,LP419914-9,Aspartame,LOINC Component,LOINC,Valid,Non-standard,25
 764374,454161000124103,Medication non-compliance due to cognitive impairment,Clinical Finding,SNOMED,Valid,Standard,24
 761104,14830001000004107,Family history of hyperparathyroidism,Context-dependent,SNOMED,Valid,Standard,24
@@ -2600,11 +2458,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 37076950,LP16333-4,Penicillin G potassium,LOINC Component,LOINC,Valid,Non-standard,24
 37016251,2641000119104,Exposure to chlamydia,Event,SNOMED,Valid,Standard,24
 36674615,459131000124108,Muscle spasticity present,Context-dependent,SNOMED,Valid,Standard,24
-35822929,4-1140879842,propranolol,Value,UK Biobank,Valid,Non-standard,24
-35820368,744-1141172954,linezolid,Value,UK Biobank,Valid,Non-standard,24
-35820367,4-1141172954,linezolid,Value,UK Biobank,Valid,Non-standard,24
-35818584,744-1141186826,ertapenem,Value,UK Biobank,Valid,Non-standard,24
-35818583,4-1141186826,ertapenem,Value,UK Biobank,Valid,Non-standard,24
 2102854,2022F,Dilated retinal eye exam with interpretation by an ophthalmologist or optometrist documented and reviewed; with evidence of retinopathy (DM),CPT4,CPT4,Valid,Standard,24
 1177177,LP33356-4,Ertapenem,LOINC Component,LOINC,Valid,Non-standard,24
 764552,456521000124106,Family history of basal cell carcinoma of skin,Context-dependent,SNOMED,Valid,Standard,23
@@ -2639,8 +2492,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 37117066,113481000119108,Long-term current use of tamoxifen,Context-dependent,SNOMED,Valid,Standard,23
 37108579,106581000119100,Long-term current use of cyclosporine,Context-dependent,SNOMED,Valid,Standard,23
 36675595,772006002,Failed instrumental delivery,Context-dependent,SNOMED,Valid,Standard,23
-35819378,4-1140874646,glipizide,Value,UK Biobank,Valid,Non-standard,23
-35817847,4-1140874816,dexamethasone,Value,UK Biobank,Valid,Non-standard,23
 35627035,35c70c9b-2996-4114-ae32-72e691ff96d0,"Retired SNOMED UK Drug extension concept, do not use, use concept indicated by the CONCEPT_RELATIONSHIP table, if any",Qualifier Value,SNOMED,Valid,Non-standard,23
 3518464,372584003,Dexamethasone,Substance,Nebraska Lexicon,Valid,Non-standard,23
 1619649,LP422109-1,Levothyroxine,LOINC Component,LOINC,Valid,Non-standard,23
@@ -2654,7 +2505,7 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4314558,87241003,Gas retention,Morph Abnormality,SNOMED,Valid,Standard,22
 4307293,391132008,Nutritional assessment completed,Context-dependent,SNOMED,Valid,Non-standard,22
 4305451,133931009,Infant,Social Context,SNOMED,Valid,Standard,22
-4297533,386879008,Fenofibrate,Substance,SNOMED,Valid,Non-standard,22
+4297533,386879008,Fenofibrate,Substance,SNOMED,Valid,Non-standard,44
 4203277,308486004,Breast screening call,Procedure,SNOMED,Valid,Non-standard,22
 4196500,79899007,Medication interaction,Clinical Finding,SNOMED,Valid,Standard,22
 4176765,428748002,Family history of malignant neoplasm of male breast,Context-dependent,SNOMED,Valid,Non-standard,22
@@ -2672,8 +2523,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 40479343,444370002,Exposure to Human poliovirus,Event,SNOMED,Valid,Standard,22
 37109458,61251000119108,Long-term current use of tacrolimus,Context-dependent,SNOMED,Valid,Standard,22
 36713092,31001000119109,Colon cancer screening declined,Context-dependent,SNOMED,Valid,Standard,22
-35820205,4-1140864752,lansoprazole,Value,UK Biobank,Valid,Non-standard,22
-35818865,4-1140861954,fenofibrate,Value,UK Biobank,Valid,Non-standard,22
 35626994,506f988d-a385-4383-9268-a6f974252c52,"Retired SNOMED UK Drug extension concept, do not use, use concept indicated by the CONCEPT_RELATIONSHIP table, if any",Qualifier Value,SNOMED,Valid,Non-standard,22
 35622821,765024005,Atkins diet,Procedure,SNOMED,Valid,Standard,22
 35611441,eae138a3-e15f-4acf-b755-35bed42c62f9,"Retired SNOMED UK Drug extension concept, do not use, use concept indicated by the CONCEPT_RELATIONSHIP table, if any",Qualifier Value,SNOMED,Valid,Non-standard,22
@@ -2707,10 +2556,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4033946,238996003,Drug-induced toxic pustuloderma,Disorder,SNOMED,Valid,Standard,21
 37063131,LP18898-4,azaTHIOprine,LOINC Component,LOINC,Valid,Non-standard,21
 36684076,782161000,Bite,Event,SNOMED,Valid,Standard,21
-35822954,4-1140882142,pseudoephedrine,Value,UK Biobank,Valid,Non-standard,21
-35821891,6314-32,orange,Value,UK Biobank,Valid,Standard,21
-35817285,4-1140872150,clonazepam,Value,UK Biobank,Valid,Non-standard,21
-35816206,4-1140869930,azathioprine,Value,UK Biobank,Valid,Non-standard,21
 35627032,6f183ba1-a7d3-4fd0-a598-04688d26cc5c,"Retired SNOMED UK Drug extension concept, do not use, use concept indicated by the CONCEPT_RELATIONSHIP table, if any",Qualifier Value,SNOMED,Valid,Non-standard,21
 607782,1155942004,Allergy to metal and/or metal compound,Clinical Finding,SNOMED,Valid,Standard,20
 45942438,83916,SILVER,Misc,CIEL,Valid,Non-standard,20
@@ -2721,7 +2566,7 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4297089,38605008,Natural death,Event,SNOMED,Valid,Standard,20
 4277415,65692009,Spindle cell carcinoma,Morph Abnormality,SNOMED,Valid,Standard,20
 4271714,64204000,"Squamous cell carcinoma, metastatic",Morph Abnormality,SNOMED,Valid,Standard,20
-4248041,72717003,Magnesium,Substance,SNOMED,Valid,Non-standard,20
+4248041,72717003,Magnesium,Substance,SNOMED,Valid,Non-standard,40
 4223018,41967008,Silver,Substance,SNOMED,Valid,Non-standard,20
 4198920,433305001,Family history of congestive heart failure,Context-dependent,SNOMED,Valid,Standard,20
 4183468,43492007,Group B streptococcus,Organism,SNOMED,Valid,Standard,20
@@ -2746,13 +2591,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 36716245,722187008,Under immunized,Clinical Finding,SNOMED,Valid,Standard,20
 36713623,718536006,Allergy to lovastatin,Clinical Finding,SNOMED,Valid,Non-standard,20
 36205760,LP35095-6,inFLIXimab,LOINC Component,LOINC,Valid,Non-standard,20
-35823331,4-1141165244,rofecoxib,Value,UK Biobank,Valid,Non-standard,20
-35821781,4-1140928916,olanzapine,Value,UK Biobank,Valid,Non-standard,20
-35820788,4-1140866092,metolazone,Value,UK Biobank,Valid,Non-standard,20
-35820542,74-483,Magnesium,Value,UK Biobank,Valid,Standard,20
-35819808,4-1140871336,indomethacin,Value,UK Biobank,Valid,Non-standard,20
-35818794,4-1140865608,famotidine,Value,UK Biobank,Valid,Non-standard,20
-35817928,4-1140883590,dicyclomine,Value,UK Biobank,Valid,Non-standard,20
 35809418,c100051,Alcohol,Category,UK Biobank,Valid,Non-standard,20
 3518608,386849001,Olanzapine,Substance,Nebraska Lexicon,Valid,Non-standard,20
 3345850,53041004,Alcohol,Substance,Nebraska Lexicon,Valid,Non-standard,20
@@ -2808,10 +2646,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 36716419,722417007,Paternal alcohol abuse,Context-dependent,SNOMED,Valid,Standard,19
 36676575,773485002,Allergy to valproic acid,Clinical Finding,SNOMED,Valid,Non-standard,19
 36209862,LP220253-1,riTUXimab,LOINC Component,LOINC,Valid,Non-standard,19
-35822002,4-1141175204,oxcarbazepine,Value,UK Biobank,Valid,Non-standard,19
-35819060,4-1140888098,fluticasone,Value,UK Biobank,Valid,Non-standard,19
-35816624,4-1140879730,buspirone,Value,UK Biobank,Valid,Non-standard,19
-35816025,4-1141195974,aripiprazole,Value,UK Biobank,Valid,Non-standard,19
 35608199,4da98071-3884-4e30-a33c-56f2122499b1,"Retired SNOMED UK Drug extension concept, do not use, use concept indicated by the CONCEPT_RELATIONSHIP table, if any",Qualifier Value,SNOMED,Valid,Non-standard,19
 3518913,406784005,Aripiprazole,Substance,Nebraska Lexicon,Valid,Non-standard,19
 3518422,255641001,Caffeine,Substance,Nebraska Lexicon,Valid,Non-standard,19
@@ -2822,13 +2656,13 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 436316,302986003,Assault by poisoning by non-pharmaceutical substances,Event,SNOMED,Valid,Standard,18
 4328092,75622000,Myxoid chondrosarcoma,Morph Abnormality,SNOMED,Valid,Standard,18
 4314999,216358005,"Place of occurrence of accident or poisoning, basketball court",Location,SNOMED,Valid,Non-standard,18
-4305902,387413002,Colchicine,Substance,SNOMED,Valid,Non-standard,18
+4305902,387413002,Colchicine,Substance,SNOMED,Valid,Non-standard,36
 4288742,68944005,Meningothelial meningioma,Morph Abnormality,SNOMED,Valid,Standard,18
 4281855,67182003,Mucinous cystadenoma,Morph Abnormality,SNOMED,Valid,Standard,18
 42539369,762492001,Underweight in adolescence,Clinical Finding,SNOMED,Valid,Standard,18
 42539211,16090691000119109,Occupational exposure to dust,Event,SNOMED,Valid,Standard,18
 42537733,737284009,Mandibular implant in situ,Clinical Finding,SNOMED,Valid,Non-standard,18
-42536289,735030001,Garlic,Substance,SNOMED,Valid,Standard,54
+42536289,735030001,Garlic,Substance,SNOMED,Valid,Standard,72
 4253174,407564000,Angiotensin converting enzyme inhibitor not tolerated,Context-dependent,SNOMED,Valid,Standard,18
 4212601,57741007,Fall from bridge,Event,SNOMED,Valid,Standard,18
 4188173,414446006,Ice hockey,Qualifier Value,SNOMED,Valid,Standard,18
@@ -2861,10 +2695,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4026477,227493005,Cashew nut,Substance,SNOMED,Valid,Standard,18
 37396388,716187007,Allergy to insect protein,Clinical Finding,SNOMED,Valid,Non-standard,18
 36713460,717794008,Supervision of pregnancy with history of infertility,Procedure,SNOMED,Valid,Standard,18
-35819291,100692-3,Garlic,Answer,UK Biobank,Valid,Standard,18
-35817359,4-1140875486,colchicine,Value,UK Biobank,Valid,Non-standard,18
-35817216,4-1140921600,citalopram,Value,UK Biobank,Valid,Non-standard,18
-35816608,4-1140866280,bumetanide,Value,UK Biobank,Valid,Non-standard,18
 35627024,b04d3158-8b30-4465-a772-978b877d88b0,"Retired SNOMED UK Drug extension concept, do not use, use concept indicated by the CONCEPT_RELATIONSHIP table, if any",Qualifier Value,SNOMED,Valid,Non-standard,18
 3518949,395814003,Oxaliplatin,Substance,Nebraska Lexicon,Valid,Non-standard,18
 3053809,387413002,Colchicine,Substance,Nebraska Lexicon,Valid,Non-standard,18
@@ -2904,10 +2734,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4046664,134420004,No suicidal thoughts,Context-dependent,SNOMED,Valid,Standard,17
 4025840,19551004,Varicellovirus humanalpha3,Organism,SNOMED,Valid,Standard,17
 37108791,126951000119109,Long-term current use of lithium,Context-dependent,SNOMED,Valid,Standard,17
-35824741,4-1140872214,valproic acid,Value,UK Biobank,Valid,Non-standard,17
-35822241,744-1140888758,penicillin v,Value,UK Biobank,Valid,Non-standard,17
-35822240,4-1140888758,penicillin v,Value,UK Biobank,Valid,Non-standard,17
-35821794,4-1141193282,olmesartan,Value,UK Biobank,Valid,Non-standard,17
 2102836,2019F,"Dilated macular exam performed, including documentation of the presence or absence of macular thickening or hemorrhage and the level of macular degeneration severity (EC)",CPT4,CPT4,Valid,Standard,17
 19474248,D001569,Benzodiazepines,Main Heading,MeSH,Valid,Non-standard,17
 608153,1156923005,Medulloblastoma,Morph Abnormality,SNOMED,Valid,Standard,16
@@ -2922,7 +2748,7 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 43021387,473144009,Chronic disease present,Context-dependent,SNOMED,Valid,Standard,16
 4300039,385297003,Congenital deformity,Morph Abnormality,SNOMED,Valid,Non-standard,16
 4261967,35701008,Hemangioblastic meningioma,Morph Abnormality,SNOMED,Valid,Standard,16
-42536455,735341005,Fish oil,Substance,SNOMED,Valid,Non-standard,16
+42536455,735341005,Fish oil,Substance,SNOMED,Valid,Non-standard,32
 4236629,90639005,Fall from window,Event,SNOMED,Valid,Standard,16
 4232885,404974001,Impaired mobility: physiological status,Observable Entity,SNOMED,Valid,Standard,16
 4232456,89740008,Lobular carcinoma,Morph Abnormality,SNOMED,Valid,Standard,16
@@ -2951,9 +2777,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 37204873,783806000,Vascular malformation,Morph Abnormality,SNOMED,Valid,Standard,16
 3661789,870715006,Adverse reaction to biguanide oral hypoglycemic agent,Disorder,SNOMED,Valid,Standard,16
 3655578,866041003,Mother currently breastfeeding,Context-dependent,SNOMED,Valid,Standard,16
-35819672,4-1140883656,hydroxyzine,Value,UK Biobank,Valid,Non-standard,16
-35818934,74-472,Fish oil,Value,UK Biobank,Valid,Standard,16
-35817004,4-1140883504,cetirizine,Value,UK Biobank,Valid,Non-standard,16
 3358824,372523007,Cetirizine,Substance,Nebraska Lexicon,Valid,Non-standard,16
 3240793,735341005,Fish oil,Substance,Nebraska Lexicon,Valid,Non-standard,16
 763043,435401000124105,Suspected soft tissue infection,Context-dependent,SNOMED,Valid,Standard,15
@@ -2996,11 +2819,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4008485,102264005,Cheese,Substance,SNOMED,Valid,Standard,45
 37068695,LP101036-4,PACLitaxel,LOINC Component,LOINC,Valid,Non-standard,15
 36713114,32941000119104,Ingestion of toxic substance,Disorder,SNOMED,Valid,Standard,15
-35823461,4-1140910492,scopolamine,Value,UK Biobank,Valid,Non-standard,15
-35821617,4-1140867818,nortriptyline,Value,UK Biobank,Valid,Non-standard,15
-35819618,4-1140874896,hydrocortisone,Value,UK Biobank,Valid,Non-standard,15
-35819323,744-1140873574,gentamicin,Value,UK Biobank,Valid,Non-standard,15
-35819322,4-1140873574,gentamicin,Value,UK Biobank,Valid,Non-standard,15
 35627108,f021d26f-5288-4b6d-9528-9a45dbe863a6,"Retired SNOMED UK Drug extension concept, do not use, use concept indicated by the CONCEPT_RELATIONSHIP table, if any",Qualifier Value,SNOMED,Valid,Non-standard,15
 35611148,8b706065-1d29-48be-ae29-283399fe2435,"Retired SNOMED UK Drug extension concept, do not use, use concept indicated by the CONCEPT_RELATIONSHIP table, if any",Qualifier Value,SNOMED,Valid,Non-standard,15
 2106771,3250F,Specimen site other than anatomic location of primary tumor (PATH),CPT4,CPT4,Valid,Standard,15
@@ -3060,12 +2878,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 37053671,LP19249-9,Yellow dye,LOINC Component,LOINC,Valid,Non-standard,14
 37016733,712840004,Allergy to hazelnut,Clinical Finding,SNOMED,Valid,Non-standard,14
 36714502,719763000,Maternal history of diabetes mellitus type 2,Context-dependent,SNOMED,Valid,Standard,14
-35824069,4-1140911642,tacrolimus,Value,UK Biobank,Valid,Non-standard,14
-35823787,4-1140879854,sotalol,Value,UK Biobank,Valid,Non-standard,14
-35819936,4-1140860954,isosorbide mononitrate,Value,UK Biobank,Valid,Non-standard,14
-35817100,4-1140866144,chlorthalidone,Value,UK Biobank,Valid,Non-standard,14
-35816219,744-1140873280,aztreonam,Value,UK Biobank,Valid,Non-standard,14
-35816218,4-1140873280,aztreonam,Value,UK Biobank,Valid,Non-standard,14
 35627059,5c93ff3b-d29d-4e2f-9e93-02501eba0223,"Retired SNOMED UK Drug extension concept, do not use, use concept indicated by the CONCEPT_RELATIONSHIP table, if any",Qualifier Value,SNOMED,Valid,Non-standard,14
 3518906,386905002,Carboplatin,Substance,Nebraska Lexicon,Valid,Non-standard,14
 3518492,406458000,Memantine,Substance,Nebraska Lexicon,Valid,Non-standard,14
@@ -3126,16 +2938,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 36676525,773428003,Allergy to isosorbide,Clinical Finding,SNOMED,Valid,Non-standard,13
 36675674,772139001,Obstructed left femoral hernia,Disorder,SNOMED,Valid,Standard,13
 3661639,866260004,Adverse reaction to oral contraceptive,Disorder,SNOMED,Valid,Standard,13
-35824399,4-1140875268,tolmetin,Value,UK Biobank,Valid,Non-standard,13
-35823014,4-1140860728,quinapril,Value,UK Biobank,Valid,Non-standard,13
-35822584,4-1140874930,prednisolone,Value,UK Biobank,Valid,Non-standard,13
-35822395,4-1141171646,pioglitazone,Value,UK Biobank,Valid,Non-standard,13
-35821754,744-1140874160,ofloxacin,Value,UK Biobank,Valid,Non-standard,13
-35821753,4-1140874160,ofloxacin,Value,UK Biobank,Valid,Non-standard,13
-35820262,4-1141166294,leflunomide,Value,UK Biobank,Valid,Non-standard,13
-35820163,4-1140879824,labetalol,Value,UK Biobank,Valid,Non-standard,13
-35816925,744-1140873202,ceftazidime,Value,UK Biobank,Valid,Non-standard,13
-35816924,4-1140873202,ceftazidime,Value,UK Biobank,Valid,Non-standard,13
 3518835,116601002,Prednisolone,Substance,Nebraska Lexicon,Valid,Non-standard,13
 3393958,372657005,Trimethobenzamide,Substance,Nebraska Lexicon,Valid,Non-standard,13
 2106869,3284F,Intraocular pressure (IOP) reduced by a value of greater than or equal to 15% from the pre-intervention level (EC),CPT4,CPT4,Valid,Standard,13
@@ -3207,13 +3009,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 37045810,LP19197-0,Phenazopyridine,LOINC Component,LOINC,Valid,Non-standard,12
 37016178,137471000119107,Programmable ventricular shunt valve in situ,Clinical Finding,SNOMED,Valid,Non-standard,12
 36712761,10939881000119105,Unhealthy alcohol drinking behavior,Clinical Finding,SNOMED,Valid,Standard,12
-35824210,4-1140879798,terazosin,Value,UK Biobank,Valid,Non-standard,12
-35823920,4-1140865536,sucralfate,Value,UK Biobank,Valid,Non-standard,12
-35822235,4-1140875316,penicillamine,Value,UK Biobank,Valid,Non-standard,12
-35821716,4-1140874360,nystatin,Value,UK Biobank,Valid,Non-standard,12
-35821125,744-1140880342,mupirocin,Value,UK Biobank,Valid,Non-standard,12
-35821124,4-1140880342,mupirocin,Value,UK Biobank,Valid,Non-standard,12
-35817963,4-2038459814,digoxin,Value,UK Biobank,Valid,Non-standard,12
 35627062,1a8a583e-3dc7-4a83-8613-78932e7c29ae,"Retired SNOMED UK Drug extension concept, do not use, use concept indicated by the CONCEPT_RELATIONSHIP table, if any",Qualifier Value,SNOMED,Valid,Non-standard,12
 3518638,395939008,Clavulanic acid,Substance,Nebraska Lexicon,Valid,Non-standard,12
 3302006,391828004,Benzoin,Substance,Nebraska Lexicon,Valid,Non-standard,12
@@ -3289,17 +3084,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 37057980,LP13939-1,Horse dander,LOINC Component,LOINC,Valid,Non-standard,11
 37017402,713670002,Entered into drug clinical trial,Clinical Finding,SNOMED,Valid,Standard,11
 36205394,LP173592-9,Adalimumab,LOINC Component,LOINC,Valid,Non-standard,11
-35822015,4-1140883568,oxybutynin,Value,UK Biobank,Valid,Non-standard,11
-35821933,4-1141186834,oseltamivir,Value,UK Biobank,Valid,Non-standard,11
-35821185,4-1140875336,nabumetone,Value,UK Biobank,Valid,Non-standard,11
-35820455,4-1140862772,loratadine,Value,UK Biobank,Valid,Non-standard,11
-35818704,4-1140871188,etodolac,Value,UK Biobank,Valid,Non-standard,11
-35817709,4-1140874104,dapsone,Value,UK Biobank,Valid,Non-standard,11
-35817094,4-1140879658,chlorpromazine,Value,UK Biobank,Valid,Non-standard,11
-35817092,4-1140883520,chlorpheniramine,Value,UK Biobank,Valid,Non-standard,11
-35816913,744-1141168270,cefprozil,Value,UK Biobank,Valid,Non-standard,11
-35816912,4-1141168270,cefprozil,Value,UK Biobank,Valid,Non-standard,11
-35815481,4-1141188588,adalimumab,Value,UK Biobank,Valid,Non-standard,11
 35630655,35d64233-f361-48ae-a60a-d510a7fe0b48,"Retired SNOMED UK Drug extension concept, do not use, use concept indicated by the CONCEPT_RELATIONSHIP table, if any",Qualifier Value,SNOMED,Valid,Non-standard,11
 3409538,25780000,Soap,Substance,Nebraska Lexicon,Valid,Non-standard,11
 3344981,386884002,Loratadine,Substance,Nebraska Lexicon,Valid,Non-standard,11
@@ -3376,13 +3160,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 37061323,LP263196-0,Oxaprozin,LOINC Component,LOINC,Valid,Non-standard,10
 37018475,715037005,Difficulty taking medication,Clinical Finding,SNOMED,Valid,Standard,10
 36717118,720400005,Family distress,Context-dependent,SNOMED,Valid,Standard,10
-35823597,4-1141168936,sildenafil,Value,UK Biobank,Valid,Non-standard,10
-35822255,4-1140884338,pentamidine,Value,UK Biobank,Valid,Non-standard,10
-35820772,4-1140917132,methylphenidate,Value,UK Biobank,Valid,Non-standard,10
-35818657,4-1141177526,esomeprazole,Value,UK Biobank,Valid,Non-standard,10
-35818306,4-1140879778,doxazosin,Value,UK Biobank,Valid,Non-standard,10
-35816893,744-1140873416,cefixime,Value,UK Biobank,Valid,Non-standard,10
-35816892,4-1140873416,cefixime,Value,UK Biobank,Valid,Non-standard,10
 35627005,485afe5c-b059-47b4-a88d-688d5cf0da46,"Retired SNOMED UK Drug extension concept, do not use, use concept indicated by the CONCEPT_RELATIONSHIP table, if any",Qualifier Value,SNOMED,Valid,Non-standard,10
 3518543,108518005,Oxaprozin,Substance,Nebraska Lexicon,Valid,Non-standard,10
 3365320,386842005,Sevoflurane,Substance,Nebraska Lexicon,Valid,Non-standard,10
@@ -3483,18 +3260,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4008063,111055000,Mountain climbing,Qualifier Value,SNOMED,Valid,Standard,9
 37050046,LP19140-0,Menthol,LOINC Component,LOINC,Valid,Non-standard,9
 36712804,122371000119100,HIV screening declined,Context-dependent,SNOMED,Valid,Standard,9
-35824385,744-1140873536,tobramycin,Value,UK Biobank,Valid,Non-standard,9
-35824384,4-1140873536,tobramycin,Value,UK Biobank,Valid,Non-standard,9
-35824161,4-1140863202,temazepam,Value,UK Biobank,Valid,Non-standard,9
-35823019,4-1140874420,quinine,Value,UK Biobank,Valid,Non-standard,9
-35820922,4-1140860532,minoxidil,Value,UK Biobank,Valid,Non-standard,9
-35820761,4-1140875452,methocarbamol,Value,UK Biobank,Valid,Non-standard,9
-35820101,4-1140874336,ketoconazole,Value,UK Biobank,Valid,Non-standard,9
-35819061,4-1140888594,fluvastatin,Value,UK Biobank,Valid,Non-standard,9
-35818965,4-1140888570,flecainide,Value,UK Biobank,Valid,Non-standard,9
-35818914,4-1141146428,fexofenadine,Value,UK Biobank,Valid,Non-standard,9
-35816831,4-1140875432,carisoprodol,Value,UK Biobank,Valid,Non-standard,9
-35816597,4-1140862572,budesonide,Value,UK Biobank,Valid,Non-standard,9
 35627041,7e2aa53e-4ef8-46d2-aefa-052a506896f1,"Retired SNOMED UK Drug extension concept, do not use, use concept indicated by the CONCEPT_RELATIONSHIP table, if any",Qualifier Value,SNOMED,Valid,Non-standard,9
 35627025,d405af0a-c818-4df1-b9f3-2e7490658eca,"Retired SNOMED UK Drug extension concept, do not use, use concept indicated by the CONCEPT_RELATIONSHIP table, if any",Qualifier Value,SNOMED,Valid,Non-standard,9
 3518710,96068000,Amoxicillin trihydrate,Substance,Nebraska Lexicon,Valid,Non-standard,9
@@ -3605,19 +3370,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 36674236,770959008,Bite of squirrel,Event,SNOMED,Valid,Standard,8
 3661817,871554001,Blood product-induced anaphylactoid reaction,Disorder,SNOMED,Valid,Standard,8
 36208953,LP220257-2,Etanercept,LOINC Component,LOINC,Valid,Non-standard,8
-35824488,4-1140868426,triamcinolone,Value,UK Biobank,Valid,Non-standard,8
-35824349,4-1140879866,timolol,Value,UK Biobank,Valid,Non-standard,8
-35823938,744-1141182110,sulfadiazine,Value,UK Biobank,Valid,Non-standard,8
-35823937,4-1141182110,sulfadiazine,Value,UK Biobank,Valid,Non-standard,8
-35823727,4-1141200322,solifenacin,Value,UK Biobank,Valid,Non-standard,8
-35823623,4-1141173926,sirolimus,Value,UK Biobank,Valid,Non-standard,8
-35822918,4-1140888482,propafenone,Value,UK Biobank,Valid,Non-standard,8
-35822171,4-1140867888,paroxetine,Value,UK Biobank,Valid,Non-standard,8
-35821382,4-2018610518,nicotine,Value,UK Biobank,Valid,Non-standard,8
-35821243,4-1141164276,nebivolol,Value,UK Biobank,Valid,Non-standard,8
-35818307,4-1140867640,doxepin,Value,UK Biobank,Valid,Non-standard,8
-35816911,744-1140873430,cefpodoxime,Value,UK Biobank,Valid,Non-standard,8
-35816910,4-1140873430,cefpodoxime,Value,UK Biobank,Valid,Non-standard,8
 35627020,2daf5c15-562c-4331-9214-e2258f981f9a,"Retired SNOMED UK Drug extension concept, do not use, use concept indicated by the CONCEPT_RELATIONSHIP table, if any",Qualifier Value,SNOMED,Valid,Non-standard,8
 3518370,116594009,Triamcinolone,Substance,Nebraska Lexicon,Valid,Non-standard,8
 3353082,419442005,Ethyl alcohol,Substance,Nebraska Lexicon,Valid,Non-standard,8
@@ -3647,7 +3399,7 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4310775,217116006,Hit against bottom when diving into shallow water,Event,SNOMED,Valid,Standard,7
 4310152,424924007,Community resource finding,Clinical Finding,SNOMED,Valid,Standard,7
 4305589,3898006,"Neoplasm, benign",Morph Abnormality,SNOMED,Valid,Standard,7
-4304313,387189002,Gemfibrozil,Substance,SNOMED,Valid,Non-standard,7
+4304313,387189002,Gemfibrozil,Substance,SNOMED,Valid,Non-standard,14
 4303683,418397007,Allergy to cinnamon,Clinical Finding,SNOMED,Valid,Non-standard,7
 4303438,386374005,Nutritional monitoring,Procedure,SNOMED,Valid,Standard,7
 4302489,419298007,Allergy to watermelon,Clinical Finding,SNOMED,Valid,Non-standard,7
@@ -3743,19 +3495,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 37044437,LP101882-1,Desflurane,LOINC Component,LOINC,Valid,Non-standard,7
 36683661,781684006,Non-allergic hypersensitivity to non-steroidal anti-inflammatory agent,Clinical Finding,SNOMED,Valid,Standard,7
 3661849,871777003,Adverse reaction to coumarin,Disorder,SNOMED,Valid,Standard,7
-35824211,4-1140927328,terbinafine,Value,UK Biobank,Valid,Non-standard,7
-35823359,4-1141177600,rosiglitazone,Value,UK Biobank,Valid,Non-standard,7
-35823062,4-1140879406,ranitidine,Value,UK Biobank,Valid,Non-standard,7
-35822430,4-1140871666,piroxicam,Value,UK Biobank,Valid,Non-standard,7
-35819924,4-1140873986,isoniazid,Value,UK Biobank,Valid,Non-standard,7
-35819887,4-1141152998,irbesartan,Value,UK Biobank,Valid,Non-standard,7
-35819883,4-1140883548,ipratropium,Value,UK Biobank,Valid,Non-standard,7
-35819317,4-1140861856,gemfibrozil,Value,UK Biobank,Valid,Non-standard,7
-35819043,4-1140869772,fluorouracil,Value,UK Biobank,Valid,Non-standard,7
-35818291,4-1140922714,dorzolamide,Value,UK Biobank,Valid,Non-standard,7
-35817267,4-1140863268,clobazam,Value,UK Biobank,Valid,Non-standard,7
-35817179,4-1141181150,cilostazol,Value,UK Biobank,Valid,Non-standard,7
-35816121,4-1140883494,atropine,Value,UK Biobank,Valid,Non-standard,7
 3518395,372832002,Atropine,Substance,Nebraska Lexicon,Valid,Non-standard,7
 3452193,226496008,Orange juice,Substance,Nebraska Lexicon,Valid,Non-standard,7
 3308358,42841002,Zinc oxide,Substance,Nebraska Lexicon,Valid,Non-standard,7
@@ -3805,13 +3544,13 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4315359,218026000,Accidents caused by powered household appliances and implements,Event,SNOMED,Valid,Standard,6
 4315007,216383005,"Place of occurrence of accident or poisoning, tennis court",Location,SNOMED,Valid,Non-standard,6
 4313673,218167007,Accident caused by central electric current,Event,SNOMED,Valid,Standard,6
-4313014,86739005,Zinc,Substance,SNOMED,Valid,Non-standard,6
+4313014,86739005,Zinc,Substance,SNOMED,Valid,Non-standard,24
 4312970,216420007,"Place of occurrence of accident or poisoning, theater",Location,SNOMED,Valid,Non-standard,6
 4312969,216409007,"Place of occurrence of accident or poisoning, post office",Location,SNOMED,Valid,Non-standard,6
 4309752,216343002,"Place of occurrence of accident or poisoning, factory building",Location,SNOMED,Valid,Non-standard,6
 43020487,288551000119109,Problem in relationship with in-laws,Clinical Finding,SNOMED,Valid,Standard,6
 4294380,76000001,Aneurysmal bone cyst,Morph Abnormality,SNOMED,Valid,Standard,6
-4289925,70237008,Glucosamine,Substance,SNOMED,Valid,Non-standard,6
+4289925,70237008,Glucosamine,Substance,SNOMED,Valid,Non-standard,18
 42872484,450475007,For cardiopulmonary resuscitation,Clinical Finding,SNOMED,Valid,Standard,6
 4265604,397847006,Family bereavement,Clinical Finding,SNOMED,Valid,Standard,6
 4263116,36024000,Gangrene,Morph Abnormality,SNOMED,Valid,Standard,6
@@ -3914,24 +3653,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 36716554,722595002,Overweight in adulthood with body mass index of 25 or more but less than 30,Clinical Finding,SNOMED,Valid,Standard,6
 36684866,457831000124109,Medication adherence variable,Clinical Finding,SNOMED,Valid,Standard,6
 36306421,LP28438-7,Zonisamide,LOINC Component,LOINC,Valid,Non-standard,6
-35825274,74-487,Zinc,Value,UK Biobank,Valid,Standard,6
-35825273,100690-2,Zinc,Answer,UK Biobank,Valid,Standard,6
-35825272,100630-4,Zinc,Answer,UK Biobank,Valid,Standard,6
-35824222,4-1141188794,teriparatide,Value,UK Biobank,Valid,Non-standard,6
-35823605,744-1141192340,silver sulfadiazine,Value,UK Biobank,Valid,Non-standard,6
-35823604,4-1141192340,silver sulfadiazine,Value,UK Biobank,Valid,Non-standard,6
-35820986,4-1140888172,mometasone,Value,UK Biobank,Valid,Non-standard,6
-35820340,4-1141191044,levothyroxine sodium,Value,UK Biobank,Valid,Non-standard,6
-35820240,4-1141146188,latanoprost,Value,UK Biobank,Valid,Non-standard,6
-35819391,100692-5,Glucosamine,Answer,UK Biobank,Valid,Standard,6
-35819390,100630-2,Glucosamine,Answer,UK Biobank,Valid,Standard,6
-35819377,4-1141152590,glimepiride,Value,UK Biobank,Valid,Non-standard,6
-35818930,4-1140868550,finasteride,Value,UK Biobank,Valid,Non-standard,6
-35818342,4-1140867084,droperidol,Value,UK Biobank,Valid,Non-standard,6
-35816786,4-1140860750,captopril,Value,UK Biobank,Valid,Non-standard,6
-35816462,4-1141179914,bimatoprost,Value,UK Biobank,Valid,Non-standard,6
-35815706,4-1140879644,amantadine,Value,UK Biobank,Valid,Non-standard,6
-35815478,4-1140909954,acyclovir,Value,UK Biobank,Valid,Non-standard,6
 35626997,1d7a861c-b11f-4d3e-93c1-a2f2ef39dc23,"Retired SNOMED UK Drug extension concept, do not use, use concept indicated by the CONCEPT_RELATIONSHIP table, if any",Qualifier Value,SNOMED,Valid,Non-standard,6
 35626961,8771000175103,Uses home continuous positive airway pressure ventilation supply,Clinical Finding,SNOMED,Valid,Standard,6
 35622274,763653008,Ankle joint prosthesis present,Clinical Finding,SNOMED,Valid,Non-standard,6
@@ -3999,7 +3720,7 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4219336,39953003,Tobacco,Substance,SNOMED,Valid,Standard,5
 4218451,72354005,Oral contraceptive intolerance,Clinical Finding,SNOMED,Valid,Standard,5
 4214073,41556003,Angiocentric immunoproliferative lesion,Morph Abnormality,SNOMED,Valid,Standard,5
-4207948,5540006,Calcium,Substance,SNOMED,Valid,Non-standard,5
+4207948,5540006,Calcium,Substance,SNOMED,Valid,Non-standard,17
 4203407,308555008,Child into care examination status,Clinical Finding,SNOMED,Valid,Standard,5
 4201936,315277001,Suspected head and neck cancer,Context-dependent,SNOMED,Valid,Standard,5
 4201934,315272007,Suspected testicular cancer,Context-dependent,SNOMED,Valid,Standard,5
@@ -4110,27 +3831,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 36712851,12591000132100,Suspected SARS (severe acute respiratory syndrome),Context-dependent,SNOMED,Valid,Standard,5
 3655168,846748009,Collapse of lung present,Context-dependent,SNOMED,Valid,Standard,5
 36306323,LP17994-2,Ergotamine,LOINC Component,LOINC,Valid,Non-standard,5
-35824494,4-1140866388,triamterene,Value,UK Biobank,Valid,Non-standard,5
-35823953,4-1140871604,sulindac,Value,UK Biobank,Valid,Non-standard,5
-35823936,744-1141182178,sulfacetamide,Value,UK Biobank,Valid,Non-standard,5
-35823935,4-1141182178,sulfacetamide,Value,UK Biobank,Valid,Non-standard,5
-35823897,744-1140874098,streptomycin,Value,UK Biobank,Valid,Non-standard,5
-35823896,4-1140874098,streptomycin,Value,UK Biobank,Valid,Non-standard,5
-35823522,4-1140865716,senna,Value,UK Biobank,Valid,Non-standard,5
-35823357,4-1140928274,ropinirole,Value,UK Biobank,Valid,Non-standard,5
-35822864,4-1140872132,primidone,Value,UK Biobank,Valid,Non-standard,5
-35822485,744-1140873842,polymyxin b,Value,UK Biobank,Valid,Non-standard,5
-35822484,4-1140873842,polymyxin b,Value,UK Biobank,Valid,Non-standard,5
-35821439,4-1140865618,nizatidine,Value,UK Biobank,Valid,Non-standard,5
-35821189,4-1140860192,nadolol,Value,UK Biobank,Valid,Non-standard,5
-35820845,4-1140874346,miconazole,Value,UK Biobank,Valid,Non-standard,5
-35820832,4-1140888470,mexiletine,Value,UK Biobank,Valid,Non-standard,5
-35819792,4-1140866078,indapamide,Value,UK Biobank,Valid,Non-standard,5
-35819069,74-481,Folic acid,Value,UK Biobank,Valid,Standard,5
-35818579,4-1140888658,ergotamine,Value,UK Biobank,Valid,Non-standard,5
-35816773,4-1141173030,capecitabine,Value,UK Biobank,Valid,Non-standard,5
-35816610,4-1140871732,buprenorphine,Value,UK Biobank,Valid,Non-standard,5
-35815350,4-1141165852,abacavir,Value,UK Biobank,Valid,Non-standard,5
 35626998,b3c15de9-7349-4bbe-b133-c395af93d26c,"Retired SNOMED UK Drug extension concept, do not use, use concept indicated by the CONCEPT_RELATIONSHIP table, if any",Qualifier Value,SNOMED,Valid,Non-standard,5
 35608741,b932004f-d63f-476d-b14a-c08c5f2e1c60,"Retired SNOMED UK Drug extension concept, do not use, use concept indicated by the CONCEPT_RELATIONSHIP table, if any",Qualifier Value,SNOMED,Valid,Non-standard,5
 3518973,703115008,Lurasidone,Substance,Nebraska Lexicon,Valid,Non-standard,5
@@ -4215,7 +3915,7 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 43020484,288501000119105,Parent child estrangement,Clinical Finding,SNOMED,Valid,Standard,4
 4301443,385712009,Ostomy care,Procedure,SNOMED,Valid,Standard,4
 4301079,386263003,Dysrhythmia management,Procedure,SNOMED,Valid,Standard,4
-4299873,387052002,Magnesium citrate,Substance,SNOMED,Valid,Non-standard,4
+4299873,387052002,Magnesium citrate,Substance,SNOMED,Valid,Non-standard,8
 4290186,37058002,Foreign body giant cell granuloma,Morph Abnormality,SNOMED,Valid,Standard,4
 4286038,68614005,Esthesioneuroepithelioma,Morph Abnormality,SNOMED,Valid,Standard,4
 4284836,67292001,Suffocation by cave-in,Event,SNOMED,Valid,Standard,4
@@ -4236,7 +3936,7 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4233486,405746006,Current non smoker but past smoking history unknown,Clinical Finding,SNOMED,Valid,Standard,4
 4230974,89293008,Human immunodeficiency virus type I,Organism,SNOMED,Valid,Standard,4
 4215544,394987009,Angiotensin II receptor antagonists contraindicated,Context-dependent,SNOMED,Valid,Standard,4
-4213842,395957009,Ciprofibrate,Substance,SNOMED,Valid,Non-standard,4
+4213842,395957009,Ciprofibrate,Substance,SNOMED,Valid,Non-standard,8
 4205688,309013001,Referred by person,Clinical Finding,SNOMED,Valid,Standard,4
 4202569,315364008,Angiotensin converting enzyme inhibitors contraindicated,Context-dependent,SNOMED,Valid,Standard,4
 4193527,7894007,Karyotype morphology,Morph Abnormality,SNOMED,Valid,Standard,4
@@ -4374,37 +4074,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 36684355,782561007,Allergy to iron compound,Clinical Finding,SNOMED,Valid,Non-standard,4
 36674325,772170009,Tuberculosis suspected,Context-dependent,SNOMED,Valid,Standard,4
 36306554,LP266153-8,Eszopiclone,LOINC Component,LOINC,Valid,Non-standard,4
-35825322,4-1141150620,zolmitriptan,Value,UK Biobank,Valid,Non-standard,4
-35825320,4-1141173814,zoledronic acid,Value,UK Biobank,Valid,Non-standard,4
-35824730,4-1141192798,valdecoxib,Value,UK Biobank,Valid,Non-standard,4
-35824471,4-1141185316,travoprost,Value,UK Biobank,Valid,Non-standard,4
-35824371,4-1141182628,tiotropium,Value,UK Biobank,Valid,Non-standard,4
-35824215,4-1140862830,terfenadine,Value,UK Biobank,Valid,Non-standard,4
-35824155,4-1141166006,telmisartan,Value,UK Biobank,Valid,Non-standard,4
-35824099,4-1140870164,tamoxifen,Value,UK Biobank,Valid,Non-standard,4
-35822576,4-1140879794,prazosin,Value,UK Biobank,Valid,Non-standard,4
-35822571,4-1141164060,pramipexole,Value,UK Biobank,Valid,Non-standard,4
-35822336,4-1140879844,phenylephrine,Value,UK Biobank,Valid,Non-standard,4
-35822042,744-1140873548,oxytetracycline,Value,UK Biobank,Valid,Non-standard,4
-35822041,4-1140873548,oxytetracycline,Value,UK Biobank,Valid,Non-standard,4
-35821195,4-1140884376,nalbuphine,Value,UK Biobank,Valid,Non-standard,4
-35820958,4-1141163114,modafinil,Value,UK Biobank,Valid,Non-standard,4
-35820705,4-1140869842,mercaptopurine,Value,UK Biobank,Valid,Non-standard,4
-35820544,4-1140865872,magnesium citrate,Value,UK Biobank,Valid,Non-standard,4
-35819935,4-1140861008,isosorbide dinitrate,Value,UK Biobank,Valid,Non-standard,4
-35819757,4-1141185284,imatinib,Value,UK Biobank,Valid,Non-standard,4
-35819129,4-1140888556,fosinopril,Value,UK Biobank,Valid,Non-standard,4
-35819033,4-1140884676,fluocinolone,Value,UK Biobank,Valid,Non-standard,4
-35817628,4-1140869604,cyclophosphamide,Value,UK Biobank,Valid,Non-standard,4
-35817194,4-1140862026,ciprofibrate,Value,UK Biobank,Valid,Non-standard,4
-35816690,74-485,Calcium,Value,UK Biobank,Valid,Standard,4
-35816689,100690-3,Calcium,Answer,UK Biobank,Valid,Standard,4
-35816688,100630-3,Calcium,Answer,UK Biobank,Valid,Standard,4
-35816208,4-1140883500,azelastine,Value,UK Biobank,Valid,Non-standard,4
-35815903,4-1140923018,anastrozole,Value,UK Biobank,Valid,Non-standard,4
-35815581,4-1140879774,alfuzosin,Value,UK Biobank,Valid,Non-standard,4
-35815406,4-1140862938,acetylcysteine,Value,UK Biobank,Valid,Non-standard,4
-35815400,4-1140875868,acetazolamide,Value,UK Biobank,Valid,Non-standard,4
 35627119,e350f5f3-63a6-433c-badb-27e6acf9a3f8,"Retired SNOMED UK Drug extension concept, do not use, use concept indicated by the CONCEPT_RELATIONSHIP table, if any",Qualifier Value,SNOMED,Valid,Non-standard,4
 35627015,3154f419-f949-40e1-b559-a14d74857dad,"Retired SNOMED UK Drug extension concept, do not use, use concept indicated by the CONCEPT_RELATIONSHIP table, if any",Qualifier Value,SNOMED,Valid,Non-standard,4
 35627013,6f84a1ed-fc36-4fc1-b182-105f4a618c03,"Retired SNOMED UK Drug extension concept, do not use, use concept indicated by the CONCEPT_RELATIONSHIP table, if any",Qualifier Value,SNOMED,Valid,Non-standard,4
@@ -4726,42 +4395,11 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 3661808,871521003,Adverse reaction to estrogen and/or progesterone,Disorder,SNOMED,Valid,Standard,3
 36307501,LP31697-3,Vitamin E,LOINC Component,LOINC,Valid,Non-standard,3
 36034465,LP419937-0,Aloe vera,LOINC Component,LOINC,Valid,Non-standard,3
-35827258,89-352,Turkey,Value,UK Biobank,Valid,Standard,3
-35825028,4-1141182596,voriconazole,Value,UK Biobank,Valid,Non-standard,3
 35824997,74-480,Vitamin E,Value,UK Biobank,Valid,Standard,3
 35824996,100691-5,Vitamin E,Answer,UK Biobank,Valid,Standard,3
 35824995,100629-5,Vitamin E,Answer,UK Biobank,Valid,Standard,3
 35824977,100691-2,Vitamin B,Answer,UK Biobank,Valid,Standard,3
 35824976,100629-2,Vitamin B,Answer,UK Biobank,Valid,Standard,3
-35824770,4-1141192248,vardenafil,Value,UK Biobank,Valid,Non-standard,3
-35824319,4-1141163324,ticlopidine,Value,UK Biobank,Valid,Non-standard,3
-35824080,4-1141187810,tadalafil,Value,UK Biobank,Valid,Non-standard,3
-35823018,4-1140851530,quinidine,Value,UK Biobank,Valid,Non-standard,3
-35822260,4-1140909712,pentoxifylline,Value,UK Biobank,Valid,Non-standard,3
-35821733,4-1140870200,octreotide,Value,UK Biobank,Valid,Non-standard,3
-35821371,4-1140879810,nicardipine,Value,UK Biobank,Valid,Non-standard,3
-35820941,4-1140865628,misoprostol,Value,UK Biobank,Valid,Non-standard,3
-35820769,4-1140860470,methyldopa,Value,UK Biobank,Valid,Non-standard,3
-35820447,4-1140879464,loperamide,Value,UK Biobank,Valid,Non-standard,3
-35819406,4-1141179948,glycopyrrolate,Value,UK Biobank,Valid,Non-standard,3
-35819128,744-1140884076,fosfomycin,Value,UK Biobank,Valid,Non-standard,3
-35819127,4-1140884076,fosfomycin,Value,UK Biobank,Valid,Non-standard,3
-35819088,4-1141195224,formoterol,Value,UK Biobank,Valid,Non-standard,3
-35818557,4-1140870600,epoetin alfa,Value,UK Biobank,Valid,Non-standard,3
-35818119,4-1140879404,docusate sodium,Value,UK Biobank,Valid,Non-standard,3
-35817980,4-1140868090,dimenhydrinate,Value,UK Biobank,Valid,Non-standard,3
-35817302,4-1140867420,clozapine,Value,UK Biobank,Valid,Non-standard,3
-35817296,4-1140880288,clotrimazole,Value,UK Biobank,Valid,Non-standard,3
-35817184,4-1141201418,cinacalcet,Value,UK Biobank,Valid,Non-standard,3
-35817118,4-1140865576,cholestyramine,Value,UK Biobank,Valid,Non-standard,3
-35817093,4-1140862624,chlorpheniramine maleate,Value,UK Biobank,Valid,Non-standard,3
-35816907,744-1140873182,cefoxitin,Value,UK Biobank,Valid,Non-standard,3
-35816906,4-1140873182,cefoxitin,Value,UK Biobank,Valid,Non-standard,3
-35816552,4-1141176284,brinzolamide,Value,UK Biobank,Valid,Non-standard,3
-35816550,4-1141150750,brimonidine tartrate,Value,UK Biobank,Valid,Non-standard,3
-35816412,4-1140874790,betamethasone,Value,UK Biobank,Valid,Non-standard,3
-35816380,4-1140883514,benztropine,Value,UK Biobank,Valid,Non-standard,3
-35815570,4-1140922174,alendronate sodium,Value,UK Biobank,Valid,Non-standard,3
 35627022,ebfdcb42-ce64-4e9a-9645-e545607e73b9,"Retired SNOMED UK Drug extension concept, do not use, use concept indicated by the CONCEPT_RELATIONSHIP table, if any",Qualifier Value,SNOMED,Valid,Non-standard,3
 3518951,108482004,Sildenafil citrate,Substance,Nebraska Lexicon,Valid,Non-standard,3
 3518918,372898000,Nafcillin,Substance,Nebraska Lexicon,Valid,Non-standard,3
@@ -4878,11 +4516,11 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4309264,391737006,Almond oil,Substance,SNOMED,Valid,Non-standard,2
 4309239,422651008,Limited access to community support services,Clinical Finding,SNOMED,Valid,Standard,2
 4309080,424429009,Gait dyspraxia,Clinical Finding,SNOMED,Valid,Standard,2
-4305895,387390002,Sodium chloride,Substance,SNOMED,Valid,Non-standard,2
+4305895,387390002,Sodium chloride,Substance,SNOMED,Valid,Non-standard,4
 4305880,387307005,Calcium carbonate,Substance,SNOMED,Valid,Non-standard,2
 4305842,418765005,"Exposure to potentially harmful entity, undetermined intent",Event,SNOMED,Valid,Standard,2
 4305269,389082000,Constipation care,Procedure,SNOMED,Valid,Standard,2
-4305231,386964000,Repaglinide,Substance,SNOMED,Valid,Non-standard,2
+4305231,386964000,Repaglinide,Substance,SNOMED,Valid,Non-standard,4
 4303551,386444001,Spiritual support,Procedure,SNOMED,Valid,Standard,2
 4303099,419619007,Allergy to potato,Clinical Finding,SNOMED,Valid,Non-standard,2
 4302685,387784003,Ecchymoma,Morph Abnormality,SNOMED,Valid,Standard,2
@@ -5220,7 +4858,7 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4028557,128726006,"Endometrial stromal sarcoma, low grade",Morph Abnormality,SNOMED,Valid,Standard,2
 40282772,11953005,Renal function,Observable Entity,SNOMED,Valid,Standard,2
 4028206,13331008,Atrophy,Morph Abnormality,SNOMED,Valid,Standard,2
-4027997,227549007,Mayonnaise,Substance,SNOMED,Valid,Standard,4
+4027997,227549007,Mayonnaise,Substance,SNOMED,Valid,Standard,6
 4027958,227411006,Sage,Substance,SNOMED,Valid,Standard,4
 4026995,226041007,Mint,Substance,SNOMED,Valid,Standard,2
 4026735,226863004,Yogurt,Substance,SNOMED,Valid,Standard,4
@@ -5282,60 +4920,7 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 3667018,830171008,Allergy to meclizine,Clinical Finding,SNOMED,Valid,Non-standard,2
 3661709,870413003,Adverse reaction to vitamin K and/or vitamin K derivative,Disorder,SNOMED,Valid,Standard,2
 36034146,LP420302-4,Daratumumab,LOINC Component,LOINC,Valid,Non-standard,2
-35825210,4-1141171404,zaleplon,Value,UK Biobank,Valid,Non-standard,2
-35825208,4-1141168340,zafirlukast,Value,UK Biobank,Valid,Non-standard,2
-35824574,4-1141171496,trospium,Value,UK Biobank,Valid,Non-standard,2
-35824503,4-1140855914,triazolam,Value,UK Biobank,Valid,Non-standard,2
-35824177,4-1141164182,temozolomide,Value,UK Biobank,Valid,Non-standard,2
-35823676,4-2018961142,sodium chloride,Value,UK Biobank,Valid,Non-standard,2
-35823673,4-1140877826,sodium bicarbonate,Value,UK Biobank,Valid,Non-standard,2
-35823435,4-1140871092,salsalate,Value,UK Biobank,Valid,Non-standard,2
-35823429,4-1140862144,salmeterol,Value,UK Biobank,Valid,Non-standard,2
-35823414,4-1140880014,salicylic acid,Value,UK Biobank,Valid,Non-standard,2
-35823311,4-1141167690,rivastigmine,Value,UK Biobank,Valid,Non-standard,2
-35823305,4-1141175684,risedronate sodium,Value,UK Biobank,Valid,Non-standard,2
-35823167,4-1141168660,repaglinide,Value,UK Biobank,Valid,Non-standard,2
-35822400,744-1140872852,piperacillin,Value,UK Biobank,Valid,Non-standard,2
-35822399,4-1140872852,piperacillin,Value,UK Biobank,Valid,Non-standard,2
-35822334,4-1140868040,phentermine,Value,UK Biobank,Valid,Non-standard,2
-35822257,4-1140884402,pentazocine,Value,UK Biobank,Valid,Non-standard,2
-35821577,744-1140874178,norfloxacin,Value,UK Biobank,Valid,Non-standard,2
-35821576,4-1140874178,norfloxacin,Value,UK Biobank,Valid,Non-standard,2
-35820750,4-1140884482,methadone,Value,UK Biobank,Valid,Non-standard,2
-35820660,4-1140869270,medroxyprogesterone,Value,UK Biobank,Valid,Non-standard,2
-35820615,78-342,Mayonnaise,Value,UK Biobank,Valid,Standard,2
-35820330,4-1141184748,levocetirizine,Value,UK Biobank,Valid,Non-standard,2
-35820317,4-1141145896,letrozole,Value,UK Biobank,Valid,Non-standard,2
-35819953,4-1140874302,itraconazole,Value,UK Biobank,Valid,Non-standard,2
-35819767,4-1140879630,imipramine,Value,UK Biobank,Valid,Non-standard,2
-35819671,4-1140869978,hydroxyurea,Value,UK Biobank,Valid,Non-standard,2
-35819443,4-1140874318,griseofulvin,Value,UK Biobank,Valid,Non-standard,2
-35819062,4-1140879544,fluvoxamine,Value,UK Biobank,Valid,Non-standard,2
-35819050,4-1140867398,fluphenazine decanoate,Value,UK Biobank,Valid,Non-standard,2
-35819049,4-1140882098,fluphenazine,Value,UK Biobank,Valid,Non-standard,2
-35818836,4-1140888646,felodipine,Value,UK Biobank,Valid,Non-standard,2
-35818748,4-1141171100,exemestane,Value,UK Biobank,Valid,Non-standard,2
-35818706,4-1140869782,etoposide,Value,UK Biobank,Valid,Non-standard,2
-35818556,4-1141201244,eplerenone,Value,UK Biobank,Valid,Non-standard,2
-35818542,4-1140883534,ephedrine,Value,UK Biobank,Valid,Non-standard,2
-35818463,4-1141185436,eletriptan,Value,UK Biobank,Valid,Non-standard,2
-35818056,4-1140866568,disopyramide,Value,UK Biobank,Valid,Non-standard,2
-35818015,4-1140865656,diphenoxylate,Value,UK Biobank,Valid,Non-standard,2
-35817957,4-1140871282,diflunisal,Value,UK Biobank,Valid,Non-standard,2
 35817877,4-1140910402,diacetylmorphine,Value,UK Biobank,Valid,Non-standard,2
-35817826,4-1140879624,desipramine,Value,UK Biobank,Valid,Non-standard,2
-35817770,744-1140884206,demeclocycline,Value,UK Biobank,Valid,Non-standard,2
-35817769,4-1140884206,demeclocycline,Value,UK Biobank,Valid,Non-standard,2
-35817642,4-1140883584,cyproheptadine,Value,UK Biobank,Valid,Non-standard,2
-35817268,4-1140888074,clobetasol,Value,UK Biobank,Valid,Non-standard,2
-35817182,4-1140865426,cimetidine,Value,UK Biobank,Valid,Non-standard,2
-35817063,4-1140863328,chlordiazepoxide,Value,UK Biobank,Valid,Non-standard,2
-35816742,4-1141156836,candesartan cilexetil,Value,UK Biobank,Valid,Non-standard,2
-35816488,4-1140879760,bisoprolol,Value,UK Biobank,Valid,Non-standard,2
-35816422,4-1140883482,bethanechol,Value,UK Biobank,Valid,Non-standard,2
-35815986,4-1141189862,aprepitant,Value,UK Biobank,Valid,Non-standard,2
-35815732,744-1140873588,amikacin,Value,UK Biobank,Valid,Non-standard,2
-35815731,4-1140873588,amikacin,Value,UK Biobank,Valid,Non-standard,2
 35627044,e263acef-5101-4624-b159-b7bed97babf1,"Retired SNOMED UK Drug extension concept, do not use, use concept indicated by the CONCEPT_RELATIONSHIP table, if any",Qualifier Value,SNOMED,Valid,Non-standard,2
 35627040,88efbb40-5c35-4044-9703-b2f904d52973,"Retired SNOMED UK Drug extension concept, do not use, use concept indicated by the CONCEPT_RELATIONSHIP table, if any",Qualifier Value,SNOMED,Valid,Non-standard,2
 35627026,f68a70d7-26bc-42c8-a44a-ae506e1a2fa5,"Retired SNOMED UK Drug extension concept, do not use, use concept indicated by the CONCEPT_RELATIONSHIP table, if any",Qualifier Value,SNOMED,Valid,Non-standard,2
@@ -5565,7 +5150,7 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4301572,385940007,Skin breakdown control,Procedure,SNOMED,Valid,Standard,1
 4301549,385857005,Ventilator care and adjustment,Procedure,SNOMED,Valid,Standard,1
 4301500,78058005,Liver cell adenoma,Morph Abnormality,SNOMED,Valid,Standard,1
-4301194,387337001,Magnesium hydroxide,Substance,SNOMED,Valid,Non-standard,1
+4301194,387337001,Magnesium hydroxide,Substance,SNOMED,Valid,Non-standard,2
 4300822,385909000,Cataract care,Procedure,SNOMED,Valid,Standard,1
 4300163,77381001,Burkitt lymphoma,Morph Abnormality,SNOMED,Valid,Standard,1
 4300015,385171004,Vaginal suspension,Dose Form,SNOMED,Valid,Non-standard,1
@@ -6331,7 +5916,7 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4010103,112681002,Intradermal nevus,Morph Abnormality,SNOMED,Valid,Standard,1
 4008043,102427001,Exposure to water pollution,Event,SNOMED,Valid,Standard,1
 4006797,111056004,Flood,Event,SNOMED,Valid,Standard,1
-4006129,111070004,Chromium,Substance,SNOMED,Valid,Non-standard,1
+4006129,111070004,Chromium,Substance,SNOMED,Valid,Non-standard,2
 4005995,111050005,Bullet fragment,Physical Object,SNOMED,Valid,Non-standard,1
 4004259,10083006,Cannabis sativa,Organism,SNOMED,Valid,Standard,3
 4002790,1007001,Brassica oleracea,Organism,SNOMED,Valid,Standard,10
@@ -6422,97 +6007,7 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 35824972,100691-1,Vitamin A,Answer,UK Biobank,Valid,Standard,1
 35824971,100629-1,Vitamin A,Answer,UK Biobank,Valid,Standard,1
 35824970,4-1140852756,vitamin a,Value,UK Biobank,Valid,Non-standard,1
-35824910,4-2018602634,vigabatrin,Value,UK Biobank,Valid,Non-standard,1
-35824570,4-1140875852,tropicamide,Value,UK Biobank,Valid,Non-standard,1
-35824519,4-1140909816,trihexyphenidyl,Value,UK Biobank,Valid,Non-standard,1
-35824480,4-1141152604,tretinoin,Value,UK Biobank,Valid,Non-standard,1
-35824449,4-1140861832,tranexamic acid,Value,UK Biobank,Valid,Non-standard,1
-35824369,4-1140880460,tioconazole,Value,UK Biobank,Valid,Non-standard,1
-35824303,4-1141168436,tiagabine,Value,UK Biobank,Valid,Non-standard,1
-35823998,80-354,Sunflower oil,Value,UK Biobank,Valid,Standard,1
-35823860,4-1140928248,stavudine,Value,UK Biobank,Valid,Non-standard,1
-35823751,4-1140868644,somatropin,Value,UK Biobank,Valid,Non-standard,1
-35823697,4-1140925852,sodium phosphate,Value,UK Biobank,Valid,Non-standard,1
-35823568,4-1141175192,sevelamer,Value,UK Biobank,Valid,Non-standard,1
-35823560,4-1140868808,sermorelin,Value,UK Biobank,Valid,Non-standard,1
-35823480,4-1141181708,secobarbital,Value,UK Biobank,Valid,Non-standard,1
-35823313,4-1141167932,rizatriptan,Value,UK Biobank,Valid,Non-standard,1
-35823310,4-1140928384,ritonavir,Value,UK Biobank,Valid,Non-standard,1
-35823238,4-1140909754,ribavirin,Value,UK Biobank,Valid,Non-standard,1
-35823016,4-1140857714,quinestrol,Value,UK Biobank,Valid,Non-standard,1
-35822931,4-1140874776,propylthiouracil,Value,UK Biobank,Valid,Non-standard,1
-35822889,4-1140883476,procyclidine,Value,UK Biobank,Valid,Non-standard,1
-35822883,4-1140869998,procarbazine,Value,UK Biobank,Valid,Non-standard,1
-35822313,4-1140884406,phenazocine,Value,UK Biobank,Valid,Non-standard,1
-35822001,4-1140863442,oxazepam,Value,UK Biobank,Valid,Non-standard,1
-35821923,4-1141168680,orlistat,Value,UK Biobank,Valid,Non-standard,1
-35821796,4-1141192298,olopatadine,Value,UK Biobank,Valid,Non-standard,1
-35821412,4-1140928226,nisoldipine,Value,UK Biobank,Valid,Non-standard,1
-35821404,4-1140872568,nimodipine,Value,UK Biobank,Valid,Non-standard,1
-35821198,744-1140874220,nalidixic acid,Value,UK Biobank,Valid,Non-standard,1
-35821197,4-1140874220,nalidixic acid,Value,UK Biobank,Valid,Non-standard,1
 35821113,74-468,Multivitamin,Value,UK Biobank,Valid,Standard,1
-35820663,4-1140874438,mefloquine,Value,UK Biobank,Valid,Non-standard,1
-35820545,4-1140881330,magnesium hydroxide,Value,UK Biobank,Valid,Non-standard,1
-35820437,4-1140869542,lomustine,Value,UK Biobank,Valid,Non-standard,1
-35820377,4-1140884512,liothyronine,Value,UK Biobank,Valid,Non-standard,1
-35820366,744-1140857092,lincomycin,Value,UK Biobank,Valid,Non-standard,1
-35820365,4-1140857092,lincomycin,Value,UK Biobank,Valid,Non-standard,1
-35820331,4-1140872320,levodopa,Value,UK Biobank,Valid,Non-standard,1
-35820112,4-1140862668,ketotifen,Value,UK Biobank,Valid,Non-standard,1
-35819852,4-1140870102,interferons,Value,UK Biobank,Valid,Non-standard,1
-35819705,4-1141180314,ibandronic acid,Value,UK Biobank,Valid,Non-standard,1
-35819368,4-1141172616,glatiramer,Value,UK Biobank,Valid,Non-standard,1
-35819280,4-1140874472,ganciclovir,Value,UK Biobank,Valid,Non-standard,1
-35819056,4-1140863110,flurazepam,Value,UK Biobank,Valid,Non-standard,1
-35819041,4-1140875766,fluorometholone,Value,UK Biobank,Valid,Non-standard,1
-35819031,4-1140876154,flunisolide,Value,UK Biobank,Valid,Non-standard,1
-35819028,4-1140884672,fludrocortisone,Value,UK Biobank,Valid,Non-standard,1
-35818701,4-1140872160,ethosuximide,Value,UK Biobank,Valid,Non-standard,1
-35818439,4-1141165518,efavirenz,Value,UK Biobank,Valid,Non-standard,1
-35818141,4-1140879430,domperidone,Value,UK Biobank,Valid,Non-standard,1
-35818090,4-1140872480,disulfiram,Value,UK Biobank,Valid,Non-standard,1
-35818026,4-1140861778,dipyridamole,Value,UK Biobank,Valid,Non-standard,1
-35817967,4-1141163770,dihydroergotamine,Value,UK Biobank,Valid,Non-standard,1
-35817962,4-1140865990,digitoxin,Value,UK Biobank,Valid,Non-standard,1
-35817941,4-1140879684,diethylpropion,Value,UK Biobank,Valid,Non-standard,1
-35817933,4-1140888928,didanosine,Value,UK Biobank,Valid,Non-standard,1
-35817837,4-1140909894,desoximetasone,Value,UK Biobank,Valid,Non-standard,1
-35817828,4-1141172924,desloratadine,Value,UK Biobank,Valid,Non-standard,1
-35817757,4-1141145782,deflazacort,Value,UK Biobank,Valid,Non-standard,1
-35817706,4-1140883858,dantrolene,Value,UK Biobank,Valid,Non-standard,1
-35817695,4-1140868968,danazol,Value,UK Biobank,Valid,Non-standard,1
-35817627,4-1140883518,cyclopentolate,Value,UK Biobank,Valid,Non-standard,1
-35817560,4-1140910736,cromolyn sodium,Value,UK Biobank,Valid,Non-standard,1
-35817375,744-1140873810,colistin,Value,UK Biobank,Valid,Non-standard,1
-35817374,4-1140873810,colistin,Value,UK Biobank,Valid,Non-standard,1
-35817361,4-1140888590,colestipol,Value,UK Biobank,Valid,Non-standard,1
-35817282,4-1140879620,clomipramine,Value,UK Biobank,Valid,Non-standard,1
-35817244,4-1140862638,clemastine,Value,UK Biobank,Valid,Non-standard,1
-35817215,4-1140868122,cisapride,Value,UK Biobank,Valid,Non-standard,1
-35817128,74-482,Chromium,Value,UK Biobank,Valid,Standard,1
-35817099,744-1140884198,chlortetracycline,Value,UK Biobank,Valid,Non-standard,1
-35817098,4-1140884198,chlortetracycline,Value,UK Biobank,Valid,Non-standard,1
-35817090,4-1140866138,chlorothiazide,Value,UK Biobank,Valid,Non-standard,1
-35816970,744-1140873258,cephradine,Value,UK Biobank,Valid,Non-standard,1
-35816969,4-1140873258,cephradine,Value,UK Biobank,Valid,Non-standard,1
-35816927,744-1140909504,ceftibuten,Value,UK Biobank,Valid,Non-standard,1
-35816926,4-1140909504,ceftibuten,Value,UK Biobank,Valid,Non-standard,1
-35816795,4-1140869452,carbachol,Value,UK Biobank,Valid,Non-standard,1
-35816686,4-1141174388,calcitriol,Value,UK Biobank,Valid,Non-standard,1
-35816573,4-1140868866,bromocriptine,Value,UK Biobank,Valid,Non-standard,1
-35816570,4-1140853200,bromelains,Value,UK Biobank,Valid,Non-standard,1
-35816481,4-1140865786,bisacodyl,Value,UK Biobank,Valid,Non-standard,1
-35816117,4-1140916262,atovaquone,Value,UK Biobank,Valid,Non-standard,1
-35816114,4-1141199446,atomoxetine,Value,UK Biobank,Valid,Non-standard,1
-35816095,4-1141190554,atazanavir,Value,UK Biobank,Valid,Non-standard,1
-35815985,4-1140875934,apraclonidine,Value,UK Biobank,Valid,Non-standard,1
-35815790,4-1140867774,amoxapine,Value,UK Biobank,Valid,Non-standard,1
-35815746,4-1140862260,aminophylline,Value,UK Biobank,Valid,Non-standard,1
-35815745,4-1140870242,aminoglutethimide,Value,UK Biobank,Valid,Non-standard,1
-35815740,4-1140888512,amiloride,Value,UK Biobank,Valid,Non-standard,1
-35815580,4-1140880942,alfentanil,Value,UK Biobank,Valid,Non-standard,1
-35815387,4-1140868902,acarbose,Value,UK Biobank,Valid,Non-standard,1
 35627091,bd77cfbe-dcb3-4f52-bf5d-d02847f8e3b5,"Retired SNOMED UK Drug extension concept, do not use, use concept indicated by the CONCEPT_RELATIONSHIP table, if any",Qualifier Value,SNOMED,Valid,Non-standard,1
 35627063,f6eaa18b-d7ce-488d-98b3-b8e5e1be90de,"Retired SNOMED UK Drug extension concept, do not use, use concept indicated by the CONCEPT_RELATIONSHIP table, if any",Qualifier Value,SNOMED,Valid,Non-standard,1
 35626265,769681006,First encounter by subject,Clinical Finding,SNOMED,Valid,Standard,1
@@ -6718,7 +6213,7 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 40534548,40534548,Tetracyclines,Main Heading,SNOMED,Valid,Non-standard,36
 4232770,4232770,Cefuroxime axetil,Suppl Concept,SNOMED,Valid,Non-standard,29
 4227704,4227704,Rosuvastatin calcium,Main Heading,SNOMED,Valid,Non-standard,25
-4305262,4305262,Valproic acid,Main Heading,SNOMED,Valid,Non-standard,17
+4305262,4305262,Valproic acid,Main Heading,SNOMED,Valid,Non-standard,34
 4193945,4193945,Clavulanic acid,Main Heading,SNOMED,Valid,Non-standard,12
 4140913,4140913,Tiotropium bromide,Main Heading,SNOMED,Valid,Non-standard,10
 4031593,4031593,Enoxaparin sodium,Suppl Concept,SNOMED,Valid,Non-standard,7
@@ -6730,16 +6225,16 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4217134,4217134,Fluocinolone acetonide,Main Heading,SNOMED,Valid,Non-standard,4
 4136021,4136021,Olmesartan medoxomil,Main Heading,SNOMED,Valid,Non-standard,3
 4320367,4320367,Prednisolone acetate,Suppl Concept,SNOMED,Valid,Non-standard,3
-40280082,40280082,Brimonidine tartrate,Main Heading,SNOMED,Valid,Non-standard,3
+40280082,40280082,Brimonidine tartrate,Main Heading,SNOMED,Valid,Non-standard,6
 4032406,4032406,Sildenafil citrate,Main Heading,SNOMED,Valid,Non-standard,3
-4304294,4304294,Glycopyrrolate,Main Heading,SNOMED,Valid,Non-standard,3
+4304294,4304294,Glycopyrrolate,Main Heading,SNOMED,Valid,Non-standard,6
 4029048,4029048,Quetiapine fumarate,Main Heading,SNOMED,Valid,Non-standard,3
 4137858,4137858,Sitagliptin phosphate,Main Heading,SNOMED,Valid,Non-standard,2
 4032093,4032093,Carboprost tromethamine,Suppl Concept,SNOMED,Valid,Non-standard,2
 4237636,4237636,Enbucrilate,Main Heading,SNOMED,Valid,Non-standard,2
 4154902,4154902,Sorbic acid,Main Heading,SNOMED,Valid,Non-standard,2
 40351141,40351141,Benzoic acid,Main Heading,SNOMED,Valid,Non-standard,2
-4297532,4297532,Candesartan cilexetil,Suppl Concept,SNOMED,Valid,Non-standard,2
+4297532,4297532,Candesartan cilexetil,Suppl Concept,SNOMED,Valid,Non-standard,4
 4309115,4309115,Erythromycin stearate,Suppl Concept,SNOMED,Valid,Non-standard,1
 4320182,4320182,Cefpodoxime proxetil,Suppl Concept,SNOMED,Valid,Non-standard,1
 4309858,4309858,Histamine phosphate,Suppl Concept,SNOMED,Valid,Non-standard,1
@@ -6750,15 +6245,430 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4023390,4023390,Testosterone enanthate,Suppl Concept,SNOMED,Valid,Non-standard,1
 4322104,4322104,Lumiracoxib,Suppl Concept,SNOMED,Valid,Non-standard,1
 4156401,4156401,Cefditoren pivoxil,Suppl Concept,SNOMED,Valid,Non-standard,1
-40526755,40526755,Interferons,Main Heading,SNOMED,Valid,Non-standard,1
+40526755,40526755,Interferons,Main Heading,SNOMED,Valid,Non-standard,2
 45766700,45766700,Aclidinium bromide,Suppl Concept,SNOMED,Valid,Non-standard,1
 4193809,4193809,Mometasone furoate,Main Heading,SNOMED,Valid,Non-standard,1
 4043015,4043015,Plague vaccine,Main Heading,SNOMED,Valid,Non-standard,1
 4243930,4243930,Hyaluronic acid,Main Heading,SNOMED,Valid,Non-standard,1
 35625974,35625974,Ioxaglic acid,Main Heading,SNOMED,Valid,Non-standard,1
-4298924,4298924,Cromolyn sodium,Main Heading,SNOMED,Valid,Non-standard,1
-4299023,4299023,Nalidixic acid,Main Heading,SNOMED,Valid,Non-standard,1
-4225166,4225166,Ibandronic acid,Main Heading,SNOMED,Valid,Non-standard,1
+4298924,4298924,Cromolyn sodium,Main Heading,SNOMED,Valid,Non-standard,2
+4299023,4299023,Nalidixic acid,Main Heading,SNOMED,Valid,Non-standard,3
+4225166,4225166,Ibandronic acid,Main Heading,SNOMED,Valid,Non-standard,2
 4198916,4198916,Desvenlafaxine succinate,Main Heading,SNOMED,Valid,Non-standard,1
 40577337,40577337,Atazanavir sulfate,Main Heading,SNOMED,Valid,Non-standard,1
 4032572,4032572,Glatiramer acetate,Main Heading,SNOMED,Valid,Non-standard,1
+4307012,4307012,Codeine,Answer,SNOMED,Valid,Standard,1598
+4305091,4305091,Lisinopril,Value,SNOMED,Valid,Non-standard,795
+4189449,4189449,Morphine,Value,SNOMED,Valid,Non-standard,758
+4156860,4156860,Amoxicillin,Value,SNOMED,Valid,Non-standard,1268
+4306886,4306886,Aspirin,Answer,SNOMED,Valid,Standard,1437
+4187588,4187588,Ciprofloxacin,Value,SNOMED,Valid,Non-standard,940
+4299172,4299172,Levofloxacin,Value,SNOMED,Valid,Non-standard,896
+4297525,4297525,Tramadol,Value,SNOMED,Valid,Non-standard,436
+4189425,4189425,Atorvastatin,Value,SNOMED,Valid,Non-standard,372
+4164069,4164069,Vancomycin,Value,SNOMED,Valid,Non-standard,742
+4298923,4298923,Ibuprofen,Value,SNOMED,Valid,Non-standard,334
+4306840,4306840,Cephalexin,Value,SNOMED,Valid,Non-standard,628
+4164059,4164059,Erythromycin,Value,SNOMED,Valid,Non-standard,596
+4299745,4299745,Gabapentin,Value,SNOMED,Valid,Non-standard,275
+4187575,4187575,Clindamycin,Value,SNOMED,Valid,Non-standard,532
+4305087,4305087,Amlodipine,Value,SNOMED,Valid,Non-standard,255
+4299165,4299165,Azithromycin,Value,SNOMED,Valid,Non-standard,464
+4306040,4306040,Acetaminophen,Value,SNOMED,Valid,Non-standard,230
+40613160,40613160,Egg,Value,SNOMED,Valid,Standard,195
+4159634,4159634,Heparin,Value,SNOMED,Valid,Non-standard,188
+4159323,4159323,Metformin,Value,SNOMED,Valid,Non-standard,188
+4299030,4299030,Meperidine,Value,SNOMED,Valid,Non-standard,188
+4156709,4156709,Doxycycline,Value,SNOMED,Valid,Non-standard,370
+4023242,4023242,Prednisone,Value,SNOMED,Valid,Non-standard,174
+4205895,4205895,Penicillin G,Value,SNOMED,Valid,Non-standard,328
+4162415,4162415,Fentanyl,Value,SNOMED,Valid,Non-standard,147
+4158269,4158269,Prochlorperazine,Value,SNOMED,Valid,Non-standard,141
+4306031,4306031,Clarithromycin,Value,SNOMED,Valid,Non-standard,282
+4187023,4187023,Metoclopramide,Value,SNOMED,Valid,Non-standard,136
+4187581,4187581,Tetracycline,Value,SNOMED,Valid,Non-standard,268
+4187584,4187584,Metoprolol,Value,SNOMED,Valid,Non-standard,134
+45763630,45763630,Rosuvastatin,Value,SNOMED,Valid,Non-standard,130
+4301328,4301328,Simvastatin,Value,SNOMED,Valid,Non-standard,129
+4186860,4186860,Naproxen,Value,SNOMED,Valid,Non-standard,121
+4187330,4187330,Pregabalin,Value,SNOMED,Valid,Non-standard,120
+4159615,4159615,Amiodarone,Value,SNOMED,Valid,Non-standard,119
+4299163,4299163,Hydrochlorothiazide,Value,SNOMED,Valid,Non-standard,118
+4159334,4159334,Metronidazole,Value,SNOMED,Valid,Non-standard,234
+4305261,4305261,Spironolactone,Value,SNOMED,Valid,Non-standard,116
+4186842,4186842,Ketorolac,Value,SNOMED,Valid,Non-standard,113
+4190223,4190223,Losartan,Value,SNOMED,Valid,Non-standard,111
+4186990,4186990,Ceftriaxone,Value,SNOMED,Valid,Non-standard,222
+4021058,4021058,Celecoxib,Value,SNOMED,Valid,Non-standard,107
+4299887,4299887,Lorazepam,Value,SNOMED,Valid,Non-standard,106
+4304295,4304295,Hydralazine,Value,SNOMED,Valid,Non-standard,105
+4306735,4306735,Cefaclor,Value,SNOMED,Valid,Non-standard,198
+4159993,4159993,Nitrofurantoin,Value,SNOMED,Valid,Non-standard,188
+4299739,4299739,Haloperidol,Value,SNOMED,Valid,Non-standard,94
+4158887,4158887,Niacin,Value,SNOMED,Valid,Non-standard,93
+4308523,4308523,Zolpidem,Value,SNOMED,Valid,Non-standard,79
+4306892,4306892,Furosemide,Value,SNOMED,Valid,Non-standard,78
+4230914,4230914,Duloxetine,Value,SNOMED,Valid,Non-standard,74
+4301090,4301090,Phenytoin,Value,SNOMED,Valid,Non-standard,69
+4305915,4305915,Cefazolin,Value,SNOMED,Valid,Non-standard,136
+4190222,4190222,Pravastatin,Value,SNOMED,Valid,Non-standard,67
+4297685,4297685,Levetiracetam,Value,SNOMED,Valid,Non-standard,67
+4298903,4298903,Allopurinol,Value,SNOMED,Valid,Non-standard,67
+4306047,4306047,Bupropion,Value,SNOMED,Valid,Non-standard,66
+4307009,4307009,Nifedipine,Value,SNOMED,Valid,Non-standard,66
+4304142,4304142,Clopidogrel,Value,SNOMED,Valid,Non-standard,66
+4134512,4134512,Moxifloxacin,Value,SNOMED,Valid,Non-standard,130
+4306706,4306706,Ampicillin,Value,SNOMED,Valid,Non-standard,126
+4157765,4157765,Ondansetron,Value,SNOMED,Valid,Non-standard,59
+4187015,4187015,Warfarin,Value,SNOMED,Valid,Non-standard,56
+4020620,4020620,Methylprednisolone,Value,SNOMED,Valid,Non-standard,56
+40549543,40549543,Epinephrine,Value,SNOMED,Valid,Non-standard,56
+4306732,4306732,Diazepam,Value,SNOMED,Valid,Non-standard,56
+4305089,4305089,Carvedilol,Value,SNOMED,Valid,Non-standard,56
+4158266,4158266,Trazodone,Value,SNOMED,Valid,Non-standard,55
+4299020,4299020,Sulfasalazine,Value,SNOMED,Valid,Non-standard,53
+4304126,4304126,Quetiapine,Value,SNOMED,Valid,Non-standard,51
+4301210,4301210,Nitroglycerin,Value,SNOMED,Valid,Non-standard,50
+4299874,4299874,Meloxicam,Value,SNOMED,Valid,Non-standard,49
+4254500,4254500,Ezetimibe,Value,SNOMED,Valid,Non-standard,49
+4299168,4299168,Meropenem,Value,SNOMED,Valid,Non-standard,96
+4137589,4137589,Cortisone,Value,SNOMED,Valid,Non-standard,48
+4159329,4159329,Sertraline,Value,SNOMED,Valid,Non-standard,46
+4304300,4304300,Omeprazole,Value,SNOMED,Valid,Non-standard,46
+4297530,4297530,Ramipril,Value,SNOMED,Valid,Non-standard,44
+4156716,4156716,Tamsulosin,Value,SNOMED,Valid,Non-standard,43
+4306720,4306720,Carbamazepine,Value,SNOMED,Valid,Non-standard,43
+4193816,4193816,Pantoprazole,Value,SNOMED,Valid,Non-standard,42
+4159321,4159321,Enoxaparin,Value,SNOMED,Valid,Non-standard,41
+4301206,4301206,Methotrexate,Value,SNOMED,Valid,Non-standard,40
+4187143,4187143,Clonidine,Value,SNOMED,Valid,Non-standard,36
+4156855,4156855,Enalapril,Value,SNOMED,Valid,Non-standard,36
+4301320,4301320,Lamotrigine,Value,SNOMED,Valid,Non-standard,36
+4299744,4299744,Topiramate,Value,SNOMED,Valid,Non-standard,36
+4186987,4186987,Cefadroxil,Value,SNOMED,Valid,Non-standard,70
+4299840,4299840,Valsartan,Value,SNOMED,Valid,Non-standard,34
+4158255,4158255,Fluoxetine,Value,SNOMED,Valid,Non-standard,34
+4187577,4187577,Diltiazem,Value,SNOMED,Valid,Non-standard,34
+4267846,4267846,Escitalopram,Value,SNOMED,Valid,Non-standard,33
+4305239,4305239,Alprazolam,Value,SNOMED,Valid,Non-standard,33
+4163776,4163776,Venlafaxine,Value,SNOMED,Valid,Non-standard,32
+4217875,4217875,Sumatriptan,Value,SNOMED,Valid,Non-standard,32
+4306852,4306852,Baclofen,Value,SNOMED,Valid,Non-standard,32
+4159991,4159991,Hydroxychloroquine,Value,SNOMED,Valid,Non-standard,31
+4306707,4306707,Fluconazole,Value,SNOMED,Valid,Non-standard,30
+4187005,4187005,Amitriptyline,Value,SNOMED,Valid,Non-standard,30
+4244056,4244056,Iron,Answer,SNOMED,Valid,Standard,87
+4299740,4299740,Risperidone,Value,SNOMED,Valid,Non-standard,28
+4188390,4188390,Cefuroxime,Value,SNOMED,Valid,Non-standard,56
+4306037,4306037,Atenolol,Value,SNOMED,Valid,Non-standard,28
+4187569,4187569,Verapamil,Value,SNOMED,Valid,Non-standard,28
+4306709,4306709,Trimethoprim,Value,SNOMED,Valid,Non-standard,54
+4189441,4189441,Phenobarbital,Value,SNOMED,Valid,Non-standard,26
+4305085,4305085,Mirtazapine,Value,SNOMED,Valid,Non-standard,26
+4156854,4156854,Minocycline,Value,SNOMED,Valid,Non-standard,52
+4159969,4159969,Tizanidine,Value,SNOMED,Valid,Non-standard,25
+4322323,4322323,Diclofenac,Value,SNOMED,Valid,Non-standard,25
+4245841,4245841,Ertapenem,Value,SNOMED,Valid,Non-standard,48
+4304173,4304173,Linezolid,Value,SNOMED,Valid,Non-standard,48
+4159492,4159492,Propranolol,Value,SNOMED,Valid,Non-standard,24
+4306698,4306698,Glipizide,Value,SNOMED,Valid,Non-standard,23
+40288319,40288319,Dexamethasone,Value,SNOMED,Valid,Non-standard,23
+4297536,4297536,Lansoprazole,Value,SNOMED,Valid,Non-standard,22
+4160635,4160635,Pseudoephedrine,Value,SNOMED,Valid,Non-standard,21
+40597170,40597170,Orange,Value,SNOMED,Valid,Standard,21
+4301207,4301207,Clonazepam,Value,SNOMED,Valid,Non-standard,21
+4164032,4164032,Azathioprine,Value,SNOMED,Valid,Non-standard,21
+4159986,4159986,Indomethacin,Value,SNOMED,Valid,Non-standard,20
+4306718,4306718,Famotidine,Value,SNOMED,Valid,Non-standard,20
+4187008,4187008,Dicyclomine,Value,SNOMED,Valid,Non-standard,20
+4304159,4304159,Rofecoxib,Value,SNOMED,Valid,Non-standard,20
+4304125,4304125,Olanzapine,Value,SNOMED,Valid,Non-standard,20
+4298899,4298899,Metolazone,Value,SNOMED,Valid,Non-standard,20
+4305251,4305251,Oxcarbazepine,Value,SNOMED,Valid,Non-standard,19
+4246699,4246699,Fluticasone,Value,SNOMED,Valid,Non-standard,19
+4307017,4307017,Buspirone,Value,SNOMED,Valid,Non-standard,19
+4232145,4232145,Aripiprazole,Value,SNOMED,Valid,Non-standard,19
+4159330,4159330,Citalopram,Value,SNOMED,Valid,Non-standard,18
+4306033,4306033,Bumetanide,Value,SNOMED,Valid,Non-standard,18
+4164066,4164066,Penicillin V,Value,SNOMED,Valid,Non-standard,34
+4134356,4134356,Olmesartan,Value,SNOMED,Valid,Non-standard,17
+4156718,4156718,Cetirizine,Value,SNOMED,Valid,Non-standard,16
+4158271,4158271,Hydroxyzine,Value,SNOMED,Valid,Non-standard,16
+4156853,4156853,Nortriptyline,Value,SNOMED,Valid,Non-standard,15
+4245352,4245352,Hydrocortisone,Value,SNOMED,Valid,Non-standard,15
+4305884,4305884,Gentamicin,Value,SNOMED,Valid,Non-standard,30
+4301212,4301212,Scopolamine,Value,SNOMED,Valid,Non-standard,15
+4306846,4306846,Chlorthalidone,Value,SNOMED,Valid,Non-standard,14
+4305894,4305894,Aztreonam,Value,SNOMED,Valid,Non-standard,28
+4305086,4305086,Isosorbide mononitrate,Value,SNOMED,Valid,Non-standard,14
+4160637,4160637,Sotalol,Value,SNOMED,Valid,Non-standard,14
+4304147,4304147,Tacrolimus,Value,SNOMED,Valid,Non-standard,14
+4298921,4298921,Ceftazidime,Value,SNOMED,Valid,Non-standard,26
+4308517,4308517,Ofloxacin,Value,SNOMED,Valid,Non-standard,26
+4156871,4156871,Labetalol,Value,SNOMED,Valid,Non-standard,13
+4305238,4305238,Leflunomide,Value,SNOMED,Valid,Non-standard,13
+4020623,4020623,Prednisolone,Value,SNOMED,Valid,Non-standard,13
+4216941,4216941,Pioglitazone,Value,SNOMED,Valid,Non-standard,13
+4187012,4187012,Tolmetin,Value,SNOMED,Valid,Non-standard,13
+4299839,4299839,Quinapril,Value,SNOMED,Valid,Non-standard,13
+4299050,4299050,Sucralfate,Value,SNOMED,Valid,Non-standard,12
+4299018,4299018,Penicillamine,Value,SNOMED,Valid,Non-standard,12
+4305257,4305257,Nystatin,Value,SNOMED,Valid,Non-standard,12
+4305898,4305898,Mupirocin,Value,SNOMED,Valid,Non-standard,24
+4306887,4306887,Digoxin,Value,SNOMED,Valid,Non-standard,12
+4304180,4304180,Terazosin,Value,SNOMED,Valid,Non-standard,12
+4307023,4307023,Cefprozil,Value,SNOMED,Valid,Non-standard,22
+4301096,4301096,Chlorpromazine,Value,SNOMED,Valid,Non-standard,11
+4251303,4251303,Adalimumab,Value,SNOMED,Valid,Non-standard,11
+4187600,4187600,Chlorpheniramine,Value,SNOMED,Valid,Non-standard,11
+4304136,4304136,Loratadine,Value,SNOMED,Valid,Non-standard,11
+4304290,4304290,Dapsone,Value,SNOMED,Valid,Non-standard,11
+4297526,4297526,Etodolac,Value,SNOMED,Valid,Non-standard,11
+4304129,4304129,Nabumetone,Value,SNOMED,Valid,Non-standard,11
+4134357,4134357,Oseltamivir,Value,SNOMED,Valid,Non-standard,11
+4159479,4159479,Oxybutynin,Value,SNOMED,Valid,Non-standard,11
+4217128,4217128,Esomeprazole,Value,SNOMED,Valid,Non-standard,10
+4307022,4307022,Cefixime,Value,SNOMED,Valid,Non-standard,20
+4159302,4159302,Doxazosin,Value,SNOMED,Valid,Non-standard,10
+4189283,4189283,Methylphenidate,Value,SNOMED,Valid,Non-standard,10
+4156862,4156862,Pentamidine,Value,SNOMED,Valid,Non-standard,10
+4164031,4164031,Sildenafil,Value,SNOMED,Valid,Non-standard,10
+4301087,4301087,Ketoconazole,Value,SNOMED,Valid,Non-standard,9
+4217723,4217723,Budesonide,Value,SNOMED,Valid,Non-standard,9
+4306696,4306696,Carisoprodol,Value,SNOMED,Valid,Non-standard,9
+4159311,4159311,Fexofenadine,Value,SNOMED,Valid,Non-standard,9
+4156872,4156872,Flecainide,Value,SNOMED,Valid,Non-standard,9
+4299179,4299179,Fluvastatin,Value,SNOMED,Valid,Non-standard,9
+4189453,4189453,Tobramycin,Value,SNOMED,Valid,Non-standard,18
+4299068,4299068,Methocarbamol,Value,SNOMED,Valid,Non-standard,9
+4189438,4189438,Quinine,Value,SNOMED,Valid,Non-standard,9
+4305878,4305878,Temazepam,Value,SNOMED,Valid,Non-standard,9
+4299024,4299024,Minoxidil,Value,SNOMED,Valid,Non-standard,9
+4156738,4156738,Paroxetine,Value,SNOMED,Valid,Non-standard,8
+4299166,4299166,Cefpodoxime,Value,SNOMED,Valid,Non-standard,16
+4156735,4156735,Doxepin,Value,SNOMED,Valid,Non-standard,8
+4217742,4217742,Nebivolol,Value,SNOMED,Valid,Non-standard,8
+4285436,4285436,Nicotine,Value,SNOMED,Valid,Non-standard,8
+4304162,4304162,Sirolimus,Value,SNOMED,Valid,Non-standard,8
+4158406,4158406,Propafenone,Value,SNOMED,Valid,Non-standard,8
+4251134,4251134,Solifenacin,Value,SNOMED,Valid,Non-standard,8
+40520768,40520768,Sulfadiazine,Value,SNOMED,Valid,Non-standard,16
+4158397,4158397,Timolol,Value,SNOMED,Valid,Non-standard,8
+4023238,4023238,Triamcinolone,Value,SNOMED,Valid,Non-standard,8
+4300009,4300009,Fluorouracil,Value,SNOMED,Valid,Non-standard,7
+4306050,4306050,Clobazam,Value,SNOMED,Valid,Non-standard,7
+4186844,4186844,Ipratropium,Value,SNOMED,Valid,Non-standard,7
+4023394,4023394,Cilostazol,Value,SNOMED,Valid,Non-standard,7
+4159619,4159619,Atropine,Value,SNOMED,Valid,Non-standard,7
+4190195,4190195,Dorzolamide,Value,SNOMED,Valid,Non-standard,7
+4299841,4299841,Irbesartan,Value,SNOMED,Valid,Non-standard,7
+4298910,4298910,Piroxicam,Value,SNOMED,Valid,Non-standard,7
+4187570,4187570,Ranitidine,Value,SNOMED,Valid,Non-standard,7
+4216958,4216958,Rosiglitazone,Value,SNOMED,Valid,Non-standard,7
+4189428,4189428,Terbinafine,Value,SNOMED,Valid,Non-standard,7
+4306890,4306890,Isoniazid,Value,SNOMED,Valid,Non-standard,7
+4187006,4187006,Acyclovir,Value,SNOMED,Valid,Non-standard,6
+4187018,4187018,Amantadine,Value,SNOMED,Valid,Non-standard,6
+4032207,4032207,Bimatoprost,Value,SNOMED,Valid,Non-standard,6
+4304306,4304306,Captopril,Value,SNOMED,Valid,Non-standard,6
+4300001,4300001,Droperidol,Value,SNOMED,Valid,Non-standard,6
+4299858,4299858,Finasteride,Value,SNOMED,Valid,Non-standard,6
+4297678,4297678,Glimepiride,Value,SNOMED,Valid,Non-standard,6
+4297552,4297552,Latanoprost,Value,SNOMED,Valid,Non-standard,6
+4137701,4137701,Teriparatide,Value,SNOMED,Valid,Non-standard,6
+4054350,4054350,Levothyroxine sodium,Value,SNOMED,Valid,Non-standard,6
+4299888,4299888,Silver sulfadiazine,Value,SNOMED,Valid,Non-standard,12
+4217114,4217114,Mometasone,Value,SNOMED,Valid,Non-standard,6
+4299842,4299842,Nizatidine,Value,SNOMED,Valid,Non-standard,5
+4305245,4305245,Abacavir,Value,SNOMED,Valid,Non-standard,5
+4298913,4298913,Buprenorphine,Value,SNOMED,Valid,Non-standard,5
+4305099,4305099,Capecitabine,Value,SNOMED,Valid,Non-standard,5
+4217111,4217111,Ergotamine,Value,SNOMED,Valid,Non-standard,5
+4270192,4270192,Folic acid,Value,SNOMED,Valid,Standard,5
+4301213,4301213,Indapamide,Value,SNOMED,Valid,Non-standard,5
+4187599,4187599,Mexiletine,Value,SNOMED,Valid,Non-standard,5
+4164070,4164070,Miconazole,Value,SNOMED,Valid,Non-standard,5
+4307005,4307005,Nadolol,Value,SNOMED,Valid,Non-standard,5
+4298911,4298911,Senna,Value,SNOMED,Valid,Non-standard,5
+4159616,4159616,Polymyxin B,Value,SNOMED,Valid,Non-standard,10
+4301091,4301091,Streptomycin,Value,SNOMED,Valid,Non-standard,10
+4304171,4304171,Triamterene,Value,SNOMED,Valid,Non-standard,5
+4306039,4306039,Sulindac,Value,SNOMED,Valid,Non-standard,5
+4159465,4159465,Sulfacetamide,Value,SNOMED,Valid,Non-standard,10
+4157767,4157767,Ropinirole,Value,SNOMED,Valid,Non-standard,5
+4305865,4305865,Primidone,Value,SNOMED,Valid,Non-standard,5
+4306848,4306848,Isosorbide dinitrate,Value,SNOMED,Valid,Non-standard,4
+4185917,4185917,Imatinib,Value,SNOMED,Valid,Non-standard,4
+4159303,4159303,Fosinopril,Value,SNOMED,Valid,Non-standard,4
+4218214,4218214,Fluocinolone,Value,SNOMED,Valid,Non-standard,4
+4299054,4299054,Cyclophosphamide,Value,SNOMED,Valid,Non-standard,4
+4306879,4306879,Acetylcysteine,Value,SNOMED,Valid,Non-standard,4
+4159309,4159309,Azelastine,Value,SNOMED,Valid,Non-standard,4
+4297546,4297546,Anastrozole,Value,SNOMED,Valid,Non-standard,4
+4218208,4218208,Alfuzosin,Value,SNOMED,Valid,Non-standard,4
+4159477,4159477,Acetazolamide,Value,SNOMED,Valid,Non-standard,4
+4297518,4297518,Mercaptopurine,Value,SNOMED,Valid,Non-standard,4
+4299864,4299864,Modafinil,Value,SNOMED,Valid,Non-standard,4
+4178358,4178358,Zolmitriptan,Value,SNOMED,Valid,Non-standard,4
+4189452,4189452,Nalbuphine,Value,SNOMED,Valid,Non-standard,4
+4217883,4217883,Zoledronic acid,Value,SNOMED,Valid,Non-standard,4
+4300268,4300268,Valdecoxib,Value,SNOMED,Valid,Non-standard,4
+4030418,4030418,Travoprost,Value,SNOMED,Valid,Non-standard,4
+4299881,4299881,Terfenadine,Value,SNOMED,Valid,Non-standard,4
+40525946,40525946,Telmisartan,Value,SNOMED,Valid,Non-standard,4
+4250858,4250858,Tiotropium,Value,SNOMED,Valid,Non-standard,4
+4190066,4190066,Tamoxifen,Value,SNOMED,Valid,Non-standard,4
+4305908,4305908,Prazosin,Value,SNOMED,Valid,Non-standard,4
+4304128,4304128,Pramipexole,Value,SNOMED,Valid,Non-standard,4
+4187572,4187572,Phenylephrine,Value,SNOMED,Valid,Non-standard,4
+4156858,4156858,Oxytetracycline,Value,SNOMED,Valid,Non-standard,8
+4301211,4301211,Cholestyramine,Value,SNOMED,Valid,Non-standard,3
+4188029,4188029,Formoterol,Value,SNOMED,Valid,Non-standard,3
+4297560,4297560,Epoetin alfa,Value,SNOMED,Valid,Non-standard,3
+40317559,40317559,Docusate sodium,Value,SNOMED,Valid,Non-standard,3
+4306889,4306889,Dimenhydrinate,Value,SNOMED,Valid,Non-standard,3
+4305885,4305885,Clotrimazole,Value,SNOMED,Valid,Non-standard,3
+4255993,4255993,Cinacalcet,Value,SNOMED,Valid,Non-standard,3
+4187590,4187590,Benztropine,Value,SNOMED,Valid,Non-standard,3
+40585112,40585112,Chlorpheniramine maleate,Value,SNOMED,Valid,Non-standard,3
+4187025,4187025,Cefoxitin,Value,SNOMED,Valid,Non-standard,6
+4297551,4297551,Brinzolamide,Value,SNOMED,Valid,Non-standard,3
+4024513,4024513,Betamethasone,Value,SNOMED,Valid,Non-standard,3
+4156720,4156720,Fosfomycin,Value,SNOMED,Valid,Non-standard,6
+40523796,40523796,Alendronate sodium,Value,SNOMED,Valid,Non-standard,3
+4301322,4301322,Clozapine,Value,SNOMED,Valid,Non-standard,3
+4225684,4225684,Vardenafil,Value,SNOMED,Valid,Non-standard,3
+4305255,4305255,Loperamide,Value,SNOMED,Valid,Non-standard,3
+40617903,40617903,Turkey,Value,SNOMED,Valid,Standard,3
+4299445,4299445,Voriconazole,Value,SNOMED,Valid,Non-standard,3
+4297562,4297562,Ticlopidine,Value,SNOMED,Valid,Non-standard,3
+4187000,4187000,Quinidine,Value,SNOMED,Valid,Non-standard,3
+4299162,4299162,Pentoxifylline,Value,SNOMED,Valid,Non-standard,3
+4032091,4032091,Octreotide,Value,SNOMED,Valid,Non-standard,3
+4157768,4157768,Nicardipine,Value,SNOMED,Valid,Non-standard,3
+4306727,4306727,Misoprostol,Value,SNOMED,Valid,Non-standard,3
+4248216,4248216,Tadalafil,Value,SNOMED,Valid,Non-standard,3
+4159992,4159992,Methyldopa,Value,SNOMED,Valid,Non-standard,3
+4251126,4251126,Eplerenone,Value,SNOMED,Valid,Non-standard,2
+40523044,40523044,Diphenoxylate,Value,SNOMED,Valid,Non-standard,2
+4187589,4187589,Disopyramide,Value,SNOMED,Valid,Non-standard,2
+4258078,4258078,Eletriptan,Value,SNOMED,Valid,Non-standard,2
+4187144,4187144,Griseofulvin,Value,SNOMED,Valid,Non-standard,2
+4306856,4306856,Ephedrine,Value,SNOMED,Valid,Non-standard,2
+4299838,4299838,Felodipine,Value,SNOMED,Valid,Non-standard,2
+4306843,4306843,Etoposide,Value,SNOMED,Valid,Non-standard,2
+4304164,4304164,Exemestane,Value,SNOMED,Valid,Non-standard,2
+4164068,4164068,Fluphenazine,Value,SNOMED,Valid,Non-standard,2
+4213161,4213161,Fluphenazine decanoate,Value,SNOMED,Valid,Non-standard,2
+4304292,4304292,Diflunisal,Value,SNOMED,Valid,Non-standard,2
+4305088,4305088,Bisoprolol,Value,SNOMED,Valid,Non-standard,2
+4159475,4159475,Desipramine,Value,SNOMED,Valid,Non-standard,2
+4159493,4159493,Demeclocycline,Value,SNOMED,Valid,Non-standard,4
+4159468,4159468,Cyproheptadine,Value,SNOMED,Valid,Non-standard,2
+4169614,4169614,Clobetasol,Value,SNOMED,Valid,Non-standard,2
+4162425,4162425,Cimetidine,Value,SNOMED,Valid,Non-standard,2
+4188397,4188397,Chlordiazepoxide,Value,SNOMED,Valid,Non-standard,2
+4156861,4156861,Bethanechol,Value,SNOMED,Valid,Non-standard,2
+4255857,4255857,Aprepitant,Value,SNOMED,Valid,Non-standard,2
+4301175,4301175,Amikacin,Value,SNOMED,Valid,Non-standard,4
+4158403,4158403,Fluvoxamine,Value,SNOMED,Valid,Non-standard,2
+4306736,4306736,Norfloxacin,Value,SNOMED,Valid,Non-standard,4
+4301186,4301186,Hydroxyurea,Value,SNOMED,Valid,Non-standard,2
+4304177,4304177,Risedronate sodium,Value,SNOMED,Valid,Non-standard,2
+4159480,4159480,Imipramine,Value,SNOMED,Valid,Non-standard,2
+4305247,4305247,Zaleplon,Value,SNOMED,Valid,Non-standard,2
+4133385,4133385,Trospium,Value,SNOMED,Valid,Non-standard,2
+4297680,4297680,Triazolam,Value,SNOMED,Valid,Non-standard,2
+4304160,4304160,Temozolomide,Value,SNOMED,Valid,Non-standard,2
+4305883,4305883,Sodium bicarbonate,Value,SNOMED,Valid,Non-standard,2
+4304284,4304284,Salsalate,Value,SNOMED,Valid,Non-standard,2
+4159307,4159307,Salmeterol,Value,SNOMED,Valid,Non-standard,2
+4301095,4301095,Salicylic acid,Value,SNOMED,Valid,Non-standard,2
+4216957,4216957,Rivastigmine,Value,SNOMED,Valid,Non-standard,2
+4304134,4304134,Zafirlukast,Value,SNOMED,Valid,Non-standard,2
+4305871,4305871,Methadone,Value,SNOMED,Valid,Non-standard,2
+4188391,4188391,Piperacillin,Value,SNOMED,Valid,Non-standard,4
+4225650,4225650,Levocetirizine,Value,SNOMED,Valid,Non-standard,2
+4054329,4054329,Medroxyprogesterone,Value,SNOMED,Valid,Non-standard,2
+4297547,4297547,Letrozole,Value,SNOMED,Valid,Non-standard,2
+4304320,4304320,Pentazocine,Value,SNOMED,Valid,Non-standard,2
+4190064,4190064,Phentermine,Value,SNOMED,Valid,Non-standard,2
+4307021,4307021,Itraconazole,Value,SNOMED,Valid,Non-standard,2
+4187582,4187582,Colestipol,Value,SNOMED,Valid,Non-standard,1
+4299065,4299065,Desoximetasone,Value,SNOMED,Valid,Non-standard,1
+4306870,4306870,Colistin,Value,SNOMED,Valid,Non-standard,2
+4158396,4158396,Cyclopentolate,Value,SNOMED,Valid,Non-standard,1
+4054332,4054332,Danazol,Value,SNOMED,Valid,Non-standard,1
+4159613,4159613,Dantrolene,Value,SNOMED,Valid,Non-standard,1
+40522777,40522777,Deflazacort,Value,SNOMED,Valid,Non-standard,1
+4213963,4213963,Desloratadine,Value,SNOMED,Valid,Non-standard,1
+4305890,4305890,Dipyridamole,Value,SNOMED,Valid,Non-standard,1
+4298892,4298892,Didanosine,Value,SNOMED,Valid,Non-standard,1
+4301184,4301184,Diethylpropion,Value,SNOMED,Valid,Non-standard,1
+4189450,4189450,Digitoxin,Value,SNOMED,Valid,Non-standard,1
+4306733,4306733,Dihydroergotamine,Value,SNOMED,Valid,Non-standard,1
+4301086,4301086,Disulfiram,Value,SNOMED,Valid,Non-standard,1
+4301082,4301082,Domperidone,Value,SNOMED,Valid,Non-standard,1
+4305244,4305244,Efavirenz,Value,SNOMED,Valid,Non-standard,1
+4305749,4305749,Ethosuximide,Value,SNOMED,Valid,Non-standard,1
+4024518,4024518,Fludrocortisone,Value,SNOMED,Valid,Non-standard,1
+4187011,4187011,Clemastine,Value,SNOMED,Valid,Non-standard,1
+4188409,4188409,Clomipramine,Value,SNOMED,Valid,Non-standard,1
+4306719,4306719,Bromelains,Value,SNOMED,Valid,Non-standard,1
+4304307,4304307,Cisapride,Value,SNOMED,Valid,Non-standard,1
+4299174,4299174,Alfentanil,Value,SNOMED,Valid,Non-standard,1
+4306036,4306036,Amiloride,Value,SNOMED,Valid,Non-standard,1
+4299022,4299022,Aminoglutethimide,Value,SNOMED,Valid,Non-standard,1
+4189442,4189442,Aminophylline,Value,SNOMED,Valid,Non-standard,1
+4189621,4189621,Amoxapine,Value,SNOMED,Valid,Non-standard,1
+4189416,4189416,Apraclonidine,Value,SNOMED,Valid,Non-standard,1
+4186117,4186117,Atazanavir,Value,SNOMED,Valid,Non-standard,1
+4251136,4251136,Atomoxetine,Value,SNOMED,Valid,Non-standard,1
+4299844,4299844,Atovaquone,Value,SNOMED,Valid,Non-standard,1
+4298883,4298883,Bisacodyl,Value,SNOMED,Valid,Non-standard,1
+4104649,4104649,Fluorometholone,Value,SNOMED,Valid,Non-standard,1
+4305254,4305254,Bromocriptine,Value,SNOMED,Valid,Non-standard,1
+4123687,4123687,Calcitriol,Value,SNOMED,Valid,Non-standard,1
+4306711,4306711,Carbachol,Value,SNOMED,Valid,Non-standard,1
+4301315,4301315,Ceftibuten,Value,SNOMED,Valid,Non-standard,2
+4305264,4305264,Cephradine,Value,SNOMED,Valid,Non-standard,2
+4159494,4159494,Chlorothiazide,Value,SNOMED,Valid,Non-standard,1
+4159984,4159984,Chlortetracycline,Value,SNOMED,Valid,Non-standard,2
+4023234,4023234,Flunisolide,Value,SNOMED,Valid,Non-standard,1
+4301307,4301307,Mefloquine,Value,SNOMED,Valid,Non-standard,1
+4305266,4305266,Flurazepam,Value,SNOMED,Valid,Non-standard,1
+4163774,4163774,Tiagabine,Value,SNOMED,Valid,Non-standard,1
+4305094,4305094,Ritonavir,Value,SNOMED,Valid,Non-standard,1
+4179696,4179696,Rizatriptan,Value,SNOMED,Valid,Non-standard,1
+4156868,4156868,Secobarbital,Value,SNOMED,Valid,Non-standard,1
+4193829,4193829,Sermorelin,Value,SNOMED,Valid,Non-standard,1
+4217754,4217754,Sevelamer,Value,SNOMED,Valid,Non-standard,1
+40562753,40562753,Sodium phosphate,Value,SNOMED,Valid,Non-standard,1
+4193831,4193831,Somatropin,Value,SNOMED,Valid,Non-standard,1
+4305093,4305093,Stavudine,Value,SNOMED,Valid,Non-standard,1
+40528620,40528620,Sunflower oil,Value,SNOMED,Valid,Standard,1
+4217093,4217093,Tioconazole,Value,SNOMED,Valid,Non-standard,1
+4134366,4134366,Quinestrol,Value,SNOMED,Valid,Non-standard,1
+4297676,4297676,Tranexamic acid,Value,SNOMED,Valid,Non-standard,1
+4306841,4306841,Tretinoin,Value,SNOMED,Valid,Non-standard,1
+4304293,4304293,Trihexyphenidyl,Value,SNOMED,Valid,Non-standard,1
+4307018,4307018,Tropicamide,Value,SNOMED,Valid,Non-standard,1
+4149304,4149304,Vigabatrin,Value,SNOMED,Valid,Non-standard,1
+4298916,4298916,Ribavirin,Value,SNOMED,Valid,Non-standard,1
+4304317,4304317,Propylthiouracil,Value,SNOMED,Valid,Non-standard,1
+4159626,4159626,Ganciclovir,Value,SNOMED,Valid,Non-standard,1
+4159315,4159315,Glatiramer,Value,SNOMED,Valid,Non-standard,1
+4164047,4164047,Ketotifen,Value,SNOMED,Valid,Non-standard,1
+4299879,4299879,Levodopa,Value,SNOMED,Valid,Non-standard,1
+4186994,4186994,Lincomycin,Value,SNOMED,Valid,Non-standard,2
+4247536,4247536,Liothyronine,Value,SNOMED,Valid,Non-standard,1
+4298925,4298925,Lomustine,Value,SNOMED,Valid,Non-standard,1
+4301094,4301094,Procyclidine,Value,SNOMED,Valid,Non-standard,1
+4306035,4306035,Nimodipine,Value,SNOMED,Valid,Non-standard,1
+4304130,4304130,Nisoldipine,Value,SNOMED,Valid,Non-standard,1
+4156726,4156726,Olopatadine,Value,SNOMED,Valid,Non-standard,1
+4299865,4299865,Orlistat,Value,SNOMED,Valid,Non-standard,1
+4299060,4299060,Oxazepam,Value,SNOMED,Valid,Non-standard,1
+4301191,4301191,Phenazocine,Value,SNOMED,Valid,Non-standard,1
+4306891,4306891,Procarbazine,Value,SNOMED,Valid,Non-standard,1
+4299859,4299859,Acarbose,Value,SNOMED,Valid,Non-standard,1
