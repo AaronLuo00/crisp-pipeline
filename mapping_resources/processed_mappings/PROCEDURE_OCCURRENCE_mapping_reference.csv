@@ -20377,3 +20377,476 @@ original_concept_id,original_code,original_name,original_vocab,snomed_concept_id
 2784451,0X9B0ZZ,"Drainage of Right Elbow Region, Open Approach",ICD10PCS,4042647,118705005,Procedure on elbow,SNOMED,Is a,1
 2784458,0X9C00Z,"Drainage of Left Elbow Region with Drainage Device, Open Approach",ICD10PCS,4042647,118705005,Procedure on elbow,SNOMED,Subsumes,1
 1314326,G0494,"Skilled services of a licensed practical nurse (lpn) for the observation and assessment of the patient's condition, each 15 minutes (the change in the patient's condition requires skilled nursing personnel to identify and evaluate the patient's need fo...",HCPCS,4321906,9632001,Nursing procedure,SNOMED,Is a,1
+2211361,71020,"Radiologic examination, chest, 2 views, frontal and lateral (Deprecated)",CPT4,1072999,1290963007,"Plain X-ray of chest, combined posteroanterior and lateral",SNOMED,Maps to,315141
+44816450,94669,"Mechanical chest wall oscillation to facilitate lung function, per session",CPT4,4133839,127779003,Oscillating positive expiratory pressure (flutter) physiotherapy,SNOMED,Maps to,108573
+2108253,36591,Collection of blood specimen from a completely implantable venous access device,CPT4,35615189,16631761000119104,Collection of blood via implanted venous access device,SNOMED,Maps to,107753
+2211742,76770,"Ultrasound, retroperitoneal (eg, renal, aorta, nodes), real time with image documentation; complete",CPT4,4136834,31683008,"Retroperitoneal echography, B-scan, complete",SNOMED,Maps to,53564
+2108887,43239,"Esophagogastroduodenoscopy, flexible, transoral; with biopsy, single or multiple",CPT4,40485932,445982009,Endoscopy and biopsy of upper gastrointestinal tract,SNOMED,Maps to,35092
+40756956,74178,"Computed tomography, abdomen and pelvis; without contrast material in one or both body regions, followed by contrast material(s) and further sections in one or both body regions",CPT4,3564016,282821000000109,Computed tomography of abdomen NEC,SNOMED,Semantic match,26499
+2106586,31624,"Bronchoscopy, rigid or flexible, including fluoroscopic guidance, when performed; with bronchial alveolar lavage",CPT4,4287484,397397002,Bronchoscopy and bronchoalveolar lavage,SNOMED,Maps to,24861
+2211743,76775,"Ultrasound, retroperitoneal (eg, renal, aorta, nodes), real time with image documentation; limited",CPT4,4034787,11390003,"Retroperitoneal echography, B-scan, limited",SNOMED,Maps to,23761
+2102577,17000,"Destruction (eg, laser surgery, electrosurgery, cryosurgery, chemosurgery, surgical curettement), premalignant lesions (eg, actinic keratoses); first lesion",CPT4,4184910,54342005,Destruction of premalignant skin lesion,SNOMED,Maps to,21126
+2314227,96411,"Chemotherapy administration; intravenous, push technique, each additional substance/drug (List separately in addition to code for primary procedure)",CPT4,4312321,86036005,Intravenous chemotherapy administration by push technique,SNOMED,Maps to,17418
+2211510,74150,"Computed tomography, abdomen; without contrast material",CPT4,3564016,282821000000109,Computed tomography of abdomen NEC,SNOMED,Semantic match,15871
+2102578,17003,"Destruction (eg, laser surgery, electrosurgery, cryosurgery, chemosurgery, surgical curettement), premalignant lesions (eg, actinic keratoses); second through 14 lesions, each (List separately in addition to code for first lesion)",CPT4,4184910,54342005,Destruction of premalignant skin lesion,SNOMED,Maps to,15471
+2211512,74170,"Computed tomography, abdomen; without contrast material, followed by contrast material(s) and further sections",CPT4,3564016,282821000000109,Computed tomography of abdomen NEC,SNOMED,Semantic match,13303
+2314225,96409,"Chemotherapy administration; intravenous, push technique, single or initial substance/drug",CPT4,4312321,86036005,Intravenous chemotherapy administration by push technique,SNOMED,Maps to,12348
+2108231,36589,"Removal of tunneled central venous catheter, without subcutaneous port or pump",CPT4,42873079,450330005,Removal of tunneled central venous catheter,SNOMED,Maps to,11170
+2106389,31231,"Nasal endoscopy, diagnostic, unilateral or bilateral (separate procedure)",CPT4,37153412,1217361008,Nasendoscopy,SNOMED,Maps to,10701
+2108894,43246,"Esophagogastroduodenoscopy, flexible, transoral; with directed placement of percutaneous gastrostomy tube",CPT4,4140968,33250001,Upper gastrointestinal endoscopy for directed placement of percutaneous gastrostomy tube,SNOMED,Maps to,10414
+2106787,32551,"Tube thoracostomy, includes connection to drainage system (eg, water seal), when performed, open (separate procedure)",CPT4,4141919,264957007,Insertion of pleural tube drain,SNOMED,Maps to,7750
+2314050,94770,"Carbon dioxide, expired gas determination by infrared analyzer (Deprecated)",CPT4,4231511,439321001,Measurement of expired gas using infrared analyzer,SNOMED,Maps to,7539
+2101877,10060,"Incision and drainage of abscess (eg, carbuncle, suppurative hidradenitis, cutaneous or subcutaneous abscess, cyst, furuncle, or paronychia); simple or single",CPT4,4108316,284181007,Incision and drainage of abscess,SNOMED,Maps to,7384
+2106611,31645,"Bronchoscopy, rigid or flexible, including fluoroscopic guidance, when performed; with therapeutic aspiration of tracheobronchial tree, initial",CPT4,4335466,232594001,Bronchoscopic aspiration of secretions,SNOMED,Maps to,6399
+2107494,33967,"Insertion of intra-aortic balloon assist device, percutaneous",CPT4,4309033,83676006,Percutaneous insertion of intra-aortic balloon catheter,SNOMED,Maps to,6123
+2102077,11721,Debridement of nail(s) by any method(s); 6 or more,CPT4,40486437,446100009,Debridement of nail,SNOMED,Maps to,5582
+2213552,90870,Electroconvulsive therapy (includes necessary monitoring),CPT4,4030840,23835007,Electroconvulsive therapy,SNOMED,Maps to,5334
+2211757,76817,"Ultrasound, pregnant uterus, real time with image documentation, transvaginal",CPT4,4324607,430064008,Transvaginal obstetric ultrasonography,SNOMED,Maps to,4652
+2108897,43249,"Esophagogastroduodenoscopy, flexible, transoral; with transendoscopic balloon dilation of esophagus (less than 30 mm diameter)",CPT4,4067233,173646008,Fiberoptic endoscopic balloon dilation of esophagus,SNOMED,Maps to,4211
+2108884,43236,"Esophagogastroduodenoscopy, flexible, transoral; with directed submucosal injection(s), any substance",CPT4,40480982,443290002,Esophagogastroduodenoscopy with directed submucosal injection,SNOMED,Maps to,3543
+2108895,43247,"Esophagogastroduodenoscopy, flexible, transoral; with removal of foreign body(s)",CPT4,4071406,173813000,Fiberoptic endoscopic removal of foreign body from upper gastrointestinal tract,SNOMED,Maps to,2870
+725003,00731,"Anesthesia for upper gastrointestinal endoscopic procedures, endoscope introduced proximal to duodenum; not otherwise specified",CPT4,4160439,399097000,Administration of anesthesia,SNOMED,Maps to,2640
+2102216,13101,"Repair, complex, trunk; 2.6 cm to 7.5 cm",CPT4,4246976,40834003,Complex surgical repair of wounds of trunk,SNOMED,Maps to,2431
+2211814,77057,"Bilateral screening mammography, craniocaudal and mediolateral oblique views of each breast (Deprecated)",CPT4,36713187,384151000119104,Screening mammography of bilateral breasts,SNOMED,Maps to,2283
+42742498,94729,"Diffusing capacity (eg, carbon monoxide, membrane) (List separately in addition to code for primary procedure)",CPT4,4336959,87529006,Membrane diffusion capacity,SNOMED,Maps to,2221
+2106602,31632,"Bronchoscopy, rigid or flexible, including fluoroscopic guidance, when performed; with transbronchial lung biopsy(s), each additional lobe (List separately in addition to code for primary procedure)",CPT4,4085734,243685008,Bronchoscopy with transbronchial lung biopsy,SNOMED,Maps to,2106
+2100959,00790,Anesthesia for intraperitoneal procedures in upper abdomen including laparoscopy; not otherwise specified,CPT4,4160439,399097000,Administration of anesthesia,SNOMED,Maps to,2071
+2108985,43761,"Repositioning of a naso- or oro-gastric feeding tube, through the duodenum for enteric nutrition",CPT4,4260257,440364001,Repositioning of gastric feeding tube via duodenum,SNOMED,Maps to,2040
+2108882,43234,"Upper gastrointestinal endoscopy, simple primary examination (eg, with small diameter flexible endoscope) (separate procedure) (Deprecated)",CPT4,4294382,76009000,Esophagogastroduodenoscopy,SNOMED,Maps to,1952
+2108984,43760,"Change of gastrostomy tube, percutaneous, without imaging or endoscopic guidance (Deprecated)",CPT4,4266224,6125005,Change of gastrostomy tube,SNOMED,Maps to,1851
+2108295,36825,Creation of arteriovenous fistula by other than direct arteriovenous anastomosis (separate procedure); autogenous graft,CPT4,4175143,48765000,Creation of arteriovenous fistula by autologous graft,SNOMED,Maps to,1787
+2101878,10061,"Incision and drainage of abscess (eg, carbuncle, suppurative hidradenitis, cutaneous or subcutaneous abscess, cyst, furuncle, or paronychia); complicated or multiple",CPT4,4108316,284181007,Incision and drainage of abscess,SNOMED,Maps to,1742
+2109056,44160,"Colectomy, partial, with removal of terminal ileum with ileocolostomy",CPT4,40485422,444165004,Excision of part of colon and excision of terminal ileum with ileocolic anastomosis,SNOMED,Maps to,1690
+2108296,36830,"Creation of arteriovenous fistula by other than direct arteriovenous anastomosis (separate procedure); nonautogenous graft (eg, biological collagen, thermoplastic graft)",CPT4,4331729,22600001,Creation of arteriovenous fistula with nonautogenous graft,SNOMED,Maps to,1622
+2101889,10180,"Incision and drainage, complex, postoperative wound infection",CPT4,4237450,58126003,Postoperative wound infection,SNOMED,Maps to,1566
+2103556,22845,Anterior instrumentation; 2 to 3 vertebral segments (List separately in addition to code for primary procedure),CPT4,4119119,22793001,Anterior spinal instrumentation,SNOMED,Maps to,1563
+2106786,32550,Insertion of indwelling tunneled pleural catheter with cuff,CPT4,4205640,438375003,Insertion of tunneled indwelling catheter with cuff into pleura,SNOMED,Maps to,1548
+2102579,17004,"Destruction (eg, laser surgery, electrosurgery, cryosurgery, chemosurgery, surgical curettement), premalignant lesions (eg, actinic keratoses), 15 or more lesions",CPT4,4184910,54342005,Destruction of premalignant skin lesion,SNOMED,Maps to,1532
+2106911,33010,Pericardiocentesis; initial (Deprecated),CPT4,4147462,35594005,Initial pericardiocentesis,SNOMED,Maps to,1495
+2102076,11720,Debridement of nail(s) by any method(s); 1 to 5,CPT4,40486437,446100009,Debridement of nail,SNOMED,Maps to,1440
+2108311,37182,"Insertion of transvenous intrahepatic portosystemic shunt(s) (TIPS) (includes venous access, hepatic and portal vein catheterization, portography with hemodynamic evaluation, intrahepatic tract formation/dilatation, stent placement and all associa...",CPT4,4052390,233445008,Transjugular intrahepatic portosystemic shunt,SNOMED,Maps to,1322
+2103716,23472,"Arthroplasty, glenohumeral joint; total shoulder (glenoid and proximal humeral replacement (eg, total shoulder))",CPT4,4172500,42262007,Total shoulder replacement,SNOMED,Maps to,1312
+2102217,13102,"Repair, complex, trunk; each additional 5 cm or less (List separately in addition to code for primary procedure)",CPT4,4246976,40834003,Complex surgical repair of wounds of trunk,SNOMED,Maps to,1200
+2102674,19102,"Biopsy of breast; percutaneous, needle core, using imaging guidance (Deprecated)",CPT4,37167475,1264555004,Imaging guided core needle biopsy of breast,SNOMED,Maps to,1142
+2100774,00402,"Anesthesia for procedures on the integumentary system on the extremities, anterior trunk and perineum; reconstructive procedures on breast (eg, reduction or augmentation mammoplasty, muscle flaps)",CPT4,4160439,399097000,Administration of anesthesia,SNOMED,Maps to,1085
+2108163,36514,Therapeutic apheresis; for plasma pheresis,CPT4,4049372,20720000,Plasmapheresis,SNOMED,Maps to,1080
+2100778,00410,"Anesthesia for procedures on the integumentary system on the extremities, anterior trunk and perineum; electrical conversion of arrhythmias",CPT4,4160439,399097000,Administration of anesthesia,SNOMED,Maps to,1070
+2102236,13152,"Repair, complex, eyelids, nose, ears and/or lips; 2.6 cm to 7.5 cm",CPT4,4177797,49651002,"Complex surgical repair of eyelids, nose, ears and lips",SNOMED,Maps to,1065
+2102934,20690,"Application of a uniplane (pins or wires in 1 plane), unilateral, external fixation system",CPT4,40481864,443453001,Application of uniplane external fixation system,SNOMED,Maps to,1056
+2211760,76820,"Doppler velocimetry, fetal; umbilical artery",CPT4,42535610,480571000119102,Doppler ultrasound velocimetry of umbilical artery of fetus,SNOMED,Maps to,1053
+2108980,43653,"Laparoscopy, surgical; gastrostomy, without construction of gastric tube (eg, Stamm procedure) (separate procedure)",CPT4,4260104,440078007,Laparoscopic construction of gastric stoma,SNOMED,Maps to,1023
+2102163,12020,Treatment of superficial wound dehiscence; simple closure,CPT4,40479673,443011008,Closure of superficial wound dehiscence,SNOMED,Maps to,991
+2108457,38241,Hematopoietic progenitor cell (HPC); autologous transplantation,CPT4,46272967,711429001,Transplantation of autologous progenitor cell,SNOMED,Maps to,986
+2102935,20692,"Application of a multiplane (pins or wires in more than 1 plane), unilateral, external fixation system (eg, Ilizarov, Monticelli type)",CPT4,40480533,443191007,Application of multiplane external fixation system,SNOMED,Maps to,969
+2110284,59025,Fetal non-stress test,CPT4,4308655,387673001,Nonstress test,SNOMED,Maps to,953
+2106622,31646,"Bronchoscopy, rigid or flexible, including fluoroscopic guidance, when performed; with therapeutic aspiration of tracheobronchial tree, subsequent, same hospital stay",CPT4,4335466,232594001,Bronchoscopic aspiration of secretions,SNOMED,Maps to,948
+2102235,13151,"Repair, complex, eyelids, nose, ears and/or lips; 1.1 cm to 2.5 cm",CPT4,4177797,49651002,"Complex surgical repair of eyelids, nose, ears and lips",SNOMED,Maps to,942
+2106830,32663,"Thoracoscopy, surgical; with lobectomy (single lobe)",CPT4,4328240,75935006,Thoracoscopic lobectomy of lung,SNOMED,Maps to,902
+2109740,51741,"Complex uroflowmetry (eg, calibrated electronic equipment)",CPT4,4311562,85509006,Complex uroflowmetry,SNOMED,Maps to,897
+2102894,20526,"Injection, therapeutic (eg, local anesthetic, corticosteroid), carpal tunnel",CPT4,4082236,182641004,Injection of carpal tunnel,SNOMED,Maps to,857
+2102732,19303,"Mastectomy, simple, complete",CPT4,4066543,172043006,Simple mastectomy,SNOMED,Maps to,820
+2103515,22595,"Arthrodesis, posterior technique, atlas-axis (C1-C2)",CPT4,4142525,265710006,Posterior fusion of atlantoaxial joint,SNOMED,Maps to,789
+42742513,32666,"Thoracoscopy, surgical; with therapeutic wedge resection (eg, mass, nodule), initial unilateral",CPT4,40485447,444188003,Thoracoscopic wedge resection of lung,SNOMED,Maps to,785
+2109040,44139,Mobilization (take-down) of splenic flexure performed in conjunction with partial colectomy (List separately in addition to primary procedure),CPT4,40483733,443909001,Excision of part of colon with mobilization of splenic flexure,SNOMED,Maps to,774
+2102736,19307,"Mastectomy, modified radical, including axillary lymph nodes, with or without pectoralis minor muscle, but excluding pectoralis major muscle",CPT4,4249113,406505007,Modified radical mastectomy,SNOMED,Maps to,767
+2313887,93505,Endomyocardial biopsy,CPT4,4308808,387829002,Endomyocardial biopsy,SNOMED,Maps to,765
+2109019,44015,"Tube or needle catheter jejunostomy for enteral alimentation, intraoperative, any method (List separately in addition to primary procedure)",CPT4,4268321,62937006,Feeding enterostomy of jejunum,SNOMED,Maps to,761
+2108328,37195,"Thrombolysis, cerebral, by intravenous infusion",CPT4,35621677,472191000119101,Thrombolysis of cerebral artery by intravenous infusion,SNOMED,Maps to,748
+2101884,10120,"Incision and removal of foreign body, subcutaneous tissues; simple",CPT4,40478913,444291007,Removal of foreign body from subcutaneous tissue by incision,SNOMED,Maps to,739
+2106583,31620,Endobronchial ultrasound (EBUS) during bronchoscopic diagnostic or therapeutic intervention(s) (List separately in addition to code for primary procedure[s]) (Deprecated),CPT4,4233305,439939004,Endoscopic ultrasonography of bronchus,SNOMED,Maps to,712
+2105994,29848,"Endoscopy, wrist, surgical, with release of transverse carpal ligament",CPT4,4258031,440354005,Arthroscopy of wrist with release of transverse carpal ligament,SNOMED,Maps to,680
+2102215,13100,"Repair, complex, trunk; 1.1 cm to 2.5 cm",CPT4,4246976,40834003,Complex surgical repair of wounds of trunk,SNOMED,Maps to,677
+2106502,31528,"Laryngoscopy direct, with or without tracheoscopy; with dilation, initial",CPT4,4072324,21796007,Direct laryngoscopy with dilation,SNOMED,Maps to,664
+2106562,31600,"Tracheostomy, planned (separate procedure)",CPT4,1073322,1303805000,Construction of tracheostomy,SNOMED,Maps to,656
+2106403,31238,"Nasal/sinus endoscopy, surgical; with control of nasal hemorrhage",CPT4,4258705,440543004,Endoscopy of nasal sinus with control of nasal hemorrhage,SNOMED,Maps to,627
+40756884,43775,"Laparoscopy, surgical, gastric restrictive procedure; longitudinal gastrectomy (ie, sleeve gastrectomy)",CPT4,4122328,235191008,Longitudinal gastroplasty,SNOMED,Maps to,569
+2106582,31615,Tracheobronchoscopy through established tracheostomy incision,CPT4,4119421,287528001,Bronchoscopy via tracheostomy,SNOMED,Maps to,566
+2102237,13153,"Repair, complex, eyelids, nose, ears and/or lips; each additional 5 cm or less (List separately in addition to code for primary procedure)",CPT4,4177797,49651002,"Complex surgical repair of eyelids, nose, ears and lips",SNOMED,Maps to,546
+2102234,13150,"Repair, complex, eyelids, nose, ears and/or lips; 1.0 cm or less (Deprecated)",CPT4,4177797,49651002,"Complex surgical repair of eyelids, nose, ears and lips",SNOMED,Maps to,524
+2108736,42182,"Repair, laceration of palate; over 2 cm or complex",CPT4,4013483,112850008,Suture of laceration of palate,SNOMED,Maps to,523
+2101033,00868,"Anesthesia for extraperitoneal procedures in lower abdomen, including urinary tract; renal transplant (recipient)",CPT4,4160439,399097000,Administration of anesthesia,SNOMED,Maps to,520
+2102418,15757,Free skin flap with microvascular anastomosis,CPT4,37157143,1197481000,Reconstruction using free skin flap with microvascular anastomosis,SNOMED,Maps to,515
+2106808,32652,"Thoracoscopy, surgical; with total pulmonary decortication, including intrapleural pneumonolysis",CPT4,4233180,439817002,Thoracoscopy with total pulmonary decortication and intrapleural pneumonolysis,SNOMED,Maps to,512
+2108275,36680,Placement of needle for intraosseous infusion,CPT4,4257889,440009003,Insertion of needle for intraosseous infusion,SNOMED,Maps to,505
+2106591,31631,"Bronchoscopy, rigid or flexible, including fluoroscopic guidance, when performed; with placement of tracheal stent(s) (includes tracheal/bronchial dilation as required)",CPT4,37158318,1255833006,Bronchoscopic insertion of stent into trachea,SNOMED,Maps to,498
+2106751,32480,"Removal of lung, other than pneumonectomy; single lobe (lobectomy)",CPT4,4070879,173171007,Lobectomy of lung,SNOMED,Maps to,483
+2102121,11970,Replacement of tissue expander with permanent implant,CPT4,4263614,36250008,Replacement of tissue expander of skin with permanent prosthesis,SNOMED,Maps to,471
+2107093,33282,Implantation of patient-activated cardiac event recorder (Deprecated),CPT4,46273032,711506006,Implantation of patient-activated cardiac event recorder,SNOMED,Maps to,469
+2102757,19357,"Tissue expander placement in breast reconstruction, including subsequent expansion(s)",CPT4,4204127,319175008,Insertion of tissue expander into breast,SNOMED,Maps to,467
+2106883,32853,"Lung transplant, double (bilateral sequential or en bloc); without cardiopulmonary bypass",CPT4,4337612,232658009,Double lung transplant,SNOMED,Maps to,459
+2313716,92543,"Caloric vestibular test, each irrigation (binaural, bithermal stimulation constitutes 4 tests), with recording (Deprecated)",CPT4,4282906,66608006,Caloric vestibular test,SNOMED,Maps to,431
+2313766,92604,"Diagnostic analysis of cochlear implant, age 7 years or older; subsequent reprogramming",CPT4,4262082,441372006,Diagnostic analysis of cochlear implant with reprogramming,SNOMED,Maps to,419
+2101703,01610,"Anesthesia for all procedures on nerves, muscles, tendons, fascia, and bursae of shoulder and axilla",CPT4,4160439,399097000,Administration of anesthesia,SNOMED,Maps to,417
+2103557,22846,Anterior instrumentation; 4 to 7 vertebral segments (List separately in addition to code for primary procedure),CPT4,4119119,22793001,Anterior spinal instrumentation,SNOMED,Maps to,412
+2101755,01810,"Anesthesia for all procedures on nerves, muscles, tendons, fascia, and bursae of forearm, wrist, and hand",CPT4,4160439,399097000,Administration of anesthesia,SNOMED,Maps to,407
+2101634,01214,Anesthesia for open procedures involving hip joint; total hip arthroplasty,CPT4,4160439,399097000,Administration of anesthesia,SNOMED,Maps to,388
+2106950,33120,"Excision of intracardiac tumor, resection with cardiopulmonary bypass",CPT4,4337271,87055003,Excision of intracardiac tumor with cardiopulmonary bypass,SNOMED,Maps to,379
+2106608,31640,"Bronchoscopy, rigid or flexible, including fluoroscopic guidance, when performed; with excision of tumor",CPT4,37109517,7221000179100,Bronchoscopic excision of tracheobronchial neoplasm,SNOMED,Maps to,378
+2211853,77370,Special medical radiation physics consultation,CPT4,4239028,680007,Radiation physics consultation,SNOMED,Maps to,365
+2102958,20900,"Bone graft, any donor area; minor or small (eg, dowel or button)",CPT4,4236352,90915003,Excision of bone for graft,SNOMED,Maps to,345
+2106807,32651,"Thoracoscopy, surgical; with partial pulmonary decortication",CPT4,4231506,439309000,Thoracoscopy with partial pulmonary decortication,SNOMED,Maps to,336
+2108858,43117,"Partial esophagectomy, distal two-thirds, with thoracotomy and separate abdominal incision, with or without proximal gastrectomy; with thoracic esophagogastrostomy, with or without pyloroplasty (Ivor Lewis)",CPT4,4128563,235161003,Ivor Lewis subtotal esophagectomy,SNOMED,Maps to,320
+2102753,19340,"Insertion of breast implant on same day of mastectomy (ie, immediate)",CPT4,4214040,80280009,Immediate insertion of breast prosthesis,SNOMED,Maps to,310
+2101885,10121,"Incision and removal of foreign body, subcutaneous tissues; complicated",CPT4,40478913,444291007,Removal of foreign body from subcutaneous tissue by incision,SNOMED,Maps to,304
+2106503,31529,"Laryngoscopy direct, with or without tracheoscopy; with dilation, subsequent",CPT4,4072324,21796007,Direct laryngoscopy with dilation,SNOMED,Maps to,303
+2106923,33015,Tube pericardiostomy (Deprecated),CPT4,4214030,80999007,Tube pericardiostomy,SNOMED,Maps to,303
+2108818,42826,"Tonsillectomy, primary or secondary; age 12 or over",CPT4,4070719,173422009,Tonsillectomy,SNOMED,Maps to,285
+2106548,31588,"Laryngoplasty, not otherwise specified (eg, for burns, reconstruction after partial laryngectomy) (Deprecated)",CPT4,4002394,119727006,Larynx reconstruction,SNOMED,Maps to,270
+2102959,20902,"Bone graft, any donor area; major or large",CPT4,4236352,90915003,Excision of bone for graft,SNOMED,Maps to,262
+2108876,43220,"Esophagoscopy, flexible, transoral; with transendoscopic balloon dilation (less than 30 mm diameter)",CPT4,4067233,173646008,Fiberoptic endoscopic balloon dilation of esophagus,SNOMED,Maps to,228
+2106727,32220,"Decortication, pulmonary (separate procedure); total",CPT4,4111233,194255002,Total decortication of lung,SNOMED,Maps to,227
+2106052,29888,Arthroscopically aided anterior cruciate ligament repair/augmentation or reconstruction,CPT4,4208524,55244002,Arthroscopically aided anterior cruciate ligament repair,SNOMED,Maps to,223
+2211761,76821,"Doppler velocimetry, fetal; middle cerebral artery",CPT4,4138610,425813003,Doppler ultrasound scan of middle cerebral artery of fetus,SNOMED,Maps to,217
+2108293,36822,Insertion of cannula(s) for prolonged extracorporeal circulation for cardiopulmonary insufficiency (ECMO) (separate procedure) (Deprecated),CPT4,4233428,440001000,Insertion of vascular cannula for prolonged extracorporeal circulation,SNOMED,Maps to,211
+2102754,19342,Insertion or replacement of breast implant on separate day from mastectomy,CPT4,4336218,86864004,Delayed insertion of breast prosthesis,SNOMED,Maps to,210
+2103459,22310,"Closed treatment of vertebral body fracture(s), without manipulation, requiring and including casting or bracing",CPT4,4043695,129240003,Closed reduction of fracture of vertebral body,SNOMED,Maps to,210
+2106411,31287,"Nasal/sinus endoscopy, surgical, with sphenoidotomy",CPT4,4153324,315618009,FESS - Functional endoscopic sinus surgery - sphenoethmoidectomy,SNOMED,Maps to,207
+2104635,26600,"Closed treatment of metacarpal fracture, single; without manipulation, each bone",CPT4,4079113,179171004,Closed reduction of fracture of metacarpus,SNOMED,Maps to,206
+2313717,92544,"Optokinetic nystagmus test, bidirectional, foveal or peripheral stimulation, with recording",CPT4,4146493,34651001,"Optokinetic nystagmus test, bidirectional, with recording",SNOMED,Maps to,203
+2104754,27030,"Arthrotomy, hip, with drainage (eg, infection)",CPT4,4258554,439526007,Incision and drainage of hip joint,SNOMED,Maps to,202
+2108868,43202,"Esophagoscopy, flexible, transoral; with biopsy, single or multiple",CPT4,4066401,173652009,Fiberoptic esophagoscopy and biopsy,SNOMED,Maps to,202
+2103374,21627,Sternal debridement,CPT4,4283385,67549005,Sternal debridement,SNOMED,Maps to,201
+2101807,01961,Anesthesia for cesarean delivery only,CPT4,4160439,399097000,Administration of anesthesia,SNOMED,Maps to,188
+2102821,20103,Exploration of penetrating wound (separate procedure); extremity,CPT4,4232257,439595002,Exploration of penetrating wound of extremity,SNOMED,Maps to,185
+2102419,15758,Free fascial flap with microvascular anastomosis,CPT4,4071245,178039000,Distant fascial microvascular free flap,SNOMED,Maps to,178
+2102775,19371,"Peri-implant capsulectomy, breast, complete, including removal of all intracapsular contents",CPT4,4237682,90991008,Periprosthetic capsulectomy of breast,SNOMED,Maps to,177
+2103296,21422,Open treatment of palatal or maxillary fracture (LeFort I type),CPT4,4205426,55416000,"Reduction of palatal fractures, open treatment, Lefort I type",SNOMED,Maps to,175
+2108723,42000,"Drainage of abscess of palate, uvula",CPT4,4321454,9747004,Drainage of abscess of palate,SNOMED,Maps to,174
+2105896,29440,Adding walker to previously applied cast,CPT4,4035600,239699002,Application of cast walking heel,SNOMED,Maps to,170
+2103975,24516,"Treatment of humeral shaft fracture, with insertion of intramedullary implant, with or without cerclage and/or locking screws",CPT4,4234171,440629001,Reduction of fracture of shaft of humerus with intramedullary fixation,SNOMED,Maps to,165
+2102739,19324,"Mammaplasty, augmentation; without prosthetic implant (Deprecated)",CPT4,4119274,22890008,Augmentation mammoplasty,SNOMED,Maps to,157
+2102818,20100,Exploration of penetrating wound (separate procedure); neck,CPT4,4203849,438777008,Exploration of penetrating wound of neck,SNOMED,Maps to,147
+2103773,23655,"Closed treatment of shoulder dislocation, with manipulation; requiring anesthesia",CPT4,4160439,399097000,Administration of anesthesia,SNOMED,Maps to,146
+2107428,33883,"Placement of proximal extension prosthesis for endovascular repair of descending thoracic aorta (eg, aneurysm, pseudoaneurysm, dissection, penetrating ulcer, intramural hematoma, or traumatic disruption); initial extension",CPT4,4259692,439944006,Insertion of proximal extension prosthesis for repair of descending thoracic aorta,SNOMED,Maps to,143
+2104016,24640,"Closed treatment of radial head subluxation in child, nursemaid elbow, with manipulation",CPT4,4328656,430324002,Closed reduction of subluxation of radial head,SNOMED,Maps to,143
+2211386,72010,"Radiologic examination, spine, entire, survey study, anteroposterior and lateral (Deprecated)",CPT4,1075131,1290674001,"Plain X-ray of entire spinal column, anteroposterior and lateral",SNOMED,Maps to,136
+2103235,21320,Closed treatment of nasal bone fracture with manipulation; with stabilization,CPT4,4203754,52626009,Manipulative reduction of nasal bone fracture with stabilization,SNOMED,Maps to,135
+42742514,32667,"Thoracoscopy, surgical; with therapeutic wedge resection (eg, mass or nodule), each additional resection, ipsilateral (List separately in addition to code for primary procedure)",CPT4,40485447,444188003,Thoracoscopic wedge resection of lung,SNOMED,Maps to,131
+2106565,31605,"Tracheostomy, emergency procedure; cricothyroid membrane",CPT4,4134560,398142004,Emergency cricothyroidotomy,SNOMED,Maps to,128
+2105805,28805,"Amputation, foot; transmetatarsal",CPT4,4143797,265739006,Amputation through metatarsal bones,SNOMED,Maps to,128
+2108872,43215,"Esophagoscopy, flexible, transoral; with removal of foreign body(s)",CPT4,4067232,173645007,Fiberoptic esophagoscopy and removal of foreign body,SNOMED,Maps to,127
+2104719,26910,"Amputation, metacarpal, with finger or thumb (ray amputation), single, with or without interosseous transfer",CPT4,4040995,16579006,Metacarpal amputation with finger or thumb,SNOMED,Maps to,121
+2101635,01215,Anesthesia for open procedures involving hip joint; revision of total hip arthroplasty,CPT4,4160439,399097000,Administration of anesthesia,SNOMED,Maps to,118
+2102559,16000,"Initial treatment, first degree burn, when no more than local treatment is required",CPT4,4119989,302429001,Toilet of burnt skin,SNOMED,Maps to,114
+2101712,01638,"Anesthesia for open or surgical arthroscopic procedures on humeral head and neck, sternoclavicular joint, acromioclavicular joint, and shoulder joint; total shoulder replacement",CPT4,4160439,399097000,Administration of anesthesia,SNOMED,Maps to,113
+44816408,43195,"Esophagoscopy, rigid, transoral; with balloon dilation (less than 30 mm diameter)",CPT4,4071430,173666004,Rigid esophagoscopy and balloon dilation,SNOMED,Maps to,112
+2104896,27220,Closed treatment of acetabulum (hip socket) fracture(s); without manipulation,CPT4,4260267,440417002,Closed reduction of fracture of acetabulum,SNOMED,Maps to,110
+2106823,32657,"Thoracoscopy, surgical; with wedge resection of lung, single or multiple (Deprecated)",CPT4,40485447,444188003,Thoracoscopic wedge resection of lung,SNOMED,Maps to,109
+2108737,42200,"Palatoplasty for cleft palate, soft and/or hard palate only",CPT4,4234902,359880001,Uranoplasty for cleft palate repair,SNOMED,Maps to,107
+2108276,36800,"Insertion of cannula for hemodialysis, other purpose (separate procedure); vein to vein",CPT4,4267880,61740001,"Insertion of cannula for hemodialysis, vein to vein",SNOMED,Maps to,105
+2107070,33261,Operative ablation of ventricular arrhythmogenic focus with cardiopulmonary bypass,CPT4,4234169,440619008,Ablation of ventricular arrhythmogenic focus with cardiopulmonary bypass,SNOMED,Maps to,104
+2106405,31240,"Nasal/sinus endoscopy, surgical; with concha bullosa resection",CPT4,4206528,440021004,Endoscopy of nasal sinus with resection of concha bullosa,SNOMED,Maps to,98
+2104638,26608,"Percutaneous skeletal fixation of metacarpal fracture, each bone",CPT4,4259549,439765007,Percutaneous skeletal fixation of fracture of metacarpal,SNOMED,Maps to,93
+2105510,28080,"Excision, interdigital (Morton) neuroma, single, each",CPT4,4230802,89005003,Excision of Morton's neuroma of peripheral nerve,SNOMED,Maps to,92
+2212014,78601,"Brain imaging, less than 4 static views; with vascular flow",CPT4,4137437,32289004,Brain imaging with vascular flow,SNOMED,Maps to,89
+2107011,33222,Relocation of skin pocket for pacemaker,CPT4,4335171,231505007,Revision of skin pocket for pacemaker,SNOMED,Maps to,89
+2106563,31601,"Tracheostomy, planned (separate procedure); younger than 2 years",CPT4,1073322,1303805000,Construction of tracheostomy,SNOMED,Maps to,89
+2103334,21480,Closed treatment of temporomandibular dislocation; initial or subsequent,CPT4,4079945,179632003,Closed reduction of dislocation of temporomandibular joint,SNOMED,Maps to,88
+2108000,35697,"Reimplantation, visceral artery to infrarenal aortic prosthesis, each artery (List separately in addition to code for primary procedure)",CPT4,4232239,439447009,Reimplantation of visceral artery into infrarenal aortic prosthesis,SNOMED,Maps to,87
+2107732,35251,Repair blood vessel with vein graft; intra-abdominal,CPT4,36685559,1099291000000106,Repair of blood vessel of abdomen with vein graft,SNOMED,Maps to,87
+2100693,00176,"Anesthesia for intraoral procedures, including biopsy; radical surgery",CPT4,4160439,399097000,Administration of anesthesia,SNOMED,Maps to,87
+2108014,35721,"Exploration (not followed by surgical repair), with or without lysis of artery; femoral artery (Deprecated)",CPT4,4047337,12243000,Exploration of femoral artery,SNOMED,Maps to,86
+2105542,28110,"Ostectomy, partial excision, fifth metatarsal head (bunionette) (separate procedure)",CPT4,4142209,3326006,Excision of bunionette,SNOMED,Maps to,86
+2106748,32440,"Removal of lung, pneumonectomy",CPT4,4172438,49795001,Total pneumonectomy,SNOMED,Maps to,84
+2105322,27695,"Repair, primary, disrupted ligament, ankle; collateral",CPT4,1242914,1290104003,Suture of ruptured collateral ligament of ankle,SNOMED,Maps to,84
+2213352,89255,Preparation of embryo for transfer (any method),CPT4,4261953,441276006,Preparation of embryo for transfer,SNOMED,Maps to,82
+2107402,33840,"Excision of coarctation of aorta, with or without associated patent ductus arteriosus; with direct anastomosis",CPT4,4105220,25736000,Excision of coarctation of aorta with end-to-end anastomosis,SNOMED,Maps to,82
+2106288,30802,"Ablation, soft tissue of inferior turbinates, unilateral or bilateral, any method (eg, electrocautery, radiofrequency ablation, or tissue volume reduction); intramural (ie, submucosal)",CPT4,4290941,70618008,"Cauterization of turbinates, intramural",SNOMED,Maps to,82
+2101020,00864,"Anesthesia for extraperitoneal procedures in lower abdomen, including urinary tract; total cystectomy",CPT4,4160439,399097000,Administration of anesthesia,SNOMED,Maps to,82
+2107540,34502,"Reconstruction of vena cava, any method",CPT4,4229990,438781008,Reconstruction of vena cava,SNOMED,Maps to,80
+2105429,27840,Closed treatment of ankle dislocation; without anesthesia,CPT4,4060561,19948003,Closed reduction of dislocation of ankle,SNOMED,Maps to,80
+2103592,22900,"Excision, tumor, soft tissue of abdominal wall, subfascial (eg, intramuscular); less than 5 cm",CPT4,4301054,38615002,Excision of subfascial abdominal wall tumor,SNOMED,Maps to,80
+2103377,21685,Hyoid myotomy and suspension,CPT4,4337467,232533005,Hyoid bone suspension,SNOMED,Maps to,79
+2102500,15847,"Excision, excessive skin and subcutaneous tissue (includes lipectomy), abdomen (eg, abdominoplasty) (includes umbilical transposition and fascial plication) (List separately in addition to code for primary procedure)",CPT4,4238658,58420000,Excision of excessive skin and subcutaneous tissue of abdomen,SNOMED,Maps to,78
+2105543,28111,"Ostectomy, complete excision; first metatarsal head",CPT4,40480607,443258007,Excision of entire head of first metatarsal,SNOMED,Maps to,73
+2108817,42825,"Tonsillectomy, primary or secondary; younger than age 12",CPT4,4070719,173422009,Tonsillectomy,SNOMED,Maps to,72
+2103887,24305,"Tendon lengthening, upper arm or elbow, each tendon",CPT4,4235219,438489009,Lengthening of tendon of upper arm,SNOMED,Maps to,70
+2105773,28605,Closed treatment of tarsometatarsal joint dislocation; requiring anesthesia,CPT4,4160439,399097000,Administration of anesthesia,SNOMED,Maps to,69
+2102116,11950,"Subcutaneous injection of filling material (eg, collagen); 1 cc or less",CPT4,4093586,25798001,Subcutaneous injection of filling material,SNOMED,Maps to,69
+2108777,42500,"Plastic repair of salivary duct, sialodochoplasty; primary or simple",CPT4,4244058,38294005,Primary sialodochoplasty,SNOMED,Maps to,68
+2101032,00866,"Anesthesia for extraperitoneal procedures in lower abdomen, including urinary tract; adrenalectomy",CPT4,4160439,399097000,Administration of anesthesia,SNOMED,Maps to,68
+2108726,42100,"Biopsy of palate, uvula",CPT4,4110247,18155007,Biopsy of palate,SNOMED,Maps to,67
+2107430,33886,Placement of distal extension prosthesis(s) delayed after endovascular repair of descending thoracic aorta,CPT4,4233427,440000004,Delayed insertion of distal extension prosthesis of descending thoracic aorta,SNOMED,Maps to,65
+2106728,32225,"Decortication, pulmonary (separate procedure); partial",CPT4,4311424,86371000,Partial pleurectomy,SNOMED,Maps to,65
+2106666,31825,Surgical closure tracheostomy or fistula; with plastic repair,CPT4,4237750,58425005,Surgical closure of tracheostomy with plastic repair,SNOMED,Maps to,64
+2105371,27760,Closed treatment of medial malleolus fracture; without manipulation,CPT4,4258138,440437003,Closed reduction of fracture of medial malleolus,SNOMED,Maps to,64
+2103972,24500,Closed treatment of humeral shaft fracture; without manipulation,CPT4,4260252,440315009,Closed reduction of fracture of shaft of humerus,SNOMED,Maps to,64
+44816364,43211,"Esophagoscopy, flexible, transoral; with endoscopic mucosal resection",CPT4,4067095,173636006,Fiberoptic esophagoscopy and snare resection,SNOMED,Maps to,64
+2212016,78606,"Brain imaging, minimum 4 static views; with vascular flow",CPT4,4137437,32289004,Brain imaging with vascular flow,SNOMED,Maps to,60
+2108598,40812,"Excision of lesion of mucosa and submucosa, vestibule of mouth; with simple repair",CPT4,4144400,33988007,Excision of lesion of vestibule of mouth with simple repair,SNOMED,Maps to,60
+2105960,29827,"Arthroscopy, shoulder, surgical; with rotator cuff repair",CPT4,44783078,699120002,Arthroscopic repair of rotator cuff,SNOMED,Maps to,60
+2105759,28575,Closed treatment of talotarsal joint dislocation; requiring anesthesia,CPT4,4160439,399097000,Administration of anesthesia,SNOMED,Maps to,60
+2102375,15400,"Application of xenograft, skin; 100 sq cm or less (Deprecated)",CPT4,4046023,12365002,Xenograft of skin to skin,SNOMED,Maps to,60
+2108490,38780,"Retroperitoneal transabdominal lymphadenectomy, extensive, including pelvic, aortic, and renal nodes (separate procedure)",CPT4,4035734,11703007,Extensive retroperitoneal transabdominal lymphadenectomy,SNOMED,Maps to,59
+2106763,32484,"Removal of lung, other than pneumonectomy; single segment (segmentectomy)",CPT4,4070880,173172000,Excision of segment of lung,SNOMED,Maps to,59
+2109635,50590,"Lithotripsy, extracorporeal shock wave",CPT4,4195791,44345001,Extracorporeal shockwave lithotripsy,SNOMED,Maps to,58
+2105288,27658,"Repair, flexor tendon, leg; primary, without graft, each tendon",CPT4,4230721,439231005,Primary repair of flexor tendon of lower limb,SNOMED,Maps to,58
+2106922,33011,Pericardiocentesis; subsequent (Deprecated),CPT4,4102011,28110001,Subsequent pericardiocentesis,SNOMED,Maps to,57
+2105605,28234,"Tenotomy, open, extensor, foot or toe, each tendon",CPT4,4140970,33253004,Open tenotomy of extensor of foot,SNOMED,Maps to,57
+2104915,27238,"Closed treatment of intertrochanteric, peritrochanteric, or subtrochanteric femoral fracture; without manipulation",CPT4,4076334,179159005,Closed reduction of fracture of hip,SNOMED,Maps to,57
+42739977,19160,"Mastectomy, partial (Deprecated)",CPT4,4275911,64368001,Partial mastectomy,SNOMED,Maps to,55
+2105735,28490,"Closed treatment of fracture great toe, phalanx or phalanges; without manipulation",CPT4,4076440,179165005,Closed reduction of fracture of hallux,SNOMED,Maps to,54
+2102117,11951,"Subcutaneous injection of filling material (eg, collagen); 1.1 to 5.0 cc",CPT4,4093586,25798001,Subcutaneous injection of filling material,SNOMED,Maps to,54
+44816409,43196,"Esophagoscopy, rigid, transoral; with insertion of guide wire followed by dilation over guide wire",CPT4,4180835,53178003,Esophagoscopy for insertion of wire to guide dilation,SNOMED,Maps to,54
+2101737,01740,Anesthesia for open or surgical arthroscopic procedures of the elbow; not otherwise specified,CPT4,4160439,399097000,Administration of anesthesia,SNOMED,Maps to,52
+2108632,41110,Excision of lesion of tongue without closure,CPT4,4069034,173358003,Excision of lesion of tongue,SNOMED,Maps to,52
+2108879,43228,"Esophagoscopy, rigid or flexible; with ablation of tumor(s), polyp(s), or other lesion(s), not amenable to removal by hot biopsy forceps, bipolar cautery or snare technique (Deprecated)",CPT4,4204969,53797006,Esophagoscopy for destruction of lesion or tumor,SNOMED,Maps to,51
+2108038,35883,"Revision, femoral anastomosis of synthetic arterial bypass graft in groin, open; with nonautogenous patch graft (eg, polyester, ePTFE, bovine pericardium)",CPT4,4232867,438762000,Open revision of femoral anastomosis of synthetic arterial bypass graft using nonautogenous patch graft,SNOMED,Maps to,51
+2313765,92603,"Diagnostic analysis of cochlear implant, age 7 years or older; with programming",CPT4,4232099,439307003,Diagnostic analysis of cochlear implant with programming,SNOMED,Maps to,50
+2100831,00542,"Anesthesia for thoracotomy procedures involving lungs, pleura, diaphragm, and mediastinum (including surgical thoracoscopy); decortication",CPT4,4160439,399097000,Administration of anesthesia,SNOMED,Maps to,50
+2101000,00846,Anesthesia for intraperitoneal procedures in lower abdomen including laparoscopy; radical hysterectomy,CPT4,4160439,399097000,Administration of anesthesia,SNOMED,Maps to,50
+2107096,33305,Repair of cardiac wound; with cardiopulmonary bypass,CPT4,4231513,439331008,Repair of wound of heart with cardiopulmonary bypass,SNOMED,Maps to,50
+2102134,11976,"Removal, implantable contraceptive capsules",CPT4,4199276,301807007,Removal of subcutaneous contraceptive,SNOMED,Maps to,49
+43527880,0291T,"Imaging of heart vessel or graft including supervision, interpretation, and report (Deprecated)",CPT4,1074472,1343469001,Fluoroscopic selective angiocardiography with contrast,SNOMED,Maps to,49
+2103040,21044,Excision of malignant tumor of mandible,CPT4,4232091,439249005,Excision of malignant neoplasm of mandible,SNOMED,Maps to,48
+2314041,94680,"Oxygen uptake, expired gas analysis; rest and exercise, direct, simple",CPT4,4192562,39361004,Oxygen uptake by expired gas analysis at rest and with exercise,SNOMED,Maps to,46
+2109739,51736,"Simple uroflowmetry (UFR) (eg, stop-watch flow rate, mechanical uroflowmeter)",CPT4,4279929,65895009,Simple uroflowmetry,SNOMED,Maps to,46
+2106404,31239,"Nasal/sinus endoscopy, surgical; with dacryocystorhinostomy",CPT4,4234923,440667003,Endoscopy of nasal sinus with dacryocystorhinostomy,SNOMED,Maps to,45
+2109002,43846,"Gastric restrictive procedure, with gastric bypass for morbid obesity; with short limb (150 cm or less) Roux-en-Y gastroenterostomy",CPT4,40483730,443906008,Bypass of stomach with short limb Roux-en-Y gastroenterostomy,SNOMED,Maps to,44
+2100999,00844,Anesthesia for intraperitoneal procedures in lower abdomen including laparoscopy; abdominoperineal resection,CPT4,4160439,399097000,Administration of anesthesia,SNOMED,Maps to,44
+2102376,15401,"Application of xenograft, skin; each additional 100 sq cm (List separately in addition to code for primary procedure) (Deprecated)",CPT4,4046023,12365002,Xenograft of skin to skin,SNOMED,Maps to,44
+2102981,20950,"Monitoring of interstitial fluid pressure (includes insertion of device, eg, wick catheter technique, needle manometer technique) in detection of muscle compartment syndrome",CPT4,4238690,68121006,Measurement of interstitial fluid pressure in muscle compartment,SNOMED,Maps to,44
+2105781,28665,Closed treatment of interphalangeal joint dislocation; requiring anesthesia,CPT4,4259987,440017006,Closed manual reduction of dislocation of interphalangeal joint under anesthesia,SNOMED,Maps to,44
+2106762,32482,"Removal of lung, other than pneumonectomy; 2 lobes (bilobectomy)",CPT4,4067713,173170008,Bilobectomy of lung,SNOMED,Maps to,43
+2107004,33214,"Upgrade of implanted pacemaker system, conversion of single chamber system to dual chamber system (includes removal of previously placed pulse generator, testing of existing lead, insertion of new lead, insertion of new pulse generator)",CPT4,4293626,384683008,Replacement of cardiac pacemaker device with dual-chamber device,SNOMED,Maps to,43
+2107269,33617,"Repair of complex cardiac anomalies (eg, single ventricle) by modified Fontan procedure",CPT4,4050559,233136004,Total cavopulmonary connection,SNOMED,Maps to,42
+2103675,23331,"Removal of foreign body, shoulder; deep (eg, Neer hemiarthroplasty removal) (Deprecated)",CPT4,4281233,66079000,"Removal of foreign body of shoulder, deep",SNOMED,Maps to,41
+2110221,58555,"Hysteroscopy, diagnostic (separate procedure)",CPT4,4052532,233545006,Hysteroscopy,SNOMED,Maps to,40
+2106767,32500,"Removal of lung, other than total pneumonectomy; wedge resection, single or multiple (Deprecated)",CPT4,4019077,116030005,Wedge biopsy of lung,SNOMED,Maps to,40
+2104136,25240,"Excision distal ulna partial or complete (eg, Darrach type or matched resection)",CPT4,4231704,89852008,Excision of distal ulna,SNOMED,Maps to,39
+2104576,26531,"Arthroplasty, metacarpophalangeal joint; with prosthetic implant, each joint",CPT4,4083376,239491006,Prosthetic arthroplasty of metacarpophalangeal joint of finger,SNOMED,Maps to,39
+44816407,43194,"Esophagoscopy, rigid, transoral; with removal of foreign body(s)",CPT4,4068157,173665000,Rigid esophagoscopy and removal of foreign body,SNOMED,Maps to,39
+2106768,32501,Resection and repair of portion of bronchus (bronchoplasty) when performed at time of lobectomy or segmentectomy (List separately in addition to code for primary procedure),CPT4,4337605,232640003,Lobectomy with bronchoplastic procedure,SNOMED,Maps to,38
+2106287,30801,"Ablation, soft tissue of inferior turbinates, unilateral or bilateral, any method (eg, electrocautery, radiofrequency ablation, or tissue volume reduction); superficial",CPT4,4237285,57065000,"Cauterization of turbinates, superficial",SNOMED,Maps to,38
+2102752,19330,"Removal of ruptured breast implant, including implant contents (eg, saline, silicone gel)",CPT4,40481414,443362003,Removal of ruptured breast implant,SNOMED,Maps to,38
+2103032,21026,"Excision of bone (eg, for osteomyelitis or bone abscess); facial bone(s)",CPT4,4209286,56195000,Excision of bone from facial bones,SNOMED,Maps to,38
+2313627,91122,Anorectal manometry,CPT4,37017257,713501009,Anorectal manometry,SNOMED,Maps to,37
+2108727,42104,"Excision, lesion of palate, uvula; without closure",CPT4,4068911,173380000,Excision of lesion of palate,SNOMED,Maps to,37
+43527869,31660,"Bronchoscopy, rigid or flexible, including fluoroscopic guidance, when performed; with bronchial thermoplasty, 1 lobe",CPT4,37017131,713348007,Thermoplasty of bronchus,SNOMED,Maps to,36
+2103233,21310,Closed treatment of nasal bone fracture without manipulation (Deprecated),CPT4,4097890,25060006,Closed reduction of nasal fracture,SNOMED,Maps to,35
+2105290,27664,"Repair, extensor tendon, leg; primary, without graft, each tendon",CPT4,4205507,439634007,Primary repair of extensor tendon of lower limb,SNOMED,Maps to,35
+2104013,24615,Open treatment of acute or chronic elbow dislocation,CPT4,4310395,85397003,Open reduction of dislocation of elbow,SNOMED,Maps to,34
+2105023,27370,Injection of contrast for knee arthrography (Deprecated),CPT4,4295140,76449004,Injection of knee,SNOMED,Maps to,34
+40757146,22901,"Excision, tumor, soft tissue of abdominal wall, subfascial (eg, intramuscular); 5 cm or greater",CPT4,4301054,38615002,Excision of subfascial abdominal wall tumor,SNOMED,Maps to,34
+44816365,43193,"Esophagoscopy, rigid, transoral; with biopsy, single or multiple",CPT4,4066625,173671006,Rigid esophagoscopy and biopsy,SNOMED,Maps to,34
+2101647,01274,"Anesthesia for procedures involving arteries of upper leg, including bypass graft; femoral artery embolectomy",CPT4,4160439,399097000,Administration of anesthesia,SNOMED,Maps to,33
+2107138,33414,Repair of left ventricular outflow tract obstruction by patch enlargement of the outflow tract,CPT4,4339974,233069001,Patch enlargement of right ventricular outflow tract,SNOMED,Maps to,33
+2108831,42900,Suture pharynx for wound or injury,CPT4,4187682,46034007,Suture of laceration of pharynx,SNOMED,Maps to,33
+2102819,20101,Exploration of penetrating wound (separate procedure); chest,CPT4,4259409,439584008,Exploration of penetrating wound of chest,SNOMED,Maps to,32
+2103275,21385,Open treatment of orbital floor blowout fracture; transantral approach (Caldwell-Luc type operation),CPT4,4072329,21820000,Open reduction of orbital floor blowout fracture by transantral approach,SNOMED,Maps to,32
+2103759,23620,Closed treatment of greater humeral tuberosity fracture; without manipulation,CPT4,4262071,441309001,Closed reduction of fracture of greater tuberosity of humerus,SNOMED,Maps to,30
+2105227,27601,"Decompression fasciotomy, leg; posterior compartment(s) only",CPT4,4071931,178074004,Decompression fasciotomy of posterior compartment of lower leg,SNOMED,Maps to,30
+2105523,28090,"Excision of lesion, tendon, tendon sheath, or capsule (including synovectomy) (eg, cyst or ganglion); foot",CPT4,4001881,119686008,Foot excision,SNOMED,Maps to,29
+2104317,25671,Percutaneous skeletal fixation of distal radioulnar dislocation,CPT4,4231953,438560005,Percutaneous skeletal fixation of distal dislocation of radius and ulna,SNOMED,Maps to,29
+2108036,35879,"Revision, lower extremity arterial bypass, without thrombectomy, open; with vein patch angioplasty",CPT4,4206989,439446000,Open revision of arterial bypass of lower extremity with vein patch angioplasty,SNOMED,Maps to,29
+2108949,43458,Dilation of esophagus with balloon (30 mm diameter or larger) for achalasia (Deprecated),CPT4,4297397,386784009,Balloon dilation of achalasia of esophagus,SNOMED,Maps to,29
+2313805,92986,Percutaneous balloon valvuloplasty; aortic valve,CPT4,4299383,77166000,Percutaneous balloon valvuloplasty of aortic valve,SNOMED,Maps to,29
+44816388,23333,"Removal of foreign body, shoulder; deep (subfascial or intramuscular)",CPT4,4281233,66079000,"Removal of foreign body of shoulder, deep",SNOMED,Maps to,29
+2107909,35583,In-situ vein bypass; femoral-popliteal,CPT4,4175600,50807007,Femoral-popliteal artery bypass graft with vein,SNOMED,Maps to,28
+2108602,40819,"Excision of frenum, labial or buccal (frenumectomy, frenulectomy, frenectomy)",CPT4,4207622,312600002,Oral frenectomy,SNOMED,Maps to,28
+2107332,33724,"Repair of isolated partial anomalous pulmonary venous return (eg, Scimitar Syndrome)",CPT4,4018441,174900004,Repair of partial anomalous pulmonary venous connection,SNOMED,Maps to,27
+44816413,43214,"Esophagoscopy, flexible, transoral; with dilation of esophagus with balloon (30 mm diameter or larger) (includes fluoroscopic guidance, when performed)",CPT4,4067233,173646008,Fiberoptic endoscopic balloon dilation of esophagus,SNOMED,Maps to,27
+2107429,33884,"Placement of proximal extension prosthesis for endovascular repair of descending thoracic aorta (eg, aneurysm, pseudoaneurysm, dissection, penetrating ulcer, intramural hematoma, or traumatic disruption); each additional proximal extension (List s...",CPT4,4259692,439944006,Insertion of proximal extension prosthesis for repair of descending thoracic aorta,SNOMED,Maps to,26
+2106530,31578,"Laryngoscopy, flexible; with removal of lesion(s), non-laser",CPT4,4305665,82273001,Flexible fiberoptic laryngoscopy with removal of lesion,SNOMED,Maps to,26
+2106348,31040,"Pterygomaxillary fossa surgery, any approach",CPT4,4204778,438782001,Surgical procedure on pterygopalatine fossa,SNOMED,Maps to,26
+2107098,33310,"Cardiotomy, exploratory (includes removal of foreign body, atrial or ventricular thrombus); without bypass",CPT4,4338693,87917005,Exploratory cardiotomy,SNOMED,Maps to,25
+2105302,27675,"Repair, dislocating peroneal tendons; without fibular osteotomy",CPT4,4140582,264995002,Repair of peroneal tendon,SNOMED,Maps to,25
+2103732,23505,Closed treatment of clavicular fracture; with manipulation,CPT4,4241224,59395005,Manual reduction of closed fracture of clavicle,SNOMED,Maps to,24
+2102119,11954,"Subcutaneous injection of filling material (eg, collagen); over 10.0 cc",CPT4,4093586,25798001,Subcutaneous injection of filling material,SNOMED,Maps to,23
+2103616,23077,"Radical resection of tumor (eg, sarcoma), soft tissue of shoulder area; less than 5 cm",CPT4,4300648,78342004,Radical resection of tumor of soft tissue of shoulder area,SNOMED,Maps to,23
+2106529,31577,"Laryngoscopy, flexible; with removal of foreign body(s)",CPT4,4241202,59306004,Flexible fiberoptic laryngoscopy with removal of foreign body,SNOMED,Maps to,23
+2106346,31030,"Sinusotomy, maxillary (antrotomy); radical (Caldwell-Luc) without removal of antrochoanal polyps",CPT4,4232331,897004,Radical maxillary antrotomy,SNOMED,Maps to,23
+2105385,27768,Closed treatment of posterior malleolus fracture; with manipulation,CPT4,4232107,439365009,Closed manual reduction of fracture of posterior malleolus,SNOMED,Maps to,22
+2108922,43310,"Esophagoplasty (plastic repair or reconstruction), thoracic approach; without repair of tracheoesophageal fistula",CPT4,4218851,39655008,Esophagoplasty by thoracic approach,SNOMED,Maps to,22
+2107668,35142,"Direct repair of aneurysm, pseudoaneurysm, or excision (partial or total) and graft insertion, with or without patch graft; for ruptured aneurysm, common femoral artery (profunda femoris, superficial femoral)",CPT4,4177323,50323003,Repair of ruptured aneurysm with graft of common femoral artery,SNOMED,Maps to,22
+2107044,33241,Removal of implantable defibrillator pulse generator only,CPT4,4228672,88553002,Removal of cardioverter/defibrillator pulse generator without replacement,SNOMED,Maps to,22
+2101678,01472,"Anesthesia for procedures on nerves, muscles, tendons, and fascia of lower leg, ankle, and foot; repair of ruptured Achilles tendon, with or without graft",CPT4,4160439,399097000,Administration of anesthesia,SNOMED,Maps to,21
+2107192,33475,"Replacement, pulmonary valve",CPT4,4339184,88045004,Replacement of pulmonary valve,SNOMED,Maps to,21
+2106053,29889,Arthroscopically aided posterior cruciate ligament repair/augmentation or reconstruction,CPT4,4077907,18864004,Arthroscopically aided posterior cruciate ligament repair,SNOMED,Maps to,20
+2104457,26320,Removal of implant from finger or hand,CPT4,4029550,10777003,Removal of implant from hand,SNOMED,Maps to,19
+2103615,23076,"Excision, tumor, soft tissue of shoulder area, subfascial (eg, intramuscular); less than 5 cm",CPT4,4290694,70483004,"Excision of tumor from shoulder area, deep, subfascial",SNOMED,Maps to,19
+2103458,22305,Closed treatment of vertebral process fracture(s) (Deprecated),CPT4,4044044,129241004,Closed reduction of fracture of spinous process of vertebra,SNOMED,Maps to,19
+2314021,94452,"High altitude simulation test (HAST), with interpretation and report by a physician or other qualified health care professional",CPT4,4206245,440011007,Hypoxia altitude simulation test,SNOMED,Maps to,19
+2108921,43305,"Esophagoplasty (plastic repair or reconstruction), cervical approach; with repair of tracheoesophageal fistula",CPT4,4269506,63499008,Repair of tracheoesophageal fistula by cervical approach,SNOMED,Maps to,19
+2107266,33611,Repair of double outlet right ventricle with intraventricular tunnel repair,CPT4,4146002,427188004,Repair of double outlet right ventricle with intraventricular tunnel,SNOMED,Maps to,19
+42742507,32098,"Thoracotomy, with biopsy(ies) of pleura",CPT4,4328907,22148004,Open biopsy of pleura,SNOMED,Maps to,19
+2101739,01744,Anesthesia for open or surgical arthroscopic procedures of the elbow; repair of nonunion or malunion of humerus,CPT4,4160439,399097000,Administration of anesthesia,SNOMED,Maps to,18
+2104641,26645,"Closed treatment of carpometacarpal fracture dislocation, thumb (Bennett fracture), with manipulation",CPT4,4056994,16794008,Manual reduction of closed carpometacarpal fracture dislocation of thumb,SNOMED,Maps to,18
+2108778,42505,"Plastic repair of salivary duct, sialodochoplasty; secondary or complicated",CPT4,4270510,63091003,Secondary sialodochoplasty,SNOMED,Maps to,18
+2107644,35092,"Direct repair of aneurysm, pseudoaneurysm, or excision (partial or total) and graft insertion, with or without patch graft; for ruptured aneurysm, abdominal aorta involving visceral vessels (mesenteric, celiac, renal)",CPT4,4052846,23617000,Repair of ruptured aneurysm of abdominal aorta with graft,SNOMED,Maps to,18
+2105384,27767,Closed treatment of posterior malleolus fracture; without manipulation,CPT4,4231517,439364008,Closed reduction of fracture of posterior malleolus,SNOMED,Maps to,18
+2102897,20552,"Injection(s); single or multiple trigger point(s), 1 or 2 muscle(s)",CPT4,37153387,1217321007,Injection of trigger point,SNOMED,Maps to,17
+2103315,21450,Closed treatment of mandibular fracture; without manipulation,CPT4,4086986,24832002,Closed reduction of mandibular fracture,SNOMED,Maps to,17
+2103317,21452,"Percutaneous treatment of mandibular fracture, with external fixation",CPT4,4144533,34377000,Manual reduction of closed fracture of mandible with external fixation,SNOMED,Maps to,17
+2103888,24310,"Tenotomy, open, elbow to shoulder, each tendon",CPT4,40486101,447722000,Division of tendon of upper arm,SNOMED,Maps to,17
+2104092,25101,"Arthrotomy, wrist joint; with joint exploration, with or without biopsy, with or without removal of loose or foreign body",CPT4,4149567,31072003,Arthrotomy of wrist joint with joint exploration,SNOMED,Maps to,17
+2104258,25520,Closed treatment of radial shaft fracture and closed treatment of dislocation of distal radioulnar joint (Galeazzi fracture/dislocation),CPT4,4209073,439994007,Closed reduction of fracture of shaft of radius with closed reduction of dislocation of distal radioulnar joint,SNOMED,Maps to,17
+2104656,26676,"Percutaneous skeletal fixation of carpometacarpal dislocation, other than thumb, with manipulation, each joint",CPT4,4230433,438895001,Percutaneous skeletal fixation of dislocation of carpometacarpal joint with manipulation,SNOMED,Maps to,17
+2107475,33926,Repair of pulmonary artery arborization anomalies by unifocalization; with cardiopulmonary bypass,CPT4,4236270,438769009,Unifocalization of pulmonary artery with cardiopulmonary bypass,SNOMED,Maps to,17
+2102972,20920,Fascia lata graft; by stripper,CPT4,36674208,770824007,Harvesting of sheet of fascia from fascia lata by stripper,SNOMED,Maps to,16
+2106610,31643,"Bronchoscopy, rigid or flexible, including fluoroscopic guidance, when performed; with placement of catheter(s) for intracavitary radioelement application",CPT4,4209079,440108009,Bronchoscopy and insertion of intracavitary radioactive isotope using catheter,SNOMED,Maps to,16
+2108923,43312,"Esophagoplasty (plastic repair or reconstruction), thoracic approach; with repair of tracheoesophageal fistula",CPT4,4280236,66545007,Repair of tracheoesophageal fistula by thoracic approach,SNOMED,Maps to,16
+2108870,43205,"Esophagoscopy, flexible, transoral; with band ligation of esophageal varices",CPT4,4067097,173641003,Fiberoptic esophagoscopy and banding of esophageal varices,SNOMED,Maps to,16
+42733288,19162,"Mastectomy, partial; with axillary lymphadenectomy (Deprecated)",CPT4,4261671,35482003,Partial mastectomy with axillary lymphadenectomy,SNOMED,Maps to,16
+2104558,26508,"Release of thenar muscle(s) (eg, thumb contracture)",CPT4,4075287,178260000,Release of contracture of intrinsic muscle of thumb,SNOMED,Maps to,15
+2104612,26561,Repair of syndactyly (web finger) each web space; with skin flaps and grafts,CPT4,44783695,699787007,Correction of syndactyly with skin flap and graft,SNOMED,Maps to,15
+2108037,35881,"Revision, lower extremity arterial bypass, without thrombectomy, open; with segmental vein interposition",CPT4,4258534,439422007,Open revision of arterial bypass of lower extremity with segmental vein interposition,SNOMED,Maps to,15
+40756961,23078,"Radical resection of tumor (eg, sarcoma), soft tissue of shoulder area; 5 cm or greater",CPT4,4300648,78342004,Radical resection of tumor of soft tissue of shoulder area,SNOMED,Maps to,15
+2105323,27696,"Repair, primary, disrupted ligament, ankle; both collateral ligaments",CPT4,1242915,1290105002,Suture of rupture of calcaneofibular ligament and talofibular ligament,SNOMED,Maps to,14
+2103700,23455,"Capsulorrhaphy, anterior; with labral repair (eg, Bankart procedure)",CPT4,4270182,63671006,Bankart capsulorrhaphy,SNOMED,Maps to,14
+43527870,31661,"Bronchoscopy, rigid or flexible, including fluoroscopic guidance, when performed; with bronchial thermoplasty, 2 or more lobes",CPT4,37017131,713348007,Thermoplasty of bronchus,SNOMED,Maps to,14
+2314018,94375,Respiratory flow volume loop,CPT4,4320469,69706004,Respiratory flow volume loop measurement,SNOMED,Maps to,13
+2105291,27665,"Repair, extensor tendon, leg; secondary, with or without graft, each tendon",CPT4,4208027,439067005,Secondary repair of extensor tendon of lower limb,SNOMED,Maps to,13
+2101679,01474,"Anesthesia for procedures on nerves, muscles, tendons, and fascia of lower leg, ankle, and foot; gastrocnemius recession (eg, Strayer procedure)",CPT4,4160439,399097000,Administration of anesthesia,SNOMED,Maps to,13
+2103907,24344,"Reconstruction lateral collateral ligament, elbow, with tendon graft (includes harvesting of graft)",CPT4,4204599,438835004,Reconstruction of lateral collateral ligament of elbow using tendon graft,SNOMED,Maps to,13
+2104379,26035,"Decompression fingers and/or hand, injection injury (eg, grease gun)",CPT4,4172147,48914004,"Decompression of hand, injection injury",SNOMED,Maps to,13
+2104950,27295,Disarticulation of hip,CPT4,4242396,38162008,Disarticulation of hip,SNOMED,Maps to,13
+2105737,28496,"Percutaneous skeletal fixation of fracture great toe, phalanx or phalanges, with manipulation",CPT4,4233168,439764006,Percutaneous skeletal fixation of fracture of great toe with manipulation,SNOMED,Maps to,13
+2106863,32800,Repair lung hernia through chest wall,CPT4,4233304,439936006,Repair of chest wall herniation of lung,SNOMED,Maps to,13
+2108390,37718,"Ligation, division, and stripping, short saphenous vein",CPT4,4322955,71329008,"Ligation, division and complete stripping of short saphenous veins",SNOMED,Maps to,13
+2101001,00848,Anesthesia for intraperitoneal procedures in lower abdomen including laparoscopy; pelvic exenteration,CPT4,4160439,399097000,Administration of anesthesia,SNOMED,Maps to,12
+2103236,21325,Open treatment of nasal fracture; uncomplicated,CPT4,4264828,36460001,Open reduction of nasal fracture,SNOMED,Maps to,12
+2107403,33845,"Excision of coarctation of aorta, with or without associated patent ductus arteriosus; with graft",CPT4,4049478,15946006,Correction of coarctation of aorta with graft replacement,SNOMED,Maps to,12
+2109230,46020,Placement of seton,CPT4,45771078,700071009,Insertion of anal seton,SNOMED,Maps to,12
+2106750,32445,"Removal of lung, pneumonectomy; extrapleural",CPT4,4339613,232644007,Extrapleural pneumonectomy,SNOMED,Maps to,11
+2102737,19316,Mastopexy,CPT4,4179928,50843001,Fixation of pendulous breast,SNOMED,Maps to,11
+2103454,22220,"Osteotomy of spine, including discectomy, anterior approach, single vertebral segment; cervical",CPT4,4207594,439793006,Osteotomy and discectomy of cervical spine by anterior approach,SNOMED,Maps to,11
+2106036,29882,"Arthroscopy, knee, surgical; with meniscus repair (medial OR lateral)",CPT4,4225263,84877006,Arthroscopy of knee with meniscus repair,SNOMED,Maps to,11
+2106235,30435,"Rhinoplasty, secondary; intermediate revision (bony work with osteotomies)",CPT4,4136234,32010001,"Secondary rhinoplasty, intermediate revision with osteotomies",SNOMED,Maps to,11
+2108944,43420,Closure of esophagostomy or fistula; cervical approach,CPT4,4337546,87260005,Closure of esophageal fistula by cervical approach,SNOMED,Maps to,11
+2109738,51726,"Complex cystometrogram (ie, calibrated electronic equipment)",CPT4,4141581,33235005,Complex cystometrogram,SNOMED,Maps to,11
+2108446,38210,"Transplant preparation of hematopoietic progenitor cells; specific cell depletion within harvest, T-cell depletion",CPT4,4012469,113040003,T cell depletion of bone marrow for transplantation,SNOMED,Maps to,10
+2110729,63650,"Percutaneous implantation of neurostimulator electrode array, epidural",CPT4,4173628,42526005,"Percutaneous implantation of neurostimulator electrodes, epidural",SNOMED,Maps to,10
+2101605,0101T,"Extracorporeal shock wave involving musculoskeletal system, not otherwise specified",CPT4,4234302,439204007,Extracorporeal shock wave therapy of musculoskeletal system,SNOMED,Maps to,9
+2104613,26562,"Repair of syndactyly (web finger) each web space; complex (eg, involving bone, nails)",CPT4,4083402,239608001,Correction of complicated syndactyly,SNOMED,Maps to,9
+2105289,27659,"Repair, flexor tendon, leg; secondary, with or without graft, each tendon",CPT4,4231357,439068000,Secondary repair of flexor tendon of lower limb,SNOMED,Maps to,9
+2106723,32200,"Pneumonostomy, with open drainage of abscess or cyst",CPT4,4224020,334835009,Pneumonostomy with open drainage,SNOMED,Maps to,9
+2107382,33800,"Aortic suspension (aortopexy) for tracheal decompression (eg, for tracheomalacia) (separate procedure)",CPT4,4230426,438837007,Suspension and fixation of aorta for tracheal decompression,SNOMED,Maps to,9
+2109014,43887,"Gastric restrictive procedure, open; removal of subcutaneous port component only",CPT4,4231644,439519007,Removal of subcutaneous port component after open gastric restrictive procedure,SNOMED,Maps to,9
+2108996,43831,"Gastrostomy, open; neonatal, for feeding",CPT4,4022009,116016000,Open surgical placement of gastrostomy tube,SNOMED,Maps to,9
+2108017,35741,"Exploration (not followed by surgical repair), with or without lysis of artery; popliteal artery (Deprecated)",CPT4,4331908,2276001,Exploration of popliteal artery,SNOMED,Maps to,9
+2104989,27332,"Arthrotomy, with excision of semilunar cartilage (meniscectomy) knee; medial OR lateral",CPT4,4343671,239418004,Open meniscectomy,SNOMED,Maps to,8
+2106349,31050,"Sinusotomy, sphenoid, with or without biopsy",CPT4,4213281,392213008,Sphenoid sinusotomy,SNOMED,Maps to,8
+2107141,33417,Aortoplasty (gusset) for supravalvular stenosis,CPT4,36674291,771348000,Repair of supravalvar aortic stenosis,SNOMED,Maps to,8
+2108039,35884,"Revision, femoral anastomosis of synthetic arterial bypass graft in groin, open; with autogenous vein patch graft",CPT4,4232256,439573001,Open revision of femoral anastomosis of synthetic arterial bypass graft using autogenous vein patch graft,SNOMED,Maps to,8
+2107263,33606,Anastomosis of pulmonary artery to aorta (Damus-Kaye-Stansel procedure),CPT4,4049086,233134001,Damus-Kaye-Stansel operation,SNOMED,Maps to,8
+2103712,23462,"Capsulorrhaphy, anterior, any type; with coracoid process transfer",CPT4,44783186,699243004,Bristow-Latarjet procedure,SNOMED,Maps to,8
+2102956,20827,"Replantation, thumb (includes distal tip to MP joint), complete amputation",CPT4,40481482,443423008,Replantation of thumb between distal tip and metacarpophalangeal joint after complete amputation,SNOMED,Maps to,8
+2102735,19306,"Mastectomy, radical, including pectoral muscles, axillary and internal mammary lymph nodes (Urban type operation)",CPT4,4230382,359731002,"Urban operation, extended radical mastectomy",SNOMED,Maps to,8
+2102133,11975,"Insertion, implantable contraceptive capsules (Deprecated)",CPT4,4059978,169553002,Implantation of subcutaneous contraceptive,SNOMED,Maps to,8
+2110778,64510,"Injection, anesthetic agent; stellate ganglion (cervical sympathetic)",CPT4,4074030,21879001,Injection of anesthetic agent into stellate ganglion,SNOMED,Maps to,8
+2109766,52000,Cystourethroscopy (separate procedure),CPT4,4305063,386745004,Transurethral cystoscopy,SNOMED,Maps to,8
+2104179,25332,"Arthroplasty, wrist, with or without interposition, with or without external or internal fixation",CPT4,4325438,71476000,Arthroplasty of wrist,SNOMED,Maps to,7
+2103909,24346,"Reconstruction medial collateral ligament, elbow, with tendon graft (includes harvesting of graft)",CPT4,4259418,439632006,Reconstruction of medial collateral ligament of elbow using tendon graft,SNOMED,Maps to,7
+2103903,24340,Tenodesis of biceps tendon at elbow (separate procedure),CPT4,4273305,36563001,Tenodesis for rupture of biceps tendon at elbow,SNOMED,Maps to,7
+2105684,28344,"Reconstruction, toe(s); polydactyly",CPT4,4198691,51335009,Removal of supernumerary toe,SNOMED,Maps to,7
+2108936,43352,"Esophagostomy, fistulization of esophagus, external; cervical approach",CPT4,4246736,60954008,Cervical esophagostomy,SNOMED,Maps to,7
+2107649,35112,"Direct repair of aneurysm, pseudoaneurysm, or excision (partial or total) and graft insertion, with or without patch graft; for ruptured aneurysm, splenic artery",CPT4,4195090,68257007,Repair of ruptured aneurysm with graft of splenic artery,SNOMED,Maps to,7
+2106962,33130,Resection of external cardiac tumor,CPT4,4329271,429595007,Resection of neoplasm of heart,SNOMED,Maps to,7
+2102118,11952,"Subcutaneous injection of filling material (eg, collagen); 5.1 to 10.0 cc",CPT4,4093586,25798001,Subcutaneous injection of filling material,SNOMED,Maps to,7
+42628056,33477,"Transcatheter pulmonary valve implantation, percutaneous approach, including pre-stenting of the valve delivery site, when performed",CPT4,37206820,787162002,Percutaneous pulmonary valve implantation,SNOMED,Maps to,7
+2106427,31294,"Nasal/sinus endoscopy, surgical, with optic nerve decompression",CPT4,4260105,440080001,Endoscopy of nasal sinus with decompression of optic nerve,SNOMED,Maps to,6
+2105488,28035,"Release, tarsal tunnel (posterior tibial nerve decompression)",CPT4,4250782,73924003,Tarsal tunnel release,SNOMED,Maps to,6
+2105368,27756,"Percutaneous skeletal fixation of tibial shaft fracture (with or without fibular fracture) (eg, pins or screws)",CPT4,40479715,443050007,Percutaneous fixation of fracture of shaft of tibia,SNOMED,Maps to,6
+2105062,27412,"Autologous chondrocyte implantation, knee",CPT4,4206382,438770005,Autologous chondrocyte implantation of knee joint,SNOMED,Maps to,6
+2102955,20824,"Replantation, thumb (includes carpometacarpal joint to MP joint), complete amputation",CPT4,40481481,443422003,Replantation of thumb between carpometacarpal and metacarpophalangeal joints after complete amputation,SNOMED,Maps to,6
+2107665,35132,"Direct repair of aneurysm, pseudoaneurysm, or excision (partial or total) and graft insertion, with or without patch graft; for ruptured aneurysm, iliac artery (common, hypogastric, external)",CPT4,4136803,31938009,Repair of ruptured aneurysm with graft of iliac artery,SNOMED,Maps to,6
+2108729,42107,"Excision, lesion of palate, uvula; with local flap closure",CPT4,4194057,79350002,Excision of lesion of palate with local flap closure,SNOMED,Maps to,6
+2102494,15838,"Excision, excessive skin and subcutaneous tissue (includes lipectomy); submental fat pad",CPT4,4071751,177245000,Submental lipectomy,SNOMED,Maps to,6
+2101729,01712,"Anesthesia for procedures on nerves, muscles, tendons, fascia, and bursae of upper arm and elbow; tenotomy, elbow to shoulder, open",CPT4,4160439,399097000,Administration of anesthesia,SNOMED,Maps to,6
+2100653,00126,"Anesthesia for procedures on external, middle, and inner ear including biopsy; tympanotomy",CPT4,4160439,399097000,Administration of anesthesia,SNOMED,Maps to,6
+2108734,42160,"Destruction of lesion, palate or uvula (thermal, cryo or chemical)",CPT4,4070616,173381001,Destruction of lesion of palate,SNOMED,Maps to,5
+2106842,32665,"Thoracoscopy, surgical; with esophagomyotomy (Heller type)",CPT4,4233433,440042002,Thoracoscopy with esophagomyotomy,SNOMED,Maps to,5
+2105287,27656,"Repair, fascial defect of leg",CPT4,42709767,449639000,Repair of defect of fascia of lower limb,SNOMED,Maps to,5
+2110326,59820,"Treatment of missed abortion, completed surgically; first trimester",CPT4,4087135,18489003,Surgical treatment of missed miscarriage of first trimester,SNOMED,Maps to,5
+2110194,58300,Insertion of intrauterine device (IUD),CPT4,4275113,65200003,Insertion of intrauterine contraceptive device,SNOMED,Maps to,5
+2103215,21270,"Malar augmentation, prosthetic material",CPT4,4188055,46468006,Malar augmentation with alloplastic material,SNOMED,Maps to,5
+2314010,94150,"Vital capacity, total (separate procedure)",CPT4,4147814,268379003,Vital capacity,SNOMED,Maps to,5
+2313639,92019,"Ophthalmological examination and evaluation, under general anesthesia, with or without manipulation of globe for passive range of motion or other manipulation to facilitate diagnostic examination; limited",CPT4,4234424,359960003,"Ophthalmologic examination and evaluation under general anesthesia, limited",SNOMED,Maps to,5
+2213519,90802,"Interactive psychiatric diagnostic interview examination using play equipment, physical devices, language interpreter, or other mechanisms of communication (Deprecated)",CPT4,4286972,68338001,Interactive medical psychiatric diagnostic interview,SNOMED,Maps to,5
+2111017,66986,Exchange of intraocular lens,CPT4,4333163,231751005,Exchange of intraocular lens,SNOMED,Maps to,5
+2105625,28280,"Syndactylization, toes (eg, webbing or Kelikian type procedure)",CPT4,4071879,20526009,Formation of syndactyly of toe,SNOMED,Maps to,4
+2107357,33768,"Anastomosis, cavopulmonary, second superior vena cava (List separately in addition to primary procedure)",CPT4,40482697,442278005,Anastomosis of superior vena cava to pulmonary artery,SNOMED,Maps to,4
+2104355,25920,Disarticulation through wrist,CPT4,4116915,287647007,Disarticulation at wrist,SNOMED,Maps to,4
+2104541,26496,Opponensplasty; other methods,CPT4,4223240,84090000,Opponensplasty of hand,SNOMED,Maps to,4
+2104592,26545,"Reconstruction, collateral ligament, interphalangeal joint, single, including graft, each joint",CPT4,1242546,1287330005,Reconstruction of collateral ligament of interphalangeal joint of hand using graft,SNOMED,Maps to,4
+2104661,26706,"Percutaneous skeletal fixation of metacarpophalangeal dislocation, single, with manipulation",CPT4,4232409,439834005,Percutaneous skeletal fixation of dislocation of metacarpophalangeal joint with manipulation,SNOMED,Maps to,4
+2105068,27424,Reconstruction of dislocating patella; with patellectomy,CPT4,4205774,438562002,Reconstruction of dislocating patella with patellectomy,SNOMED,Maps to,4
+2109013,43886,"Gastric restrictive procedure, open; revision of subcutaneous port component only",CPT4,4229361,438217000,Revision of subcutaneous port component after open gastric restrictive procedure,SNOMED,Maps to,4
+2108807,42802,Biopsy; hypopharynx (Deprecated),CPT4,4148074,35219000,Biopsy of hypopharynx,SNOMED,Maps to,4
+2108920,43300,"Esophagoplasty (plastic repair or reconstruction), cervical approach; without repair of tracheoesophageal fistula",CPT4,4032177,14622006,Esophagoplasty by cervical approach,SNOMED,Maps to,4
+2100738,0030T,"Antiprothrombin (phospholipid cofactor) antibody, each Ig class (Deprecated)",CPT4,4221127,82886000,Antiphospholipid antibody measurement,SNOMED,Maps to,4
+2101646,01272,"Anesthesia for procedures involving arteries of upper leg, including bypass graft; femoral artery ligation",CPT4,4160439,399097000,Administration of anesthesia,SNOMED,Maps to,4
+2101744,01760,Anesthesia for open or surgical arthroscopic procedures of the elbow; total elbow replacement,CPT4,4160439,399097000,Administration of anesthesia,SNOMED,Maps to,4
+2103000,20974,Electrical stimulation to aid bone healing; noninvasive (nonoperative),CPT4,4040307,16475002,Transcutaneous stimulation of bone growth,SNOMED,Maps to,4
+2103100,21125,"Augmentation, mandibular body or angle; prosthetic material",CPT4,4231224,439016007,Augmentation of mandible using prosthesis,SNOMED,Maps to,4
+2314022,94453,"High altitude simulation test (HAST), with interpretation and report by a physician or other qualified health care professional; with supplemental oxygen titration",CPT4,4206698,440225002,Hypoxia altitude simulation test with supplemental oxygen titration,SNOMED,Maps to,4
+40756963,43754,"Gastric intubation and aspiration, diagnostic; single specimen (eg, acid analysis)",CPT4,4071412,173831004,Intubation of stomach for study of gastric secretion,SNOMED,Maps to,4
+2107671,35152,"Direct repair of aneurysm, pseudoaneurysm, or excision (partial or total) and graft insertion, with or without patch graft; for ruptured aneurysm, popliteal artery",CPT4,4209718,56683001,Repair of ruptured aneurysm with graft of popliteal artery,SNOMED,Maps to,3
+2108118,36425,"Venipuncture, cutdown; age 1 or over",CPT4,4104015,28898009,Venous cutdown,SNOMED,Maps to,3
+2108747,42235,"Repair of anterior palate, including vomer flap",CPT4,4068912,173393005,Repair of anterior cleft palate with vomerine flap,SNOMED,Maps to,3
+2109039,44137,"Removal of transplanted intestinal allograft, complete",CPT4,4231358,439071008,Complete removal of allograft of intestine,SNOMED,Maps to,3
+2107333,33726,Repair of pulmonary venous stenosis,CPT4,4141361,426751000,Repair of pulmonary vein stenosis,SNOMED,Maps to,3
+2104594,26548,"Repair and reconstruction, finger, volar plate, interphalangeal joint",CPT4,4232236,439438001,Reconstruction of volar plate of interphalangeal joint of finger,SNOMED,Maps to,3
+2105206,27566,"Open treatment of patellar dislocation, with or without partial or total patellectomy",CPT4,43531173,608872001,Open reduction of dislocation of patellofemoral joint,SNOMED,Maps to,3
+2105566,28150,"Phalangectomy, toe, each toe",CPT4,4206972,439246003,Phalangectomy of toe,SNOMED,Maps to,3
+2105716,28446,"Open osteochondral autograft, talus (includes obtaining graft[s])",CPT4,4204600,438838002,Open grafting of osteochondral autograft to talus,SNOMED,Maps to,3
+2105961,29828,"Arthroscopy, shoulder, surgical; biceps tenodesis",CPT4,4259564,439861005,Arthroscopy of shoulder with biceps tenodesis,SNOMED,Maps to,3
+2106431,31320,"Laryngotomy (thyrotomy, laryngofissure); diagnostic (Deprecated)",CPT4,4321443,969009,Incision and exploration of larynx,SNOMED,Maps to,3
+2211954,78258,Esophageal motility,CPT4,4314773,86543007,Esophageal motility study,SNOMED,Maps to,3
+2110776,64505,"Injection, anesthetic agent; sphenopalatine ganglion",CPT4,4312757,86169007,Injection of anesthetic agent into sphenopalatine ganglion,SNOMED,Maps to,3
+2102456,15819,Cervicoplasty (Deprecated),CPT4,4189739,392204006,Repair of cervix,SNOMED,Maps to,3
+2102898,20553,"Injection(s); single or multiple trigger point(s), 3 or more muscles",CPT4,37153387,1217321007,Injection of trigger point,SNOMED,Maps to,3
+2102999,20973,Free osteocutaneous flap with microvascular anastomosis; great toe with web space,CPT4,40479703,443039009,Transplantation of free osteocutaneous flap from great toe and web space using microvascular anastomosis,SNOMED,Maps to,3
+2103101,21127,"Augmentation, mandibular body or angle; with bone graft, onlay or interpositional (includes obtaining autograft)",CPT4,40479664,443004009,Augmentation of mandible using bone graft,SNOMED,Maps to,3
+2103455,22222,"Osteotomy of spine, including discectomy, anterior approach, single vertebral segment; thoracic",CPT4,4231497,439275009,Osteotomy and discectomy of thoracic spine by anterior approach,SNOMED,Maps to,3
+2103558,22847,Anterior instrumentation; 8 or more vertebral segments (List separately in addition to code for primary procedure),CPT4,4119119,22793001,Anterior spinal instrumentation,SNOMED,Maps to,3
+2100819,00524,Anesthesia for closed chest procedures; pneumocentesis,CPT4,4160439,399097000,Administration of anesthesia,SNOMED,Maps to,3
+2106154,30124,"Excision dermoid cyst, nose; simple, skin, subcutaneous",CPT4,3654280,830035005,Excision of dermoid cyst of skin of nose,SNOMED,Maps to,2
+2104990,27333,"Arthrotomy, with excision of semilunar cartilage (meniscectomy) knee; medial AND lateral",CPT4,4190333,373659003,Open total meniscectomy of knee,SNOMED,Maps to,2
+2108869,43204,"Esophagoscopy, flexible, transoral; with injection sclerosis of esophageal varices",CPT4,4067229,173639004,Fiberoptic esophagoscopy and injection sclerotherapy of varices,SNOMED,Maps to,2
+2108706,41850,"Destruction of lesion (except excision), dentoalveolar structures",CPT4,4338355,88315008,Destruction of lesion of dentoalveolar structures,SNOMED,Maps to,2
+2107889,35558,"Bypass graft, with vein; femoral-femoral",CPT4,4070337,17737009,Femoral-femoral artery bypass graft with vein,SNOMED,Maps to,2
+2107778,35400,Angioscopy (noncoronary vessels or grafts) during therapeutic intervention (List separately in addition to code for primary procedure),CPT4,4014021,103723005,Angioscopy,SNOMED,Maps to,2
+2212945,86900,"Blood typing, serologic; ABO",CPT4,4238568,91315004,ABO typing,SNOMED,Maps to,2
+2313807,92990,Percutaneous balloon valvuloplasty; pulmonary valve,CPT4,4187102,46897002,Percutaneous balloon valvuloplasty of pulmonary valve,SNOMED,Maps to,2
+2102520,15922,"Excision, coccygeal pressure ulcer, with coccygectomy; with flap closure",CPT4,4206405,439789000,Excision of coccygeal pressure injury with coccygectomy and flap reconstruction,SNOMED,Maps to,2
+2103141,21181,"Reconstruction by contouring of benign tumor of cranial bones (eg, fibrous dysplasia), extracranial",CPT4,4206262,440190007,Extracranial contouring of facial and skull bones for benign neoplasm,SNOMED,Maps to,2
+2102914,20615,Aspiration and injection for treatment of bone cyst,CPT4,4206253,440065007,Aspiration and injection of cyst of bone,SNOMED,Maps to,2
+2101710,01634,"Anesthesia for open or surgical arthroscopic procedures on humeral head and neck, sternoclavicular joint, acromioclavicular joint, and shoulder joint; shoulder disarticulation",CPT4,4160439,399097000,Administration of anesthesia,SNOMED,Maps to,2
+2101036,00870,"Anesthesia for extraperitoneal procedures in lower abdomen, including urinary tract; cystolithotomy",CPT4,4160439,399097000,Administration of anesthesia,SNOMED,Maps to,2
+2100818,00522,Anesthesia for closed chest procedures; needle biopsy of pleura,CPT4,4160439,399097000,Administration of anesthesia,SNOMED,Maps to,2
+2104239,25449,"Revision of arthroplasty, including removal of implant, wrist joint",CPT4,4236402,438859009,Revision of arthroplasty of wrist joint with removal of implant,SNOMED,Maps to,2
+44816478,0322T,Removal of defibrillator device accessed beneath the skin (Deprecated),CPT4,44810459,897911000000100,Removal of subcutaneous cardioverter defibrillator,SNOMED,Maps to,2
+44816467,0335T,Insertion of sinus tarsi implant,CPT4,44808437,840611000000103,Insertion of implant to sinus tarsi,SNOMED,Maps to,2
+2211775,76930,"Ultrasonic guidance for pericardiocentesis, imaging supervision and interpretation (Deprecated)",CPT4,4076429,1787006,Ultrasonic guidance for pericardiocentesis,SNOMED,Maps to,1
+2111141,68100,Biopsy of conjunctiva,CPT4,4120666,303636000,Conjunctival biopsy,SNOMED,Maps to,1
+2313712,92533,"Caloric vestibular test, each irrigation (binaural, bithermal stimulation constitutes 4 tests)",CPT4,4282906,66608006,Caloric vestibular test,SNOMED,Maps to,1
+2313763,92601,"Diagnostic analysis of cochlear implant, patient younger than 7 years of age; with programming",CPT4,4232099,439307003,Diagnostic analysis of cochlear implant with programming,SNOMED,Maps to,1
+2313764,92602,"Diagnostic analysis of cochlear implant, patient younger than 7 years of age; subsequent reprogramming",CPT4,4262082,441372006,Diagnostic analysis of cochlear implant with reprogramming,SNOMED,Maps to,1
+2314108,95829,Electrocorticogram at surgery (separate procedure),CPT4,4224326,84511005,Electrocorticogram during surgery,SNOMED,Maps to,1
+2314153,95955,"Electroencephalogram (EEG) during nonintracranial surgery (eg, carotid surgery)",CPT4,4321674,70135008,Electroencephalogram during nonintracranial surgery,SNOMED,Maps to,1
+2108364,37500,"Vascular endoscopy, surgical, with ligation of perforator veins, subfascial (SEPS)",CPT4,40491429,448700009,Endoscopic ligation of subfascial perforating vein of lower extremity,SNOMED,Maps to,1
+2109015,43888,"Gastric restrictive procedure, open; removal and replacement of subcutaneous port component only",CPT4,4234327,439348000,Removal and replacement of subcutaneous port component after open gastric restrictive procedure,SNOMED,Maps to,1
+2108746,42227,"Lengthening of palate, with island flap",CPT4,4297864,76620004,Palatoplasty for lengthening of palate with pharyngeal flap,SNOMED,Maps to,1
+2105783,28675,"Open treatment of interphalangeal joint dislocation, includes internal fixation, when performed",CPT4,43531090,608786008,Open reduction of dislocation of interphalangeal joint of toe,SNOMED,Maps to,1
+2107178,33470,"Valvotomy, pulmonary valve, closed heart; transventricular (Deprecated)",CPT4,4287403,69579007,Closed transventricular pulmonary valve commissurotomy,SNOMED,Maps to,1
+2109823,52500,Transurethral resection of bladder neck (separate procedure),CPT4,4310737,388230004,Cystourethroscopy with resection of neck of urinary bladder,SNOMED,Maps to,1
+2109737,51725,"Simple cystometrogram (CMG) (eg, spinal manometer)",CPT4,4035404,11732005,Simple cystometrogram,SNOMED,Maps to,1
+2100843,00546,"Anesthesia for thoracotomy procedures involving lungs, pleura, diaphragm, and mediastinum (including surgical thoracoscopy); pulmonary resection with thoracoplasty",CPT4,4160439,399097000,Administration of anesthesia,SNOMED,Maps to,1
+2100934,0071T,"Focused ultrasound ablation of uterine leiomyomata, including MR guidance; total leiomyomata volume less than 200 cc of tissue",CPT4,36676817,774009005,MRI guided high intensity focused ultrasound ablation of uterine fibroid,SNOMED,Maps to,1
+2101664,01420,"Anesthesia for all cast applications, removal, or repair involving knee joint",CPT4,4160439,399097000,Administration of anesthesia,SNOMED,Maps to,1
+2101731,01716,"Anesthesia for procedures on nerves, muscles, tendons, fascia, and bursae of upper arm and elbow; tenodesis, rupture of long tendon of biceps",CPT4,4160439,399097000,Administration of anesthesia,SNOMED,Maps to,1
+2104219,25430,"Insertion of vascular pedicle into carpal bone (eg, Hori procedure)",CPT4,3654431,833322005,Pedicle vascularized bone graft to carpal bone,SNOMED,Maps to,1
+2104554,26499,"Correction claw finger, other methods",CPT4,4052860,23523000,Correction of claw finger,SNOMED,Maps to,1
+2104555,26500,"Reconstruction of tendon pulley, each tendon; with local tissues (separate procedure)",CPT4,4339083,87839006,Hand tendon pulley reconstruction with local tissues,SNOMED,Maps to,1
+2104599,26555,"Transfer, finger to another position without microvascular anastomosis",CPT4,4325440,71501009,"Transfer of finger, except thumb",SNOMED,Maps to,1
+2104633,26596,"Excision of constricting ring of finger, with multiple Z-plasties",CPT4,4232554,439925004,Excision of constriction ring of finger with Z plasty,SNOMED,Maps to,1
+2103579,22864,"Removal of total disc arthroplasty (artificial disc), anterior approach, single interspace; cervical",CPT4,4205638,438363008,Removal of cervical total intervertebral disc prosthesis using anterior approach,SNOMED,Maps to,1
+2102433,15776,Punch graft for hair transplant; more than 15 punch grafts,CPT4,37204459,783120005,Hair bearing punch graft of skin to skin of scalp,SNOMED,Maps to,1
+2102656,17380,"Electrolysis epilation, each 30 minutes",CPT4,4172161,48957009,Epilation by electrolysis,SNOMED,Maps to,1
+2103057,21060,"Meniscectomy, partial or complete, temporomandibular joint (separate procedure)",CPT4,4337513,87404002,Excision of meniscus of jaw bone,SNOMED,Maps to,1
+2103093,21100,"Application of halo type appliance for maxillofacial fixation, includes removal (separate procedure)",CPT4,4206256,440101003,Application of halo device for maxillofacial fixation,SNOMED,Maps to,1
+2103113,21138,Reduction forehead; contouring and application of prosthetic material or bone graft (includes obtaining autograft),CPT4,4234317,439301002,Contouring of forehead for reduction and application of prosthetic material,SNOMED,Maps to,1
+2103494,22526,"Percutaneous intradiscal electrothermal annuloplasty, unilateral or bilateral including fluoroscopic guidance; single level",CPT4,4197889,431763003,Percutaneous intradiscal electrothermal annuloplasty using fluoroscopic guidance,SNOMED,Maps to,1
+927068,10007,"Fine needle aspiration biopsy, including fluoroscopic guidance; first lesion",CPT4,40482947,445317004,Fluoroscopy guided fine needle aspiration biopsy,SNOMED,Maps to,1
