@@ -1,17 +1,17 @@
 Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency,Original_Id,Original_Code,Original_Name,Original_Vocab,Mapping_Applied,Mapping_Relationship
-3024171,9279-1,Respiratory rate,Clinical Observation,Measurement,LOINC,Valid,Standard,94805710,3024171,9279-1,Respiratory rate,LOINC,No,
-3004249,8480-6,Systolic blood pressure,Clinical Observation,Measurement,LOINC,Valid,Standard,83437359,3004249,8480-6,Systolic blood pressure,LOINC,No,
-3012888,8462-4,Diastolic blood pressure,Clinical Observation,Measurement,LOINC,Valid,Standard,83360287,3012888,8462-4,Diastolic blood pressure,LOINC,No,
-3020891,8310-5,Body temperature,Clinical Observation,Measurement,LOINC,Valid,Standard,78982836,3020891,8310-5,Body temperature,LOINC,No,
+4313591,86290005,Respiratory rate,Clinical Observation,Measurement,SNOMED,Valid,Standard,94805710,3024171,9279-1,Respiratory rate,LOINC,Yes,Exact name match
+4152194,271649006,Systolic blood pressure,Clinical Observation,Measurement,SNOMED,Valid,Standard,83437359,3004249,8480-6,Systolic blood pressure,LOINC,Yes,Exact name match
+4154790,271650006,Diastolic blood pressure,Clinical Observation,Measurement,SNOMED,Valid,Standard,83360287,3012888,8462-4,Diastolic blood pressure,LOINC,Yes,Exact name match
+40387958,1942004,Body temperature,Clinical Observation,Measurement,SNOMED,Valid,Standard,78982836,3020891,8310-5,Body temperature,LOINC,Yes,Exact name match
 3560198,891771000000103,Heart rate,Clinical Observation,Measurement,SNOMED,Valid,Standard,77549128,3027018,8867-4,Heart rate,LOINC,Yes,Maps to
 4020553,104847001,Oxygen saturation measurement,Clinical Observation,Measurement,SNOMED,Valid,Standard,61799131,40762499,59408-5,Oxygen saturation in Arterial blood by Pulse oximetry,LOINC,Yes,Subsumes
 0,NULL/Missing,NULL/Missing measurement concept,Undefined,Metadata,None,Invalid,Non-standard,49201949,0,NULL/Missing,NULL/Missing measurement concept,None,No,
 4301868,78564009,Pulse rate,Observable Entity,Measurement,SNOMED,Valid,Standard,25722649,4301868,78564009,Pulse rate,SNOMED,No,
 4098046,252465000,Pulse oximetry,Procedure,Measurement,SNOMED,Valid,Standard,24145203,4098046,252465000,Pulse oximetry,SNOMED,No,
-3027598,8478-0,Mean blood pressure,Clinical Observation,Measurement,LOINC,Valid,Standard,23915719,3027598,8478-0,Mean blood pressure,LOINC,No,
+4239021,6797001,Mean blood pressure,Clinical Observation,Measurement,SNOMED,Valid,Standard,23915719,3027598,8478-0,Mean blood pressure,LOINC,Yes,Exact name match
 43055141,72514-3,Pain severity - 0-10 verbal numeric rating [Score] - Reported,Clinical Observation,Measurement,LOINC,Valid,Standard,22034394,43055141,72514-3,Pain severity - 0-10 verbal numeric rating [Score] - Reported,LOINC,No,
 3014315,9187-6,Urine output,Clinical Observation,Measurement,LOINC,Valid,Standard,19011397,3014315,9187-6,Urine output,LOINC,No,
-3036277,8302-2,Body height,Clinical Observation,Measurement,LOINC,Valid,Standard,14250938,3036277,8302-2,Body height,LOINC,No,
+607590,1153637007,Body height,Clinical Observation,Measurement,SNOMED,Valid,Standard,14250938,3036277,8302-2,Body height,LOINC,Yes,Exact name match
 37174455,55491000237100,Patient weight,Clinical Observation,Measurement,SNOMED,Valid,Standard,13677510,3025315,29463-7,Body weight,LOINC,Yes,Maps to
 4326744,75367002,Blood pressure,Observable Entity,Measurement,SNOMED,Valid,Standard,13549047,4326744,75367002,Blood pressure,SNOMED,No,
 4018317,104688003,"Glucose measurement, quantitative",Clinical Observation,Measurement,SNOMED,Valid,Standard,13023010,3004501,2345-7,Glucose [Mass/volume] in Serum or Plasma,LOINC,Yes,Subsumes
@@ -77,17 +77,17 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency,Original_Id,
 3034426,5902-2,Prothrombin time (PT),Lab Test,Measurement,LOINC,Valid,Standard,3866708,3034426,5902-2,Prothrombin time (PT),LOINC,No,
 37174016,67541000237108,Lymphocyte count in blood,Clinical Observation,Measurement,SNOMED,Valid,Standard,3729263,3004327,731-0,Lymphocytes [#/volume] in Blood by Automated count,LOINC,Yes,Subsumes
 4137083,425401001,Pain intensity rating scale,Staging / Scales,Measurement,SNOMED,Valid,Standard,3652310,4137083,425401001,Pain intensity rating scale,SNOMED,No,
-3032445,50064-5,Ideal body weight,Clinical Observation,Measurement,LOINC,Valid,Standard,3626078,3032445,50064-5,Ideal body weight,LOINC,No,
+40308117,148029004,Ideal body weight,Clinical Observation,Measurement,SNOMED,Valid,Standard,3626078,3032445,50064-5,Ideal body weight,LOINC,Yes,Exact name match
 4144235,33747003,"Glucose measurement, blood",Clinical Observation,Measurement,SNOMED,Valid,Standard,3281174,3011424,2340-8,Glucose [Mass/volume] in Blood by Automated test strip,LOINC,Yes,Subsumes
 3046900,33256-9,Leukocytes [#/volume] corrected for nucleated erythrocytes in Blood by Automated count,Lab Test,Measurement,LOINC,Valid,Standard,3235013,3046900,33256-9,Leukocytes [#/volume] corrected for nucleated erythrocytes in Blood by Automated count,LOINC,No,
 4201235,301898006,Body surface area,Observable Entity,Measurement,SNOMED,Valid,Standard,3089401,4201235,301898006,Body surface area,SNOMED,No,
 3030494,50957-0,Manual differential performed [Presence] in Blood,Lab Test,Measurement,LOINC,Valid,Standard,2860096,3030494,50957-0,Manual differential performed [Presence] in Blood,LOINC,No,
 3018677,14979-9,aPTT in Platelet poor plasma by Coagulation assay,Lab Test,Measurement,LOINC,Valid,Standard,2800369,3018677,14979-9,aPTT in Platelet poor plasma by Coagulation assay,LOINC,No,
 37175121,25231000237103,PO2 (partial pressure of oxygen) in arterial blood,Clinical Observation,Measurement,SNOMED,Valid,Standard,2723189,3027801,2703-7,Oxygen [Partial pressure] in Arterial blood,LOINC,Yes,Is a
-3005424,8277-6,Body surface area,Clinical Observation,Measurement,LOINC,Valid,Standard,2679756,3005424,8277-6,Body surface area,LOINC,No,
+40266853,102495000,Body surface area,Clinical Observation,Measurement,SNOMED,Valid,Standard,2679756,3005424,8277-6,Body surface area,LOINC,Yes,Exact name match
 1075460,1304152003,Partial pressure of carbon dioxide in arterial blood,Clinical Observation,Measurement,SNOMED,Valid,Standard,2619561,3027946,2019-8,Carbon dioxide [Partial pressure] in Arterial blood,LOINC,Yes,Subsumes
 4215028,81065003,pH measurement,Clinical Observation,Measurement,SNOMED,Valid,Standard,2607769,3019977,2744-1,pH of Arterial blood,LOINC,Yes,Is a
-21490850,76212-0,Invasive Blood pressure,Clinical Observation,Measurement,LOINC,Valid,Standard,2546407,21490850,76212-0,Invasive Blood pressure,LOINC,No,
+4302410,386533006,Invasive blood pressure,Clinical Observation,Measurement,SNOMED,Valid,Standard,2546407,21490850,76212-0,Invasive Blood pressure,LOINC,Yes,Exact name match
 4194291,312471006,Blood bicarbonate measurement,Clinical Observation,Measurement,SNOMED,Valid,Standard,2397103,3003396,1925-7,Base excess in Arterial blood by calculation,LOINC,Yes,Is a
 4227915,88645003,Bicarbonate measurement,Clinical Observation,Measurement,SNOMED,Valid,Standard,2325042,3008152,1960-4,Bicarbonate [Moles/volume] in Arterial blood,LOINC,Yes,Subsumes
 40762636,59574-4,Body mass index (BMI) [Percentile],Clinical Observation,Measurement,LOINC,Valid,Standard,2323284,40762636,59574-4,Body mass index (BMI) [Percentile],LOINC,No,
@@ -125,7 +125,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency,Original_Id,
 40761514,58413-6,Nucleated erythrocytes/100 leukocytes [Ratio] in Blood by Automated count,Lab Test,Measurement,LOINC,Valid,Standard,1050097,40761514,58413-6,Nucleated erythrocytes/100 leukocytes [Ratio] in Blood by Automated count,LOINC,No,
 4227915,88645003,Bicarbonate measurement,Clinical Observation,Measurement,SNOMED,Valid,Standard,1039671,3006576,1959-6,Bicarbonate [Moles/volume] in Blood,LOINC,Yes,Subsumes
 4154501,271348005,Urine dipstick for pH,Clinical Observation,Measurement,SNOMED,Valid,Standard,1018927,3029305,50560-2,pH of Urine by Automated test strip,LOINC,Yes,Subsumes
-3027162,5778-6,Color of Urine,Lab Test,Measurement,LOINC,Valid,Standard,1003489,3027162,5778-6,Color of Urine,LOINC,No,
+4328657,430327009,Color of urine,Lab Test,Measurement,SNOMED,Valid,Standard,1003489,3027162,5778-6,Color of Urine,LOINC,Yes,Exact name match
 37174016,67541000237108,Lymphocyte count in blood,Clinical Observation,Measurement,SNOMED,Valid,Standard,994127,3019198,26474-7,Lymphocytes [#/volume] in Blood,LOINC,Yes,Is a
 3029709,50552-9,Clarity in Urine by Refractometry automated,Lab Test,Measurement,LOINC,Valid,Standard,992333,3029709,50552-9,Clarity in Urine by Refractometry automated,LOINC,No,
 3012677,9000-1,Fluid intake oral Measured,Clinical Observation,Measurement,LOINC,Valid,Standard,991425,3012677,9000-1,Fluid intake oral Measured,LOINC,No,
@@ -150,7 +150,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency,Original_Id,
 4020553,104847001,Oxygen saturation measurement,Clinical Observation,Measurement,SNOMED,Valid,Standard,822360,3016502,2708-6,Oxygen saturation in Arterial blood,LOINC,Yes,Subsumes
 3022096,30180-4,Basophils/100 leukocytes in Blood,Lab Test,Measurement,LOINC,Valid,Standard,819869,3022096,30180-4,Basophils/100 leukocytes in Blood,LOINC,No,
 3027920,774-0,Ovalocytes [Presence] in Blood by Light microscopy,Lab Test,Measurement,LOINC,Valid,Standard,815013,3027920,774-0,Ovalocytes [Presence] in Blood by Light microscopy,LOINC,No,
-40769406,66746-9,Specimen type,Lab Test,Measurement,LOINC,Valid,Standard,811832,40769406,66746-9,Specimen type,LOINC,No,
+4154128,371439000,Specimen type,Lab Test,Measurement,SNOMED,Valid,Standard,811832,40769406,66746-9,Specimen type,LOINC,Yes,Exact name match
 1616355,96828-9,Renal [Score] SOFA,Clinical Observation,Measurement,LOINC,Valid,Standard,811525,1616355,96828-9,Renal [Score] SOFA,LOINC,No,
 3026238,19996-8,Oxygen/Inspired gas Respiratory system --on ventilator,Clinical Observation,Measurement,LOINC,Valid,Standard,810220,3026238,19996-8,Oxygen/Inspired gas Respiratory system --on ventilator,LOINC,No,
 4029625,13621006,Tidal volume,Observable Entity,Measurement,SNOMED,Valid,Standard,781277,4029625,13621006,Tidal volume,SNOMED,No,
@@ -222,11 +222,11 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency,Original_Id,
 3022509,5796-8,Hyaline casts [#/area] in Urine sediment by Microscopy low power field,Lab Test,Measurement,LOINC,Valid,Standard,496563,3022509,5796-8,Hyaline casts [#/area] in Urine sediment by Microscopy low power field,LOINC,No,
 3019230,2716-9,Fractional oxyhemoglobin in Venous blood,Lab Test,Measurement,LOINC,Valid,Standard,496311,3019230,2716-9,Fractional oxyhemoglobin in Venous blood,LOINC,No,
 42869452,71695-1,Immature granulocytes/100 leukocytes in Blood by Automated count,Lab Test,Measurement,LOINC,Valid,Standard,482858,42869452,71695-1,Immature granulocytes/100 leukocytes in Blood by Automated count,LOINC,No,
-3035146,8831-0,Systemic vascular Resistance,Clinical Observation,Measurement,LOINC,Valid,Standard,481540,3035146,8831-0,Systemic vascular Resistance,LOINC,No,
-21490724,75931-6,Inspiration/Expiration time Ratio,Clinical Observation,Measurement,LOINC,Valid,Standard,481275,21490724,75931-6,Inspiration/Expiration time Ratio,LOINC,No,
-3025809,8634-8,Q-T interval,Clinical Observation,Measurement,LOINC,Valid,Standard,480910,3025809,8634-8,Q-T interval,LOINC,No,
+40330630,165094008,Systemic vascular resistance,Clinical Observation,Measurement,SNOMED,Valid,Standard,481540,3035146,8831-0,Systemic vascular Resistance,LOINC,Yes,Exact name match
+4108450,250822000,Inspiration/expiration time ratio,Clinical Observation,Measurement,SNOMED,Valid,Standard,481275,21490724,75931-6,Inspiration/Expiration time Ratio,LOINC,Yes,Exact name match
+40288741,123331008,Q-T interval,Clinical Observation,Measurement,SNOMED,Valid,Standard,480910,3025809,8634-8,Q-T interval,LOINC,Yes,Exact name match
 3029879,51486-9,Epithelial cells.squamous [#/volume] in Urine by Automated count,Lab Test,Measurement,LOINC,Valid,Standard,480187,3029879,51486-9,Epithelial cells.squamous [#/volume] in Urine by Automated count,LOINC,No,
-3008047,8837-7,Systemic vascular Resistance index,Clinical Observation,Measurement,LOINC,Valid,Standard,477591,3008047,8837-7,Systemic vascular Resistance index,LOINC,No,
+4081061,276900001,Systemic vascular resistance index,Clinical Observation,Measurement,SNOMED,Valid,Standard,477591,3008047,8837-7,Systemic vascular Resistance index,LOINC,Yes,Exact name match
 4140731,427210008,Expired sevoflurane concentration,Observable Entity,Measurement,SNOMED,Valid,Standard,467745,4140731,427210008,Expired sevoflurane concentration,SNOMED,No,
 36303797,88294-4,"Glomerular filtration rate/1.73 sq M.predicted among non-blacks [Volume Rate/Area] in Serum, Plasma or Blood by Creatinine-based formula (CKD-EPI)",Lab Test,Measurement,LOINC,Valid,Standard,466925,36303797,88294-4,"Glomerular filtration rate/1.73 sq M.predicted among non-blacks [Volume Rate/Area] in Serum, Plasma or Blood by Creatinine-based formula (CKD-EPI)",LOINC,No,
 3032238,50225-2,Epithelial cells.non-squamous [Presence] in Urine by Automated,Lab Test,Measurement,LOINC,Valid,Standard,466786,3032238,50225-2,Epithelial cells.non-squamous [Presence] in Urine by Automated,LOINC,No,
@@ -266,7 +266,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency,Original_Id,
 3018229,749-2,Myelocytes/100 leukocytes in Blood by Manual count,Lab Test,Measurement,LOINC,Valid,Standard,355735,3018229,749-2,Myelocytes/100 leukocytes in Blood by Manual count,LOINC,No,
 44782825,698822002,Airway plateau pressure,Observable Entity,Measurement,SNOMED,Valid,Standard,354706,44782825,698822002,Airway plateau pressure,SNOMED,No,
 3031147,34728-6,"Carbon dioxide, total [Moles/volume] in Blood by calculation",Lab Test,Measurement,LOINC,Valid,Standard,353643,3031147,34728-6,"Carbon dioxide, total [Moles/volume] in Blood by calculation",LOINC,No,
-3006322,8331-1,Oral temperature,Clinical Observation,Measurement,LOINC,Valid,Standard,351832,3006322,8331-1,Oral temperature,LOINC,No,
+4218834,415945006,Oral temperature,Clinical Observation,Measurement,SNOMED,Valid,Standard,351832,3006322,8331-1,Oral temperature,LOINC,Yes,Exact name match
 3045410,33425-0,Minute volume setting Ventilator,Clinical Observation,Measurement,LOINC,Valid,Standard,351026,3045410,33425-0,Minute volume setting Ventilator,LOINC,No,
 3003214,11125-2,Platelet morphology finding [Identifier] in Blood,Lab Test,Measurement,LOINC,Valid,Standard,349406,3003214,11125-2,Platelet morphology finding [Identifier] in Blood,LOINC,No,
 3008204,32167-9,Clarity of Urine,Lab Test,Measurement,LOINC,Valid,Standard,346624,3008204,32167-9,Clarity of Urine,LOINC,No,
@@ -292,7 +292,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency,Original_Id,
 44794807,293821000000103,Non high density lipoprotein cholesterol measurement,Clinical Observation,Measurement,SNOMED,Valid,Standard,288724,3044491,43396-1,Cholesterol non HDL [Mass/volume] in Serum or Plasma,LOINC,Yes,Is a
 3022022,8633-0,QRS duration,Clinical Observation,Measurement,LOINC,Valid,Standard,285938,3022022,8633-0,QRS duration,LOINC,No,
 3005854,7790-9,Burr cells [Presence] in Blood by Light microscopy,Lab Test,Measurement,LOINC,Valid,Standard,282477,3005854,7790-9,Burr cells [Presence] in Blood by Light microscopy,LOINC,No,
-3007794,8625-6,P-R Interval,Clinical Observation,Measurement,LOINC,Valid,Standard,281271,3007794,8625-6,P-R Interval,LOINC,No,
+40630425,80798007,P-R interval,Clinical Observation,Measurement,SNOMED,Valid,Standard,281271,3007794,8625-6,P-R Interval,LOINC,Yes,Exact name match
 3000185,2502-3,Iron saturation [Mass Fraction] in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,281206,3000185,2502-3,Iron saturation [Mass Fraction] in Serum or Plasma,LOINC,No,
 3005131,27353-2,Glucose mean value [Mass/volume] in Blood Estimated from glycated hemoglobin,Lab Test,Measurement,LOINC,Valid,Standard,280889,3005131,27353-2,Glucose mean value [Mass/volume] in Blood Estimated from glycated hemoglobin,LOINC,No,
 3026258,8636-3,Q-T interval corrected,Clinical Observation,Measurement,LOINC,Valid,Standard,277168,3026258,8636-3,Q-T interval corrected,LOINC,No,
@@ -324,7 +324,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency,Original_Id,
 4090322,251886005,Static lung compliance,Observable Entity,Measurement,SNOMED,Valid,Standard,219797,4090322,251886005,Static lung compliance,SNOMED,No,
 3038058,737-7,Lymphocytes/100 leukocytes in Blood by Manual count,Lab Test,Measurement,LOINC,Valid,Standard,219457,3038058,737-7,Lymphocytes/100 leukocytes in Blood by Manual count,LOINC,No,
 3046731,45390-2,Epithelial cells.squamous [#/area] in Urine sediment by Microscopy low power field,Lab Test,Measurement,LOINC,Valid,Standard,217799,3046731,45390-2,Epithelial cells.squamous [#/area] in Urine sediment by Microscopy low power field,LOINC,No,
-21490695,61017-0,Cerebral perfusion pressure,Clinical Observation,Measurement,LOINC,Valid,Standard,213078,21490695,61017-0,Cerebral perfusion pressure,LOINC,No,
+4353710,250846007,Cerebral perfusion pressure,Clinical Observation,Measurement,SNOMED,Valid,Standard,213078,21490695,61017-0,Cerebral perfusion pressure,LOINC,Yes,Exact name match
 4017625,104569000,"Carboxyhemoglobin measurement, quantitative",Clinical Observation,Measurement,SNOMED,Valid,Standard,212328,3023081,20563-3,Carboxyhemoglobin/Hemoglobin.total in Blood,LOINC,Yes,Subsumes
 3015956,714-6,Eosinophils/100 leukocytes in Blood by Manual count,Lab Test,Measurement,LOINC,Valid,Standard,211246,3015956,714-6,Eosinophils/100 leukocytes in Blood by Manual count,LOINC,No,
 35609595,1083751000000108,Urine specific gravity,Clinical Observation,Measurement,SNOMED,Valid,Standard,206372,3000330,5811-5,Specific gravity of Urine by Test strip,LOINC,Yes,Is a
@@ -403,7 +403,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency,Original_Id,
 4215028,81065003,pH measurement,Clinical Observation,Measurement,SNOMED,Valid,Standard,138125,3012388,19213-8,pH of Mixed venous blood,LOINC,Yes,Is a
 4157239,273313008,Behavior rating scale,Staging / Scales,Measurement,SNOMED,Valid,Standard,138079,4157239,273313008,Behavior rating scale,SNOMED,No,
 4272032,63476009,Prostate specific antigen measurement,Clinical Observation,Measurement,SNOMED,Valid,Standard,136919,3013603,2857-1,Prostate specific Ag [Mass/volume] in Serum or Plasma,LOINC,Yes,Is a
-3043970,39107-8,Color of Skin,Clinical Observation,Measurement,LOINC,Valid,Standard,136889,3043970,39107-8,Color of Skin,LOINC,No,
+4264810,364533002,Color of skin,Clinical Observation,Measurement,SNOMED,Valid,Standard,136889,3043970,39107-8,Color of Skin,LOINC,Yes,Exact name match
 4192889,394957003,Mixed venous carbon dioxide level,Clinical Observation,Measurement,SNOMED,Valid,Standard,135760,3021513,19212-0,Carbon dioxide [Partial pressure] in Mixed venous blood,LOINC,Yes,Subsumes
 4227915,88645003,Bicarbonate measurement,Clinical Observation,Measurement,SNOMED,Valid,Standard,135618,3025817,19229-4,Bicarbonate [Moles/volume] in Mixed venous blood,LOINC,Yes,Subsumes
 3026008,630-4,Bacteria identified in Urine by Culture,Lab Test,Measurement,LOINC,Valid,Standard,135070,3026008,630-4,Bacteria identified in Urine by Culture,LOINC,No,
@@ -520,7 +520,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency,Original_Id,
 40481003,443308002,Measurement of haptoglobin,Clinical Observation,Measurement,SNOMED,Valid,Standard,75860,3012336,4542-7,Haptoglobin [Mass/volume] in Serum or Plasma,LOINC,Yes,Is a
 3004562,25145-4,Bacteria [Presence] in Urine sediment by Light microscopy,Lab Test,Measurement,LOINC,Valid,Standard,75139,3004562,25145-4,Bacteria [Presence] in Urine sediment by Light microscopy,LOINC,No,
 4033092,14663000,"Chloride measurement, urine",Clinical Observation,Measurement,SNOMED,Valid,Standard,74905,3007733,2078-4,Chloride [Moles/volume] in Urine,LOINC,Yes,Is a
-3013652,8828-6,Pulmonary vascular Resistance,Clinical Observation,Measurement,LOINC,Valid,Standard,74841,3013652,8828-6,Pulmonary vascular Resistance,LOINC,No,
+4081062,276901002,Pulmonary vascular resistance,Clinical Observation,Measurement,SNOMED,Valid,Standard,74841,3013652,8828-6,Pulmonary vascular Resistance,LOINC,Yes,Exact name match
 37173195,57951000237108,"Carbon dioxide, total (calculated) molar concentration in arterial blood",Clinical Observation,Measurement,SNOMED,Valid,Standard,74302,3037663,41647-9,"Carbon dioxide, total [Moles/volume] in Arterial blood by calculation",LOINC,Yes,Is a
 3052992,49275-1,Immunofixation for Serum or Plasma Narrative,Lab Test,Measurement,LOINC,Valid,Standard,73897,3052992,49275-1,Immunofixation for Serum or Plasma Narrative,LOINC,No,
 3007350,8246-1,Amorphous sediment [Presence] in Urine sediment by Light microscopy,Lab Test,Measurement,LOINC,Valid,Standard,73293,3007350,8246-1,Amorphous sediment [Presence] in Urine sediment by Light microscopy,LOINC,No,
@@ -561,7 +561,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency,Original_Id,
 37172455,51841000237107,Influenza A virus H1 RNA nucleic acid amplification qualitative result,Clinical Observation,Measurement,SNOMED,Valid,Standard,61454,3030120,49521-8,Influenza virus A H1 RNA [Presence] in Specimen by NAA with probe detection,LOINC,Yes,Subsumes
 3046948,44429-9,Albumin/Globulin [Mass Ratio] in Serum or Plasma by Electrophoresis,Lab Test,Measurement,LOINC,Valid,Standard,60334,3046948,44429-9,Albumin/Globulin [Mass Ratio] in Serum or Plasma by Electrophoresis,LOINC,No,
 4206973,439261002,Measurement of mycophenolic acid,Clinical Observation,Measurement,SNOMED,Valid,Standard,60322,3027653,23905-3,Mycophenolate [Mass/volume] in Serum or Plasma,LOINC,Yes,Is a
-3020091,18842-5,Discharge summary,Clinical Observation,Note,LOINC,Valid,Standard,60200,3020091,18842-5,Discharge summary,LOINC,No,
+40376982,184253006,Discharge summary,Clinical Observation,Note,SNOMED,Valid,Standard,60200,3020091,18842-5,Discharge summary,LOINC,Yes,Exact name match
 3037637,42758-3,Reticulocytes [#/volume] in Blood by calculation,Lab Test,Measurement,LOINC,Valid,Standard,59882,3037637,42758-3,Reticulocytes [#/volume] in Blood by calculation,LOINC,No,
 40760007,56888-1,HIV 1+2 Ab+HIV1 p24 Ag [Presence] in Serum or Plasma by Immunoassay,Lab Test,Measurement,LOINC,Valid,Standard,59684,40760007,56888-1,HIV 1+2 Ab+HIV1 p24 Ag [Presence] in Serum or Plasma by Immunoassay,LOINC,No,
 3024783,10380-4,Stomatocytes [Presence] in Blood by Light microscopy,Lab Test,Measurement,LOINC,Valid,Standard,59629,3024783,10380-4,Stomatocytes [Presence] in Blood by Light microscopy,LOINC,No,
@@ -577,7 +577,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency,Original_Id,
 4097430,25197003,Sodium measurement,Clinical Observation,Measurement,SNOMED,Valid,Standard,55880,3038702,39792-7,Sodium [Moles/volume] in Capillary blood,LOINC,Yes,Subsumes
 3028167,24467-3,CD3+CD4+ (T4 helper) cells [#/volume] in Blood,Lab Test,Measurement,LOINC,Valid,Standard,55572,3028167,24467-3,CD3+CD4+ (T4 helper) cells [#/volume] in Blood,LOINC,No,
 4097887,250589001,Digoxin blood measurement,Clinical Observation,Measurement,SNOMED,Valid,Standard,55255,3011335,10535-3,Digoxin [Mass/volume] in Serum or Plasma,LOINC,Yes,Is a
-3009713,8834-4,Pulmonary vascular Resistance index,Clinical Observation,Measurement,LOINC,Valid,Standard,54534,3009713,8834-4,Pulmonary vascular Resistance index,LOINC,No,
+4174582,276902009,Pulmonary vascular resistance index,Clinical Observation,Measurement,SNOMED,Valid,Standard,54534,3009713,8834-4,Pulmonary vascular Resistance index,LOINC,Yes,Exact name match
 3026904,703-9,Basophilic stippling [Presence] in Blood by Light microscopy,Lab Test,Measurement,LOINC,Valid,Standard,54270,3026904,703-9,Basophilic stippling [Presence] in Blood by Light microscopy,LOINC,No,
 4095055,250637003,ALT - blood measurement,Clinical Observation,Measurement,SNOMED,Valid,Standard,54163,3027388,1744-2,Alanine aminotransferase [Enzymatic activity/volume] in Serum or Plasma by No addition of P-5'-P,LOINC,Yes,Is a
 40769405,66745-1,Clot Lysis [Length fraction] in Blood by Thromboelastography --30 minutes post maximum clot amplitude,Lab Test,Measurement,LOINC,Valid,Standard,54135,40769405,66745-1,Clot Lysis [Length fraction] in Blood by Thromboelastography --30 minutes post maximum clot amplitude,LOINC,No,
@@ -617,7 +617,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency,Original_Id,
 3051633,46736-5,Fatty acid oxidation defects newborn screen interpretation,Lab Test,Measurement,LOINC,Valid,Standard,47381,3051633,46736-5,Fatty acid oxidation defects newborn screen interpretation,LOINC,No,
 3049389,46737-3,Galactosemias newborn screen interpretation,Lab Test,Measurement,LOINC,Valid,Standard,47380,3049389,46737-3,Galactosemias newborn screen interpretation,LOINC,No,
 3013078,8637-1,R-R interval by EKG,Clinical Observation,Measurement,LOINC,Valid,Standard,46539,3013078,8637-1,R-R interval by EKG,LOINC,No,
-3006277,8632-2,QRS axis,Clinical Observation,Measurement,LOINC,Valid,Standard,46539,3006277,8632-2,QRS axis,LOINC,No,
+4089466,251196003,QRS Axis,Clinical Observation,Measurement,SNOMED,Valid,Standard,46539,3006277,8632-2,QRS axis,LOINC,Yes,Exact name match
 4017498,104486009,"Albumin measurement, urine, quantitative",Clinical Observation,Measurement,SNOMED,Valid,Standard,46186,3000034,14957-5,Microalbumin [Mass/volume] in Urine,LOINC,Yes,Subsumes
 3051923,46740-7,Hemoglobin disorders newborn screen interpretation,Lab Test,Measurement,LOINC,Valid,Standard,46052,3051923,46740-7,Hemoglobin disorders newborn screen interpretation,LOINC,No,
 4263457,45896001,Aspartate aminotransferase measurement,Procedure,Measurement,SNOMED,Valid,Standard,45232,4263457,45896001,Aspartate aminotransferase measurement,SNOMED,No,
@@ -1066,7 +1066,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency,Original_Id,
 3032493,50410-0,dRVVT/dRVVT W excess phospholipid (screen to confirm ratio),Lab Test,Measurement,LOINC,Valid,Standard,10218,3032493,50410-0,dRVVT/dRVVT W excess phospholipid (screen to confirm ratio),LOINC,No,
 4020862,105192003,Fentanyl measurement,Clinical Observation,Measurement,SNOMED,Valid,Standard,10218,3004176,11235-9,fentaNYL [Presence] in Urine,LOINC,Yes,Is a
 3025639,30434-5,Microcytes [Presence] in Blood,Lab Test,Measurement,LOINC,Valid,Standard,10205,3025639,30434-5,Microcytes [Presence] in Blood,LOINC,No,
-21490590,60838-0,Nasopharyngeal temperature,Clinical Observation,Measurement,LOINC,Valid,Standard,10202,21490590,60838-0,Nasopharyngeal temperature,LOINC,No,
+44782834,698831002,Nasopharyngeal temperature,Clinical Observation,Measurement,SNOMED,Valid,Standard,10202,21490590,60838-0,Nasopharyngeal temperature,LOINC,Yes,Exact name match
 4215028,81065003,pH measurement,Clinical Observation,Measurement,SNOMED,Valid,Standard,10181,3018672,2748-2,pH of Body fluid,LOINC,Yes,Is a
 3023410,10333-3,Appearance of Cerebral spinal fluid,Lab Test,Measurement,LOINC,Valid,Standard,10179,3023410,10333-3,Appearance of Cerebral spinal fluid,LOINC,No,
 4018310,104670006,Fructose-bisphosphate aldolase measurement,Clinical Observation,Measurement,SNOMED,Valid,Standard,10165,3027953,1761-6,Aldolase [Enzymatic activity/volume] in Serum or Plasma,LOINC,Yes,Is a
@@ -1111,7 +1111,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency,Original_Id,
 3018143,5157-3,Epstein Barr virus capsid IgG Ab [Units/volume] in Serum by Immunoassay,Lab Test,Measurement,LOINC,Valid,Standard,9112,3018143,5157-3,Epstein Barr virus capsid IgG Ab [Units/volume] in Serum by Immunoassay,LOINC,No,
 4184637,43396009,Hemoglobin A1c measurement,Procedure,Measurement,SNOMED,Valid,Standard,9084,4184637,43396009,Hemoglobin A1c measurement,SNOMED,No,
 3020707,9305-4,Mononuclear cells/100 leukocytes in Body fluid by Manual count,Lab Test,Measurement,LOINC,Valid,Standard,9030,3020707,9305-4,Mononuclear cells/100 leukocytes in Body fluid by Manual count,LOINC,No,
-3041292,39126-8,Length of Wound,Clinical Observation,Measurement,LOINC,Valid,Standard,9008,3041292,39126-8,Length of Wound,LOINC,No,
+3522555,45141000000103,Length of wound,Clinical Observation,Measurement,SNOMED,Valid,Standard,9008,3041292,39126-8,Length of Wound,LOINC,Yes,Exact name match
 4144235,33747003,"Glucose measurement, blood",Procedure,Measurement,SNOMED,Valid,Standard,9004,4144235,33747003,"Glucose measurement, blood",SNOMED,No,
 3005627,9306-2,Polymorphonuclear cells/100 leukocytes in Body fluid by Manual count,Lab Test,Measurement,LOINC,Valid,Standard,8963,3005627,9306-2,Polymorphonuclear cells/100 leukocytes in Body fluid by Manual count,LOINC,No,
 21491660,78012-2,Streptococcus pyogenes Ag [Presence] in Throat by Rapid immunoassay,Lab Test,Measurement,LOINC,Valid,Standard,8932,21491660,78012-2,Streptococcus pyogenes Ag [Presence] in Throat by Rapid immunoassay,LOINC,No,
@@ -1121,7 +1121,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency,Original_Id,
 43055424,72590-3,Alpha 2 globulin/Protein.total [Pure mass fraction] in Serum or Plasma by Electrophoresis,Lab Test,Measurement,LOINC,Valid,Standard,8905,43055424,72590-3,Alpha 2 globulin/Protein.total [Pure mass fraction] in Serum or Plasma by Electrophoresis,LOINC,No,
 43055420,72586-1,Beta globulin/Protein.total [Pure mass fraction] in Serum or Plasma by Electrophoresis,Lab Test,Measurement,LOINC,Valid,Standard,8905,43055420,72586-1,Beta globulin/Protein.total [Pure mass fraction] in Serum or Plasma by Electrophoresis,LOINC,No,
 43055416,72582-0,Gamma globulin/Protein.total [Pure mass fraction] in Serum or Plasma by Electrophoresis,Lab Test,Measurement,LOINC,Valid,Standard,8905,43055416,72582-0,Gamma globulin/Protein.total [Pure mass fraction] in Serum or Plasma by Electrophoresis,LOINC,No,
-3042480,39125-0,Width of Wound,Clinical Observation,Measurement,LOINC,Valid,Standard,8845,3042480,39125-0,Width of Wound,LOINC,No,
+3522556,45151000000100,Width of wound,Clinical Observation,Measurement,SNOMED,Valid,Standard,8845,3042480,39125-0,Width of Wound,LOINC,Yes,Exact name match
 2213288,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,8836,2213288,No matching concept,No matching concept,None,No,
 3010084,1986-9,C peptide [Mass/volume] in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,8811,3010084,1986-9,C peptide [Mass/volume] in Serum or Plasma,LOINC,No,
 3053209,48378-4,Kappa light chains.free/Lambda light chains.free [Mass Ratio] in Serum,Lab Test,Measurement,LOINC,Valid,Standard,8716,3053209,48378-4,Kappa light chains.free/Lambda light chains.free [Mass Ratio] in Serum,LOINC,No,
@@ -1214,7 +1214,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency,Original_Id,
 3001775,5356-1,Smith extractable nuclear Ab [Presence] in Serum by Immunoassay,Lab Test,Measurement,LOINC,Valid,Standard,6849,3001775,5356-1,Smith extractable nuclear Ab [Presence] in Serum by Immunoassay,LOINC,No,
 3003159,23860-0,Erythrocytes [#/volume] in Body fluid by Automated count,Lab Test,Measurement,LOINC,Valid,Standard,6837,3003159,23860-0,Erythrocytes [#/volume] in Body fluid by Automated count,LOINC,No,
 3041372,52816-6,Nucleated cells [#/volume] in Cerebral spinal fluid by Automated count,Lab Test,Measurement,LOINC,Valid,Standard,6830,3041372,52816-6,Nucleated cells [#/volume] in Cerebral spinal fluid by Automated count,LOINC,No,
-3042000,39127-6,Depth of Wound,Clinical Observation,Measurement,LOINC,Valid,Standard,6825,3042000,39127-6,Depth of Wound,LOINC,No,
+4312795,425094009,Depth of wound,Clinical Observation,Measurement,SNOMED,Valid,Standard,6825,3042000,39127-6,Depth of Wound,LOINC,Yes,Exact name match
 4191367,389000,Tobramycin measurement,Clinical Observation,Measurement,SNOMED,Valid,Standard,6823,3006638,4059-2,Tobramycin [Mass/volume] in Serum or Plasma --trough,LOINC,Yes,Is a
 3017354,26505-8,Segmented neutrophils/100 leukocytes in Blood,Lab Test,Measurement,LOINC,Valid,Standard,6814,3017354,26505-8,Segmented neutrophils/100 leukocytes in Blood,LOINC,No,
 46374178,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779,46374178,No matching concept,No matching concept,None,No,
@@ -1478,7 +1478,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency,Original_Id,
 3027589,18520-7,P-R Interval Lead AVF,Clinical Observation,Measurement,LOINC,Valid,Standard,6779,3027589,18520-7,P-R Interval Lead AVF,LOINC,No,
 3027447,10143-6,T wave amplitude in lead AVL,Clinical Observation,Measurement,LOINC,Valid,Standard,6779,3027447,10143-6,T wave amplitude in lead AVL,LOINC,No,
 3027381,10071-9,S' wave duration in lead AVL,Clinical Observation,Measurement,LOINC,Valid,Standard,6779,3027381,10071-9,S' wave duration in lead AVL,LOINC,No,
-3027358,8638-9,T wave axis,Clinical Observation,Measurement,LOINC,Valid,Standard,6779,3027358,8638-9,T wave axis,LOINC,No,
+45770409,928081000000109,T wave axis,Clinical Observation,Measurement,SNOMED,Valid,Standard,6779,3027358,8638-9,T wave axis,LOINC,Yes,Exact name match
 3027200,10001-6,R wave duration in lead I,Clinical Observation,Measurement,LOINC,Valid,Standard,6779,3027200,10001-6,R wave duration in lead I,LOINC,No,
 3027068,9896-2,P wave amplitude in lead V2,Clinical Observation,Measurement,LOINC,Valid,Standard,6779,3027068,9896-2,P wave amplitude in lead V2,LOINC,No,
 3026894,18509-0,T wave axis.horizontal plane Reference beat,Clinical Observation,Measurement,LOINC,Valid,Standard,6779,3026894,18509-0,T wave axis.horizontal plane Reference beat,LOINC,No,
@@ -1630,7 +1630,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency,Original_Id,
 3007187,10063-6,S' wave amplitude in lead III,Clinical Observation,Measurement,LOINC,Valid,Standard,6779,3007187,10063-6,S' wave amplitude in lead III,LOINC,No,
 3006851,10141-0,T' wave amplitude in lead V6,Clinical Observation,Measurement,LOINC,Valid,Standard,6779,3006851,10141-0,T' wave amplitude in lead V6,LOINC,No,
 3006830,9890-5,P wave amplitude in lead AVL,Clinical Observation,Measurement,LOINC,Valid,Standard,6779,3006830,9890-5,P wave amplitude in lead AVL,LOINC,No,
-3006698,8626-4,P wave axis,Clinical Observation,Measurement,LOINC,Valid,Standard,6779,3006698,8626-4,P wave axis,LOINC,No,
+4092015,251192001,P wave axis,Clinical Observation,Measurement,SNOMED,Valid,Standard,6779,3006698,8626-4,P wave axis,LOINC,Yes,Exact name match
 3006697,9956-4,QRS duration in lead V2,Clinical Observation,Measurement,LOINC,Valid,Standard,6779,3006697,9956-4,QRS duration in lead V2,LOINC,No,
 3006427,10057-8,S wave duration in lead V6,Clinical Observation,Measurement,LOINC,Valid,Standard,6779,3006427,10057-8,S wave duration in lead V6,LOINC,No,
 3006151,10136-0,T' wave amplitude in lead V1,Clinical Observation,Measurement,LOINC,Valid,Standard,6779,3006151,10136-0,T' wave amplitude in lead V1,LOINC,No,
@@ -1810,7 +1810,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency,Original_Id,
 3032319,35036-3,Macrophages [#/volume] in Body fluid,Lab Test,Measurement,LOINC,Valid,Standard,5039,3032319,35036-3,Macrophages [#/volume] in Body fluid,LOINC,No,
 35918667,480,Morph Coding Sys--Originl,NAACCR Variable,Measurement,NAACCR,Valid,Standard,5023,35918667,480,Morph Coding Sys--Originl,NAACCR,No,
 35918304,470,Morph Coding Sys--Current,NAACCR Variable,Measurement,NAACCR,Valid,Standard,5023,35918304,470,Morph Coding Sys--Current,NAACCR,No,
-3000012,31111-8,Reticulocyte production index,Lab Test,Measurement,LOINC,Valid,Standard,5014,3000012,31111-8,Reticulocyte production index,LOINC,No,
+37208926,1110451000000102,Reticulocyte production index,Lab Test,Measurement,SNOMED,Valid,Standard,5014,3000012,31111-8,Reticulocyte production index,LOINC,Yes,Exact name match
 3028433,6584-7,Virus identified in Specimen by Culture,Lab Test,Measurement,LOINC,Valid,Standard,5011,3028433,6584-7,Virus identified in Specimen by Culture,LOINC,No,
 4220748,41960005,Immunoglobulin E measurement,Clinical Observation,Measurement,SNOMED,Valid,Standard,4968,3005322,19113-0,IgE [Units/volume] in Serum or Plasma,LOINC,Yes,Is a
 734306,init_diag,Initial Diagnosis,Extension/Invasion,Measurement,Cancer Modifier,Valid,Standard,4966,734306,init_diag,Initial Diagnosis,Cancer Modifier,No,
@@ -2426,7 +2426,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency,Original_Id,
 3008108,11153-4,Hematocrit [Volume Fraction] of Body fluid,Lab Test,Measurement,LOINC,Valid,Standard,1423,3008108,11153-4,Hematocrit [Volume Fraction] of Body fluid,LOINC,No,
 3048401,47003-9,Varicella zoster virus DNA [#/volume] (viral load) in Serum or Plasma by NAA with probe detection,Lab Test,Measurement,LOINC,Valid,Standard,1421,3048401,47003-9,Varicella zoster virus DNA [#/volume] (viral load) in Serum or Plasma by NAA with probe detection,LOINC,No,
 4017492,104469003,Adenosine 5'-triphosphate measurement,Clinical Observation,Measurement,SNOMED,Valid,Standard,1412,3035902,1721-0,Adenosine triphosphate [Mass/volume] in Blood,LOINC,Yes,Is a
-3007955,20053-5,Atmospheric pressure,Clinical Observation,Measurement,LOINC,Valid,Standard,1411,3007955,20053-5,Atmospheric pressure,LOINC,No,
+4234529,40513000,Atmospheric pressure,Clinical Observation,Measurement,SNOMED,Valid,Standard,1411,3007955,20053-5,Atmospheric pressure,LOINC,Yes,Exact name match
 4041715,167009006,Blood ethanol measurement,Procedure,Measurement,SNOMED,Valid,Standard,1408,4041715,167009006,Blood ethanol measurement,SNOMED,No,
 3045041,43180-9,Herpes simplex virus 2 IgG Ab [Presence] in Serum or Plasma by Immunoassay,Lab Test,Measurement,LOINC,Valid,Standard,1407,3045041,43180-9,Herpes simplex virus 2 IgG Ab [Presence] in Serum or Plasma by Immunoassay,LOINC,No,
 4018317,104688003,"Glucose measurement, quantitative",Clinical Observation,Measurement,SNOMED,Valid,Standard,1407,3002240,2347-3,Glucose [Mass/volume] in Peritoneal fluid,LOINC,Yes,Subsumes
@@ -2500,7 +2500,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency,Original_Id,
 3042063,39465-0,"Carbon dioxide, total [Moles/volume] in Venous cord blood",Lab Test,Measurement,LOINC,Valid,Standard,1183,3042063,39465-0,"Carbon dioxide, total [Moles/volume] in Venous cord blood",LOINC,No,
 44806428,791911000000107,pH of umbilical cord venous blood,Clinical Observation,Measurement,SNOMED,Valid,Standard,1183,3032186,49699-2,pH of Venous cord blood adjusted to patient's actual temperature,LOINC,Yes,Is a
 42537408,736785003,Partial pressure of carbon dioxide in umbilical cord venous blood,Clinical Observation,Measurement,SNOMED,Valid,Standard,1182,3029246,49695-0,Carbon dioxide [Partial pressure] adjusted to patient's actual temperature in Venous cord blood,LOINC,Yes,Is a
-3012266,18185-9,Gestational age,Clinical Observation,Measurement,LOINC,Valid,Standard,1182,3012266,18185-9,Gestational age,LOINC,No,
+44789950,226081000000107,Gestational age,Clinical Observation,Measurement,SNOMED,Valid,Standard,1182,3012266,18185-9,Gestational age,LOINC,Yes,Exact name match
 40761570,58470-6,Nucleated cells [#/volume] in Cerebral spinal fluid,Lab Test,Measurement,LOINC,Valid,Standard,1177,40761570,58470-6,Nucleated cells [#/volume] in Cerebral spinal fluid,LOINC,No,
 4046599,122272004,Methicillin resistant Staphylococcus aureus culture,Clinical Observation,Measurement,SNOMED,Valid,Standard,1175,3039355,52969-3,Methicillin resistant Staphylococcus aureus [Presence] in Nose by Organism specific culture,LOINC,Yes,Is a
 3002124,6012-9,von Willebrand factor (vWf) Ag [Units/volume] in Platelet poor plasma by Immunoassay,Lab Test,Measurement,LOINC,Valid,Standard,1168,3002124,6012-9,von Willebrand factor (vWf) Ag [Units/volume] in Platelet poor plasma by Immunoassay,LOINC,No,
@@ -2632,7 +2632,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency,Original_Id,
 3025815,20592-2,CD19 cells [#/volume] in Specimen,Lab Test,Measurement,LOINC,Valid,Standard,913,3025815,20592-2,CD19 cells [#/volume] in Specimen,LOINC,No,
 3025921,1681-6,Beta hydroxybutyrate dehydrogenase [Enzymatic activity/volume] in Blood,Lab Test,Measurement,LOINC,Valid,Standard,908,3025921,1681-6,Beta hydroxybutyrate dehydrogenase [Enzymatic activity/volume] in Blood,LOINC,No,
 3047217,43836-6,Beta globulin [Presence] in Serum or Plasma by Electrophoresis,Lab Test,Measurement,LOINC,Valid,Standard,906,3047217,43836-6,Beta globulin [Presence] in Serum or Plasma by Electrophoresis,LOINC,No,
-3046596,33512-5,Color of Specimen,Lab Test,Measurement,LOINC,Valid,Standard,902,3046596,33512-5,Color of Specimen,LOINC,No,
+4094450,250430006,Color of specimen,Lab Test,Measurement,SNOMED,Valid,Standard,902,3046596,33512-5,Color of Specimen,LOINC,Yes,Exact name match
 3031314,50407-6,Other cells/100 leukocytes [Identifier] in Cerebral spinal fluid,Lab Test,Measurement,LOINC,Valid,Standard,902,3031314,50407-6,Other cells/100 leukocytes [Identifier] in Cerebral spinal fluid,LOINC,No,
 4353605,250724005,Tumor marker measurement,Procedure,Measurement,SNOMED,Valid,Standard,901,4353605,250724005,Tumor marker measurement,SNOMED,No,
 3005665,27118-9,Streptococcus pneumoniae Danish serotype 6B IgG Ab [Mass/volume] in Serum,Lab Test,Measurement,LOINC,Valid,Standard,900,3005665,27118-9,Streptococcus pneumoniae Danish serotype 6B IgG Ab [Mass/volume] in Serum,LOINC,No,
@@ -2977,7 +2977,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency,Original_Id,
 4311051,392272006,Bermuda grass specific IgE antibody measurement,Clinical Observation,Measurement,SNOMED,Valid,Standard,509,3015731,6041-8,Bermuda grass IgE Ab [Units/volume] in Serum,LOINC,Yes,Is a
 36685614,1099851000000102,MSK-HQ (Musculoskeletal Health Questionnaire) - physical activity levels - in the past week how many days have you done a total of 30 minutes or more of physical activity,Observable Entity,Measurement,SNOMED,Valid,Non-standard,508,36685614,1099851000000102,MSK-HQ (Musculoskeletal Health Questionnaire) - physical activity levels - in the past week how many days have you done a total of 30 minutes or more of physical activity,SNOMED,No,
 4198724,313579004,Urine methamphetamine measurement,Clinical Observation,Measurement,SNOMED,Valid,Standard,508,3023083,3780-4,Methamphetamine [Mass/volume] in Urine,LOINC,Yes,Subsumes
-3018031,9800-4,Number of Stones,Lab Test,Measurement,LOINC,Valid,Standard,507,3018031,9800-4,Number of Stones,LOINC,No,
+40348807,260962003,Number of stones,Lab Test,Measurement,SNOMED,Valid,Standard,507,3018031,9800-4,Number of Stones,LOINC,Yes,Exact name match
 35918552,756,Tumor Size Summary,NAACCR Variable,Measurement,NAACCR,Valid,Non-standard,506,35918552,756,Tumor Size Summary,NAACCR,No,
 3014188,9802-0,Size [Entitic volume] of Stone,Lab Test,Measurement,LOINC,Valid,Standard,506,3014188,9802-0,Size [Entitic volume] of Stone,LOINC,No,
 21491186,79562-5,Endotracheal tube Diameter,Clinical Observation,Measurement,LOINC,Valid,Standard,506,21491186,79562-5,Endotracheal tube Diameter,LOINC,No,
@@ -4658,7 +4658,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency,Original_Id,
 3042733,44534-6,HLA Ab [Presence] in Serum,Lab Test,Measurement,LOINC,Valid,Standard,45,3042733,44534-6,HLA Ab [Presence] in Serum,LOINC,No,
 3039955,51763-1,Muscle specific receptor tyrosine kinase Ab [Titer] in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,45,3039955,51763-1,Muscle specific receptor tyrosine kinase Ab [Titer] in Serum or Plasma,LOINC,No,
 3028284,31314-8,Coxiella burnetii phase 2 IgG Ab [Presence] in Serum,Lab Test,Measurement,LOINC,Valid,Standard,45,3028284,31314-8,Coxiella burnetii phase 2 IgG Ab [Presence] in Serum,LOINC,No,
-3025085,8328-7,Axillary temperature,Clinical Observation,Measurement,LOINC,Valid,Standard,45,3025085,8328-7,Axillary temperature,LOINC,No,
+4188706,415882003,Axillary temperature,Clinical Observation,Measurement,SNOMED,Valid,Standard,45,3025085,8328-7,Axillary temperature,LOINC,Yes,Exact name match
 3024654,9522-4,Entamoeba histolytica IgG Ab [Units/volume] in Serum by Immunoassay,Lab Test,Measurement,LOINC,Valid,Standard,45,3024654,9522-4,Entamoeba histolytica IgG Ab [Units/volume] in Serum by Immunoassay,LOINC,No,
 4020243,105083003,Benzoylecgonine measurement,Clinical Observation,Measurement,SNOMED,Valid,Standard,45,3022755,3394-4,Benzoylecgonine [Mass/volume] in Urine,LOINC,Yes,Subsumes
 3022312,26997-7,CD3+CD25+ cells [#/volume] in Blood,Lab Test,Measurement,LOINC,Valid,Standard,45,3022312,26997-7,CD3+CD25+ cells [#/volume] in Blood,LOINC,No,
@@ -4754,7 +4754,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency,Original_Id,
 3002951,575-1,Fungus identified in Skin by Culture,Lab Test,Measurement,LOINC,Valid,Standard,39,3002951,575-1,Fungus identified in Skin by Culture,LOINC,No,
 3002303,6914-6,Chlamydophila pneumoniae IgM Ab [Titer] in Serum by Immunofluorescence,Lab Test,Measurement,LOINC,Valid,Standard,39,3002303,6914-6,Chlamydophila pneumoniae IgM Ab [Titer] in Serum by Immunofluorescence,LOINC,No,
 21492784,79420-6,Miscellaneous allergen IgE Ab [Units/volume] in Serum,Lab Test,Measurement,LOINC,Valid,Standard,39,21492784,79420-6,Miscellaneous allergen IgE Ab [Units/volume] in Serum,LOINC,No,
-21490776,75994-4,Pulmonary artery wedge pressure,Clinical Observation,Measurement,LOINC,Valid,Standard,39,21490776,75994-4,Pulmonary artery wedge pressure,LOINC,No,
+4040920,118433006,Pulmonary artery wedge pressure,Clinical Observation,Measurement,SNOMED,Valid,Standard,39,21490776,75994-4,Pulmonary artery wedge pressure,LOINC,Yes,Exact name match
 40771568,69047-9,Geneticist review of results,Lab Test,Measurement,LOINC,Valid,Standard,38,40771568,69047-9,Geneticist review of results,LOINC,No,
 40766036,63304-0,Parietal cell Ab [Titer] in Gastric fluid by Immunofluorescence,Lab Test,Measurement,LOINC,Valid,Standard,38,40766036,63304-0,Parietal cell Ab [Titer] in Gastric fluid by Immunofluorescence,LOINC,No,
 4007008,121372004,Methylenedioxyamphetamine measurement,Clinical Observation,Measurement,SNOMED,Valid,Standard,38,40763809,61045-1,Methylenedioxyamphetamine [Presence] in Serum or Plasma,LOINC,Yes,Is a
@@ -7283,7 +7283,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency,Original_Id,
 4006352,121383008,Mitotane measurement,Clinical Observation,Measurement,SNOMED,Valid,Standard,2,3005578,13626-7,Mitotane [Mass/volume] in Serum or Plasma,LOINC,Yes,Is a
 3005562,6069-9,Chestnut Pollen IgE Ab [Units/volume] in Serum,Lab Test,Measurement,LOINC,Valid,Standard,2,3005562,6069-9,Chestnut Pollen IgE Ab [Units/volume] in Serum,LOINC,No,
 3005375,7248-8,Cultivated Corn IgE Ab [Units/volume] in Serum,Lab Test,Measurement,LOINC,Valid,Standard,2,3005375,7248-8,Cultivated Corn IgE Ab [Units/volume] in Serum,LOINC,No,
-3005308,6683-7,Reptilase time,Lab Test,Measurement,LOINC,Valid,Standard,2,3005308,6683-7,Reptilase time,LOINC,No,
+4013122,103853006,Reptilase time,Lab Test,Measurement,SNOMED,Valid,Standard,2,3005308,6683-7,Reptilase time,LOINC,Yes,Exact name match
 3004592,1250-0,Major crossmatch [Interpretation],Lab Test,Measurement,LOINC,Valid,Standard,2,3004592,1250-0,Major crossmatch [Interpretation],LOINC,No,
 3004378,2352-3,Glucose in CSF/Glucose plas,Lab Test,Measurement,LOINC,Valid,Standard,2,3004378,2352-3,Glucose in CSF/Glucose plas,LOINC,No,
 3004123,32173-7,Eosinophils [Presence] in Blood by Wright stain,Lab Test,Measurement,LOINC,Valid,Standard,2,3004123,32173-7,Eosinophils [Presence] in Blood by Wright stain,LOINC,No,
@@ -7653,7 +7653,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency,Original_Id,
 4264354,4475004,Cyanide measurement,Clinical Observation,Measurement,SNOMED,Valid,Standard,1,3024987,5634-1,Cyanide [Mass/volume] in Blood,LOINC,Yes,Is a
 3024856,3273-0,Heparin unfractionated [Units/volume] in Platelet poor plasma by Coagulation assay,Lab Test,Measurement,LOINC,Valid,Standard,1,3024856,3273-0,Heparin unfractionated [Units/volume] in Platelet poor plasma by Coagulation assay,LOINC,No,
 3024850,11480-1,Microscopic observation [Identifier] in Urine by Acid fast stain,Lab Test,Measurement,LOINC,Valid,Standard,1,3024850,11480-1,Microscopic observation [Identifier] in Urine by Acid fast stain,LOINC,No,
-3024841,8863-3,Left ventricular stroke work index,Clinical Observation,Measurement,LOINC,Valid,Standard,1,3024841,8863-3,Left ventricular stroke work index,LOINC,No,
+4174898,276898003,Left ventricular stroke work index,Clinical Observation,Measurement,SNOMED,Valid,Standard,1,3024841,8863-3,Left ventricular stroke work index,LOINC,Yes,Exact name match
 3024740,547-0,Streptococcus.beta-hemolytic [Presence] in Specimen by Organism specific culture,Lab Test,Measurement,LOINC,Valid,Standard,1,3024740,547-0,Streptococcus.beta-hemolytic [Presence] in Specimen by Organism specific culture,LOINC,No,
 4214231,392382005,Goat willow specific IgE antibody measurement,Clinical Observation,Measurement,SNOMED,Valid,Standard,1,3024593,6285-1,Willow IgE Ab [Units/volume] in Serum,LOINC,Yes,Is a
 3024546,5999-8,Platelet aggregation serotonin induced in Platelet rich plasma,Lab Test,Measurement,LOINC,Valid,Standard,1,3024546,5999-8,Platelet aggregation serotonin induced in Platelet rich plasma,LOINC,No,

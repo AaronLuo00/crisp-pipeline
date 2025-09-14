@@ -2374,3 +2374,41 @@ original_concept_id,original_code,original_name,original_vocab,snomed_concept_id
 35917945,corpus_sarcoma@2880,FIGO Stage,NAACCR,4137662,,FIGO Stage,SNOMED,Exact name match,3
 35917713,lymphoma_ocular_adnexa@2864,Sicca Syndrome,NAACCR,40352977,,Sicca syndrome,SNOMED,Exact name match,2
 35917809,lymphoma_ocular_adnexa@2861,Rheumatoid Arthritis,NAACCR,80809,,Rheumatoid arthritis,SNOMED,Exact name match,2
+3024171,9279-1,Respiratory rate,LOINC,4313591,86290005,Respiratory rate,SNOMED,Exact name match,94805710
+3004249,8480-6,Systolic blood pressure,LOINC,4152194,271649006,Systolic blood pressure,SNOMED,Exact name match,83437359
+3012888,8462-4,Diastolic blood pressure,LOINC,4154790,271650006,Diastolic blood pressure,SNOMED,Exact name match,83360287
+3020891,8310-5,Body temperature,LOINC,40387958,1942004,Body temperature,SNOMED,Exact name match,78982836
+3027598,8478-0,Mean blood pressure,LOINC,4239021,6797001,Mean blood pressure,SNOMED,Exact name match,23915719
+3036277,8302-2,Body height,LOINC,607590,1153637007,Body height,SNOMED,Exact name match,14250938
+3032445,50064-5,Ideal body weight,LOINC,40308117,148029004,Ideal body weight,SNOMED,Exact name match,3626078
+3005424,8277-6,Body surface area,LOINC,40266853,102495000,Body surface area,SNOMED,Exact name match,2679756
+21490850,76212-0,Invasive Blood pressure,LOINC,4302410,386533006,Invasive blood pressure,SNOMED,Exact name match,2546407
+3027162,5778-6,Color of Urine,LOINC,4328657,430327009,Color of urine,SNOMED,Exact name match,1003489
+40769406,66746-9,Specimen type,LOINC,4154128,371439000,Specimen type,SNOMED,Exact name match,811832
+3035146,8831-0,Systemic vascular Resistance,LOINC,40330630,165094008,Systemic vascular resistance,SNOMED,Exact name match,481540
+21490724,75931-6,Inspiration/Expiration time Ratio,LOINC,4108450,250822000,Inspiration/expiration time ratio,SNOMED,Exact name match,481275
+3025809,8634-8,Q-T interval,LOINC,40288741,123331008,Q-T interval,SNOMED,Exact name match,480910
+3008047,8837-7,Systemic vascular Resistance index,LOINC,4081061,276900001,Systemic vascular resistance index,SNOMED,Exact name match,477591
+3006322,8331-1,Oral temperature,LOINC,4218834,415945006,Oral temperature,SNOMED,Exact name match,351832
+3007794,8625-6,P-R Interval,LOINC,40630425,80798007,P-R interval,SNOMED,Exact name match,281271
+21490695,61017-0,Cerebral perfusion pressure,LOINC,4353710,250846007,Cerebral perfusion pressure,SNOMED,Exact name match,213078
+3043970,39107-8,Color of Skin,LOINC,4264810,364533002,Color of skin,SNOMED,Exact name match,136889
+3013652,8828-6,Pulmonary vascular Resistance,LOINC,4081062,276901002,Pulmonary vascular resistance,SNOMED,Exact name match,74841
+3020091,18842-5,Discharge summary,LOINC,40376982,184253006,Discharge summary,SNOMED,Exact name match,60200
+3009713,8834-4,Pulmonary vascular Resistance index,LOINC,4174582,276902009,Pulmonary vascular resistance index,SNOMED,Exact name match,54534
+3006277,8632-2,QRS axis,LOINC,4089466,251196003,QRS Axis,SNOMED,Exact name match,46539
+21490590,60838-0,Nasopharyngeal temperature,LOINC,44782834,698831002,Nasopharyngeal temperature,SNOMED,Exact name match,10202
+3041292,39126-8,Length of Wound,LOINC,3522555,45141000000103,Length of wound,SNOMED,Exact name match,9008
+3042480,39125-0,Width of Wound,LOINC,3522556,45151000000100,Width of wound,SNOMED,Exact name match,8845
+3042000,39127-6,Depth of Wound,LOINC,4312795,425094009,Depth of wound,SNOMED,Exact name match,6825
+3027358,8638-9,T wave axis,LOINC,45770409,928081000000109,T wave axis,SNOMED,Exact name match,6779
+3006698,8626-4,P wave axis,LOINC,4092015,251192001,P wave axis,SNOMED,Exact name match,6779
+3000012,31111-8,Reticulocyte production index,LOINC,37208926,1110451000000102,Reticulocyte production index,SNOMED,Exact name match,5014
+3007955,20053-5,Atmospheric pressure,LOINC,4234529,40513000,Atmospheric pressure,SNOMED,Exact name match,1411
+3012266,18185-9,Gestational age,LOINC,44789950,226081000000107,Gestational age,SNOMED,Exact name match,1182
+3046596,33512-5,Color of Specimen,LOINC,4094450,250430006,Color of specimen,SNOMED,Exact name match,902
+3018031,9800-4,Number of Stones,LOINC,40348807,260962003,Number of stones,SNOMED,Exact name match,507
+3025085,8328-7,Axillary temperature,LOINC,4188706,415882003,Axillary temperature,SNOMED,Exact name match,45
+21490776,75994-4,Pulmonary artery wedge pressure,LOINC,4040920,118433006,Pulmonary artery wedge pressure,SNOMED,Exact name match,39
+3005308,6683-7,Reptilase time,LOINC,4013122,103853006,Reptilase time,SNOMED,Exact name match,2
+3024841,8863-3,Left ventricular stroke work index,LOINC,4174898,276898003,Left ventricular stroke work index,SNOMED,Exact name match,1
