@@ -22717,3 +22717,7 @@ original_concept_id,original_code,original_name,original_vocab,snomed_concept_id
 43528029,99487,"Complex chronic care management services with the following required elements: multiple (two or more) chronic conditions expected to last at least 12 months, or until the death of the patient, chronic conditions that place the patient at significa...",CPT4,4310912,,Care regimes management,SNOMED,CPT4 - SNOMED eq,1
 42742391,94781,"Car seat/bed testing for airway integrity, for infants through 12 months of age, with continual clinical staff observation and continuous recording of pulse oximetry, heart rate and respiratory rate, with interpretation and report; each additional...",CPT4,4088016,,Child examination,SNOMED,CPT4 - SNOMED eq,1
 42742550,77425,"Intraoperative radiation treatment delivery, electrons, single treatment session",CPT4,4059385,,Radiotherapy - intraoperative control,SNOMED,CPT4 - SNOMED eq,1
+2751086,0HBTXZX,"Excision of Right Breast, External Approach, Diagnostic (Deprecated)",ICD10PCS,4180139,429400009,Excision of right breast,SNOMED,Name match,7
+2751097,0HBUXZZ,"Excision of Left Breast, External Approach (Deprecated)",ICD10PCS,4176608,428571003,Excision of left breast,SNOMED,Name match,6
+2751096,0HBUXZX,"Excision of Left Breast, External Approach, Diagnostic (Deprecated)",ICD10PCS,4176608,428571003,Excision of left breast,SNOMED,Name match,5
+2751087,0HBTXZZ,"Excision of Right Breast, External Approach (Deprecated)",ICD10PCS,4180139,429400009,Excision of right breast,SNOMED,Name match,4

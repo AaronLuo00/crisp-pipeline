@@ -5534,9 +5534,9 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 4134543,398031005,Enucleation of eyeball with insertion of orbital implant,Procedure,SNOMED,Valid,Standard,15
 4149881,30973001,Percutaneous implantation of neurostimulator electrodes into peripheral nerve,Procedure,SNOMED,Valid,Standard,15
 4170544,49187005,Endarterectomy of aorta,Procedure,SNOMED,Valid,Standard,15
-4176608,428571003,Excision of left breast,Procedure,SNOMED,Valid,Standard,15
+4176608,428571003,Excision of left breast,Procedure,SNOMED,Valid,Standard,26
 4177490,50449007,Revision of peritoneal-venous shunt,Procedure,SNOMED,Valid,Standard,15
-4180139,429400009,Excision of right breast,Procedure,SNOMED,Valid,Standard,15
+4180139,429400009,Excision of right breast,Procedure,SNOMED,Valid,Standard,26
 4186722,413650000,Biopsy of nose,Procedure,SNOMED,Valid,Standard,15
 4203990,438341004,Laparoscopic insertion of peritoneal dialysis catheter,Procedure,SNOMED,Valid,Standard,15
 4214021,8096008,Capsulotomy of midfoot with tendon lengthening,Procedure,SNOMED,Valid,Standard,15
@@ -6468,7 +6468,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 2767782,0RG60Z1,"Fusion of Thoracic Vertebral Joint, Posterior Approach, Posterior Column, Open Approach (Deprecated)",ICD10PCS,ICD10PCS,Valid,Standard,8
 2767584,0RG60A1,"Fusion of Thoracic Vertebral Joint with Interbody Fusion Device, Posterior Approach, Posterior Column, Open Approach (Deprecated)",ICD10PCS,ICD10PCS,Valid,Standard,8
 2747390,0DNT4ZZ,"Release Lesser Omentum, Percutaneous Endoscopic Approach (Deprecated)",ICD10PCS,ICD10PCS,Valid,Standard,7
-2751086,0HBTXZX,"Excision of Right Breast, External Approach, Diagnostic (Deprecated)",ICD10PCS,ICD10PCS,Valid,Standard,7
 2105665,28309,"Osteotomy, with or without lengthening, shortening or angular correction, metatarsal; multiple (eg, Swanson type cavus foot procedure)",Undefined,CPT4,Invalid,Non-standard,7
 2105247,27614,"Biopsy, soft tissue of leg or ankle area; deep (subfascial or intramuscular)",Undefined,CPT4,Invalid,Non-standard,7
 2105002,27335,"Arthrotomy, with synovectomy, knee; anterior AND posterior including popliteal area",Undefined,CPT4,Invalid,Non-standard,7
@@ -6656,7 +6655,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 2735490,06BR0ZZ,"Excision of Right Lesser Saphenous Vein, Open Approach (Deprecated)",ICD10PCS,ICD10PCS,Valid,Standard,6
 2752626,0DQS0ZZ,"Repair Greater Omentum, Open Approach (Deprecated)",ICD10PCS,ICD10PCS,Valid,Standard,6
 2747533,0DBS3ZX,"Excision of Greater Omentum, Percutaneous Approach, Diagnostic (Deprecated)",ICD10PCS,ICD10PCS,Valid,Standard,6
-2751097,0HBUXZZ,"Excision of Left Breast, External Approach (Deprecated)",ICD10PCS,ICD10PCS,Valid,Standard,6
 2104856,27158,"Osteotomy, pelvis, bilateral (eg, congenital malformation)",Undefined,CPT4,Invalid,Non-standard,6
 2106153,30120,Excision or surgical planing of skin of nose for rhinophyma,Undefined,CPT4,Invalid,Non-standard,6
 2105570,28173,Radical resection of tumor; metatarsal,Undefined,CPT4,Invalid,Non-standard,6
@@ -6866,7 +6864,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 2767311,0RG20Z0,"Fusion of 2 or more Cervical Vertebral Joints, Anterior Approach, Anterior Column, Open Approach (Deprecated)",ICD10PCS,ICD10PCS,Valid,Standard,6
 2747537,0DBT0ZX,"Excision of Lesser Omentum, Open Approach, Diagnostic (Deprecated)",ICD10PCS,ICD10PCS,Valid,Standard,5
 2747388,0DNT0ZZ,"Release Lesser Omentum, Open Approach (Deprecated)",ICD10PCS,ICD10PCS,Valid,Standard,5
-2751096,0HBUXZX,"Excision of Left Breast, External Approach, Diagnostic (Deprecated)",ICD10PCS,ICD10PCS,Valid,Standard,5
 2750614,0DUS07Z,"Supplement Greater Omentum with Autologous Tissue Substitute, Open Approach (Deprecated)",ICD10PCS,ICD10PCS,Valid,Standard,5
 2101622,01160,Anesthesia for closed procedures involving symphysis pubis or sacroiliac joint,Undefined,CPT4,Invalid,Non-standard,5
 2108873,43216,"Esophagoscopy, flexible, transoral; with removal of tumor(s), polyp(s), or other lesion(s) by hot biopsy forceps",Undefined,CPT4,Invalid,Non-standard,5
@@ -7110,7 +7107,6 @@ Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
 2747536,0DBS4ZZ,"Excision of Greater Omentum, Percutaneous Endoscopic Approach (Deprecated)",ICD10PCS,ICD10PCS,Valid,Standard,4
 2741866,0BHR4MZ,"Insertion of Diaphragmatic Pacemaker Lead into Right Diaphragm, Percutaneous Endoscopic Approach (Deprecated)",ICD10PCS,ICD10PCS,Valid,Standard,4
 2758395,0NR207Z,"Replacement of Left Frontal Bone with Autologous Tissue Substitute, Open Approach (Deprecated)",ICD10PCS,ICD10PCS,Valid,Standard,4
-2751087,0HBTXZZ,"Excision of Right Breast, External Approach (Deprecated)",ICD10PCS,ICD10PCS,Valid,Standard,4
 2103845,24125,Excision or curettage of bone cyst or benign tumor of head or neck of radius or olecranon process; with autograft (includes obtaining graft),Undefined,CPT4,Invalid,Non-standard,4
 2106078,29907,"Arthroscopy, subtalar joint, surgical; with subtalar arthrodesis",Undefined,CPT4,Invalid,Non-standard,4
 2105591,28225,"Tenolysis, extensor, foot; single tendon",Undefined,CPT4,Invalid,Non-standard,4

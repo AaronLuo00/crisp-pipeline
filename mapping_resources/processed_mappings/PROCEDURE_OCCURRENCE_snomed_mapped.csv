@@ -16497,7 +16497,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency,Original_Id,
 4044379,129237003,Closed approach,Procedure,Procedure,SNOMED,Valid,Standard,7,2751855,0HCGXZZ,"Extirpation of Matter from Left Hand Skin, External Approach",ICD10PCS,Yes,Has access
 4044379,129237003,Closed approach,Procedure,Procedure,SNOMED,Valid,Standard,7,2751853,0HCEXZZ,"Extirpation of Matter from Left Lower Arm Skin, External Approach",ICD10PCS,Yes,Has access
 4013298,103388001,Percutaneous approach,Procedure,Procedure,SNOMED,Valid,Standard,7,2751706,0FJB3ZZ,"Inspection of Hepatobiliary Duct, Percutaneous Approach",ICD10PCS,Yes,Access of
-2751086,0HBTXZX,"Excision of Right Breast, External Approach, Diagnostic (Deprecated)",ICD10PCS,Procedure,ICD10PCS,Valid,Standard,7,2751086,0HBTXZX,"Excision of Right Breast, External Approach, Diagnostic (Deprecated)",ICD10PCS,No,
+4180139,429400009,Excision of right breast,ICD10PCS,Procedure,SNOMED,Valid,Standard,7,2751086,0HBTXZX,"Excision of Right Breast, External Approach, Diagnostic (Deprecated)",ICD10PCS,Yes,Name match
 4290594,37270008,Endoscope,Procedure,Procedure,SNOMED,Valid,Standard,7,2751056,0G904ZZ,"Drainage of Pituitary Gland, Percutaneous Endoscopic Approach",ICD10PCS,Yes,Using acc device
 4166295,275023007,Pancreas endoscopic operation,Procedure,Procedure,SNOMED,Valid,Standard,7,2750985,0FCC8ZZ,"Extirpation of Matter from Ampulla of Vater, Via Natural or Artificial Opening Endoscopic",ICD10PCS,Yes,Is a
 4129646,261004008,Diagnostic intent,Procedure,Procedure,SNOMED,Valid,Standard,7,2750809,0H9KXZX,"Drainage of Right Lower Leg Skin, External Approach, Diagnostic",ICD10PCS,Yes,Intent of
@@ -17261,7 +17261,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency,Original_Id,
 4304358,103693007,Diagnostic procedure,Procedure,Procedure,SNOMED,Valid,Standard,6,2750581,0H97XZX,"Drainage of Abdomen Skin, External Approach, Diagnostic",ICD10PCS,Yes,Is a
 4044379,129237003,Closed approach,Procedure,Procedure,SNOMED,Valid,Standard,6,2751851,0HCCXZZ,"Extirpation of Matter from Left Upper Arm Skin, External Approach",ICD10PCS,Yes,Has access
 4042478,118824002,Procedure on biliary tract,Procedure,Procedure,SNOMED,Valid,Standard,6,2751460,0FHB0DZ,"Insertion of Intraluminal Device into Hepatobiliary Duct, Open Approach",ICD10PCS,Yes,Is a
-2751097,0HBUXZZ,"Excision of Left Breast, External Approach (Deprecated)",ICD10PCS,Procedure,ICD10PCS,Valid,Standard,6,2751097,0HBUXZZ,"Excision of Left Breast, External Approach (Deprecated)",ICD10PCS,No,
+4176608,428571003,Excision of left breast,ICD10PCS,Procedure,SNOMED,Valid,Standard,6,2751097,0HBUXZZ,"Excision of Left Breast, External Approach (Deprecated)",ICD10PCS,Yes,Name match
 4044378,129236007,Open approach,Procedure,Procedure,SNOMED,Valid,Standard,6,2751078,0HBT0ZX,"Excision of Right Breast, Open Approach, Diagnostic",ICD10PCS,Yes,Has access
 4013298,103388001,Percutaneous approach,Procedure,Procedure,SNOMED,Valid,Standard,6,2750977,0FC93ZZ,"Extirpation of Matter from Common Bile Duct, Percutaneous Approach",ICD10PCS,Yes,Has access
 4116178,302697001,Drainage of skin lesion,Procedure,Procedure,SNOMED,Valid,Standard,6,2750812,0H9LXZX,"Drainage of Left Lower Leg Skin, External Approach, Diagnostic",ICD10PCS,Yes,Is a
@@ -18134,7 +18134,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency,Original_Id,
 4044378,129236007,Open approach,Procedure,Procedure,SNOMED,Valid,Standard,5,2751715,0FJG0ZZ,"Inspection of Pancreas, Open Approach",ICD10PCS,Yes,Has access
 4000738,119583009,Trunk excision,Procedure,Procedure,SNOMED,Valid,Standard,5,2751619,0HB9XZX,"Excision of Perineum Skin, External Approach, Diagnostic",ICD10PCS,Yes,Is a
 4042478,118824002,Procedure on biliary tract,Procedure,Procedure,SNOMED,Valid,Standard,5,2751464,0FHB3DZ,"Insertion of Intraluminal Device into Hepatobiliary Duct, Percutaneous Approach",ICD10PCS,Yes,Is a
-2751096,0HBUXZX,"Excision of Left Breast, External Approach, Diagnostic (Deprecated)",ICD10PCS,Procedure,ICD10PCS,Valid,Standard,5,2751096,0HBUXZX,"Excision of Left Breast, External Approach, Diagnostic (Deprecated)",ICD10PCS,No,
+4176608,428571003,Excision of left breast,ICD10PCS,Procedure,SNOMED,Valid,Standard,5,2751096,0HBUXZX,"Excision of Left Breast, External Approach, Diagnostic (Deprecated)",ICD10PCS,Yes,Name match
 36695581,770804008,Structure of nail unit of digit of hand,Procedure,Procedure,SNOMED,Valid,Standard,5,2751075,0HBQXZZ,"Excision of Finger Nail, External Approach",ICD10PCS,Yes,Dir proc site of
 4290594,37270008,Endoscope,Procedure,Procedure,SNOMED,Valid,Standard,5,2750973,0FC84ZZ,"Extirpation of Matter from Cystic Duct, Percutaneous Endoscopic Approach",ICD10PCS,Yes,Using acc device
 4044378,129236007,Open approach,Procedure,Procedure,SNOMED,Valid,Standard,5,2750958,0FC40ZZ,"Extirpation of Matter from Gallbladder, Open Approach",ICD10PCS,Yes,Has access
@@ -19218,7 +19218,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency,Original_Id,
 4013298,103388001,Percutaneous approach,Procedure,Procedure,SNOMED,Valid,Standard,4,2750844,0H9U30Z,"Drainage of Left Breast with Drainage Device, Percutaneous Approach",ICD10PCS,Yes,Access of
 4013298,103388001,Percutaneous approach,Procedure,Procedure,SNOMED,Valid,Standard,4,2750959,0FC43ZZ,"Extirpation of Matter from Gallbladder, Percutaneous Approach",ICD10PCS,Yes,Has access
 4013298,103388001,Percutaneous approach,Procedure,Procedure,SNOMED,Valid,Standard,4,2750962,0FC53ZZ,"Extirpation of Matter from Right Hepatic Duct, Percutaneous Approach",ICD10PCS,Yes,Access of
-2751087,0HBTXZZ,"Excision of Right Breast, External Approach (Deprecated)",ICD10PCS,Procedure,ICD10PCS,Valid,Standard,4,2751087,0HBTXZZ,"Excision of Right Breast, External Approach (Deprecated)",ICD10PCS,No,
+4180139,429400009,Excision of right breast,ICD10PCS,Procedure,SNOMED,Valid,Standard,4,2751087,0HBTXZZ,"Excision of Right Breast, External Approach (Deprecated)",ICD10PCS,Yes,Name match
 40492306,445772004,Biopsy of skin and/or subcutaneous tissue,Procedure,Procedure,SNOMED,Valid,Standard,4,2751607,0HB3XZX,"Excision of Left Ear Skin, External Approach, Diagnostic",ICD10PCS,Yes,Is a
 4044379,129237003,Closed approach,Procedure,Procedure,SNOMED,Valid,Standard,4,2750570,0H93XZZ,"Drainage of Left Ear Skin, External Approach",ICD10PCS,Yes,Has access
 4041107,118630004,Division,Procedure,Procedure,SNOMED,Valid,Standard,4,2750554,0H8KXZZ,"Division of Right Lower Leg Skin, External Approach",ICD10PCS,Yes,Is a
