@@ -33,6 +33,8 @@ This directory contains the 5-stage CRISP-DM pipeline modules for processing OMO
 - **Output**: Patient data saved to `extracted_patient_data/` at project root
 - **Reports**: Statistics and summaries saved to `output/5_extraction/`
 
+**Note on Visit Timestamps**: The extracted data contains visit records where start time equals end time. This originates from the raw OMOP CDM data. These records are preserved as they still represent valid medical events.
+
 ## Performance Optimizations
 
 The pipeline has been optimized with parallel processing capabilities:
