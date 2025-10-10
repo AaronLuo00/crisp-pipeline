@@ -208,59 +208,101 @@ class ResNet(nn.Module):
             x = block(x)
         return self.output(x).squeeze()
 
-class AttentionBlock(nn.Module):
-    """Self-attention block for tabular data"""
-    def __init__(self, dim, num_heads=8):
-        super(AttentionBlock, self).__init__()
-        self.attention = nn.MultiheadAttention(dim, num_heads, batch_first=True)
-        self.norm = nn.LayerNorm(dim)
+class TemporalAttentionBlock(nn.Module):
+    """Temporal self-attention block for sequential data"""
+    def __init__(self, dim, num_heads=8, dropout=0.3):
+        super(TemporalAttentionBlock, self).__init__()
+        self.attention = nn.MultiheadAttention(dim, num_heads, batch_first=True, dropout=dropout)
+        self.norm1 = nn.LayerNorm(dim)
         self.ffn = nn.Sequential(
             nn.Linear(dim, dim * 4),
-            nn.ReLU(),
-            nn.Linear(dim * 4, dim)
-        )
-        self.norm2 = nn.LayerNorm(dim)
-    
-    def forward(self, x):
-        # Self-attention
-        x = x.unsqueeze(1)  # Add sequence dimension
-        attn_out, _ = self.attention(x, x, x)
-        x = self.norm(x + attn_out)
-        
-        # Feed-forward
-        ffn_out = self.ffn(x)
-        x = self.norm2(x + ffn_out)
-        return x.squeeze(1)
-
-class TransformerModel(nn.Module):
-    """Transformer model for tabular data"""
-    def __init__(self, input_dim, hidden_dim=256, num_blocks=4, num_heads=8, dropout=0.3):
-        super(TransformerModel, self).__init__()
-        
-        # Input projection
-        self.input_proj = nn.Sequential(
-            nn.Linear(input_dim, hidden_dim),
-            nn.LayerNorm(hidden_dim),
-            nn.ReLU(),
+            nn.GELU(),
+            nn.Dropout(dropout),
+            nn.Linear(dim * 4, dim),
             nn.Dropout(dropout)
         )
-        
-        # Attention blocks
-        self.blocks = nn.ModuleList([
-            AttentionBlock(hidden_dim, num_heads) for _ in range(num_blocks)
+        self.norm2 = nn.LayerNorm(dim)
+        self.dropout = nn.Dropout(dropout)
+
+    def forward(self, x):
+        # Self-attention with residual connection
+        attn_out, _ = self.attention(x, x, x)
+        x = self.norm1(x + self.dropout(attn_out))
+
+        # Feed-forward with residual connection
+        ffn_out = self.ffn(x)
+        x = self.norm2(x + ffn_out)
+        return x
+
+class SequentialTransformer(nn.Module):
+    """Transformer model with static and temporal feature fusion for sequential data"""
+    def __init__(self, static_dim, temporal_dim, hidden_dim=128, num_blocks=3, num_heads=8, dropout=0.3):
+        super(SequentialTransformer, self).__init__()
+
+        # Static feature processing
+        self.static_net = nn.Sequential(
+            nn.Linear(static_dim, 64),
+            nn.BatchNorm1d(64),
+            nn.ReLU(),
+            nn.Dropout(dropout),
+            nn.Linear(64, 32),
+            nn.BatchNorm1d(32),
+            nn.ReLU()
+        )
+
+        # Temporal feature projection
+        self.temporal_proj = nn.Sequential(
+            nn.Linear(temporal_dim, hidden_dim),
+            nn.LayerNorm(hidden_dim),
+            nn.Dropout(dropout)
+        )
+
+        # Temporal Transformer blocks
+        self.transformer_blocks = nn.ModuleList([
+            TemporalAttentionBlock(hidden_dim, num_heads, dropout)
+            for _ in range(num_blocks)
         ])
-        
-        # Output layer
-        self.output = nn.Sequential(
-            nn.Linear(hidden_dim, 1),
+
+        # Global pooling for temporal features
+        self.temporal_pool = nn.AdaptiveAvgPool1d(1)
+
+        # Fusion and output layers
+        fusion_dim = 32 + hidden_dim  # Static + Transformer output
+        self.fusion = nn.Sequential(
+            nn.Linear(fusion_dim, 128),
+            nn.BatchNorm1d(128),
+            nn.ReLU(),
+            nn.Dropout(dropout),
+            nn.Linear(128, 64),
+            nn.BatchNorm1d(64),
+            nn.ReLU(),
+            nn.Dropout(dropout),
+            nn.Linear(64, 1),
             nn.Sigmoid()
         )
-    
-    def forward(self, x):
-        x = self.input_proj(x)
-        for block in self.blocks:
+
+    def forward(self, x_static, x_temporal):
+        # Process static features
+        static_out = self.static_net(x_static)
+
+        # Process temporal features with Transformer
+        # x_temporal shape: [batch, seq_len, temporal_dim]
+        x = self.temporal_proj(x_temporal)  # [batch, seq_len, hidden_dim]
+
+        # Apply Transformer blocks
+        for block in self.transformer_blocks:
             x = block(x)
-        return self.output(x).squeeze()
+
+        # Global average pooling over time dimension
+        # x: [batch, seq_len, hidden_dim] -> [batch, hidden_dim, seq_len]
+        x = x.transpose(1, 2)
+        temporal_out = self.temporal_pool(x).squeeze(-1)  # [batch, hidden_dim]
+
+        # Fusion
+        combined = torch.cat([static_out, temporal_out], dim=1)
+        output = self.fusion(combined)
+
+        return output.squeeze()
 
 def load_features(task_name: str, input_dir: Path, time_window: int = 4) -> pd.DataFrame:
     """Load features for a specific task"""
@@ -297,9 +339,17 @@ def prepare_data(df: pd.DataFrame, target_col: str, test_size: float = 0.2,
     
     X = df[feature_cols]
     y = df[target_col]
-    
+
     # Handle missing values
     X = X.fillna(X.median())
+
+    # Clip extreme values to prevent numerical instability
+    # Values > 1e10 are data errors (e.g., WBC count of 1e21)
+    extreme_threshold = 1e10
+    n_extreme = (X.abs() > extreme_threshold).sum().sum()
+    if n_extreme > 0:
+        print(f"  Clipping {n_extreme} extreme values (> {extreme_threshold:.0e}) to prevent NaN")
+        X = X.clip(-extreme_threshold, extreme_threshold)
     
     # Split data
     X_train, X_test, y_train, y_test = train_test_split(
@@ -510,11 +560,12 @@ def get_model(model_type: str, input_dim: int = None, config: Dict = None,
         return ResNet(input_dim, hidden_dim, num_blocks, dropout)
     
     elif model_type == 'Transformer':
-        hidden_dim = config.get('hidden_dim', 256)
-        num_blocks = config.get('num_blocks', 4)
+        # Sequential Transformer (requires static_dim and temporal_dim)
+        hidden_dim = config.get('hidden_dim', 128)
+        num_blocks = config.get('num_blocks', 3)
         num_heads = config.get('num_heads', 8)
         dropout = config.get('dropout', 0.3)
-        return TransformerModel(input_dim, hidden_dim, num_blocks, num_heads, dropout)
+        return SequentialTransformer(static_dim, temporal_dim, hidden_dim, num_blocks, num_heads, dropout)
     
     elif model_type == 'LSTM':
         hidden_dim = config.get('hidden_dim', 128)
@@ -557,9 +608,9 @@ def train_model(model: nn.Module, train_loader: DataLoader, val_loader: DataLoad
     
     train_losses = []
     val_aurocs = []
-    
+
     # Check if this is a sequential model
-    is_sequential = model_type in ['LSTM', 'TCN']
+    is_sequential = model_type in ['LSTM', 'TCN', 'Transformer']
     
     for epoch in range(epochs):
         # Training
@@ -664,9 +715,9 @@ def evaluate_model(model: nn.Module, test_loader: DataLoader, model_type: str = 
     model.eval()
     predictions = []
     labels = []
-    
+
     # Check if this is a sequential model
-    is_sequential = model_type in ['LSTM', 'TCN']
+    is_sequential = model_type in ['LSTM', 'TCN', 'Transformer']
     
     with torch.no_grad():
         for batch_data in test_loader:
@@ -682,7 +733,24 @@ def evaluate_model(model: nn.Module, test_loader: DataLoader, model_type: str = 
             
             predictions.extend(outputs.cpu().numpy())
             labels.extend(batch_y.numpy())
-    
+
+    # Convert to numpy arrays and check for NaN
+    predictions = np.array(predictions)
+    labels = np.array(labels)
+
+    # Filter out NaN predictions
+    valid_mask = ~np.isnan(predictions)
+    if not valid_mask.all():
+        n_nan = (~valid_mask).sum()
+        print(f"      Warning: {n_nan} NaN predictions detected, filtering them out")
+        predictions = predictions[valid_mask]
+        labels = labels[valid_mask]
+
+    # Check if we have enough valid predictions
+    if len(predictions) == 0:
+        print(f"      Error: All predictions are NaN")
+        return 0.5, 0.0, np.array([])
+
     # Calculate metrics with error handling
     try:
         auroc = roc_auc_score(labels, predictions)
@@ -778,7 +846,7 @@ def train_task_models(task_name: str, targets: List[str], input_dir: Path,
         X_train, X_test, y_train, y_test, scaler, feature_cols = data
         
         # Check if this is a sequential model
-        is_sequential = args.model_type in ['LSTM', 'TCN']
+        is_sequential = args.model_type in ['LSTM', 'TCN', 'Transformer']
         
         if is_sequential:
             # Reshape data for sequential models

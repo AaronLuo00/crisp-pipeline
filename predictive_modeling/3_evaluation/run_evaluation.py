@@ -328,18 +328,169 @@ def reconstruct_dl_model(checkpoint: Dict, metadata: Dict = None):
             output = self.fusion(combined)
             
             return output.squeeze()
-    
+
+    class TemporalAttentionBlock(nn.Module):
+        """Temporal self-attention block for sequential data"""
+        def __init__(self, dim, num_heads=8, dropout=0.3):
+            super(TemporalAttentionBlock, self).__init__()
+            self.attention = nn.MultiheadAttention(dim, num_heads, batch_first=True, dropout=dropout)
+            self.norm1 = nn.LayerNorm(dim)
+            self.ffn = nn.Sequential(
+                nn.Linear(dim, dim * 4),
+                nn.GELU(),
+                nn.Dropout(dropout),
+                nn.Linear(dim * 4, dim),
+                nn.Dropout(dropout)
+            )
+            self.norm2 = nn.LayerNorm(dim)
+            self.dropout = nn.Dropout(dropout)
+
+        def forward(self, x):
+            # Self-attention with residual connection
+            attn_out, _ = self.attention(x, x, x)
+            x = self.norm1(x + self.dropout(attn_out))
+
+            # Feed-forward with residual connection
+            ffn_out = self.ffn(x)
+            x = self.norm2(x + ffn_out)
+            return x
+
+    class SequentialTransformer(nn.Module):
+        """Transformer model with static and temporal feature fusion for sequential data"""
+        def __init__(self, static_dim, temporal_dim, hidden_dim=128, num_blocks=3, num_heads=8, dropout=0.3):
+            super(SequentialTransformer, self).__init__()
+
+            # Static feature processing
+            self.static_net = nn.Sequential(
+                nn.Linear(static_dim, 64),
+                nn.BatchNorm1d(64),
+                nn.ReLU(),
+                nn.Dropout(dropout),
+                nn.Linear(64, 32),
+                nn.BatchNorm1d(32),
+                nn.ReLU()
+            )
+
+            # Temporal feature projection
+            self.temporal_proj = nn.Sequential(
+                nn.Linear(temporal_dim, hidden_dim),
+                nn.LayerNorm(hidden_dim),
+                nn.Dropout(dropout)
+            )
+
+            # Temporal Transformer blocks
+            self.transformer_blocks = nn.ModuleList([
+                TemporalAttentionBlock(hidden_dim, num_heads, dropout)
+                for _ in range(num_blocks)
+            ])
+
+            # Global pooling for temporal features
+            self.temporal_pool = nn.AdaptiveAvgPool1d(1)
+
+            # Fusion and output layers
+            fusion_dim = 32 + hidden_dim  # Static + Transformer output
+            self.fusion = nn.Sequential(
+                nn.Linear(fusion_dim, 128),
+                nn.BatchNorm1d(128),
+                nn.ReLU(),
+                nn.Dropout(dropout),
+                nn.Linear(128, 64),
+                nn.BatchNorm1d(64),
+                nn.ReLU(),
+                nn.Dropout(dropout),
+                nn.Linear(64, 1),
+                nn.Sigmoid()
+            )
+
+        def forward(self, x_static, x_temporal):
+            # Process static features
+            static_out = self.static_net(x_static)
+
+            # Process temporal features with Transformer
+            x = self.temporal_proj(x_temporal)
+
+            # Apply Transformer blocks
+            for block in self.transformer_blocks:
+                x = block(x)
+
+            # Global average pooling over time dimension
+            x = x.transpose(1, 2)
+            temporal_out = self.temporal_pool(x).squeeze(-1)
+
+            # Fusion
+            combined = torch.cat([static_out, temporal_out], dim=1)
+            output = self.fusion(combined)
+
+            return output.squeeze()
+
     # Create model instance
     if model_class == 'MLP':
         model = MLP(input_dim)
     elif model_class == 'LSTMPredictor':
-        # Use dimensions that match training (hidden_dim=256 for compatibility)
-        model = LSTMPredictor(static_dim=104, temporal_dim=477, hidden_dim=256, 
-                            num_layers=2, dropout=0.3)
+        # Infer dimensions from checkpoint weights
+        state_dict = checkpoint['model_state_dict']
+
+        # Get static_dim from first layer weight
+        static_dim = state_dict['static_net.0.weight'].shape[1]
+
+        # Get temporal_dim from LSTM weight
+        # lstm.weight_ih_l0 shape: [hidden_size * 4, temporal_dim] for bidirectional
+        temporal_dim = state_dict['lstm.weight_ih_l0'].shape[1]
+
+        # Infer hidden_dim from LSTM weight
+        # For bidirectional LSTM: weight shape is [4 * hidden_dim, input_dim]
+        hidden_dim = state_dict['lstm.weight_ih_l0'].shape[0] // 4
+
+        model = LSTMPredictor(static_dim=static_dim, temporal_dim=temporal_dim,
+                            hidden_dim=hidden_dim, num_layers=2, dropout=0.3)
+
     elif model_class == 'TCNPredictor':
-        # Use dimensions that match training
-        model = TCNPredictor(static_dim=104, temporal_dim=477, 
-                           num_channels=[256, 128, 64], kernel_size=3, dropout=0.3)
+        # Infer dimensions from checkpoint weights
+        state_dict = checkpoint['model_state_dict']
+
+        # Get static_dim from first layer weight
+        static_dim = state_dict['static_net.0.weight'].shape[1]
+
+        # Get temporal_dim from first TCN conv layer
+        # tcn.0.conv1.weight shape: [out_channels, in_channels, kernel_size]
+        temporal_dim = state_dict['tcn.0.conv1.weight'].shape[1]
+
+        # Get num_channels from TCN layers
+        num_channels = []
+        i = 0
+        while f'tcn.{i}.conv1.weight' in state_dict:
+            out_channels = state_dict[f'tcn.{i}.conv1.weight'].shape[0]
+            num_channels.append(out_channels)
+            i += 1
+
+        # Get kernel_size from first conv layer
+        kernel_size = state_dict['tcn.0.conv1.weight'].shape[2]
+
+        model = TCNPredictor(static_dim=static_dim, temporal_dim=temporal_dim,
+                           num_channels=num_channels, kernel_size=kernel_size, dropout=0.3)
+    elif model_class == 'SequentialTransformer':
+        # Infer dimensions from checkpoint weights
+        state_dict = checkpoint['model_state_dict']
+
+        # Get static_dim from first layer weight
+        static_dim = state_dict['static_net.0.weight'].shape[1]
+
+        # Get temporal_dim from temporal projection weight
+        temporal_dim = state_dict['temporal_proj.0.weight'].shape[1]
+
+        # Get hidden_dim from temporal projection output
+        hidden_dim = state_dict['temporal_proj.0.weight'].shape[0]
+
+        # Count number of transformer blocks
+        num_blocks = sum(1 for key in state_dict.keys() if 'transformer_blocks' in key and 'attention.in_proj_weight' in key)
+
+        # Get num_heads from attention layer shape
+        # in_proj_weight shape: [3 * hidden_dim, hidden_dim] for Q, K, V
+        num_heads = 8  # Default, can't easily infer from weights
+
+        model = SequentialTransformer(static_dim=static_dim, temporal_dim=temporal_dim,
+                                     hidden_dim=hidden_dim, num_blocks=num_blocks,
+                                     num_heads=num_heads, dropout=0.3)
     else:
         raise ValueError(f"Unknown model class: {model_class}")
     
@@ -391,11 +542,40 @@ def load_test_data(task_name: str, target: str, feature_dir: Path, time_window: 
 
 def calculate_metrics(y_true, y_pred_proba, threshold=0.5) -> Dict:
     """Calculate essential evaluation metrics"""
+
+    # Convert to numpy arrays
+    y_true = np.array(y_true)
+    y_pred_proba = np.array(y_pred_proba)
+
+    # Filter out NaN predictions
+    valid_mask = ~np.isnan(y_pred_proba)
+    if not valid_mask.all():
+        n_nan = (~valid_mask).sum()
+        print(f"      Warning: {n_nan} NaN predictions detected, filtering them out")
+        y_pred_proba = y_pred_proba[valid_mask]
+        y_true = y_true[valid_mask]
+
+    # Check if we have enough valid predictions
+    if len(y_pred_proba) == 0:
+        print(f"      Error: All predictions are NaN, returning default metrics")
+        return {
+            'auroc': 0.5,
+            'auprc': 0.0,
+            'sensitivity': 0.0,
+            'specificity': 0.0,
+            'ppv': 0.0,
+            'accuracy': 0.0,
+            'tp': 0,
+            'tn': 0,
+            'fp': 0,
+            'fn': 0
+        }
+
     y_pred = (y_pred_proba >= threshold).astype(int)
-    
+
     # Confusion matrix
     tn, fp, fn, tp = confusion_matrix(y_true, y_pred).ravel()
-    
+
     # Core metrics only
     metrics = {
         'auroc': roc_auc_score(y_true, y_pred_proba),
@@ -409,7 +589,7 @@ def calculate_metrics(y_true, y_pred_proba, threshold=0.5) -> Dict:
         'fp': int(fp),
         'fn': int(fn)
     }
-    
+
     return metrics
 
 def plot_roc_curve(y_true, y_pred_proba, model_name: str, task_name: str, 
@@ -501,7 +681,15 @@ def evaluate_model(task_name: str, target: str, model_name: str, model_category:
     
     # Ensure we have the right features in the right order
     X = X[feature_cols]
-    
+
+    # Clip extreme values BEFORE scaling to prevent numerical instability
+    # Values > 1e10 are data errors (e.g., WBC count of 1e21)
+    extreme_threshold = 1e10
+    n_extreme = (X.abs() > extreme_threshold).sum().sum()
+    if n_extreme > 0:
+        print(f"      Clipping {n_extreme} extreme values (> {extreme_threshold:.0e})")
+        X = X.clip(-extreme_threshold, extreme_threshold)
+
     # Scale features
     X_scaled = scaler.transform(X)
     
@@ -511,21 +699,21 @@ def evaluate_model(task_name: str, target: str, model_name: str, model_category:
     elif model_category == 'deep_learning' and TORCH_AVAILABLE:
         model.eval()
         with torch.no_grad():
-            # Check if this is a sequential model (LSTM/TCN)
+            # Check if this is a sequential model (LSTM/TCN/Transformer)
             model_type = model_data.get('model_type', model_name)
-            if model_type in ['LSTMPredictor', 'TCNPredictor'] or model_name in ['lstm', 'tcn']:
+            if model_type in ['LSTMPredictor', 'TCNPredictor', 'SequentialTransformer'] or model_name in ['lstm', 'tcn', 'transformer']:
                 # For sequential models, reshape data
                 df_features = pd.DataFrame(X_scaled, columns=feature_cols)
                 X_static, X_temporal, _ = reshape_temporal_features(df_features, time_window)
-                
+
                 # Convert to tensors
                 X_static_tensor = torch.FloatTensor(X_static)
                 X_temporal_tensor = torch.FloatTensor(X_temporal)
-                
+
                 # Make predictions with dual inputs
                 y_pred_proba = model(X_static_tensor, X_temporal_tensor).cpu().numpy()
             else:
-                # For non-sequential models (MLP, ResNet, Transformer)
+                # For non-sequential models (MLP, ResNet, etc.)
                 X_tensor = torch.FloatTensor(X_scaled)
                 y_pred_proba = model(X_tensor).cpu().numpy()
     else:
