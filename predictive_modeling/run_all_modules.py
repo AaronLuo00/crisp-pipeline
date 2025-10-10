@@ -84,6 +84,45 @@ def run_module(module_name: str, module_path: str, args: list = None) -> dict:
         }
 
 
+def find_latest_experiment(models_dir: Path, exp_type: str = 'random_split') -> str:
+    """Find the latest experiment by timestamp
+
+    Args:
+        models_dir: Base models directory
+        exp_type: Experiment type prefix ('random_split' or 'loso_site*')
+
+    Returns:
+        Experiment name (e.g., 'random_split_20251010_014657') or None if not found
+    """
+    latest_exp = None
+    latest_time = None
+
+    # Search in both traditional and deep_learning directories
+    for category in ['traditional', 'deep_learning']:
+        category_dir = models_dir / category
+        if not category_dir.exists():
+            continue
+
+        # Find all experiment directories matching the pattern
+        for exp_dir in category_dir.iterdir():
+            if exp_dir.is_dir() and exp_dir.name.startswith(exp_type):
+                # Extract timestamp from experiment name
+                # Format: {type}_{YYYYMMDD}_{HHMMSS}
+                parts = exp_dir.name.split('_')
+                if len(parts) >= 3:
+                    try:
+                        # Combine date and time parts (last two parts)
+                        timestamp_str = '_'.join(parts[-2:])
+                        timestamp = datetime.strptime(timestamp_str, '%Y%m%d_%H%M%S')
+
+                        if latest_time is None or timestamp > latest_time:
+                            latest_time = timestamp
+                            latest_exp = exp_dir.name
+                    except ValueError:
+                        continue
+
+    return latest_exp
+
 def check_dependencies():
     """Check if required directories and files exist"""
     # Get the script's directory to build correct paths
@@ -263,12 +302,38 @@ def main(args):
     eval_module = {
         'name': 'Model Evaluation',
         'path': str(script_dir / '3_evaluation' / 'run_evaluation.py'),
-        'args': ['--model-dir', 'predictive_modeling/modeling_results/models', 
+        'args': ['--model-dir', 'predictive_modeling/modeling_results/models',
                 '--feature-dir', 'predictive_modeling/modeling_results/features',
                 '--output-dir', 'predictive_modeling/modeling_results/evaluation']
     }
     if args.time_window:
         eval_module['args'].extend(['--time-window', str(args.time_window)])
+
+    # Auto-discover latest experiment for evaluation
+    # Always try to discover if models directory exists
+    # This allows evaluation of previously trained models
+    if True:  # Always run discovery logic
+        models_dir = Path('predictive_modeling/modeling_results/models')
+        if models_dir.exists():
+            # Determine experiment type to search for
+            if hasattr(args, 'loso_site') and args.loso_site:
+                exp_type = f'loso_site{args.loso_site}'
+            else:
+                exp_type = 'random_split'
+
+            latest_exp = find_latest_experiment(models_dir, exp_type=exp_type)
+            if latest_exp:
+                print(f"\n[INFO] Auto-discovered latest experiment for evaluation: {latest_exp}")
+                eval_module['args'].extend(['--exp-name', latest_exp])
+
+                # Add loso-site parameter if applicable
+                if hasattr(args, 'loso_site') and args.loso_site:
+                    eval_module['args'].extend(['--loso-site', args.loso_site])
+            else:
+                print(f"\n[WARNING] No {exp_type} experiments found, evaluation will use default model discovery")
+        else:
+            print("\n[WARNING] Models directory not found, skipping experiment auto-discovery")
+
     modules.append(eval_module)
     
     # Skip modules if requested
@@ -349,6 +414,8 @@ if __name__ == '__main__':
                        help='Start from specific module')
     parser.add_argument('--continue-on-error', action='store_true',
                        help='Continue pipeline even if a module fails')
-    
+    parser.add_argument('--loso-site', type=str, choices=['4', '7', '6', '9'],
+                       help='LOSO test site for evaluation (will find latest loso_site{X} experiment)')
+
     args = parser.parse_args()
     sys.exit(main(args))
