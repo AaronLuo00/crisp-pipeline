@@ -321,9 +321,9 @@ def load_features(task_name: str, input_dir: Path, time_window: int = 4) -> pd.D
     print(f"  Loaded {len(df)} samples with {len(df.columns)-1} features from {feature_file.name}")
     return df
 
-def prepare_data(df: pd.DataFrame, target_col: str, test_size: float = 0.2, 
+def prepare_data(df: pd.DataFrame, target_col: str, test_size: float = 0.2,
                  use_smote: bool = False, smote_threshold: float = 0.3,
-                 random_state: int = 42) -> Tuple:
+                 random_state: int = 42, loso_test_site: str = None) -> Tuple:
     """Prepare data for training"""
     # Check if target column exists
     if target_col not in df.columns:
@@ -350,11 +350,23 @@ def prepare_data(df: pd.DataFrame, target_col: str, test_size: float = 0.2,
     if n_extreme > 0:
         print(f"  Clipping {n_extreme} extreme values (> {extreme_threshold:.0e}) to prevent NaN")
         X = X.clip(-extreme_threshold, extreme_threshold)
-    
+
     # Split data
-    X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=test_size, random_state=random_state, stratify=y
-    )
+    if loso_test_site is not None:
+        # LOSO: site-based split
+        site = df['patient_id'].astype(str).str[0]
+        test_mask = (site == str(loso_test_site))
+        X_train, X_test = X[~test_mask], X[test_mask]
+        y_train, y_test = y[~test_mask], y[test_mask]
+
+        train_sites = sorted(set(site[~test_mask].unique()))
+        print(f"  LOSO split: Train on sites {train_sites}, Test on site {loso_test_site}")
+        print(f"  Train: {len(X_train)} samples, Test: {len(X_test)} samples")
+    else:
+        # Original: random split
+        X_train, X_test, y_train, y_test = train_test_split(
+            X, y, test_size=test_size, random_state=random_state, stratify=y
+        )
     
     # Apply SMOTE if requested and imbalanced
     if use_smote and y_train.mean() < smote_threshold:
@@ -832,11 +844,12 @@ def train_task_models(task_name: str, targets: List[str], input_dir: Path,
         
         # Prepare data
         data = prepare_data(
-            df, target, 
+            df, target,
             test_size=args.test_size,
             use_smote=args.use_smote,
             smote_threshold=args.smote_threshold,
-            random_state=42
+            random_state=42,
+            loso_test_site=getattr(args, 'loso_site', None)
         )
         
         if data[0] is None:
@@ -1104,6 +1117,10 @@ if __name__ == '__main__':
                        help='Use SMOTE for imbalanced data')
     parser.add_argument('--smote-threshold', type=float, default=0.3,
                        help='Apply SMOTE if positive rate below this threshold')
-    
+
+    # LOSO parameters
+    parser.add_argument('--loso-site', type=str, choices=['4', '6', '7', '9'],
+                       help='Leave-one-site-out: test on this site (4/6/7/9), train on others')
+
     args = parser.parse_args()
     main(args)
