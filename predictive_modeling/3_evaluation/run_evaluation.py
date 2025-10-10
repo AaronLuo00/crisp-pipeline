@@ -500,44 +500,64 @@ def reconstruct_dl_model(checkpoint: Dict, metadata: Dict = None):
     
     return model
 
-def load_test_data(task_name: str, target: str, feature_dir: Path, time_window: int = 4) -> Tuple:
-    """Load test data for evaluation"""
-    
+def load_test_data(task_name: str, target: str, feature_dir: Path,
+                   time_window: int = 4, loso_test_site: str = None) -> Tuple:
+    """Load test data for evaluation
+
+    Args:
+        task_name: Task name
+        target: Target variable
+        feature_dir: Feature directory
+        time_window: Time window in hours
+        loso_test_site: If provided, use site-based split (LOSO); otherwise use random split
+    """
+
     # Determine which feature file to use
     if task_name == 'sepsis':
         feature_file = feature_dir / 'sepsis_static_features.csv'
     else:
         # For mortality, readmission, los tasks
         feature_file = feature_dir / f'time_series_features_{time_window}h_window.csv'
-    
+
     if not feature_file.exists():
         raise FileNotFoundError(f"Feature file not found: {feature_file}")
-    
+
     df = pd.read_csv(feature_file)
-    
+
     # Filter to columns needed
     feature_cols = [col for col in df.columns if col not in ['patient_id', target]
-                   and not col.startswith('mortality_') 
+                   and not col.startswith('mortality_')
                    and not col.startswith('readmission_')
                    and not col.startswith('los_')
                    and not col.startswith('has_sepsis')
                    and not col.startswith('sepsis_within')]
-    
+
     X = df[feature_cols]
     y = df[target]
     patient_ids = df['patient_id']
-    
+
     # Handle missing values
     X = X.fillna(X.median())
-    
-    # Split data - keep consistent with training (20% test set, same random_state)
-    _, X_test, _, y_test, _, patient_ids_test = train_test_split(
-        X, y, patient_ids,
-        test_size=0.2,
-        random_state=42,
-        stratify=y
-    )
-    
+
+    # Split data - keep consistent with training
+    if loso_test_site is not None:
+        # LOSO: site-based split (must match training)
+        site = df['patient_id'].astype(str).str[0]
+        test_mask = (site == str(loso_test_site))
+        X_test = X[test_mask]
+        y_test = y[test_mask]
+        patient_ids_test = patient_ids[test_mask]
+
+        print(f"      LOSO evaluation: Testing on site {loso_test_site} ({len(X_test)} samples)")
+    else:
+        # Random split (20% test set, same random_state as training)
+        _, X_test, _, y_test, _, patient_ids_test = train_test_split(
+            X, y, patient_ids,
+            test_size=0.2,
+            random_state=42,
+            stratify=y
+        )
+
     return X_test, y_test, patient_ids_test
 
 def calculate_metrics(y_true, y_pred_proba, threshold=0.5) -> Dict:
@@ -636,10 +656,11 @@ def plot_pr_curve(y_true, y_pred_proba, model_name: str, task_name: str,
     plt.close()
 
 def evaluate_model(task_name: str, target: str, model_name: str, model_category: str,
-                   model_dir: Path, feature_dir: Path, output_dir: Path, 
-                   time_window: int = 4) -> Optional[Dict]:
+                   model_dir: Path, feature_dir: Path, output_dir: Path,
+                   time_window: int = 4, exp_name: str = None,
+                   loso_test_site: str = None) -> Optional[Dict]:
     """Evaluate a single model
-    
+
     Args:
         task_name: Task name (mortality, readmission, etc.)
         target: Target variable name
@@ -649,32 +670,40 @@ def evaluate_model(task_name: str, target: str, model_name: str, model_category:
         feature_dir: Directory containing features
         output_dir: Output directory for results
         time_window: Time window for features
+        exp_name: Experiment name (if None, use old directory structure)
+        loso_test_site: LOSO test site for data split
     """
-    
-    # Construct model path based on new structure
+
+    # Construct model path based on whether exp_name is provided
     if model_category == 'traditional':
-        model_path = model_dir / 'traditional' / model_name / f'{task_name}_{target}_model.pkl'
+        if exp_name:
+            model_path = model_dir / 'traditional' / exp_name / model_name / f'{task_name}_{target}_model.pkl'
+        else:
+            model_path = model_dir / 'traditional' / model_name / f'{task_name}_{target}_model.pkl'
     else:
-        model_path = model_dir / 'deep_learning' / model_name / f'{task_name}_{target}_model.pt'
-    
+        if exp_name:
+            model_path = model_dir / 'deep_learning' / exp_name / model_name / f'{task_name}_{target}_model.pt'
+        else:
+            model_path = model_dir / 'deep_learning' / model_name / f'{task_name}_{target}_model.pt'
+
     if not model_path.exists():
         print(f"    Model not found: {model_path}")
         return None
-    
+
     # Load model
     try:
         model_data = load_model(model_path, model_category)
     except Exception as e:
         print(f"    Error loading model: {e}")
         return None
-    
+
     model = model_data['model']
     scaler = model_data['scaler']
     feature_cols = model_data['feature_cols']
-    
-    # Load test data
+
+    # Load test data with appropriate split
     try:
-        X, y, _ = load_test_data(task_name, target, feature_dir, time_window)
+        X, y, _ = load_test_data(task_name, target, feature_dir, time_window, loso_test_site)
     except FileNotFoundError as e:
         print(f"    {e}")
         return None
@@ -743,16 +772,26 @@ def evaluate_model(task_name: str, target: str, model_name: str, model_category:
     
     return metrics
 
-def discover_available_models(model_dir: Path, task_name: str, target: str) -> Dict[str, List[str]]:
+def discover_available_models(model_dir: Path, task_name: str, target: str,
+                              exp_name: str = None) -> Dict[str, List[str]]:
     """Automatically discover available models in the model directory
-    
+
+    Args:
+        model_dir: Base model directory
+        task_name: Task name
+        target: Target variable
+        exp_name: Experiment name (if None, use old directory structure)
+
     Returns:
         Dict with keys 'traditional' and 'deep_learning', each containing list of model names
     """
     available_models = {'traditional': [], 'deep_learning': []}
-    
+
     # Check traditional models directory
     traditional_dir = model_dir / 'traditional'
+    if exp_name:
+        traditional_dir = traditional_dir / exp_name
+
     if traditional_dir.exists():
         for model_subdir in traditional_dir.iterdir():
             if model_subdir.is_dir():
@@ -760,9 +799,12 @@ def discover_available_models(model_dir: Path, task_name: str, target: str) -> D
                 model_file = model_subdir / f'{task_name}_{target}_model.pkl'
                 if model_file.exists():
                     available_models['traditional'].append(model_subdir.name)
-    
+
     # Check deep learning models directory
     dl_dir = model_dir / 'deep_learning'
+    if exp_name:
+        dl_dir = dl_dir / exp_name
+
     if dl_dir.exists() and TORCH_AVAILABLE:
         for model_subdir in dl_dir.iterdir():
             if model_subdir.is_dir():
@@ -770,54 +812,63 @@ def discover_available_models(model_dir: Path, task_name: str, target: str) -> D
                 model_file = model_subdir / f'{task_name}_{target}_model.pt'
                 if model_file.exists():
                     available_models['deep_learning'].append(model_subdir.name)
-    
+
     return available_models
 
 def evaluate_all_models_for_task(task_name: str, targets: List[str], model_dir: Path,
-                                 feature_dir: Path, output_dir: Path, 
+                                 feature_dir: Path, output_dir: Path,
                                  time_window: int = 4,
-                                 model_types: Optional[List[str]] = None) -> Dict:
-    """Evaluate all available models for a task"""
-    
+                                 model_types: Optional[List[str]] = None,
+                                 exp_name: str = None,
+                                 loso_test_site: str = None) -> Dict:
+    """Evaluate all available models for a task
+
+    Args:
+        exp_name: Experiment name to evaluate
+        loso_test_site: LOSO test site for data split
+    """
+
     print(f"\n{task_name.upper()} EVALUATION")
     print("-" * 60)
-    
+
     task_results = {}
-    
+
     # If model_types specified, use those; otherwise discover available models
     if model_types is not None:
         # Parse model types from argument (backward compatibility)
         traditional_models = [m for m in model_types if m in
                             ['logisticregression', 'randomforest', 'gradientboosting', 'xgboost']]
         dl_models = [m for m in model_types if m in ['mlp', 'transformer', 'lstm', 'tcn']]
-        
+
         # For each target, evaluate specified models
         for target in targets:
             print(f"\n  Target: {target}")
             target_results = {}
-            
+
             # Evaluate traditional models
             for model_name in traditional_models:
                 print(f"    Evaluating {model_name}...")
                 metrics = evaluate_model(
                     task_name, target, model_name, 'traditional',
-                    model_dir, feature_dir, output_dir, time_window
+                    model_dir, feature_dir, output_dir, time_window,
+                    exp_name, loso_test_site
                 )
                 if metrics:
                     target_results[model_name] = metrics
                     print(f"      AUROC: {metrics['auroc']:.3f}, AUPRC: {metrics['auprc']:.3f}")
-            
+
             # Evaluate deep learning models
             for model_name in dl_models:
                 print(f"    Evaluating {model_name}...")
                 metrics = evaluate_model(
                     task_name, target, model_name, 'deep_learning',
-                    model_dir, feature_dir, output_dir, time_window
+                    model_dir, feature_dir, output_dir, time_window,
+                    exp_name, loso_test_site
                 )
                 if metrics:
                     target_results[model_name] = metrics
                     print(f"      AUROC: {metrics['auroc']:.3f}, AUPRC: {metrics['auprc']:.3f}")
-            
+
             if target_results:
                 # Find best model for this target
                 best_model = max(target_results.items(), key=lambda x: x[1]['auroc'])
@@ -827,25 +878,26 @@ def evaluate_all_models_for_task(task_name: str, targets: List[str], model_dir: 
         # Auto-discover models for each target
         for target in targets:
             print(f"\n  Target: {target}")
-            
+
             # Discover available models for this task and target
-            available_models = discover_available_models(model_dir, task_name, target)
-            
+            available_models = discover_available_models(model_dir, task_name, target, exp_name)
+
             if not available_models['traditional'] and not available_models['deep_learning']:
                 print(f"    No models found for {task_name}_{target}")
                 continue
-            
+
             print(f"    Found models: Traditional={available_models['traditional']}, "
                   f"Deep Learning={available_models['deep_learning']}")
-            
+
             target_results = {}
-            
+
             # Evaluate discovered traditional models
             for model_name in available_models['traditional']:
                 print(f"    Evaluating {model_name} (traditional)...")
                 metrics = evaluate_model(
                     task_name, target, model_name, 'traditional',
-                    model_dir, feature_dir, output_dir, time_window
+                    model_dir, feature_dir, output_dir, time_window,
+                    exp_name, loso_test_site
                 )
                 if metrics:
                     target_results[model_name] = metrics
@@ -856,7 +908,8 @@ def evaluate_all_models_for_task(task_name: str, targets: List[str], model_dir: 
                 print(f"    Evaluating {model_name} (deep learning)...")
                 metrics = evaluate_model(
                     task_name, target, model_name, 'deep_learning',
-                    model_dir, feature_dir, output_dir, time_window
+                    model_dir, feature_dir, output_dir, time_window,
+                    exp_name, loso_test_site
                 )
                 if metrics:
                     target_results[model_name] = metrics
@@ -872,20 +925,37 @@ def evaluate_all_models_for_task(task_name: str, targets: List[str], model_dir: 
 
 def main(args):
     """Main evaluation function"""
+    # Extract experiment configuration
+    exp_name = args.exp_name
+    loso_test_site = getattr(args, 'loso_site', None)
+
     print("=" * 80)
     print("MODEL EVALUATION MODULE")
     print(f"Run time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    if exp_name:
+        print(f"Experiment: {exp_name}")
+    if loso_test_site:
+        print(f"LOSO Test Site: {loso_test_site}")
     print(f"Time window: {args.time_window} hours")
     print(f"Tasks: {args.tasks}")
     if args.models:
         print(f"Models: {args.models}")
     print("=" * 80)
-    
+
     # Setup paths
     model_dir = Path(args.model_dir)
     feature_dir = Path(args.feature_dir)
-    output_dir = Path(args.output_dir)
+    base_output_dir = Path(args.output_dir)
+
+    # Create experiment-specific output directory
+    if exp_name:
+        output_dir = base_output_dir / exp_name
+    else:
+        output_dir = base_output_dir / 'default'
     output_dir.mkdir(exist_ok=True, parents=True)
+
+    print(f"Output directory: {output_dir}")
+    print("=" * 80)
     
     # Define default targets for each task
     default_targets = {
@@ -911,7 +981,7 @@ def main(args):
         
         task_results = evaluate_all_models_for_task(
             task_name, targets, model_dir, feature_dir, output_dir,
-            args.time_window, model_types
+            args.time_window, model_types, exp_name, loso_test_site
         )
         all_results[task_name] = task_results
     
@@ -921,6 +991,9 @@ def main(args):
     print("=" * 80)
     
     summary = {
+        'experiment_name': exp_name,
+        'experiment_type': 'loso' if loso_test_site else 'random_split',
+        'loso_test_site': loso_test_site,
         'run_time': datetime.now().isoformat(),
         'time_window': args.time_window,
         'tasks': all_results,
@@ -978,6 +1051,10 @@ def main(args):
     with open(report_file, 'w', encoding='utf-8') as f:
         f.write("# Model Evaluation Report\n\n")
         f.write(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n")
+        if exp_name:
+            f.write(f"Experiment: {exp_name}\n\n")
+        if loso_test_site:
+            f.write(f"LOSO Test Site: {loso_test_site}\n\n")
         f.write(f"Time Window: {args.time_window} hours\n\n")
         
         for task_name, task_targets in all_results.items():
@@ -1042,6 +1119,12 @@ if __name__ == '__main__':
     parser.add_argument('--models', type=str,
                        default=None,
                        help='Comma-separated list of models to evaluate (e.g., logisticregression,randomforest,mlp)')
-    
+
+    # Experiment configuration
+    parser.add_argument('--exp-name', type=str, default=None,
+                       help='Experiment name to evaluate (default: auto-discover models without exp subdirectory)')
+    parser.add_argument('--loso-site', type=str, choices=['4', '6', '9'],
+                       help='LOSO test site (must match training configuration)')
+
     args = parser.parse_args()
     main(args)

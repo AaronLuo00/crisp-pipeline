@@ -920,9 +920,20 @@ def train_task_models(task_name: str, targets: List[str], input_dir: Path,
 
 def main(args):
     """Main training function"""
+    # Generate experiment name
+    if args.exp_name is None:
+        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+        if args.loso_site:
+            exp_name = f'loso_site{args.loso_site}_{timestamp}'
+        else:
+            exp_name = f'random_split_{timestamp}'
+    else:
+        exp_name = args.exp_name
+
     print("=" * 80)
     print("DEEP LEARNING MODEL TRAINING MODULE")
     print(f"Run time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    print(f"Experiment: {exp_name}")
     print(f"Device: {device}")
     print(f"Model types: {args.model_type}")
     print(f"Time window: {args.time_window} hours")
@@ -931,8 +942,12 @@ def main(args):
 
     # Setup paths
     input_dir = Path(args.input_dir)
-    output_dir = Path(args.output_dir)
+    base_output_dir = Path(args.output_dir)
+    output_dir = base_output_dir / exp_name
     output_dir.mkdir(exist_ok=True, parents=True)
+
+    print(f"Output directory: {output_dir}")
+    print("=" * 80)
 
     # Define default targets for each task
     default_targets = {
@@ -982,9 +997,28 @@ def main(args):
     print("=" * 80)
 
     summary = {
+        'experiment_name': exp_name,
+        'experiment_type': 'loso' if args.loso_site else 'random_split',
+        'loso_test_site': args.loso_site,
         'run_time': datetime.now().isoformat(),
-        'model_types': args.model_type,
-        'time_window': args.time_window,
+        'hyperparameters': {
+            'model_types': args.model_type,
+            'time_window': args.time_window,
+            'tasks': args.tasks,
+            'batch_size': args.batch_size,
+            'epochs': args.epochs,
+            'learning_rate': args.lr,
+            'hidden_dims': getattr(args, 'hidden_dims', None),
+            'num_blocks': getattr(args, 'num_blocks', None),
+            'num_heads': getattr(args, 'num_heads', None),
+            'num_layers': getattr(args, 'num_layers', None),
+            'kernel_size': getattr(args, 'kernel_size', None),
+            'dropout': args.dropout,
+            'patience': args.patience,
+            'test_size': args.test_size,
+            'use_smote': args.use_smote,
+            'smote_threshold': args.smote_threshold
+        },
         'models': all_results,
         'statistics': {}
     }
@@ -1081,6 +1115,10 @@ if __name__ == '__main__':
     # LOSO parameters
     parser.add_argument('--loso-site', type=str, choices=['4', '6', '7', '9'],
                        help='Leave-one-site-out: test on this site (4/6/7/9), train on others')
+
+    # Experiment naming
+    parser.add_argument('--exp-name', type=str, default=None,
+                       help='Experiment name (default: auto-generated from timestamp and params)')
 
     args = parser.parse_args()
     main(args)

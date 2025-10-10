@@ -288,18 +288,33 @@ def train_task_models(task_name: str, targets: List[str], input_dir: Path,
 
 def main(args):
     """Main training function"""
+    # Generate experiment name
+    if args.exp_name is None:
+        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+        if args.loso_site:
+            exp_name = f'loso_site{args.loso_site}_{timestamp}'
+        else:
+            exp_name = f'random_split_{timestamp}'
+    else:
+        exp_name = args.exp_name
+
     print("=" * 80)
     print("TRADITIONAL MODEL TRAINING MODULE")
     print(f"Run time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    print(f"Experiment: {exp_name}")
     print(f"Time window: {args.time_window} hours")
     print(f"Models: {args.models}")
     print(f"Tasks: {args.tasks}")
     print("=" * 80)
-    
+
     # Setup paths
     input_dir = Path(args.input_dir)
-    output_dir = Path(args.output_dir)
+    base_output_dir = Path(args.output_dir)
+    output_dir = base_output_dir / exp_name
     output_dir.mkdir(exist_ok=True, parents=True)
+
+    print(f"Output directory: {output_dir}")
+    print("=" * 80)
     
     # Define default targets for each task
     default_targets = {
@@ -333,9 +348,19 @@ def main(args):
     print("=" * 80)
     
     summary = {
+        'experiment_name': exp_name,
+        'experiment_type': 'loso' if args.loso_site else 'random_split',
+        'loso_test_site': args.loso_site,
         'run_time': datetime.now().isoformat(),
-        'time_window': args.time_window,
-        'models': args.models,
+        'hyperparameters': {
+            'models': args.models,
+            'time_window': args.time_window,
+            'tasks': args.tasks,
+            'test_size': args.test_size,
+            'use_smote': args.use_smote,
+            'smote_threshold': args.smote_threshold,
+            'cv_folds': args.cv_folds
+        },
         'tasks': all_results,
         'statistics': {}
     }
@@ -413,6 +438,10 @@ if __name__ == '__main__':
     # LOSO parameters
     parser.add_argument('--loso-site', type=str, choices=['4', '6', '7', '9'],
                        help='Leave-one-site-out: test on this site (4/6/7/9), train on others')
+
+    # Experiment naming
+    parser.add_argument('--exp-name', type=str, default=None,
+                       help='Experiment name (default: auto-generated from timestamp and params)')
 
     args = parser.parse_args()
     main(args)
