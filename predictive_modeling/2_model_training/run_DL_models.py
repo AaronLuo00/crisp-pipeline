@@ -159,55 +159,6 @@ class MLP(nn.Module):
     def forward(self, x):
         return self.model(x).squeeze()
 
-class ResidualBlock(nn.Module):
-    """Residual block for deep networks"""
-    def __init__(self, dim, dropout=0.3):
-        super(ResidualBlock, self).__init__()
-        self.block = nn.Sequential(
-            nn.Linear(dim, dim),
-            nn.BatchNorm1d(dim),
-            nn.ReLU(),
-            nn.Dropout(dropout),
-            nn.Linear(dim, dim),
-            nn.BatchNorm1d(dim)
-        )
-        self.relu = nn.ReLU()
-    
-    def forward(self, x):
-        residual = x
-        out = self.block(x)
-        out += residual
-        return self.relu(out)
-
-class ResNet(nn.Module):
-    """Residual Network for tabular data"""
-    def __init__(self, input_dim, hidden_dim=256, num_blocks=4, dropout=0.3):
-        super(ResNet, self).__init__()
-        
-        # Input projection
-        self.input_proj = nn.Sequential(
-            nn.Linear(input_dim, hidden_dim),
-            nn.BatchNorm1d(hidden_dim),
-            nn.ReLU()
-        )
-        
-        # Residual blocks
-        self.blocks = nn.ModuleList([
-            ResidualBlock(hidden_dim, dropout) for _ in range(num_blocks)
-        ])
-        
-        # Output layer
-        self.output = nn.Sequential(
-            nn.Linear(hidden_dim, 1),
-            nn.Sigmoid()
-        )
-    
-    def forward(self, x):
-        x = self.input_proj(x)
-        for block in self.blocks:
-            x = block(x)
-        return self.output(x).squeeze()
-
 class TemporalAttentionBlock(nn.Module):
     """Temporal self-attention block for sequential data"""
     def __init__(self, dim, num_heads=8, dropout=0.3):
@@ -564,13 +515,7 @@ def get_model(model_type: str, input_dim: int = None, config: Dict = None,
         hidden_dims = config.get('hidden_dims', [256, 128, 64])
         dropout = config.get('dropout', 0.3)
         return MLP(input_dim, hidden_dims, dropout)
-    
-    elif model_type == 'ResNet':
-        hidden_dim = config.get('hidden_dim', 256)
-        num_blocks = config.get('num_blocks', 4)
-        dropout = config.get('dropout', 0.3)
-        return ResNet(input_dim, hidden_dim, num_blocks, dropout)
-    
+
     elif model_type == 'Transformer':
         # Sequential Transformer (requires static_dim and temporal_dim)
         hidden_dim = config.get('hidden_dim', 128)
@@ -979,16 +924,16 @@ def main(args):
     print("DEEP LEARNING MODEL TRAINING MODULE")
     print(f"Run time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print(f"Device: {device}")
-    print(f"Model type: {args.model_type}")
+    print(f"Model types: {args.model_type}")
     print(f"Time window: {args.time_window} hours")
     print(f"Tasks: {args.tasks}")
     print("=" * 80)
-    
+
     # Setup paths
     input_dir = Path(args.input_dir)
     output_dir = Path(args.output_dir)
     output_dir.mkdir(exist_ok=True, parents=True)
-    
+
     # Define default targets for each task
     default_targets = {
         'mortality': ['mortality_7day', 'mortality_30day'],  # Only 7-day and 30-day mortality
@@ -996,62 +941,78 @@ def main(args):
         'los': ['los_greater_3days', 'los_greater_7days'],
         'sepsis': ['has_sepsis_after_icu', 'sepsis_within_48h', 'sepsis_within_7days']
     }
-    
-    # Parse tasks
+
+    # Parse tasks and model types
     tasks_to_run = args.tasks.split(',')
-    
+    model_types_to_run = args.model_type.split(',')
+
     all_results = {}
-    
-    # Train models for each task
-    for task_name in tasks_to_run:
-        if task_name not in default_targets:
-            print(f"\nSkipping {task_name} (unknown task)")
-            continue
-        
-        targets = default_targets[task_name]
-        
-        task_results = train_task_models(
-            task_name, targets, input_dir, output_dir, args
-        )
-        all_results[task_name] = task_results
+
+    # Train each model type
+    for model_type in model_types_to_run:
+        model_type = model_type.strip()
+        print(f"\n{'='*80}")
+        print(f"TRAINING {model_type.upper()} MODELS")
+        print(f"{'='*80}")
+
+        # Create a copy of args with single model type
+        model_args = argparse.Namespace(**vars(args))
+        model_args.model_type = model_type
+
+        model_results = {}
+
+        # Train models for each task
+        for task_name in tasks_to_run:
+            if task_name not in default_targets:
+                print(f"\nSkipping {task_name} (unknown task)")
+                continue
+
+            targets = default_targets[task_name]
+
+            task_results = train_task_models(
+                task_name, targets, input_dir, output_dir, model_args
+            )
+            model_results[task_name] = task_results
+
+        all_results[model_type] = model_results
     
     # Save summary
     print("\n" + "=" * 80)
     print("TRAINING SUMMARY")
     print("=" * 80)
-    
+
     summary = {
         'run_time': datetime.now().isoformat(),
-        'model_type': args.model_type,
+        'model_types': args.model_type,
         'time_window': args.time_window,
-        'tasks': all_results,
+        'models': all_results,
         'statistics': {}
     }
-    
-    for task_name, task_results in all_results.items():
-        if task_results:
-            avg_auroc = np.mean([r['auroc'] for r in task_results.values()])
-            avg_auprc = np.mean([r['auprc'] for r in task_results.values()])
-            
-            summary['statistics'][task_name] = {
-                'avg_auroc': avg_auroc,
-                'avg_auprc': avg_auprc,
-                'n_targets': len(task_results)
-            }
-            
-            print(f"\n{task_name.upper()}:")
-            print(f"  Targets trained: {len(task_results)}")
-            print(f"  Average AUROC: {avg_auroc:.3f}")
-            print(f"  Average AUPRC: {avg_auprc:.3f}")
-            
-            best_target = max(task_results.items(), key=lambda x: x[1]['auroc'])
-            print(f"  Best: {best_target[0]} (AUROC={best_target[1]['auroc']:.3f})")
-    
+
+    for model_type, model_results in all_results.items():
+        print(f"\n{model_type.upper()}:")
+        model_stats = {}
+
+        for task_name, task_results in model_results.items():
+            if task_results:
+                avg_auroc = np.mean([r['auroc'] for r in task_results.values()])
+                avg_auprc = np.mean([r['auprc'] for r in task_results.values()])
+
+                model_stats[task_name] = {
+                    'avg_auroc': avg_auroc,
+                    'avg_auprc': avg_auprc,
+                    'n_targets': len(task_results)
+                }
+
+                print(f"  {task_name}: AUROC={avg_auroc:.3f}, AUPRC={avg_auprc:.3f}, Targets={len(task_results)}")
+
+        summary['statistics'][model_type] = model_stats
+
     # Save summary
-    summary_file = output_dir / f'deep_learning_summary_{args.model_type.lower()}.json'
+    summary_file = output_dir / 'deep_learning_summary_all_models.json'
     with open(summary_file, 'w', encoding='utf-8') as f:
         json.dump(summary, f, indent=2)
-    
+
     print(f"\nModels saved to: {output_dir}")
     print(f"Summary saved to: {summary_file}")
     
@@ -1085,9 +1046,8 @@ if __name__ == '__main__':
     
     # Model configuration
     parser.add_argument('--model-type', type=str,
-                       choices=['MLP', 'ResNet', 'Transformer', 'LSTM', 'TCN'],
-                       default='MLP',
-                       help='Type of deep learning model to train')
+                       default='MLP,Transformer,LSTM,TCN',
+                       help='Comma-separated list of deep learning models to train (e.g., MLP,LSTM,TCN,Transformer)')
     parser.add_argument('--hidden-dims', type=str,
                        default='256,128,64',
                        help='Comma-separated hidden dimensions for MLP/TCN channels')

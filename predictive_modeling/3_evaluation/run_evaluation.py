@@ -713,7 +713,7 @@ def evaluate_model(task_name: str, target: str, model_name: str, model_category:
                 # Make predictions with dual inputs
                 y_pred_proba = model(X_static_tensor, X_temporal_tensor).cpu().numpy()
             else:
-                # For non-sequential models (MLP, ResNet, etc.)
+                # For non-sequential models (MLP, etc.)
                 X_tensor = torch.FloatTensor(X_scaled)
                 y_pred_proba = model(X_tensor).cpu().numpy()
     else:
@@ -787,9 +787,9 @@ def evaluate_all_models_for_task(task_name: str, targets: List[str], model_dir: 
     # If model_types specified, use those; otherwise discover available models
     if model_types is not None:
         # Parse model types from argument (backward compatibility)
-        traditional_models = [m for m in model_types if m in 
+        traditional_models = [m for m in model_types if m in
                             ['logisticregression', 'randomforest', 'gradientboosting', 'xgboost']]
-        dl_models = [m for m in model_types if m in ['mlp', 'resnet', 'transformer', 'lstm', 'tcn']]
+        dl_models = [m for m in model_types if m in ['mlp', 'transformer', 'lstm', 'tcn']]
         
         # For each target, evaluate specified models
         for target in targets:
