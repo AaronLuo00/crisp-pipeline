@@ -137,10 +137,11 @@ After running the pipeline, your results will be organized in two main locations
 - Each module creates its own subdirectory with detailed documentation
 - Includes data processing reports, mapping statistics, and processing logs
 
-**ML-Ready Patient Data** (`extracted_patient_data/`) 
+**ML-Ready Patient Data** (`extracted_patient_data/`)
 - Final extracted patient-level data at the project root
 - Structure: `extracted_patient_data/<patient_id>/<table_name>.csv`
 - Each patient folder contains their complete OMOP CDM records
+- **Optional**: `patient_trajectory.md` for LLM-friendly patient timeline (generated separately)
 - Ready for direct use in machine learning pipelines
 
 Example structure:
@@ -161,11 +162,13 @@ crisp-pipeline/
     │   │   ├── MEASUREMENT.csv
     │   │   ├── OBSERVATION.csv
     │   │   ├── DRUG_EXPOSURE.csv
+    │   │   ├── patient_trajectory.md  # Optional: LLM-friendly timeline
     │   │   └── ...
     │   └── ...
     └── 600000071/                 # Special 3-level hierarchy for 600000071 prefix
         └── 197000-197999/         # Grouped by thousands
             └── 600000071197101/   # Individual patient folder
+                ├── patient_trajectory.md  # Optional: LLM-friendly timeline
                 └── ...
 ```
 
@@ -254,6 +257,14 @@ Raw Data → [EDA] → [Cleaning] → [Mapping] → [Standardization] → [Extra
   - Cohort-specific extraction
   - Feature aggregation
   - Patient-level data organization
+  - **Patient Trajectory Generation** (for LLM analysis):
+    ```bash
+    # Generate human-readable markdown trajectories for all patients
+    python pipeline_modules/5_extraction/run_trajectory_generation.py
+    ```
+    - Creates `patient_trajectory.md` in each patient folder
+    - Chronologically organized medical events with visit timeline
+    - **Note**: A small number of concepts may show as IDs instead of names (mappings will be updated this week)
 
 ## ⚡ Performance Optimizations
 
