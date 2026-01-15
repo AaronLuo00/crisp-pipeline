@@ -83,6 +83,8 @@ data_20000/
 data_50000/
 data_full/
 data/*.csv
+EDA/
+
 
 # Performance optimization testing
 performance_optimization/

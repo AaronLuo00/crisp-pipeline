@@ -157,7 +157,7 @@ class MLP(nn.Module):
         self.model = nn.Sequential(*layers)
     
     def forward(self, x):
-        return self.model(x).squeeze()
+        return self.model(x).squeeze(-1)
 
 class TemporalAttentionBlock(nn.Module):
     """Temporal self-attention block for sequential data"""
@@ -253,7 +253,7 @@ class SequentialTransformer(nn.Module):
         combined = torch.cat([static_out, temporal_out], dim=1)
         output = self.fusion(combined)
 
-        return output.squeeze()
+        return output.squeeze(-1)
 
 def load_features(task_name: str, input_dir: Path, time_window: int = 4) -> pd.DataFrame:
     """Load features for a specific task"""
@@ -390,8 +390,8 @@ class LSTMPredictor(nn.Module):
         # Fusion
         combined = torch.cat([static_out, temporal_out], dim=1)
         output = self.fusion(combined)
-        
-        return output.squeeze()
+
+        return output.squeeze(-1)
 
 class TCNBlock(nn.Module):
     """Temporal Convolutional Block"""
@@ -494,8 +494,8 @@ class TCNPredictor(nn.Module):
         # Fusion
         combined = torch.cat([static_out, tcn_out], dim=1)
         output = self.fusion(combined)
-        
-        return output.squeeze()
+
+        return output.squeeze(-1)
 
 def get_model(model_type: str, input_dim: int = None, config: Dict = None, 
               static_dim: int = None, temporal_dim: int = None) -> nn.Module:
