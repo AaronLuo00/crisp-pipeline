@@ -40,6 +40,7 @@ from parallel_extraction import (
 
 # Import byte-offset utilities for MEASUREMENT chunking
 from file_splitter import get_csv_byte_ranges, get_total_row_count_fast
+from file_handle_cache import FileHandleCache
 
 # Platform-specific settings for performance optimization
 if platform.system() == 'Windows':
@@ -370,44 +371,40 @@ class PatientDataExtractor:
                        leave=False, ncols=100,
                        disable=not show_progress)
             
-            # Track file handles for optimized appending
-            file_handles = {}
-            file_writers = {}
+            # Use LRU file handle cache to avoid fd exhaustion with 500K+ patients
+            file_cache = FileHandleCache(max_handles=500, buffer_size=FILE_BUFFER_SIZE)
             
-            for chunk_idx, chunk in enumerate(reader):
-                # Remove null person_ids
-                chunk = chunk[chunk["person_id"].notnull()]
-                chunk_size = len(chunk)
-                total_records += chunk_size
-                
-                # Update progress bar with number of rows processed
-                pbar.update(chunk_size)
-                
-                # Group by person_id
-                grouped = chunk.groupby("person_id")
-                
-                for person_id, group_df in grouped:
-                    # Get patient folder
-                    patient_path = self.get_patient_path(person_id)
-                    patient_path.mkdir(parents=True, exist_ok=True)
+            try:
+                for chunk_idx, chunk in enumerate(reader):
+                    # Remove null person_ids
+                    chunk = chunk[chunk["person_id"].notnull()]
+                    chunk_size = len(chunk)
+                    total_records += chunk_size
                     
-                    # Get or create file handle with buffering
-                    file_path = patient_path / f"{table_name}.csv"
-                    if person_id not in file_handles:
-                        # Open file with optimized buffering
-                        file_handles[person_id] = open(file_path, 'w', newline='', 
-                                                      encoding='utf-8', buffering=FILE_BUFFER_SIZE)
-                        # Write header for new file
-                        group_df.to_csv(file_handles[person_id], index=False)
-                    else:
-                        # Append without header
-                        group_df.to_csv(file_handles[person_id], header=False, index=False)
+                    # Update progress bar with number of rows processed
+                    pbar.update(chunk_size)
                     
-                    patients_processed.add(person_id)
-            
-            # Close all file handles
-            for handle in file_handles.values():
-                handle.close()
+                    # Group by person_id
+                    grouped = chunk.groupby("person_id")
+                    
+                    for person_id, group_df in grouped:
+                        # Get patient folder
+                        patient_path = self.get_patient_path(person_id)
+                        patient_path.mkdir(parents=True, exist_ok=True)
+                        
+                        # Get or create file handle via LRU cache
+                        file_path = patient_path / f"{table_name}.csv"
+                        handle, needs_header = file_cache.get_handle(str(file_path))
+                        if needs_header:
+                            group_df.to_csv(handle, index=False)
+                        else:
+                            group_df.to_csv(handle, header=False, index=False)
+                        
+                        patients_processed.add(person_id)
+            finally:
+                cache_stats = file_cache.get_stats()
+                file_cache.close_all()
+                logging.info(f"[{table_name}] FileHandleCache stats: {cache_stats}")
             
             # Close progress bar
             pbar.close()

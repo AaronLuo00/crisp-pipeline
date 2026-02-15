@@ -445,15 +445,20 @@ def process_single_table(table_name, input_dir, output_dir, concept_frequencies,
 def process_measurement_chunk(start_byte, end_byte, fieldnames, chunk_id,
                              input_file, output_dir,
                              concept_frequencies, mappings, enable_dedup, min_concept_freq):
-    """Process a chunk of MEASUREMENT table - used for parallel processing.
+    """Process a chunk of MEASUREMENT table - single-pass streaming for memory efficiency.
     
     Uses byte-offset seeking instead of skip-scan for O(1) seek to chunk start.
+    
+    Memory optimization (2025-06 fix):
+    - Single-pass: read → filter → map → dedup → write immediately (no accumulator lists)
+    - Dedup uses a hash set (~8 bytes per entry) instead of dict with full row copies
+    - Low-freq and duplicate records are streamed to disk, not accumulated in memory
+    - Peak memory: ~O(unique_dedup_keys × 8 bytes) instead of O(total_rows × row_size)
     """
     import csv
     import sys
     import time
     from pathlib import Path
-    from collections import defaultdict
     
     # Ensure utils is importable in worker process
     _pm_dir = str(Path(input_file).parent.parent)  # pipeline_modules dir
@@ -484,124 +489,146 @@ def process_measurement_chunk(start_byte, end_byte, fieldnames, chunk_id,
         'file_writing': 0
     }
     
-    # Read and process chunk
-    processed_rows = []
-    removed_low_freq = []
-    duplicate_records = []
-    
-    read_start = time.time()
-    # Use a local counter for row numbering within the chunk
-    chunk_row_counter = 0
-    
-    for row in streaming_csv_reader(input_file, start_byte, end_byte, fieldnames):
-        chunk_row_counter += 1
-        
-        # Filter low frequency
-        concept_value = row.get('measurement_concept_id', '').strip()
-        if concept_value and concept_frequencies.get('MEASUREMENT', {}).get(concept_value, 0) <= min_concept_freq:
-            freq = concept_frequencies.get('MEASUREMENT', {}).get(concept_value, 0)
-            row_copy = row.copy()
-            row_copy['removal_reason'] = f"low_frequency_concept (measurement_concept_id={concept_value}, freq={freq})"
-            row_copy['original_row_number'] = f"chunk{chunk_id}_row{chunk_row_counter}"
-            removed_low_freq.append(row_copy)
-            stats['low_freq_removed'] += 1
-            continue
-        
-        # Apply mapping
-        if concept_value in mappings:
-            row['measurement_concept_id'] = mappings[concept_value]  # Replace with mapped SNOMED ID
-            row['measurement_concept_id_mapped'] = 'Y'
-            stats['mappings_applied'] += 1
-        else:
-            row['measurement_concept_id_mapped'] = 'N'
-        
-        processed_rows.append(row)
-        stats['rows_processed'] += 1
-    
-    time_stats['file_reading'] = time.time() - read_start
-    
-    # Simple deduplication within chunk
-    dedup_start = time.time()
-    if enable_dedup:
-        seen_keys = {}
-        unique_rows = []
-        group_counter = 0
-        
-        for idx, row in enumerate(processed_rows):
-            person_id = row.get('person_id', '')
-            # Use mapped concept for deduplication
-            original_value = row.get('measurement_concept_id', '')
-            if original_value in mappings:
-                concept_id = mappings[original_value]
-            else:
-                concept_id = original_value
-            datetime_val = row.get('measurement_datetime', '')
-            
-            dedup_key = f"{person_id}|{concept_id}|{datetime_val}"
-            
-            if dedup_key not in seen_keys:
-                seen_keys[dedup_key] = {'idx': idx, 'group_id': None, 'row': row.copy()}
-                unique_rows.append(row)
-            else:
-                # First duplicate for this key - create group and add kept record
-                if seen_keys[dedup_key]['group_id'] is None:
-                    group_counter += 1
-                    group_id = f"MEASUREMENT_CHUNK{chunk_id}_{group_counter}"
-                    seen_keys[dedup_key]['group_id'] = group_id
-                    
-                    # Add kept record
-                    kept_row = seen_keys[dedup_key]['row'].copy()
-                    kept_row['duplicate_status'] = 'kept'
-                    kept_row['duplicate_group_id'] = group_id
-                    kept_row['original_row_number'] = f"chunk{chunk_id}_row{seen_keys[dedup_key]['idx'] + 1}"
-                    duplicate_records.append(kept_row)
-                
-                # Add removed record
-                dup_row = row.copy()
-                dup_row['duplicate_status'] = 'removed'
-                dup_row['duplicate_group_id'] = seen_keys[dedup_key]['group_id']
-                dup_row['original_row_number'] = f"chunk{chunk_id}_row{idx + 1}"
-                duplicate_records.append(dup_row)
-                stats['duplicates_removed'] += 1
-        
-        processed_rows = unique_rows
-    
-    time_stats['deduplication'] = time.time() - dedup_start
-    
-    # Save chunk results temporarily
-    write_start = time.time()
+    # --- Open ALL output files upfront for streaming writes ---
     chunk_file = output_dir / f".temp_measurement_chunk_{chunk_id}.csv"
     extended_fieldnames = list(fieldnames) + ['measurement_concept_id_mapped']
     dup_fieldnames = extended_fieldnames + ['duplicate_status', 'duplicate_group_id', 'original_row_number']
+    low_freq_fieldnames = list(fieldnames) + ['removal_reason', 'original_row_number']
     
-    with open(chunk_file, 'w', newline='', encoding='utf-8', buffering=FILE_BUFFER_SIZE) as f:
-        writer = csv.DictWriter(f, fieldnames=extended_fieldnames)
-        writer.writeheader()  # Always write header for each chunk
-        writer.writerows(processed_rows)
+    removed_file = output_dir / "removed_records" / "low_frequency" / f".temp_MEASUREMENT_low_freq_chunk_{chunk_id}.csv"
+    removed_file.parent.mkdir(parents=True, exist_ok=True)
+    dup_file = output_dir / "removed_records" / "duplicates" / f".temp_MEASUREMENT_duplicates_chunk_{chunk_id}.csv"
+    dup_file.parent.mkdir(parents=True, exist_ok=True)
     
-    # Save removed records for this chunk
-    if removed_low_freq:
-        removed_file = output_dir / "removed_records" / "low_frequency" / f".temp_MEASUREMENT_low_freq_chunk_{chunk_id}.csv"
-        removed_file.parent.mkdir(parents=True, exist_ok=True)
-        low_freq_fieldnames = list(fieldnames) + ['removal_reason', 'original_row_number']
-        with open(removed_file, 'w', newline='', encoding='utf-8') as f:
-            writer = csv.DictWriter(f, fieldnames=low_freq_fieldnames)
-            writer.writeheader()  # Always write header
-            writer.writerows(removed_low_freq)
+    # Dedup state: lightweight hash set instead of dict with row copies
+    # Memory: ~8 bytes per entry (int64 hash) vs ~1.5KB per entry (dict with row copy)
+    seen_keys = set() if enable_dedup else None
     
-    if duplicate_records:
-        dup_file = output_dir / "removed_records" / "duplicates" / f".temp_MEASUREMENT_duplicates_chunk_{chunk_id}.csv"
-        dup_file.parent.mkdir(parents=True, exist_ok=True)
-        with open(dup_file, 'w', newline='', encoding='utf-8') as f:
-            writer = csv.DictWriter(f, fieldnames=dup_fieldnames)
-            writer.writeheader()  # Always write header
-            writer.writerows(duplicate_records)
+    # Pre-fetch the MEASUREMENT frequency map to avoid repeated dict lookups
+    measurement_freq = concept_frequencies.get('MEASUREMENT', {})
     
-    time_stats['file_writing'] = time.time() - write_start
+    # Write buffers for batching I/O (reduces syscall overhead)
+    write_buffer = []
+    low_freq_buffer = []
+    dup_buffer = []
     
-    # Calculate time for filtering and mapping (combined as they happen together in the reading loop)
-    time_stats['low_freq_filtering'] = time_stats['file_reading'] * 0.2  # Estimate
-    time_stats['concept_mapping'] = time_stats['file_reading'] * 0.1  # Estimate
+    # Track whether we wrote any low-freq or dup records (for empty-file cleanup)
+    has_low_freq = False
+    has_duplicates = False
+    
+    try:
+        # Open all output files
+        out_handle = open(chunk_file, 'w', newline='', encoding='utf-8', buffering=FILE_BUFFER_SIZE)
+        out_writer = csv.DictWriter(out_handle, fieldnames=extended_fieldnames)
+        out_writer.writeheader()
+        
+        low_freq_handle = open(removed_file, 'w', newline='', encoding='utf-8', buffering=FILE_BUFFER_SIZE)
+        low_freq_writer = csv.DictWriter(low_freq_handle, fieldnames=low_freq_fieldnames)
+        low_freq_writer.writeheader()
+        
+        dup_handle = open(dup_file, 'w', newline='', encoding='utf-8', buffering=FILE_BUFFER_SIZE)
+        dup_writer = csv.DictWriter(dup_handle, fieldnames=dup_fieldnames)
+        dup_writer.writeheader()
+        
+        # --- Single-pass streaming loop ---
+        read_start = time.time()
+        chunk_row_counter = 0
+        
+        for row in streaming_csv_reader(input_file, start_byte, end_byte, fieldnames):
+            chunk_row_counter += 1
+            
+            # --- Step 1: Filter low frequency concepts ---
+            concept_value = row.get('measurement_concept_id', '').strip()
+            if concept_value and measurement_freq.get(concept_value, 0) <= min_concept_freq:
+                freq = measurement_freq.get(concept_value, 0)
+                row_copy = row.copy()
+                row_copy['removal_reason'] = f"low_frequency_concept (measurement_concept_id={concept_value}, freq={freq})"
+                row_copy['original_row_number'] = f"chunk{chunk_id}_row{chunk_row_counter}"
+                low_freq_buffer.append(row_copy)
+                stats['low_freq_removed'] += 1
+                
+                # Flush low-freq buffer
+                if len(low_freq_buffer) >= WRITE_BUFFER_SIZE:
+                    low_freq_writer.writerows(low_freq_buffer)
+                    low_freq_buffer = []
+                    has_low_freq = True
+                continue
+            
+            # --- Step 2: Apply concept mapping ---
+            if concept_value in mappings:
+                row['measurement_concept_id'] = mappings[concept_value]
+                row['measurement_concept_id_mapped'] = 'Y'
+                stats['mappings_applied'] += 1
+            else:
+                row['measurement_concept_id_mapped'] = 'N'
+            
+            # --- Step 3: Deduplication (single-pass, hash-set based) ---
+            if enable_dedup:
+                # Build dedup key from the MAPPED concept_id (already replaced above)
+                person_id = row.get('person_id', '')
+                concept_id = row.get('measurement_concept_id', '')
+                datetime_val = row.get('measurement_datetime', '')
+                
+                # Use hash of the tuple for O(1) lookup with ~8 bytes per entry
+                dedup_key_hash = hash((person_id, concept_id, datetime_val))
+                
+                if dedup_key_hash in seen_keys:
+                    # Duplicate - write to dup file immediately
+                    dup_row = row.copy()
+                    dup_row['duplicate_status'] = 'removed'
+                    dup_row['duplicate_group_id'] = f"MEASUREMENT_CHUNK{chunk_id}_hash"
+                    dup_row['original_row_number'] = f"chunk{chunk_id}_row{chunk_row_counter}"
+                    dup_buffer.append(dup_row)
+                    stats['duplicates_removed'] += 1
+                    
+                    # Flush dup buffer
+                    if len(dup_buffer) >= WRITE_BUFFER_SIZE:
+                        dup_writer.writerows(dup_buffer)
+                        dup_buffer = []
+                        has_duplicates = True
+                    continue
+                
+                seen_keys.add(dedup_key_hash)
+            
+            # --- Step 4: Write to output immediately ---
+            write_buffer.append(row)
+            stats['rows_processed'] += 1
+            
+            # Flush output buffer
+            if len(write_buffer) >= WRITE_BUFFER_SIZE:
+                out_writer.writerows(write_buffer)
+                write_buffer = []
+        
+        time_stats['file_reading'] = time.time() - read_start
+        
+        # --- Flush remaining buffers ---
+        write_start = time.time()
+        if write_buffer:
+            out_writer.writerows(write_buffer)
+        if low_freq_buffer:
+            low_freq_writer.writerows(low_freq_buffer)
+            has_low_freq = True
+        if dup_buffer:
+            dup_writer.writerows(dup_buffer)
+            has_duplicates = True
+        time_stats['file_writing'] = time.time() - write_start
+        
+    finally:
+        out_handle.close()
+        low_freq_handle.close()
+        dup_handle.close()
+    
+    # Clean up empty removed-records files (only header, no data rows)
+    if not has_low_freq and stats['low_freq_removed'] == 0:
+        removed_file.unlink(missing_ok=True)
+    if not has_duplicates and stats['duplicates_removed'] == 0:
+        dup_file.unlink(missing_ok=True)
+    
+    # Calculate time estimates for sub-steps (they happen interleaved in the single pass)
+    total_processing = time_stats['file_reading']
+    time_stats['low_freq_filtering'] = total_processing * 0.2  # Estimate
+    time_stats['concept_mapping'] = total_processing * 0.1  # Estimate
+    time_stats['deduplication'] = total_processing * 0.15  # Estimate
     
     time_stats['total'] = time.time() - start_time
     

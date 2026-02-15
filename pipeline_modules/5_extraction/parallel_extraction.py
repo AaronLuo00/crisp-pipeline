@@ -21,6 +21,7 @@ if str(_utils_dir) not in sys.path:
     sys.path.insert(0, str(_utils_dir))
 
 from file_splitter import count_rows_in_range
+from file_handle_cache import FileHandleCache
 
 # Platform-specific settings
 if platform.system() == 'Windows':
@@ -82,44 +83,38 @@ def process_single_table_worker(table_name: str, standardized_dir: Path,
         with open(input_file, 'r') as f:
             total_rows = sum(1 for _ in f) - 1
         
-        # Process in chunks
+        # Process in chunks using LRU file handle cache to avoid fd exhaustion
         reader = pd.read_csv(input_file, dtype={"person_id": str}, chunksize=CHUNK_SIZE)
         
-        # Track file handles for optimized appending
-        file_handles = {}
+        file_cache = FileHandleCache(max_handles=500, buffer_size=FILE_BUFFER_SIZE)
         
-        for chunk in reader:
-            # Remove null person_ids
-            chunk = chunk[chunk["person_id"].notnull()]
-            total_records += len(chunk)
-            
-            # Group by person_id
-            grouped = chunk.groupby("person_id")
-            
-            for person_id, group_df in grouped:
-                # Get patient folder
-                patient_path = get_patient_path(person_id, patient_data_dir)
-                patient_path.mkdir(parents=True, exist_ok=True)
+        try:
+            for chunk in reader:
+                # Remove null person_ids
+                chunk = chunk[chunk["person_id"].notnull()]
+                total_records += len(chunk)
                 
-                # Get or create file handle with buffering
-                file_path = patient_path / f"{table_name}.csv"
-                if person_id not in file_handles:
-                    # Open file with optimized buffering
-                    file_handles[person_id] = open(
-                        file_path, 'w', newline='', 
-                        encoding='utf-8', buffering=FILE_BUFFER_SIZE
-                    )
-                    # Write header for new file
-                    group_df.to_csv(file_handles[person_id], index=False)
-                else:
-                    # Append without header
-                    group_df.to_csv(file_handles[person_id], header=False, index=False)
+                # Group by person_id
+                grouped = chunk.groupby("person_id")
                 
-                patients_processed.add(person_id)
-        
-        # Close all file handles
-        for handle in file_handles.values():
-            handle.close()
+                for person_id, group_df in grouped:
+                    # Get patient folder
+                    patient_path = get_patient_path(person_id, patient_data_dir)
+                    patient_path.mkdir(parents=True, exist_ok=True)
+                    
+                    # Get or create file handle via LRU cache
+                    file_path = patient_path / f"{table_name}.csv"
+                    handle, needs_header = file_cache.get_handle(str(file_path))
+                    if needs_header:
+                        group_df.to_csv(handle, index=False)
+                    else:
+                        group_df.to_csv(handle, header=False, index=False)
+                    
+                    patients_processed.add(person_id)
+        finally:
+            cache_stats = file_cache.get_stats()
+            file_cache.close_all()
+            logging.info(f"[{table_name}] FileHandleCache stats: {cache_stats}")
         
         processing_time = time.time() - t0
         
@@ -161,10 +156,11 @@ def process_measurement_chunk(args: Tuple) -> Tuple[int, Dict, str]:
     temp_dir = output_base_dir / "temp" / f"chunk_{chunk_id}"
     temp_dir.mkdir(parents=True, exist_ok=True)
     
-    # Track statistics
-    file_handles = {}
+    # Track statistics using LRU file handle cache to avoid fd exhaustion
     patient_counts = defaultdict(int)
     total_processed = 0
+    
+    file_cache = FileHandleCache(max_handles=500, buffer_size=FILE_BUFFER_SIZE)
     
     try:
         # Open file, seek to start_byte, and let pandas read from there.
@@ -191,34 +187,20 @@ def process_measurement_chunk(args: Tuple) -> Tuple[int, Dict, str]:
                 grouped = sub_chunk.groupby("person_id")
                 
                 for person_id, group_df in grouped:
-                    # Write to temporary file
+                    # Write to temporary file via LRU cache
                     temp_file = temp_dir / f"{person_id}.csv"
-                    
-                    if person_id not in file_handles:
-                        file_handles[person_id] = open(
-                            temp_file, 'w', newline='',
-                            encoding='utf-8', buffering=FILE_BUFFER_SIZE
-                        )
-                        group_df.to_csv(file_handles[person_id], index=False)
+                    handle, needs_header = file_cache.get_handle(str(temp_file))
+                    if needs_header:
+                        group_df.to_csv(handle, index=False)
                     else:
-                        group_df.to_csv(file_handles[person_id], header=False, index=False)
+                        group_df.to_csv(handle, header=False, index=False)
                     
                     patient_counts[person_id] += len(group_df)
         
-        # Close all file handles
-        for handle in file_handles.values():
-            handle.close()
-        
         return chunk_id, dict(patient_counts), str(temp_dir)
         
-    except Exception as e:
-        # Clean up on error
-        for handle in file_handles.values():
-            try:
-                handle.close()
-            except:
-                pass
-        raise e
+    finally:
+        file_cache.close_all()
 
 
 def merge_measurement_chunks(output_base_dir: Path, patient_data_dir: Path, 

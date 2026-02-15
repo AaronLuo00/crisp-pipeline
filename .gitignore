@@ -120,3 +120,6 @@ predictive_modeling/modeling_results/**/*.pth
 # Unmapped concepts check directory
 mapping_resources/processed_mappings/unmapped_check/
 
+
+# Audit docs
+.audit/

@@ -386,8 +386,7 @@ def clean_table_partial(table_name, start_byte=0, end_byte=-1, fieldnames=None, 
     invalid_concept_count = 0
     temporal_issues = 0
     rows_written = 0
-    seen_keys = {}  # Changed from set to dict to store first occurrence info
-    duplicate_groups = defaultdict(list)  # Store all records in each duplicate group
+    seen_keys = set()  # Set of 64-bit hashes for O(1) dedup with minimal memory
     
     # Initialize write buffers for batch writing
     write_buffer = []
@@ -400,7 +399,8 @@ def clean_table_partial(table_name, start_byte=0, end_byte=-1, fieldnames=None, 
     # Open output file and removed records files with optimized buffering
     with open(temp_file, 'w', encoding='utf-8', newline='', buffering=FILE_BUFFER_SIZE) as outfile, \
          open(invalid_concept_file, 'w', encoding='utf-8', newline='', buffering=FILE_BUFFER_SIZE) as invalid_file, \
-         open(temporal_issues_file, 'w', encoding='utf-8', newline='', buffering=FILE_BUFFER_SIZE) as temporal_file:
+         open(temporal_issues_file, 'w', encoding='utf-8', newline='', buffering=FILE_BUFFER_SIZE) as temporal_file, \
+         open(duplicates_file, 'w', encoding='utf-8', newline='', buffering=FILE_BUFFER_SIZE) as dup_file:
         
         writer = csv.DictWriter(outfile, fieldnames=clean_headers)
         writer.writeheader()
@@ -411,6 +411,11 @@ def clean_table_partial(table_name, start_byte=0, end_byte=-1, fieldnames=None, 
         temporal_headers = headers + ['temporal_issue_reason', 'start_datetime', 'end_datetime', 'original_row_number']
         temporal_writer = csv.DictWriter(temporal_file, fieldnames=temporal_headers)
         temporal_writer.writeheader()
+        
+        dup_headers = headers + ['duplicate_status', 'duplicate_group_id', 'original_row_number']
+        dup_writer = csv.DictWriter(dup_file, fieldnames=dup_headers)
+        dup_writer.writeheader()
+        dup_write_buffer = []
         
         # Process file using byte-offset seeking (no skip-scan)
         # Create progress bar with more frequent updates
@@ -445,18 +450,25 @@ def clean_table_partial(table_name, start_byte=0, end_byte=-1, fieldnames=None, 
                         t1 = time.time()
                         if duplicate_key_cols:
                             key = tuple(row.get(col, '') for col in duplicate_key_cols)
-                            if key in seen_keys:
+                            key_hash = hash(key)
+                            if key_hash in seen_keys:
                                 duplicate_count += 1
                                 skip_row = True
                                 removal_reason = 'duplicate'
-                                # Add to duplicate group
-                                group_id = seen_keys[key]
-                                duplicate_groups[group_id].append((row, 'removed', original_row_num))
+                                group_id = f"{table_name}_dup_{duplicate_count}"
+                                # Stream the removed duplicate record to disk immediately
+                                dup_meta = row.copy()
+                                dup_meta['duplicate_status'] = 'removed'
+                                dup_meta['duplicate_group_id'] = group_id
+                                dup_meta['original_row_number'] = original_row_num
+                                dup_write_buffer.append(dup_meta)
+                                # Batch write duplicates when buffer is full
+                                if len(dup_write_buffer) >= WRITE_BUFFER_SIZE:
+                                    dup_writer.writerows(dup_write_buffer)
+                                    dup_write_buffer = []
                             else:
-                                # First occurrence - create new group
-                                group_id = f"{table_name}_{len(seen_keys)+1}"
-                                seen_keys[key] = group_id
-                                duplicate_groups[group_id].append((row, 'kept', original_row_num))
+                                # First occurrence — keep the row, just record the hash
+                                seen_keys.add(key_hash)
                         table_time_stats['duplicate_detection'] += time.time() - t1
                         
                         if skip_row:
@@ -570,29 +582,15 @@ def clean_table_partial(table_name, start_byte=0, end_byte=-1, fieldnames=None, 
             invalid_writer.writerows(invalid_buffer)
         if temporal_buffer:
             temporal_writer.writerows(temporal_buffer)
+        if dup_write_buffer:
+            dup_writer.writerows(dup_write_buffer)
     
     # Rename temp file to final output (Windows-compatible)
     # Use shutil.move for cross-platform compatibility
     import shutil
     shutil.move(str(temp_file), str(output_file))
     
-    # Write duplicate groups to file (only groups with multiple records)
-    duplicate_groups_written = 0
-    with open(duplicates_file, 'w', encoding='utf-8', newline='', buffering=FILE_BUFFER_SIZE) as dup_file:
-        dup_headers = headers + ['duplicate_status', 'duplicate_group_id', 'original_row_number']
-        dup_writer = csv.DictWriter(dup_file, fieldnames=dup_headers)
-        dup_writer.writeheader()
-        
-        for group_id, group_records in duplicate_groups.items():
-            # Only write groups that have duplicates (more than 1 record)
-            if len(group_records) > 1:
-                for row, status, row_num in group_records:
-                    row_with_meta = row.copy()
-                    row_with_meta['duplicate_status'] = status
-                    row_with_meta['duplicate_group_id'] = group_id
-                    row_with_meta['original_row_number'] = row_num
-                    dup_writer.writerow(row_with_meta)
-                    duplicate_groups_written += 1
+    # Duplicates have been streamed to disk inline — no post-processing needed
     
     # Silent summary - details saved to results file
     rows_removed = total_rows - rows_written
