@@ -28,8 +28,8 @@ if platform.system() == 'Windows':
     CHUNK_SIZE = 500000
     FILE_BUFFER_SIZE = 2 * 1024 * 1024
 else:
-    CHUNK_SIZE = 100000
-    FILE_BUFFER_SIZE = 1 * 1024 * 1024
+    CHUNK_SIZE = 200000  # Default for macOS/Linux
+    FILE_BUFFER_SIZE = 4 * 1024 * 1024  # 4MB file buffer
 
 
 def get_patient_path(person_id: str, patient_data_dir: Path) -> Path:
@@ -86,7 +86,7 @@ def process_single_table_worker(table_name: str, standardized_dir: Path,
         # Process in chunks using LRU file handle cache to avoid fd exhaustion
         reader = pd.read_csv(input_file, dtype={"person_id": str}, chunksize=CHUNK_SIZE)
         
-        file_cache = FileHandleCache(max_handles=500, buffer_size=FILE_BUFFER_SIZE)
+        file_cache = FileHandleCache(max_handles=5000, buffer_size=FILE_BUFFER_SIZE)
         
         try:
             for chunk in reader:
@@ -160,7 +160,7 @@ def process_measurement_chunk(args: Tuple) -> Tuple[int, Dict, str]:
     patient_counts = defaultdict(int)
     total_processed = 0
     
-    file_cache = FileHandleCache(max_handles=500, buffer_size=FILE_BUFFER_SIZE)
+    file_cache = FileHandleCache(max_handles=5000, buffer_size=FILE_BUFFER_SIZE)
     
     try:
         # Open file, seek to start_byte, and let pandas read from there.

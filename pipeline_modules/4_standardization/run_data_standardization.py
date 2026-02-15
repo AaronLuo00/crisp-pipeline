@@ -47,7 +47,7 @@ if platform.system() == 'Windows':
     CHUNK_SIZE = 500000  # Larger chunks for Windows (better I/O performance)
     PROGRESS_INTERVAL = 30.0  # Less frequent updates (reduce overhead)
 else:
-    CHUNK_SIZE = 100000  # Default for macOS/Linux
+    CHUNK_SIZE = 200000  # Default for macOS/Linux
     PROGRESS_INTERVAL = 10.0
 
 # Get MEASUREMENT_SPLITS from environment variable (default: 8)

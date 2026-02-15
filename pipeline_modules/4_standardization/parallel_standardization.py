@@ -32,9 +32,9 @@ if platform.system() == 'Windows':
     FILE_BUFFER_SIZE = 2 * 1024 * 1024  # 2MB file buffer
     WRITE_BUFFER_SIZE = 50000  # 50K rows batch write
 else:
-    CHUNK_SIZE = 100000  # Default for macOS/Linux
-    FILE_BUFFER_SIZE = 1 * 1024 * 1024  # 1MB file buffer
-    WRITE_BUFFER_SIZE = 20000  # 20K rows batch write
+    CHUNK_SIZE = 200000  # Default for macOS/Linux
+    FILE_BUFFER_SIZE = 4 * 1024 * 1024  # 4MB file buffer
+    WRITE_BUFFER_SIZE = 100000  # 100K rows batch write
 DATE_COLUMNS = {
     'MEASUREMENT': ['measurement_date', 'measurement_datetime'],
     'OBSERVATION': ['observation_date', 'observation_datetime'],

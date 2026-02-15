@@ -50,9 +50,9 @@ if platform.system() == 'Windows':
     FILE_BUFFER_SIZE = 2 * 1024 * 1024  # 2MB file buffer
 else:
     PROGRESS_INTERVAL = 10.0  # Default for macOS/Linux
-    CHUNK_SIZE = 100000  # Default for macOS/Linux
-    WRITE_BUFFER_SIZE = 20000  # 20K rows batch write
-    FILE_BUFFER_SIZE = 1 * 1024 * 1024  # 1MB file buffer
+    CHUNK_SIZE = 200000  # Default for macOS/Linux
+    WRITE_BUFFER_SIZE = 100000  # 100K rows batch write
+    FILE_BUFFER_SIZE = 4 * 1024 * 1024  # 4MB file buffer
 
 # Setup logging will be configured after output_dir is created
 
@@ -372,7 +372,7 @@ class PatientDataExtractor:
                        disable=not show_progress)
             
             # Use LRU file handle cache to avoid fd exhaustion with 500K+ patients
-            file_cache = FileHandleCache(max_handles=500, buffer_size=FILE_BUFFER_SIZE)
+            file_cache = FileHandleCache(max_handles=5000, buffer_size=FILE_BUFFER_SIZE)
             
             try:
                 for chunk_idx, chunk in enumerate(reader):

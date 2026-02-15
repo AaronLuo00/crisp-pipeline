@@ -47,9 +47,9 @@ else:
     
     # Unix-like system performance settings
     PROGRESS_INTERVAL = 10.0  # Default for macOS/Linux
-    CHUNK_SIZE = 100000  # Default for macOS/Linux
-    WRITE_BUFFER_SIZE = 20000  # Moderate buffer for Unix-like systems
-    FILE_BUFFER_SIZE = 1 * 1024 * 1024  # 1MB file buffer
+    CHUNK_SIZE = 200000  # Default for macOS/Linux
+    WRITE_BUFFER_SIZE = 100000  # 100K rows batch write
+    FILE_BUFFER_SIZE = 4 * 1024 * 1024  # 4MB file buffer
 
 # Parallel processing configuration
 MAX_WORKERS = max(1, multiprocessing.cpu_count() - 2)  # Reserve 2 cores for system

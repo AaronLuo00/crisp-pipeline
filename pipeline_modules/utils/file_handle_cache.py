@@ -9,7 +9,7 @@ ones when the limit is reached.
 Usage:
     from utils.file_handle_cache import FileHandleCache
 
-    cache = FileHandleCache(max_handles=200)
+    cache = FileHandleCache(max_handles=5000)
     try:
         for patient_id, data in process_data():
             file_path = get_patient_file(patient_id)
@@ -40,12 +40,12 @@ class FileHandleCache:
     
     Args:
         max_handles: Maximum number of simultaneously open file handles.
-                     Default 200 is safe for most OS configurations.
+                     Default 5000. Ensure ulimit -n is sufficient.
         buffer_size: Write buffer size for each file handle.
-                     Default 65536 (64KB) balances memory and I/O performance.
+                     Default 262144 (256KB).
     """
     
-    def __init__(self, max_handles: int = 200, buffer_size: int = 65536):
+    def __init__(self, max_handles: int = 5000, buffer_size: int = 262144):
         self.max_handles = max_handles
         self.buffer_size = buffer_size
         self.handles: OrderedDict[str, io.TextIOWrapper] = OrderedDict()

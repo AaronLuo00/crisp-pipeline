@@ -43,7 +43,7 @@ class NumpyEncoder(json.JSONEncoder):
 if platform.system() == 'Windows':
     CHUNK_SIZE = 500000  # Larger chunks for Windows (better I/O performance)
 else:
-    CHUNK_SIZE = 100000  # Default for macOS/Linux
+    CHUNK_SIZE = 200000  # Default for macOS/Linux
 
 # Parallel processing configuration
 PARALLEL_EDA = os.environ.get('PARALLEL_EDA', 'true').lower() == 'true'
