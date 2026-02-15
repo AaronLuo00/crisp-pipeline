@@ -25,6 +25,11 @@ module_dir = PathImport(__file__).parent
 if str(module_dir) not in sys.path:
     sys.path.insert(0, str(module_dir))
 
+# Add utils directory to path for file_splitter import
+utils_dir = PathImport(__file__).parent.parent / "utils"
+if str(utils_dir) not in sys.path:
+    sys.path.insert(0, str(utils_dir))
+
 # Import parallel processing functions
 from parallel_extraction import (
     process_table_batch,
@@ -32,6 +37,9 @@ from parallel_extraction import (
     process_measurement_chunk,
     merge_measurement_chunks
 )
+
+# Import byte-offset utilities for MEASUREMENT chunking
+from file_splitter import get_csv_byte_ranges, get_total_row_count_fast
 
 # Platform-specific settings for performance optimization
 if platform.system() == 'Windows':
@@ -87,11 +95,23 @@ TABLES_TO_PROCESS = [
 ]
 
 def estimate_file_rows(file_path, sample_size=1024*1024):
-    """Estimate total rows by sampling first 1MB of file."""
+    """Estimate total rows by sampling first 1MB of file.
+    
+    For small files (< 100MB), uses get_total_row_count_fast for exact counts.
+    For larger files, uses 1MB sampling to avoid full file scan on non-MEASUREMENT tables.
+    (MEASUREMENT uses byte-offset chunking which doesn't need this function at all.)
+    """
     file_size = file_path.stat().st_size
     
     if file_size == 0:
         return 0
+    
+    # For files under 100MB, use exact counting (fast enough)
+    if file_size < 100 * 1024 * 1024:
+        try:
+            return get_total_row_count_fast(str(file_path))
+        except Exception:
+            pass  # Fall through to estimation
     
     # Read first 1MB (or entire file if smaller)
     actual_sample_size = min(sample_size, file_size)
@@ -1354,7 +1374,7 @@ class PatientDataExtractor:
         
         self.phase_times['phase1'] = time.time() - phase1_start
         
-        # Phase 2: MEASUREMENT parallel chunk processing
+        # Phase 2: MEASUREMENT parallel chunk processing (byte-offset seeking)
         print("\n=== Phase 2: MEASUREMENT Parallel Processing ===")
         print(f"Step 3/3: Processing MEASUREMENT table...")
         phase2_start = time.time()
@@ -1362,15 +1382,29 @@ class PatientDataExtractor:
         
         if measurement_file.exists():
             print(f"Processing MEASUREMENT with {MEASUREMENT_CHUNKS} parallel chunks...")
+            print(f"  Computing byte-offset ranges (O(n_chunks) seeks, not full file scan)...")
             measurement_start = time.time()
             
-            with ProcessPoolExecutor(max_workers=MEASUREMENT_CHUNKS) as executor:
-                # Submit all chunks
+            # Compute byte ranges ONCE — O(MEASUREMENT_CHUNKS) seeks, ~milliseconds
+            # This replaces having each of 6 workers independently count all rows
+            byte_ranges = get_csv_byte_ranges(str(measurement_file), MEASUREMENT_CHUNKS)
+            actual_chunks = len(byte_ranges)
+            
+            if actual_chunks != MEASUREMENT_CHUNKS:
+                print(f"  Note: File split into {actual_chunks} chunks (requested {MEASUREMENT_CHUNKS})")
+            
+            for i, (sb, eb, _) in enumerate(byte_ranges):
+                size_mb = (eb - sb) / (1024 * 1024)
+                print(f"  Chunk {i}: bytes {sb:,} - {eb:,} ({size_mb:.1f} MB)")
+            
+            with ProcessPoolExecutor(max_workers=actual_chunks) as executor:
+                # Submit all chunks with pre-computed byte ranges
                 chunk_futures = []
-                for chunk_id in range(MEASUREMENT_CHUNKS):
+                for chunk_id, (start_byte, end_byte, fieldnames) in enumerate(byte_ranges):
                     future = executor.submit(
                         process_measurement_chunk,
-                        (chunk_id, MEASUREMENT_CHUNKS, measurement_file, output_dir)
+                        (chunk_id, start_byte, end_byte, fieldnames, 
+                         str(measurement_file), str(output_dir))
                     )
                     chunk_futures.append(future)
                 
@@ -1380,7 +1414,7 @@ class PatientDataExtractor:
                     try:
                         chunk_id, patient_counts, temp_dir = future.result()  # No timeout - let it complete
                         chunk_results.append((chunk_id, patient_counts, temp_dir))
-                        print(f"  [OK] Chunk {chunk_id + 1}/{MEASUREMENT_CHUNKS} completed")
+                        print(f"  [OK] Chunk {chunk_id + 1}/{actual_chunks} completed")
                     except Exception as e:
                         print(f"  [FAIL] Chunk {i} failed: {e}")
                         logging.error(f"MEASUREMENT chunk {i} failed: {e}")
@@ -1388,7 +1422,7 @@ class PatientDataExtractor:
             # Merge chunks
             if chunk_results:
                 print("  Merging MEASUREMENT chunks...")
-                merge_stats = merge_measurement_chunks(output_dir, patient_data_dir, MEASUREMENT_CHUNKS)
+                merge_stats = merge_measurement_chunks(output_dir, patient_data_dir, actual_chunks)
                 
                 measurement_time = time.time() - measurement_start
                 self.extraction_results['statistics']['MEASUREMENT'] = {

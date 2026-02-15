@@ -2,8 +2,10 @@
 """Parallel processing functions for ICU data extraction."""
 
 import os
+import sys
 import csv
 import time
+import io
 import pandas as pd
 import platform
 import shutil
@@ -11,6 +13,14 @@ from pathlib import Path
 from collections import defaultdict
 from typing import List, Dict, Tuple, Any
 import logging
+
+# Add utils directory to path for file_splitter import
+_module_dir = Path(__file__).parent
+_utils_dir = _module_dir.parent / "utils"
+if str(_utils_dir) not in sys.path:
+    sys.path.insert(0, str(_utils_dir))
+
+from file_splitter import count_rows_in_range
 
 # Platform-specific settings
 if platform.system() == 'Windows':
@@ -125,24 +135,27 @@ def process_single_table_worker(table_name: str, standardized_dir: Path,
 
 
 def process_measurement_chunk(args: Tuple) -> Tuple[int, Dict, str]:
-    """Process a chunk of the MEASUREMENT table."""
-    chunk_id, total_chunks, input_file, output_base_dir = args
+    """Process a chunk of the MEASUREMENT table using byte-offset seeking.
+    
+    Args tuple: (chunk_id, start_byte, end_byte, fieldnames, input_file, output_base_dir)
+        - chunk_id: integer chunk index
+        - start_byte: byte offset where this chunk's data begins
+        - end_byte: byte offset where this chunk's data ends
+        - fieldnames: list of column names from the CSV header
+        - input_file: path to the MEASUREMENT CSV file
+        - output_base_dir: base directory for temp output
+    
+    Instead of counting all rows then using skiprows (which causes massive I/O
+    amplification on 200GB files), each worker seeks directly to its byte range
+    and reads only its portion of the file.
+    """
+    chunk_id, start_byte, end_byte, fieldnames, input_file, output_base_dir = args
     
     input_file = Path(input_file)
     output_base_dir = Path(output_base_dir)
     
-    # Calculate chunk's row range
-    with open(input_file, 'r') as f:
-        total_rows = sum(1 for _ in f) - 1  # Subtract header
-    
-    rows_per_chunk = total_rows // total_chunks
-    start_row = chunk_id * rows_per_chunk
-    
-    if chunk_id == total_chunks - 1:
-        # Last chunk processes remaining rows
-        nrows = None
-    else:
-        nrows = rows_per_chunk
+    # Count rows in this byte range (fast: reads only this chunk's bytes)
+    chunk_rows = count_rows_in_range(str(input_file), start_byte, end_byte)
     
     # Create temporary output directory
     temp_dir = output_base_dir / "temp" / f"chunk_{chunk_id}"
@@ -154,45 +167,43 @@ def process_measurement_chunk(args: Tuple) -> Tuple[int, Dict, str]:
     total_processed = 0
     
     try:
-        # Read and process chunk
-        if start_row > 0:
+        # Open file, seek to start_byte, and let pandas read from there.
+        # We pass the header (fieldnames) as `names=` and tell pandas there's
+        # no header row in this portion (header=None -> use `names`).
+        # nrows = chunk_rows ensures we don't read past our byte range.
+        with open(input_file, 'r', encoding='utf-8') as f:
+            f.seek(start_byte)
+            
             reader = pd.read_csv(
-                input_file,
-                skiprows=range(1, start_row + 1),
-                nrows=nrows,
-                chunksize=min(CHUNK_SIZE, rows_per_chunk) if nrows else CHUNK_SIZE,
+                f,
+                names=fieldnames,
+                header=None,
+                nrows=chunk_rows,
+                chunksize=min(CHUNK_SIZE, max(1, chunk_rows)),
                 dtype={"person_id": str},
                 low_memory=False
             )
-        else:
-            reader = pd.read_csv(
-                input_file,
-                nrows=nrows,
-                chunksize=min(CHUNK_SIZE, rows_per_chunk) if nrows else CHUNK_SIZE,
-                dtype={"person_id": str},
-                low_memory=False
-            )
-        
-        for sub_chunk in reader:
-            sub_chunk = sub_chunk[sub_chunk["person_id"].notnull()]
-            total_processed += len(sub_chunk)
             
-            grouped = sub_chunk.groupby("person_id")
-            
-            for person_id, group_df in grouped:
-                # Write to temporary file
-                temp_file = temp_dir / f"{person_id}.csv"
+            for sub_chunk in reader:
+                sub_chunk = sub_chunk[sub_chunk["person_id"].notnull()]
+                total_processed += len(sub_chunk)
                 
-                if person_id not in file_handles:
-                    file_handles[person_id] = open(
-                        temp_file, 'w', newline='',
-                        encoding='utf-8', buffering=FILE_BUFFER_SIZE
-                    )
-                    group_df.to_csv(file_handles[person_id], index=False)
-                else:
-                    group_df.to_csv(file_handles[person_id], header=False, index=False)
+                grouped = sub_chunk.groupby("person_id")
                 
-                patient_counts[person_id] += len(group_df)
+                for person_id, group_df in grouped:
+                    # Write to temporary file
+                    temp_file = temp_dir / f"{person_id}.csv"
+                    
+                    if person_id not in file_handles:
+                        file_handles[person_id] = open(
+                            temp_file, 'w', newline='',
+                            encoding='utf-8', buffering=FILE_BUFFER_SIZE
+                        )
+                        group_df.to_csv(file_handles[person_id], index=False)
+                    else:
+                        group_df.to_csv(file_handles[person_id], header=False, index=False)
+                    
+                    patient_counts[person_id] += len(group_df)
         
         # Close all file handles
         for handle in file_handles.values():

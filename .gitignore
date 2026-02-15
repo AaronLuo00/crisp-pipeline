@@ -82,6 +82,7 @@ data_10000/
 data_20000/
 data_50000/
 data_full/
+daily_experiments/
 data/*.csv
 EDA/
 

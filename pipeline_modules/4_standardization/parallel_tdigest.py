@@ -10,7 +10,13 @@ import logging
 from tdigest import TDigest
 import multiprocessing as mp
 import time
+import sys
+
+sys.path.append(str(Path(__file__).parent))
+sys.path.append(str(Path(__file__).parent.parent / 'utils'))
+
 from unit_conversions import UNIT_ID_CONVERSIONS
+from file_splitter import streaming_csv_reader
 
 
 def process_measurement_chunk(args: Tuple[str, int, int, Optional[int]]) -> Tuple[Dict, float]:
@@ -60,86 +66,74 @@ def process_measurement_chunk(args: Tuple[str, int, int, Optional[int]]) -> Tupl
         'measurement_concept_id_mapped': 'str'
     }
     
-    # Process the file chunk
+    # Calculate actual start position (skip partial line and header)
     with open(filepath, 'rb') as f:
-        # Skip to start position if not at beginning
         if start_byte > 0:
             f.seek(start_byte)
-            # Skip the partial line at the start
-            f.readline()
+            f.readline()  # Skip partial line
             actual_start = f.tell()
         else:
-            actual_start = 0
+            # First chunk: skip header line
+            f.readline()
+            actual_start = f.tell()
         
-        # Check if we need to skip header
-        is_first_chunk = (start_byte == 0)
-        
-        # Read the entire chunk at once for this worker
-        if end_byte > actual_start:
-            f.seek(actual_start)
-            chunk_data = f.read(end_byte - actual_start)
+        # Read header from file start
+        f.seek(0)
+        header_line = f.readline().decode('utf-8').strip()
+    
+    import csv
+    fieldnames = next(csv.reader([header_line]))
+    
+    # Helper function for unit conversion
+    def convert_units(value, unit_concept_id, measurement_concept_id):
+        """Convert units before adding to T-Digest."""
+        if not value or not unit_concept_id:
+            return value
+        try:
+            unit_id = int(float(unit_concept_id))
+            if unit_id in UNIT_ID_CONVERSIONS:
+                conversion = UNIT_ID_CONVERSIONS[unit_id]
+                if measurement_concept_id in conversion['for_concepts']:
+                    if 'factor' in conversion:
+                        return value * conversion['factor']
+                    elif 'formula' in conversion:
+                        return conversion['formula'](value)
+        except:
+            pass
+        return value
+    
+    # Stream rows line-by-line using shared utility (O(1) memory per row)
+    try:
+        for row in streaming_csv_reader(filepath, actual_start, end_byte, fieldnames):
+            # Only process rows with numeric values
+            value_str = row.get('value_as_number', '')
+            if not value_str:
+                continue
             
-            if chunk_data:
-                # Find the last complete line
-                last_newline = chunk_data.rfind(b'\n')
-                if last_newline != -1:
-                    # Process only complete lines
-                    process_data = chunk_data[:last_newline]
-                else:
-                    # If no newline found, process entire chunk (edge case for last chunk)
-                    process_data = chunk_data
-                
-                # Parse CSV chunk
-                from io import BytesIO
-                try:
-                    df_chunk = pd.read_csv(
-                        BytesIO(process_data),
-                        header=0 if is_first_chunk else None,
-                        names=None if is_first_chunk else column_names,
-                        dtype=dtype_spec,
-                        low_memory=False,
-                        na_values=['', 'NA', 'null', 'NULL', 'None']
-                    )
-                except Exception as e:
-                    # Only log if it's not an expected empty chunk
-                    if len(process_data) > 0:
-                        logging.debug(f"Skipping chunk at position {actual_start}: {e}")
-                    return {}
-                
-                # Process measurements with numeric values
-                valid_measurements = df_chunk[df_chunk['value_as_number'].notna()]
-                
-                # Helper function for unit conversion
-                def convert_units(value, unit_concept_id, measurement_concept_id):
-                    """Convert units before adding to T-Digest."""
-                    if not value or not unit_concept_id:
-                        return value
-                    try:
-                        unit_id = int(float(unit_concept_id))
-                        if unit_id in UNIT_ID_CONVERSIONS:
-                            conversion = UNIT_ID_CONVERSIONS[unit_id]
-                            if measurement_concept_id in conversion['for_concepts']:
-                                if 'factor' in conversion:
-                                    return value * conversion['factor']
-                                elif 'formula' in conversion:
-                                    return conversion['formula'](value)
-                    except:
-                        pass
-                    return value
-                
-                # Group by concept and update T-Digests
-                for concept_id, group in valid_measurements.groupby('measurement_concept_id'):
-                    if concept_id not in concept_digests:
-                        concept_digests[concept_id] = TDigest(delta=0.01, K=25)
-                    
-                    # Add all values to the digest after unit conversion
-                    for idx, row in group.iterrows():
-                        value = row['value_as_number']
-                        if not np.isnan(value) and np.isfinite(value):
-                            # Convert units before adding to T-Digest
-                            unit_id = row.get('unit_concept_id', np.nan)
-                            converted_value = convert_units(value, unit_id, concept_id)
-                            concept_digests[concept_id].update(converted_value)
+            try:
+                value = float(value_str)
+            except (ValueError, TypeError):
+                continue
+            
+            if not np.isfinite(value):
+                continue
+            
+            # Get concept ID
+            try:
+                concept_id = float(row.get('measurement_concept_id', '0'))
+            except (ValueError, TypeError):
+                continue
+            
+            # Initialize T-Digest for this concept if needed
+            if concept_id not in concept_digests:
+                concept_digests[concept_id] = TDigest(delta=0.01, K=25)
+            
+            # Convert units before adding to T-Digest
+            unit_id_str = row.get('unit_concept_id', '')
+            converted_value = convert_units(value, unit_id_str, concept_id)
+            concept_digests[concept_id].update(converted_value)
+    except Exception as e:
+        logging.debug(f"Error streaming chunk at position {actual_start}: {e}")
     
     # Serialize T-Digest states
     result = {}

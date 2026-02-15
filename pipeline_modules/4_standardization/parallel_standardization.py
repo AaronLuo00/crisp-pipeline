@@ -19,9 +19,12 @@ import re
 # Import from main module for unit conversion
 import sys
 sys.path.append(str(Path(__file__).parent))
+# Add utils to path for shared file splitter
+sys.path.append(str(Path(__file__).parent.parent / 'utils'))
 
 # Import unit conversion mappings
 from unit_conversions import UNIT_ID_CONVERSIONS
+from file_splitter import streaming_csv_reader
 
 # Platform-specific settings for performance optimization
 if platform.system() == 'Windows':
@@ -255,135 +258,126 @@ def process_measurement_chunk(args: Tuple) -> Tuple[int, Dict, float, List]:
     outliers_percentile = []
     outliers_range = []
     
+    # Calculate actual byte range boundaries
     with open(input_file, 'rb') as infile:
-        # Seek to start position
-        infile.seek(start_pos)
         if start_pos > 0:
-            # Skip partial line
-            infile.readline()
+            infile.seek(start_pos)
+            infile.readline()  # Skip partial line
             actual_start = infile.tell()
         else:
-            actual_start = 0
+            # First chunk: skip header line
+            infile.readline()
+            actual_start = infile.tell()
         
-        # Read header if first chunk
-        if chunk_id == 0:
-            infile.seek(0)
-            header_line = infile.readline().decode('utf-8').strip()
-            header = header_line.split(',')
-            infile.seek(actual_start)
-        else:
-            # Get header from first line of file
-            infile.seek(0)
-            header_line = infile.readline().decode('utf-8').strip()
-            header = header_line.split(',')
-            infile.seek(actual_start)
+        # Read header from first line of file
+        infile.seek(0)
+        header_line = infile.readline().decode('utf-8').strip()
+        header = header_line.split(',')
+    
+    # Open output file with buffering
+    with open(temp_output, 'w', newline='', encoding='utf-8', buffering=FILE_BUFFER_SIZE) as outfile:
+        writer = csv.DictWriter(outfile, fieldnames=header)
         
-        # Open output file with buffering
-        with open(temp_output, 'w', newline='', encoding='utf-8', buffering=FILE_BUFFER_SIZE) as outfile:
-            writer = csv.DictWriter(outfile, fieldnames=header)
+        # Write header for all chunks (will skip when merging)
+        writer.writeheader()
+        
+        # Initialize write buffer for batch writing
+        write_buffer = []
+        
+        # Stream rows line-by-line using shared utility (O(1) memory per row)
+        reader = streaming_csv_reader(input_file, actual_start, end_pos, header)
+        
+        for row in reader:
+            stats['records_processed'] += 1
             
-            # Write header for all chunks (will skip when merging)
-            writer.writeheader()
-            
-            # Initialize write buffer for batch writing
-            write_buffer = []
-            
-            # Process lines
-            reader = csv.DictReader(infile.read(end_pos - actual_start).decode('utf-8').splitlines(), fieldnames=header)
-            if chunk_id == 0:
-                next(reader)  # Skip header row in first chunk
-            
-            for row in reader:
-                stats['records_processed'] += 1
-                
-                # Check outliers for MEASUREMENT with numeric values
-                if 'value_as_number' in row and row['value_as_number']:
-                    try:
-                        value = float(row['value_as_number'])
-                        concept_id = int(row.get('measurement_concept_id', 0))
-                        
-                        # Check if this concept has thresholds
-                        if concept_id in concept_thresholds.get('MEASUREMENT', {}):
-                            threshold = concept_thresholds['MEASUREMENT'][concept_id]
-                            is_outlier = False
-                            outlier_type = None
-                            
-                            # Check percentile outliers
-                            if 'lower_percentile' in threshold and 'upper_percentile' in threshold:
-                                if value < threshold['lower_percentile'] or value > threshold['upper_percentile']:
-                                    is_outlier = True
-                                    outlier_type = 'percentile'
-                                    outlier_row = dict(row)
-                                    outlier_row['outlier_type'] = 'percentile'
-                                    outlier_row['threshold_low'] = threshold['lower_percentile']
-                                    outlier_row['threshold_high'] = threshold['upper_percentile']
-                                    outliers_percentile.append(outlier_row)
-                                    stats['outliers_removed_percentile'] += 1
-                            
-                            # Check range outliers (if not already flagged)
-                            if not is_outlier and 'range_min' in threshold and 'range_max' in threshold:
-                                if value < threshold['range_min'] or value > threshold['range_max']:
-                                    is_outlier = True
-                                    outlier_type = 'range'
-                                    outlier_row = dict(row)
-                                    outlier_row['outlier_type'] = 'range'
-                                    outlier_row['range_min'] = threshold['range_min']
-                                    outlier_row['range_max'] = threshold['range_max']
-                                    outliers_range.append(outlier_row)
-                                    stats['outliers_removed_range'] += 1
-                            
-                            if is_outlier:
-                                continue  # Skip this record
-                        
-                        # Unit conversion
-                        if 'unit_concept_id' in row and row['unit_concept_id'] and value:
-                            new_value, new_unit_id, converted = standardize_units_parallel(
-                                value, row['unit_concept_id'], concept_id
-                            )
-                            if converted:
-                                # Record change if under limit
-                                if len(changes) < max_changes:
-                                    changes.append({
-                                        'row_number': stats['records_processed'],
-                                        'measurement_id': row.get('measurement_id', ''),
-                                        'concept_id': concept_id,
-                                        'original_value': value,
-                                        'original_unit_id': row['unit_concept_id'],
-                                        'new_value': new_value,
-                                        'new_unit_id': new_unit_id,
-                                        'change_type': 'unit_conversion'
-                                    })
-                                row['value_as_number'] = new_value
-                                row['unit_concept_id'] = new_unit_id
-                                stats['units_converted'] += 1
+            # Check outliers for MEASUREMENT with numeric values
+            if 'value_as_number' in row and row['value_as_number']:
+                try:
+                    value = float(row['value_as_number'])
+                    concept_id = int(row.get('measurement_concept_id', 0))
                     
-                    except (ValueError, TypeError):
-                        pass
+                    # Check if this concept has thresholds
+                    if concept_id in concept_thresholds.get('MEASUREMENT', {}):
+                        threshold = concept_thresholds['MEASUREMENT'][concept_id]
+                        is_outlier = False
+                        outlier_type = None
+                        
+                        # Check percentile outliers
+                        if 'lower_percentile' in threshold and 'upper_percentile' in threshold:
+                            if value < threshold['lower_percentile'] or value > threshold['upper_percentile']:
+                                is_outlier = True
+                                outlier_type = 'percentile'
+                                outlier_row = dict(row)
+                                outlier_row['outlier_type'] = 'percentile'
+                                outlier_row['threshold_low'] = threshold['lower_percentile']
+                                outlier_row['threshold_high'] = threshold['upper_percentile']
+                                outliers_percentile.append(outlier_row)
+                                stats['outliers_removed_percentile'] += 1
+                        
+                        # Check range outliers (if not already flagged)
+                        if not is_outlier and 'range_min' in threshold and 'range_max' in threshold:
+                            if value < threshold['range_min'] or value > threshold['range_max']:
+                                is_outlier = True
+                                outlier_type = 'range'
+                                outlier_row = dict(row)
+                                outlier_row['outlier_type'] = 'range'
+                                outlier_row['range_min'] = threshold['range_min']
+                                outlier_row['range_max'] = threshold['range_max']
+                                outliers_range.append(outlier_row)
+                                stats['outliers_removed_range'] += 1
+                        
+                        if is_outlier:
+                            continue  # Skip this record
+                    
+                    # Unit conversion
+                    if 'unit_concept_id' in row and row['unit_concept_id'] and value:
+                        new_value, new_unit_id, converted = standardize_units_parallel(
+                            value, row['unit_concept_id'], concept_id
+                        )
+                        if converted:
+                            # Record change if under limit
+                            if len(changes) < max_changes:
+                                changes.append({
+                                    'row_number': stats['records_processed'],
+                                    'measurement_id': row.get('measurement_id', ''),
+                                    'concept_id': concept_id,
+                                    'original_value': value,
+                                    'original_unit_id': row['unit_concept_id'],
+                                    'new_value': new_value,
+                                    'new_unit_id': new_unit_id,
+                                    'change_type': 'unit_conversion'
+                                })
+                            row['value_as_number'] = new_value
+                            row['unit_concept_id'] = new_unit_id
+                            stats['units_converted'] += 1
                 
-                # Standardize datetime fields
-                for col in ['measurement_date', 'measurement_datetime']:
-                    if col in row and row[col]:
-                        # Remove fractional seconds (milliseconds/microseconds)
-                        original = row[col]
-                        standardized = re.sub(r'(\d{2}:\d{2}:\d{2})\.\d+', r'\1', str(original))
-                        if original != standardized:
-                            row[col] = standardized
-                            stats['datetime_standardized'] += 1
-                
-                # Format ID columns before adding to buffer
-                formatted_row = format_id_columns_row(row, 'MEASUREMENT')
-                
-                # Add non-outlier record to buffer
-                write_buffer.append(formatted_row)
-                
-                # Batch write when buffer is full
-                if len(write_buffer) >= WRITE_BUFFER_SIZE:
-                    writer.writerows(write_buffer)
-                    write_buffer.clear()
+                except (ValueError, TypeError):
+                    pass
             
-            # Write remaining records in buffer
-            if write_buffer:
+            # Standardize datetime fields
+            for col in ['measurement_date', 'measurement_datetime']:
+                if col in row and row[col]:
+                    # Remove fractional seconds (milliseconds/microseconds)
+                    original = row[col]
+                    standardized = re.sub(r'(\d{2}:\d{2}:\d{2})\.\d+', r'\1', str(original))
+                    if original != standardized:
+                        row[col] = standardized
+                        stats['datetime_standardized'] += 1
+            
+            # Format ID columns before adding to buffer
+            formatted_row = format_id_columns_row(row, 'MEASUREMENT')
+            
+            # Add non-outlier record to buffer
+            write_buffer.append(formatted_row)
+            
+            # Batch write when buffer is full
+            if len(write_buffer) >= WRITE_BUFFER_SIZE:
                 writer.writerows(write_buffer)
+                write_buffer.clear()
+        
+        # Write remaining records in buffer
+        if write_buffer:
+            writer.writerows(write_buffer)
     
     # Save outlier files
     if outliers_percentile:

@@ -7,6 +7,8 @@ from pathlib import Path
 from datetime import datetime
 import time
 import os
+import sys
+import io
 import matplotlib.pyplot as plt
 import seaborn as sns
 from tqdm import tqdm
@@ -14,6 +16,13 @@ import numpy as np
 import platform
 from concurrent.futures import ProcessPoolExecutor, as_completed
 import logging
+
+# Ensure pipeline_modules is on sys.path so 'utils' package is importable
+_pipeline_modules_dir = str(Path(__file__).parent.parent.absolute())
+if _pipeline_modules_dir not in sys.path:
+    sys.path.insert(0, _pipeline_modules_dir)
+
+from utils.file_splitter import get_csv_byte_ranges, streaming_csv_reader_raw, count_rows_in_range
 
 # Check pandas version for compatibility
 PANDAS_VERSION = tuple(map(int, pd.__version__.split('.')[:2]))
@@ -88,8 +97,20 @@ def get_file_row_count(file_path, silent=False):
     
     return row_count
 
-def process_table_partial(file_path, start_row, end_row, chunk_size=CHUNK_SIZE, part_suffix=""):
-    """Process a partial range of a table and return aggregated statistics."""
+def process_table_partial(file_path, start_byte, end_byte, fieldnames, chunk_size=CHUNK_SIZE, part_suffix=""):
+    """Process a partial byte range of a table and return aggregated statistics.
+    
+    Uses byte-offset seeking instead of skip-scan to eliminate I/O amplification.
+    Each worker seeks directly to its assigned byte range — O(1) startup cost
+    regardless of position in the file.
+    """
+    # Ensure pipeline_modules is on sys.path (needed in worker processes)
+    _pm_dir = str(Path(__file__).parent.parent.absolute())
+    if _pm_dir not in sys.path:
+        sys.path.insert(0, _pm_dir)
+    from utils.file_splitter import streaming_csv_reader_raw, count_rows_in_range
+
+    file_path = Path(file_path)
     table_name = file_path.stem
     part_name = f"{table_name}{part_suffix}" if part_suffix else table_name
     
@@ -108,31 +129,33 @@ def process_table_partial(file_path, start_row, end_row, chunk_size=CHUNK_SIZE, 
     }
     table_start = time.time()
     
-    # Calculate actual rows to process
-    total_file_rows = get_file_row_count(file_path, silent=True)
-    if end_row == -1:
-        end_row = total_file_rows
-    actual_rows = end_row - start_row
+    # Count actual rows in this byte range (fast byte counting, no parsing)
+    t0 = time.time()
+    actual_rows = count_rows_in_range(file_path, start_byte, end_byte)
+    time_stats['row_counting'] = time.time() - t0
     
     # Initialize statistics
     stats = {
         "file_name": file_path.name,
         "part_name": part_name,
-        "start_row": start_row,
-        "end_row": end_row,
+        "start_byte": start_byte,
+        "end_byte": end_byte,
         "total_records": 0,
-        "total_columns": 0,
-        "columns": None,
+        "total_columns": len(fieldnames),
+        "columns": list(fieldnames),
         "memory_usage_mb": 0,
-        "missing_values": {},
+        "missing_values": {col: 0 for col in fieldnames},
         "data_types": None,
         "chunks_processed": 0
     }
     
     # For aggregating unique values
     unique_trackers = {}
-    id_columns = []
-    datetime_columns = []
+    id_columns = [col for col in fieldnames if col.endswith('_id')]
+    datetime_columns = [col for col in fieldnames
+                        if 'date' in col.lower() or 'time' in col.lower()]
+    for col in id_columns:
+        unique_trackers[col] = set()
     
     # Table-specific data collection
     table_data = {
@@ -144,147 +167,164 @@ def process_table_partial(file_path, start_row, end_row, chunk_size=CHUNK_SIZE, 
         "all_patients": set()
     }
     
-    # Process chunks with row range limitation
+    # Process data using byte-offset streaming — no skip-scan!
     t0 = time.time()
     rows_read = 0
     chunk_num = 0
-    
-    # Skip to start position if needed
-    skip_rows = list(range(1, start_row + 1)) if start_row > 0 else None
+    batch_rows = []  # accumulate rows for batching into DataFrames
     
     # Add progress bar for chunk processing
     with tqdm(total=actual_rows, desc=f"Reading MEASUREMENT{part_suffix}", 
               unit="rows", leave=False,
-              disable=False,  # Enable to show processing speed
-              miniters=max(100, actual_rows//100) if actual_rows > 0 else 1,  # Update every 1% or at least 100 rows
-              mininterval=10.0,  # Update at least every 10 seconds
+              disable=False,
+              miniters=max(100, actual_rows//100) if actual_rows > 0 else 1,
+              mininterval=10.0,
               ncols=100, ascii=True) as pbar:
-        for chunk in pd.read_csv(file_path, chunksize=chunk_size, low_memory=False, skiprows=skip_rows):
-            # Check if we've read enough rows
-            if end_row != -1 and rows_read + len(chunk) > actual_rows:
-                # Truncate the last chunk
-                remaining_rows = actual_rows - rows_read
-                chunk = chunk.iloc[:remaining_rows]
-            
-            # First chunk: initialize column-based statistics
-            if chunk_num == 0:
-                stats["columns"] = list(chunk.columns)
-                stats["total_columns"] = len(chunk.columns)
-                stats["data_types"] = chunk.dtypes.astype(str).to_dict()
-                
-                # Initialize missing values counter
-                for col in chunk.columns:
-                    stats["missing_values"][col] = 0
-                
-                # Identify column types
-                id_columns = [col for col in chunk.columns if col.endswith('_id')]
-                datetime_columns = [col for col in chunk.columns 
-                                  if 'date' in col.lower() or 'time' in col.lower()]
-                
-                # Initialize unique value trackers for ID columns
+
+        for row_dict in streaming_csv_reader_raw(file_path, start_byte, end_byte, fieldnames):
+            batch_rows.append(row_dict)
+
+            if len(batch_rows) >= chunk_size:
+                # Convert batch to DataFrame for vectorized statistics
+                chunk = pd.DataFrame(batch_rows)
+                batch_rows = []
+
+                # First chunk: capture dtypes after pandas inference
+                if chunk_num == 0:
+                    # Re-read a small sample with pd type inference for accurate dtypes
+                    stats["data_types"] = chunk.dtypes.astype(str).to_dict()
+
+                # Update basic statistics
+                stats["total_records"] += len(chunk)
+                stats["memory_usage_mb"] += chunk.memory_usage(deep=True).sum() / 1024 / 1024
+
+                # Update missing values - vectorized
+                t1 = time.time()
+                missing_counts = chunk.isnull().sum().to_dict()
+                for col, count in missing_counts.items():
+                    stats["missing_values"][col] = stats["missing_values"].get(col, 0) + count
+                time_stats['missing_calc'] += time.time() - t1
+
+                # Track unique values for ID columns
+                t1 = time.time()
                 for col in id_columns:
-                    unique_trackers[col] = set()
-            
-            # Update basic statistics
+                    if col in chunk.columns:
+                        unique_trackers[col].update(chunk[col].dropna().unique())
+                time_stats['unique_tracking'] += time.time() - t1
+
+                # Table-specific processing
+                if table_name == "PERSON":
+                    table_data["all_patients"].update(chunk['person_id'].unique())
+                    gender_counts = chunk['gender_concept_id'].value_counts().to_dict()
+                    for gender, count in gender_counts.items():
+                        table_data["gender_counts"][int(gender)] = table_data["gender_counts"].get(int(gender), 0) + int(count)
+                    table_data["birth_years"].extend(chunk['year_of_birth'].tolist())
+                elif table_name == "VISIT_DETAIL":
+                    table_data["all_patients"].update(chunk['person_id'].unique())
+                    concept_counts = chunk['visit_detail_concept_id'].value_counts().to_dict()
+                    for concept, count in concept_counts.items():
+                        table_data["concept_distributions"][int(concept)] = \
+                            table_data["concept_distributions"].get(int(concept), 0) + int(count)
+                    icu_concept_ids = [581379, 32037]
+                    icu_chunk = chunk[chunk['visit_detail_concept_id'].isin(icu_concept_ids)]
+                    table_data["icu_patients"].update(icu_chunk['person_id'].unique())
+                elif table_name == "DEATH":
+                    table_data["death_count"] += len(chunk)
+                    table_data["all_patients"].update(chunk['person_id'].unique())
+
+                stats["chunks_processed"] += 1
+                rows_read += len(chunk)
+                chunk_num += 1
+                pbar.update(len(chunk))
+
+        # Process remaining rows in the last partial batch
+        if batch_rows:
+            chunk = pd.DataFrame(batch_rows)
+            batch_rows = []
+
+            if chunk_num == 0:
+                stats["data_types"] = chunk.dtypes.astype(str).to_dict()
+
             stats["total_records"] += len(chunk)
             stats["memory_usage_mb"] += chunk.memory_usage(deep=True).sum() / 1024 / 1024
-            
-            # Update missing values - vectorized
+
             t1 = time.time()
             missing_counts = chunk.isnull().sum().to_dict()
             for col, count in missing_counts.items():
-                stats["missing_values"][col] += count
+                stats["missing_values"][col] = stats["missing_values"].get(col, 0) + count
             time_stats['missing_calc'] += time.time() - t1
-            
-            # Track unique values for ID columns
+
             t1 = time.time()
             for col in id_columns:
                 if col in chunk.columns:
                     unique_trackers[col].update(chunk[col].dropna().unique())
             time_stats['unique_tracking'] += time.time() - t1
-            
-            # Table-specific processing
+
             if table_name == "PERSON":
                 table_data["all_patients"].update(chunk['person_id'].unique())
-                # Gender distribution
                 gender_counts = chunk['gender_concept_id'].value_counts().to_dict()
                 for gender, count in gender_counts.items():
                     table_data["gender_counts"][int(gender)] = table_data["gender_counts"].get(int(gender), 0) + int(count)
-                # Birth years
                 table_data["birth_years"].extend(chunk['year_of_birth'].tolist())
-                
             elif table_name == "VISIT_DETAIL":
-                # Track all patients
                 table_data["all_patients"].update(chunk['person_id'].unique())
-                # Concept distribution
                 concept_counts = chunk['visit_detail_concept_id'].value_counts().to_dict()
                 for concept, count in concept_counts.items():
                     table_data["concept_distributions"][int(concept)] = \
                         table_data["concept_distributions"].get(int(concept), 0) + int(count)
-                # ICU patients
                 icu_concept_ids = [581379, 32037]
                 icu_chunk = chunk[chunk['visit_detail_concept_id'].isin(icu_concept_ids)]
                 table_data["icu_patients"].update(icu_chunk['person_id'].unique())
-                
             elif table_name == "DEATH":
                 table_data["death_count"] += len(chunk)
                 table_data["all_patients"].update(chunk['person_id'].unique())
-            
+
             stats["chunks_processed"] += 1
             rows_read += len(chunk)
             chunk_num += 1
-            
-            # Update progress bar
             pbar.update(len(chunk))
-            
-            # Break if we've read all required rows
-            if end_row != -1 and rows_read >= actual_rows:
-                break
     
     time_stats['chunk_reading'] = time.time() - t0
     
     # Calculate final statistics
     # Missing percentages
-    stats["missing_percentage"] = {
-        col: (stats["missing_values"][col] / stats["total_records"] * 100) 
-        for col in stats["columns"]
-    }
+    if stats["total_records"] > 0:
+        stats["missing_percentage"] = {
+            col: (stats["missing_values"][col] / stats["total_records"] * 100) 
+            for col in stats["columns"]
+        }
+    else:
+        stats["missing_percentage"] = {col: 0.0 for col in stats["columns"]}
     
     # Unique counts for ID columns
     stats["unique_counts"] = {col: len(unique_trackers[col]) for col in id_columns}
     
-    # Date ranges (sample from this part only)
+    # Date ranges (sample from this part using byte-offset seek)
     if datetime_columns and stats["total_records"] > 0:
         t0 = time.time()
         stats["date_ranges"] = {}
-        # Read a sample from this part for date ranges
+        # Read a small sample from the start of this byte range
         sample_size = min(1000, stats["total_records"])
-        if start_row > 0:
-            sample_chunk = pd.read_csv(file_path, nrows=sample_size, skiprows=list(range(1, start_row + 1)))
-        else:
-            sample_chunk = pd.read_csv(file_path, nrows=sample_size)
+        sample_rows = []
+        for row_dict in streaming_csv_reader_raw(file_path, start_byte, end_byte, fieldnames):
+            sample_rows.append(row_dict)
+            if len(sample_rows) >= sample_size:
+                break
+        sample_chunk = pd.DataFrame(sample_rows) if sample_rows else pd.DataFrame(columns=fieldnames)
         
         for col in datetime_columns:
             try:
-                # Pandas 2.0+ automatically infers format, older versions need explicit parameter
-                # Try common OMOP date formats
-                # First try ISO format (YYYY-MM-DD) which is most common in OMOP
                 dates = pd.to_datetime(sample_chunk[col], 
                                       format='%Y-%m-%d',
                                       errors='coerce').dropna()
-                
-                # If no valid dates found, try with datetime format
                 if len(dates) == 0:
                     dates = pd.to_datetime(sample_chunk[col], 
                                           format='%Y-%m-%d %H:%M:%S',
                                           errors='coerce').dropna()
-                
-                # If still no dates, fallback to automatic parsing
                 if len(dates) == 0 and USE_INFER_FORMAT:
                     dates = pd.to_datetime(sample_chunk[col], 
                                           infer_datetime_format=True,
                                           errors='coerce').dropna()
-                
                 if len(dates) > 0:
                     stats["date_ranges"][col] = {
                         "min": str(dates.min()),
@@ -566,6 +606,8 @@ def merge_table_part_stats(part_stats_list, table_name):
     merged_stats.pop("part_name", None)
     merged_stats.pop("start_row", None) 
     merged_stats.pop("end_row", None)
+    merged_stats.pop("start_byte", None)
+    merged_stats.pop("end_byte", None)
     
     # Aggregate numeric fields
     merged_stats["total_records"] = sum(stats["total_records"] for stats in part_stats_list)
@@ -728,10 +770,14 @@ if __name__ == '__main__':
         # Calculate total tasks (accounting for MEASUREMENT splits)
         total_tasks = len(data_files)
         measurement_file = None
+        measurement_n_chunks = MEASUREMENT_SPLITS
         for file_path in data_files:
             if file_path.stem == "MEASUREMENT":
                 measurement_file = file_path
-                total_tasks = total_tasks - 1 + MEASUREMENT_SPLITS  # Remove 1, add MEASUREMENT_SPLITS
+                # Pre-compute byte ranges to know exact chunk count
+                _byte_ranges = get_csv_byte_ranges(file_path, MEASUREMENT_SPLITS)
+                measurement_n_chunks = len(_byte_ranges)
+                total_tasks = total_tasks - 1 + measurement_n_chunks
                 break
         
         print(f"Processing {len(data_files)} tables ({total_tasks} tasks) in parallel with {MAX_WORKERS} workers...")
@@ -744,19 +790,16 @@ if __name__ == '__main__':
                 table_name = file_path.stem
                 
                 if table_name == "MEASUREMENT" and MEASUREMENT_SPLITS > 1:
-                    # Split MEASUREMENT table
-                    total_rows = get_file_row_count(file_path)
-                    rows_per_split = total_rows // MEASUREMENT_SPLITS
+                    # Split MEASUREMENT table using byte-offset ranges (no skip-scan!)
+                    byte_ranges = get_csv_byte_ranges(file_path, MEASUREMENT_SPLITS)
                     
-                    for i in range(MEASUREMENT_SPLITS):
-                        start_row = i * rows_per_split
-                        end_row = (i + 1) * rows_per_split if i < MEASUREMENT_SPLITS - 1 else total_rows
+                    for i, (start_byte, end_byte, fieldnames) in enumerate(byte_ranges):
                         part_suffix = f"_part{i+1}"
                         
                         future = executor.submit(
-                            process_table_partial, file_path, start_row, end_row, CHUNK_SIZE, part_suffix
+                            process_table_partial, file_path, start_byte, end_byte, fieldnames, CHUNK_SIZE, part_suffix
                         )
-                        future_to_info[future] = (table_name, i+1, MEASUREMENT_SPLITS)
+                        future_to_info[future] = (table_name, i+1, len(byte_ranges))
                 else:
                     # Normal table processing
                     future = executor.submit(process_table_chunked, file_path, CHUNK_SIZE)
@@ -787,11 +830,11 @@ if __name__ == '__main__':
                         print(f"  [{completed}/{total_tasks}] {table_name} part {part_num}/{num_parts} completed ({time_taken:.2f}s, {speed:,.0f} rows/s)")
                         
                         # Check if all MEASUREMENT parts are done
-                        if len(measurement_parts) == MEASUREMENT_SPLITS:
+                        if len(measurement_parts) == measurement_n_chunks:
                             # Merge MEASUREMENT parts
                             merged_stats = merge_table_part_stats(measurement_parts, "MEASUREMENT")
                             eda_results["tables"]["MEASUREMENT"] = merged_stats
-                            print(f"  MEASUREMENT table merged from {MEASUREMENT_SPLITS} parts")
+                            print(f"  MEASUREMENT table merged from {measurement_n_chunks} parts")
                     else:
                         # Normal table
                         eda_results["tables"][table_name] = stats

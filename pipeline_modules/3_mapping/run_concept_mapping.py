@@ -18,6 +18,12 @@ from collections import defaultdict, Counter
 from tqdm import tqdm
 from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor, as_completed
 
+# Add pipeline_modules to path so workers can import utils.file_splitter
+_pipeline_modules_dir = str(Path(__file__).parent.parent)
+if _pipeline_modules_dir not in sys.path:
+    sys.path.insert(0, _pipeline_modules_dir)
+from utils.file_splitter import get_csv_byte_ranges, streaming_csv_reader, count_rows_in_range
+
 # Platform-specific settings for CSV field size limit and performance optimization
 if platform.system() == 'Windows':
     # Windows: C long is 32-bit even on 64-bit systems
@@ -165,26 +171,29 @@ def count_single_table_frequency(table_name, input_dir, concept_columns, min_fre
     
     return table_name, dict(concept_counter), dict(freq_stats), time_stats
 
-def count_measurement_partial_frequency(input_file, concept_col, start_row, end_row):
-    """Count concept frequencies for a partial MEASUREMENT table - used for parallel processing."""
-    import csv
+def count_measurement_partial_frequency(input_file, concept_col, start_byte, end_byte, fieldnames):
+    """Count concept frequencies for a partial MEASUREMENT table - used for parallel processing.
+    
+    Uses byte-offset seeking instead of skip-scan for O(1) seek to chunk start.
+    """
+    import sys
     import time
+    from pathlib import Path
     from collections import Counter
+    
+    # Ensure utils is importable in worker process
+    _pm_dir = str(Path(input_file).parent.parent)  # pipeline_modules dir
+    if _pm_dir not in sys.path:
+        sys.path.insert(0, _pm_dir)
+    from utils.file_splitter import streaming_csv_reader
     
     start_time = time.time()
     concept_counter = Counter()
     
-    with open(input_file, 'r', encoding='utf-8') as f:
-        reader = csv.DictReader(f)
-        for i, row in enumerate(reader):
-            if i < start_row:
-                continue
-            if end_row is not None and i >= end_row:
-                break
-            
-            concept_value = row.get(concept_col, '').strip()
-            if concept_value and concept_value != '':
-                concept_counter[concept_value] += 1
+    for row in streaming_csv_reader(input_file, start_byte, end_byte, fieldnames):
+        concept_value = row.get(concept_col, '').strip()
+        if concept_value and concept_value != '':
+            concept_counter[concept_value] += 1
     
     total_time = time.time() - start_time
     return dict(concept_counter), {'total': total_time, 'file_reading': total_time}
@@ -433,26 +442,29 @@ def process_single_table(table_name, input_dir, output_dir, concept_frequencies,
     
     return table_name, stats, time_stats
 
-def process_measurement_chunk(chunk_id, total_chunks, input_file, output_dir,
+def process_measurement_chunk(start_byte, end_byte, fieldnames, chunk_id,
+                             input_file, output_dir,
                              concept_frequencies, mappings, enable_dedup, min_concept_freq):
-    """Process a chunk of MEASUREMENT table - used for parallel processing."""
+    """Process a chunk of MEASUREMENT table - used for parallel processing.
+    
+    Uses byte-offset seeking instead of skip-scan for O(1) seek to chunk start.
+    """
     import csv
+    import sys
     import time
     from pathlib import Path
     from collections import defaultdict
+    
+    # Ensure utils is importable in worker process
+    _pm_dir = str(Path(input_file).parent.parent)  # pipeline_modules dir
+    if _pm_dir not in sys.path:
+        sys.path.insert(0, _pm_dir)
+    from utils.file_splitter import streaming_csv_reader
     
     start_time = time.time()
     
     input_file = Path(input_file)
     output_dir = Path(output_dir)
-    
-    # Calculate row range
-    with open(input_file, 'r') as f:
-        total_rows = sum(1 for _ in f) - 1  # Subtract header
-    
-    chunk_size = total_rows // total_chunks
-    start_row = chunk_id * chunk_size
-    end_row = (chunk_id + 1) * chunk_size if chunk_id < total_chunks - 1 else total_rows
     
     # Initialize statistics
     stats = {
@@ -478,37 +490,33 @@ def process_measurement_chunk(chunk_id, total_chunks, input_file, output_dir,
     duplicate_records = []
     
     read_start = time.time()
-    with open(input_file, 'r', encoding='utf-8') as f:
-        reader = csv.DictReader(f)
-        fieldnames = reader.fieldnames
+    # Use a local counter for row numbering within the chunk
+    chunk_row_counter = 0
+    
+    for row in streaming_csv_reader(input_file, start_byte, end_byte, fieldnames):
+        chunk_row_counter += 1
         
-        for i, row in enumerate(reader):
-            if i < start_row:
-                continue
-            if i >= end_row:
-                break
-            
-            # Filter low frequency
-            concept_value = row.get('measurement_concept_id', '').strip()
-            if concept_value and concept_frequencies.get('MEASUREMENT', {}).get(concept_value, 0) <= min_concept_freq:
-                freq = concept_frequencies.get('MEASUREMENT', {}).get(concept_value, 0)
-                row_copy = row.copy()
-                row_copy['removal_reason'] = f"low_frequency_concept (measurement_concept_id={concept_value}, freq={freq})"
-                row_copy['original_row_number'] = i + 2  # +2 for header and 1-based indexing
-                removed_low_freq.append(row_copy)
-                stats['low_freq_removed'] += 1
-                continue
-            
-            # Apply mapping
-            if concept_value in mappings:
-                row['measurement_concept_id'] = mappings[concept_value]  # Replace with mapped SNOMED ID
-                row['measurement_concept_id_mapped'] = 'Y'
-                stats['mappings_applied'] += 1
-            else:
-                row['measurement_concept_id_mapped'] = 'N'
-            
-            processed_rows.append(row)
-            stats['rows_processed'] += 1
+        # Filter low frequency
+        concept_value = row.get('measurement_concept_id', '').strip()
+        if concept_value and concept_frequencies.get('MEASUREMENT', {}).get(concept_value, 0) <= min_concept_freq:
+            freq = concept_frequencies.get('MEASUREMENT', {}).get(concept_value, 0)
+            row_copy = row.copy()
+            row_copy['removal_reason'] = f"low_frequency_concept (measurement_concept_id={concept_value}, freq={freq})"
+            row_copy['original_row_number'] = f"chunk{chunk_id}_row{chunk_row_counter}"
+            removed_low_freq.append(row_copy)
+            stats['low_freq_removed'] += 1
+            continue
+        
+        # Apply mapping
+        if concept_value in mappings:
+            row['measurement_concept_id'] = mappings[concept_value]  # Replace with mapped SNOMED ID
+            row['measurement_concept_id_mapped'] = 'Y'
+            stats['mappings_applied'] += 1
+        else:
+            row['measurement_concept_id_mapped'] = 'N'
+        
+        processed_rows.append(row)
+        stats['rows_processed'] += 1
     
     time_stats['file_reading'] = time.time() - read_start
     
@@ -545,14 +553,14 @@ def process_measurement_chunk(chunk_id, total_chunks, input_file, output_dir,
                     kept_row = seen_keys[dedup_key]['row'].copy()
                     kept_row['duplicate_status'] = 'kept'
                     kept_row['duplicate_group_id'] = group_id
-                    kept_row['original_row_number'] = seen_keys[dedup_key]['idx'] + start_row + 2
+                    kept_row['original_row_number'] = f"chunk{chunk_id}_row{seen_keys[dedup_key]['idx'] + 1}"
                     duplicate_records.append(kept_row)
                 
                 # Add removed record
                 dup_row = row.copy()
                 dup_row['duplicate_status'] = 'removed'
                 dup_row['duplicate_group_id'] = seen_keys[dedup_key]['group_id']
-                dup_row['original_row_number'] = idx + start_row + 2
+                dup_row['original_row_number'] = f"chunk{chunk_id}_row{idx + 1}"
                 duplicate_records.append(dup_row)
                 stats['duplicates_removed'] += 1
         
@@ -680,30 +688,20 @@ class ConceptMapper:
             
             for table_name in ALL_TABLES:
                 if table_name == 'MEASUREMENT':
-                    # Special handling for MEASUREMENT - split into chunks
+                    # Special handling for MEASUREMENT - split into chunks using byte ranges
                     measurement_file = input_dir / "MEASUREMENT_cleaned.csv"
                     if measurement_file.exists():
-                        # First get row count
-                        row_count = 0
-                        with open(measurement_file, 'r', encoding='utf-8') as f:
-                            for _ in f:
-                                row_count += 1
-                        row_count -= 1  # Subtract header
+                        byte_ranges = get_csv_byte_ranges(measurement_file, MEASUREMENT_SPLITS)
                         
-                        # Calculate chunk size
-                        chunk_size = row_count // MEASUREMENT_SPLITS + 1
-                        
-                        # Submit partial tasks
-                        for i in range(MEASUREMENT_SPLITS):
-                            start_row = i * chunk_size
-                            end_row = (i + 1) * chunk_size if i < MEASUREMENT_SPLITS - 1 else None
-                            
+                        # Submit partial tasks using byte ranges
+                        for i, (start_byte, end_byte, fieldnames) in enumerate(byte_ranges):
                             future = executor.submit(
                                 count_measurement_partial_frequency,
                                 measurement_file, 
                                 'measurement_concept_id',
-                                start_row, 
-                                end_row
+                                start_byte,
+                                end_byte,
+                                fieldnames
                             )
                             futures.append(future)
                             future_info[future] = ('MEASUREMENT_PARTIAL', i)
@@ -1490,15 +1488,18 @@ def main():
     with ProcessPoolExecutor(max_workers=MAX_WORKERS) as executor:
         futures = []
         
-        # Submit MEASUREMENT chunks
+        # Submit MEASUREMENT chunks using byte-offset ranges
         measurement_file = input_dir / "MEASUREMENT_cleaned.csv"
         if measurement_file.exists():
             logging.info("Submitting MEASUREMENT chunks for parallel processing...")
-            for i in range(MEASUREMENT_SPLITS):
+            measurement_byte_ranges = get_csv_byte_ranges(measurement_file, MEASUREMENT_SPLITS)
+            for i, (start_byte, end_byte, chunk_fieldnames) in enumerate(measurement_byte_ranges):
                 future = executor.submit(
                     process_measurement_chunk,
+                    start_byte=start_byte,
+                    end_byte=end_byte,
+                    fieldnames=chunk_fieldnames,
                     chunk_id=i,
-                    total_chunks=MEASUREMENT_SPLITS,
                     input_file=measurement_file,
                     output_dir=output_dir,
                     concept_frequencies=mapper.concept_frequencies,
@@ -1534,10 +1535,16 @@ def main():
             'time_stats': {'total': 0}
         }
         
-        # Get total MEASUREMENT rows from file
+        # Get total MEASUREMENT rows from byte ranges (avoid full-file scan)
         if measurement_file.exists():
-            with open(measurement_file, 'r') as f:
-                measurement_total_rows = sum(1 for _ in f) - 1
+            if measurement_byte_ranges:
+                # Sum row counts across all byte ranges
+                measurement_total_rows = sum(
+                    count_rows_in_range(measurement_file, sb, eb) 
+                    for sb, eb, _ in measurement_byte_ranges
+                )
+            else:
+                measurement_total_rows = 0
             measurement_stats['total_rows'] = measurement_total_rows
         
         for task_type, info, future in tqdm(futures, desc="Processing tables"):
@@ -1550,7 +1557,7 @@ def main():
                     measurement_stats['total_mappings_applied'] += stats['mappings_applied']
                     # Store time stats for this chunk
                     mapper.stats[f'MEASUREMENT_CHUNK_{chunk_id}'] = {'time_stats': time_stats}
-                    logging.info(f"MEASUREMENT chunk {chunk_id + 1}/{MEASUREMENT_SPLITS} completed")
+                    logging.info(f"MEASUREMENT chunk {chunk_id + 1}/{len(measurement_byte_ranges)} completed")
                 else:
                     table_name, stats, time_stats = future.result()
                     if 'error' not in stats:
@@ -1570,7 +1577,7 @@ def main():
     if measurement_file.exists():
         logging.info("Merging MEASUREMENT chunks...")
         merge_start = time.time()
-        merge_measurement_chunks(output_dir, MEASUREMENT_SPLITS)
+        merge_measurement_chunks(output_dir, len(measurement_byte_ranges))
         merge_time = time.time() - merge_start
         
         # Add MEASUREMENT stats

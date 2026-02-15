@@ -4,6 +4,7 @@
 import csv
 import json
 import os
+import sys
 import platform
 import shutil
 import time
@@ -16,6 +17,12 @@ import numpy as np
 from concurrent.futures import ProcessPoolExecutor, as_completed
 import multiprocessing
 import logging
+
+# Add pipeline_modules to sys.path for utils imports
+_pipeline_modules_dir = str(Path(__file__).parent.parent)
+if _pipeline_modules_dir not in sys.path:
+    sys.path.insert(0, _pipeline_modules_dir)
+from utils.file_splitter import get_csv_byte_ranges, streaming_csv_reader, count_rows_in_range
 
 # Performance optimization settings
 if platform.system() == 'Windows':
@@ -239,13 +246,16 @@ def analyze_columns_chunked(file_path, chunk_size=CHUNK_SIZE):
             
     return headers, columns_to_remove, missing_counts, total_rows, columns_info
 
-def clean_table_partial(table_name, start_row=0, end_row=-1, position=0, disable_progress=False, part_suffix=""):
-    """Clean a table or part of a table with chunked processing.
+def clean_table_partial(table_name, start_byte=0, end_byte=-1, fieldnames=None, position=0, disable_progress=False, part_suffix=""):
+    """Clean a table or part of a table with byte-offset seeking.
+    
+    Uses byte-range seeking to read only the assigned chunk of the file.
     
     Args:
         table_name: Name of the table to clean
-        start_row: Starting row (0-based), 0 for beginning
-        end_row: Ending row (exclusive), -1 for end of file
+        start_byte: Starting byte offset, 0 for beginning
+        end_byte: Ending byte offset, -1 for end of file
+        fieldnames: List of CSV column names (from get_csv_byte_ranges)
         position: Position for progress bar (for parallel processing)
         disable_progress: Whether to disable progress bar
         part_suffix: Suffix for output files when processing partial table
@@ -287,17 +297,28 @@ def clean_table_partial(table_name, start_row=0, end_row=-1, position=0, disable
         logging.warning(f"Input file not found: {input_file}")
         return 0
     
-    # Get total row count for progress bar
-    file_total_rows = get_file_row_count(input_file)
+    # Get total row count for this byte range
+    file_size = input_file.stat().st_size
+    if end_byte == -1:
+        end_byte = file_size
     
-    # Determine actual rows to process
-    if end_row == -1:
-        end_row = file_total_rows
-    total_rows = end_row - start_row
+    # If no fieldnames provided, read from file header (whole-file mode)
+    if fieldnames is None:
+        with open(input_file, 'r', encoding='utf-8') as f:
+            reader = csv.DictReader(f)
+            fieldnames = reader.fieldnames
+        if start_byte == 0:
+            # Skip past the header for whole-file mode
+            with open(input_file, 'rb') as f:
+                f.readline()
+                start_byte = f.tell()
+            end_byte = file_size
+    
+    total_rows = count_rows_in_range(input_file, start_byte, end_byte)
     
     # For partial processing, show which part is being processed
     if part_suffix:
-        print(f"  Processing {table_name} rows {start_row:,} to {end_row:,} ({total_rows:,} rows)")
+        print(f"  Processing {table_name} bytes {start_byte:,} to {end_byte:,} ({total_rows:,} rows)")
     
     # Try to load column analysis from EDA module
     t0 = time.time()
@@ -305,6 +326,7 @@ def clean_table_partial(table_name, start_row=0, end_row=-1, position=0, disable
     columns_to_remove = []
     missing_counts = {}
     columns_info = []
+    headers = list(fieldnames)  # Use fieldnames from byte-range splitter
     
     if column_analysis_path.exists():
         # Use pre-computed column analysis from EDA
@@ -315,7 +337,7 @@ def clean_table_partial(table_name, start_row=0, end_row=-1, position=0, disable
         if table_name in column_analysis:
             table_analysis = column_analysis[table_name]
             columns_to_remove = table_analysis.get("columns_to_remove", [])
-            headers = table_analysis.get("columns", [])
+            # headers already set from fieldnames above; EDA columns used only for validation
             
             # Reconstruct missing_counts from column_stats
             for col, stats in table_analysis.get("column_stats", {}).items():
@@ -390,123 +412,93 @@ def clean_table_partial(table_name, start_row=0, end_row=-1, position=0, disable
         temporal_writer = csv.DictWriter(temporal_file, fieldnames=temporal_headers)
         temporal_writer.writeheader()
         
-        # Process file in chunks with progress bar
-        with open(input_file, 'r', encoding='utf-8') as infile:
-            reader = csv.DictReader(infile)
+        # Process file using byte-offset seeking (no skip-scan)
+        # Create progress bar with more frequent updates
+        desc_text = f"Cleaning {table_name}{part_suffix}" if part_suffix else f"Cleaning {table_name}"
+        # Check if we're in a logged environment (dumb terminal means logging)
+        is_logged = os.environ.get('TERM') == 'dumb'
+        with tqdm(total=total_rows, desc=desc_text, unit="rows", ascii=True,
+                 miniters=max(100, total_rows//100) if total_rows > 0 else 1,  # Update every 1% or at least 100 rows
+                 mininterval=PROGRESS_INTERVAL,
+                 position=0 if is_logged else position,  # Don't use positions when logging
+                 leave=False, ncols=100,
+                 disable=disable_progress) as pbar:
+            chunk = []
             
-            # Create progress bar with more frequent updates
-            desc_text = f"Cleaning {table_name}{part_suffix}" if part_suffix else f"Cleaning {table_name}"
-            # Check if we're in a logged environment (dumb terminal means logging)
-            is_logged = os.environ.get('TERM') == 'dumb'
-            with tqdm(total=total_rows, desc=desc_text, unit="rows", ascii=True,
-                     miniters=max(100, total_rows//100) if total_rows > 0 else 1,  # Update every 1% or at least 100 rows
-                     mininterval=PROGRESS_INTERVAL,
-                     position=0 if is_logged else position,  # Don't use positions when logging
-                     leave=False, ncols=100,
-                     disable=disable_progress) as pbar:
-                chunk = []
+            rows_processed = 0
+            for row in streaming_csv_reader(input_file, start_byte, end_byte, fieldnames):
+                t_read = time.time()
+                rows_processed += 1
+                original_row_num = rows_processed  # Sequential counter within this chunk
                 
-                rows_processed = 0
-                for row_num, row in enumerate(reader):
-                    t_read = time.time()
-                    # Skip rows before start_row
-                    if row_num < start_row:
-                        table_time_stats['csv_reading'] += time.time() - t_read
-                        continue
-                    
-                    # Stop if we've reached end_row
-                    if row_num >= end_row:
-                        table_time_stats['csv_reading'] += time.time() - t_read
-                        break
-                    
-                    chunk.append((row_num + 1, row))  # Store with 1-based row number
-                    rows_processed += 1
-                    table_time_stats['csv_reading'] += time.time() - t_read
-                    
-                    # Process chunk when it reaches the desired size
-                    if len(chunk) >= CHUNK_SIZE or rows_processed == total_rows:
-                        # Process each row in the chunk
-                        for original_row_num, row in chunk:
-                            # Check for duplicates
-                            skip_row = False
-                            removal_reason = None
-                            
-                            t1 = time.time()
-                            if duplicate_key_cols:
-                                key = tuple(row.get(col, '') for col in duplicate_key_cols)
-                                if key in seen_keys:
-                                    duplicate_count += 1
+                chunk.append((original_row_num, row))
+                table_time_stats['csv_reading'] += time.time() - t_read
+                
+                # Process chunk when it reaches the desired size
+                if len(chunk) >= CHUNK_SIZE or rows_processed == total_rows:
+                    # Process each row in the chunk
+                    for original_row_num, row in chunk:
+                        # Check for duplicates
+                        skip_row = False
+                        removal_reason = None
+                        
+                        t1 = time.time()
+                        if duplicate_key_cols:
+                            key = tuple(row.get(col, '') for col in duplicate_key_cols)
+                            if key in seen_keys:
+                                duplicate_count += 1
+                                skip_row = True
+                                removal_reason = 'duplicate'
+                                # Add to duplicate group
+                                group_id = seen_keys[key]
+                                duplicate_groups[group_id].append((row, 'removed', original_row_num))
+                            else:
+                                # First occurrence - create new group
+                                group_id = f"{table_name}_{len(seen_keys)+1}"
+                                seen_keys[key] = group_id
+                                duplicate_groups[group_id].append((row, 'kept', original_row_num))
+                        table_time_stats['duplicate_detection'] += time.time() - t1
+                        
+                        if skip_row:
+                            continue
+                        
+                        # Check for invalid concept_id
+                        t1 = time.time()
+                        if table_name in PRIMARY_CONCEPT_FIELDS:
+                            concept_field = PRIMARY_CONCEPT_FIELDS[table_name]
+                            if concept_field in headers:
+                                concept_id = row.get(concept_field, '')
+                                if not concept_id or str(concept_id).strip() == '' or str(concept_id).strip() == '0':
+                                    invalid_concept_count += 1
                                     skip_row = True
-                                    removal_reason = 'duplicate'
-                                    # Add to duplicate group
-                                    group_id = seen_keys[key]
-                                    duplicate_groups[group_id].append((row, 'removed', original_row_num))
-                                else:
-                                    # First occurrence - create new group
-                                    group_id = f"{table_name}_{len(seen_keys)+1}"
-                                    seen_keys[key] = group_id
-                                    duplicate_groups[group_id].append((row, 'kept', original_row_num))
-                            table_time_stats['duplicate_detection'] += time.time() - t1
-                            
-                            if skip_row:
-                                continue
-                            
-                            # Check for invalid concept_id
-                            t1 = time.time()
-                            if table_name in PRIMARY_CONCEPT_FIELDS:
-                                concept_field = PRIMARY_CONCEPT_FIELDS[table_name]
-                                if concept_field in headers:
-                                    concept_id = row.get(concept_field, '')
-                                    if not concept_id or str(concept_id).strip() == '' or str(concept_id).strip() == '0':
-                                        invalid_concept_count += 1
-                                        skip_row = True
-                                        removal_reason = 'invalid_concept'
-                                        # Save invalid concept record to buffer
-                                        invalid_buffer.append(row)
-                                        
-                                        # Batch write when buffer is full
-                                        if len(invalid_buffer) >= WRITE_BUFFER_SIZE:
-                                            invalid_writer.writerows(invalid_buffer)
-                                            invalid_buffer = []
-                            table_time_stats['invalid_concept'] += time.time() - t1
-                            
-                            if skip_row:
-                                continue
-                            
-                            # Temporal validation
-                            t1 = time.time()
-                            temporal_invalid = False
-                            start = None
-                            end = None
-                            
-                            if table_name in TEMPORAL_FIELDS:
-                                start_col, end_col = TEMPORAL_FIELDS[table_name]
-                                start = row.get(start_col)
-                                end = row.get(end_col) if end_col else None
-                            
-                            # Special handling for DEATH table - check if death_date > 2200
-                            if table_name == 'DEATH' and start:
-                                # Check if death date is beyond reasonable threshold (year 2200)
-                                if start and str(start) > '2200':
-                                    temporal_invalid = True
-                                    temporal_issues += 1
-                                    skip_row = True
-                                    removal_reason = 'temporal_issue'
-                                    
-                                    # Save temporal issue record to buffer
-                                    temporal_row = row.copy()
-                                    temporal_row['temporal_issue_reason'] = f"Death date ({start}) exceeds reasonable threshold (>2200)"
-                                    temporal_row['start_datetime'] = start
-                                    temporal_row['end_datetime'] = ''
-                                    temporal_row['original_row_number'] = original_row_num
-                                    temporal_buffer.append(temporal_row)
+                                    removal_reason = 'invalid_concept'
+                                    # Save invalid concept record to buffer
+                                    invalid_buffer.append(row)
                                     
                                     # Batch write when buffer is full
-                                    if len(temporal_buffer) >= WRITE_BUFFER_SIZE:
-                                        temporal_writer.writerows(temporal_buffer)
-                                        temporal_buffer = []
-                            # Regular temporal validation for other tables
-                            elif start and end and end < start:
+                                    if len(invalid_buffer) >= WRITE_BUFFER_SIZE:
+                                        invalid_writer.writerows(invalid_buffer)
+                                        invalid_buffer = []
+                        table_time_stats['invalid_concept'] += time.time() - t1
+                        
+                        if skip_row:
+                            continue
+                        
+                        # Temporal validation
+                        t1 = time.time()
+                        temporal_invalid = False
+                        start = None
+                        end = None
+                        
+                        if table_name in TEMPORAL_FIELDS:
+                            start_col, end_col = TEMPORAL_FIELDS[table_name]
+                            start = row.get(start_col)
+                            end = row.get(end_col) if end_col else None
+                        
+                        # Special handling for DEATH table - check if death_date > 2200
+                        if table_name == 'DEATH' and start:
+                            # Check if death date is beyond reasonable threshold (year 2200)
+                            if start and str(start) > '2200':
                                 temporal_invalid = True
                                 temporal_issues += 1
                                 skip_row = True
@@ -514,9 +506,9 @@ def clean_table_partial(table_name, start_row=0, end_row=-1, position=0, disable
                                 
                                 # Save temporal issue record to buffer
                                 temporal_row = row.copy()
-                                temporal_row['temporal_issue_reason'] = f"End datetime ({end}) is before start datetime ({start})"
+                                temporal_row['temporal_issue_reason'] = f"Death date ({start}) exceeds reasonable threshold (>2200)"
                                 temporal_row['start_datetime'] = start
-                                temporal_row['end_datetime'] = end
+                                temporal_row['end_datetime'] = ''
                                 temporal_row['original_row_number'] = original_row_num
                                 temporal_buffer.append(temporal_row)
                                 
@@ -524,33 +516,52 @@ def clean_table_partial(table_name, start_row=0, end_row=-1, position=0, disable
                                 if len(temporal_buffer) >= WRITE_BUFFER_SIZE:
                                     temporal_writer.writerows(temporal_buffer)
                                     temporal_buffer = []
+                        # Regular temporal validation for other tables
+                        elif start and end and end < start:
+                            temporal_invalid = True
+                            temporal_issues += 1
+                            skip_row = True
+                            removal_reason = 'temporal_issue'
                             
-                            table_time_stats['temporal_validation'] += time.time() - t1
-                            
-                            if skip_row:
-                                continue
-                            
-                            # Write cleaned row to buffer
-                            t_transform = time.time()
-                            clean_row = {k: v for k, v in row.items() if k not in columns_to_remove}
-                            table_time_stats['data_transformation'] += time.time() - t_transform
-                            
-                            t_write = time.time()
-                            write_buffer.append(clean_row)
-                            rows_written += 1
+                            # Save temporal issue record to buffer
+                            temporal_row = row.copy()
+                            temporal_row['temporal_issue_reason'] = f"End datetime ({end}) is before start datetime ({start})"
+                            temporal_row['start_datetime'] = start
+                            temporal_row['end_datetime'] = end
+                            temporal_row['original_row_number'] = original_row_num
+                            temporal_buffer.append(temporal_row)
                             
                             # Batch write when buffer is full
-                            if len(write_buffer) >= WRITE_BUFFER_SIZE:
-                                writer.writerows(write_buffer)
-                                write_buffer = []
-                            
-                            table_time_stats['file_io'] += time.time() - t_write
+                            if len(temporal_buffer) >= WRITE_BUFFER_SIZE:
+                                temporal_writer.writerows(temporal_buffer)
+                                temporal_buffer = []
                         
-                        # Update progress
-                        pbar.update(len(chunk))
+                        table_time_stats['temporal_validation'] += time.time() - t1
                         
-                        # Clear chunk
-                        chunk = []
+                        if skip_row:
+                            continue
+                        
+                        # Write cleaned row to buffer
+                        t_transform = time.time()
+                        clean_row = {k: v for k, v in row.items() if k not in columns_to_remove}
+                        table_time_stats['data_transformation'] += time.time() - t_transform
+                        
+                        t_write = time.time()
+                        write_buffer.append(clean_row)
+                        rows_written += 1
+                        
+                        # Batch write when buffer is full
+                        if len(write_buffer) >= WRITE_BUFFER_SIZE:
+                            writer.writerows(write_buffer)
+                            write_buffer = []
+                        
+                        table_time_stats['file_io'] += time.time() - t_write
+                    
+                    # Update progress
+                    pbar.update(len(chunk))
+                    
+                    # Clear chunk
+                    chunk = []
         
         # Write any remaining buffered data before closing files
         if write_buffer:
@@ -636,8 +647,13 @@ def clean_table_partial(table_name, start_row=0, end_row=-1, position=0, disable
     return rows_written, table_time_stats, stats_for_aggregation
 
 def clean_table(table_name, position=0, disable_progress=False):
-    """Wrapper function for backward compatibility."""
-    return clean_table_partial(table_name, 0, -1, position, disable_progress, "")
+    """Wrapper function for backward compatibility.
+    
+    Processes the entire file using byte-offset seeking (start_byte=0, end_byte=-1).
+    The fieldnames will be auto-detected from the file header.
+    """
+    return clean_table_partial(table_name, start_byte=0, end_byte=-1, fieldnames=None,
+                               position=position, disable_progress=disable_progress, part_suffix="")
 
 def merge_csv_files_fast(output_file, part_files, buffer_size=FILE_BUFFER_SIZE):
     """Fast merge CSV files by skipping CSV parsing - just copy raw content.
@@ -814,22 +830,21 @@ if __name__ == '__main__':
             
             for table in KEY_TABLES:
                 if table in table_splits:
-                    # Submit multiple tasks for large table
+                    # Submit multiple tasks for large table using byte-offset splitting
                     num_splits = table_splits[table]
                     input_file = data_dir / f"{table}.csv"
-                    total_rows = get_file_row_count(input_file)
-                    rows_per_split = total_rows // num_splits
+                    byte_ranges = get_csv_byte_ranges(input_file, num_splits)
+                    # Update num_splits to actual number of chunks (may differ if file is small)
+                    table_splits[table] = len(byte_ranges)
                     
-                    for i in range(num_splits):
-                        start_row = i * rows_per_split
-                        end_row = (i + 1) * rows_per_split if i < num_splits - 1 else total_rows
+                    for i, (start_byte, end_byte, chunk_fieldnames) in enumerate(byte_ranges):
                         part_suffix = f"_part{i+1}"
                         
                         future = executor.submit(
-                            clean_table_partial, table, start_row, end_row,
-                            position_counter, False, part_suffix
+                            clean_table_partial, table, start_byte, end_byte,
+                            chunk_fieldnames, position_counter, False, part_suffix
                         )
-                        future_to_info[future] = (table, i+1, num_splits)
+                        future_to_info[future] = (table, i+1, len(byte_ranges))
                         position_counter += 1
                 else:
                     # Submit single task for normal table
