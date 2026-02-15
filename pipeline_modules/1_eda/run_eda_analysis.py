@@ -22,7 +22,7 @@ _pipeline_modules_dir = str(Path(__file__).parent.parent.absolute())
 if _pipeline_modules_dir not in sys.path:
     sys.path.insert(0, _pipeline_modules_dir)
 
-from utils.file_splitter import get_csv_byte_ranges, streaming_csv_reader_raw, count_rows_in_range
+from utils.file_splitter import get_csv_byte_ranges, streaming_csv_reader_raw, count_rows_in_range, read_csv_byte_range_chunked
 
 # Check pandas version for compatibility
 PANDAS_VERSION = tuple(map(int, pd.__version__.split('.')[:2]))
@@ -108,7 +108,7 @@ def process_table_partial(file_path, start_byte, end_byte, fieldnames, chunk_siz
     _pm_dir = str(Path(__file__).parent.parent.absolute())
     if _pm_dir not in sys.path:
         sys.path.insert(0, _pm_dir)
-    from utils.file_splitter import streaming_csv_reader_raw, count_rows_in_range
+    from utils.file_splitter import streaming_csv_reader_raw, count_rows_in_range, read_csv_byte_range_chunked
 
     file_path = Path(file_path)
     table_name = file_path.stem
@@ -167,11 +167,10 @@ def process_table_partial(file_path, start_byte, end_byte, fieldnames, chunk_siz
         "all_patients": set()
     }
     
-    # Process data using byte-offset streaming — no skip-scan!
+    # Process data using byte-offset + pd.read_csv for proper dtype inference
     t0 = time.time()
     rows_read = 0
     chunk_num = 0
-    batch_rows = []  # accumulate rows for batching into DataFrames
     
     # Add progress bar for chunk processing
     with tqdm(total=actual_rows, desc=f"Reading MEASUREMENT{part_suffix}", 
@@ -181,85 +180,30 @@ def process_table_partial(file_path, start_byte, end_byte, fieldnames, chunk_siz
               mininterval=10.0,
               ncols=100, ascii=True) as pbar:
 
-        for row_dict in streaming_csv_reader_raw(file_path, start_byte, end_byte, fieldnames):
-            batch_rows.append(row_dict)
-
-            if len(batch_rows) >= chunk_size:
-                # Convert batch to DataFrame for vectorized statistics
-                chunk = pd.DataFrame(batch_rows)
-                batch_rows = []
-
-                # First chunk: capture dtypes after pandas inference
-                if chunk_num == 0:
-                    # Re-read a small sample with pd type inference for accurate dtypes
-                    stats["data_types"] = chunk.dtypes.astype(str).to_dict()
-
-                # Update basic statistics
-                stats["total_records"] += len(chunk)
-                stats["memory_usage_mb"] += chunk.memory_usage(deep=True).sum() / 1024 / 1024
-
-                # Update missing values - vectorized
-                t1 = time.time()
-                missing_counts = chunk.isnull().sum().to_dict()
-                for col, count in missing_counts.items():
-                    stats["missing_values"][col] = stats["missing_values"].get(col, 0) + count
-                time_stats['missing_calc'] += time.time() - t1
-
-                # Track unique values for ID columns
-                t1 = time.time()
-                for col in id_columns:
-                    if col in chunk.columns:
-                        unique_trackers[col].update(chunk[col].dropna().unique())
-                time_stats['unique_tracking'] += time.time() - t1
-
-                # Table-specific processing
-                if table_name == "PERSON":
-                    table_data["all_patients"].update(chunk['person_id'].unique())
-                    gender_counts = chunk['gender_concept_id'].value_counts().to_dict()
-                    for gender, count in gender_counts.items():
-                        table_data["gender_counts"][int(gender)] = table_data["gender_counts"].get(int(gender), 0) + int(count)
-                    table_data["birth_years"].extend(chunk['year_of_birth'].tolist())
-                elif table_name == "VISIT_DETAIL":
-                    table_data["all_patients"].update(chunk['person_id'].unique())
-                    concept_counts = chunk['visit_detail_concept_id'].value_counts().to_dict()
-                    for concept, count in concept_counts.items():
-                        table_data["concept_distributions"][int(concept)] = \
-                            table_data["concept_distributions"].get(int(concept), 0) + int(count)
-                    icu_concept_ids = [581379, 32037]
-                    icu_chunk = chunk[chunk['visit_detail_concept_id'].isin(icu_concept_ids)]
-                    table_data["icu_patients"].update(icu_chunk['person_id'].unique())
-                elif table_name == "DEATH":
-                    table_data["death_count"] += len(chunk)
-                    table_data["all_patients"].update(chunk['person_id'].unique())
-
-                stats["chunks_processed"] += 1
-                rows_read += len(chunk)
-                chunk_num += 1
-                pbar.update(len(chunk))
-
-        # Process remaining rows in the last partial batch
-        if batch_rows:
-            chunk = pd.DataFrame(batch_rows)
-            batch_rows = []
-
+        for chunk in read_csv_byte_range_chunked(file_path, start_byte, end_byte, fieldnames, chunksize=chunk_size):
+            # First chunk: capture dtypes after pandas inference
             if chunk_num == 0:
                 stats["data_types"] = chunk.dtypes.astype(str).to_dict()
 
+            # Update basic statistics
             stats["total_records"] += len(chunk)
             stats["memory_usage_mb"] += chunk.memory_usage(deep=True).sum() / 1024 / 1024
 
+            # Update missing values - vectorized
             t1 = time.time()
             missing_counts = chunk.isnull().sum().to_dict()
             for col, count in missing_counts.items():
                 stats["missing_values"][col] = stats["missing_values"].get(col, 0) + count
             time_stats['missing_calc'] += time.time() - t1
 
+            # Track unique values for ID columns
             t1 = time.time()
             for col in id_columns:
                 if col in chunk.columns:
                     unique_trackers[col].update(chunk[col].dropna().unique())
             time_stats['unique_tracking'] += time.time() - t1
 
+            # Table-specific processing
             if table_name == "PERSON":
                 table_data["all_patients"].update(chunk['person_id'].unique())
                 gender_counts = chunk['gender_concept_id'].value_counts().to_dict()
@@ -303,14 +247,12 @@ def process_table_partial(file_path, start_byte, end_byte, fieldnames, chunk_siz
     if datetime_columns and stats["total_records"] > 0:
         t0 = time.time()
         stats["date_ranges"] = {}
-        # Read a small sample from the start of this byte range
+        # Read a small sample from the start of this byte range (with proper dtype inference)
         sample_size = min(1000, stats["total_records"])
-        sample_rows = []
-        for row_dict in streaming_csv_reader_raw(file_path, start_byte, end_byte, fieldnames):
-            sample_rows.append(row_dict)
-            if len(sample_rows) >= sample_size:
-                break
-        sample_chunk = pd.DataFrame(sample_rows) if sample_rows else pd.DataFrame(columns=fieldnames)
+        try:
+            sample_chunk = next(read_csv_byte_range_chunked(file_path, start_byte, end_byte, fieldnames, chunksize=sample_size))
+        except StopIteration:
+            sample_chunk = pd.DataFrame(columns=fieldnames)
         
         for col in datetime_columns:
             try:

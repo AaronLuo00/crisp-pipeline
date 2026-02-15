@@ -21,6 +21,8 @@ import io
 from pathlib import Path
 from typing import List, Tuple, Iterator, Dict, Optional
 
+import pandas as pd
+
 
 def get_csv_byte_ranges(
     file_path, 
@@ -209,3 +211,99 @@ def get_total_row_count_fast(file_path) -> int:
             count += buf.count(b'\n')
     
     return max(0, count - 1)  # Subtract 1 for header line
+
+
+def read_csv_byte_range(
+    file_path,
+    start_byte: int,
+    end_byte: int,
+    fieldnames: List[str],
+    chunksize: Optional[int] = None,
+    dtype=None,
+    low_memory: bool = False
+):
+    """
+    Read a byte range of a CSV file into a pandas DataFrame with proper
+    dtype inference (int64, float64, etc.), NOT all-object.
+    
+    This wraps pd.read_csv with a pre-sliced byte buffer so that pandas
+    handles type inference the same way it does for a normal CSV read.
+    
+    Args:
+        file_path: Path to CSV file
+        start_byte: Byte offset to start reading from (first data byte of chunk)
+        end_byte: Byte offset to stop reading at
+        fieldnames: Column names from CSV header
+        chunksize: If set, return a TextFileReader iterator of DataFrames
+        dtype: Optional dtype dict to pass to pd.read_csv
+        low_memory: Passed to pd.read_csv (default False for consistent dtypes)
+    
+    Returns:
+        DataFrame (or TextFileReader if chunksize is set)
+    """
+    file_path = Path(file_path)
+    
+    with open(file_path, 'rb') as f:
+        f.seek(start_byte)
+        raw_bytes = f.read(end_byte - start_byte)
+    
+    # Prepend header line so pd.read_csv can parse column names + infer dtypes
+    header_line = ','.join(fieldnames) + '\n'
+    buf = io.BytesIO(header_line.encode('utf-8') + raw_bytes)
+    
+    kwargs = dict(
+        low_memory=low_memory,
+    )
+    if dtype is not None:
+        kwargs['dtype'] = dtype
+    if chunksize is not None:
+        kwargs['chunksize'] = chunksize
+    
+    return pd.read_csv(buf, **kwargs)
+
+
+def read_csv_byte_range_chunked(
+    file_path,
+    start_byte: int,
+    end_byte: int,
+    fieldnames: List[str],
+    chunksize: int = 100000,
+    dtype=None,
+    low_memory: bool = False
+) -> Iterator[pd.DataFrame]:
+    """
+    Yield DataFrames of `chunksize` rows from a byte range, with proper
+    dtype inference. Memory-efficient: reads the byte range once, then
+    iterates in chunks.
+    
+    Args:
+        file_path: Path to CSV file
+        start_byte: Byte offset to start reading
+        end_byte: Byte offset to stop reading
+        fieldnames: Column names
+        chunksize: Rows per chunk
+        dtype: Optional dtype dict
+        low_memory: Passed to pd.read_csv
+    
+    Yields:
+        pd.DataFrame chunks with proper dtypes
+    """
+    file_path = Path(file_path)
+    
+    with open(file_path, 'rb') as f:
+        f.seek(start_byte)
+        raw_bytes = f.read(end_byte - start_byte)
+    
+    header_line = ','.join(fieldnames) + '\n'
+    buf = io.BytesIO(header_line.encode('utf-8') + raw_bytes)
+    
+    kwargs = dict(
+        chunksize=chunksize,
+        low_memory=low_memory,
+    )
+    if dtype is not None:
+        kwargs['dtype'] = dtype
+    
+    reader = pd.read_csv(buf, **kwargs)
+    for chunk in reader:
+        yield chunk
