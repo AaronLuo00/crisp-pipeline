@@ -1303,56 +1303,58 @@ class PatientDataExtractor:
         print(f"  (MEASUREMENT will be processed separately with parallel chunks)")
         
         # Phase 1: Parallel processing of ICU summaries and tables
+        # ICU extraction runs in the MAIN process (not a child) because:
+        #   1. It modifies self.extraction_results — child process changes would be lost
+        #   2. It frees up a worker slot for table processing
+        #   3. It avoids pickling the entire PatientDataExtractor instance
+        #   4. It still runs concurrently with table workers (main thread + child processes)
         print("\n=== Phase 1: Parallel Processing ===")
         phase1_start = time.time()
+        
+        all_patient_episodes = None
         
         with ProcessPoolExecutor(max_workers=MAX_WORKERS) as executor:
             futures = {}
             
-            # Step 1: Submit ICU summaries extraction (independent task)
-            print("\nStep 1/3: Extracting ICU visit summaries (parallel)...")
-            futures['icu'] = executor.submit(self.extract_icu_summaries)
-            
-            # Step 2: Submit all non-MEASUREMENT tables for parallel processing
+            # Step 1: Submit all non-MEASUREMENT tables to child processes
             if tables_to_process:
-                print(f"\nStep 2/3: Processing {len(tables_to_process)} tables in parallel...")
+                print(f"\nStep 1/3: Processing {len(tables_to_process)} tables in parallel...")
                 for table in tables_to_process:
                     futures[f'table_{table}'] = executor.submit(
                         process_single_table_worker, table, standardized_dir, patient_data_dir
                     )
             
-            # Collect parallel results
-            all_patient_episodes = None
-            completed_tasks = 0
-            total_tasks = len(futures)
+            # Step 2: Run ICU extraction in main process (concurrent with table workers)
+            print("\nStep 2/3: Extracting ICU visit summaries (main process)...")
+            try:
+                all_patient_episodes = self.extract_icu_summaries()
+                print(f"  [OK] ICU episodes extracted: {len(all_patient_episodes) if all_patient_episodes else 0} patients")
+                self.extraction_results['statistics']['total_icu_patients'] = len(all_patient_episodes) if all_patient_episodes else 0
+            except Exception as e:
+                import traceback
+                error_detail = traceback.format_exc()
+                logging.error(f"ICU extraction failed: {e}\nTraceback:\n{error_detail}")
+                print(f"  [FAIL] ICU extraction failed: {e}")
+                self.extraction_results['errors'].append(f"ICU extraction: {str(e)}")
             
+            # Step 3: Collect table results from child processes
             for key, future in futures.items():
                 try:
-                    if key == 'icu':
-                        all_patient_episodes = future.result()  # No timeout - let it complete
-                        completed_tasks += 1
-                        print(f"  [OK] ICU episodes extracted: {len(all_patient_episodes) if all_patient_episodes else 0} patients")
-                        self.extraction_results['statistics']['total_icu_patients'] = len(all_patient_episodes) if all_patient_episodes else 0
-                    
-                    elif key.startswith('table_'):
-                        table_name = key.replace('table_', '')
-                        stats = future.result()  # No timeout
-                        completed_tasks += 1
-                        if 'error' not in stats:
-                            self.extraction_results['statistics'][table_name] = stats
-                            print(f"  [OK] {table_name}: {stats.get('total_records', 0):,} records")
-                        else:
-                            print(f"  [FAIL] {table_name}: {stats['error']}")
-                            logging.error(f"Failed to extract {table_name}: {stats['error']}")
-                            self.extraction_results['errors'].append(f"{table_name}: {stats['error']}")
+                    table_name = key.replace('table_', '')
+                    stats = future.result()
+                    if 'error' not in stats:
+                        self.extraction_results['statistics'][table_name] = stats
+                        print(f"  [OK] {table_name}: {stats.get('total_records', 0):,} records")
+                    else:
+                        print(f"  [FAIL] {table_name}: {stats['error']}")
+                        logging.error(f"Failed to extract {table_name}: {stats['error']}")
+                        self.extraction_results['errors'].append(f"{table_name}: {stats['error']}")
                 
                 except Exception as e:
                     import traceback
                     error_detail = traceback.format_exc()
                     logging.error(f"Task {key} failed: {e}\nTraceback:\n{error_detail}")
                     print(f"  [FAIL] Task {key} failed: {e}")
-                    if key == 'icu':
-                        print(f"  ICU extraction error details: {str(e)}")
                     self.extraction_results['errors'].append(f"Task {key}: {str(e)}")
         
         self.phase_times['phase1'] = time.time() - phase1_start
@@ -1402,7 +1404,16 @@ class PatientDataExtractor:
                         print(f"  [FAIL] Chunk {i} failed: {e}")
                         logging.error(f"MEASUREMENT chunk {i} failed: {e}")
             
-            # Merge chunks
+            # Validate all chunks completed before merging
+            if len(chunk_results) < actual_chunks:
+                failed = actual_chunks - len(chunk_results)
+                raise RuntimeError(
+                    f"{failed}/{actual_chunks} MEASUREMENT chunks failed — "
+                    f"aborting merge to prevent silent data loss. "
+                    f"Check logs above for chunk failure details."
+                )
+            
+            # Merge chunks (all chunks verified successful)
             if chunk_results:
                 print("  Merging MEASUREMENT chunks...")
                 merge_stats = merge_measurement_chunks(output_dir, patient_data_dir, actual_chunks)
