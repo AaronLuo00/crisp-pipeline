@@ -585,6 +585,8 @@ def process_visit_patient_chunk(args: Tuple) -> Tuple[int, Dict, float]:
     
     Args:
         args: Tuple containing (chunk_id, total_chunks, input_file, output_dir, patient_chunk, table_name, threshold_hours)
+              input_file is now a pre-split temp file containing only this chunk's patients
+              (with original_row_number already added by the caller).
     
     Returns:
         Tuple of (chunk_id, statistics, elapsed_time)
@@ -606,14 +608,9 @@ def process_visit_patient_chunk(args: Tuple) -> Tuple[int, Dict, float]:
         'total_output_records': 0
     }
     
-    # Read input file and add original row numbers
-    df = pd.read_csv(input_file, low_memory=False)
-    
-    # Add original row numbers (index + 2 because index starts at 0 and we have header)
-    df['original_row_number'] = df.index + 2
-    
-    # Filter to only patients in this chunk
-    chunk_df = df[df['person_id'].isin(patient_chunk)]
+    # Read pre-split chunk file (only contains this chunk's patients, ~1/N of full file)
+    # original_row_number is already added by the caller before splitting
+    chunk_df = pd.read_csv(input_file, low_memory=False)
     
     if chunk_df.empty:
         logging.warning(f"No data found for chunk {chunk_id}")

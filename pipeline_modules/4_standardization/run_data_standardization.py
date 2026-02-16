@@ -1268,31 +1268,41 @@ class DataStandardizer:
                 futures.append(('merge_measurement', None, future))
             
             # Submit VISIT chunk processing tasks
+            # Pre-split: read full file once in main process, write per-patient temp chunks
+            # so workers only read their 1/N slice (avoids 8x memory duplication)
             for task_type, table_name in tasks:
                 if task_type == 'visit_chunks':
                     task_start_times[('visit_chunks', table_name)] = time.time()
                     
-                    # Get patient list for this table
                     input_file = self.get_input_path(table_name)
                     if input_file.exists():
-                        # Read just to get patient list
                         import pandas as pd
-                        df_sample = pd.read_csv(input_file, usecols=['person_id'], low_memory=False)
-                        patients = df_sample['person_id'].unique()
-                        
-                        # Split patients into configurable chunks
                         import numpy as np
+                        
+                        # Read full file ONCE in main process
+                        df_full = pd.read_csv(input_file, low_memory=False)
+                        # Add original row numbers (index + 2: 0-based index + header row)
+                        df_full['original_row_number'] = df_full.index + 2
+                        
+                        patients = df_full['person_id'].unique()
                         patient_chunks = np.array_split(patients, MEASUREMENT_SPLITS)
                         
-                        # Submit chunk processing tasks
+                        # Write per-chunk temp files so each worker only reads its slice
                         chunk_futures = []
                         for i, patient_chunk in enumerate(patient_chunks):
+                            chunk_df = df_full[df_full['person_id'].isin(patient_chunk)]
+                            temp_chunk_file = output_dir / f".temp_{table_name}_input_chunk_{i}.csv"
+                            chunk_df.to_csv(temp_chunk_file, index=False)
+                            
                             chunk_future = executor.submit(
                                 process_visit_patient_chunk,
-                                (i, MEASUREMENT_SPLITS, input_file, output_dir, patient_chunk.tolist(), 
+                                (i, MEASUREMENT_SPLITS, temp_chunk_file, output_dir, patient_chunk.tolist(), 
                                  table_name, self.merge_threshold_hours)
                             )
                             chunk_futures.append(('visit_chunk', table_name, i, chunk_future))
+                        
+                        # Free main-process memory after writing temp files
+                        del df_full
                         
                         futures.extend(chunk_futures)
             
@@ -1336,6 +1346,12 @@ class DataStandardizer:
                 self.phase_stats['phase3']['task_times'][f'{table_name}_merge'] = total_time
                 
                 logging.info(f"{table_name} visits merged successfully in {total_time:.2f}s")
+                
+                # Clean up temp input chunk files
+                for i in range(MEASUREMENT_SPLITS):
+                    temp_input = output_dir / f".temp_{table_name}_input_chunk_{i}.csv"
+                    if temp_input.exists():
+                        temp_input.unlink()
         
         self.phase_stats['phase3']['wall_time'] = time.time() - phase3_start
         
