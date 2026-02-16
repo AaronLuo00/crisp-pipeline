@@ -118,9 +118,9 @@ def process_measurement_chunk(args: Tuple[str, int, int, Optional[int]]) -> Tupl
             if not np.isfinite(value):
                 continue
             
-            # Get concept ID
+            # Get concept ID (use int to ensure consistent key types across pipeline)
             try:
-                concept_id = float(row.get('measurement_concept_id', '0'))
+                concept_id = int(float(row.get('measurement_concept_id', '0')))
             except (ValueError, TypeError):
                 continue
             

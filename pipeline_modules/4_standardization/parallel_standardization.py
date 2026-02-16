@@ -296,7 +296,33 @@ def process_measurement_chunk(args: Tuple) -> Tuple[int, Dict, float, List]:
                     value = float(row['value_as_number'])
                     concept_id = int(row.get('measurement_concept_id', 0))
                     
-                    # Check if this concept has thresholds
+                    # Unit conversion FIRST (before outlier check)
+                    # T-Digest statistics were computed on converted values,
+                    # so outlier thresholds are in converted-unit scale.
+                    # We must convert before comparing.
+                    if 'unit_concept_id' in row and row['unit_concept_id'] and value:
+                        new_value, new_unit_id, converted = standardize_units_parallel(
+                            value, row['unit_concept_id'], concept_id
+                        )
+                        if converted:
+                            # Record change if under limit
+                            if len(changes) < max_changes:
+                                changes.append({
+                                    'row_number': stats['records_processed'],
+                                    'measurement_id': row.get('measurement_id', ''),
+                                    'concept_id': concept_id,
+                                    'original_value': value,
+                                    'original_unit_id': row['unit_concept_id'],
+                                    'new_value': new_value,
+                                    'new_unit_id': new_unit_id,
+                                    'change_type': 'unit_conversion'
+                                })
+                            row['value_as_number'] = new_value
+                            row['unit_concept_id'] = new_unit_id
+                            value = float(new_value)  # Update value for outlier check
+                            stats['units_converted'] += 1
+                    
+                    # Now check outliers using converted value
                     if concept_id in concept_thresholds.get('MEASUREMENT', {}):
                         threshold = concept_thresholds['MEASUREMENT'][concept_id]
                         is_outlier = False
@@ -328,28 +354,6 @@ def process_measurement_chunk(args: Tuple) -> Tuple[int, Dict, float, List]:
                         
                         if is_outlier:
                             continue  # Skip this record
-                    
-                    # Unit conversion
-                    if 'unit_concept_id' in row and row['unit_concept_id'] and value:
-                        new_value, new_unit_id, converted = standardize_units_parallel(
-                            value, row['unit_concept_id'], concept_id
-                        )
-                        if converted:
-                            # Record change if under limit
-                            if len(changes) < max_changes:
-                                changes.append({
-                                    'row_number': stats['records_processed'],
-                                    'measurement_id': row.get('measurement_id', ''),
-                                    'concept_id': concept_id,
-                                    'original_value': value,
-                                    'original_unit_id': row['unit_concept_id'],
-                                    'new_value': new_value,
-                                    'new_unit_id': new_unit_id,
-                                    'change_type': 'unit_conversion'
-                                })
-                            row['value_as_number'] = new_value
-                            row['unit_concept_id'] = new_unit_id
-                            stats['units_converted'] += 1
                 
                 except (ValueError, TypeError):
                     pass
