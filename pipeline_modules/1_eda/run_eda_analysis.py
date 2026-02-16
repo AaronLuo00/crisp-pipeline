@@ -150,12 +150,21 @@ def process_table_partial(file_path, start_byte, end_byte, fieldnames, chunk_siz
     }
     
     # For aggregating unique values
+    # Primary key columns: unique_count ≈ total_records, skip tracking to save memory
+    PRIMARY_KEY_COLS = {
+        'measurement_id', 'visit_detail_id', 'visit_occurrence_id',
+        'drug_exposure_id', 'condition_occurrence_id', 'observation_id',
+        'procedure_occurrence_id', 'device_exposure_id', 'specimen_id'
+    }
+    MAX_UNIQUE_TRACK = 5_000_000  # 5M cap
+
     unique_trackers = {}
     id_columns = [col for col in fieldnames if col.endswith('_id')]
     datetime_columns = [col for col in fieldnames
                         if 'date' in col.lower() or 'time' in col.lower()]
     for col in id_columns:
-        unique_trackers[col] = set()
+        if col not in PRIMARY_KEY_COLS:
+            unique_trackers[col] = set()
     
     # Table-specific data collection
     table_data = {
@@ -196,10 +205,10 @@ def process_table_partial(file_path, start_byte, end_byte, fieldnames, chunk_siz
                 stats["missing_values"][col] = stats["missing_values"].get(col, 0) + count
             time_stats['missing_calc'] += time.time() - t1
 
-            # Track unique values for ID columns
+            # Track unique values for ID columns (skip primary keys & capped cols)
             t1 = time.time()
             for col in id_columns:
-                if col in chunk.columns:
+                if col in unique_trackers and len(unique_trackers[col]) < MAX_UNIQUE_TRACK:
                     unique_trackers[col].update(chunk[col].dropna().unique())
             time_stats['unique_tracking'] += time.time() - t1
 
@@ -241,7 +250,16 @@ def process_table_partial(file_path, start_byte, end_byte, fieldnames, chunk_siz
         stats["missing_percentage"] = {col: 0.0 for col in stats["columns"]}
     
     # Unique counts for ID columns
-    stats["unique_counts"] = {col: len(unique_trackers[col]) for col in id_columns}
+    stats["unique_counts"] = {}
+    for col in id_columns:
+        if col in unique_trackers:
+            count = len(unique_trackers[col])
+            if count >= MAX_UNIQUE_TRACK:
+                stats["unique_counts"][col] = f">{MAX_UNIQUE_TRACK} (capped)"
+            else:
+                stats["unique_counts"][col] = count
+        else:
+            stats["unique_counts"][col] = f"~{stats['total_records']} (primary key)"
     
     # Date ranges (sample from this part using byte-offset seek)
     if datetime_columns and stats["total_records"] > 0:
@@ -345,6 +363,14 @@ def process_table_chunked(file_path, chunk_size=CHUNK_SIZE):
     }
     
     # For aggregating unique values
+    # Primary key columns: unique_count ≈ total_records, skip tracking to save memory
+    PRIMARY_KEY_COLS = {
+        'measurement_id', 'visit_detail_id', 'visit_occurrence_id',
+        'drug_exposure_id', 'condition_occurrence_id', 'observation_id',
+        'procedure_occurrence_id', 'device_exposure_id', 'specimen_id'
+    }
+    MAX_UNIQUE_TRACK = 5_000_000  # 5M cap
+
     unique_trackers = {}
     id_columns = []
     datetime_columns = []
@@ -384,9 +410,10 @@ def process_table_chunked(file_path, chunk_size=CHUNK_SIZE):
                 datetime_columns = [col for col in chunk.columns 
                                   if 'date' in col.lower() or 'time' in col.lower()]
                 
-                # Initialize unique value trackers for ID columns
+                # Initialize unique value trackers for ID columns (skip primary keys)
                 for col in id_columns:
-                    unique_trackers[col] = set()
+                    if col not in PRIMARY_KEY_COLS:
+                        unique_trackers[col] = set()
             
             # Update basic statistics
             stats["total_records"] += len(chunk)
@@ -399,10 +426,10 @@ def process_table_chunked(file_path, chunk_size=CHUNK_SIZE):
                 stats["missing_values"][col] += count
             time_stats['missing_calc'] += time.time() - t1
             
-            # Track unique values for ID columns
+            # Track unique values for ID columns (skip primary keys & capped cols)
             t1 = time.time()
             for col in id_columns:
-                if col in chunk.columns:
+                if col in unique_trackers and len(unique_trackers[col]) < MAX_UNIQUE_TRACK:
                     unique_trackers[col].update(chunk[col].dropna().unique())
             time_stats['unique_tracking'] += time.time() - t1
             
@@ -449,7 +476,16 @@ def process_table_chunked(file_path, chunk_size=CHUNK_SIZE):
         stats["missing_percentage"] = {col: 0.0 for col in stats["columns"]}
     
     # Unique counts for ID columns
-    stats["unique_counts"] = {col: len(unique_trackers[col]) for col in id_columns}
+    stats["unique_counts"] = {}
+    for col in id_columns:
+        if col in unique_trackers:
+            count = len(unique_trackers[col])
+            if count >= MAX_UNIQUE_TRACK:
+                stats["unique_counts"][col] = f">{MAX_UNIQUE_TRACK} (capped)"
+            else:
+                stats["unique_counts"][col] = count
+        else:
+            stats["unique_counts"][col] = f"~{stats['total_records']} (primary key)"
     
     # Date ranges (process a sample for efficiency)
     if datetime_columns:
@@ -577,7 +613,13 @@ def merge_table_part_stats(part_stats_list, table_name):
         # In reality, there might be overlaps between parts, but this gives us a reasonable estimate
         merged_unique = {}
         for col in merged_stats["unique_counts"]:
-            merged_unique[col] = max(stats["unique_counts"].get(col, 0) for stats in part_stats_list)
+            # If any part has a string value (primary key or capped), propagate it
+            vals = [stats["unique_counts"].get(col, 0) for stats in part_stats_list]
+            str_vals = [v for v in vals if isinstance(v, str)]
+            if str_vals:
+                merged_unique[col] = str_vals[0]  # keep the label
+            else:
+                merged_unique[col] = max(vals)
         merged_stats["unique_counts"] = merged_unique
     
     # Merge date ranges
