@@ -291,8 +291,8 @@ def read_csv_byte_range_chunked(
     file_path = Path(file_path)
     range_size = end_byte - start_byte
 
-    # Small range (<256MB): load into memory as before (fast, no overhead)
-    if range_size <= 256 * 1024 * 1024:
+    # Small range (<2GB): load into memory as before (fast, no overhead)
+    if range_size <= 2 * 1024 * 1024 * 1024:
         with open(file_path, 'rb') as f:
             f.seek(start_byte)
             raw_bytes = f.read(range_size)
@@ -312,8 +312,8 @@ def read_csv_byte_range_chunked(
             yield chunk
         return
 
-    # Large range (>256MB): stream in sub-ranges to cap peak memory
-    SUB_RANGE_BYTES = 128 * 1024 * 1024  # 128MB per sub-read
+    # Large range (>2GB): stream in sub-ranges to cap peak memory
+    SUB_RANGE_BYTES = 1 * 1024 * 1024 * 1024  # 1GB per sub-read
     pos = start_byte
 
     while pos < end_byte:

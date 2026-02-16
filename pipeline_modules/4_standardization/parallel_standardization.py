@@ -444,8 +444,8 @@ def process_standard_table(args: Tuple) -> Tuple[str, Dict, float]:
         # Check file size to decide strategy
         file_size = Path(input_file).stat().st_size
         
-        # Small files (<512MB): use original bulk-load approach (simpler, no overhead)
-        if file_size <= 512 * 1024 * 1024:
+        # Small files (<4GB): use original bulk-load approach (simpler, no overhead)
+        if file_size <= 4 * 1024 * 1024 * 1024:
             df = pd.read_csv(input_file, low_memory=False)
             stats['input_records'] = len(df)
             
@@ -464,7 +464,7 @@ def process_standard_table(args: Tuple) -> Tuple[str, Dict, float]:
             df.to_csv(output_file, index=False, date_format='%Y-%m-%d %H:%M:%S')
         else:
             # Large files (>512MB): chunked streaming — O(chunk_size) memory
-            STREAM_CHUNK = 200000  # 200K rows per chunk
+            STREAM_CHUNK = 500000  # 500K rows per chunk
             header_written = False
             
             for chunk in pd.read_csv(input_file, chunksize=STREAM_CHUNK, low_memory=False):
