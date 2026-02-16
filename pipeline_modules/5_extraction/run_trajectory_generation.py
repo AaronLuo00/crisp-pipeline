@@ -408,14 +408,14 @@ def collect_events_for_patient(
         ),
     )
 
-    # Process conditions
+    # Process conditions (diagnoses don't have a numeric value — the concept name IS the value)
     process_table(
         conditions,
         ("condition_start_datetime", "condition_start_date"),
         "condition_concept_id",
         "condition",
         "condition",
-        lambda row: None,
+        lambda row: "",
     )
 
     # Process drugs
@@ -445,7 +445,7 @@ def collect_events_for_patient(
         lambda row: measurement_value_string(row),
     )
 
-    # Process observations
+    # Process observations (include both numeric and non-numeric observations)
     process_table(
         observations,
         ("observation_datetime", "observation_date"),
@@ -456,7 +456,7 @@ def collect_events_for_patient(
             f"value {row.get('value_as_number')}"
             if row.get("value_as_number")
             and str(row.get("value_as_number")).strip() != ""
-            else None
+            else ""
         ),
     )
 
@@ -468,7 +468,7 @@ def collect_events_for_patient(
         "procedure",
         "procedure",
         lambda row: (
-            f"quantity {row.get('quantity')}" if row.get("quantity") else None
+            f"quantity {row.get('quantity')}" if row.get("quantity") else ""
         ),
     )
 
@@ -480,7 +480,7 @@ def collect_events_for_patient(
         "device",
         "device",
         lambda row: (
-            f"quantity {row.get('quantity')}" if row.get("quantity") else None
+            f"quantity {row.get('quantity')}" if row.get("quantity") else ""
         ),
     )
 
