@@ -149,12 +149,13 @@ class CRISPPipeline:
         logging.info("Environment check passed")
         return True
     
-    def copy_module_log(self, module_id: str) -> Optional[Path]:
+    def copy_module_log(self, module_id: str, module_start_time: float = None) -> Optional[Path]:
         """
         Copy module log file to centralized pipeline logs directory
         
         Args:
             module_id: Module identifier (e.g., '1_eda', '2_cleaning')
+            module_start_time: Unix timestamp when the module started (for log file matching)
             
         Returns:
             Path to copied log file if successful, None otherwise
@@ -189,8 +190,10 @@ class CRISPPipeline:
         log_files = []
         
         for log_file in log_path.glob(pattern):
-            # Check if file was modified recently (within last 60 seconds)
-            if current_time - log_file.stat().st_mtime < 60:
+            # Check if file was modified during this module's execution
+            # Use module_start_time if available (reliable), fall back to 60s window
+            cutoff = module_start_time if module_start_time else (current_time - 60)
+            if log_file.stat().st_mtime >= cutoff:
                 log_files.append(log_file)
         
         if not log_files:
@@ -399,7 +402,7 @@ class CRISPPipeline:
             # Copy module log to pipeline run directory
             # Wait a moment to ensure log file is fully written
             time.sleep(0.5)
-            copied_log = self.copy_module_log(module_id)
+            copied_log = self.copy_module_log(module_id, module_start_time=start_time)
             if not copied_log:
                 logging.debug(f"  No log file found for module {module_id}")
             

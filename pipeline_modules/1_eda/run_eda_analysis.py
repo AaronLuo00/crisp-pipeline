@@ -440,10 +440,13 @@ def process_table_chunked(file_path, chunk_size=CHUNK_SIZE):
     
     # Calculate final statistics
     # Missing percentages
-    stats["missing_percentage"] = {
-        col: (stats["missing_values"][col] / stats["total_records"] * 100) 
-        for col in stats["columns"]
-    }
+    if stats["total_records"] > 0:
+        stats["missing_percentage"] = {
+            col: (stats["missing_values"][col] / stats["total_records"] * 100) 
+            for col in stats["columns"]
+        }
+    else:
+        stats["missing_percentage"] = {col: 0.0 for col in stats["columns"]}
     
     # Unique counts for ID columns
     stats["unique_counts"] = {col: len(unique_trackers[col]) for col in id_columns}

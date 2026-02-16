@@ -1446,6 +1446,8 @@ class PatientDataExtractor:
             self.calculate_pre_icu_statistics(all_patient_episodes)
             stats_time = time.time() - phase4_start
             print(f"  [OK] Completed: {len(all_patient_episodes)} patients analyzed in {stats_time:.2f}s")
+        elif all_patient_episodes is None:
+            raise RuntimeError("ICU episode extraction failed — cannot generate labels. Check Phase 1 errors above.")
         else:
             print("Skipping pre-ICU statistics (no ICU patients found)")
         

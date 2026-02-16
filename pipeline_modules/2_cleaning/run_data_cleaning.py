@@ -510,7 +510,12 @@ def clean_table_partial(table_name, start_byte=0, end_byte=-1, fieldnames=None, 
                         # Special handling for DEATH table - check if death_date > 2200
                         if table_name == 'DEATH' and start:
                             # Check if death date is beyond reasonable threshold (year 2200)
-                            if start and str(start) > '2200':
+                            # Parse year robustly instead of string comparison
+                            try:
+                                start_year = int(str(start)[:4])
+                            except (ValueError, IndexError):
+                                start_year = 0
+                            if start_year > 2200:
                                 temporal_invalid = True
                                 temporal_issues += 1
                                 skip_row = True
@@ -529,8 +534,18 @@ def clean_table_partial(table_name, start_byte=0, end_byte=-1, fieldnames=None, 
                                     temporal_writer.writerows(temporal_buffer)
                                     temporal_buffer = []
                         # Regular temporal validation for other tables
-                        elif start and end and end < start:
-                            temporal_invalid = True
+                        # Parse datetimes properly instead of string comparison
+                        elif start and end:
+                            try:
+                                start_dt = datetime.fromisoformat(str(start).replace(' ', 'T'))
+                                end_dt = datetime.fromisoformat(str(end).replace(' ', 'T'))
+                                if end_dt < start_dt:
+                                    temporal_invalid = True
+                            except (ValueError, TypeError):
+                                # If dates can't be parsed, fall back to string comparison
+                                if str(end) < str(start):
+                                    temporal_invalid = True
+                        if temporal_invalid and not skip_row:
                             temporal_issues += 1
                             skip_row = True
                             removal_reason = 'temporal_issue'
