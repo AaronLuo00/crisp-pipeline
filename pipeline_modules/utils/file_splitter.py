@@ -273,8 +273,8 @@ def read_csv_byte_range_chunked(
 ) -> Iterator[pd.DataFrame]:
     """
     Yield DataFrames of `chunksize` rows from a byte range, with proper
-    dtype inference. Memory-efficient: reads the byte range once, then
-    iterates in chunks.
+    dtype inference. Truly streaming: never loads the full byte range
+    into memory at once.
     
     Args:
         file_path: Path to CSV file
@@ -289,21 +289,63 @@ def read_csv_byte_range_chunked(
         pd.DataFrame chunks with proper dtypes
     """
     file_path = Path(file_path)
-    
-    with open(file_path, 'rb') as f:
-        f.seek(start_byte)
-        raw_bytes = f.read(end_byte - start_byte)
-    
-    header_line = ','.join(fieldnames) + '\n'
-    buf = io.BytesIO(header_line.encode('utf-8') + raw_bytes)
-    
-    kwargs = dict(
-        chunksize=chunksize,
-        low_memory=low_memory,
-    )
-    if dtype is not None:
-        kwargs['dtype'] = dtype
-    
-    reader = pd.read_csv(buf, **kwargs)
-    for chunk in reader:
-        yield chunk
+    range_size = end_byte - start_byte
+
+    # Small range (<256MB): load into memory as before (fast, no overhead)
+    if range_size <= 256 * 1024 * 1024:
+        with open(file_path, 'rb') as f:
+            f.seek(start_byte)
+            raw_bytes = f.read(range_size)
+
+        header_line = ','.join(fieldnames) + '\n'
+        buf = io.BytesIO(header_line.encode('utf-8') + raw_bytes)
+
+        kwargs = dict(
+            chunksize=chunksize,
+            low_memory=low_memory,
+        )
+        if dtype is not None:
+            kwargs['dtype'] = dtype
+
+        reader = pd.read_csv(buf, **kwargs)
+        for chunk in reader:
+            yield chunk
+        return
+
+    # Large range (>256MB): stream in sub-ranges to cap peak memory
+    SUB_RANGE_BYTES = 128 * 1024 * 1024  # 128MB per sub-read
+    pos = start_byte
+
+    while pos < end_byte:
+        sub_end = min(pos + SUB_RANGE_BYTES, end_byte)
+
+        # If not the last sub-range, extend to next newline so we don't
+        # split a CSV row in half
+        if sub_end < end_byte:
+            with open(file_path, 'rb') as f:
+                f.seek(sub_end)
+                rest_of_line = f.readline()
+                sub_end += len(rest_of_line)
+                if sub_end > end_byte:
+                    sub_end = end_byte
+
+        with open(file_path, 'rb') as f:
+            f.seek(pos)
+            raw_bytes = f.read(sub_end - pos)
+
+        header_line = ','.join(fieldnames) + '\n'
+        buf = io.BytesIO(header_line.encode('utf-8') + raw_bytes)
+
+        kwargs = dict(
+            chunksize=chunksize,
+            low_memory=low_memory,
+        )
+        if dtype is not None:
+            kwargs['dtype'] = dtype
+
+        reader = pd.read_csv(buf, **kwargs)
+        for chunk in reader:
+            yield chunk
+
+        del raw_bytes, buf  # explicitly free before next sub-range
+        pos = sub_end

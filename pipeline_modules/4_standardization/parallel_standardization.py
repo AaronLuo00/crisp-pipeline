@@ -408,6 +408,9 @@ def process_measurement_chunk(args: Tuple) -> Tuple[int, Dict, float, List]:
 def process_standard_table(args: Tuple) -> Tuple[str, Dict, float]:
     """
     Process a standard table (non-MEASUREMENT) for standardization.
+    Uses chunked streaming to avoid loading entire file into memory.
+    
+    For a 16GB DRUG_EXPOSURE table, peak memory is ~200MB instead of ~32GB.
     
     Args:
         args: Tuple containing (table_name, input_file, output_dir)
@@ -428,34 +431,69 @@ def process_standard_table(args: Tuple) -> Tuple[str, Dict, float]:
         'outliers_removed_range': 0
     }
     
-    # Process using pandas for simplicity
+    # Get datetime columns for this table (if any)
+    date_cols = DATE_COLUMNS.get(table_name, [])
+    
+    # Get ID columns for this table
+    id_columns = ID_COLUMNS_TO_FORMAT.get('ALL', []) + \
+                 ID_COLUMNS_TO_FORMAT.get(table_name, [])
+    
+    output_file = Path(output_dir) / f"{table_name}_standardized.csv"
+    
     try:
-        df = pd.read_csv(input_file, low_memory=False)
-        stats['input_records'] = len(df)
+        # Check file size to decide strategy
+        file_size = Path(input_file).stat().st_size
         
-        # Standardize datetime fields if applicable
-        if table_name in DATE_COLUMNS:
-            for col in DATE_COLUMNS[table_name]:
+        # Small files (<512MB): use original bulk-load approach (simpler, no overhead)
+        if file_size <= 512 * 1024 * 1024:
+            df = pd.read_csv(input_file, low_memory=False)
+            stats['input_records'] = len(df)
+            
+            # Standardize datetime fields if applicable
+            for col in date_cols:
                 if col in df.columns:
-                    # Remove milliseconds/microseconds from datetime columns
-                    # Convert to string, remove fractional seconds, and keep as string
                     mask = df[col].notna()
                     non_null = mask.sum()
                     if non_null > 0:
-                        # Convert to string and remove fractional seconds
-                        df.loc[mask, col] = df.loc[mask, col].astype(str).str.replace(r'(\d{2}:\d{2}:\d{2})\.\d+', r'\1', regex=True)
+                        df.loc[mask, col] = df.loc[mask, col].astype(str).str.replace(
+                            r'(\d{2}:\d{2}:\d{2})\.\d+', r'\1', regex=True)
                         stats['datetime_standardized'] += non_null
-        
-        # No outlier removal for non-MEASUREMENT tables
-        stats['output_records'] = len(df)
-        
-        # Format ID columns before saving
-        df = format_id_columns_df(df, table_name)
-        
-        # Save output
-        output_file = Path(output_dir) / f"{table_name}_standardized.csv"
-        # Use date_format to preserve time component even when it's 00:00:00
-        df.to_csv(output_file, index=False, date_format='%Y-%m-%d %H:%M:%S')
+            
+            stats['output_records'] = len(df)
+            df = format_id_columns_df(df, table_name)
+            df.to_csv(output_file, index=False, date_format='%Y-%m-%d %H:%M:%S')
+        else:
+            # Large files (>512MB): chunked streaming — O(chunk_size) memory
+            STREAM_CHUNK = 200000  # 200K rows per chunk
+            header_written = False
+            
+            for chunk in pd.read_csv(input_file, chunksize=STREAM_CHUNK, low_memory=False):
+                stats['input_records'] += len(chunk)
+                
+                # Standardize datetime fields
+                for col in date_cols:
+                    if col in chunk.columns:
+                        mask = chunk[col].notna()
+                        non_null = mask.sum()
+                        if non_null > 0:
+                            chunk.loc[mask, col] = chunk.loc[mask, col].astype(str).str.replace(
+                                r'(\d{2}:\d{2}:\d{2})\.\d+', r'\1', regex=True)
+                            stats['datetime_standardized'] += non_null
+                
+                # Format ID columns
+                chunk = format_id_columns_df(chunk, table_name)
+                
+                stats['output_records'] += len(chunk)
+                
+                # Append to output file
+                chunk.to_csv(
+                    output_file,
+                    index=False,
+                    mode='a' if header_written else 'w',
+                    header=not header_written,
+                    date_format='%Y-%m-%d %H:%M:%S'
+                )
+                header_written = True
         
     except Exception as e:
         logging.error(f"Error processing {table_name}: {e}")

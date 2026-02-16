@@ -491,9 +491,30 @@ def process_table_chunked(file_path, chunk_size=CHUNK_SIZE):
     if datetime_columns:
         t0 = time.time()
         stats["date_ranges"] = {}
-        # Read first and last chunks for date ranges
+        # Read first 1000 rows (cheap)
         first_chunk = pd.read_csv(file_path, nrows=1000)
-        last_chunk = pd.read_csv(file_path, skiprows=range(1, max(1, total_rows - 1000)))
+        
+        # Read last 1000 rows using byte-offset seek (O(1) seek instead of
+        # skiprows=range(1, N-1000) which builds a set of N integers → OOM)
+        file_size = file_path.stat().st_size
+        tail_bytes = min(file_size, 512 * 1024)  # 512KB tail should contain >1000 rows
+        with open(file_path, 'rb') as f:
+            f.seek(max(0, file_size - tail_bytes))
+            if file_size > tail_bytes:
+                f.readline()  # skip partial line
+            tail_data = f.read()
+        
+        import io as _io
+        # Prepend header so pd.read_csv can parse columns
+        header_bytes = open(file_path, 'rb').readline()
+        tail_buf = _io.BytesIO(header_bytes + tail_data)
+        try:
+            last_chunk = pd.read_csv(tail_buf, low_memory=False)
+            # Keep only last 1000 rows
+            if len(last_chunk) > 1000:
+                last_chunk = last_chunk.tail(1000)
+        except Exception:
+            last_chunk = pd.DataFrame()
         
         for col in datetime_columns:
             try:
@@ -506,7 +527,7 @@ def process_table_chunked(file_path, chunk_size=CHUNK_SIZE):
                                                 errors='coerce')
                     last_dates = pd.to_datetime(last_chunk[col], 
                                                format='%Y-%m-%d',
-                                               errors='coerce')
+                                               errors='coerce') if not last_chunk.empty else pd.Series(dtype='datetime64[ns]')
                 except:
                     # If that fails, try datetime format
                     try:
@@ -515,7 +536,7 @@ def process_table_chunked(file_path, chunk_size=CHUNK_SIZE):
                                                     errors='coerce')
                         last_dates = pd.to_datetime(last_chunk[col], 
                                                    format='%Y-%m-%d %H:%M:%S',
-                                                   errors='coerce')
+                                                   errors='coerce') if not last_chunk.empty else pd.Series(dtype='datetime64[ns]')
                     except:
                         # Fallback to automatic parsing if enabled
                         if USE_INFER_FORMAT:
@@ -524,12 +545,12 @@ def process_table_chunked(file_path, chunk_size=CHUNK_SIZE):
                                                         errors='coerce')
                             last_dates = pd.to_datetime(last_chunk[col], 
                                                        infer_datetime_format=True,
-                                                       errors='coerce')
+                                                       errors='coerce') if not last_chunk.empty else pd.Series(dtype='datetime64[ns]')
                         else:
                             first_dates = pd.to_datetime(first_chunk[col], 
                                                         errors='coerce')
                             last_dates = pd.to_datetime(last_chunk[col], 
-                                                       errors='coerce')
+                                                       errors='coerce') if not last_chunk.empty else pd.Series(dtype='datetime64[ns]')
                 
                 all_dates = pd.concat([first_dates, last_dates])
                 all_dates = all_dates.dropna()
