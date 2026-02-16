@@ -422,6 +422,7 @@ class PatientDataExtractor:
         except Exception as e:
             logging.error(f"Error processing {table_name}: {str(e)}")
             self.extraction_results['errors'].append(f"{table_name}: {str(e)}")
+            raise  # Re-raise: silent partial data is worse than a loud failure
     
     def split_basic_table_by_patient(self, table_name: str):
         """Split a basic table (PERSON/DEATH) by patient ID and save to patient folders."""
@@ -473,6 +474,7 @@ class PatientDataExtractor:
         except Exception as e:
             logging.error(f"Error processing {table_name}: {str(e)}")
             self.extraction_results['errors'].append(f"{table_name}: {str(e)}")
+            raise  # Re-raise: silent partial data is worse than a loud failure
     
     def generate_patient_labels(self, person_id: str, patient_path: Path, 
                                   episode_info: dict = None) -> dict:
@@ -763,6 +765,15 @@ class PatientDataExtractor:
         results = []
         labels_generated = 0  # Counter for successfully generated labels
         
+        # In-memory label accumulators — avoid re-reading 500K JSON files from disk
+        label_agg = {
+            'mortality_48h': 0, 'mortality_7day': 0, 'mortality_30day': 0,
+            'readmission_total': 0, 'readmission_7day': 0, 'readmission_30day': 0,
+            'readmission_90day': 0,
+            'los_3day': 0, 'los_7day': 0,
+            'sepsis_post_icu': 0, 'sepsis_24h': 0, 'sepsis_48h': 0, 'sepsis_7day': 0,
+        }
+        
         # Process each patient with ICU records
         if not all_patient_episodes:
             logging.info("No ICU patients found, skipping pre-ICU statistics")
@@ -889,6 +900,24 @@ class PatientDataExtractor:
                         json.dump(labels, f, indent=2, default=str)
                     
                     labels_generated += 1
+                    
+                    # Accumulate label statistics in memory (no need to re-read from disk later)
+                    label_agg['mortality_48h'] += labels['mortality']['mortality_icu_48h']
+                    label_agg['mortality_7day'] += labels['mortality']['mortality_icu_7day']
+                    label_agg['mortality_30day'] += labels['mortality']['mortality_icu_30day']
+                    label_agg['readmission_total'] += labels['readmission']['has_readmission']
+                    label_agg['readmission_7day'] += labels['readmission'].get('readmission_within_7days', 0)
+                    label_agg['readmission_30day'] += labels['readmission']['readmission_within_30days']
+                    label_agg['readmission_90day'] += labels['readmission'].get('readmission_within_90days', 0)
+                    if 'los' in labels:
+                        label_agg['los_3day'] += labels['los'].get('los_greater_than_3days', 0)
+                        label_agg['los_7day'] += labels['los'].get('los_greater_than_7days', 0)
+                    if 'sepsis' in labels:
+                        label_agg['sepsis_post_icu'] += labels['sepsis'].get('has_sepsis_after_icu', 0)
+                        label_agg['sepsis_24h'] += labels['sepsis'].get('sepsis_within_24h', 0)
+                        label_agg['sepsis_48h'] += labels['sepsis'].get('sepsis_within_48h', 0)
+                        label_agg['sepsis_7day'] += labels['sepsis'].get('sepsis_within_7days', 0)
+                    
                     # Log only for patients with positive mortality labels or every 50 patients
                     if (labels['mortality']['mortality_icu_48h'] or 
                         labels['mortality']['mortality_icu_7day'] or 
@@ -935,68 +964,25 @@ class PatientDataExtractor:
             skipped_df.to_csv(skipped_file, index=False)
             logging.info(f"Skipped patients saved to: {skipped_file}")
         
-        # Log label generation statistics with mortality summary
+        # Log label generation statistics from in-memory accumulators
+        # (Previously re-read 500K+ JSON files from disk — now uses label_agg dict)
         if labels_generated > 0:
             logging.info(f"Generated labels for {labels_generated} ICU patients")
             
-            # Count mortality, readmission, LOS, and sepsis outcomes from saved labels
-            mortality_48h = 0
-            mortality_7day = 0
-            mortality_30day = 0
-            readmission_total = 0
-            readmission_7day = 0
-            readmission_30day = 0
-            readmission_90day = 0
-            los_3day = 0
-            los_7day = 0
-            sepsis_post_icu = 0
-            sepsis_24h = 0
-            sepsis_48h = 0
-            sepsis_7day = 0
-            
-            for person_id in all_patient_episodes.keys():
-                patient_path = self.get_patient_path(person_id)
-                labels_file = patient_path / "patient_labels.json"
-                if labels_file.exists():
-                    try:
-                        with open(labels_file, 'r') as f:
-                            patient_labels = json.load(f)
-                        mortality_48h += patient_labels['mortality']['mortality_icu_48h']
-                        mortality_7day += patient_labels['mortality']['mortality_icu_7day']
-                        mortality_30day += patient_labels['mortality']['mortality_icu_30day']
-                        readmission_total += patient_labels['readmission']['has_readmission']
-                        # Handle both old and new label formats
-                        if 'readmission_within_7days' in patient_labels['readmission']:
-                            readmission_7day += patient_labels['readmission']['readmission_within_7days']
-                        readmission_30day += patient_labels['readmission']['readmission_within_30days']
-                        if 'readmission_within_90days' in patient_labels['readmission']:
-                            readmission_90day += patient_labels['readmission']['readmission_within_90days']
-                        # LOS labels (check if they exist for backward compatibility)
-                        if 'los' in patient_labels:
-                            los_3day += patient_labels['los'].get('los_greater_than_3days', 0)
-                            los_7day += patient_labels['los'].get('los_greater_than_7days', 0)
-                        # Sepsis labels (check if they exist for backward compatibility)
-                        if 'sepsis' in patient_labels:
-                            sepsis_post_icu += patient_labels['sepsis'].get('has_sepsis_after_icu', 0)
-                            sepsis_24h += patient_labels['sepsis'].get('sepsis_within_24h', 0)
-                            sepsis_48h += patient_labels['sepsis'].get('sepsis_within_48h', 0)
-                            sepsis_7day += patient_labels['sepsis'].get('sepsis_within_7days', 0)
-                    except:
-                        pass
-            
-            logging.info(f"Mortality summary - 48h: {mortality_48h}/{labels_generated} ({mortality_48h/labels_generated*100:.1f}%), "
-                        f"7day: {mortality_7day}/{labels_generated} ({mortality_7day/labels_generated*100:.1f}%), "
-                        f"30day: {mortality_30day}/{labels_generated} ({mortality_30day/labels_generated*100:.1f}%)")
-            logging.info(f"Readmission summary - Total: {readmission_total}/{labels_generated} ({readmission_total/labels_generated*100:.1f}%), "
-                        f"7day: {readmission_7day}/{labels_generated} ({readmission_7day/labels_generated*100:.1f}%), "
-                        f"30day: {readmission_30day}/{labels_generated} ({readmission_30day/labels_generated*100:.1f}%), "
-                        f"90day: {readmission_90day}/{labels_generated} ({readmission_90day/labels_generated*100:.1f}%)")
-            logging.info(f"LOS summary - >3days: {los_3day}/{labels_generated} ({los_3day/labels_generated*100:.1f}%), "
-                        f">7days: {los_7day}/{labels_generated} ({los_7day/labels_generated*100:.1f}%)")
-            logging.info(f"Sepsis summary - Post-ICU: {sepsis_post_icu}/{labels_generated} ({sepsis_post_icu/labels_generated*100:.1f}%), "
-                        f"24h: {sepsis_24h}/{labels_generated} ({sepsis_24h/labels_generated*100:.1f}%), "
-                        f"48h: {sepsis_48h}/{labels_generated} ({sepsis_48h/labels_generated*100:.1f}%), "
-                        f"7day: {sepsis_7day}/{labels_generated} ({sepsis_7day/labels_generated*100:.1f}%)")
+            n = labels_generated
+            logging.info(f"Mortality summary - 48h: {label_agg['mortality_48h']}/{n} ({label_agg['mortality_48h']/n*100:.1f}%), "
+                        f"7day: {label_agg['mortality_7day']}/{n} ({label_agg['mortality_7day']/n*100:.1f}%), "
+                        f"30day: {label_agg['mortality_30day']}/{n} ({label_agg['mortality_30day']/n*100:.1f}%)")
+            logging.info(f"Readmission summary - Total: {label_agg['readmission_total']}/{n} ({label_agg['readmission_total']/n*100:.1f}%), "
+                        f"7day: {label_agg['readmission_7day']}/{n} ({label_agg['readmission_7day']/n*100:.1f}%), "
+                        f"30day: {label_agg['readmission_30day']}/{n} ({label_agg['readmission_30day']/n*100:.1f}%), "
+                        f"90day: {label_agg['readmission_90day']}/{n} ({label_agg['readmission_90day']/n*100:.1f}%)")
+            logging.info(f"LOS summary - >3days: {label_agg['los_3day']}/{n} ({label_agg['los_3day']/n*100:.1f}%), "
+                        f">7days: {label_agg['los_7day']}/{n} ({label_agg['los_7day']/n*100:.1f}%)")
+            logging.info(f"Sepsis summary - Post-ICU: {label_agg['sepsis_post_icu']}/{n} ({label_agg['sepsis_post_icu']/n*100:.1f}%), "
+                        f"24h: {label_agg['sepsis_24h']}/{n} ({label_agg['sepsis_24h']/n*100:.1f}%), "
+                        f"48h: {label_agg['sepsis_48h']}/{n} ({label_agg['sepsis_48h']/n*100:.1f}%), "
+                        f"7day: {label_agg['sepsis_7day']}/{n} ({label_agg['sepsis_7day']/n*100:.1f}%)")
         
         # Record processing time and label statistics
         processing_time = time.time() - t0

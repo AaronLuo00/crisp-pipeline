@@ -709,9 +709,19 @@ def render_patient_trajectory(
 # Parallel Processing Worker
 # ============================================================================
 
-def process_patient_worker(args: Tuple[Path, Dict[str, Dict[int, str]]]) -> Tuple[str, bool, Optional[str]]:
-    """Worker function to process a single patient (for parallel execution)."""
-    patient_dir, mappings = args
+def _init_trajectory_worker(shared_mappings):
+    """Initializer for trajectory worker processes — loads mappings once per worker."""
+    global _WORKER_MAPPINGS
+    _WORKER_MAPPINGS = shared_mappings
+
+
+def process_patient_worker(patient_dir: Path) -> Tuple[str, bool, Optional[str]]:
+    """Worker function to process a single patient (for parallel execution).
+    
+    Uses global _WORKER_MAPPINGS set by _init_trajectory_worker to avoid
+    pickling mappings for every task submission (which would be 500K+ copies).
+    """
+    mappings = _WORKER_MAPPINGS
     patient_id = patient_dir.name
 
     try:
@@ -780,14 +790,16 @@ class TrajectoryGenerator:
         logging.info(f"Found {len(patient_dirs)} patients")
         logging.info(f"Generating trajectories using {MAX_WORKERS} workers...")
 
-        # Prepare arguments for workers
-        worker_args = [(patient_dir, self.mappings) for patient_dir in patient_dirs]
-
-        # Process in parallel
+        # Process in parallel — mappings are shared via initializer (once per worker),
+        # NOT pickled per-task (which would be 500K+ copies and cause OOM)
         start_time = time.time()
-        with ProcessPoolExecutor(max_workers=MAX_WORKERS) as executor:
-            futures = {executor.submit(process_patient_worker, args): args[0]
-                      for args in worker_args}
+        with ProcessPoolExecutor(
+            max_workers=MAX_WORKERS,
+            initializer=_init_trajectory_worker,
+            initargs=(self.mappings,)
+        ) as executor:
+            futures = {executor.submit(process_patient_worker, patient_dir): patient_dir
+                      for patient_dir in patient_dirs}
 
             # Progress bar
             with tqdm(total=len(patient_dirs), desc="Generating trajectories",
