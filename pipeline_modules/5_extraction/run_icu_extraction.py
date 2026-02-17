@@ -41,6 +41,7 @@ from parallel_extraction import (
 # Import byte-offset utilities for MEASUREMENT chunking
 from file_splitter import get_csv_byte_ranges, get_total_row_count_fast
 from file_handle_cache import FileHandleCache
+from dtype_compat import safe_int, normalize_id_columns
 
 # Platform-specific settings for performance optimization
 if platform.system() == 'Windows':
@@ -251,6 +252,8 @@ class PatientDataExtractor:
             # Collect all ICU visits first
             all_icu_visits = []
             for chunk in chunk_iterator:
+                # Normalize concept ID column to handle int/float format differences
+                chunk['visit_detail_concept_id'] = pd.to_numeric(chunk['visit_detail_concept_id'], errors='coerce')
                 # Filter ICU visits
                 icu_visits = chunk[chunk['visit_detail_concept_id'].isin(ICU_CONCEPT_IDS)].copy()
                 if not icu_visits.empty:
@@ -669,6 +672,10 @@ class PatientDataExtractor:
         if has_icu and last_icu_start and condition_file.exists():
             try:
                 conditions_df = pd.read_csv(condition_file)
+                # Normalize concept ID to handle float format ('132797.0' → 132797)
+                conditions_df['condition_concept_id'] = pd.to_numeric(
+                    conditions_df['condition_concept_id'], errors='coerce'
+                ).astype('Int64')
                 
                 # Filter for sepsis conditions
                 sepsis_conditions = conditions_df[
@@ -853,8 +860,8 @@ class PatientDataExtractor:
                             if pd.notna(birth_year):
                                 age_at_icu = first_icu_start.year - int(birth_year)
                             
-                            # Get gender
-                            gender_id = person_df['gender_concept_id'].iloc[0]
+                            # Get gender (safe_int handles '8507.0' or 8507.0)
+                            gender_id = safe_int(person_df['gender_concept_id'].iloc[0])
                             if gender_id == 8507:
                                 gender = 'Male'
                             elif gender_id == 8532:
@@ -862,8 +869,8 @@ class PatientDataExtractor:
                             else:
                                 gender = f'Other({gender_id})'
                             
-                            # Get race
-                            race_id = person_df['race_concept_id'].iloc[0]
+                            # Get race (safe_int handles float format)
+                            race_id = safe_int(person_df['race_concept_id'].iloc[0])
                             race_mapping = {
                                 8527: 'White',
                                 8516: 'Black',

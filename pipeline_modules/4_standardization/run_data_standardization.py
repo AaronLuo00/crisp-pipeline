@@ -39,8 +39,15 @@ except ImportError:
         merge_visit_chunks
     )
 import os
+import sys
 import multiprocessing as mp
 from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor, as_completed
+
+# Import dtype compatibility utilities
+_pipeline_modules_dir = str(Path(__file__).parent.parent)
+if _pipeline_modules_dir not in sys.path:
+    sys.path.insert(0, _pipeline_modules_dir)
+from utils.dtype_compat import safe_int, safe_concept_id_str, normalize_dataframe
 
 # Platform-specific settings for performance optimization
 if platform.system() == 'Windows':
@@ -357,7 +364,7 @@ class DataStandardizer:
             
         try:
             value = float(value)
-            unit_id = int(float(unit_concept_id))
+            unit_id = safe_int(unit_concept_id)
         except:
             logging.warning(f"Could not parse value/unit: {value}/{unit_concept_id}")
             return value, unit_concept_id, None
@@ -539,7 +546,7 @@ class DataStandardizer:
                 
                 for concept_id in chunk[concept_col].dropna():
                     try:
-                        concept_id = int(concept_id)
+                        concept_id = safe_int(concept_id)
                         concept_counts[concept_id] += 1
                     except Exception as e:
                         if chunk_num == 1:
@@ -552,7 +559,7 @@ class DataStandardizer:
                 
                 for concept_id, group in valid_rows.groupby(concept_col):
                     try:
-                        concept_id = int(concept_id)
+                        concept_id = safe_int(concept_id)
                         # Convert units before collecting values for statistics
                         for idx, row in group.iterrows():
                             value = float(row['value_as_number'])
@@ -704,7 +711,7 @@ class DataStandardizer:
                 if 'value_as_number' in row and row['value_as_number']:
                     try:
                         value = float(row['value_as_number'])
-                        concept_id = int(row.get(concept_col, 0))
+                        concept_id = safe_int(row.get(concept_col, 0))
                         
                         # Unit conversion
                         unit_id = row.get('unit_concept_id', '')

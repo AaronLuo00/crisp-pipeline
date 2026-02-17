@@ -23,6 +23,7 @@ _pipeline_modules_dir = str(Path(__file__).parent.parent)
 if _pipeline_modules_dir not in sys.path:
     sys.path.insert(0, _pipeline_modules_dir)
 from utils.file_splitter import get_csv_byte_ranges, streaming_csv_reader, count_rows_in_range
+from utils.dtype_compat import is_zero_or_empty, safe_concept_id_str
 
 # Performance optimization settings
 if platform.system() == 'Windows':
@@ -480,7 +481,7 @@ def clean_table_partial(table_name, start_byte=0, end_byte=-1, fieldnames=None, 
                             concept_field = PRIMARY_CONCEPT_FIELDS[table_name]
                             if concept_field in headers:
                                 concept_id = row.get(concept_field, '')
-                                if not concept_id or str(concept_id).strip() == '' or str(concept_id).strip() == '0':
+                                if is_zero_or_empty(concept_id):
                                     invalid_concept_count += 1
                                     skip_row = True
                                     removal_reason = 'invalid_concept'
