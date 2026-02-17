@@ -52,7 +52,7 @@ else:
     FILE_BUFFER_SIZE = 4 * 1024 * 1024  # 4MB file buffer
 
 # Parallel processing configuration
-MAX_WORKERS = max(1, multiprocessing.cpu_count() - 2)  # Reserve 2 cores for system
+MAX_WORKERS = int(os.environ.get("SLURM_CPUS_ON_NODE", max(1, multiprocessing.cpu_count() - 2)))  # Use SLURM allocation if available
 MEASUREMENT_SPLITS = int(os.environ.get('MEASUREMENT_SPLITS', '8'))  # Split MEASUREMENT table into parts (configurable via env)
 LARGE_TABLE_THRESHOLD = 100000  # Tables larger than this will be considered for splitting
 
