@@ -52,10 +52,11 @@ CRITICAL's unique strength lies in capturing **full-spectrum patient journeys**â
 
 ### Prerequisites
 
-- **Python 3.8+** (tested with Python 3.8.13)
+- **Python 3.8+** (tested with Python 3.8.13, 3.12.9)
 - **Memory**: 16GB+ RAM recommended 
 - **Storage**: ~2x your data size in available disk space
 - **Data Format**: OMOP CDM v5.3 compatible
+- **Key Dependencies**: `pandas`, `numpy`, `pyarrow` (for parquet I/O), `tqdm`, `tdigest` (see `config/requirements.txt`)
 
 ### Quick Installation
 
@@ -122,8 +123,17 @@ python data_preparation/validate_data.py --data-dir data/
 
 **Step 3: Run the pipeline**
 ```bash
-# Execute the complete pipeline
+# Execute the complete pipeline (default: parquet output, parallel enabled)
 python pipeline_modules/run_all_module.py
+
+# Full-scale run with traceability (keeps all intermediate files)
+python pipeline_modules/run_all_module.py --traceable --max-workers 20
+
+# Resume from a specific module (e.g., skip EDA and cleaning)
+python pipeline_modules/run_all_module.py --start-from 3_mapping
+
+# Output as CSV instead of parquet
+python pipeline_modules/run_all_module.py --output-format csv
 ```
 
 Your processed data will be available in the `output/` directory.
