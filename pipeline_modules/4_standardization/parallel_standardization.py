@@ -4,15 +4,12 @@ Handles chunked processing of MEASUREMENT and parallel processing of other table
 """
 
 import csv
-import json
 import time
 import shutil
 import pandas as pd
-import numpy as np
 import platform
 from pathlib import Path
-from typing import Dict, List, Tuple, Any
-from collections import defaultdict
+from typing import Dict, List, Tuple
 import logging
 import re
 
@@ -25,6 +22,7 @@ sys.path.append(str(Path(__file__).parent.parent / 'utils'))
 # Import unit conversion mappings
 from unit_conversions import UNIT_ID_CONVERSIONS
 from file_splitter import streaming_csv_reader
+from io_utils import get_output_format, save_df
 
 # Platform-specific settings for performance optimization
 if platform.system() == 'Windows':
@@ -453,7 +451,12 @@ def process_standard_table(args: Tuple) -> Tuple[str, Dict, float]:
     id_columns = ID_COLUMNS_TO_FORMAT.get('ALL', []) + \
                  ID_COLUMNS_TO_FORMAT.get(table_name, [])
     
-    output_file = Path(output_dir) / f"{table_name}_standardized.csv"
+    # Determine output format
+    output_fmt = get_output_format()
+    if output_fmt == 'parquet':
+        output_file = Path(output_dir) / f"{table_name}_standardized.parquet"
+    else:
+        output_file = Path(output_dir) / f"{table_name}_standardized.csv"
     
     try:
         # Check file size to decide strategy
@@ -462,9 +465,15 @@ def process_standard_table(args: Tuple) -> Tuple[str, Dict, float]:
         # Build dtype dict to read ID columns as str (avoids float64 precision loss)
         id_dtype = _get_id_dtype_dict(table_name)
         
+        # Detect input format
+        is_parquet = str(input_file).endswith('.parquet')
+        
         # Small files (<4GB): use original bulk-load approach (simpler, no overhead)
         if file_size <= 4 * 1024 * 1024 * 1024:
-            df = pd.read_csv(input_file, low_memory=False, dtype=id_dtype)
+            if is_parquet:
+                df = pd.read_parquet(input_file)
+            else:
+                df = pd.read_csv(input_file, low_memory=False, dtype=id_dtype)
             stats['input_records'] = len(df)
             
             # Standardize datetime fields if applicable
@@ -479,39 +488,84 @@ def process_standard_table(args: Tuple) -> Tuple[str, Dict, float]:
             
             stats['output_records'] = len(df)
             df = format_id_columns_df(df, table_name)
-            df.to_csv(output_file, index=False, date_format='%Y-%m-%d %H:%M:%S')
+            save_df(df, output_file, index=False)
         else:
             # Large files (>512MB): chunked streaming — O(chunk_size) memory
             STREAM_CHUNK = 500000  # 500K rows per chunk
             header_written = False
             
-            for chunk in pd.read_csv(input_file, chunksize=STREAM_CHUNK, low_memory=False, dtype=id_dtype):
-                stats['input_records'] += len(chunk)
+            if is_parquet:
+                # Streaming parquet read via row groups — O(batch_size) memory
+                import pyarrow.parquet as pq
+                import pyarrow as pa
+                pf = pq.ParquetFile(input_file)
+                pq_writer = None
+                parquet_out = Path(str(output_file).replace('.csv', '') + '.parquet')
                 
-                # Standardize datetime fields
-                for col in date_cols:
-                    if col in chunk.columns:
-                        mask = chunk[col].notna()
-                        non_null = mask.sum()
-                        if non_null > 0:
-                            chunk.loc[mask, col] = chunk.loc[mask, col].astype(str).str.replace(
-                                r'(\d{2}:\d{2}:\d{2})\.\d+', r'\1', regex=True)
-                            stats['datetime_standardized'] += non_null
+                for batch in pf.iter_batches(batch_size=STREAM_CHUNK):
+                    chunk = batch.to_pandas()
+                    chunk['person_id'] = chunk['person_id'].astype(str)
+                    stats['input_records'] += len(chunk)
+                    for col in date_cols:
+                        if col in chunk.columns:
+                            mask = chunk[col].notna()
+                            non_null = mask.sum()
+                            if non_null > 0:
+                                chunk.loc[mask, col] = chunk.loc[mask, col].astype(str).str.replace(
+                                    r'(\d{2}:\d{2}:\d{2})\.\d+', r'\1', regex=True)
+                                stats['datetime_standardized'] += non_null
+                    chunk = format_id_columns_df(chunk, table_name)
+                    stats['output_records'] += len(chunk)
+                    
+                    out_table = pa.Table.from_pandas(chunk, preserve_index=False)
+                    if pq_writer is None:
+                        pq_writer = pq.ParquetWriter(parquet_out, out_table.schema)
+                    pq_writer.write_table(out_table)
                 
-                # Format ID columns
-                chunk = format_id_columns_df(chunk, table_name)
+                if pq_writer is not None:
+                    pq_writer.close()
+            else:
+                for chunk in pd.read_csv(input_file, chunksize=STREAM_CHUNK, low_memory=False, dtype=id_dtype):
+                    stats['input_records'] += len(chunk)
+                    
+                    # Standardize datetime fields
+                    for col in date_cols:
+                        if col in chunk.columns:
+                            mask = chunk[col].notna()
+                            non_null = mask.sum()
+                            if non_null > 0:
+                                chunk.loc[mask, col] = chunk.loc[mask, col].astype(str).str.replace(
+                                    r'(\d{2}:\d{2}:\d{2})\.\d+', r'\1', regex=True)
+                                stats['datetime_standardized'] += non_null
+                    
+                    # Format ID columns
+                    chunk = format_id_columns_df(chunk, table_name)
+                    
+                    stats['output_records'] += len(chunk)
+                    
+                    if output_fmt == 'parquet':
+                        # Incremental parquet write — O(chunk_size) memory
+                        import pyarrow as pa
+                        import pyarrow.parquet as pq
+                        table = pa.Table.from_pandas(chunk, preserve_index=False)
+                        if not header_written:
+                            parquet_path = Path(str(output_file).replace('.csv', '') + '.parquet')
+                            pq_writer = pq.ParquetWriter(parquet_path, table.schema)
+                            header_written = True
+                        pq_writer.write_table(table)
+                    else:
+                        # Append to CSV output file
+                        chunk.to_csv(
+                            output_file,
+                            index=False,
+                            mode='a' if header_written else 'w',
+                            header=not header_written,
+                            date_format='%Y-%m-%d %H:%M:%S'
+                        )
+                        header_written = True
                 
-                stats['output_records'] += len(chunk)
-                
-                # Append to output file
-                chunk.to_csv(
-                    output_file,
-                    index=False,
-                    mode='a' if header_written else 'w',
-                    header=not header_written,
-                    date_format='%Y-%m-%d %H:%M:%S'
-                )
-                header_written = True
+                if output_fmt == 'parquet' and header_written:
+                    pq_writer.close()
         
     except Exception as e:
         logging.error(f"Error processing {table_name}: {e}")
@@ -537,11 +591,11 @@ def merge_measurement_chunks(output_dir: Path, num_chunks: int) -> Dict:
     start_time = time.time()
     stats = {'records_merged': 0}
     
-    # Output files
-    final_output = output_dir / "MEASUREMENT_standardized.csv"
+    # Always merge to CSV first (chunks are CSV from streaming processing)
+    csv_output = output_dir / "MEASUREMENT_standardized.csv"
     
     # Merge main data files
-    with open(final_output, 'wb') as outfile:
+    with open(csv_output, 'wb') as outfile:
         for i in range(num_chunks):
             chunk_file = output_dir / f".temp_measurement_chunk_{i}.csv"
             if not chunk_file.exists():
@@ -559,6 +613,16 @@ def merge_measurement_chunks(output_dir: Path, num_chunks: int) -> Dict:
             
             # Remove temp file
             chunk_file.unlink()
+    
+    # Convert to parquet if configured
+    output_fmt = get_output_format()
+    if output_fmt == 'parquet':
+        try:
+            from io_utils import convert_csv_to_parquet
+            convert_csv_to_parquet(csv_output, delete_csv=True)
+            logging.info("Converted MEASUREMENT_standardized to parquet")
+        except Exception as e:
+            logging.warning(f"Could not convert MEASUREMENT to parquet: {e}")
     
     # Merge outlier files
     merge_outlier_files(output_dir, num_chunks, 'outliers_percentile')
@@ -629,7 +693,10 @@ def process_visit_patient_chunk(args: Tuple) -> Tuple[int, Dict, float]:
     # Read pre-split chunk file (only contains this chunk's patients, ~1/N of full file)
     # original_row_number is already added by the caller before splitting
     id_dtype = _get_id_dtype_dict(table_name)
-    chunk_df = pd.read_csv(input_file, low_memory=False, dtype=id_dtype)
+    if str(input_file).endswith('.parquet'):
+        chunk_df = pd.read_parquet(input_file)
+    else:
+        chunk_df = pd.read_csv(input_file, low_memory=False, dtype=id_dtype)
     
     if chunk_df.empty:
         logging.warning(f"No data found for chunk {chunk_id}")
@@ -637,6 +704,12 @@ def process_visit_patient_chunk(args: Tuple) -> Tuple[int, Dict, float]:
     
     # Initialize merger
     merger = VisitConceptMerger(threshold_minutes=int(threshold_hours * 60))
+    
+    # Normalize patient_chunk IDs to match chunk_df's person_id dtype
+    # (patient_chunk comes from parquet int64, but CSV reads person_id as str via dtype dict)
+    pid_dtype = chunk_df['person_id'].dtype
+    if pid_dtype == object or str(pid_dtype) in ('string', 'str', 'object'):
+        patient_chunk = [str(pid) for pid in patient_chunk]
     
     # Process each patient in chunk
     all_results = []
@@ -709,9 +782,10 @@ def merge_visit_chunks(output_dir: Path, table_name: str, num_chunks: int) -> Di
     start_time = time.time()
     stats = {'chunks_merged': 0, 'records_merged': 0}
     
-    # Output files
+    # Output files — always merge to CSV first (chunks are CSV), then convert if needed
     final_output = output_dir / f"{table_name}_standardized.csv"
     final_mapping = output_dir / "merged_visit" / f"{table_name}_merge_mapping.csv"
+    output_fmt = get_output_format()
     
     # Ensure directories exist
     final_mapping.parent.mkdir(parents=True, exist_ok=True)
@@ -761,6 +835,15 @@ def merge_visit_chunks(output_dir: Path, table_name: str, num_chunks: int) -> Di
                 
                 # Clean up temp file
                 mapping_file.unlink()
+    
+    # Convert to parquet if configured
+    if output_fmt == 'parquet' and final_output.exists():
+        try:
+            from io_utils import convert_csv_to_parquet
+            convert_csv_to_parquet(final_output, delete_csv=True)
+            logging.info(f"Converted {table_name}_standardized to parquet")
+        except Exception as e:
+            logging.warning(f"Could not convert {table_name} to parquet: {e}")
     
     elapsed = time.time() - start_time
     logging.info(f"{table_name} chunks merged in {elapsed:.2f}s")

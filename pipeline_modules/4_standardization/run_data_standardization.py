@@ -1289,7 +1289,11 @@ class DataStandardizer:
                 if task_type == 'visit_chunks':
                     task_start_times[('visit_chunks', table_name)] = time.time()
                     
-                    input_file = self.get_input_path(table_name)
+                    # Use the STANDARDIZED output from Phase 2 (not mapped input)
+                    try:
+                        input_file = resolve_input(output_dir / f"{table_name}_standardized.csv")
+                    except FileNotFoundError:
+                        input_file = self.get_input_path(table_name)
                     if input_file.exists():
                         import pandas as pd
                         import numpy as np
