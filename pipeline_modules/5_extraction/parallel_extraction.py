@@ -1,11 +1,8 @@
 #!/usr/bin/env python
 """Parallel processing functions for ICU data extraction."""
 
-import os
 import sys
-import csv
 import time
-import io
 import pandas as pd
 import platform
 import shutil
@@ -22,6 +19,7 @@ if str(_utils_dir) not in sys.path:
 
 from file_splitter import count_rows_in_range
 from file_handle_cache import FileHandleCache
+from io_utils import resolve_input
 
 # Platform-specific settings
 if platform.system() == 'Windows':
@@ -71,20 +69,29 @@ def process_single_table_worker(table_name: str, standardized_dir: Path,
     """Process a single table in a worker process."""
     t0 = time.time()
     
-    input_file = standardized_dir / f"{table_name}_standardized.csv"
-    if not input_file.exists():
-        return {'error': f"File not found: {input_file}"}
+    try:
+        input_file = resolve_input(standardized_dir / f"{table_name}_standardized.csv")
+    except FileNotFoundError:
+        return {'error': f"File not found: {table_name}_standardized"}
     
     total_records = 0
     patients_processed = set()
     
     try:
-        # Count total rows
-        with open(input_file, 'r') as f:
-            total_rows = sum(1 for _ in f) - 1
+        is_parquet = str(input_file).endswith('.parquet')
         
-        # Process in chunks using LRU file handle cache to avoid fd exhaustion
-        reader = pd.read_csv(input_file, dtype={"person_id": str}, chunksize=CHUNK_SIZE)
+        if is_parquet:
+            _full_df = pd.read_parquet(input_file)
+            _full_df['person_id'] = _full_df['person_id'].astype(str)
+            total_rows = len(_full_df)
+            reader = [_full_df]
+        else:
+            # Count total rows
+            with open(input_file, 'r') as f:
+                total_rows = sum(1 for _ in f) - 1
+            
+            # Process in chunks using LRU file handle cache to avoid fd exhaustion
+            reader = pd.read_csv(input_file, dtype={"person_id": str}, chunksize=CHUNK_SIZE)
         
         file_cache = FileHandleCache(max_handles=5000, buffer_size=FILE_BUFFER_SIZE)
         
@@ -292,7 +299,10 @@ def group_tables_by_size(tables: List[str], standardized_dir: Path) -> Tuple[Lis
             # Always treat MEASUREMENT as large
             large_tables.append(table)
         else:
-            file_path = standardized_dir / f"{table}_standardized.csv"
+            try:
+                file_path = resolve_input(standardized_dir / f"{table}_standardized.csv")
+            except FileNotFoundError:
+                continue
             size_category = estimate_table_size(file_path)
             
             if size_category == 'small':

@@ -10,10 +10,9 @@ import shutil
 import time
 from pathlib import Path
 from datetime import datetime
-from collections import defaultdict, Counter
+from collections import defaultdict
 from tqdm import tqdm
 import pandas as pd
-import numpy as np
 from concurrent.futures import ProcessPoolExecutor, as_completed
 import multiprocessing
 import logging
@@ -23,7 +22,8 @@ _pipeline_modules_dir = str(Path(__file__).parent.parent)
 if _pipeline_modules_dir not in sys.path:
     sys.path.insert(0, _pipeline_modules_dir)
 from utils.file_splitter import get_csv_byte_ranges, streaming_csv_reader, count_rows_in_range
-from utils.dtype_compat import is_zero_or_empty, safe_concept_id_str
+from utils.dtype_compat import is_zero_or_empty
+from utils.io_utils import get_output_format, convert_csv_to_parquet
 
 # Performance optimization settings
 if platform.system() == 'Windows':
@@ -1026,6 +1026,24 @@ if __name__ == '__main__':
     results_path = output_dir / "cleaning_results.json"
     with open(results_path, 'w') as f:
         json.dump(cleaning_results, f, indent=2)
+
+    # Convert cleaned CSV files to Parquet if output format is parquet
+    # Note: MEASUREMENT stays as CSV because Module 3 and 4 use byte-level CSV streaming on it
+    if get_output_format() == 'parquet':
+        print("\nConverting cleaned files to Parquet format...")
+        for table in KEY_TABLES:
+            if table == 'MEASUREMENT':
+                print(f"  Skipping {table} (stays as CSV for streaming compatibility)")
+                continue
+            csv_file = output_dir / f"{table}_cleaned.csv"
+            if csv_file.exists():
+                try:
+                    parquet_path = convert_csv_to_parquet(csv_file, delete_csv=True)
+                    if parquet_path:
+                        print(f"  Converted {table}_cleaned.csv -> .parquet")
+                except Exception as e:
+                    print(f"  Warning: Could not convert {table}: {e}")
+        print("Parquet conversion complete.")
 
     print(f"\n{'='*60}")
     print("CLEANING COMPLETE")

@@ -10,9 +10,9 @@ import pandas as pd
 import platform
 import time
 from pathlib import Path
-from datetime import datetime, timedelta
+from datetime import datetime
 from collections import defaultdict, Counter
-from typing import List, Dict, Tuple, Any
+from typing import List, Dict, Tuple
 from tqdm import tqdm
 import logging
 import warnings
@@ -43,13 +43,14 @@ except ImportError:
 import os
 import sys
 import multiprocessing as mp
-from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor, as_completed
+from concurrent.futures import ProcessPoolExecutor
 
 # Import dtype compatibility utilities
 _pipeline_modules_dir = str(Path(__file__).parent.parent)
 if _pipeline_modules_dir not in sys.path:
     sys.path.insert(0, _pipeline_modules_dir)
-from utils.dtype_compat import safe_int, safe_concept_id_str, normalize_dataframe
+from utils.dtype_compat import safe_int
+from utils.io_utils import resolve_input, save_df
 
 # Platform-specific settings for performance optimization
 if platform.system() == 'Windows':
@@ -186,7 +187,7 @@ CONCEPT_RANGES = {
 }
 
 # Import unit conversion configurations
-from unit_conversions import UNIT_CONCEPT_MAP, UNIT_ID_CONVERSIONS, LEGACY_UNIT_CONVERSIONS
+from unit_conversions import UNIT_ID_CONVERSIONS
 
 class DataStandardizer:
     def __init__(self, outlier_percentile=99.0, 
@@ -228,10 +229,15 @@ class DataStandardizer:
         }
         
     def get_input_path(self, table_name):
-        """Get the correct input path - all tables should come from mapping output."""
-        # All tables have been processed by Module 3 (mapping and low frequency filtering)
-        input_file = mapping_dir / f"{table_name}_mapped.csv"
-        return input_file
+        """Get the correct input path - all tables should come from mapping output.
+        
+        Resolves to .parquet or .csv based on what exists.
+        """
+        try:
+            return resolve_input(mapping_dir / f"{table_name}_mapped.csv")
+        except FileNotFoundError:
+            # Fall back to explicit CSV path for error messages
+            return mapping_dir / f"{table_name}_mapped.csv"
     
     def standardize_datetime(self, dt_string, column_name=""):
         """Optimized datetime standardization with caching and format detection."""
@@ -1034,9 +1040,10 @@ class DataStandardizer:
             logging.info(f"Skipping merge for {table_name} - not a visit table")
             return
         
-        # Get the standardized input file
-        input_file = output_dir / f"{table_name}_standardized.csv"
-        if not input_file.exists():
+        # Get the standardized input file (may be .parquet or .csv)
+        try:
+            input_file = resolve_input(output_dir / f"{table_name}_standardized.csv")
+        except FileNotFoundError:
             # If standardized file doesn't exist, use the cleaned file
             input_file = self.get_input_path(table_name)
             if not input_file.exists():
@@ -1072,8 +1079,7 @@ class DataStandardizer:
         # Save the merged result as the standardized output
         # This overwrites the standardized file with the merged version
         output_file = output_dir / f"{table_name}_standardized.csv"
-        # Use date_format to preserve time component even when it's 00:00:00
-        merged_df.to_csv(output_file, index=False, date_format='%Y-%m-%d %H:%M:%S')
+        save_df(merged_df, output_file, index=False)
         logging.info(f"Saved merged {table_name} to: {output_file}")
         
         # Save mapping file to merged subdirectory
@@ -1290,7 +1296,10 @@ class DataStandardizer:
                         
                         # Read full file ONCE in main process (ID cols as str to avoid float64 precision loss)
                         id_dtype = _get_id_dtype_dict(table_name)
-                        df_full = pd.read_csv(input_file, low_memory=False, dtype=id_dtype)
+                        if str(input_file).endswith('.parquet'):
+                            df_full = pd.read_parquet(input_file)
+                        else:
+                            df_full = pd.read_csv(input_file, low_memory=False, dtype=id_dtype)
                         # Add original row numbers (index + 2: 0-based index + header row)
                         df_full['original_row_number'] = df_full.index + 2
                         

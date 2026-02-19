@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 """Extract patient data and organize by patient ID with ICU timeline information."""
 
-import os
-import csv
 import json
 import glob
 import pandas as pd
@@ -10,7 +8,6 @@ import platform
 import time
 from pathlib import Path
 from datetime import datetime
-from collections import defaultdict
 from tqdm import tqdm
 import logging
 import warnings
@@ -32,7 +29,6 @@ if str(utils_dir) not in sys.path:
 
 # Import parallel processing functions
 from parallel_extraction import (
-    process_table_batch,
     process_single_table_worker,
     process_measurement_chunk,
     merge_measurement_chunks
@@ -41,7 +37,8 @@ from parallel_extraction import (
 # Import byte-offset utilities for MEASUREMENT chunking
 from file_splitter import get_csv_byte_ranges, get_total_row_count_fast
 from file_handle_cache import FileHandleCache
-from dtype_compat import safe_int, normalize_id_columns
+from dtype_compat import safe_int
+from io_utils import resolve_input
 
 # Platform-specific settings for performance optimization
 if platform.system() == 'Windows':
@@ -215,9 +212,10 @@ class PatientDataExtractor:
         t0 = time.time()
         logging.info("Extracting ICU visit episodes...")
         
-        visit_detail_file = standardized_dir / "VISIT_DETAIL_standardized.csv"
-        if not visit_detail_file.exists():
-            logging.error(f"VISIT_DETAIL file not found: {visit_detail_file}")
+        try:
+            visit_detail_file = resolve_input(standardized_dir / "VISIT_DETAIL_standardized.csv")
+        except FileNotFoundError:
+            logging.error(f"VISIT_DETAIL file not found in {standardized_dir}")
             return {}
         
         # Dictionary to store all ICU episodes for each patient
@@ -236,7 +234,14 @@ class PatientDataExtractor:
                 return all_patient_episodes
             
             # Read in chunks for memory efficiency
-            chunks = pd.read_csv(visit_detail_file, chunksize=CHUNK_SIZE, dtype={"person_id": str}, low_memory=False)
+            if str(visit_detail_file).endswith('.parquet'):
+                # Parquet: read all at once (typically fits in memory) and fake a chunk iterator
+                _full_df = pd.read_parquet(visit_detail_file)
+                _full_df['person_id'] = _full_df['person_id'].astype(str)
+                chunks = [_full_df]
+                estimated_chunks = 1
+            else:
+                chunks = pd.read_csv(visit_detail_file, chunksize=CHUNK_SIZE, dtype={"person_id": str}, low_memory=False)
             
             # Only use progress bar if we have multiple chunks
             if estimated_chunks > 1:
@@ -344,9 +349,10 @@ class PatientDataExtractor:
         t0 = time.time()
         logging.info(f"Processing {table_name}...")
         
-        input_file = standardized_dir / f"{table_name}_standardized.csv"
-        if not input_file.exists():
-            logging.warning(f"File not found: {input_file}")
+        try:
+            input_file = resolve_input(standardized_dir / f"{table_name}_standardized.csv")
+        except FileNotFoundError:
+            logging.warning(f"File not found: {table_name}_standardized")
             return
         
         # Track statistics
@@ -361,7 +367,12 @@ class PatientDataExtractor:
             num_chunks = (total_rows + CHUNK_SIZE - 1) // CHUNK_SIZE
             
             # Process in chunks
-            reader = pd.read_csv(input_file, dtype={"person_id": str}, chunksize=CHUNK_SIZE)
+            if str(input_file).endswith('.parquet'):
+                _full_df = pd.read_parquet(input_file)
+                _full_df['person_id'] = _full_df['person_id'].astype(str)
+                reader = [_full_df]
+            else:
+                reader = pd.read_csv(input_file, dtype={"person_id": str}, chunksize=CHUNK_SIZE)
             
             # Enable progress bar for tables with significant data (consistent with Module 4)
             show_progress = total_rows > 10000  # Show progress for tables > 10k rows
@@ -432,9 +443,10 @@ class PatientDataExtractor:
         t0 = time.time()
         logging.info(f"Processing {table_name} from cleaning directory...")
         
-        input_file = cleaning_dir / f"{table_name}_cleaned.csv"
-        if not input_file.exists():
-            logging.warning(f"File not found: {input_file}")
+        try:
+            input_file = resolve_input(cleaning_dir / f"{table_name}_cleaned.csv")
+        except FileNotFoundError:
+            logging.warning(f"File not found: {table_name}_cleaned")
             return
         
         # Track statistics
@@ -443,7 +455,11 @@ class PatientDataExtractor:
         
         try:
             # Read the entire table (basic tables are usually smaller)
-            df = pd.read_csv(input_file, dtype={"person_id": str})
+            if str(input_file).endswith('.parquet'):
+                df = pd.read_parquet(input_file)
+                df['person_id'] = df['person_id'].astype(str)
+            else:
+                df = pd.read_csv(input_file, dtype={"person_id": str})
             df = df[df["person_id"].notnull()]
             total_records = len(df)
             
@@ -457,7 +473,8 @@ class PatientDataExtractor:
                 patient_path = self.get_patient_path(person_id)
                 patient_path.mkdir(parents=True, exist_ok=True)
                 
-                # Write to patient's table file with optimized buffering
+                # Write to patient's table file
+                # Per-patient files always use CSV (500K+ tiny files — parquet overhead not worth it)
                 file_path = patient_path / f"{table_name}.csv"
                 with open(file_path, 'w', newline='', encoding='utf-8', buffering=FILE_BUFFER_SIZE) as f:
                     group_df.to_csv(f, index=False)
@@ -1300,11 +1317,11 @@ class PatientDataExtractor:
         # This ensures every table gets processed
         tables_to_process = []
         for table in tables_without_measurement:
-            file_path = standardized_dir / f"{table}_standardized.csv"
-            if file_path.exists():
+            try:
+                _resolved = resolve_input(standardized_dir / f"{table}_standardized.csv")
                 tables_to_process.append(table)
-            else:
-                logging.warning(f"Table {table} file not found: {file_path}")
+            except FileNotFoundError:
+                logging.warning(f"Table {table} standardized file not found in {standardized_dir}")
         
         print(f"\nTables to process ({len(tables_to_process)}): {', '.join(tables_to_process)}")
         print(f"  (MEASUREMENT will be processed separately with parallel chunks)")
@@ -1370,69 +1387,82 @@ class PatientDataExtractor:
         print("\n=== Phase 2: MEASUREMENT Parallel Processing ===")
         print(f"Step 3/3: Processing MEASUREMENT table...")
         phase2_start = time.time()
-        measurement_file = standardized_dir / "MEASUREMENT_standardized.csv"
+        try:
+            measurement_file = resolve_input(standardized_dir / "MEASUREMENT_standardized.csv")
+        except FileNotFoundError:
+            measurement_file = standardized_dir / "MEASUREMENT_standardized.csv"  # Will fail existence check below
         
         if measurement_file.exists():
-            print(f"Processing MEASUREMENT with {MEASUREMENT_CHUNKS} parallel chunks...")
-            print(f"  Computing byte-offset ranges (O(n_chunks) seeks, not full file scan)...")
             measurement_start = time.time()
+            is_measurement_parquet = str(measurement_file).endswith('.parquet')
             
-            # Compute byte ranges ONCE — O(MEASUREMENT_CHUNKS) seeks, ~milliseconds
-            # This replaces having each of 6 workers independently count all rows
-            byte_ranges = get_csv_byte_ranges(str(measurement_file), MEASUREMENT_CHUNKS)
-            actual_chunks = len(byte_ranges)
-            
-            if actual_chunks != MEASUREMENT_CHUNKS:
-                print(f"  Note: File split into {actual_chunks} chunks (requested {MEASUREMENT_CHUNKS})")
-            
-            for i, (sb, eb, _) in enumerate(byte_ranges):
-                size_mb = (eb - sb) / (1024 * 1024)
-                print(f"  Chunk {i}: bytes {sb:,} - {eb:,} ({size_mb:.1f} MB)")
-            
-            with ProcessPoolExecutor(max_workers=actual_chunks) as executor:
-                # Submit all chunks with pre-computed byte ranges
-                chunk_futures = []
-                for chunk_id, (start_byte, end_byte, fieldnames) in enumerate(byte_ranges):
-                    future = executor.submit(
-                        process_measurement_chunk,
-                        (chunk_id, start_byte, end_byte, fieldnames, 
-                         str(measurement_file), str(output_dir))
-                    )
-                    chunk_futures.append(future)
-                
-                # Collect chunk results
-                chunk_results = []
-                for i, future in enumerate(as_completed(chunk_futures)):
-                    try:
-                        chunk_id, patient_counts, temp_dir = future.result()  # No timeout - let it complete
-                        chunk_results.append((chunk_id, patient_counts, temp_dir))
-                        print(f"  [OK] Chunk {chunk_id + 1}/{actual_chunks} completed")
-                    except Exception as e:
-                        print(f"  [FAIL] Chunk {i} failed: {e}")
-                        logging.error(f"MEASUREMENT chunk {i} failed: {e}")
-            
-            # Validate all chunks completed before merging
-            if len(chunk_results) < actual_chunks:
-                failed = actual_chunks - len(chunk_results)
-                raise RuntimeError(
-                    f"{failed}/{actual_chunks} MEASUREMENT chunks failed — "
-                    f"aborting merge to prevent silent data loss. "
-                    f"Check logs above for chunk failure details."
-                )
-            
-            # Merge chunks (all chunks verified successful)
-            if chunk_results:
-                print("  Merging MEASUREMENT chunks...")
-                merge_stats = merge_measurement_chunks(output_dir, patient_data_dir, actual_chunks)
-                
+            if is_measurement_parquet:
+                # Parquet input: use pandas-based extraction (no byte-range seeking)
+                print(f"Processing MEASUREMENT from parquet file...")
+                self.split_table_by_patient('MEASUREMENT')
                 measurement_time = time.time() - measurement_start
-                self.extraction_results['statistics']['MEASUREMENT'] = {
-                    'total_records': merge_stats['total_records'],
-                    'unique_patients': merge_stats['unique_patients'],
-                    'processing_time': measurement_time
-                }
-                print(f"  [OK] MEASUREMENT completed: {merge_stats['total_records']:,} records, "
-                     f"{merge_stats['unique_patients']} patients in {measurement_time:.2f}s")
+                print(f"  [OK] MEASUREMENT completed in {measurement_time:.2f}s")
+            else:
+                # CSV input: use optimized byte-range parallel chunks
+                print(f"Processing MEASUREMENT with {MEASUREMENT_CHUNKS} parallel chunks...")
+                print(f"  Computing byte-offset ranges (O(n_chunks) seeks, not full file scan)...")
+                
+                # Compute byte ranges ONCE — O(MEASUREMENT_CHUNKS) seeks, ~milliseconds
+                # This replaces having each of 6 workers independently count all rows
+                byte_ranges = get_csv_byte_ranges(str(measurement_file), MEASUREMENT_CHUNKS)
+                actual_chunks = len(byte_ranges)
+                
+                if actual_chunks != MEASUREMENT_CHUNKS:
+                    print(f"  Note: File split into {actual_chunks} chunks (requested {MEASUREMENT_CHUNKS})")
+                
+                for i, (sb, eb, _) in enumerate(byte_ranges):
+                    size_mb = (eb - sb) / (1024 * 1024)
+                    print(f"  Chunk {i}: bytes {sb:,} - {eb:,} ({size_mb:.1f} MB)")
+                
+                with ProcessPoolExecutor(max_workers=actual_chunks) as executor:
+                    # Submit all chunks with pre-computed byte ranges
+                    chunk_futures = []
+                    for chunk_id, (start_byte, end_byte, fieldnames) in enumerate(byte_ranges):
+                        future = executor.submit(
+                            process_measurement_chunk,
+                            (chunk_id, start_byte, end_byte, fieldnames, 
+                             str(measurement_file), str(output_dir))
+                        )
+                        chunk_futures.append(future)
+                    
+                    # Collect chunk results
+                    chunk_results = []
+                    for i, future in enumerate(as_completed(chunk_futures)):
+                        try:
+                            chunk_id, patient_counts, temp_dir = future.result()  # No timeout - let it complete
+                            chunk_results.append((chunk_id, patient_counts, temp_dir))
+                            print(f"  [OK] Chunk {chunk_id + 1}/{actual_chunks} completed")
+                        except Exception as e:
+                            print(f"  [FAIL] Chunk {i} failed: {e}")
+                            logging.error(f"MEASUREMENT chunk {i} failed: {e}")
+                
+                # Validate all chunks completed before merging
+                if len(chunk_results) < actual_chunks:
+                    failed = actual_chunks - len(chunk_results)
+                    raise RuntimeError(
+                        f"{failed}/{actual_chunks} MEASUREMENT chunks failed — "
+                        f"aborting merge to prevent silent data loss. "
+                        f"Check logs above for chunk failure details."
+                    )
+                
+                # Merge chunks (all chunks verified successful)
+                if chunk_results:
+                    print("  Merging MEASUREMENT chunks...")
+                    merge_stats = merge_measurement_chunks(output_dir, patient_data_dir, actual_chunks)
+                    
+                    measurement_time = time.time() - measurement_start
+                    self.extraction_results['statistics']['MEASUREMENT'] = {
+                        'total_records': merge_stats['total_records'],
+                        'unique_patients': merge_stats['unique_patients'],
+                        'processing_time': measurement_time
+                    }
+                    print(f"  [OK] MEASUREMENT completed: {merge_stats['total_records']:,} records, "
+                         f"{merge_stats['unique_patients']} patients in {measurement_time:.2f}s")
         else:
             print("  MEASUREMENT file not found, skipping...")
         

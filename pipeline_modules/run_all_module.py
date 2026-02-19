@@ -268,6 +268,10 @@ class CRISPPipeline:
         if self.config.get('measurement_splits'):
             env['MEASUREMENT_SPLITS'] = str(self.config['measurement_splits'])
         
+        # Pass output format and traceable settings via environment variables
+        env['PIPELINE_OUTPUT_FORMAT'] = self.config.get('output_format', 'parquet')
+        env['PIPELINE_TRACEABLE'] = '1' if self.config.get('traceable', False) else '0'
+        
         # Execute module
         start_time = time.time()
         try:
@@ -416,6 +420,68 @@ class CRISPPipeline:
             logging.error(f"Module {module_name} failed: {e}")
             return False, {'error': str(e), 'execution_time': time.time() - start_time}
     
+    def cleanup_previous_module_data(self, completed_module_id: str):
+        """Delete large intermediate data files from previous modules when not in traceable mode.
+        
+        Keeps: reports, JSONs, removed_records/, logs, pipeline_runs/
+        Deletes: large *_cleaned.{csv,parquet}, *_mapped.{csv,parquet}, *_standardized.{csv,parquet}
+        """
+        if self.config.get('traceable', False):
+            return
+        
+        output_base = self.project_root / "output"
+        
+        # Define what to clean after each module completes
+        # Note: Module 2 (cleaning) output is needed by BOTH Module 3 AND Module 5 
+        # (PERSON, DEATH are read directly from 2_cleaning by extraction).
+        # So we only clean Module 2 after Module 5 finishes.
+        cleanup_map = {
+            '4_standardization': {
+                'dir': output_base / '3_mapping',
+                'patterns': ['*_mapped.csv', '*_mapped.parquet']
+            },
+            '5_extraction': {
+                'dirs': [
+                    {'dir': output_base / '2_cleaning', 'patterns': ['*_cleaned.csv', '*_cleaned.parquet']},
+                    {'dir': output_base / '4_standardization', 'patterns': ['*_standardized.csv', '*_standardized.parquet']},
+                ]
+            }
+        }
+        
+        if completed_module_id not in cleanup_map:
+            return
+        
+        cleanup_info = cleanup_map[completed_module_id]
+        
+        # Support both single-dir and multi-dir cleanup
+        if 'dirs' in cleanup_info:
+            cleanup_targets = cleanup_info['dirs']
+        else:
+            cleanup_targets = [{'dir': cleanup_info['dir'], 'patterns': cleanup_info['patterns']}]
+        
+        total_deleted = 0
+        total_freed = 0
+        
+        for target in cleanup_targets:
+            cleanup_dir = target['dir']
+            if not cleanup_dir.exists():
+                continue
+            
+            for pattern in target['patterns']:
+                for f in cleanup_dir.glob(pattern):
+                    try:
+                        file_size = f.stat().st_size
+                        f.unlink()
+                        total_deleted += 1
+                        total_freed += file_size
+                    except Exception as e:
+                        logging.warning(f"Could not delete {f}: {e}")
+            
+            if total_deleted > 0:
+                mb_freed = total_freed / (1024 * 1024)
+                logging.info(f"  [CLEANUP] Deleted {total_deleted} intermediate files "
+                            f"({mb_freed:.1f} MB freed)")
+
     def run_all(self, skip_modules: List[str] = None, start_from: str = None, dry_run: bool = False):
         """
         Run all pipeline modules in sequence
@@ -432,6 +498,8 @@ class CRISPPipeline:
         logging.info("CRISP PIPELINE EXECUTION")
         logging.info(f"Run ID: {self.run_id}")
         logging.info(f"Start Time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+        logging.info(f"Output Format: {self.config.get('output_format', 'parquet')}")
+        logging.info(f"Traceable Mode: {'ON' if self.config.get('traceable', False) else 'OFF (intermediate files will be cleaned)'}")
         
         # Print parallel processing configuration
         import multiprocessing
@@ -502,6 +570,8 @@ class CRISPPipeline:
                 
                 if success:
                     successful_modules.append(module['id'])
+                    # Clean up previous module's intermediate data files
+                    self.cleanup_previous_module_data(module['id'])
                 else:
                     failed_modules.append(module['id'])
                     if module.get('required', False):
@@ -580,8 +650,9 @@ class CRISPPipeline:
         if '5_extraction' in self.results and self.results['5_extraction'].get('success', False):
             extracted_dir = self.project_root / "extracted_patient_data"
             if extracted_dir.exists():
-                # Count actual patients by counting PERSON.csv files (most accurate method)
+                # Count actual patients by counting PERSON.csv or PERSON.parquet files (most accurate method)
                 person_files = glob.glob(str(extracted_dir / "**" / "PERSON.csv"), recursive=True)
+                person_files += glob.glob(str(extracted_dir / "**" / "PERSON.parquet"), recursive=True)
                 patient_count = len(person_files)
                 if patient_count > 0:
                     print(f"\nExtracted Patient Data:")
@@ -654,8 +725,9 @@ class CRISPPipeline:
             if '5_extraction' in successful_modules:
                 extracted_dir = self.project_root / "extracted_patient_data"
                 if extracted_dir.exists():
-                    # Count actual patients by counting PERSON.csv files
+                    # Count actual patients by counting PERSON.csv or PERSON.parquet files
                     person_files = glob.glob(str(extracted_dir / "**" / "PERSON.csv"), recursive=True)
+                    person_files += glob.glob(str(extracted_dir / "**" / "PERSON.parquet"), recursive=True)
                     patient_count = len(person_files)
                     if patient_count > 0:
                         f.write(f"\n### Final Output\n\n")
@@ -774,6 +846,20 @@ def main():
         help='Show detailed output from each module'
     )
     
+    parser.add_argument(
+        '--traceable',
+        action='store_true',
+        default=False,
+        help='Keep all intermediate data files (default: false, deletes previous module data after each step)'
+    )
+    
+    parser.add_argument(
+        '--output-format',
+        choices=['parquet', 'csv'],
+        default='parquet',
+        help='Output format for inter-module data files (default: parquet)'
+    )
+    
     args = parser.parse_args()
     
     # Load configuration
@@ -796,6 +882,8 @@ def main():
     config['max_workers'] = args.max_workers if args.max_workers else max(1, multiprocessing.cpu_count() - 2)
     config['quiet'] = args.quiet
     config['verbose'] = args.verbose
+    config['traceable'] = args.traceable
+    config['output_format'] = args.output_format
     
     # Initialize and run pipeline
     base_dir = Path(__file__).parent

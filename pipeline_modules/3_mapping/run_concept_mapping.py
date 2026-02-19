@@ -8,21 +8,21 @@ import json
 import shutil
 import logging
 import argparse
-import numpy as np
 import platform
 import time
 import multiprocessing
 from pathlib import Path
-from datetime import datetime, timedelta
+from datetime import datetime
 from collections import defaultdict, Counter
 from tqdm import tqdm
-from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor, as_completed
+from concurrent.futures import ProcessPoolExecutor, as_completed
 
 # Add pipeline_modules to path so workers can import utils.file_splitter
 _pipeline_modules_dir = str(Path(__file__).parent.parent)
 if _pipeline_modules_dir not in sys.path:
     sys.path.insert(0, _pipeline_modules_dir)
 from utils.file_splitter import get_csv_byte_ranges, streaming_csv_reader, count_rows_in_range
+from utils.io_utils import get_output_format, resolve_input, convert_csv_to_parquet
 
 # Platform-specific settings for CSV field size limit and performance optimization
 if platform.system() == 'Windows':
@@ -128,28 +128,46 @@ ID_COLUMNS = {
 def count_single_table_frequency(table_name, input_dir, concept_columns, min_freq):
     """Count concept frequencies for a single table - used for parallel processing."""
     import csv
+    import sys
     import time
     from collections import Counter
     from pathlib import Path
     
+    # Ensure utils is importable in worker process
+    _pm_dir = str(Path(input_dir).parent)
+    if _pm_dir not in sys.path:
+        sys.path.insert(0, _pm_dir)
+    from utils.io_utils import resolve_input
+    
     start_time = time.time()
     
     input_dir = Path(input_dir) if not isinstance(input_dir, Path) else input_dir
-    input_file = input_dir / f"{table_name}_cleaned.csv"
     
-    if not input_file.exists():
+    try:
+        input_file = resolve_input(input_dir / f"{table_name}_cleaned.csv")
+    except FileNotFoundError:
         return table_name, {}, {'low_frequency': 0, 'high_frequency': 0}, {'total': 0}
     
     concept_counter = Counter()
     
     read_start = time.time()
-    with open(input_file, 'r', encoding='utf-8') as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            for concept_col in concept_columns.get(table_name, []):
-                concept_value = row.get(concept_col, '').strip()
-                if concept_value and concept_value != '':
-                    concept_counter[concept_value] += 1
+    if str(input_file).endswith('.parquet'):
+        import pandas as pd
+        df = pd.read_parquet(input_file)
+        for concept_col in concept_columns.get(table_name, []):
+            if concept_col in df.columns:
+                values = df[concept_col].dropna().astype(str).str.strip()
+                values = values[values != '']
+                for val, count in values.value_counts().items():
+                    concept_counter[val] += count
+    else:
+        with open(input_file, 'r', encoding='utf-8') as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                for concept_col in concept_columns.get(table_name, []):
+                    concept_value = row.get(concept_col, '').strip()
+                    if concept_value and concept_value != '':
+                        concept_counter[concept_value] += 1
     read_time = time.time() - read_start
     
     # Calculate statistics
@@ -203,21 +221,29 @@ def process_single_table(table_name, input_dir, output_dir, concept_frequencies,
                         processed_mappings_dir, enable_dedup, min_concept_freq):
     """Process a complete table using streaming single-pass."""
     import csv
+    import sys
     import time
     import logging
     from pathlib import Path
     from collections import defaultdict
+    
+    # Ensure utils is importable in worker process
+    _pm_dir = str(Path(input_dir).parent)
+    if _pm_dir not in sys.path:
+        sys.path.insert(0, _pm_dir)
+    from utils.io_utils import resolve_input, get_output_format, convert_csv_to_parquet
     
     # Initialize paths
     input_dir = Path(input_dir)
     output_dir = Path(output_dir)
     processed_mappings_dir = Path(processed_mappings_dir)
     
-    input_file = input_dir / f"{table_name}_cleaned.csv"
-    output_file = output_dir / f"{table_name}_mapped.csv"
+    try:
+        input_file = resolve_input(input_dir / f"{table_name}_cleaned.csv")
+    except FileNotFoundError:
+        return table_name, {'error': f'Input file not found: {input_dir / f"{table_name}_cleaned"}'}, {}
     
-    if not input_file.exists():
-        return table_name, {'error': f'Input file not found: {input_file}'}, {}
+    output_file = output_dir / f"{table_name}_mapped.csv"
     
     # Initialize statistics
     stats = {
@@ -258,10 +284,17 @@ def process_single_table(table_name, input_dir, output_dir, concept_frequencies,
     # Pre-fetch the frequency map for this table
     freq_map = concept_frequencies.get(table_name, {})
     
-    # Read header to get fieldnames
-    with open(input_file, 'r', encoding='utf-8') as f:
-        reader = csv.DictReader(f)
-        fieldnames = list(reader.fieldnames)
+    # Read header / fieldnames depending on format
+    is_parquet_input = str(input_file).endswith('.parquet')
+    if is_parquet_input:
+        import pandas as pd
+        _df_header = pd.read_parquet(input_file, columns=None).head(0)
+        fieldnames = list(_df_header.columns)
+        del _df_header
+    else:
+        with open(input_file, 'r', encoding='utf-8') as f:
+            reader = csv.DictReader(f)
+            fieldnames = list(reader.fieldnames)
     
     # Prepare extended fieldnames for output
     extended_fieldnames = fieldnames.copy()
@@ -322,10 +355,19 @@ def process_single_table(table_name, input_dir, output_dir, concept_frequencies,
         # --- Single-pass streaming loop ---
         read_start = time.time()
         
-        with open(input_file, 'r', encoding='utf-8', buffering=FILE_BUFFER_SIZE) as f:
-            reader = csv.DictReader(f)
-            
-            for row in reader:
+        # Create row iterator based on input format
+        if is_parquet_input:
+            import pandas as pd
+            _df_full = pd.read_parquet(input_file)
+            # Convert all values to strings for CSV-compatible processing
+            _df_full = _df_full.astype(str).replace('nan', '')
+            _row_iter = (row.to_dict() for _, row in _df_full.iterrows())
+        else:
+            _csv_handle = open(input_file, 'r', encoding='utf-8', buffering=FILE_BUFFER_SIZE)
+            _row_iter = csv.DictReader(_csv_handle)
+        
+        try:
+            for row in _row_iter:
                 row_counter += 1
                 
                 # --- Step 1: Filter low frequency concepts ---
@@ -403,6 +445,10 @@ def process_single_table(table_name, input_dir, output_dir, concept_frequencies,
                 if len(write_buffer) >= WRITE_BUFFER_SIZE:
                     out_writer.writerows(write_buffer)
                     write_buffer = []
+        finally:
+            # Close input file handle if CSV
+            if not is_parquet_input and '_csv_handle' in dir():
+                _csv_handle.close()
         
         time_stats['file_reading'] = time.time() - read_start
         
@@ -422,6 +468,15 @@ def process_single_table(table_name, input_dir, output_dir, concept_frequencies,
         out_handle.close()
         low_freq_handle.close()
         dup_handle.close()
+    
+    # Convert output to parquet if configured (for non-MEASUREMENT tables)
+    # MEASUREMENT stays as CSV because Module 4 reads it with byte-level streaming
+    output_fmt = get_output_format()
+    if output_fmt == 'parquet' and table_name != 'MEASUREMENT':
+        try:
+            convert_csv_to_parquet(output_file, delete_csv=True)
+        except Exception as e:
+            logging.warning(f"Could not convert {table_name} output to parquet: {e}")
     
     # Clean up empty removed-records files (only header, no data rows)
     if not has_low_freq and stats['low_freq_removed'] == 0:
@@ -970,9 +1025,10 @@ class ConceptMapper:
         logging.info('='*60)
         
         # Determine input/output files
-        input_file = input_dir / f"{table_name}_cleaned.csv"
-        if not input_file.exists():
-            logging.warning(f"Input file not found for {table_name}: {input_file}")
+        try:
+            input_file = resolve_input(input_dir / f"{table_name}_cleaned.csv")
+        except FileNotFoundError:
+            logging.warning(f"Input file not found for {table_name}")
             return
         
         output_file = output_dir / f"{table_name}_mapped.csv"
