@@ -10,6 +10,7 @@ import shutil
 import time
 from pathlib import Path
 from datetime import datetime
+import re
 from collections import defaultdict
 from tqdm import tqdm
 import pandas as pd
@@ -135,6 +136,66 @@ cleaning_results = {
     "chunk_size": CHUNK_SIZE,
     "tables": {}
 }
+
+# Pre-compiled regex for extracting date portion from truncated datetimes
+_DATE_PREFIX_RE = re.compile(r'^(\d{4}-\d{2}-\d{2})')
+# Standard datetime formats to try (most common first for speed)
+_DT_FORMATS = ['%Y-%m-%d %H:%M:%S', '%Y-%m-%d %H:%M:%S.%f', '%Y-%m-%d']
+
+# Lower bound for plausible dates (configurable)
+LOWER_DATE_BOUND = datetime(1900, 1, 1)
+
+
+def safe_parse_datetime(val):
+    """Parse a datetime string robustly, handling truncated/malformed values.
+    
+    Returns:
+        (datetime_obj or None, repair_type: str or None)
+        repair_type is None if parsed cleanly, 'truncated' if date extracted
+        from a truncated datetime, 'unparseable' if completely failed.
+    """
+    if not val or (isinstance(val, float) and pd.isna(val)):
+        return None, None
+    s = str(val).strip()
+    if not s:
+        return None, None
+    
+    # Fast path: try standard formats (covers 99.87% of rows)
+    for fmt in _DT_FORMATS:
+        try:
+            return datetime.strptime(s, fmt), None
+        except ValueError:
+            continue
+    
+    # Slow path: truncated datetime like "2024-05-23 2" → extract date portion
+    m = _DATE_PREFIX_RE.match(s)
+    if m:
+        try:
+            return datetime.strptime(m.group(1), '%Y-%m-%d'), 'truncated'
+        except ValueError:
+            pass
+    
+    return None, 'unparseable'
+
+
+def safe_parse_datetime_with_fallback(row, dt_col, date_col=None):
+    """Parse datetime with optional fallback to date-only column.
+    
+    Returns:
+        (datetime_obj or None, repair_type: str or None)
+    """
+    dt_val = row.get(dt_col)
+    result, repair = safe_parse_datetime(dt_val)
+    
+    # If datetime column failed or was truncated, try date-only column as fallback
+    if result is None and date_col and date_col in row:
+        date_val = row.get(date_col)
+        result, repair = safe_parse_datetime(date_val)
+        if result is not None and repair is None:
+            repair = 'date_fallback'
+    
+    return result, repair
+
 
 def get_file_row_count(file_path):
     """Get the number of rows in a CSV file with caching."""
@@ -392,6 +453,7 @@ def clean_table_partial(table_name, start_byte=0, end_byte=-1, fieldnames=None, 
     duplicate_count = 0
     invalid_concept_count = 0
     temporal_issues = 0
+    datetime_repairs = {}  # Track datetime repair stats
     rows_written = 0
     seen_keys = set()  # Set of 64-bit hashes for O(1) dedup with minimal memory
     
@@ -541,12 +603,27 @@ def clean_table_partial(table_name, start_byte=0, end_byte=-1, fieldnames=None, 
                                     temporal_writer.writerows(temporal_buffer)
                                     temporal_buffer = []
                         # Regular temporal validation for other tables
-                        # Parse datetimes properly instead of string comparison
+                        # Parse datetimes robustly (handles truncated formats like "2024-05-23 2")
                         elif start and end:
-                            try:
-                                start_dt = datetime.fromisoformat(str(start).replace(' ', 'T'))
-                                end_dt = datetime.fromisoformat(str(end).replace(' ', 'T'))
-                                
+                            start_col, end_col = TEMPORAL_FIELDS[table_name]
+                            # Derive date-only fallback column names
+                            start_date_col = start_col.replace('_datetime', '_date') if '_datetime' in start_col else None
+                            end_date_col = end_col.replace('_datetime', '_date') if '_datetime' in end_col else None
+                            
+                            start_dt, start_repair = safe_parse_datetime_with_fallback(row, start_col, start_date_col)
+                            end_dt, end_repair = safe_parse_datetime_with_fallback(row, end_col, end_date_col)
+                            
+                            # Track repair stats
+                            if start_repair in ('truncated', 'date_fallback'):
+                                datetime_repairs['start_repaired'] = datetime_repairs.get('start_repaired', 0) + 1
+                            if end_repair in ('truncated', 'date_fallback'):
+                                datetime_repairs['end_repaired'] = datetime_repairs.get('end_repaired', 0) + 1
+                            if start_repair == 'unparseable':
+                                datetime_repairs['start_unparseable'] = datetime_repairs.get('start_unparseable', 0) + 1
+                            if end_repair == 'unparseable':
+                                datetime_repairs['end_unparseable'] = datetime_repairs.get('end_unparseable', 0) + 1
+                            
+                            if start_dt and end_dt:
                                 # Sanitize sentinel/anomalous end dates → set to empty (NaT)
                                 # rather than removing the entire row
                                 sanitized_end = False
@@ -566,10 +643,14 @@ def clean_table_partial(table_name, start_byte=0, end_byte=-1, fieldnames=None, 
                                     end = None  # Prevent end<start check below
                                 elif end_dt < start_dt:
                                     temporal_invalid = True
-                            except (ValueError, TypeError):
-                                # If dates can't be parsed, fall back to string comparison
-                                if str(end) < str(start):
-                                    temporal_invalid = True
+                                
+                                # Check lower date bound (flag suspiciously old dates)
+                                if start_dt < LOWER_DATE_BOUND:
+                                    datetime_repairs['pre_1900'] = datetime_repairs.get('pre_1900', 0) + 1
+                            elif start_dt is None and end_dt is None:
+                                # Both unparseable — skip temporal check, row passes through
+                                pass
+                            # If only one side parsed, skip temporal check (can't compare)
                         if temporal_invalid and not skip_row:
                             temporal_issues += 1
                             skip_row = True
@@ -663,6 +744,7 @@ def clean_table_partial(table_name, start_byte=0, end_byte=-1, fieldnames=None, 
         "duplicates_removed": duplicate_count,
         "invalid_concept_removed": invalid_concept_count,
         "temporal_issues": temporal_issues,
+        "datetime_repairs": datetime_repairs,
         "output_file": str(output_file),
         "removed_records_files": {
             "duplicates": str(duplicates_file),
@@ -672,6 +754,10 @@ def clean_table_partial(table_name, start_byte=0, end_byte=-1, fieldnames=None, 
         "removed_columns_details": columns_info
     }
     
+    # Log datetime repair stats if any
+    if datetime_repairs:
+        logging.info(f"  Datetime repairs for {table_name}: {datetime_repairs}")
+    
     # Silent completion
     
     # Return statistics for parallel processing aggregation
@@ -679,6 +765,7 @@ def clean_table_partial(table_name, start_byte=0, end_byte=-1, fieldnames=None, 
         "duplicates_removed": duplicate_count,
         "invalid_concept_removed": invalid_concept_count,
         "temporal_issues": temporal_issues,
+        "datetime_repairs": datetime_repairs,
         "columns_removed": columns_to_remove
     }
     
