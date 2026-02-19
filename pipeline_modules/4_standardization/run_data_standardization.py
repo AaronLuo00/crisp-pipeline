@@ -25,7 +25,8 @@ try:
         process_standard_table,
         merge_measurement_chunks,
         process_visit_patient_chunk,
-        merge_visit_chunks
+        merge_visit_chunks,
+        _get_id_dtype_dict
     )
 except ImportError:
     # Fall back to absolute imports (when run as script)
@@ -36,7 +37,8 @@ except ImportError:
         process_standard_table,
         merge_measurement_chunks,
         process_visit_patient_chunk,
-        merge_visit_chunks
+        merge_visit_chunks,
+        _get_id_dtype_dict
     )
 import os
 import sys
@@ -1286,8 +1288,9 @@ class DataStandardizer:
                         import pandas as pd
                         import numpy as np
                         
-                        # Read full file ONCE in main process
-                        df_full = pd.read_csv(input_file, low_memory=False)
+                        # Read full file ONCE in main process (ID cols as str to avoid float64 precision loss)
+                        id_dtype = _get_id_dtype_dict(table_name)
+                        df_full = pd.read_csv(input_file, low_memory=False, dtype=id_dtype)
                         # Add original row numbers (index + 2: 0-based index + header row)
                         df_full['original_row_number'] = df_full.index + 2
                         

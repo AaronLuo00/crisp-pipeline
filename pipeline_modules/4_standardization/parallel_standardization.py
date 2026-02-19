@@ -100,10 +100,20 @@ ID_COLUMNS_TO_FORMAT = {
     ]
 }
 
+def _get_id_dtype_dict(table_name: str) -> Dict[str, str]:
+    """
+    Return a dtype dict that forces all ID columns for `table_name` to str.
+    Use this when calling pd.read_csv to avoid float64 inference on ID columns.
+    """
+    id_columns = ID_COLUMNS_TO_FORMAT.get('ALL', []) + \
+                 ID_COLUMNS_TO_FORMAT.get(table_name, [])
+    return {col: 'str' for col in id_columns}
+
+
 def format_id_columns_df(df, table_name):
     """
     Format ID columns in DataFrame by removing .0 suffix.
-    Handles both float64 columns and object columns with float string values.
+    Handles float64, object, and Arrow string columns safely.
     
     Args:
         df: DataFrame to format
@@ -117,32 +127,37 @@ def format_id_columns_df(df, table_name):
                  ID_COLUMNS_TO_FORMAT.get(table_name, [])
     
     for col in id_columns:
-        if col in df.columns:
-            # Handle float64 columns
-            if df[col].dtype == 'float64':
-                # For columns with NaN, format non-null values
-                mask = df[col].notna()
-                if mask.any():
-                    # Convert to string, removing .0 for integers
-                    df.loc[mask, col] = df.loc[mask, col].apply(
-                        lambda x: str(int(x)) if x == int(x) else str(x)
-                    )
-            # Handle object (string) columns that may contain float representations
-            elif df[col].dtype == 'object':
-                # Process non-null string values
-                mask = df[col].notna() & (df[col] != '')
-                if mask.any():
-                    def format_value(val):
-                        if isinstance(val, str) and '.' in val:
-                            try:
-                                float_val = float(val)
-                                if float_val == int(float_val):
-                                    return str(int(float_val))
-                            except (ValueError, TypeError):
-                                pass
-                        return val
-                    
-                    df.loc[mask, col] = df.loc[mask, col].apply(format_value)
+        if col not in df.columns:
+            continue
+        
+        col_dtype = str(df[col].dtype)
+        
+        # If already read as str (ideal path) — just strip ".0" suffixes
+        if col_dtype in ('object', 'str', 'string', 'string[python]') or 'arrow' in col_dtype.lower():
+            mask = df[col].notna() & (df[col].astype(str) != '')
+            if mask.any():
+                def _strip_dot_zero(val):
+                    s = str(val)
+                    if '.' in s:
+                        try:
+                            f = float(s)
+                            if f == int(f):
+                                return str(int(f))
+                        except (ValueError, TypeError, OverflowError):
+                            pass
+                    return s
+                df[col] = df[col].where(~mask, df.loc[mask, col].astype(str).map(_strip_dot_zero))
+        
+        # Handle float64 columns (legacy path when dtype=str not used)
+        elif col_dtype == 'float64':
+            mask = df[col].notna()
+            if mask.any():
+                # Convert entire column to str at once to avoid Arrow StringArray vs float64 conflict
+                df[col] = df[col].where(~mask, df.loc[mask, col].apply(
+                    lambda x: str(int(x)) if x == int(x) else str(x)
+                ))
+                # Force column to object dtype to prevent downstream issues
+                df[col] = df[col].astype('object')
     
     return df
 
@@ -444,9 +459,12 @@ def process_standard_table(args: Tuple) -> Tuple[str, Dict, float]:
         # Check file size to decide strategy
         file_size = Path(input_file).stat().st_size
         
+        # Build dtype dict to read ID columns as str (avoids float64 precision loss)
+        id_dtype = _get_id_dtype_dict(table_name)
+        
         # Small files (<4GB): use original bulk-load approach (simpler, no overhead)
         if file_size <= 4 * 1024 * 1024 * 1024:
-            df = pd.read_csv(input_file, low_memory=False)
+            df = pd.read_csv(input_file, low_memory=False, dtype=id_dtype)
             stats['input_records'] = len(df)
             
             # Standardize datetime fields if applicable
@@ -467,7 +485,7 @@ def process_standard_table(args: Tuple) -> Tuple[str, Dict, float]:
             STREAM_CHUNK = 500000  # 500K rows per chunk
             header_written = False
             
-            for chunk in pd.read_csv(input_file, chunksize=STREAM_CHUNK, low_memory=False):
+            for chunk in pd.read_csv(input_file, chunksize=STREAM_CHUNK, low_memory=False, dtype=id_dtype):
                 stats['input_records'] += len(chunk)
                 
                 # Standardize datetime fields
@@ -610,7 +628,8 @@ def process_visit_patient_chunk(args: Tuple) -> Tuple[int, Dict, float]:
     
     # Read pre-split chunk file (only contains this chunk's patients, ~1/N of full file)
     # original_row_number is already added by the caller before splitting
-    chunk_df = pd.read_csv(input_file, low_memory=False)
+    id_dtype = _get_id_dtype_dict(table_name)
+    chunk_df = pd.read_csv(input_file, low_memory=False, dtype=id_dtype)
     
     if chunk_df.empty:
         logging.warning(f"No data found for chunk {chunk_id}")
