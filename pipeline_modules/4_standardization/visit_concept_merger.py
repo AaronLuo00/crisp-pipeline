@@ -229,10 +229,15 @@ class VisitConceptMerger:
         
         # Update temporal boundaries
         merged['merged_start_datetime'] = episode_records[start_col].min()
-        merged['merged_end_datetime'] = episode_records[end_col].max()
+        # Use max of non-NaT end dates; if all NaT, result is NaT
+        valid_ends = episode_records[end_col].dropna()
+        merged['merged_end_datetime'] = valid_ends.max() if not valid_ends.empty else pd.NaT
         
-        # Calculate merged duration
-        duration_hours = (merged['merged_end_datetime'] - merged['merged_start_datetime']).total_seconds() / 3600
+        # Calculate merged duration (NaT-safe)
+        if pd.notna(merged['merged_start_datetime']) and pd.notna(merged['merged_end_datetime']):
+            duration_hours = (merged['merged_end_datetime'] - merged['merged_start_datetime']).total_seconds() / 3600
+        else:
+            duration_hours = None
         merged['merged_duration_hours'] = duration_hours
         
         # Keep original start/end for reference

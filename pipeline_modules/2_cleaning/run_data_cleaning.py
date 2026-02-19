@@ -101,6 +101,12 @@ TEMPORAL_FIELDS = {
     'DEATH': ('death_date', None)  # Special validation for death date
 }
 
+# Sentinel/anomalous end date thresholds
+# End dates >= this are treated as sentinel placeholders and set to NaT
+SENTINEL_DATE_THRESHOLD = datetime(2100, 1, 1)
+# Maximum allowed duration in days; longer durations have end date set to NaT
+MAX_DURATION_DAYS = 730
+
 # Define duplicate key columns for each table
 DUPLICATE_KEY_COLUMNS = {
     'MEASUREMENT': ['person_id', 'measurement_concept_id', 'measurement_datetime'],
@@ -540,7 +546,25 @@ def clean_table_partial(table_name, start_byte=0, end_byte=-1, fieldnames=None, 
                             try:
                                 start_dt = datetime.fromisoformat(str(start).replace(' ', 'T'))
                                 end_dt = datetime.fromisoformat(str(end).replace(' ', 'T'))
-                                if end_dt < start_dt:
+                                
+                                # Sanitize sentinel/anomalous end dates → set to empty (NaT)
+                                # rather than removing the entire row
+                                sanitized_end = False
+                                if end_dt >= SENTINEL_DATE_THRESHOLD:
+                                    sanitized_end = True
+                                elif (end_dt - start_dt).days > MAX_DURATION_DAYS:
+                                    sanitized_end = True
+                                
+                                if sanitized_end:
+                                    # Clear end date/datetime fields in the row
+                                    _, end_field = TEMPORAL_FIELDS[table_name]
+                                    row[end_field] = ''
+                                    # Also clear the date-only variant if it exists
+                                    end_date_field = end_field.replace('_datetime', '_date')
+                                    if end_date_field != end_field and end_date_field in row:
+                                        row[end_date_field] = ''
+                                    end = None  # Prevent end<start check below
+                                elif end_dt < start_dt:
                                     temporal_invalid = True
                             except (ValueError, TypeError):
                                 # If dates can't be parsed, fall back to string comparison

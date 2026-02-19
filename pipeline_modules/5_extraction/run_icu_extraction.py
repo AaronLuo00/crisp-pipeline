@@ -276,7 +276,8 @@ class PatientDataExtractor:
                 )
                 icu_df['visit_detail_end_datetime'] = pd.to_datetime(
                     icu_df['visit_detail_end_datetime'], 
-                    format='%Y-%m-%d %H:%M:%S'
+                    format='%Y-%m-%d %H:%M:%S',
+                    errors='coerce'  # NaT-safe: sentinel dates cleaned in Module 2
                 )
                 
                 # Process each patient's ICU episodes
@@ -288,14 +289,19 @@ class PatientDataExtractor:
                     # each row here represents a separate episode
                     episodes = []
                     for idx, (_, visit) in enumerate(patient_icu.iterrows(), 1):
-                        # Calculate duration in hours
-                        duration = (visit['visit_detail_end_datetime'] - visit['visit_detail_start_datetime']).total_seconds() / 3600
+                        # Calculate duration in hours (NaT-safe)
+                        ep_start = visit['visit_detail_start_datetime']
+                        ep_end = visit['visit_detail_end_datetime']
+                        if pd.notna(ep_start) and pd.notna(ep_end):
+                            duration = (ep_end - ep_start).total_seconds() / 3600
+                        else:
+                            duration = None  # Unknown duration (sentinel end date was cleaned)
                         
                         episodes.append({
                             'episode_number': idx,
-                            'episode_start': visit['visit_detail_start_datetime'],
-                            'episode_end': visit['visit_detail_end_datetime'],
-                            'duration_hours': round(duration, 2),
+                            'episode_start': ep_start,
+                            'episode_end': ep_end,
+                            'duration_hours': round(duration, 2) if duration is not None else None,
                             'is_first_icu': idx == 1,
                             'visit_detail_ids': str(visit['visit_detail_id'])
                         })
@@ -581,11 +587,12 @@ class PatientDataExtractor:
         
         # Fill ICU info based on whether patient has ICU episodes
         if has_icu:
+            dur_h = last_episode['duration_hours']
             labels["icu_info"] = {
                 "last_icu_start": last_episode['episode_start'],
                 "last_icu_end": last_episode['episode_end'],
-                "last_icu_duration_hours": last_episode['duration_hours'],
-                "last_icu_duration_days": round(last_episode['duration_hours'] / 24, 2),
+                "last_icu_duration_hours": dur_h if dur_h is not None else None,
+                "last_icu_duration_days": round(dur_h / 24, 2) if dur_h is not None else None,
                 "total_episodes": len(episodes),
                 "last_episode_number": last_episode['episode_number']
             }
@@ -611,7 +618,7 @@ class PatientDataExtractor:
                     "mortality_icu_7day": int(days_from_last_admission <= 7),
                     "mortality_icu_30day": int(days_from_last_admission <= 30),
                     "days_to_death": round(days_from_last_admission, 2),
-                    "death_after_discharge": int(death_datetime > last_icu_end),
+                    "death_after_discharge": int(death_datetime > last_icu_end) if pd.notna(last_icu_end) else None,
                     "death_datetime": death_datetime.isoformat()
                 }
             else:
@@ -643,14 +650,24 @@ class PatientDataExtractor:
             first_end = pd.to_datetime(first_episode['episode_end'])
             second_start = pd.to_datetime(second_episode['episode_start'])
             
-            days_between = (second_start - first_end).days
-            labels["readmission"] = {
-                "has_readmission": 1,
-                "days_to_first_readmission": days_between,
-                "readmission_within_7days": int(days_between <= 7),
-                "readmission_within_30days": int(days_between <= 30),
-                "readmission_within_90days": int(days_between <= 90)
-            }
+            if pd.notna(first_end) and pd.notna(second_start):
+                days_between = (second_start - first_end).days
+                labels["readmission"] = {
+                    "has_readmission": 1,
+                    "days_to_first_readmission": days_between,
+                    "readmission_within_7days": int(days_between <= 7),
+                    "readmission_within_30days": int(days_between <= 30),
+                    "readmission_within_90days": int(days_between <= 90)
+                }
+            else:
+                # Cannot calculate readmission interval (NaT end date)
+                labels["readmission"] = {
+                    "has_readmission": 1,
+                    "days_to_first_readmission": None,
+                    "readmission_within_7days": None,
+                    "readmission_within_30days": None,
+                    "readmission_within_90days": None
+                }
         else:
             # Only one ICU episode, no readmission
             labels["readmission"] = {
@@ -664,12 +681,20 @@ class PatientDataExtractor:
         # 6. Calculate LOS labels
         if has_icu and last_episode:
             duration_hours = last_episode['duration_hours']
-            duration_days = round(duration_hours / 24, 2)
-            labels["los"] = {
-                "los_greater_than_3days": int(duration_hours > 72),
-                "los_greater_than_7days": int(duration_hours > 168),
-                "last_icu_los_days": duration_days
-            }
+            if duration_hours is not None:
+                duration_days = round(duration_hours / 24, 2)
+                labels["los"] = {
+                    "los_greater_than_3days": int(duration_hours > 72),
+                    "los_greater_than_7days": int(duration_hours > 168),
+                    "last_icu_los_days": duration_days
+                }
+            else:
+                # Unknown duration (sentinel end date was cleaned to NaT)
+                labels["los"] = {
+                    "los_greater_than_3days": None,
+                    "los_greater_than_7days": None,
+                    "last_icu_los_days": None
+                }
         else:
             labels["los"] = {
                 "los_greater_than_3days": 0,
