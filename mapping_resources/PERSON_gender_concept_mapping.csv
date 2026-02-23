@@ -1,5 +1,5 @@
 Id,Code,Name,Standard Class,Vocab,Validity,Concept,Frequency
-8532,F,FEMALE,Gender,Gender,Valid,Standard,207599
-8507,M,MALE,Gender,Gender,Valid,Standard,163746
+8532,F,FEMALE,Gender,Gender,Valid,Standard,163746
+8507,M,MALE,Gender,Gender,Valid,Standard,207599
 8551,U,UNKNOWN,Gender,Gender,Valid,Standard,18
 0,No matching concept,No matching concept,Undefined,None,Valid,Standard,2
