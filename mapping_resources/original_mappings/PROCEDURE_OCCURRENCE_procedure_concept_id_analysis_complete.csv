@@ -61,7 +61,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 2108261,36620,"Arterial catheterization or cannulation for sampling, monitoring or transfusion (separate procedure); percutaneous",Undefined,Procedure,CPT4,Invalid,Non-standard,84921
 2314285,97112,"Therapeutic procedure, 1 or more areas, each 15 minutes; neuromuscular reeducation of movement, balance, coordination, kinesthetic sense, posture, and/or proprioception for sitting and/or standing activities",Undefined,Procedure,CPT4,Invalid,Non-standard,83122
 4132629,410551005,Family history taking,Procedure,Procedure,SNOMED,Valid,Standard,80458
-0,NULL/Missing,NULL/Missing procedure concept,Undefined,Metadata,None,Invalid,Non-standard,80396
+0,NULL/Missing,NULL/Missing procedure concept,Undefined,Metadata,,Invalid,Non-standard,80396
 2213572,90935,Hemodialysis procedure with single evaluation by a physician or other qualified health care professional,Undefined,Procedure,CPT4,Invalid,Non-standard,80081
 2314004,94010,"Spirometry, including graphic record, total and timed vital capacity, expiratory flow rate measurement(s), with or without maximal voluntary ventilation",Undefined,Procedure,CPT4,Invalid,Non-standard,76963
 2211741,76705,"Ultrasound, abdominal, real time with image documentation; limited (eg, single organ, quadrant, follow-up)",Undefined,Procedure,CPT4,Invalid,Non-standard,76038
@@ -6105,7 +6105,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 4072416,176795006,Subtotal abdominal hysterectomy,Procedure,Procedure,SNOMED,Valid,Standard,99
 42539518,735193004,Revision of total hip arthroplasty,Procedure,Procedure,SNOMED,Valid,Non-standard,99
 4140111,265495003,Bypass of bifurcation of aorta by anastomosis of aorta to iliac artery,Procedure,Procedure,SNOMED,Valid,Standard,99
-945201,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,99
+945201,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,99
 725032,31253,"Nasal/sinus endoscopy, surgical with ethmoidectomy; total (anterior and posterior), including frontal sinus exploration, with removal of tissue from frontal sinus, when performed",Undefined,Procedure,CPT4,Invalid,Non-standard,99
 709942,15772,"Grafting of autologous fat harvested by liposuction technique to trunk, breasts, scalp, arms, and/or legs; each additional 50 cc injectate, or part thereof (List separately in addition to code for primary procedure)",Undefined,Procedure,CPT4,Invalid,Non-standard,99
 4264289,397218006,Amputation of ankle,Procedure,Procedure,SNOMED,Valid,Standard,99
@@ -6279,7 +6279,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 2732217,047C3ZZ,"Dilation of Right Common Iliac Artery, Percutaneous Approach",ICD10PCS,Procedure,ICD10PCS,Valid,Standard,93
 4053034,23491005,Replacement of nephrostomy tube,Procedure,Procedure,SNOMED,Valid,Standard,93
 2742115,0B738DZ,"Dilation of Right Main Bronchus with Intraluminal Device, Via Natural or Artificial Opening Endoscopic",ICD10PCS,Procedure,ICD10PCS,Valid,Standard,93
-944566,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,93
+944566,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,93
 42535596,4431000087109,Fluoroscopic arthrography of joint of left shoulder region,Procedure,Procedure,SNOMED,Valid,Standard,93
 4222733,401004,Distal subtotal pancreatectomy,Procedure,Procedure,SNOMED,Valid,Standard,93
 4201120,51241000,Control of hemorrhage,Procedure,Procedure,SNOMED,Valid,Standard,93
@@ -11760,7 +11760,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 4146072,35137007,Photocoagulation of ciliary body,Procedure,Procedure,SNOMED,Valid,Standard,20
 4181952,42937000,"Restoration, crown, single",Procedure,Procedure,SNOMED,Valid,Standard,20
 4301340,387648001,Arthroplasty of the ankle,Procedure,Procedure,SNOMED,Valid,Standard,20
-944908,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,20
+944908,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,20
 2753414,0DTT0ZZ,"Resection of Lesser Omentum, Open Approach (Deprecated)",ICD10PCS,Procedure,ICD10PCS,Valid,Standard,20
 927096,50437,"Dilation of existing tract, percutaneous, for an endourologic procedure including imaging guidance (eg, ultrasound and/or fluoroscopy) and all associated radiological supervision and interpretation, with postprocedure tube placement, when performe...",Undefined,Procedure,CPT4,Invalid,Non-standard,20
 725013,0484T,"Transcatheter mitral valve implantation/replacement (TMVI) with prosthetic valve; transthoracic exposure (eg, thoracotomy, transapical)",Undefined,Procedure,CPT4,Invalid,Non-standard,20
@@ -14965,7 +14965,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 725028,15730,"Midface flap (ie, zygomaticofacial flap) with preservation of vascular pedicle(s)",Undefined,Procedure,CPT4,Invalid,Non-standard,10
 759701,92650,"Auditory evoked potentials; screening of auditory potential with broadband stimuli, automated analysis",Undefined,Procedure,CPT4,Invalid,Non-standard,10
 2754195,0KXT0Z2,"Transfer Left Lower Leg Muscle with Skin and Subcutaneous Tissue, Open Approach",ICD10PCS,Procedure,ICD10PCS,Valid,Standard,10
-945207,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,10
+945207,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,10
 43017548,0KR407Z,"Replacement of Tongue, Palate, Pharynx Muscle with Autologous Tissue Substitute, Open Approach",ICD10PCS,Procedure,ICD10PCS,Valid,Standard,10
 43016420,0DD48ZX,"Extraction of Esophagogastric Junction, Via Natural or Artificial Opening Endoscopic, Diagnostic",ICD10PCS,Procedure,ICD10PCS,Valid,Standard,10
 4198235,5119000,Epiglottidectomy,Procedure,Procedure,SNOMED,Valid,Standard,10
@@ -21670,7 +21670,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 927085,33275,"Transcatheter removal of permanent leadless pacemaker, right ventricular, including imaging guidance (eg, fluoroscopy, venous ultrasound, ventriculography, femoral venography), when performed",Undefined,Procedure,CPT4,Invalid,Non-standard,3
 927179,97151,"Behavior identification assessment, administered by a physician or other qualified health care professional, each 15 minutes of the physician's or other qualified health care professional's time face-to-face with patient and/or guardian(s)/caregiv...",Undefined,Procedure,CPT4,Invalid,Non-standard,3
 937618,C9745,"Nasal endoscopy, surgical; balloon dilation of eustachian tube (Deprecated)",HCPCS,Procedure,HCPCS,Valid,Non-standard,3
-944779,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,3
+944779,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,3
 953295,C9749,Repair of nasal vestibular lateral wall stenosis with implant(s) (Deprecated),HCPCS,Procedure,HCPCS,Valid,Standard,3
 2764381,0PWK04Z,"Revision of Internal Fixation Device in Right Ulna, Open Approach",ICD10PCS,Procedure,ICD10PCS,Valid,Standard,3
 43531190,608892008,Laparoscopic excision of cyst of right ovary,Procedure,Procedure,SNOMED,Valid,Standard,3
@@ -24516,8 +24516,8 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 4306060,387606008,Construction of end colostomy,Procedure,Procedure,SNOMED,Valid,Standard,2
 759700,92519,"Vestibular evoked myogenic potential (VEMP) testing, with interpretation and report; cervical (cVEMP) and ocular (oVEMP)",Undefined,Procedure,CPT4,Invalid,Non-standard,2
 2761909,0Q9130Z,"Drainage of Sacrum with Drainage Device, Percutaneous Approach",ICD10PCS,Procedure,ICD10PCS,Valid,Standard,2
-945203,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,2
-944835,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,2
+945203,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,2
+944835,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,2
 927184,97156,"Family adaptive behavior treatment guidance, administered by physician or other qualified health care professional (with or without the patient present), face-to-face with guardian(s)/caregiver(s), each 15 minutes",Undefined,Procedure,CPT4,Invalid,Non-standard,2
 927160,92274,"Electroretinography (ERG), with interpretation and report; multifocal (mfERG)",Undefined,Procedure,CPT4,Invalid,Non-standard,2
 927159,92273,"Electroretinography (ERG), with interpretation and report; full field (ie, ffERG, flash ERG, Ganzfeld ERG)",Undefined,Procedure,CPT4,Invalid,Non-standard,2
@@ -30651,10 +30651,10 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 927189,99454,"Remote monitoring of physiologic parameter(s) (eg, weight, blood pressure, pulse oximetry, respiratory flow rate), initial; device(s) supply with daily recording(s) or programmed alert(s) transmission, each 30 days",Undefined,Observation,CPT4,Invalid,Non-standard,1
 927190,99457,"Remote physiologic monitoring treatment management services, clinical staff/physician/other qualified health care professional time in a calendar month requiring interactive communication with the patient/caregiver during the month; first 20 minutes",Undefined,Observation,CPT4,Invalid,Non-standard,1
 937614,G0517,"Removal of non-biodegradable drug delivery implants, 4 or more (services for subdermal implants)",HCPCS,Procedure,HCPCS,Valid,Standard,1
-944750,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,1
-944838,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,1
-945115,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,1
-945204,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,1
+944750,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,1
+944838,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,1
+945115,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,1
+945204,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,1
 725026,0499T,"Cystourethroscopy, with mechanical dilation and urethral therapeutic drug delivery for urethral stricture or stenosis, including fluoroscopy, when performed (Deprecated)",Undefined,Procedure,CPT4,Invalid,Non-standard,1
 710046,96165,"Health behavior intervention, group (2 or more patients), face-to-face; each additional 15 minutes (List separately in addition to code for primary service)",Undefined,Procedure,CPT4,Invalid,Non-standard,1
 710045,96164,"Health behavior intervention, group (2 or more patients), face-to-face; initial 30 minutes",Undefined,Procedure,CPT4,Invalid,Non-standard,1
@@ -33160,3 +33160,158 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 2784451,0X9B0ZZ,"Drainage of Right Elbow Region, Open Approach",ICD10PCS,Procedure,ICD10PCS,Valid,Standard,1
 2784458,0X9C00Z,"Drainage of Left Elbow Region with Drainage Device, Open Approach",ICD10PCS,Procedure,ICD10PCS,Valid,Standard,1
 1314326,G0494,"Skilled services of a licensed practical nurse (lpn) for the observation and assessment of the patient's condition, each 15 minutes (the change in the patient's condition requires skilled nursing personnel to identify and evaluate the patient's need fo...",HCPCS,Observation,HCPCS,Valid,Standard,1
+45883885,LA15079-9,Right side only,Answer,Meas Value,LOINC,Valid,Standard,
+45884638,LA15080-7,Left side only,Answer,Meas Value,LOINC,Valid,Standard,
+44828573,V58.69,Long-term (current) use of other medications,5-dig billing V code,Procedure,ICD9CM,Valid,Non-standard,
+2618133,H0034,"Medication training and support, per 15 minutes",HCPCS,Observation,HCPCS,Valid,Non-standard,
+2008238,99.04,Transfusion of packed cells,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+44826243,V70.0,Routine general medical examination at a health care facility,4-dig billing V code,Procedure,ICD9CM,Valid,Non-standard,
+2006918,88.72,Diagnostic ultrasound of heart,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2007901,96.04,Insertion of endotracheal tube,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2002688,45.16,Esophagogastroduodenoscopy [EGD] with closed biopsy,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2006892,88.56,Coronary arteriography using two catheters,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2007680,93.90,Non-invasive mechanical ventilation,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+4262476,396209004,Computerized axial tomography of brain with and without radiopaque contrast,Procedure,Procedure,SNOMED,Invalid,Non-standard,
+2002172,38.91,Arterial catheterization,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+44828600,V72.31,Routine gynecological examination,5-dig billing V code,Procedure,ICD9CM,Valid,Non-standard,
+2001354,33.24,Closed [endoscopic] biopsy of bronchus,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2000064,00.66,Percutaneous transluminal coronary angioplasty [PTCA],4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2001537,37.22,Left heart cardiac catheterization,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2002243,39.61,Extracorporeal circulation auxiliary to open heart surgery,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2001538,37.23,Combined right and left heart cardiac catheterization,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+44835440,V20.2,Routine infant or child health check,4-dig billing V code,Procedure,ICD9CM,Valid,Non-standard,
+2001393,34.04,Insertion of intercostal catheter for drainage,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2006956,88.91,Magnetic resonance imaging of brain and brain stem,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2001505,36.06,Insertion of non-drug-eluting coronary artery stent(s),4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2006879,88.53,Angiocardiography of left heart structures,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2008239,99.05,Transfusion of platelets,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+44827409,V72.84,"Pre-operative examination, unspecified",5-dig billing V code,Procedure,ICD9CM,Valid,Non-standard,
+2000173,03.31,Spinal tap,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2001536,37.21,Right heart cardiac catheterization,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2005661,80.26,"Arthroscopy, knee",4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+44832006,V72.0,Examination of eyes and vision,4-dig billing V code,Procedure,ICD9CM,Valid,Non-standard,
+2000594,13.71,"Insertion of intraocular lens prosthesis at time of cataract extraction, one-stage",4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2001514,36.15,Single internal mammary-coronary artery bypass,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2002705,45.25,Closed [endoscopic] biopsy of large intestine,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2008262,99.17,Injection of insulin,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2008271,99.25,Injection or infusion of cancer chemotherapeutic substance,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+44835454,V26.49,Other procreative management counseling and advice,5-dig billing V code,Procedure,ICD9CM,Valid,Non-standard,
+2000926,20.01,Myringotomy with insertion of tube,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2002173,38.92,Umbilical vein catheterization,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2002282,39.95,Hemodialysis,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2003547,54.91,Percutaneous abdominal drainage,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2005724,80.6,Excision of semilunar cartilage of knee,3-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2006514,86.05,Incision with removal of foreign body or device from skin and subcutaneous tissue,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2006917,88.71,Diagnostic ultrasound of head and neck,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2007787,94.62,Alcohol detoxification,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2008250,99.15,Parenteral infusion of concentrated nutritional substances,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+4135417,412755006,Administration of first dose of diphtheria and acellular pertussis and tetanus vaccine,Procedure,Procedure,SNOMED,Valid,Non-standard,
+40664586,G0436,"Smoking and tobacco cessation counseling visit for the asymptomatic patient; intermediate, greater than 3 minutes, up to 10 minutes (Deprecated)",HCPCS,Observation,HCPCS,Valid,Standard,
+44828590,V65.49,Other specified counseling,5-dig billing V code,Procedure,ICD9CM,Valid,Non-standard,
+2001510,36.11,(Aorto)coronary bypass of one coronary artery,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2001511,36.12,(Aorto)coronary bypass of two coronary arteries,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2001542,37.27,Cardiac mapping,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2002129,38.7,Interruption of the vena cava,3-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2002703,45.23,Colonoscopy,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2003222,51.22,Cholecystectomy,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2003821,57.94,Insertion of indwelling urinary catheter,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2003936,59.8,Ureteral catheterization,3-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2006856,88.41,Arteriography of cerebral arteries,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2006893,88.57,Other and unspecified coronary arteriography,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2006933,88.77,Diagnostic ultrasound of peripheral vascular system,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2008357,99.61,Atrial cardioversion,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2008399,99.88,Therapeutic photopheresis,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+4138745,425916005,CT of sinuses,Procedure,Procedure,SNOMED,Invalid,Non-standard,
+40343218,265841002,(Tracheostomy) or (operation),Procedure,Procedure,SNOMED,Invalid,Non-standard,
+44822707,V50.2,Routine or ritual circumcision,4-dig billing V code,Procedure,ICD9CM,Valid,Non-standard,
+44825048,V70.7,Examination of participant in clinical trial,4-dig billing V code,Procedure,ICD9CM,Valid,Non-standard,
+44826246,V72.83,Other specified pre-operative examination,5-dig billing V code,Procedure,ICD9CM,Valid,Non-standard,
+44831977,V58.81,Fitting and adjustment of vascular catheter,5-dig billing V code,Procedure,ICD9CM,Valid,Non-standard,
+44831978,V58.83,Encounter for therapeutic drug monitoring,5-dig billing V code,Procedure,ICD9CM,Valid,Non-standard,
+44836703,V68.1,Issue of repeat prescriptions,4-dig billing V code,Procedure,ICD9CM,Valid,Non-standard,
+44837845,V55.2,Attention to ileostomy,4-dig billing V code,Procedure,ICD9CM,Valid,Non-standard,
+2000069,00.70,"Revision of hip replacement, both acetabular and femoral components",4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2000089,00.93,Transplant from cadaver,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2000202,04.02,Division of trigeminal nerve,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2000232,04.81,Injection of anesthetic into peripheral nerve for analgesia,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2000869,18.4,Suture of laceration of external ear,3-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2001109,22.63,Ethmoidectomy,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2001326,32.20,Thoracoscopic excision of lesion or tissue of lung,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2001351,33.21,Bronchoscopy through artificial stoma,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2001444,35.12,Open heart valvuloplasty of mitral valve without replacement,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2001506,36.07,Insertion of drug-eluting coronary artery stent(s),4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2001512,36.13,(Aorto)coronary bypass of three coronary arteries,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2001533,37.12,Pericardiotomy,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2001540,37.25,Biopsy of heart,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2001556,37.51,Heart transplantation,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2001563,37.61,Implant of pulsation balloon,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2001580,37.78,Insertion of temporary transvenous pacemaker system,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2001994,37.92,Injection of therapeutic substance into heart,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2002025,38.10,"Endarterectomy, unspecified site",4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2002042,38.18,"Endarterectomy, lower limb arteries",4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2002176,38.95,Venous catheterization for renal dialysis,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2002181,39.1,Intra-abdominal venous shunt,3-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2002247,39.65,Extracorporeal membrane oxygenation [ECMO],4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2002290,40.11,Biopsy of lymphatic structure,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2002382,41.31,Biopsy of bone marrow,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2002391,41.5,Total splenectomy,3-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2002606,44.38,Laparoscopic gastroenterostomy,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2002704,45.24,Flexible sigmoidoscopy,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2003130,50.12,Open biopsy of liver,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2003163,50.4,Total hepatectomy,3-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2003188,51.01,Percutaneous aspiration of gallbladder,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2003204,51.11,Endoscopic retrograde cholangiography [ERC],4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2003210,51.2,Cholecystectomy,3-dig nonbill code,Procedure,ICD9Proc,Valid,Non-standard,
+2003289,51.87,Endoscopic insertion of stent (tube) into bile duct,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2003362,52.7,Radical pancreaticoduodenectomy,3-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2003504,54.21,Laparoscopy,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2003551,54.95,Incision of peritoneum,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2003668,56.0,Transurethral removal of obstruction from ureter and renal pelvis,3-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2003722,56.74,Ureteroneocystostomy,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2005436,79.15,"Closed reduction of fracture with internal fixation, femur",4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2005478,79.35,"Open reduction of fracture with internal fixation, femur",4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2005533,79.65,"Debridement of open fracture site, femur",4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2005677,80.31,"Biopsy of joint structure, shoulder",4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2005742,80.76,"Synovectomy, knee",4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2005989,82.12,Fasciotomy of hand,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2006110,83.11,Achillotenotomy,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2006123,83.14,Fasciotomy,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2006130,83.32,Excision of lesion of muscle,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2006226,84.09,Interthoracoscapular amputation,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2006229,84.11,Amputation of toe,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2006300,84.51,Insertion of interbody spinal fusion device,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2006516,86.07,Insertion of totally implantable vascular access device [VAD],4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2006652,87.11,Full-mouth x-ray of teeth,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2006880,88.54,Combined right and left heart angiocardiography,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2006920,88.74,Diagnostic ultrasound of digestive system,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2006934,88.78,Diagnostic ultrasound of gravid uterus,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2007000,89.14,Electroencephalogram,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2007059,89.45,Artificial pacemaker rate check,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2007607,93.52,Application of neck support,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2007611,93.56,Application of pressure dressing,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2007867,95.41,Audiometry,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2008242,99.08,Transfusion of blood expander,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2008248,99.13,Immunization for autoimmune disease,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2008269,99.23,Injection of steroid,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2008312,99.36,Administration of diphtheria toxoid,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2008314,99.38,Administration of tetanus toxoid,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2008352,99.57,Administration of botulism antitoxin,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+2617204,G0101,Cervical or vaginal cancer screening; pelvic and clinical breast examination,HCPCS,Measurement,HCPCS,Valid,Non-standard,
+4160463,399202009,Transmetatarsal amputation,Procedure,Procedure,SNOMED,Invalid,Non-standard,
+4332307,230977003,Intracranial microvascular decompression of cranial nerve,Procedure,Procedure,SNOMED,Invalid,Non-standard,
+40756780,43.82,Laparoscopic vertical (sleeve) gastrectomy,4-dig billing code,Procedure,ICD9Proc,Valid,Non-standard,
+44820487,V71.4,Observation following other accident,4-dig billing V code,Procedure,ICD9CM,Valid,Non-standard,
+44821609,V72.81,Pre-operative cardiovascular examination,5-dig billing V code,Procedure,ICD9CM,Valid,Non-standard,
+44822721,V58.32,Encounter for removal of sutures,5-dig billing V code,Procedure,ICD9CM,Valid,Non-standard,
+44823809,V26.9,Unspecified procreative management,4-dig billing V code,Procedure,ICD9CM,Valid,Non-standard,
+44835529,V72.9,Unspecified examination,4-dig billing V code,Procedure,ICD9CM,Valid,Non-standard,
+32817,OMOP4976890,EHR,Type Concept,Type Concept,Type Concept,Valid,Standard,
+32821,OMOP4976894,EHR billing record,Type Concept,Type Concept,Type Concept,Valid,Standard,
+32468,OMOP4822347,Inferred from claim,Procedure Type,Type Concept,Procedure Type,Valid,Non-standard,
+38000275,OMOP4822376,EHR order list entry,Procedure Type,Type Concept,Procedure Type,Valid,Non-standard,
+38003621,OMOP4822377,Procedure recorded as lab test,Procedure Type,Type Concept,Procedure Type,Valid,Non-standard,
+44786631,OMOP4822384,Secondary Procedure,Procedure Type,Type Concept,Procedure Type,Valid,Non-standard,
+44786630,OMOP4822383,Primary Procedure,Procedure Type,Type Concept,Procedure Type,Valid,Non-standard,
+42898141,OMOP4822381,Referral record,Procedure Type,Type Concept,Procedure Type,Valid,Non-standard,
+257,OMOP4822442,Hospitalization Cost Record,Procedure Type,Type Concept,Procedure Type,Valid,Non-standard,
+42865906,OMOP4822380,Condition Procedure,Procedure Type,Type Concept,Procedure Type,Valid,Non-standard,

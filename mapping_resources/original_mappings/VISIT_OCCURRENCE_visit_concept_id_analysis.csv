@@ -1,5 +1,5 @@
 Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
-0,No matching concept,No matching concept,Undefined,Metadata,None,Valid,Non-standard,17572189
+0,No matching concept,No matching concept,Undefined,Metadata,,Valid,Non-standard,17572189
 9202,OP,Outpatient Visit,Visit,Visit,Visit,Valid,Standard,12764093
 9201,IP,Inpatient Visit,Visit,Visit,Visit,Valid,Standard,2785075
 581477,OMOP4822458,Office Visit,Visit,Visit,Visit,Valid,Standard,2752880
@@ -26,3 +26,49 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 8546,34,Hospice,Visit,Visit,CMS Place of Service,Valid,Standard,330
 8971,51,Inpatient Psychiatric Facility,Visit,Visit,CMS Place of Service,Valid,Standard,92
 38004207,261Q00000X,Ambulatory Clinic / Center,Visit,Visit,NUCC,Valid,Standard,56
+32193,1,Home / non health care facility point of origin,UB04 Point of Origin,Visit,UB04 Point of Origin,Valid,Non-standard,
+32199,9,Information not available,UB04 Point of Origin,Visit,UB04 Point of Origin,Valid,Non-standard,
+32194,2,Clinic or physicians office,UB04 Point of Origin,Visit,UB04 Point of Origin,Valid,Non-standard,
+38004515,A0,Hospital,Visit,Visit,Medicare Specialty,Valid,Standard,
+32195,4,"Transfer from a Hospital, different facility",UB04 Point of Origin,Visit,UB04 Point of Origin,Valid,Non-standard,
+32592,S,Born inside this hospital,UB04 Point of Origin,Visit,UB04 Point of Origin,Valid,Non-standard,
+32220,30,Still patient,UB04 Pt dis status,Visit,UB04 Pt dis status,Valid,Non-standard,
+32197,6,Transfer from another Healthcare facility,UB04 Point of Origin,Visit,UB04 Point of Origin,Valid,Non-standard,
+8863,31,Skilled Nursing Facility,Visit,Visit,CMS Place of Service,Valid,Standard,
+32196,5,"Transfer from Skilled nursing facility, Intermediate care facility, Assisted living facility",UB04 Point of Origin,Visit,UB04 Point of Origin,Valid,Non-standard,
+32200,D,"Transfer within hospital, but seperate claim",UB04 Point of Origin,Visit,UB04 Point of Origin,Valid,Non-standard,
+38003619,09,Prison / Correctional Facility,Visit,Visit,CMS Place of Service,Valid,Standard,
+32582,3,HMO Referral,UB04 Point of Origin,Visit,UB04 Point of Origin,Valid,Non-standard,
+32589,P,Sick Baby,UB04 Point of Origin,Visit,UB04 Point of Origin,Valid,Non-standard,
+32209,0,Unknown Value (but present in data),UB04 Pt dis status,Visit,UB04 Pt dis status,Valid,Non-standard,
+32210,01,Discharged to home / self care (routine charge).,UB04 Pt dis status,Visit,UB04 Pt dis status,Valid,Non-standard,
+38004519,A4,Home Health Agency,Visit,Visit,Medicare Specialty,Valid,Standard,
+32218,20,Expired,UB04 Pt dis status,Visit,UB04 Pt dis status,Valid,Non-standard,
+32215,06,Discharged / transferred to home care of organized home health service organization.,UB04 Pt dis status,Visit,UB04 Pt dis status,Valid,Non-standard,
+32216,07,Left against medical advice or discontinued care.,UB04 Pt dis status,Visit,UB04 Pt dis status,Valid,Non-standard,
+8920,61,Comprehensive Inpatient Rehabilitation Facility,Visit,Visit,CMS Place of Service,Valid,Standard,
+32211,02,Discharged / transferred to other short term general hospital for inpatient care.,UB04 Pt dis status,Visit,UB04 Pt dis status,Valid,Non-standard,
+32228,62,Discharged / transferred to an inpatient rehabilitation facility including distinct parts units of a hospital,UB04 Pt dis status,Visit,UB04 Pt dis status,Valid,Non-standard,
+38004284,283Q00000X,Psychiatric Hospital,Visit,Visit,NUCC,Valid,Standard,
+32212,03,Discharged / transferred to skilled nursing facility (SNF) with Medicare certification in anticipation of covered skilled care,UB04 Pt dis status,Visit,UB04 Pt dis status,Valid,Non-standard,
+38004276,281PC2000X,Children's Chronic Disease Hospital,Visit,Visit,NUCC,Valid,Standard,
+8851,14,Group Home,Visit,Visit,CMS Place of Service,Valid,Standard,
+32232,66,Discharged / transferred to a Critical Access Hospital (CAH),UB04 Pt dis status,Visit,UB04 Pt dis status,Valid,Non-standard,
+32214,05,Discharged / transferred to another type of institution for inpatient care (designated cancer center or childrens hospital),UB04 Pt dis status,Visit,UB04 Pt dis status,Valid,Non-standard,
+32226,51,Hospice - medical facility,UB04 Pt dis status,Visit,UB04 Pt dis status,Valid,Non-standard,
+32238,84,Discharged / transferred to a facility that provides custodial or supportive care with a planned acute care hospital inpatient readmission,UB04 Pt dis status,Visit,UB04 Pt dis status,Valid,Non-standard,
+38004277,282E00000X,Long Term Care Hospital,Visit,Visit,NUCC,Valid,Standard,
+32217,09,Admitted as an inpatient to this hospital,UB04 Pt dis status,Visit,UB04 Pt dis status,Valid,Non-standard,
+32225,50,Hospice - home,UB04 Pt dis status,Visit,UB04 Pt dis status,Valid,Non-standard,
+32231,65,Discharged / Transferred to a psychiatric hospital or psychiatric distinct unit of a hospital,UB04 Pt dis status,Visit,UB04 Pt dis status,Valid,Non-standard,
+32234,70,Discharged / transferred to another type of health care institution not defined elsewhere in code list.,UB04 Pt dis status,Visit,UB04 Pt dis status,Valid,Non-standard,
+32229,63,Discharged / transferred to a long term care hospitals,UB04 Pt dis status,Visit,UB04 Pt dis status,Valid,Non-standard,
+32276,85,Critical Access Hospital,Visit,Visit,UB04 Typ bill,Valid,Standard,
+38004306,311Z00000X,Custodial Care Facility,Visit,Visit,NUCC,Valid,Standard,
+44806889,814161000000106,Ambulatory care,Procedure,Observation,SNOMED,Valid,Standard,
+32208,9,Information not available,UB04 Pri Typ of Adm,Observation,UB04 Pri Typ of Adm,Valid,Standard,
+4214577,394656005,Inpatient care,Procedure,Observation,SNOMED,Valid,Standard,
+42690664,1064901000000108,Urgent level emergency care,Procedure,Observation,SNOMED,Valid,Standard,
+38004268,261QX0200X,Oncology Clinic/Center,Visit,Visit,NUCC,Valid,Standard,
+44818518,OMOP4822464,Visit derived from EHR record,Visit Type,Type Concept,Visit Type,Valid,Non-standard,
+32827,OMOP4976900,EHR encounter record,Type Concept,Type Concept,Type Concept,Valid,Standard,

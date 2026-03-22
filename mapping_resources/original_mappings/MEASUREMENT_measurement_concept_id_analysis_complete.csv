@@ -5,7 +5,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3020891,8310-5,Body temperature,Clinical Observation,Measurement,LOINC,Valid,Standard,78982836
 3027018,8867-4,Heart rate,Clinical Observation,Measurement,LOINC,Valid,Standard,77549128
 40762499,59408-5,Oxygen saturation in Arterial blood by Pulse oximetry,Clinical Observation,Measurement,LOINC,Valid,Standard,61799131
-0,NULL/Missing,NULL/Missing measurement concept,Undefined,Metadata,None,Invalid,Non-standard,49201949
+0,NULL/Missing,NULL/Missing measurement concept,Undefined,Metadata,,Invalid,Non-standard,49201949
 4301868,78564009,Pulse rate,Observable Entity,Measurement,SNOMED,Valid,Standard,25722649
 4098046,252465000,Pulse oximetry,Procedure,Measurement,SNOMED,Valid,Standard,24145203
 3027598,8478-0,Mean blood pressure,Clinical Observation,Measurement,LOINC,Valid,Standard,23915719
@@ -906,7 +906,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3035460,7796-6,Platelet clump [Presence] in Blood by Light microscopy,Lab Test,Measurement,LOINC,Valid,Standard,14276
 3000637,12228-3,Triglyceride [Mass/volume] in Body fluid,Lab Test,Measurement,LOINC,Valid,Standard,14262
 3023323,15067-2,Follitropin [Units/volume] in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,14225
-2212294,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,14205
+2212294,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,14205
 3017575,19146-0,Referral lab test results,Lab Test,Measurement,LOINC,Valid,Standard,14109
 3011505,19926-5,FEV1/FVC,Clinical Observation,Measurement,LOINC,Valid,Standard,14060
 3025411,3948-7,PHENobarbital [Mass/volume] in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,14023
@@ -937,7 +937,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3048504,48509-4,Influenza virus A and B RNA [Identifier] in Specimen by NAA with probe detection,Lab Test,Measurement,LOINC,Valid,Standard,13488
 3036663,10328-3,Lymphocytes/100 leukocytes in Cerebral spinal fluid by Manual count,Lab Test,Measurement,LOINC,Valid,Standard,13457
 3005872,717-9,Hemoglobin [Presence] in Blood,Lab Test,Measurement,LOINC,Valid,Standard,13452
-2212611,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,13414
+2212611,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,13414
 3033705,41645-3,Calcium.ionized [Moles/volume] in Venous blood,Lab Test,Measurement,LOINC,Valid,Standard,13375
 3016251,2335-8,Hemoglobin.gastrointestinal [Presence] in Stool,Lab Test,Measurement,LOINC,Valid,Standard,13340
 3012887,13949-3,Cytomegalovirus IgG Ab [Presence] in Serum or Plasma by Immunoassay,Lab Test,Measurement,LOINC,Valid,Standard,13325
@@ -1051,7 +1051,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3009214,10501-5,Lutropin [Units/volume] in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,10756
 3027270,768-2,Segmented neutrophils [#/volume] in Blood by Manual count,Lab Test,Measurement,LOINC,Valid,Standard,10750
 3013520,17842-6,Cancer Ag 27-29 [Units/volume] in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,10743
-2213300,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,10743
+2213300,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,10743
 3008392,16285-9,Creatinine/Protein [Mass Ratio] in Urine,Lab Test,Measurement,LOINC,Valid,Standard,10654
 3039163,54005-4,Nuclear membrane pores nuclear Ab pattern [Presence] in Serum by Immunofluorescence,Lab Test,Measurement,LOINC,Valid,Standard,10624
 3003985,6873-4,Beta hydroxybutyrate [Moles/volume] in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,10445
@@ -1076,7 +1076,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3001873,25160-3,Granular casts [Presence] in Urine sediment by Light microscopy,Lab Test,Measurement,LOINC,Valid,Standard,10075
 3013432,23904-6,Monocytes+Macrophages/100 leukocytes in Cerebral spinal fluid by Manual count,Lab Test,Measurement,LOINC,Valid,Standard,10073
 42869450,71693-6,Platelets reticulated/100 platelets in Blood by Automated count,Lab Test,Measurement,LOINC,Valid,Standard,10069
-2212095,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,10000
+2212095,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,10000
 3012565,3167-4,Volume of 24 hour Urine,Lab Test,Measurement,LOINC,Valid,Standard,9961
 3014429,9335-1,Appearance of Body fluid,Lab Test,Measurement,LOINC,Valid,Standard,9953
 3009261,25428-4,Glucose [Presence] in Urine by Test strip,Lab Test,Measurement,LOINC,Valid,Standard,9906
@@ -1122,7 +1122,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 43055420,72586-1,Beta globulin/Protein.total [Pure mass fraction] in Serum or Plasma by Electrophoresis,Lab Test,Measurement,LOINC,Valid,Standard,8905
 43055416,72582-0,Gamma globulin/Protein.total [Pure mass fraction] in Serum or Plasma by Electrophoresis,Lab Test,Measurement,LOINC,Valid,Standard,8905
 3042480,39125-0,Width of Wound,Clinical Observation,Measurement,LOINC,Valid,Standard,8845
-2213288,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,8836
+2213288,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,8836
 3010084,1986-9,C peptide [Mass/volume] in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,8811
 3053209,48378-4,Kappa light chains.free/Lambda light chains.free [Mass Ratio] in Serum,Lab Test,Measurement,LOINC,Valid,Standard,8716
 36661384,95380-2,Influenza virus A and B and SARS-CoV-2 (COVID-19) and SARS-related CoV RNA panel - Respiratory system specimen by NAA with probe detection,Lab Test,Measurement,LOINC,Valid,Standard,8645
@@ -1217,231 +1217,231 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3042000,39127-6,Depth of Wound,Clinical Observation,Measurement,LOINC,Valid,Standard,6825
 3006638,4059-2,Tobramycin [Mass/volume] in Serum or Plasma --trough,Lab Test,Measurement,LOINC,Valid,Standard,6823
 3017354,26505-8,Segmented neutrophils/100 leukocytes in Blood,Lab Test,Measurement,LOINC,Valid,Standard,6814
-46374178,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46374177,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46374172,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46374149,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46374146,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46374137,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46374109,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46374108,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46374103,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46374080,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46374077,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46374068,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373971,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373970,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373965,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373942,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373939,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373930,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373902,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373901,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373896,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373873,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373870,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373861,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373764,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373763,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373758,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373735,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373732,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373723,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373695,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373694,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373689,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373666,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373663,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373654,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373619,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373618,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373613,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373590,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373587,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373578,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373550,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373549,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373544,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373521,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373518,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373509,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373481,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373480,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373475,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373452,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373449,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373440,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373412,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373411,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373406,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373383,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373380,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373371,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373343,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373342,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373337,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373314,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373311,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373302,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373274,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373273,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373268,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373244,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373241,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373232,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373145,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373144,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373143,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373142,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373141,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373138,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373137,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373135,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373133,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373132,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373131,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373130,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373129,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373128,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373127,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373126,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373125,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373122,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373121,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373119,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373117,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373116,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373115,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373114,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373113,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373112,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373111,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373110,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373109,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373106,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373105,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373103,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373101,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373100,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373099,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373098,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373097,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373096,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373095,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373094,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373093,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373090,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373089,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373087,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373085,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373084,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373083,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373082,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373081,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373080,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373079,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373078,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373077,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373074,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373073,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373071,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373069,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373068,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373067,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373066,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373065,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373064,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373063,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373062,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373061,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373058,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373057,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373055,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373053,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373052,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373051,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373050,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373049,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373048,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373047,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373046,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373045,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373042,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373041,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373039,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373037,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373036,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373035,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373034,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373033,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373032,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373031,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373030,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373029,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373026,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373025,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373023,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373021,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373020,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373019,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373018,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373017,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373016,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373015,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373014,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373013,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373010,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373009,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373007,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373005,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373004,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373003,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46373002,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46372996,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46372995,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46372994,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46372990,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46372989,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46372988,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46372986,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46372983,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46372982,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46372981,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46372980,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46372979,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46372978,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46372977,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46372974,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46372973,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46372971,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46372969,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46372968,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46372967,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46372966,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46372965,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46372964,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46372963,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46372962,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46372961,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46372958,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46372957,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46372955,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46372953,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46372952,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46372951,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46372950,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46372949,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46372948,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46372947,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46372946,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46372945,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46372942,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46372941,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46372939,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46372937,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46372936,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46372935,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
-46372933,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6779
+46374178,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46374177,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46374172,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46374149,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46374146,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46374137,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46374109,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46374108,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46374103,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46374080,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46374077,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46374068,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373971,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373970,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373965,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373942,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373939,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373930,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373902,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373901,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373896,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373873,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373870,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373861,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373764,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373763,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373758,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373735,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373732,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373723,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373695,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373694,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373689,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373666,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373663,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373654,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373619,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373618,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373613,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373590,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373587,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373578,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373550,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373549,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373544,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373521,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373518,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373509,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373481,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373480,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373475,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373452,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373449,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373440,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373412,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373411,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373406,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373383,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373380,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373371,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373343,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373342,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373337,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373314,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373311,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373302,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373274,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373273,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373268,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373244,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373241,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373232,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373145,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373144,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373143,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373142,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373141,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373138,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373137,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373135,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373133,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373132,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373131,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373130,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373129,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373128,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373127,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373126,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373125,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373122,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373121,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373119,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373117,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373116,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373115,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373114,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373113,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373112,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373111,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373110,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373109,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373106,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373105,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373103,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373101,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373100,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373099,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373098,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373097,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373096,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373095,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373094,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373093,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373090,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373089,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373087,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373085,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373084,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373083,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373082,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373081,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373080,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373079,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373078,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373077,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373074,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373073,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373071,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373069,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373068,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373067,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373066,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373065,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373064,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373063,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373062,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373061,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373058,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373057,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373055,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373053,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373052,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373051,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373050,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373049,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373048,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373047,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373046,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373045,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373042,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373041,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373039,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373037,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373036,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373035,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373034,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373033,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373032,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373031,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373030,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373029,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373026,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373025,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373023,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373021,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373020,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373019,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373018,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373017,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373016,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373015,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373014,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373013,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373010,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373009,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373007,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373005,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373004,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373003,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46373002,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46372996,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46372995,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46372994,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46372990,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46372989,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46372988,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46372986,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46372983,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46372982,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46372981,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46372980,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46372979,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46372978,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46372977,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46372974,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46372973,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46372971,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46372969,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46372968,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46372967,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46372966,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46372965,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46372964,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46372963,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46372962,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46372961,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46372958,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46372957,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46372955,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46372953,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46372952,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46372951,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46372950,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46372949,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46372948,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46372947,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46372946,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46372945,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46372942,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46372941,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46372939,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46372937,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46372936,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46372935,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
+46372933,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6779
 46235174,76635-2,Q-T interval corrected based on Bazett formula,Clinical Observation,Measurement,LOINC,Valid,Standard,6779
 46235173,76634-5,Q-T interval corrected based on Fridericia formula,Clinical Observation,Measurement,LOINC,Valid,Standard,6779
 3038132,10034-7,S wave amplitude in lead AVF,Clinical Observation,Measurement,LOINC,Valid,Standard,6779
@@ -1777,7 +1777,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3000571,19346-6,Amphetamine [Mass/volume] in Urine,Lab Test,Measurement,LOINC,Valid,Standard,5425
 3011363,24027-5,Streptococcus pneumoniae Ag [Presence] in Urine,Lab Test,Measurement,LOINC,Valid,Standard,5411
 35918306,410,Laterality,NAACCR Variable,Measurement,NAACCR,Valid,Standard,5410
-2213216,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,5408
+2213216,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,5408
 3019050,31017-7,Tissue transglutaminase IgA Ab [Units/volume] in Serum,Lab Test,Measurement,LOINC,Valid,Standard,5403
 35918797,490,Diagnostic Confirmation,NAACCR Variable,Measurement,NAACCR,Valid,Standard,5397
 3035456,13951-9,Hepatitis A virus Ab [Presence] in Serum by Immunoassay,Lab Test,Measurement,LOINC,Valid,Standard,5394
@@ -1821,7 +1821,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3025008,24475-6,F2 gene c.20210G>A [Genotype] in Blood or Tissue by Molecular genetics method Nominal,Lab Test,Measurement,LOINC,Valid,Standard,4928
 3046210,43215-3,Cortisol [Mass/volume] in Serum or Plasma --baseline,Lab Test,Measurement,LOINC,Valid,Standard,4927
 3034780,2742-5,Angiotensin converting enzyme [Enzymatic activity/volume] in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,4909
-2212549,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,4880
+2212549,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,4880
 3028707,19550-3,Methadone [Presence] in Urine by Screen method,Lab Test,Measurement,LOINC,Valid,Standard,4862
 3015816,21668-9,F5 gene p.Arg506Gln [Presence] in Blood or Tissue by Molecular genetics method,Lab Test,Measurement,LOINC,Valid,Standard,4862
 36031477,96558-2,Wound healing stage,Clinical Observation,Measurement,LOINC,Valid,Standard,4858
@@ -1899,7 +1899,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3045256,43824-2,Bilirubin.total [Presence] in Body fluid,Lab Test,Measurement,LOINC,Valid,Standard,4128
 3016999,8014-3,Rubella virus IgG Ab [Units/volume] in Serum,Lab Test,Measurement,LOINC,Valid,Standard,4117
 3008293,31144-9,Thyroxine (T4) [Mass/volume] in DBS,Lab Test,Measurement,LOINC,Valid,Standard,4113
-46257426,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,4106
+46257426,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,4106
 35918791,890,TNM Path N,NAACCR Variable,Measurement,NAACCR,Valid,Standard,4098
 3023261,6948-4,lamoTRIgine [Mass/volume] in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,4088
 4219068,82457009,"Vitamin D, 1,25-dihydroxy measurement",Procedure,Measurement,SNOMED,Valid,Standard,4078
@@ -1970,7 +1970,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 46236017,77307-7,Lead [Mass/volume] in Venous blood,Lab Test,Measurement,LOINC,Valid,Standard,3571
 3033870,11135-1,Appearance of Spun Cerebral spinal fluid,Lab Test,Measurement,LOINC,Valid,Standard,3568
 40759127,56006-0,Platelet aggregation ADP induced in Blood --10 umol/L,Lab Test,Measurement,LOINC,Valid,Standard,3560
-2212800,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,3556
+2212800,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,3556
 42869529,71774-4,Mitogen stimulated gamma interferon [Units/volume] corrected for background in Blood,Lab Test,Measurement,LOINC,Valid,Standard,3554
 3049133,48391-7,"Carbon dioxide, total [Moles/volume] in Venous blood by calculation",Lab Test,Measurement,LOINC,Valid,Standard,3533
 3022640,26451-5,Eosinophils/100 leukocytes in Cerebral spinal fluid,Lab Test,Measurement,LOINC,Valid,Standard,3512
@@ -2105,7 +2105,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 42528203,85269-9,X-linked adrenoleukodystrophy newborn screen interpretation,Lab Test,Measurement,LOINC,Valid,Standard,2820
 40765049,62301-7,Lysosomal storage disorders newborn screen interpretation,Lab Test,Measurement,LOINC,Valid,Standard,2820
 3034641,42327-7,Leukocytes [Presence] in Stool by Methylene blue stain,Lab Test,Measurement,LOINC,Valid,Standard,2809
-2213287,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,2789
+2213287,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,2789
 3021320,6447-7,Legionella pneumophila Ag [Presence] in Urine by Immunoassay,Lab Test,Measurement,LOINC,Valid,Standard,2786
 3005168,2501-5,Iron binding capacity.unsaturated [Mass/volume] in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,2784
 3006585,30339-6,Epstein Barr virus capsid IgG Ab [Presence] in Serum,Lab Test,Measurement,LOINC,Valid,Standard,2774
@@ -2163,7 +2163,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3027144,2839-9,Progesterone [Mass/volume] in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,2438
 3038593,53717-5,PCA-1 Ab [Titer] in Serum,Lab Test,Measurement,LOINC,Valid,Standard,2434
 3000194,21108-6,Beta 2 glycoprotein 1 IgA Ab [Units/volume] in Serum,Lab Test,Measurement,LOINC,Valid,Standard,2434
-2212167,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,2430
+2212167,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,2430
 3029197,33979-6,Voltage-gated calcium channel N type binding Ab [Moles/volume] in Serum,Lab Test,Measurement,LOINC,Valid,Standard,2425
 3024474,1746-7,Albumin [Mass/volume] in Cerebral spinal fluid,Lab Test,Measurement,LOINC,Valid,Standard,2420
 3018167,26971-2,Smooth muscle Ab [Presence] in Serum by Immunofluorescence,Lab Test,Measurement,LOINC,Valid,Standard,2416
@@ -2249,7 +2249,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3002000,32293-3,Albumin [Mass/volume] in Specimen,Lab Test,Measurement,LOINC,Valid,Standard,2092
 3030526,50941-4,Mycobacterium sp [Presence] in Specimen by Organism specific culture,Lab Test,Measurement,LOINC,Valid,Standard,2088
 3015232,12183-0,Cholesterol [Mass/volume] in Body fluid,Lab Test,Measurement,LOINC,Valid,Standard,2084
-2212241,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,2080
+2212241,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,2080
 3005445,3217-7,Coagulation factor X activated [Units/volume] in Platelet poor plasma by Coagulation assay,Lab Test,Measurement,LOINC,Valid,Standard,2075
 3046870,32998-7,Tissue transglutaminase IgG Ab [Units/volume] in Serum,Lab Test,Measurement,LOINC,Valid,Standard,2057
 4207483,312468003,Blood potassium measurement,Procedure,Measurement,SNOMED,Valid,Standard,2055
@@ -2296,7 +2296,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3046846,43701-2,Cytomegalovirus [Presence] in Specimen by Shell vial culture,Lab Test,Measurement,LOINC,Valid,Standard,1861
 3010300,20438-8,Glucose [Mass/volume] in Serum or Plasma --1 hour post dose glucose,Lab Test,Measurement,LOINC,Valid,Standard,1854
 3020229,5000-5,Cytomegalovirus DNA [Presence] in Specimen by NAA with probe detection,Lab Test,Measurement,LOINC,Valid,Standard,1852
-2213212,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,1852
+2213212,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,1852
 3003403,2346-5,Glucose [Mass/volume] in Pleural fluid,Lab Test,Measurement,LOINC,Valid,Standard,1851
 3015054,2530-4,Lactate dehydrogenase [Enzymatic activity/volume] in Pleural fluid,Lab Test,Measurement,LOINC,Valid,Standard,1849
 3004221,9274-2,5 minute Apgar Score,Clinical Observation,Measurement,LOINC,Valid,Standard,1849
@@ -2310,7 +2310,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3030035,32674-4,Cryptococcus sp Ag [Titer] in Cerebral spinal fluid,Lab Test,Measurement,LOINC,Valid,Standard,1827
 3035572,734-4,Variant lymphocytes [#/volume] in Blood by Manual count,Lab Test,Measurement,LOINC,Valid,Standard,1824
 3018867,7966-5,Mumps virus IgG Ab [Units/volume] in Serum,Lab Test,Measurement,LOINC,Valid,Standard,1823
-2212550,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,1815
+2212550,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,1815
 3016100,17780-8,Helicobacter pylori Ag [Presence] in Stool by Immunoassay,Lab Test,Measurement,LOINC,Valid,Standard,1803
 3047296,44431-5,Annexin V IgG Ab [Units/volume] in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,1793
 3024889,2617-9,Methemoglobin/Hemoglobin.total in Venous blood,Lab Test,Measurement,LOINC,Valid,Standard,1789
@@ -2366,7 +2366,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 4219024,39700003,Free thyroxine index,Procedure,Measurement,SNOMED,Valid,Standard,1646
 3013750,25514-1,Rubella virus IgG Ab [Presence] in Serum,Lab Test,Measurement,LOINC,Valid,Standard,1638
 3047184,33800-4,DNA double strand IgG Ab [Units/volume] in Serum,Lab Test,Measurement,LOINC,Valid,Standard,1636
-2212186,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,1636
+2212186,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,1636
 36770283,OMOP4999962,Metastasis to lung,Metastasis,Measurement,Cancer Modifier,Valid,Standard,1620
 3042234,53813-2,Platelet aggregation ADP induced [Units/volume] in Blood,Lab Test,Measurement,LOINC,Valid,Standard,1620
 3010296,1832-5,Alpha-1-Fetoprotein [Mass/volume] in Amniotic fluid,Lab Test,Measurement,LOINC,Valid,Standard,1614
@@ -2405,7 +2405,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3026237,6741-3,Erythrocytes [#/volume] in Body fluid by Manual count,Lab Test,Measurement,LOINC,Valid,Standard,1501
 21492556,79321-6,Lysophosphatidylcholine(26:0) [Moles/volume] in DBS,Lab Test,Measurement,LOINC,Valid,Standard,1499
 3016851,2669-0,Normetanephrine [Mass/volume] in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,1495
-2212703,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,1490
+2212703,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,1490
 46235126,75513-2,dRVVT with 1:1 PNP (LA mix),Lab Test,Measurement,LOINC,Valid,Standard,1485
 3005686,10371-3,Bite cells [Presence] in Blood by Light microscopy,Lab Test,Measurement,LOINC,Valid,Standard,1474
 3029774,33924-2,Neuronal nuclear type 3 Ab [Titer] in Serum,Lab Test,Measurement,LOINC,Valid,Standard,1469
@@ -2495,7 +2495,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3035999,2520-5,Lactate [Moles/volume] in Cerebral spinal fluid,Lab Test,Measurement,LOINC,Valid,Standard,1196
 3020422,17813-7,Alpha 2 globulin/Protein.total by Electrophoresis in Urine collected for unspecified duration,Lab Test,Measurement,LOINC,Valid,Standard,1194
 3013731,5193-8,Hepatitis B virus surface Ab [Units/volume] in Serum or Plasma by Immunoassay,Lab Test,Measurement,LOINC,Valid,Standard,1187
-2212290,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,1187
+2212290,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,1187
 3013339,20479-2,Measles virus IgG Ab [Presence] in Serum,Lab Test,Measurement,LOINC,Valid,Standard,1184
 3042063,39465-0,"Carbon dioxide, total [Moles/volume] in Venous cord blood",Lab Test,Measurement,LOINC,Valid,Standard,1183
 3032186,49699-2,pH of Venous cord blood adjusted to patient's actual temperature,Lab Test,Measurement,LOINC,Valid,Standard,1183
@@ -2529,10 +2529,10 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 35918305,1130,Pediatric Staging System,NAACCR Variable,Measurement,NAACCR,Valid,Standard,1135
 3019839,15069-8,Fructosamine [Moles/volume] in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,1133
 3033163,35038-9,Macrophages [#/volume] in Cerebral spinal fluid,Lab Test,Measurement,LOINC,Valid,Standard,1127
-2213220,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,1124
+2213220,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,1124
 3045515,34542-1,ACTH stimulation test using IV corticosteroids in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,1122
 35918318,1120,Pediatric Stage,NAACCR Variable,Measurement,NAACCR,Valid,Standard,1120
-2213278,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,1113
+2213278,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,1113
 1633942,c-7th_AJCC/UICC-N0,AJCC/UICC 7th clinical N0 Category,Staging/Grading,Measurement,Cancer Modifier,Valid,Standard,1112
 3023037,2751-6,pH of Peritoneal fluid,Lab Test,Measurement,LOINC,Valid,Standard,1111
 3008512,6942-7,Albumin [Mass/volume] in Urine by Electrophoresis,Lab Test,Measurement,LOINC,Valid,Standard,1110
@@ -2552,7 +2552,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 21493471,82203-1,Escherichia coli Stx1 and Stx2 toxin stx1+stx2 genes [Presence] in Stool by NAA with non-probe detection,Lab Test,Measurement,LOINC,Valid,Standard,1078
 4178785,42950004,Iron measurement,Procedure,Measurement,SNOMED,Valid,Standard,1074
 3024489,5404-9,Varicella zoster virus IgM Ab [Units/volume] in Serum by Immunoassay,Lab Test,Measurement,LOINC,Valid,Standard,1074
-2213251,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,1074
+2213251,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,1074
 21493332,82166-0,Influenza virus A RNA [Presence] in Nasopharynx by NAA with non-probe detection,Lab Test,Measurement,LOINC,Valid,Standard,1074
 3033882,14288-5,Carnitine [Moles/volume] in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,1073
 3035880,2750-8,pH of Pleural fluid,Lab Test,Measurement,LOINC,Valid,Standard,1069
@@ -2586,7 +2586,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3024942,3204-5,Coagulation factor VIII inhibitor [Units/volume] in Platelet poor plasma by Coagulation assay,Lab Test,Measurement,LOINC,Valid,Standard,1008
 3021600,4087-3,Valproate Free [Mass/volume] in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,1008
 4243800,59985005,Bone marrow staining and interpretation,Procedure,Measurement,SNOMED,Valid,Standard,1005
-2212801,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,1004
+2212801,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,1004
 3010418,4621-9,Hemoglobin S [Presence] in Blood,Lab Test,Measurement,LOINC,Valid,Standard,995
 3015200,29141-9,Metanephrine [Mass/volume] in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,992
 3041899,38910-6,Schistocytes [Presence] in Blood by Automated count,Lab Test,Measurement,LOINC,Valid,Standard,986
@@ -2707,10 +2707,10 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 4048586,15719007,Fine needle aspirate with routine interpretation and report,Procedure,Measurement,SNOMED,Valid,Standard,804
 3026300,20436-2,Glucose [Mass/volume] in Serum or Plasma --2 hours post dose glucose,Lab Test,Measurement,LOINC,Valid,Standard,804
 3012202,11483-5,Varicella zoster virus DNA [Presence] in Specimen by NAA with probe detection,Lab Test,Measurement,LOINC,Valid,Standard,803
-2213330,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,802
+2213330,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,802
 3042272,53622-7,von Willebrand factor (vWf) cleaving protease actual/normal in Platelet poor plasma by Chromogenic method,Lab Test,Measurement,LOINC,Valid,Standard,798
 3003526,5126-8,Cytomegalovirus IgM Ab [Units/volume] in Serum or Plasma by Immunoassay,Lab Test,Measurement,LOINC,Valid,Standard,798
-2212885,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,794
+2212885,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,794
 46236736,77026-3,Influenza virus A H1 RNA [Presence] in Nasopharynx by NAA with probe detection,Lab Test,Measurement,LOINC,Valid,Standard,787
 37021563,92954-7,Serratia marcescens DNA [NCncRange] in Sputum by NAA with non-probe detection,Lab Test,Measurement,LOINC,Valid,Standard,786
 37021298,92950-5,Streptococcus agalactiae DNA [NCncRange] in Sputum by NAA with non-probe detection,Lab Test,Measurement,LOINC,Valid,Standard,786
@@ -2822,7 +2822,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 4155237,269856004,Measurement of liver enzyme,Procedure,Measurement,SNOMED,Valid,Standard,661
 3030870,35072-8,Basophils [#/volume] in Cerebral spinal fluid,Lab Test,Measurement,LOINC,Valid,Standard,661
 3027514,3052-8,Triiodothyronine (T3).reverse [Mass/volume] in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,660
-2212742,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,658
+2212742,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,658
 3035797,35559-4,Protein.monoclonal band 2 [Mass/volume] in Serum or Plasma by Electrophoresis,Lab Test,Measurement,LOINC,Valid,Standard,657
 3025613,5104-5,Coxsackievirus B1 Ab [Titer] in Serum by Complement fixation,Lab Test,Measurement,LOINC,Valid,Standard,655
 3965775,102556-8,Common Ragweed IgE Ab [Presence] in Serum by Radioallergosorbent test (RAST),Lab Test,Measurement,LOINC,Valid,Standard,653
@@ -2925,7 +2925,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3030441,49697-6,Oxygen [Partial pressure] adjusted to patient's actual temperature in Venous cord blood,Lab Test,Measurement,LOINC,Valid,Standard,558
 3021763,5095-5,Coccidioides immitis Ab [Presence] in Serum by Immune diffusion (ID),Lab Test,Measurement,LOINC,Valid,Standard,558
 4062637,171126009,Tuberculosis screening,Procedure,Measurement,SNOMED,Valid,Standard,556
-2213308,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,554
+2213308,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,554
 3965635,102240-9,Cladosporium herbarum IgE Ab [Presence] in Serum by Radioallergosorbent test (RAST),Lab Test,Measurement,LOINC,Valid,Standard,553
 3038624,53959-3,Choriogonadotropin.tumor marker [Units/volume] in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,553
 3025481,17713-9,Topiramate [Mass/volume] in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,553
@@ -2958,7 +2958,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3009710,5669-7,Isopropanol [Mass/volume] in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,526
 3027831,8112-5,CD3-CD16+CD56+ (Natural killer) cells/100 cells in Blood,Lab Test,Measurement,LOINC,Valid,Standard,524
 3048578,48792-6,Necroinflammatory activity score,Lab Test,Measurement,LOINC,Valid,Standard,523
-2213249,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,523
+2213249,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,523
 3033053,49549-9,Referral lab test method,Lab Test,Measurement,LOINC,Valid,Standard,522
 35917348,lung@2890,Pleural/Elastic Layer Invasion (PL) by H and E or Elastic Stain,NAACCR Variable,Measurement,NAACCR,Valid,Standard,519
 35917135,lung@2880,Separate Tumor Nodules - Ipsilateral Lung,NAACCR Variable,Measurement,NAACCR,Valid,Standard,519
@@ -2994,10 +2994,10 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3025439,20057-6,Airway pressure Ventilator --at peak inspiratory flow maximum setting,Clinical Observation,Measurement,LOINC,Valid,Standard,491
 3008938,32094-5,Methanol [Moles/volume] in Specimen,Lab Test,Measurement,LOINC,Valid,Standard,491
 3042925,44706-0,Actin smooth muscle IgG Ab [Units/volume] in Serum,Lab Test,Measurement,LOINC,Valid,Standard,489
-2212166,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,488
+2212166,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,488
 3053340,49244-7,Alpha 1 antitrypsin phenotype [Interpretation] in Serum or Plasma Narrative,Lab Test,Measurement,LOINC,Valid,Standard,487
 3032652,35088-4,Glasgow coma scale,Clinical Observation,Measurement,LOINC,Valid,Standard,487
-2212544,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,487
+2212544,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,487
 1175759,91127-1,Maximum amplitude ADP induced [Length] in Blood by Resonance TEG,Lab Test,Measurement,LOINC,Valid,Standard,487
 40760947,57838-5,dRVVT W excess phospholipid (LA confirm),Lab Test,Measurement,LOINC,Valid,Standard,486
 40757578,54447-8,FLT3 gene targeted mutation analysis in Bone marrow by Molecular genetics method,Lab Test,Measurement,LOINC,Valid,Standard,486
@@ -3030,7 +3030,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3038535,40541-5,Plasma cells/100 leukocytes in Cerebral spinal fluid by Microscopy,Lab Test,Measurement,LOINC,Valid,Standard,467
 4099313,27171005,Urinalysis,Procedure,Measurement,SNOMED,Valid,Standard,466
 3028018,29905-7,Entamoeba histolytica Ag [Presence] in Stool by Immunoassay,Lab Test,Measurement,LOINC,Valid,Standard,465
-2213241,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,464
+2213241,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,464
 46235479,75697-3,Bilirubin fractions panel [Moles/volume] - Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,462
 42869600,71845-2,Oxygen saturation [Pure mass fraction] in Venous blood,Lab Test,Measurement,LOINC,Valid,Standard,462
 35225630,OMOP5031694,Metastasis to left lung,Metastasis,Measurement,Cancer Modifier,Valid,Standard,462
@@ -3123,7 +3123,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3965362,102464-5,White Oak IgE Ab [Presence] in Serum by Radioallergosorbent test (RAST),Lab Test,Measurement,LOINC,Valid,Standard,391
 36306193,89365-1,"HIV 1 and 2 Ab panel - Serum, Plasma or Blood by Rapid immunoassay",Lab Test,Measurement,LOINC,Valid,Standard,391
 3016970,32014-3,Eosinophils/100 leukocytes in Urine by Manual count,Lab Test,Measurement,LOINC,Valid,Standard,391
-2213250,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,391
+2213250,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,391
 3044974,46130-1,Prealbumin [Mass/volume] in Serum or Plasma by Nephelometry,Lab Test,Measurement,LOINC,Valid,Standard,389
 3005167,3831-5,Morphine [Mass/volume] in Urine,Lab Test,Measurement,LOINC,Valid,Standard,389
 3044072,43243-5,Isobutyrylcarnitine (C4) [Moles/volume] in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,387
@@ -3177,7 +3177,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3013101,6212-5,Penicillium notatum IgE Ab [Units/volume] in Serum,Lab Test,Measurement,LOINC,Valid,Standard,361
 3010109,5644-0,Ethanol [Presence] in Urine,Lab Test,Measurement,LOINC,Valid,Standard,361
 3002587,5807-3,RBC casts [#/area] in Urine sediment by Microscopy low power field,Lab Test,Measurement,LOINC,Valid,Standard,361
-2213311,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,361
+2213311,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,361
 36305656,88616-8,Human coronavirus NL63 RNA [Presence] in Lower respiratory specimen by NAA with probe detection,Lab Test,Measurement,LOINC,Valid,Standard,360
 36305349,88594-7,Human coronavirus HKU1 RNA [Presence] in Lower respiratory specimen by NAA with probe detection,Lab Test,Measurement,LOINC,Valid,Standard,360
 36304330,88608-5,Human coronavirus 229E RNA [Presence] in Lower respiratory specimen by NAA with probe detection,Lab Test,Measurement,LOINC,Valid,Standard,360
@@ -3268,7 +3268,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 1634921,p-6th_AJCC/UICC-MX,AJCC/UICC 6th pathological MX Category,Staging/Grading,Measurement,Cancer Modifier,Valid,Standard,316
 3025798,5096-3,Coccidioides immitis Ab [Titer] in Serum by Complement fixation,Lab Test,Measurement,LOINC,Valid,Standard,315
 3007654,10357-2,Microscopic observation [Identifier] in Wound by Gram stain,Lab Test,Measurement,LOINC,Valid,Standard,315
-2213087,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,313
+2213087,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,313
 35225580,OMOP5031989,Metastasis to urinary system,Metastasis,Measurement,Cancer Modifier,Valid,Standard,312
 3028668,15285-0,London Plane IgE Ab [Units/volume] in Serum,Lab Test,Measurement,LOINC,Valid,Standard,312
 3001488,7258-7,Cow milk IgE Ab [Units/volume] in Serum,Lab Test,Measurement,LOINC,Valid,Standard,311
@@ -3360,7 +3360,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3003245,4477-6,Complement C1 esterase inhibitor [Mass/volume] in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,270
 3025939,29770-5,Karyotype [Identifier] in Blood or Tissue Nominal,Lab Test,Measurement,LOINC,Valid,Standard,269
 3014923,18338-4,Nortramadol [Mass/volume] in Urine,Lab Test,Measurement,LOINC,Valid,Standard,269
-2212163,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,269
+2212163,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,269
 3034548,35741-8,Prostate specific Ag [Mass/volume] in Serum or Plasma by Detection limit <= 0.01 ng/mL,Lab Test,Measurement,LOINC,Valid,Standard,268
 3001218,6687-8,Citrate [Mass/time] in 24 hour Urine,Lab Test,Measurement,LOINC,Valid,Standard,268
 3033173,34618-9,Hemoglobin [Presence] in Specimen,Lab Test,Measurement,LOINC,Valid,Standard,267
@@ -3383,8 +3383,8 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3002433,29558-4,Enterovirus RNA [Presence] in Cerebral spinal fluid by NAA with probe detection,Lab Test,Measurement,LOINC,Valid,Standard,260
 3001260,15158-9,Chloride [Moles/volume] in Stool,Lab Test,Measurement,LOINC,Valid,Standard,259
 3009210,9334-4,Methanol [Mass/volume] in Blood,Lab Test,Measurement,LOINC,Valid,Standard,258
-2213301,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,258
-2213162,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,258
+2213301,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,258
+2213162,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,258
 40763312,60257-3,Bacteria identified in Cornea by Culture,Lab Test,Measurement,LOINC,Valid,Standard,257
 3027370,2483-6,Insulin-like growth factor binding protein 3 [Mass/volume] in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,256
 3016133,20573-2,Histoplasma capsulatum mycelial phase Ab [Titer] in Serum by Complement fixation,Lab Test,Measurement,LOINC,Valid,Standard,256
@@ -3460,7 +3460,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 4008265,121868005,Total cholesterol measurement,Procedure,Measurement,SNOMED,Valid,Standard,228
 3036449,36908-2,Gene mutations tested for in Blood or Tissue by Molecular genetics method Nominal,Lab Test,Measurement,LOINC,Valid,Standard,228
 3030603,33862-4,Waxy casts [Presence] in Urine sediment by Light microscopy,Lab Test,Measurement,LOINC,Valid,Standard,228
-40756870,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,227
+40756870,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,227
 3029161,32654-6,6-Methylmercaptopurine [Entitic substance] in Red Blood Cells,Lab Test,Measurement,LOINC,Valid,Standard,227
 40766730,64013-6,Escherichia coli shiga-like toxin 1 and 2 [Identifier] in Stool by Immunoassay,Lab Test,Measurement,LOINC,Valid,Standard,226
 3040571,38997-3,West Nile virus IgG Ab [Units/volume] in Serum by Immunoassay,Lab Test,Measurement,LOINC,Valid,Standard,226
@@ -3524,7 +3524,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3007856,23820-4,Aspergillus flavus Ab [Presence] in Serum by Immune diffusion (ID),Lab Test,Measurement,LOINC,Valid,Standard,206
 42870572,69573-4,Tiglylcarnitine+methylcrotonylcarnitine (C5:1) [Moles/volume] in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,205
 3004560,26475-4,Lymphocytes [#/volume] in Cerebral spinal fluid,Lab Test,Measurement,LOINC,Valid,Standard,205
-2212168,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,205
+2212168,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,205
 3041457,39010-4,Methylmalonylcarnitine (C4-DC) [Moles/volume] in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,204
 3021847,2058-6,Catecholamines [Mass/time] in 24 hour Urine,Lab Test,Measurement,LOINC,Valid,Standard,204
 1634212,p-6th_AJCC/UICC-N0,AJCC/UICC 6th pathological N0 Category,Staging/Grading,Measurement,Cancer Modifier,Valid,Standard,204
@@ -3599,7 +3599,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3044960,43192-4,Legionella pneumophila 2+3+4+5+6+8 Ab [Titer] in Serum by Immunofluorescence,Lab Test,Measurement,LOINC,Valid,Standard,181
 3024303,3126-0,Vasopressin [Mass/volume] in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,181
 3010765,2334-1,Hemoglobin.gastrointestinal [Presence] in Gastric fluid,Lab Test,Measurement,LOINC,Valid,Standard,181
-2213309,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,181
+2213309,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,181
 42870536,69426-5,Medical director review of results,Lab Test,Measurement,LOINC,Valid,Standard,180
 40757579,54448-6,NPM1 gene mutations found [Identifier] in Blood or Tissue by Molecular genetics method Nominal,Lab Test,Measurement,LOINC,Valid,Standard,180
 36203580,85777-1,Serratia marcescens DNA [Presence] by NAA with non-probe detection in Positive blood culture,Lab Test,Measurement,LOINC,Valid,Standard,180
@@ -3610,7 +3610,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3021466,14319-8,Microscopic observation [Identifier] in Vaginal fluid by Wet preparation,Lab Test,Measurement,LOINC,Valid,Standard,179
 3005432,20620-1,CD16+CD56+ cells/100 cells in Specimen,Lab Test,Measurement,LOINC,Valid,Standard,179
 3005151,2200-4,Delta aminolevulinate [Mass/time] in 24 hour Urine,Lab Test,Measurement,LOINC,Valid,Standard,179
-2213303,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,179
+2213303,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,179
 4246502,60151004,Neonatal screening,Procedure,Measurement,SNOMED,Valid,Standard,178
 35918027,prostate@2910,Prostate Apex Involvement (OBSOLETE: Prostatic Acid Phosphatase (PAP)),NAACCR Variable,Measurement,NAACCR,Valid,Standard,178
 35918021,prostate@2864,Gleason's Score on Prostatectomy/Autopsy,NAACCR Variable,Measurement,NAACCR,Valid,Standard,178
@@ -3625,7 +3625,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 35917167,prostate@2930,OBSOLETE - Gleason's Score,NAACCR Variable,Measurement,NAACCR,Valid,Standard,178
 3017315,1799-6,Amylase [Enzymatic activity/volume] in Urine,Lab Test,Measurement,LOINC,Valid,Standard,178
 3010254,5859-4,Herpes simplex virus identified in Specimen by Organism specific culture,Lab Test,Measurement,LOINC,Valid,Standard,178
-2212984,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,178
+2212984,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,178
 21493360,82194-2,Enterovirus RNA [Presence] in Cerebral spinal fluid by NAA with non-probe detection,Lab Test,Measurement,LOINC,Valid,Standard,178
 21493359,82193-4,Parechovirus A RNA [Presence] in Cerebral spinal fluid by NAA with non-probe detection,Lab Test,Measurement,LOINC,Valid,Standard,178
 21493356,82190-0,Herpes simplex virus 1 DNA [Presence] in Cerebral spinal fluid by NAA with non-probe detection,Lab Test,Measurement,LOINC,Valid,Standard,178
@@ -3659,7 +3659,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3002140,4478-4,Complement C1q [Mass/volume] in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,173
 44786923,74280-9,Mitogen stimulated gamma interferon positive control spot count [#] in Blood,Lab Test,Measurement,LOINC,Valid,Standard,172
 44786922,74279-1,Gamma interferon negative control spot count [#] in Blood,Lab Test,Measurement,LOINC,Valid,Standard,172
-42627906,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,172
+42627906,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,172
 40763731,60677-2,Alpha hydroxytriazolam [Mass/volume] in Urine,Lab Test,Measurement,LOINC,Valid,Standard,172
 40762651,59589-2,1-Hydroxymidazolam [Mass/volume] in Urine,Lab Test,Measurement,LOINC,Valid,Standard,172
 3019535,19328-4,Alpha hydroxyalprazolam [Mass/volume] in Urine,Lab Test,Measurement,LOINC,Valid,Standard,172
@@ -3845,7 +3845,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3001793,4484-2,Complement C2 [Mass/volume] in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,139
 3033464,29280-5,Fibrin D-dimer [Presence] in Platelet poor plasma by Latex agglutination,Lab Test,Measurement,LOINC,Valid,Standard,138
 3010625,14044-2,Cortisone [Mass/time] in 24 hour Urine,Lab Test,Measurement,LOINC,Valid,Standard,138
-2212165,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,138
+2212165,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,138
 44786763,74106-6,Proteinase 3 IgG Ab [Units/volume] in Serum or Plasma by Immunoassay,Lab Test,Measurement,LOINC,Valid,Standard,137
 40772044,69549-4,Genetic knowledge reference [Identifier],Lab Test,Measurement,LOINC,Valid,Standard,137
 36031666,96396-7,Cytomegalovirus DNA [log units/volume] (viral load) in Specimen by NAA with probe detection,Lab Test,Measurement,LOINC,Valid,Standard,137
@@ -3875,7 +3875,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3037692,593-4,Legionella sp identified in Specimen by Organism specific culture,Lab Test,Measurement,LOINC,Valid,Standard,132
 3016647,12191-3,Creatinine [Mass/volume] in Peritoneal fluid,Lab Test,Measurement,LOINC,Valid,Standard,132
 3005219,2495-0,Iodine [Mass/volume] in Urine,Lab Test,Measurement,LOINC,Valid,Standard,132
-2213126,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,132
+2213126,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,132
 35225719,OMOP5031911,Metastasis to small intestine,Metastasis,Measurement,Cancer Modifier,Valid,Standard,131
 3045735,33423-5,Amphiphysin Ab [Units/volume] in Serum,Lab Test,Measurement,LOINC,Valid,Standard,131
 3038462,51797-9,CV2 Ab [Units/volume] in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,131
@@ -3891,7 +3891,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 4208414,55235003,C-reactive protein measurement,Procedure,Measurement,SNOMED,Valid,Standard,129
 4131386,413107006,Hepatitis C screening,Procedure,Measurement,SNOMED,Valid,Standard,129
 3015171,30342-0,Extractable nuclear Ab [Units/volume] in Serum,Lab Test,Measurement,LOINC,Valid,Standard,129
-2212654,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,129
+2212654,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,129
 35918183,breast@2920,Molecular (MOL) Studies of Regional Lymph Nodes,NAACCR Variable,Measurement,NAACCR,Valid,Standard,128
 35918163,breast@2910,Immunohistochemistry (IHC) of Regional Lymph Nodes,NAACCR Variable,Measurement,NAACCR,Valid,Standard,128
 35917916,breast@2869,HER2: Summary Result of Testing,NAACCR Variable,Measurement,NAACCR,Valid,Standard,128
@@ -4004,11 +4004,11 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3045170,34272-5,Collagen crosslinked N-telopeptide/Creatinine [Ratio] in Urine,Lab Test,Measurement,LOINC,Valid,Standard,114
 3037043,38178-0,Lambda light chains.free [Mass/volume] in Urine,Lab Test,Measurement,LOINC,Valid,Standard,114
 3014717,9407-8,Alpha 1 antitrypsin [Mass/volume] in Stool,Lab Test,Measurement,LOINC,Valid,Standard,114
-2213313,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,114
-2212169,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,114
+2213313,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,114
+2212169,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,114
 40771570,69049-5,Coagulation specialist review of results,Lab Test,Measurement,LOINC,Valid,Standard,113
 3965489,102386-0,House dust Hollister Stier IgE Ab [Presence] in Serum by Radioallergosorbent test (RAST),Lab Test,Measurement,LOINC,Valid,Standard,113
-2213047,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,113
+2213047,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,113
 3016120,6479-0,Mumps virus IgM Ab [Titer] in Serum by Immunofluorescence,Lab Test,Measurement,LOINC,Valid,Standard,112
 42529250,82781-6,Borrelia miyamotoi flaB gene [Presence] in Specimen by NAA with probe detection,Lab Test,Measurement,LOINC,Valid,Standard,111
 3044586,34440-8,Immunoelectrophoresis for Urine,Lab Test,Measurement,LOINC,Valid,Standard,111
@@ -4128,7 +4128,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 35918230,3914,Progesterone Receptor Percent Positive or Range,NAACCR Variable,Measurement,NAACCR,Valid,Standard,94
 3026531,5098-9,Cold agglutinin [Titer] in Serum or Plasma by Agglutination,Lab Test,Measurement,LOINC,Valid,Standard,94
 3008515,8392-3,Right ventricular End diastolic blood pressure,Clinical Observation,Measurement,LOINC,Valid,Standard,94
-2213130,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,94
+2213130,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,94
 914037,790,EOD--Extension,NAACCR Variable,Measurement,NAACCR,Valid,Standard,93
 36305608,88739-8,TIF1-gamma Ab [Units/volume] in Serum by Line blot,Lab Test,Measurement,LOINC,Valid,Standard,93
 3052881,47320-7,Baker's yeast IgA Ab [Units/volume] in Serum by Immunoassay,Lab Test,Measurement,LOINC,Valid,Standard,93
@@ -4162,7 +4162,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 42870562,69563-5,Candida glabrata DNA [Presence] in Vaginal fluid by NAA with probe detection,Lab Test,Measurement,LOINC,Valid,Standard,89
 3037410,30167-1,Human papilloma virus 16+18+31+33+35+39+45+51+52+56+58+59+68 DNA [Presence] in Cervix by Probe with signal amplification,Lab Test,Measurement,LOINC,Valid,Standard,89
 3036428,35704-6,Adenosine deaminase [Enzymatic activity/volume] in Pleural fluid,Lab Test,Measurement,LOINC,Valid,Standard,89
-2212981,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,89
+2212981,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,89
 40765100,62359-5,Chromosome banding method -,Lab Test,Measurement,LOINC,Valid,Standard,88
 35226288,OMOP5031842,Metastasis to right adrenal gland,Metastasis,Measurement,Cancer Modifier,Valid,Standard,88
 35226041,OMOP5031505,Metastasis to bladder,Metastasis,Measurement,Cancer Modifier,Valid,Standard,88
@@ -4176,7 +4176,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3031090,42618-9,Naloxone [Presence] in Urine by Screen method,Lab Test,Measurement,LOINC,Valid,Standard,87
 3021418,14247-1,Purkinje cells Ab [Presence] in Cerebral spinal fluid by Immunofluorescence,Lab Test,Measurement,LOINC,Valid,Standard,87
 3003562,3002-3,Thiocyanate [Mass/volume] in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,87
-2212162,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,87
+2212162,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,87
 40758858,55729-8,Erythrocytes.fetal/100 erythrocytes [Ratio] in Blood by Flow cytometry (FC),Lab Test,Measurement,LOINC,Valid,Standard,86
 35918085,brain@2880,World Health Organization (WHO) Grade Classification,NAACCR Variable,Measurement,NAACCR,Valid,Standard,86
 3040201,51744-1,Borrelia burgdorferi 49736 IgA Ab [Units/volume] in Serum by Immunoassay,Lab Test,Measurement,LOINC,Valid,Standard,86
@@ -4289,7 +4289,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 35917681,breast@2861,Nottingham or Bloom-Richardson (BR) Score/Grade,NAACCR Variable,Measurement,NAACCR,Valid,Standard,74
 3033973,38158-2,Parathyrin.intact [Mass/volume] in Serum or Plasma --baseline,Lab Test,Measurement,LOINC,Valid,Standard,74
 3016670,23811-3,Alpha-1-Fetoprotein [Multiple of the median] adjusted in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,74
-2212112,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,74
+2212112,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,74
 1633445,p-6th_AJCC/UICC-T1,AJCC/UICC 6th pathological T1 Category,Staging/Grading,Measurement,Cancer Modifier,Valid,Standard,74
 42527139,76246-8,Intrinsic dynamic PEEP Respiratory system,Clinical Observation,Measurement,LOINC,Valid,Standard,73
 3044180,43311-0,Desmoglein 1 Ab [Units/volume] in Serum,Lab Test,Measurement,LOINC,Valid,Standard,73
@@ -4306,7 +4306,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3022314,25667-7,Glucose [Mass/volume] in Urine --2 hours post dose glucose,Lab Test,Measurement,LOINC,Valid,Standard,72
 3019418,5129-2,Deoxyribonuclease Ab [Units/volume] in Serum,Lab Test,Measurement,LOINC,Valid,Standard,72
 3003573,948-0,C Ag [Presence] on Red Blood Cells,Lab Test,Measurement,LOINC,Valid,Standard,72
-2212113,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,72
+2212113,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,72
 586526,94759-8,SARS-CoV-2 (COVID-19) RNA [Presence] in Nasopharynx by NAA with probe detection,Lab Test,Measurement,LOINC,Valid,Standard,71
 42529508,82371-6,Norbuprenorphine [Presence] in Urine by Screen method,Lab Test,Measurement,LOINC,Valid,Standard,71
 4014036,103814002,"Fibrin-fibrinogen split products assay, quantitative",Procedure,Measurement,SNOMED,Valid,Standard,71
@@ -4352,7 +4352,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3016894,21598-8,Varicella zoster virus DNA [Presence] in Cerebral spinal fluid by NAA with probe detection,Lab Test,Measurement,LOINC,Valid,Standard,67
 3015222,2990-0,Testosterone.free+weakly bound [Mass/volume] in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,67
 3010873,1978-6,Bilirubin.total [Mass/volume] in Urine,Lab Test,Measurement,LOINC,Valid,Standard,67
-2213187,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,67
+2213187,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,67
 36306115,88725-7,MDA5 Ab [Units/volume] in Serum by Line blot,Lab Test,Measurement,LOINC,Valid,Standard,66
 36304323,88732-3,Mi-2 alpha Ab [Units/volume] in Serum by Line blot,Lab Test,Measurement,LOINC,Valid,Standard,66
 36303431,88733-1,Mi-2 beta Ab [Units/volume] in Serum by Line blot,Lab Test,Measurement,LOINC,Valid,Standard,66
@@ -4364,7 +4364,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3017773,19588-3,Midazolam [Mass/volume] in Urine,Lab Test,Measurement,LOINC,Valid,Standard,66
 3016819,31585-3,Reticulin IgG Ab [Presence] in Serum,Lab Test,Measurement,LOINC,Valid,Standard,66
 3002625,1848-1,Androstanolone [Mass/volume] in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,66
-46257710,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,65
+46257710,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,65
 40762112,59019-0,HLA-DQA1 [Type] by High resolution,Lab Test,Measurement,LOINC,Valid,Standard,65
 36203662,86738-2,Toxoplasma gondii IgG Ab [Presence] in Specimen by Immunoassay,Lab Test,Measurement,LOINC,Valid,Standard,65
 35918818,3820,CEA Pretreatment Lab Value,NAACCR Variable,Measurement,NAACCR,Valid,Standard,65
@@ -4418,7 +4418,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3047253,43190-8,Myelin associated glycoprotein/Sulfated glucuronic paragloboside IgM Ab [Titer] in Serum by Immunoassay,Lab Test,Measurement,LOINC,Valid,Standard,62
 3028012,8254-5,Service comment 12,Lab Test,Measurement,LOINC,Valid,Standard,62
 3001820,22296-8,Epstein Barr virus nuclear Ab [Presence] in Serum,Lab Test,Measurement,LOINC,Valid,Standard,62
-2212605,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,62
+2212605,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,62
 40766799,64083-9,MGMT gene methylation score in Tissue by Molecular genetics method,Lab Test,Measurement,LOINC,Valid,Standard,61
 3046020,33654-5,Insulin-like growth factor binding protein 3 [Mass/volume] in Serum or Plasma --1 hour post XXX challenge,Lab Test,Measurement,LOINC,Valid,Standard,61
 3021855,26489-5,Mononuclear cells [#/volume] in Cerebral spinal fluid,Lab Test,Measurement,LOINC,Valid,Standard,61
@@ -4522,7 +4522,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3033513,25393-0,Desethylamiodarone [Moles/volume] in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,54
 3016719,12262-2,Toxoplasma gondii IgM Ab [Titer] in Serum by Immunoassay,Lab Test,Measurement,LOINC,Valid,Standard,54
 3008493,12176-4,Amino acids [Moles/volume] in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,54
-2213079,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,54
+2213079,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,54
 1634268,p-7th_AJCC/UICC-M1a,AJCC/UICC 7th pathological M1a Category,Staging/Grading,Measurement,Cancer Modifier,Valid,Standard,54
 1633341,p-7th_AJCC/UICC-T2a,AJCC/UICC 7th pathological T2a Category,Staging/Grading,Measurement,Cancer Modifier,Valid,Standard,54
 40758472,55343-8,Anidulafungin [Susceptibility] by Minimum inhibitory concentration (MIC),Lab Test,Measurement,LOINC,Valid,Standard,53
@@ -4573,7 +4573,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3008898,4821-5,HLA-B27 [Presence],Lab Test,Measurement,LOINC,Valid,Standard,50
 3002371,4935-3,HLA-DQ2 [Presence],Lab Test,Measurement,LOINC,Valid,Standard,50
 3001951,11957-8,Fetal Crown Rump length US,Clinical Observation,Measurement,LOINC,Valid,Standard,50
-46257676,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,49
+46257676,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,49
 46235759,76080-1,Influenza virus B RNA [Presence] in Nasopharynx by NAA with probe detection,Lab Test,Measurement,LOINC,Valid,Standard,49
 46235757,76078-5,Influenza virus A RNA [Presence] in Nasopharynx by NAA with probe detection,Lab Test,Measurement,LOINC,Valid,Standard,49
 4184426,54392006,Lithium measurement,Procedure,Measurement,SNOMED,Valid,Standard,49
@@ -4681,7 +4681,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3016472,22239-8,Cytomegalovirus Ab [Presence] in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,44
 3005912,31254-6,Basement membrane IgG Ab [Units/volume] in Serum,Lab Test,Measurement,LOINC,Valid,Standard,44
 3002731,6920-3,Chlamydia trachomatis IgM Ab [Titer] in Serum by Immunofluorescence,Lab Test,Measurement,LOINC,Valid,Standard,44
-2213215,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,44
+2213215,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,44
 3045793,44827-4,Bartonella quintana IgG Ab [Titer] in Serum by Immunofluorescence,Lab Test,Measurement,LOINC,Valid,Standard,43
 3033386,41602-4,Bacteria [Presence] in Cerebral spinal fluid by Light microscopy,Lab Test,Measurement,LOINC,Valid,Standard,43
 3030244,51441-4,Macroprolactin/Prolactin [Mass] in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,43
@@ -4781,7 +4781,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3011630,29891-9,Helicobacter pylori [Presence] in Stomach by urea breath test,Lab Test,Measurement,LOINC,Valid,Standard,37
 3002435,13942-8,Spermatozoa Motile [Presence] in Semen by Light microscopy,Lab Test,Measurement,LOINC,Valid,Standard,37
 3000423,17357-5,Neutrophil cytoplasmic Ab.perinuclear [Presence] in Serum by Immunofluorescence,Lab Test,Measurement,LOINC,Valid,Standard,37
-2212698,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,37
+2212698,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,37
 40758430,55301-6,JAK2 gene exon 13 targeted mutation analysis in Blood or Tissue by Molecular genetics method,Lab Test,Measurement,LOINC,Valid,Standard,36
 3965234,102364-7,Setomelanomma rostrata IgE Ab [Presence] in Serum by Radioallergosorbent test (RAST),Lab Test,Measurement,LOINC,Valid,Standard,36
 3045738,33724-6,Collection method -,Lab Test,Measurement,LOINC,Valid,Standard,36
@@ -4830,7 +4830,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3007857,3872-9,Nortriptyline [Mass/volume] in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,34
 3002548,31185-2,Platelet IgA Ab [Presence] in Serum,Lab Test,Measurement,LOINC,Valid,Standard,34
 3001455,31186-0,Platelet IgM Ab [Presence] in Serum,Lab Test,Measurement,LOINC,Valid,Standard,34
-2212284,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,34
+2212284,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,34
 1634989,c-Gleason-Score-<=6,Clinical Gleason Score <=6,Staging/Grading,Measurement,Cancer Modifier,Valid,Standard,34
 1634541,p-6th_AJCC/UICC-N2,AJCC/UICC 6th pathological N2 Category,Staging/Grading,Measurement,Cancer Modifier,Valid,Standard,34
 1633607,p-7th_AJCC/UICC-N2b,AJCC/UICC 7th pathological N2b Category,Staging/Grading,Measurement,Cancer Modifier,Valid,Standard,34
@@ -4849,7 +4849,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3012712,10338-2,Barbiturates [Mass/volume] in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,33
 3012708,4731-6,HLA-A2 [Presence],Lab Test,Measurement,LOINC,Valid,Standard,33
 3005398,6081-4,Coconut IgE Ab [Units/volume] in Serum,Lab Test,Measurement,LOINC,Valid,Standard,33
-2213122,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,33
+2213122,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,33
 1617538,96803-2,24 hour predicted protein [Mass/time] based on random Urine by calculation,Lab Test,Measurement,LOINC,Valid,Standard,33
 43533761,73737-9,Phospholipase A2 receptor IgG Ab [Units/volume] in Serum by Immunoassay,Lab Test,Measurement,LOINC,Valid,Standard,32
 4246053,396550006,Blood test,Procedure,Measurement,SNOMED,Valid,Standard,32
@@ -4868,7 +4868,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3008401,6183-8,Mugwort IgE Ab [Units/volume] in Serum,Lab Test,Measurement,LOINC,Valid,Standard,32
 3005685,1809-3,Amylase.salivary [Enzymatic activity/volume] in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,32
 3004081,14159-8,Cortisone [Mass/volume] in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,32
-46257427,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,31
+46257427,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,31
 40765015,62254-8,Lipoprotein.pre-beta [Entitic length] in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,31
 3966205,102245-8,Cockroach IgE Ab [Presence] in Serum by Radioallergosorbent test (RAST),Lab Test,Measurement,LOINC,Valid,Standard,31
 3964994,102453-8,Mouse urine proteins IgE Ab [Presence] in Serum by Radioallergosorbent test (RAST),Lab Test,Measurement,LOINC,Valid,Standard,31
@@ -4907,7 +4907,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3014421,5677-0,Lead [Mass/time] in 24 hour Urine,Lab Test,Measurement,LOINC,Valid,Standard,30
 3009337,3774-7,Methadone [Mass/volume] in Urine,Lab Test,Measurement,LOINC,Valid,Standard,30
 3004840,5838-8,Cytomegalovirus [Presence] in Specimen by Organism specific culture,Lab Test,Measurement,LOINC,Valid,Standard,30
-2213289,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,30
+2213289,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,30
 1635449,Nottingham-Grade-2,Nottingham Grade 2,Staging/Grading,Measurement,Cancer Modifier,Valid,Standard,30
 1634791,p-7th_AJCC/UICC-Ta,AJCC/UICC 7th pathological Ta Category,Staging/Grading,Measurement,Cancer Modifier,Valid,Standard,30
 1634055,p-Gleason-Score-4+3,Pathological Gleason Score 4+3,Staging/Grading,Measurement,Cancer Modifier,Valid,Standard,30
@@ -4930,7 +4930,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3025211,10450-5,Glucose [Mass/volume] in Serum or Plasma --10 hours fasting,Lab Test,Measurement,LOINC,Valid,Standard,29
 3010653,6138-2,Setomelanomma rostrata IgE Ab [Units/volume] in Serum,Lab Test,Measurement,LOINC,Valid,Standard,29
 3002479,6156-4,Goosefoot IgE Ab [Units/volume] in Serum,Lab Test,Measurement,LOINC,Valid,Standard,29
-2213089,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,29
+2213089,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,29
 21493027,81757-7,Lymphocyte proliferation.Interleukin 2.maximum/CD3 in Blood by Flow cytometry (FC),Lab Test,Measurement,LOINC,Valid,Standard,29
 21493026,81756-9,Lymphocyte proliferation.anti-CD3.maximum/CD3 in Blood by Flow cytometry (FC),Lab Test,Measurement,LOINC,Valid,Standard,29
 1633569,p-7th_AJCC/UICC-N2,AJCC/UICC 7th pathological N2 Category,Staging/Grading,Measurement,Cancer Modifier,Valid,Standard,29
@@ -5005,7 +5005,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3001709,30078-0,Weight of Stool,Lab Test,Measurement,LOINC,Valid,Standard,26
 1635677,c-7th_AJCC/UICC-N2b,AJCC/UICC 7th clinical N2b Category,Staging/Grading,Measurement,Cancer Modifier,Valid,Standard,26
 1634120,c-7th_AJCC/UICC-T4b,AJCC/UICC 7th clinical T4b Category,Staging/Grading,Measurement,Cancer Modifier,Valid,Standard,26
-43528012,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,25
+43528012,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,25
 40763730,60676-4,Ethyl sulfate [Mass/volume] in Urine,Lab Test,Measurement,LOINC,Valid,Standard,25
 40761801,58707-1,ePHEDrine+Pseudoephedrine [Mass/volume] in Urine by Confirmatory method,Lab Test,Measurement,LOINC,Valid,Standard,25
 40761529,58428-4,"2-Ethylidene-1,5-Dimethyl-3,3-Diphenylpyrrolidine (EDDP) [Presence] in Urine by Confirmatory method",Lab Test,Measurement,LOINC,Valid,Standard,25
@@ -5028,8 +5028,8 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3010610,4851-2,HLA-Cw1 [Presence],Lab Test,Measurement,LOINC,Valid,Standard,25
 3009331,20557-5,Phentermine [Mass/volume] in Urine by Confirmatory method,Lab Test,Measurement,LOINC,Valid,Standard,25
 3006008,32169-5,Cystine [Mass/volume] in 24 hour Urine,Lab Test,Measurement,LOINC,Valid,Standard,25
-2212631,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,25
-2212320,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,25
+2212631,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,25
+2212320,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,25
 1633640,p-7th_AJCC/UICC-N1a,AJCC/UICC 7th pathological N1a Category,Staging/Grading,Measurement,Cancer Modifier,Valid,Standard,25
 4237017,405824009,Genetic test,Procedure,Measurement,SNOMED,Valid,Standard,24
 40768325,65633-0,Hepatitis B virus surface Ag [Presence] in Serum or Plasma by Confirmatory method,Lab Test,Measurement,LOINC,Valid,Standard,24
@@ -5048,7 +5048,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3016048,7816-2,Blastomyces dermatitidis Ab [Presence] in Serum,Lab Test,Measurement,LOINC,Valid,Standard,24
 3013441,12728-2,Alpha subunit [Units/volume] in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,24
 3006682,8253-7,Service comment 11,Lab Test,Measurement,LOINC,Valid,Standard,24
-2212124,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,24
+2212124,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,24
 1634578,p-6th_AJCC/UICC-T1b,AJCC/UICC 6th pathological T1b Category,Staging/Grading,Measurement,Cancer Modifier,Valid,Standard,24
 1633492,c-6th_AJCC/UICC-T1b,AJCC/UICC 6th clinical T1b Category,Staging/Grading,Measurement,Cancer Modifier,Valid,Standard,24
 40760251,57132-3,CYP2C19 gene allele [Genotype] in Blood or Tissue by Molecular genetics method Nominal,Lab Test,Measurement,LOINC,Valid,Standard,23
@@ -5159,7 +5159,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3017485,19889-5,Carbon dioxide/Gas.total.at end expiration in Exhaled gas,Clinical Observation,Measurement,LOINC,Valid,Standard,20
 3013945,22320-6,Hepatitis B virus e Ab [Presence] in Serum,Lab Test,Measurement,LOINC,Valid,Standard,20
 3012335,3212-8,Coagulation factor VIII Activity.Xa activator [Units/volume] in Platelet poor plasma by Chromogenic method,Lab Test,Measurement,LOINC,Valid,Standard,20
-2213181,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,20
+2213181,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,20
 1635817,p-Gleason-Score-9,Pathological Gleason Score 9,Staging/Grading,Measurement,Cancer Modifier,Valid,Standard,20
 1635059,p-6th_AJCC/UICC-T1a,AJCC/UICC 6th pathological T1a Category,Staging/Grading,Measurement,Cancer Modifier,Valid,Standard,20
 1635010,p-7th_AJCC/UICC-T1c,AJCC/UICC 7th pathological T1c Category,Staging/Grading,Measurement,Cancer Modifier,Valid,Standard,20
@@ -5198,7 +5198,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3007719,1657-6,11-Deoxycortisol [Mass/volume] in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,19
 3006549,5846-1,Herpes simplex virus 1 Ag [Presence] in Specimen by Immunofluorescence,Lab Test,Measurement,LOINC,Valid,Standard,19
 3005460,8133-1,CD56 cells/100 cells in Blood,Lab Test,Measurement,LOINC,Valid,Standard,19
-2212108,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,19
+2212108,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,19
 21492353,79210-1,FLT3 gene internal tandem duplication [Presence] in Blood or Tissue by Molecular genetics method,Lab Test,Measurement,LOINC,Valid,Standard,19
 1635333,p-7th_AJCC/UICC-T3b,AJCC/UICC 7th pathological T3b Category,Staging/Grading,Measurement,Cancer Modifier,Valid,Standard,19
 44813405,791061000000105,Prealbumin measurement,Procedure,Measurement,SNOMED,Valid,Standard,18
@@ -5290,7 +5290,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3003327,10704-5,Ova and parasites identified in Stool by Light microscopy,Lab Test,Measurement,LOINC,Valid,Standard,17
 3001981,1018-1,E Ab [Presence] in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,17
 3000381,26927-4,Herpes simplex virus 2 IgM Ab [Titer] in Serum by Immunofluorescence,Lab Test,Measurement,LOINC,Valid,Standard,17
-2212501,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,17
+2212501,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,17
 1635717,p-7th_AJCC/UICC-N2a,AJCC/UICC 7th pathological N2a Category,Staging/Grading,Measurement,Cancer Modifier,Valid,Standard,17
 1635254,p-7th_AJCC/UICC-T2c,AJCC/UICC 7th pathological T2c Category,Staging/Grading,Measurement,Cancer Modifier,Valid,Standard,17
 44791052,247791000000107,Allergy testing,Procedure,Measurement,SNOMED,Valid,Standard,16
@@ -5471,7 +5471,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3004575,6912-0,Chlamydophila pneumoniae IgA Ab [Titer] in Serum by Immunofluorescence,Lab Test,Measurement,LOINC,Valid,Standard,14
 3002529,883-9,ABO group [Type] in Blood,Lab Test,Measurement,LOINC,Valid,Standard,14
 3002395,2811-8,Porphobilinogen [Moles/volume] in Urine,Lab Test,Measurement,LOINC,Valid,Standard,14
-2212985,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,14
+2212985,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,14
 1634832,c-Gleason-Score-3+4,Clinical Gleason Score 3+4,Staging/Grading,Measurement,Cancer Modifier,Valid,Standard,14
 1633730,p-7th_AJCC/UICC-N1b,AJCC/UICC 7th pathological N1b Category,Staging/Grading,Measurement,Cancer Modifier,Valid,Standard,14
 1175169,90080-3,Bictegravir [Susceptibility] by Genotype method,Lab Test,Measurement,LOINC,Valid,Standard,14
@@ -5670,14 +5670,14 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3001378,6229-9,Rhizopus nigricans IgE Ab [Units/volume] in Serum,Lab Test,Measurement,LOINC,Valid,Standard,12
 3000606,9780-8,Spermatozoa [#/volume] in Semen,Lab Test,Measurement,LOINC,Valid,Standard,12
 3000478,25139-7,Tryptophan/Creatinine [Molar ratio] in Urine,Lab Test,Measurement,LOINC,Valid,Standard,12
-2213333,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,12
+2213333,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,12
 21493867,81641-3,"HIV 2 Ab [Presence] in Serum, Plasma or Blood by Rapid immunoassay",Lab Test,Measurement,LOINC,Valid,Standard,12
 1633947,c-6th_AJCC/UICC-T2a,AJCC/UICC 6th clinical T2a Category,Staging/Grading,Measurement,Cancer Modifier,Valid,Standard,12
 1633550,Gleason-Grade_Group-1,Gleason Grade Group 1,Staging/Grading,Measurement,Cancer Modifier,Valid,Standard,12
 46235754,76075-1,Galactomannan Ag [Units/volume] in Bronchoalveolar lavage,Lab Test,Measurement,LOINC,Valid,Standard,11
 45765503,702455009,Screening for malignant neoplasm of vagina,Procedure,Measurement,SNOMED,Valid,Standard,11
 42527892,85147-7,PD-L1 by clone 22C3 in Tissue by Immune stain Report,Lab Test,Measurement,LOINC,Valid,Standard,11
-40756974,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,11
+40756974,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,11
 4016366,104201000,"Microbiologic smear with interpretation, special stain for inclusion bodies or intracellular parasites",Procedure,Measurement,SNOMED,Valid,Standard,11
 3966112,102503-0,Penicillin G IgE Ab [Presence] in Serum by Radioallergosorbent test (RAST),Lab Test,Measurement,LOINC,Valid,Standard,11
 3965498,102454-6,Mucor racemosus IgE Ab [Presence] in Serum by Radioallergosorbent test (RAST),Lab Test,Measurement,LOINC,Valid,Standard,11
@@ -5727,10 +5727,10 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3002291,6842-9,Halibut IgE Ab [Units/volume] in Serum,Lab Test,Measurement,LOINC,Valid,Standard,11
 3002234,16107-5,CD8+HLA-DR+ cells [#/volume] in Blood,Lab Test,Measurement,LOINC,Valid,Standard,11
 3002171,1024-9,Fy sup(a) Ab [Presence] in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,11
-2213323,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,11
-2213291,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,11
-2213040,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,11
-2212816,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,11
+2213323,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,11
+2213291,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,11
+2213040,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,11
+2212816,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,11
 1761448,100434-0,Orthopoxvirus.non-variola DNA [Presence] in Specimen by NAA with probe detection,Lab Test,Measurement,LOINC,Valid,Standard,11
 1635318,p-6th_AJCC/UICC-T3a,AJCC/UICC 6th pathological T3a Category,Staging/Grading,Measurement,Cancer Modifier,Valid,Standard,11
 1634727,c-7th_AJCC/UICC-N2c,AJCC/UICC 7th clinical N2c Category,Staging/Grading,Measurement,Cancer Modifier,Valid,Standard,11
@@ -5903,7 +5903,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 1002457,94108-8,1-Hydroxymidazolam [Presence] in Urine by Screen method,Lab Test,Measurement,LOINC,Valid,Standard,9
 46237030,77207-9,Naloxone [Mass/volume] in Urine by Confirmatory method,Lab Test,Measurement,LOINC,Valid,Standard,8
 46234850,75374-9,Other cells/100 leukocytes in Cerebral spinal fluid by Manual count,Lab Test,Measurement,LOINC,Valid,Standard,8
-43528013,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,8
+43528013,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,8
 43055394,72560-6,HIV integrase inhibitor susceptibility panel by Genotype method,Lab Test,Measurement,LOINC,Valid,Standard,8
 4290096,69152001,"Folic acid measurement, RBC",Procedure,Measurement,SNOMED,Valid,Standard,8
 4152046,268548003,Screening for malignant neoplasm of large intestine,Procedure,Measurement,SNOMED,Valid,Standard,8
@@ -5995,8 +5995,8 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3003435,1552-9,Glucose [Mass/volume] in Serum or Plasma --pre 75 g glucose PO,Lab Test,Measurement,LOINC,Valid,Standard,8
 3001482,6765-2,17-Hydroxypregnenolone [Mass/volume] in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,8
 3000167,3531-1,Desipramine [Mass/volume] in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,8
-2212791,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,8
-2212344,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,8
+2212791,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,8
+2212344,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,8
 1635317,FIGO-Grade-1,FIGO grade 1,Staging/Grading,Measurement,Cancer Modifier,Valid,Standard,8
 1635145,c-7th_AJCC/UICC-T3c,AJCC/UICC 7th clinical T3c Category,Staging/Grading,Measurement,Cancer Modifier,Valid,Standard,8
 1634251,p-6th_AJCC/UICC-T3c,AJCC/UICC 6th pathological T3c Category,Staging/Grading,Measurement,Cancer Modifier,Valid,Standard,8
@@ -6093,7 +6093,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 1616799,97607-6,POPEth [Mass/volume] in Blood,Lab Test,Measurement,LOINC,Valid,Standard,7
 1616374,97606-8,PLPEth [Mass/volume] in Blood,Lab Test,Measurement,LOINC,Valid,Standard,7
 1002162,93493-5,3-Hydroxy-3-Methylglutaryl-coenzyme A reductase IgG Ab [Units/volume] in Serum by Immunoassay,Lab Test,Measurement,LOINC,Valid,Standard,7
-42742302,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6
+42742302,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6
 42529315,82869-9,6-Thioguanine and 6-methylmercaptopurine panel - Red Blood Cells,Lab Test,Measurement,LOINC,Valid,Standard,6
 42529226,83109-9,Progesterone [Mass/volume] in Serum or Plasma by Immunoassay,Lab Test,Measurement,LOINC,Valid,Standard,6
 4245982,59960001,Ammonia measurement,Procedure,Measurement,SNOMED,Valid,Standard,6
@@ -6216,9 +6216,9 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3002769,21567-3,TOLBUTamide [Presence] in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,6
 3001818,3690-5,Imipramine [Mass/volume] in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,6
 3000272,25675-0,Glucose [Mass/volume] in Urine --4 hours post dose glucose,Lab Test,Measurement,LOINC,Valid,Standard,6
-2212656,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6
-2212601,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6
-2212346,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,6
+2212656,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6
+2212601,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6
+2212346,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,6
 21494711,81155-4,Islet cell 512 Ab [Moles/volume] in Serum,Lab Test,Measurement,LOINC,Valid,Standard,6
 21492527,79292-9,"Creatine, guanidinoacetate and creatinine pattern [Interpretation] in Urine Narrative",Lab Test,Measurement,LOINC,Valid,Standard,6
 21491866,78987-5,Provasopressin.C-terminal [Moles/volume] in Serum or Plasma by Immunoassay,Lab Test,Measurement,LOINC,Valid,Standard,6
@@ -6620,7 +6620,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3000936,6154-9,Kiwifruit IgE Ab [Units/volume] in Serum,Lab Test,Measurement,LOINC,Valid,Standard,4
 3000715,13793-5,Phenylpropionylglycine/Creatinine [Mass Ratio] in Urine,Lab Test,Measurement,LOINC,Valid,Standard,4
 3000518,29261-5,Abnormal lymphocytes/100 leukocytes in Blood by Manual count,Lab Test,Measurement,LOINC,Valid,Standard,4
-2212991,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,4
+2212991,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,4
 21495016,81258-6,Sample variant allelic frequency [NFr],Lab Test,Measurement,LOINC,Valid,Standard,4
 21494133,81751-0,Chromosome 17p13.1 deletion and 14q32 rearrangements in Bone marrow by FISH,Lab Test,Measurement,LOINC,Valid,Standard,4
 21494124,81742-9,Th-To Ab [Units/volume] in Serum by Line blot,Lab Test,Measurement,LOINC,Valid,Standard,4
@@ -6989,10 +6989,10 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3001534,6837-9,Cinnamon IgE Ab [Units/volume] in Serum,Lab Test,Measurement,LOINC,Valid,Standard,3
 3001204,15086-2,Oxalate [Moles/volume] in Urine,Lab Test,Measurement,LOINC,Valid,Standard,3
 3001165,5285-2,Polio virus 3 neutralizing antibody [Titer] in Serum by Neutralization test,Lab Test,Measurement,LOINC,Valid,Standard,3
-2314069,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,3
-2213233,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,3
-2213000,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,3
-2212939,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,3
+2314069,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,3
+2213233,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,3
+2213000,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,3
+2212939,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,3
 21493669,80700-8,CD25+CD127- (regulatory T) cells/100 CD3+CD4+ cells in Blood,Lab Test,Measurement,LOINC,Valid,Standard,3
 21492322,79178-0,4-Hydroxycyclohexylacetate/Creatinine [Molar ratio] in Urine,Lab Test,Measurement,LOINC,Valid,Standard,3
 21491073,79517-9,Desaminotyrosine/Creatinine [Molar ratio] in Urine,Lab Test,Measurement,LOINC,Valid,Standard,3
@@ -7302,7 +7302,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3000391,15161-3,Complement C1 esterase inhibitor.functional [Presence] in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,2
 3000265,13169-8,Immunoelectrophoresis for Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,2
 3000242,30160-6,Tau protein [Mass/volume] in Cerebral spinal fluid,Lab Test,Measurement,LOINC,Valid,Standard,2
-2212349,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,2
+2212349,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,2
 21493481,82213-0,Sapovirus genogroups I+II+IV+V RNA [Presence] in Stool by NAA with non-probe detection,Lab Test,Measurement,LOINC,Valid,Standard,2
 21493480,82212-2,Rotavirus A RNA [Presence] in Stool by NAA with non-probe detection,Lab Test,Measurement,LOINC,Valid,Standard,2
 21493479,82211-4,Norovirus genogroup I+II RNA [Presence] in Stool by NAA with non-probe detection,Lab Test,Measurement,LOINC,Valid,Standard,2
@@ -7806,8 +7806,8 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 3000910,12598-9,Fat.neutral [Presence] in Stool,Lab Test,Measurement,LOINC,Valid,Standard,1
 3000701,9473-0,Heptachlorepoxide [Mass/volume] in Serum or Plasma,Lab Test,Measurement,LOINC,Valid,Standard,1
 3000422,23918-6,Osmotic fragility of Red Blood Cells--0.60% sodium chloride 24 hour 37 degree C incubation,Lab Test,Measurement,LOINC,Valid,Standard,1
-2212943,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,1
-2212701,No matching concept,No matching concept,Undefined,Unknown,None,Invalid,Non-standard,1
+2212943,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,1
+2212701,No matching concept,No matching concept,Undefined,Unknown,,Invalid,Non-standard,1
 21492326,79182-2,RNA polymerase III IgG Ab [Units/volume] in Serum or Plasma by Immunoassay,Lab Test,Measurement,LOINC,Valid,Standard,1
 21492166,78228-4,IGH gene rearrangements [Interpretation] in Blood or Tissue by FISH Narrative,Lab Test,Measurement,LOINC,Valid,Standard,1
 1761869,100706-1,Mycoplasma genitalium rRNA [Presence] in Specimen by NAA with probe detection,Lab Test,Measurement,LOINC,Valid,Standard,1
@@ -7834,3 +7834,642 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 1001986,93693-0,Nonalcoholic steatohepatitis grade in Serum or Plasma Qualitative,Lab Test,Measurement,LOINC,Valid,Standard,1
 1001921,93697-1,Liver steatosis interpretation in Serum or Plasma Qualitative,Lab Test,Measurement,LOINC,Valid,Standard,1
 1001762,93696-3,Liver steatosis grade in Serum or Plasma Qualitative,Lab Test,Measurement,LOINC,Valid,Standard,1
+3030354,33914-3,Glomerular filtration rate [Volume Rate/Area] in Serum or Plasma by Creatinine-based formula (MDRD)/1.73 sq M,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3037428,20941-1,Deprecated Phosphate [Mass/volume] in Serum or Plasma,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3035286,42679-1,Heparin [Units/volume] in Platelet poor plasma by Chromogenic method,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3003147,30240-6,Deprecated Fibrin D-dimer,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3011380,4091-5,Vancomycin [Mass/volume] in Serum or Plasma --random,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3026770,773-2,Nucleated erythrocytes/Erythrocytes in Blood by Manual count,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+40768326,65634-8,Creatinine 24 hour urine panel - 24 hour Urine,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+44827420,V76.51,Special screening for malignant neoplasms of colon,5-dig billing V code,Measurement,ICD9CM,Valid,Non-standard,
+44822314,790.4,Nonspecific elevation of levels of transaminase or lactic acid dehydrogenase [LDH],4-dig billing code,Measurement,ICD9CM,Valid,Non-standard,
+45552285,C79.51,Secondary malignant neoplasm of bone,5-char billing code,Condition,ICD10CM,Valid,Non-standard,
+35206331,C78.6,Secondary malignant neoplasm of retroperitoneum and peritoneum,4-char billing code,Condition,ICD10CM,Valid,Non-standard,
+3008350,6556-5,Deprecated Streptococcus pyogenes Ag [Presence] in Throat by Immunoassay,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3010474,3664-0,Gentamicin [Mass/volume] in Serum or Plasma --random,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3041030,40844-3,Deprecated Immunoglobulin light chains.kappa.free/Immunoglobulin light chains.lambda [Mass Ratio] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+35211427,R76.8,Other specified abnormal immunological findings in serum,4-char nonbill code,Condition,ICD10CM,Valid,Non-standard,
+35206332,C78.7,Secondary malignant neoplasm of liver and intrahepatic bile duct,4-char billing code,Condition,ICD10CM,Valid,Non-standard,
+44829677,V76.11,Screening mammogram for high-risk patient,5-dig billing V code,Procedure,ICD9CM,Valid,Non-standard,
+44836851,198.3,Secondary malignant neoplasm of brain and spinal cord,4-dig billing code,Condition,ICD9CM,Valid,Non-standard,
+3000131,15685-1,Deprecated Dog dander IgE Ab RAST class [Presence] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3001539,15609-1,Deprecated Cat dander IgE Ab RAST class [Presence] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3002058,25383-1,Deprecated Cow milk IgE Ab RAST class [Presence] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3007035,16074-7,Deprecated Walnut IgE Ab RAST class [Presence] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3007980,15568-9,Deprecated Soybean IgE Ab RAST class [Presence] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3011104,13537-6,Deprecated Protein [Mass/volume] in Plasma,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3018645,15642-2,Deprecated Cladosporium herbarum IgE Ab RAST class [Presence] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3020825,15682-8,Deprecated European house dust mite IgE Ab RAST class [Presence] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3021304,15917-8,Deprecated Peanut IgE Ab RAST class [Presence] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3033335,15689-3,Deprecated Egg white IgE Ab RAST class [Presence] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+44836711,V76.12,Other screening mammogram,5-dig billing V code,Procedure,ICD9CM,Valid,Non-standard,
+45532939,C79.89,Secondary malignant neoplasm of other specified sites,5-char billing code,Condition,ICD10CM,Valid,Non-standard,
+45537840,C78.01,Secondary malignant neoplasm of right lung,5-char billing code,Condition,ICD10CM,Valid,Non-standard,
+3001157,22760-3,Potassium [Mass/volume] in Serum or Plasma,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3001164,2505-6,Iron/Iron binding capacity.total [Mass Ratio] in Serum or Plasma,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3009745,15975-6,Deprecated Common Ragweed IgE Ab RAST class [Presence] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3010702,15680-2,Deprecated American house dust mite IgE Ab RAST class [Presence] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3011177,15738-8,Deprecated Bermuda grass IgE Ab RAST class [Presence] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3015411,15650-5,Deprecated Codfish IgE Ab RAST class [Presence] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3015942,15530-9,Deprecated Alternaria alternata IgE Ab RAST class [Presence] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3023646,16018-4,Deprecated Shrimp IgE Ab RAST class [Presence] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3024009,15659-6,Deprecated Cottonwood IgE Ab RAST class [Presence] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3024395,16085-3,Deprecated Wheat IgE Ab RAST class [Presence] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3027796,15585-3,Deprecated Boxelder IgE Ab RAST class [Presence] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3035362,15697-6,Deprecated White Elm IgE Ab RAST class [Presence] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+35919548,440@2,Grade II,NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+40762850,59789-8,dRVVT factor substitution in Platelet poor plasma by Coagulation assay --2H post incubation with normal plasma,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+44826258,V76.2,Screening for malignant neoplasms of cervix,4-dig billing V code,Measurement,ICD9CM,Valid,Non-standard,
+44835684,197.6,Secondary malignant neoplasm of retroperitoneum and peritoneum,4-dig billing code,Condition,ICD9CM,Valid,Non-standard,
+45552281,C78.02,Secondary malignant neoplasm of left lung,5-char billing code,Condition,ICD10CM,Valid,Non-standard,
+913941,1060@88,Not applicable (cases that do not have an AJCC staging scheme),NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+914008,500@1,"Hospital inpatient; Managed health plans with comprehensive, unified medical records",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+914010,1117@9,Unknown whether any other metastatic site or generalized metastases. Not documented in patient record.,NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+3000385,31183-7,Deprecated Streptococcus pneumoniae 5 IgG Ab [Mass/volume] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3001965,15615-8,Deprecated Mountain Juniper IgE Ab RAST class [Presence] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3002390,15693-5,Deprecated Rough Marsh Elder IgE Ab RAST class [Presence] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3003729,15607-5,Deprecated Cashew nut IgE Ab RAST class [Presence] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3004217,27387-0,Deprecated Streptococcus pneumoniae 14 IgG Ab [Mass/volume] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3004708,27092-6,Deprecated Streptococcus pneumoniae 1 IgG Ab [Mass/volume] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3005364,15527-5,Deprecated Almond IgE Ab RAST class [Presence] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3005738,27389-6,Deprecated Streptococcus pneumoniae 23 IgG Ab [Mass/volume] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3006775,27094-2,Deprecated Streptococcus pneumoniae 4 IgG Ab [Mass/volume] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3006958,4058-4,Tobramycin [Mass/volume] in Serum or Plasma --random,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3007490,15875-8,Deprecated White Oak IgE Ab RAST class [Presence] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3008450,15864-2,Deprecated White mulberry IgE Ab RAST class [Presence] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3009537,15549-9,Deprecated Aspergillus fumigatus IgE Ab RAST class [Presence] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3012917,27113-0,Deprecated Streptococcus pneumoniae 8 IgG Ab [Mass/volume] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3013043,16054-9,Deprecated Timothy IgE Ab RAST class [Presence] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3016811,27390-4,Deprecated Streptococcus pneumoniae 19 IgG Ab [Mass/volume] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3016835,15936-8,Deprecated Common Pigweed IgE Ab RAST class [Presence] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3017886,27392-0,Deprecated Streptococcus pneumoniae 9 IgG Ab [Mass/volume] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3023101,27374-8,Deprecated Streptococcus pneumoniae 12 IgG Ab [Mass/volume] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3024180,30126-7,Deprecated London Plane IgE Ab RAST class [Presence] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3024826,27096-7,Deprecated Streptococcus pneumoniae 3 IgG Ab [Mass/volume] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3026242,16006-9,Deprecated Salmon IgE Ab RAST class [Presence] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3026310,16011-9,Deprecated Scallop IgE Ab RAST class [Presence] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3027794,16078-8,Deprecated California Walnut Pollen IgE Ab RAST class [Presence] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3033515,16052-3,Deprecated Saltwort IgE Ab RAST class [Presence] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3036008,15774-3,Deprecated Pecan or Hickory Tree IgE Ab RAST class [Presence] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3036857,15546-5,Deprecated White Ash IgE Ab RAST class [Presence] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3037235,15924-4,Deprecated Penicillium notatum IgE Ab RAST class [Presence] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3039696,52756-4,dRVVT excess phospholipid [Presence] in Platelet poor plasma by Coagulation assay,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+35909922,820@99,Not applicable,NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+35909928,752@999,Not applicable,NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+35909935,754@999,Not applicable,NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+35910083,764@9,Unknown if extension or metastasis,NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+35910133,830@99,Not applicable,NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+35910141,1182@9,Unknown/Indeterminate/not mentioned in path report,NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+35910192,756@999,Not applicable,NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+35916354,1112@9,Unknown whether bone is an involved metastatic site. Not documented in patient record.,NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+35940579,490@1,Positive histology,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35940591,501@26,"Diagnostic Imaging/Radiology (other than radiation therapy, codes 23; includes nuclear medicine)",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35940816,450@5,"ICD-O, Third Edition",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35941097,1002@88,"Not applicable, no code assigned for this case in the current AJCC Staging Manual.",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35941119,1003@88,"Not applicable, no code assigned for this case in the current AJCC Staging Manual.",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35941160,1012@88,"Not applicable, no code assigned for this case in the current AJCC Staging Manual.",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35941429,1001@88,"Not applicable, no code assigned for this case in the current AJCC Staging Manual.",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35941538,1013@88,"Not applicable, no code assigned for this case in the current AJCC Staging Manual.",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35941562,1014@88,"Not applicable, no code assigned for this case in the current AJCC Staging Manual.",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35941893,1011@88,"Not applicable, no code assigned for this case in the current AJCC Staging Manual.",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35941966,1004@88,"Not applicable, no code assigned for this case in the current AJCC Staging Manual.",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35941990,460@5,"ICD-O, Third Edition",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35942059,410@0,Not a paired site,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35942649,1113@9,Unknown whether brain is involved metastatic site. Not documented in patient record.,NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+35942675,1114@9,Unknown whether distant lymph node(s) are involved metastatic site. Not documented in patient record.,NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+35942699,1115@9,Unknown whether liver is involved metastatic site. Not documented in patient record.,NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+35942747,1116@9,Unknown whether lung is involved metastatic site. Not documented in patient record.,NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+37393206,1014041000000108,Lyme disease test,Observable Entity,Measurement,SNOMED,Valid,Non-standard,
+40762867,59806-0,aPTT.lupus sensitive.factor substitution in Platelet poor plasma by Coagulation assay --2H post incubation with normal plasma,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+45556843,Z51.81,Encounter for therapeutic drug level monitoring,5-char billing code,Measurement,ICD10CM,Valid,Non-standard,
+45557016,C79.31,Secondary malignant neoplasm of brain,5-char billing code,Condition,ICD10CM,Valid,Non-standard,
+3007087,15653-9,Deprecated Corn IgE Ab RAST class [Presence] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3014016,15897-2,Deprecated Ovalbumin IgE Ab RAST class [Presence] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3014289,15643-0,Deprecated Clam IgE Ab RAST class [Presence] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3014525,16065-5,Deprecated Tuna IgE Ab RAST class [Presence] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3014773,3023-9,Deprecated Thyroxine (T4) uptake [Mass/volume] in Serum or Plasma,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3015077,9413-6,Deprecated Lipids [Mass/time] in 24 hour Stool,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3020323,15773-5,Deprecated Pecan or Hickory Nut IgE Ab RAST class [Presence] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3022219,15898-0,Deprecated Ovomucoid IgE Ab RAST class [Presence] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3022394,15949-1,Deprecated Pistachio IgE Ab RAST class [Presence] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3027658,16014-3,Deprecated Sesame Seed IgE Ab RAST class [Presence] in Serum,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+3046064,43397-9,dRVVT factor substitution in Platelet poor plasma by Coagulation assay --immediately after addition of normal plasma,Lab Test,Measurement,LOINC,Invalid,Non-standard,
+35224830,Y90.6,Blood alcohol level of 120-199 mg/100 ml,4-char billing code,Measurement,ICD10CM,Valid,Non-standard,
+35917148,floor_mouth@2880,Size of Lymph Nodes,NAACCR Variable,Measurement,NAACCR,Valid,Non-standard,
+35917283,floor_mouth@2865,Measured Thickness (Depth),NAACCR Variable,Measurement,NAACCR,Valid,Non-standard,
+35917583,bladder@2890,Size of Metastasis in Lymph Nodes,NAACCR Variable,Measurement,NAACCR,Valid,Non-standard,
+35919156,440@3,Grade III,NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+35920119,rectum@2920@010,Tumor Regression Grade 1|Moderate response: Single cells or small groups of cancer cells,NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+35924312,brain@3843@1,WHO Grade I : Circumscribed tumors of low proliferative potential associated with the possibility of cure following resection,NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+35931526,cns_other@3843@1,WHO Grade I : Circumscribed tumors of low proliferative potential associated with the possibility of cure following resection,NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+35931687,brain@3844@1,WHO Grade I : Circumscribed tumors of low proliferative potential associated with the possibility of cure following resection,NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+35933027,brain@2880@040,Grade IV,NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+35937410,cns_other@3844@1,WHO Grade I : Circumscribed tumors of low proliferative potential associated with the possibility of cure following resection,NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+44823896,V76.44,Screening for malignant neoplasms of prostate,5-dig billing V code,Measurement,ICD9CM,Valid,Non-standard,
+44830866,V82.81,Special screening for osteoporosis,5-dig billing V code,Measurement,ICD9CM,Valid,Non-standard,
+44836706,V72.6,Laboratory examination,4-dig nonbill V code,Measurement,ICD9CM,Valid,Non-standard,
+45586027,C78.00,Secondary malignant neoplasm of unspecified lung,5-char billing code,Condition,ICD10CM,Valid,Non-standard,
+44818701,OMOP4822275,From physical examination,Meas Type,Type Concept,Meas Type,Valid,Non-standard,
+44818702,OMOP4822274,Lab result,Meas Type,Type Concept,Meas Type,Valid,Non-standard,
+32833,OMOP4976906,EHR order,Type Concept,Type Concept,Type Concept,Valid,Standard,
+32856,OMOP4976929,Lab,Type Concept,Type Concept,Type Concept,Valid,Standard,
+32817,OMOP4976890,EHR,Type Concept,Type Concept,Type Concept,Valid,Standard,
+45754907,OMOP4822276,Derived value,Meas Type,Type Concept,Meas Type,Valid,Non-standard,
+5001,OMOP4822277,Test ordered through EHR,Meas Type,Type Concept,Meas Type,Valid,Non-standard,
+32534,OMOP4822267,Tumor Registry,Meas Type,Type Concept,Meas Type,Valid,Non-standard,
+32879,OMOP4976952,Registry,Type Concept,Type Concept,Type Concept,Valid,Standard,
+32466,OMOP4822270,Inferred from claim,Meas Type,Type Concept,Meas Type,Valid,Non-standard,
+4172703,276136004,=,Qualifier Value,Meas Value Operator,SNOMED,Valid,Standard,
+4172704,276140008,>,Qualifier Value,Meas Value Operator,SNOMED,Valid,Standard,
+4171756,276139006,<,Qualifier Value,Meas Value Operator,SNOMED,Valid,Standard,
+4171755,276138003,>=,Qualifier Value,Meas Value Operator,SNOMED,Valid,Standard,
+4171754,276137008,<=,Qualifier Value,Meas Value Operator,SNOMED,Valid,Standard,
+4118124,258983007,beats/min,Qualifier Value,Unit,SNOMED,Valid,Non-standard,
+37117743,732982009,Bag,Qualifier Value,Unit,SNOMED,Valid,Non-standard,
+45884091,LA11884-6,Indeterminate,Answer,Meas Value,LOINC,Valid,Standard,
+45878583,LA6577-6,Negative,Answer,Meas Value,LOINC,Valid,Standard,
+45877494,LA17078-9,DNR,Answer,Meas Value,LOINC,Valid,Standard,
+1990490,LA33379-1,Auto,Answer,Meas Value,LOINC,Valid,Standard,
+45878245,LA32-8,No,Answer,Meas Value,LOINC,Valid,Standard,
+45878548,LA11841-6,1+,Answer,Meas Value,LOINC,Valid,Standard,
+9189,260385009,Negative,Qualifier Value,Meas Value,SNOMED,Valid,Standard,
+45881930,LA17195-1,Yellow,Answer,Meas Value,LOINC,Valid,Standard,
+45880296,LA11883-8,Not detected,Answer,Meas Value,LOINC,Valid,Standard,
+21499181,LA19732-9,Clear,Answer,Meas Value,LOINC,Valid,Standard,
+45880909,LA20948-8,Occasional,Answer,Meas Value,LOINC,Valid,Standard,
+45880295,LA15679-6,Rare,Answer,Meas Value,LOINC,Valid,Standard,
+45877994,LA33-6,Yes,Answer,Meas Value,LOINC,Valid,Standard,
+45878239,LA15680-4,Few,Answer,Meas Value,LOINC,Valid,Standard,
+45881796,LA11832-5,Trace,Answer,Meas Value,LOINC,Valid,Standard,
+45877983,LA6751-7,Moderate,Answer,Meas Value,LOINC,Valid,Standard,
+4181412,52101004,Present,Qualifier Value,Meas Value,SNOMED,Valid,Standard,
+45884084,LA6576-8,Positive,Answer,Meas Value,LOINC,Valid,Standard,
+45881803,LA18592-8,In range,Answer,Meas Value,LOINC,Valid,Standard,
+36308445,LA29246-8,Controlled ventilation,Answer,Meas Value,LOINC,Valid,Standard,
+45884153,LA6626-1,Normal,Answer,Meas Value,LOINC,Valid,Standard,
+45880586,LA11910-9,Slight,Answer,Meas Value,LOINC,Valid,Standard,
+45876467,LA11843-2,3+,Answer,Meas Value,LOINC,Valid,Standard,
+45877935,LA19974-7,Performed,Answer,Meas Value,LOINC,Valid,Standard,
+45881916,LA11842-4,2+,Answer,Meas Value,LOINC,Valid,Standard,
+45884092,LA15256-3,Nonreactive,Answer,Meas Value,LOINC,Valid,Standard,
+21498507,LA19016-7,Manual,Answer,Meas Value,LOINC,Valid,Standard,
+21498853,LA19733-7,Cloudy,Answer,Meas Value,LOINC,Valid,Standard,
+45878984,LA18951-6,Intact,Answer,Meas Value,LOINC,Valid,Standard,
+45878584,LA8981-8,Large,Answer,Meas Value,LOINC,Valid,Standard,
+45879438,LA9633-4,Present,Answer,Meas Value,LOINC,Valid,Standard,
+45881797,LA8983-4,Small,Answer,Meas Value,LOINC,Valid,Standard,
+4188539,373066001,Yes,Qualifier Value,Meas Value,SNOMED,Valid,Standard,
+45878582,LA137-2,,Answer,Meas Value,LOINC,Valid,Standard,
+45882470,LA4720-4,Not applicable,Answer,Meas Value,LOINC,Valid,Standard,
+9190,260415000,Not detected,Qualifier Value,Meas Value,SNOMED,Valid,Standard,
+45878745,LA12748-2,Abnormal,Answer,Meas Value,LOINC,Valid,Standard,
+36307889,LA19695-8,Compatible,Answer,Meas Value,LOINC,Valid,Standard,
+45878809,LA8913-1,Adequate,Answer,Meas Value,LOINC,Valid,Standard,
+1989987,LA32617-5,At rest,Answer,Meas Value,LOINC,Valid,Standard,
+21499251,LA20667-4,None seen,Answer,Meas Value,LOINC,Valid,Standard,
+45877986,LA4489-6,Unknown,Answer,Meas Value,LOINC,Valid,Standard,
+45881802,LA15255-5,Reactive,Answer,Meas Value,LOINC,Valid,Standard,
+45885265,LA14945-2,Unk,Answer,Meas Value,LOINC,Valid,Standard,
+45878417,LA17760-2,Plasma,Answer,Meas Value,LOINC,Valid,Standard,
+45880107,LA4543-0,,Answer,Meas Value,LOINC,Valid,Standard,
+46237992,LA21321-7,O Pos,Answer,Meas Value,LOINC,Valid,Standard,
+46238174,LA21325-8,A Pos,Answer,Meas Value,LOINC,Valid,Standard,
+45880913,LA15681-2,Many,Answer,Meas Value,LOINC,Valid,Standard,
+45882186,LA10325-1,Expired,Answer,Meas Value,LOINC,Valid,Standard,
+36309991,LA19718-8,Leukoreduced,Answer,Meas Value,LOINC,Valid,Standard,
+45880448,LA19059-7,Colorless,Answer,Meas Value,LOINC,Valid,Standard,
+45878815,LA19470-6,Transparent film,Answer,Meas Value,LOINC,Valid,Standard,
+45883298,LA17193-6,Red,Answer,Meas Value,LOINC,Valid,Standard,
+9192,260405006,Trace,Qualifier Value,Meas Value,SNOMED,Valid,Standard,
+45881305,LA17199-3,Dry,Answer,Meas Value,LOINC,Valid,Standard,
+46237499,LA22032-9,VT,Answer,Meas Value,LOINC,Valid,Standard,
+4126681,260373001,Detected,Qualifier Value,Meas Value,SNOMED,Valid,Standard,
+45882780,LA15487-4,Regular,Answer,Meas Value,LOINC,Valid,Standard,
+45883297,LA17192-8,Pink,Answer,Meas Value,LOINC,Valid,Standard,
+36309396,LA9620-1,Not measured,Answer,Meas Value,LOINC,Valid,Standard,
+45881292,LA4354-2,Reviewed,Answer,Meas Value,LOINC,Valid,Standard,
+45881798,LA11849-9,Room air,Answer,Meas Value,LOINC,Valid,Standard,
+45879404,LA18978-9,Never smoker,Answer,Meas Value,LOINC,Valid,Standard,
+1990315,LA24378-4,Decreased,Answer,Meas Value,LOINC,Valid,Standard,
+45880639,LA16576-3,Foam,Answer,Meas Value,LOINC,Valid,Standard,
+45881517,LA18976-3,Current every day smoker,Answer,Meas Value,LOINC,Valid,Standard,
+45883458,LA15920-4,Former smoker,Answer,Meas Value,LOINC,Valid,Standard,
+46237993,LA21327-4,B Pos,Answer,Meas Value,LOINC,Valid,Standard,
+45882755,LA16662-1,Calm,Answer,Meas Value,LOINC,Valid,Standard,
+36308408,LA24647-2,Bipolar,Answer,Meas Value,LOINC,Valid,Standard,
+45884200,LA20552-8,Unsatisfactory,Answer,Meas Value,LOINC,Valid,Standard,
+46237435,LA21322-5,O Neg,Answer,Meas Value,LOINC,Valid,Standard,
+36032515,LA24377-6,Increased,Answer,Meas Value,LOINC,Valid,Standard,
+36308536,LA25410-4,Ventilator,Answer,Meas Value,LOINC,Valid,Standard,
+45881224,LA12421-6,Initial screen,Answer,Meas Value,LOINC,Valid,Standard,
+45880287,LA20899-3,Computerized provider order entry (CPOE) system,Answer,Meas Value,LOINC,Valid,Standard,
+37019466,LA30054-3,Urine,Answer,Meas Value,LOINC,Valid,Standard,
+45878142,LA46-8,Other,Answer,Meas Value,LOINC,Valid,Standard,
+45884119,LA7304-4,Not performed,Answer,Meas Value,LOINC,Valid,Standard,
+9191,10828004,Positive,Qualifier Value,Meas Value,SNOMED,Valid,Standard,
+45884085,LA13478-5,Pleural fluid,Answer,Meas Value,LOINC,Valid,Standard,
+21498697,LA26032-5,Complete,Answer,Meas Value,LOINC,Valid,Standard,
+45882611,LA14353-9,3-4,Answer,Meas Value,LOINC,Valid,Standard,
+46237963,LA22866-0,Scheduled,Answer,Meas Value,LOINC,Valid,Standard,
+45877373,LA9227-5,Open,Answer,Meas Value,LOINC,Valid,Standard,
+45883573,LA16666-2,Active,Answer,Meas Value,LOINC,Valid,Standard,
+45881623,LA11844-0,4+,Answer,Meas Value,LOINC,Valid,Standard,
+1621254,LA32100-2,SA,Answer,Meas Value,LOINC,Valid,Standard,
+4223765,422097006,A,Qualifier Value,Meas Value,SNOMED,Valid,Standard,
+36308805,LA16388-3,Final,Answer,Meas Value,LOINC,Valid,Standard,
+45878003,LA19544-8,None detected,Answer,Meas Value,LOINC,Valid,Standard,
+45878589,LA13487-6,A,Answer,Meas Value,LOINC,Valid,Standard,
+36310193,LA19726-1,Platelets,Answer,Meas Value,LOINC,Valid,Standard,
+45878416,LA17759-4,Blood,Answer,Meas Value,LOINC,Valid,Standard,
+36310050,LA19721-2,Packed cells,Answer,Meas Value,LOINC,Valid,Standard,
+45884848,LA17196-9,Orange,Answer,Meas Value,LOINC,Valid,Standard,
+46237456,LA17968-1,Marked,Answer,Meas Value,LOINC,Valid,Standard,
+36309800,LA19655-2,Not observed,Answer,Meas Value,LOINC,Valid,Standard,
+45884086,LA9634-2,Absent,Answer,Meas Value,LOINC,Valid,Standard,
+45877985,LA11882-0,Detected,Answer,Meas Value,LOINC,Valid,Standard,
+45879394,LA18821-1,Acute,Answer,Meas Value,LOINC,Valid,Standard,
+45881307,LA17206-6,Pale,Answer,Meas Value,LOINC,Valid,Standard,
+4120897,257993002,o,Qualifier Value,Meas Value,SNOMED,Valid,Standard,
+21499164,LA25029-2,Hypoactive bowel sounds,Answer,Meas Value,LOINC,Valid,Standard,
+45880599,LA12900-9,Mucus,Answer,Meas Value,LOINC,Valid,Standard,
+45876967,LA14573-2,5-9,Answer,Meas Value,LOINC,Valid,Standard,
+36308225,LA19720-4,Whole blood,Answer,Meas Value,LOINC,Valid,Standard,
+36307774,LA19268-4,O,Answer,Meas Value,LOINC,Valid,Standard,
+45884360,LA19058-9,Brown,Answer,Meas Value,LOINC,Valid,Standard,
+3197320,4470001000004101,Moderate,Qualifier Value,Meas Value,Nebraska Lexicon,Valid,Standard,
+46237107,LA22026-1,PA,Answer,Meas Value,LOINC,Valid,Standard,
+36307582,LA25958-2,Pale yellow,Answer,Meas Value,LOINC,Valid,Standard,
+36308534,LA22093-1,Chronic pain,Answer,Meas Value,LOINC,Valid,Standard,
+45876633,LA10396-2,20-29,Answer,Meas Value,LOINC,Valid,Standard,
+36032582,LA31426-2,Surgical,Answer,Meas Value,LOINC,Valid,Standard,
+36311185,LA15822-2,Speckled,Answer,Meas Value,LOINC,Valid,Standard,
+45880669,LA2-8,Male,Answer,Meas Value,LOINC,Valid,Standard,
+45883807,LA14574-0,10-14,Answer,Meas Value,LOINC,Valid,Standard,
+21498685,LA25359-3,Left lung,Answer,Meas Value,LOINC,Valid,Standard,
+45883244,LA18187-7,All,Answer,Meas Value,LOINC,Valid,Standard,
+36309989,LA19725-3,Cryoprecipitate,Answer,Meas Value,LOINC,Valid,Standard,
+45879244,LA6637-8,Completed,Answer,Meas Value,LOINC,Valid,Standard,
+45882865,LA7410-9,Abrasion,Answer,Meas Value,LOINC,Valid,Standard,
+36662562,LA30924-7,-,Answer,Meas Value,LOINC,Valid,Standard,
+45879619,LA18815-3,Scalp,Answer,Meas Value,LOINC,Valid,Standard,
+36307742,LA21107-0,No organisms seen,Answer,Meas Value,LOINC,Valid,Standard,
+45876622,LA7444-8,Hypertension,Answer,Meas Value,LOINC,Valid,Standard,
+45876968,LA14575-7,15-19,Answer,Meas Value,LOINC,Valid,Standard,
+46237483,LA22439-6,Redness,Answer,Meas Value,LOINC,Valid,Standard,
+21499038,LA25257-9,Wong-Baker FACES,Answer,Meas Value,LOINC,Valid,Standard,
+4115446,255507004,Small,Qualifier Value,Meas Value,SNOMED,Valid,Standard,
+45881402,LA4018-3,Esophagus,Answer,Meas Value,LOINC,Valid,Standard,
+45883018,LA17084-7,Atrial fibrillation,Answer,Meas Value,LOINC,Valid,Standard,
+45884467,LA15312-4,Self,Answer,Meas Value,LOINC,Valid,Standard,
+1621065,LA31393-4,Interpretation,Answer,Meas Value,LOINC,Valid,Standard,
+36210419,LA27183-5,Immune,Answer,Meas Value,LOINC,Valid,Standard,
+45878559,LA6630-3,Not done,Answer,Meas Value,LOINC,Valid,Standard,
+46237101,LA22022-0,ND,Answer,Meas Value,LOINC,Valid,Standard,
+4137796,263716002,Colorless,Qualifier Value,Meas Value,SNOMED,Valid,Standard,
+36310580,LA28139-6,Alcohol,Answer,Meas Value,LOINC,Valid,Standard,
+45880302,LA12430-7,Out of range requiring further dried blood spot testing for at least one condition,Answer,Meas Value,LOINC,Valid,Standard,
+45884037,LA18977-1,Current some day smoker,Answer,Meas Value,LOINC,Valid,Standard,
+46237106,LA22024-6,OK,Answer,Meas Value,LOINC,Valid,Standard,
+36310366,LA19779-0,Endotracheal tube,Answer,Meas Value,LOINC,Valid,Standard,
+45878938,LA15246-4,30%,Answer,Meas Value,LOINC,Valid,Standard,
+45880618,LA6111-4,0,Answer,Meas Value,LOINC,Valid,Standard,
+4106486,257983009,b,Qualifier Value,Meas Value,SNOMED,Valid,Standard,
+45878244,LA14518-7,B,Answer,Meas Value,LOINC,Valid,Standard,
+45878643,LA3657-9,Stage III,Answer,Meas Value,LOINC,Valid,Standard,
+46237675,LA21335-7,Escherichia coli,Answer,Meas Value,LOINC,Valid,Standard,
+4124462,260413007,,Qualifier Value,Meas Value,SNOMED,Valid,Standard,
+36307838,LA19575-2,Enlarged,Answer,Meas Value,LOINC,Valid,Standard,
+45876545,LA14291-1,Diabetes mellitus,Answer,Meas Value,LOINC,Valid,Standard,
+45883335,LA19066-2,Serosanguinous,Answer,Meas Value,LOINC,Valid,Standard,
+45884087,LA11885-3,Equivocal,Answer,Meas Value,LOINC,Valid,Standard,
+45884199,LA13546-9,Test not performed,Answer,Meas Value,LOINC,Valid,Standard,
+35941661,501@20,"Pathology Department Review (surgical pathology reports, autopsies, or cytology reports)",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+45880980,LA3664-5,Stage I,Answer,Meas Value,LOINC,Valid,Standard,
+45881794,LA13475-1,Peritoneal fluid,Answer,Meas Value,LOINC,Valid,Standard,
+46237061,LA21326-6,A Neg,Answer,Meas Value,LOINC,Valid,Standard,
+46237097,LA22003-0,IL,Answer,Meas Value,LOINC,Valid,Standard,
+21499127,LA25404-7,Line draw,Answer,Meas Value,LOINC,Valid,Standard,
+36311069,LA19761-8,Not given,Answer,Meas Value,LOINC,Valid,Standard,
+45876487,LA19455-7,Gauze,Answer,Meas Value,LOINC,Valid,Standard,
+45881925,LA19074-6,Scant,Answer,Meas Value,LOINC,Valid,Standard,
+45882129,LA12426-5,Subsequent screen - required by protocol,Answer,Meas Value,LOINC,Valid,Standard,
+35815182,100002-300,3+,Answer,Observation,UK Biobank,Valid,Standard,
+35815183,100003-300,3+,Answer,Observation,UK Biobank,Valid,Standard,
+35815184,100017-300,3+,Answer,Observation,UK Biobank,Valid,Standard,
+36308111,LA25411-2,Oxygen,Answer,Meas Value,LOINC,Valid,Standard,
+36308435,LA17637-2,Ascites,Answer,Meas Value,LOINC,Valid,Standard,
+42530813,LA26549-8,Right posterior,Answer,Meas Value,LOINC,Valid,Standard,
+42531079,LA26596-9,Needs assistance,Answer,Meas Value,LOINC,Valid,Standard,
+45879786,LA11864-8,Sleeping,Answer,Meas Value,LOINC,Valid,Standard,
+45880303,LA12431-5,Out of range requiring immediate second-tier testing for at least one condition,Answer,Meas Value,LOINC,Valid,Standard,
+4146067,35105006,Increased,Qualifier Value,Meas Value,SNOMED,Valid,Standard,
+4159760,371154000,Dependent,Qualifier Value,Meas Value,SNOMED,Valid,Standard,
+21498812,LA25255-3,FLACC,Answer,Meas Value,LOINC,Valid,Standard,
+36308195,LA11879-6,Shallow,Answer,Meas Value,LOINC,Valid,Standard,
+36308775,LA19736-0,Bloody,Answer,Meas Value,LOINC,Valid,Standard,
+42530710,LA26550-6,Left anterior,Answer,Meas Value,LOINC,Valid,Standard,
+42530790,LA19241-1,1A,Answer,Meas Value,LOINC,Valid,Standard,
+42531061,LA26551-4,Left posterior,Answer,Meas Value,LOINC,Valid,Standard,
+45877984,LA13477-7,Synovial fluid,Answer,Meas Value,LOINC,Valid,Standard,
+45883548,LA15253-0,100%,Answer,Meas Value,LOINC,Valid,Standard,
+35815138,100001-200,2+,Answer,Observation,UK Biobank,Valid,Standard,
+35940992,480@8,"ICD-O, Third Edition, plus 2008 WHO hematopoietic/lymphoid new terms used for conditions diagnosed 1/1/2010*",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35942024,470@8,"ICD-O, Third Edition, plus 2008 WHO hematopoietic/lymphoid new terms used for conditions diagnosed 1/1/2010*",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+36311126,LA19696-6,Incompatible,Answer,Meas Value,LOINC,Valid,Standard,
+36311145,LA12334-1,,Answer,Meas Value,LOINC,Valid,Standard,
+45879248,LA15380-1,Colonoscopy,Answer,Meas Value,LOINC,Valid,Standard,
+45882149,LA16762-9,On pump,Answer,Meas Value,LOINC,Valid,Standard,
+46237074,LA15167-2,N,Answer,Meas Value,LOINC,Valid,Standard,
+46237872,LA21328-2,B Neg,Answer,Meas Value,LOINC,Valid,Standard,
+1177297,LA29487-8,Pending,Answer,Meas Value,LOINC,Valid,Standard,
+21498798,LA19583-6,Irregular,Answer,Meas Value,LOINC,Valid,Standard,
+35940692,990@10,"Physician, NOS, or physician type not specified in codes 11-15",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35941935,442@0,Conclusive term,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+36308337,LA21016-3,Heart,Answer,Meas Value,LOINC,Valid,Standard,
+36309447,LA21966-9,AA,Answer,Meas Value,LOINC,Valid,Standard,
+42530791,LA19242-9,1B,Answer,Meas Value,LOINC,Valid,Standard,
+45877096,LA17718-0,Sinus rhythm,Answer,Meas Value,LOINC,Valid,Standard,
+45877359,LA17093-8,Paced rhythm,Answer,Meas Value,LOINC,Valid,Standard,
+45881016,LA4591-9,Kidney,Answer,Meas Value,LOINC,Valid,Standard,
+45883608,LA11840-8,Mixed,Answer,Meas Value,LOINC,Valid,Standard,
+45884875,LA19065-4,Sanguinous,Answer,Meas Value,LOINC,Valid,Standard,
+45884876,LA19067-0,Serous,Answer,Meas Value,LOINC,Valid,Standard,
+45885201,LA7473-7,Shock,Answer,Meas Value,LOINC,Valid,Standard,
+914002,1060@07,"Seventh Edition (published 2009), recommended for use with cases diagnosed 2010-2017",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+1620969,LA31445-2,Previous myocardial infarction,Answer,Meas Value,LOINC,Valid,Standard,
+4115447,255510006,Slight,Qualifier Value,Meas Value,SNOMED,Valid,Standard,
+21498810,LA24884-1,Round,Answer,Meas Value,LOINC,Valid,Standard,
+35916290,1170@9,Not applicable,NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+35916292,1160@9,Not applicable,NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+35916301,1150@9,Not applicable,NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+35916362,1140@9,Unknown if staged,NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+35919765,440@9,"Grade/differentiation unknown, not stated, or not applicable",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35941015,480@7,"ICD-O, Third Edition",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35941896,470@7,"ICD-O, Third Edition",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+36308185,LA19246-0,Staphylococcus aureus,Answer,Meas Value,LOINC,Valid,Standard,
+36310061,LA18410-3,Bilevel,Answer,Meas Value,LOINC,Valid,Standard,
+36310350,LA19707-1,Discarded,Answer,Meas Value,LOINC,Valid,Standard,
+36310823,LA26227-1,Off,Answer,Meas Value,LOINC,Valid,Standard,
+42530718,LA21123-7,No growth,Answer,Meas Value,LOINC,Valid,Standard,
+45879589,LA15555-8,Green,Answer,Meas Value,LOINC,Valid,Standard,
+45880732,LA13504-8,F,Answer,Meas Value,LOINC,Valid,Standard,
+45880979,LA3661-1,Stage II,Answer,Meas Value,LOINC,Valid,Standard,
+913999,1117@0,None; no other metastases,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+914006,1060@06,"Sixth Edition (published 2002), recommended for use for cases diagnosed 2003-2009",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+21498711,LA22405-7,PH,Answer,Meas Value,LOINC,Valid,Standard,
+35919139,940@c3,cT3,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35919165,950@88,88,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35919267,940@88,88,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35919341,890@88,88,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35919533,910@99,Stage Unknown,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35919673,960@c0,cM0,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35919674,960@88,88,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35919705,900@88,88,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35919759,880@88,88,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35940269,1116@0,None; no lung metastases,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35940362,1113@0,None; no brain metastses,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35940413,759@3,"Regional, regional lymph nodes only",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35940466,1112@0,None; no bone metastases,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35940595,930@88,Case is not eligible for staging,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35940750,1130@88,Not applicable (not pediatric case),NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35941487,1115@0,None; no liver metastases,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35941763,759@7,Distant,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35942887,1114@0,None; no distant lymph node metastases,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+36307525,LA19687-5,Anti-D,Answer,Meas Value,LOINC,Valid,Standard,
+36308931,LA26703-1,Dipyridamole,Answer,Meas Value,LOINC,Valid,Standard,
+40198814,444@00,Single tumor,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+45877177,LA15248-0,50%,Answer,Meas Value,LOINC,Valid,Standard,
+45882551,LA15850-3,Feel anxious,Answer,Meas Value,LOINC,Valid,Standard,
+45884525,LA14620-1,Surgery,Answer,Meas Value,LOINC,Valid,Standard,
+46237873,LA21323-3,AB Pos,Answer,Meas Value,LOINC,Valid,Standard,
+4139623,264868006,No growth,Qualifier Value,Meas Value,SNOMED,Valid,Standard,
+21499047,LA25360-1,Right lung,Answer,Meas Value,LOINC,Valid,Standard,
+35909917,910@88,Not applicable,NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+35910053,970@88,Not applicable,NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+35919234,3802@6,Benign or borderline tumor,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35919243,970@4,IV,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35919304,3801@6,Benign or borderline tumor,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35919350,830@00,No nodes examined,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35919361,970@4A,IVA,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35919369,820@00,All nodes examined negative,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35919383,900@c0,cM0,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35919411,1182@1,Lymph-vascular Invasion Present/Identified,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35919413,764@8,Benign or borderline brain,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35919547,3889@6,Benign or borderline tumor,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35919626,950@c0,cN0,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35919633,890@pX,pNX,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35919635,1182@8,Not Applicable,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35919679,3816@86,Benign or borderline tumor,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35919809,820@98,No nodes examined,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35940412,930@99,Staged but unknown who assigned stage,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35940426,930@30,Cancer registrar and physician,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35940926,410@1,Right: origin of primary,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35941824,990@88,Case is not eligible for staging,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35942610,pancreas_head@2880@988,"Not applicable: Information not collected for this case|(May include cases converted from code 888 used in CSv1 for """"Not applicable"""" or when the item was not collected. If this item is required to derive T, N, M, or any stage, use of code 988 may resul",NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+35942682,pancreas_head@2890@988,"Not applicable: Information not collected for this case|(May include cases converted from code 888 used in CSv1 for """"Not applicable"""" or when the item was not collected. If this item is required to derive T, N, M, or any stage, use of code 988 may resul",NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+35942789,pancreas_head@2900@988,"Not applicable: Information not collected for this case|(May include cases converted from code 888 used in CSv1 for """"Not applicable"""" or when the item was not collected. If this item is required to derive T, N, M, or any stage, use of code 988 may resul",NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+36307959,LA28244-4,Candida glabrata,Answer,Meas Value,LOINC,Valid,Standard,
+36309154,LA19689-1,Anti-E,Answer,Meas Value,LOINC,Valid,Standard,
+36310218,LA19767-5,Pacemaker,Answer,Meas Value,LOINC,Valid,Standard,
+37079480,LA30063-4,Stool,Answer,Meas Value,LOINC,Valid,Standard,
+42530812,LA26548-0,Right anterior,Answer,Meas Value,LOINC,Valid,Standard,
+45877987,LA4457-3,White,Answer,Meas Value,LOINC,Valid,Standard,
+45878939,LA15247-2,40%,Answer,Meas Value,LOINC,Valid,Standard,
+45880449,LA19063-9,Tan,Answer,Meas Value,LOINC,Valid,Standard,
+45880658,LA11862-2,Finger,Answer,Meas Value,LOINC,Valid,Standard,
+45880922,LA4259-3,Borderline,Answer,Meas Value,LOINC,Valid,Standard,
+45881248,LA11209-6,Schistocytes,Answer,Meas Value,LOINC,Valid,Standard,
+45881352,LA7460-4,Pain,Answer,Meas Value,LOINC,Valid,Standard,
+45881899,LA4255-1,Breast,Answer,Meas Value,LOINC,Valid,Standard,
+45882679,LA17001-1,Shortness of breath,Answer,Meas Value,LOINC,Valid,Standard,
+46237376,LA22145-9,L knee,Answer,Meas Value,LOINC,Valid,Standard,
+46237613,LA15841-2,Invalid,Answer,Meas Value,LOINC,Valid,Standard,
+913973,500@8,Other hospital outpatient units/surgery centers,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+1620605,LA28855-7,30,Answer,Meas Value,LOINC,Valid,Standard,
+1621173,LA32148-1,Repeat test,Answer,Meas Value,LOINC,Valid,Standard,
+1621268,LA31716-6,6 months,Answer,Meas Value,LOINC,Valid,Standard,
+1989804,LA15170-6,M,Answer,Meas Value,LOINC,Valid,Standard,
+4132135,2667000,Absent,Qualifier Value,Meas Value,SNOMED,Valid,Standard,
+4188540,373067005,No,Qualifier Value,Meas Value,SNOMED,Valid,Standard,
+4219043,82334004,Indeterminate,Qualifier Value,Meas Value,SNOMED,Valid,Standard,
+21499068,LA15824-8,Diffuse,Answer,Meas Value,LOINC,Valid,Standard,
+35821513,100011-0,,Answer,Observation,UK Biobank,Valid,Standard,
+35821514,100012-0,,Answer,Observation,UK Biobank,Valid,Standard,
+35821515,100293-1,,Answer,Observation,UK Biobank,Valid,Standard,
+35821516,100314-0,,Answer,Observation,UK Biobank,Valid,Standard,
+35911170,lymphoma@2800@988,Not applicable: Information not collected for this schema,NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+35911212,floor_mouth@2862@988,"Not applicable: Information not collected for this case|(If this information is required by your standard setter, use of code 988 may result in an edit error.)",NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+35911723,rectum@2861@999,Unknown or no information|Not documented in patient record,NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+35912354,floor_mouth@2865@988,"Not applicable: Information not collected for this case|(If this information is required by your standard setter, use of code 988 may result in an edit error.)",NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+35912957,floor_mouth@2864@988,"Not applicable: Information not collected for this case|(If this information is required by your standard setter, use of code 988 may result in an edit error.)",NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+35913046,floor_mouth@2861@988,"Not applicable: Information not collected for this case|(If this information is required by your standard setter, use of code 988 may result in an edit error.)",NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+35913321,floor_mouth@2890@005,OBSOLETE DATA RETAINED V0200||Extracapsular extension present pathologically,NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+35913436,brain@2830@988,Not applicable: Information not collected for this schema,NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+35913490,rectum@2864@999,Unknown or no information|Not documented in patient record,NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+35913722,lymphoma@2900@999,Unknown or no information|Not documented in patient record,NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+35913867,floor_mouth@2863@988,"Not applicable: Information not collected for this case|(If this information is required by your standard setter, use of code 988 may result in an edit error.)",NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+35914158,cns_other@774@888,Not applicable: Information not collected for this schema,NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+35914479,lymphoma@2830@988,Not applicable: Information not collected for this schema,NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+35914804,lymphoma@2850@98,Not applicable: Information not collected for this schema,NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+35914966,brain@774@888,Not applicable: Information not collected for this schema,NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+35916035,rectum@2863@999,Unknown|Not documented in patient record,NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+35916314,1130@99,Unknown,NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+35919060,830@95,"No regional nodes removed, but aspiration or core biopsy of regional nodes performed",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35919074,880@p2,pT2,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35919081,880@p3,pT3,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35919088,910@1,I,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35919093,970@3B,IIIB,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35919098,890@p1,pN1,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35919149,950@c3,cN3,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35919152,890@p2B,pN2b,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35919154,910@4A,IVA,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35919249,910@2B,IIB,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35919265,880@p4A,pT4a,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35919321,960@c1A,cM1a,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35919447,910@4,IV,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35919474,950@c2B,cN2b,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35919523,940@pA,pTa,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35919573,880@pA,pTa,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35919637,890@p0,pN0,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35919638,950@c1,cN1,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35919644,440@6,B-Cell,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35919656,940@c2,cT2,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35919664,960@c1,cM1,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35919718,950@c1B,cN1b,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35919762,900@p1,pM1,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35919835,970@99,Stage Unknown,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35919862,880@pX,pTX,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35919890,970@0A,0a,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35920631,brain@2930@998,No histologic examination of primary site|Test not done (test not ordered and not performed),NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35920678,floor_mouth@2900@001,Level III lymph node(s) involved,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35921646,bladder@2850@00,No distant metastasis,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35922182,soft_tissue@2820@0,"Does not meet criteria for AJCC pathologic staging: | ||No surgical resection done. Evaluation based on physical examination, imaging examination, or other non-invasive clinical evidence. No autopsy evidence used.",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35922738,rectum@2910@000,,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35922927,brain@2920@998,No histologic examination of primary site|Test not done (test not ordered and not performed),NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35924157,rectum@2830@110,"Regional lymph nodes:| All sites:| Perirectal| Rectal, NOS| Rectosigmoid:| Paracolic/pericolic",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35924426,brain@2840@9,Not applicable for this schema,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35924982,rectum@2820@5,"Does not meet criteria for AJCC y-pathologic (yp) staging:||Surgical resection performed AFTER neoadjuvant therapy and tumor size/extension based on clinical evidence, unless the pathologic evidence at surgery (AFTER neoadjuvant) is more extensive (see c",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35925085,lung@2820@0,"Does not meet criteria for AJCC pathologic staging:||Evaluation based on physical examination, imaging examination, or other non-invasive clinical evidence. No surgical resection done.",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35925297,brain@772@050,Benign or borderline brain tumor,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35925473,rectum@2860@0,"Does not meet criteria for AJCC pathologic staging of distant metastasis: ||Evaluation of distant metastasis based on physical examination, imaging examination, and/or other non-invasive clinical evidence. No microscopic examination of metastatic specime",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35925484,pancreas_head@2840@0,"Does not meet criteria for AJCC pathologic staging:| |No regional lymph nodes removed for examination. Evidence based on physical examination, imaging examination, or other non-invasive clinical evidence. No autopsy evidence used.",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35925907,pancreas_head@2830@110,"Regional lymph nodes:| Hepatic| Lateral aortic (lumbar)| Peripancreatic, NOS:| Anterior, NOS:| Anterior pancreaticoduodenal| Anterior proximal mesenteric| Pyloric| Inferior to the head and body of pancreas| Posterior, NOS:| Pericholedochal (common bile d",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35925912,soft_tissue@2830@800,"Lymph nodes, NOS",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35926113,brain@2850@00,No distant metastasis,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35926910,brain@776@00,No distant metastasis|Unknown if distant metastasis,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35927093,brain@2860@9,Not applicable for this schema,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35927137,brain@2890@998,No histologic examination of primary site|Test not done (test not ordered and not performed),NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35927442,brain@2810@100,Supratentorial tumor confined to:| Cerebral hemisphere (cerebrum) or meninges of cerebral hemisphere (one side):| Frontal lobe| Occipital lobe| Parietal lobe| Temporal lobe,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35927517,bladder@2840@0,"Does not meet criteria for AJCC pathologic staging:| |No regional lymph nodes removed for examination. Evidence based on physical examination, imaging examination, or other non-invasive clinical evidence. No autopsy evidence used.",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35927755,rectum@2840@5,"Does not meet criteria for AJCC y-pathologic (yp) staging:||Regional lymph nodes removed for examination AFTER neoadjuvant therapy AND lymph node evaluation based on clinical evidence, unless the pathologic evidence at surgery (AFTER neoadjuvant) is more",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35927882,lymphoma@2820@0,Does not meet criteria for AJCC pathologic staging:||No staging laparotomy done. No autopsy evidence used,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35928054,brain@2820@9,Not applicable for this schema,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35928476,soft_tissue@2810@600,Adjacent organs/structures including bone/cartilage|(Including major vessel invasion),NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35929661,rectum@2930@991,"Margins clear, distance from tumor not stated|CRM negative, NOS",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35930445,lymphoma@2860@9,Not applicable for this site.,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35930570,cns_other@772@050,Benign or borderline brain,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35930828,bladder@2830@000,No regional lymph node involvement,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35931202,lymphoma@2810@800,Diffuse or disseminated (multifocal) involvement of ONE OR MORE extralymphatic organ(s)/site(s)|WITH OR WITHOUT associated lymph node involvement||Multifocal involvement of MORE THAN ONE extralymphatic organ/site||Involvement of isolated extralymphatic o,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35931272,lymphoma@2840@9,Not applicable for this site.,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35931552,lung@2850@23,Extension to: | Contralateral lung | Contralateral main stem bronchus |Separate tumor nodule(s) in contralateral lung|Pleural tumor foci or nodules on contralateral lung,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35931650,floor_mouth@2850@00,No distant metastasis,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35932576,lung@2810@100,Tumor confined to one lung|WITHOUT extension or conditions described in codes 200-800 |EXCLUDING primary in main stem bronchus|EXCLUDING superficial tumor as described in code 110,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35932948,lung@2890@998,No histologic examination of pleura to assess pleural layer invasion,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35933251,lung@2840@1,"Does not meet criteria for AJCC pathologic staging based on at least one of the following criteria:||No regional lymph nodes removed for examination. Evidence based on endoscopic examination, or other invasive techniques including surgical observation, w",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35933595,floor_mouth@2810@620,Deep (extrinsic) muscle of tongue:| Genioglossus| Geniohyoid| Hyoglossus| Mylohyoid| Palatoglossus| Styloglossus,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35933849,floor_mouth@2910@100,Level IV lymph node(s) involved,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35934219,lung@2830@600,"Contralateral/bilateral hilar (bronchopulmonary) (proximal lobar) (pulmonary root)|Contralateral/bilateral mediastinal |Scalene (inferior deep cervical), ipsilateral or contralateral|Supraclavicular (transverse cervical), ipsilateral or contralateral||St",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35934937,rectum@2862@000,None; no perineural invasion present,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35934961,floor_mouth@2930@000,"No involvement of any group: | Parapharyngeal lymph nodes | Parotid (preauricular, periparotid, and/or intraparotid) lymph nodes| Suboccipital/retroauricular lymph nodes",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35935090,bladder@2810@030,"Papillary:| Papillary transitional cell carcinoma, with inferred description of noninvasion|(See Note 2B)",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35935253,pancreas_head@2860@3,"Meets criteria for AJCC pathologic staging of distant metastasis:||Specimen from metastatic site microscopically positive WITHOUT pre-surgical systemic treatment or radiation |OR specimen from metastatic site microscopically positive, unknown if pre-surg",NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+35935949,lymphoma@2890@000,No B symptoms (asymptomatic),NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35936031,floor_mouth@2920@000,No involvement in Levels VI or VII or facial lymph nodes,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35936156,floor_mouth@2830@200,Multiple positive ipsilateral nodes listed in code 100,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35936266,brain@2861@030,"Radical, total, gross resection of tumor, lesion or mass in brain|(Less than half of lobe involved with tumor)",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35936332,pancreas_head@2810@540,"Blood vessel(s) (major):| Gastroduodenal artery| Hepatic artery| Pancreaticoduodenal artery| Portal vein| Superior mesenteric vein|Transverse colon, including hepatic flexure",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35936454,rectum@2810@400,"Extension through wall, NOS|Invasion through muscularis propria or muscularis, NOS|Non-peritonealized perirectal tissues invaded|Perimuscular tissue invaded|Subserosal tissue/(sub)serosal fat invaded|Transmural, NOS",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35937178,rectum@2850@00,No distant metastasis,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35937377,lung@2880@010,"Separate tumor nodules in ipsilateral lung, same lobe",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35937823,soft_tissue@2850@00,No distant metastasis,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35938075,pancreas_head@2850@50,40 + 10||Distant metastasis plus distant lymph nodes in code 10,NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+35938245,brain@2910@998,No histologic examination of primary site|Test not done (test not ordered and not performed),NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35938348,rectum@2890@020,"Metastases in 2-3 regional nodes, determined clinically||Stated as clinical N1b",NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+35938424,cns_other@776@00,No distant metastasis|Unknown if distant metastasis,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35938467,rectum@2880@020,Negative/normal; within normal limits,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35938623,brain@2862@002,Multifocal tumor |Tumor described as multifocal or multicentric,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35938816,brain@2900@090,KPS 90,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35940272,446@88,Information on multiple tumors not collected/not applicable for this site,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35940450,759@1,Localized,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35940500,930@10,"Physician, NOS, or physician type not specified in codes 11-15",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35940619,760@1,Localized,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35940659,759@4,"Regional, direct extension and regional lymph nodes",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35940997,410@5,Paired site: midline tumor,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35941014,410@2,Left: origin of primary,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35941131,480@A,"ICD-O, Third Edition, plus WHO new terms used for conditions, effective 1/1/2018**",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35941270,444@88,,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35941311,760@7,Distant,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35941348,930@14,Pathologist,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35941506,444@40,Multiple invasive,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35941808,470@A,"ICD-O, Third Edition, plus WHO new terms used for conditions, effective 1/1/2018**",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35941812,450@9,Other,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35941904,990@30,Cancer registrar and physician,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35941975,990@20,Cancer registrar,NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35942561,soft_tissue@2910@988,"Not applicable: Information not collected for this case|(May include cases converted from code 888 used in CSv1 for """"Not applicable"""" or when the item was not collected. If this item is required to derive T, N, M, or any stage, use of code 988 may resul",NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+35942672,soft_tissue@2890@988,"Not applicable: Information not collected for this case|(May include cases converted from code 888 used in CSv1 for """"Not applicable"""" or when the item was not collected. If this item is required to derive T, N, M, or any stage, use of code 988 may resul",NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+35942681,lymphoma@2910@988,"Not applicable: Information not collected for this case|(May include cases converted from code 888 used in CSv1 for """"Not applicable"""" or when the item was not collected. If this item is required to derive T, N, M, or any stage, use of code 988 may resul",NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+35942705,soft_tissue@2900@988,"Not applicable: Information not collected for this case|(May include cases converted from code 888 used in CSv1 for """"Not applicable"""" or when the item was not collected. If this item is required to derive T, N, M, or any stage, use of code 988 may resul",NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+35942735,bladder@2880@988,"Not applicable: Information not collected for this case|(May include cases converted from code 888 used in CSv1 for """"Not applicable"""" or when the item was not collected. If this item is required to derive T, N, M, or any stage, use of code 988 may resul",NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+35942760,bladder@2890@988,"Not applicable: Information not collected for this case|(May include cases converted from code 888 used in CSv1 for """"Not applicable"""" or when the item was not collected. If this item is required to derive T, N, M, or any stage, use of code 988 may resul",NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+35942779,soft_tissue@2880@988,"Not applicable: Information not collected for this case|(May include cases converted from code 888 used in CSv1 for """"Not applicable"""" or when the item was not collected. If this item is required to derive T, N, M, or any stage, use of code 988 may resul",NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+35942790,bladder@2900@988,"Not applicable: Information not collected for this case|(May include cases converted from code 888 used in CSv1 for """"Not applicable"""" or when the item was not collected. If this item is required to derive T, N, M, or any stage, use of code 988 may resul",NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+35942804,lymphoma@2920@988,"Not applicable: Information not collected for this case|(May include cases converted from code 888 used in CSv1 for """"Not applicable"""" or when the item was not collected. If this item is required to derive T, N, M, or any stage, use of code 988 may resul",NAACCR Value,Meas Value,NAACCR,Valid,Non-standard,
+35942823,floor_mouth@2820@3,"Either criteria meets AJCC pathologic staging:||Surgical resection performed WITHOUT pre-surgical systemic treatment or radiation |OR surgical resection performed, unknown if pre-surgical systemic treatment or radiation performed|AND Evaluation based on",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35942880,soft_tissue@2860@0,"Does not meet criteria for AJCC pathologic staging of distant metastasis:| ||Evaluation of distant metastasis based on physical examination, imaging examination, and/or other non-invasive clinical evidence. No pathologic examination of metastatic tissue",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35942972,floor_mouth@2860@0,"Does not meet criteria for AJCC pathologic staging of distant metastasis:| ||Evaluation of distant metastasis based on physical examination, imaging examination, and/or other non-invasive clinical evidence. No pathologic examination of metastatic tissue",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35943115,floor_mouth@2840@3,"Meets criteria for AJCC pathologic staging based on at least one of the following criteria:| |Any microscopic assessment of regional nodes (including FNA, incisional core needle bx, excisional bx, sentinel node bx or node resection), WITH removal of the",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35943143,lung@2860@0,"Does not meet criteria for AJCC pathologic staging of distant metastasis:| ||Evaluation of distant metastasis based on physical examination, imaging examination, and/or other non-invasive clinical evidence. No pathologic examination of metastatic tissue",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35943159,bladder@2860@0,"Does not meet criteria for AJCC pathologic staging of distant metastasis:| ||Evaluation of distant metastasis based on physical examination, imaging examination, and/or other non-invasive clinical evidence. No pathologic examination of metastatic tissue",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35943255,soft_tissue@2840@3,"Meets criteria for AJCC pathologic staging based on at least one of the following criteria:| |Any microscopic assessment of regional nodes (including FNA, incisional core needle bx, excisional bx, sentinel node bx or node resection), WITH removal of the",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35943562,pancreas_head@2820@1,"Does not meet criteria for AJCC pathologic staging:||No surgical resection done. Evaluation based on endoscopic examination, diagnostic biopsy, including fine needle aspiration biopsy, or other invasive techniques, including surgical observation without",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+35943595,bladder@2820@1,"Does not meet criteria for AJCC pathologic staging:|||No surgical resection done. Evaluation based on endoscopic examination, diagnostic biopsy, including fine needle aspiration biopsy, or other invasive techniques including surgical observation without",NAACCR Value,Meas Value,NAACCR,Valid,Standard,
+36210780,LA26037-4,Colectomy,Answer,Meas Value,LOINC,Valid,Standard,
+36303220,LA19244-5,100,Answer,Meas Value,LOINC,Valid,Standard,
+36308174,LA19341-9,Streptococcus pneumoniae,Answer,Meas Value,LOINC,Valid,Standard,
+36308749,LA15823-0,Nucleolar,Answer,Meas Value,LOINC,Valid,Standard,
+36308808,LA24608-4,20/40,Answer,Meas Value,LOINC,Valid,Standard,
+36308886,LA28708-8,Differential,Answer,Meas Value,LOINC,Valid,Standard,
+36309070,LA24610-0,20/50,Answer,Meas Value,LOINC,Valid,Standard,
+36309122,LA28286-5,Lymphocytes,Answer,Meas Value,LOINC,Valid,Standard,
+36309278,LA24612-6,20/70,Answer,Meas Value,LOINC,Valid,Standard,
+36309334,LA24336-2,Bronchoscopy,Answer,Meas Value,LOINC,Valid,Standard,
+36311174,LA24621-7,Abnormal ECG,Answer,Meas Value,LOINC,Valid,Standard,
+36311252,LA19735-2,Milky,Answer,Meas Value,LOINC,Valid,Standard,
+45876295,LA4439-1,Within Normal Limits,Answer,Meas Value,LOINC,Valid,Standard,
+45876384,LA9193-9,High,Answer,Meas Value,LOINC,Valid,Standard,
+45876955,LA13503-0,E,Answer,Meas Value,LOINC,Valid,Standard,
+45877009,LA16982-3,Asthma,Answer,Meas Value,LOINC,Valid,Standard,
+45877024,LA15553-3,Blue,Answer,Meas Value,LOINC,Valid,Standard,
+45877040,LA17766-9,Symptomatic,Answer,Meas Value,LOINC,Valid,Standard,
+45877189,LA18244-6,S3,Answer,Meas Value,LOINC,Valid,Standard,
+45878117,LA18969-8,Anemia,Answer,Meas Value,LOINC,Valid,Standard,
+45878254,LA10138-8,6,Answer,Meas Value,LOINC,Valid,Standard,
+45878303,LA6112-2,1,Answer,Meas Value,LOINC,Valid,Standard,
+45878305,LA6114-8,3,Answer,Meas Value,LOINC,Valid,Standard,
+45878323,LA3814-6,Illinois,Answer,Meas Value,LOINC,Valid,Standard,
+45878730,LA10137-0,5,Answer,Meas Value,LOINC,Valid,Standard,
+45878755,LA16917-9,NPO,Answer,Meas Value,LOINC,Valid,Standard,
+45878785,LA4340-1,Spine,Answer,Meas Value,LOINC,Valid,Standard,
+45878866,LA7435-6,Fever,Answer,Meas Value,LOINC,Valid,Standard,
+45879152,LA14495-8,True,Answer,Meas Value,LOINC,Valid,Standard,
+45881081,LA18284-2,Renal,Answer,Meas Value,LOINC,Valid,Standard,
+45881525,LA9263-0,Nasal,Answer,Meas Value,LOINC,Valid,Standard,
+45881858,LA4579-4,Lung,Answer,Meas Value,LOINC,Valid,Standard,
+45882790,LA10527-2,Osteoporosis,Answer,Meas Value,LOINC,Valid,Standard,
+45882868,LA7465-3,Pneumonia,Answer,Meas Value,LOINC,Valid,Standard,
+45884019,LA11009-0,Same,Answer,Meas Value,LOINC,Valid,Standard,
+45884687,LA15250-6,70%,Answer,Meas Value,LOINC,Valid,Standard,
+46237467,LA18005-1,Nasopharyngeal,Answer,Meas Value,LOINC,Valid,Standard,
+46237528,LA22010-5,MA,Answer,Meas Value,LOINC,Valid,Standard,
+46237836,LA19340-1,Pseudomonas aeruginosa,Answer,Meas Value,LOINC,Valid,Standard,
+46237892,LA21336-5,Klebsiella pneumoniae,Answer,Meas Value,LOINC,Valid,Standard,

@@ -8,7 +8,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 581379,OMOP4822042,Inpatient Critical Care Facility,Visit,Visit,CMS Place of Service,Valid,Standard,637857
 581385,OMOP4822036,Observation Room,Visit,Visit,CMS Place of Service,Valid,Standard,324454
 32037,OMOP4822460,Intensive Care,Visit,Visit,Visit,Valid,Standard,249039
-0,No matching concept,No matching concept,Undefined,Metadata,None,Valid,Non-standard,200812
+0,No matching concept,No matching concept,Undefined,Metadata,,Valid,Non-standard,200812
 38004259,261QR1100X,Ambulatory Research Clinic / Center,Visit,Visit,NUCC,Valid,Standard,133661
 38004228,261QI0500X,Ambulatory Infusion Therapy Clinic / Center,Visit,Visit,NUCC,Valid,Standard,132070
 38004207,261Q00000X,Ambulatory Clinic / Center,Visit,Visit,NUCC,Valid,Standard,103765
@@ -24,3 +24,17 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 38004251,261QR0206X,Ambulatory Mammography Clinic / Center,Visit,Visit,NUCC,Valid,Standard,1821
 8971,51,Inpatient Psychiatric Facility,Visit,Visit,CMS Place of Service,Valid,Standard,249
 38004311,315D00000X,Inpatient Hospice,Visit,Visit,NUCC,Valid,Standard,85
+38004515,A0,Hospital,Visit,Visit,Medicare Specialty,Valid,Standard,
+32592,S,Born inside this hospital,UB04 Point of Origin,Visit,UB04 Point of Origin,Valid,Non-standard,
+32220,30,Still patient,UB04 Pt dis status,Visit,UB04 Pt dis status,Valid,Non-standard,
+32197,6,Transfer from another Healthcare facility,UB04 Point of Origin,Visit,UB04 Point of Origin,Valid,Non-standard,
+8863,31,Skilled Nursing Facility,Visit,Visit,CMS Place of Service,Valid,Standard,
+38003619,09,Prison / Correctional Facility,Visit,Visit,CMS Place of Service,Valid,Standard,
+32199,9,Information not available,UB04 Point of Origin,Visit,UB04 Point of Origin,Valid,Non-standard,
+32589,P,Sick Baby,UB04 Point of Origin,Visit,UB04 Point of Origin,Valid,Non-standard,
+44806889,814161000000106,Ambulatory care,Procedure,Observation,SNOMED,Valid,Standard,
+4214577,394656005,Inpatient care,Procedure,Observation,SNOMED,Valid,Standard,
+42690664,1064901000000108,Urgent level emergency care,Procedure,Observation,SNOMED,Valid,Standard,
+44818518,OMOP4822464,Visit derived from EHR record,Visit Type,Type Concept,Visit Type,Valid,Non-standard,
+32817,OMOP4976890,EHR,Type Concept,Type Concept,Type Concept,Valid,Standard,
+32827,OMOP4976900,EHR encounter record,Type Concept,Type Concept,Type Concept,Valid,Standard,

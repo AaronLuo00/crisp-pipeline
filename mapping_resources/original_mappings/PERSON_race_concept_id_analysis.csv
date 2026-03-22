@@ -3,7 +3,7 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 8516,8516,Black or African American,Race,Race,Race,Valid,Standard,74382
 8552,8552,Unknown,Race,Race,Race,Valid,Standard,16337
 8515,8515,Asian,Race,Race,Race,Valid,Standard,11227
-0,0,No matching concept,Race,Metadata,None,Valid,Standard,9680
+0,0,No matching concept,Race,Metadata,,Valid,Standard,9680
 4190758,4190758,Multiple race,Race,Race,Race,Valid,Standard,2732
 3213494,3213494,Other Race,Race,Race,Race,Valid,Standard,2194
 4188159,4188159,Refuse to answer,Race,Race,Race,Valid,Standard,2036
@@ -19,3 +19,4 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 38003592,38003592,Vietnamese,Race,Race,Race,Valid,Standard,25
 38003585,38003585,Cambodian,Race,Race,Race,Valid,Standard,24
 38003584,38003584,Laotian,Race,Race,Race,Valid,Standard,13
+44814660,Race-07,Refuse to answer,Race,Observation,PCORNet,Valid,Non-standard,

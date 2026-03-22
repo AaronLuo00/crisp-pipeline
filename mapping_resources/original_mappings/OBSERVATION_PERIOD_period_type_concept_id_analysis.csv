@@ -1,0 +1,3 @@
+Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
+44814725,OMOP4822290,Period inferred by algorithm,Obs Period Type,Type Concept,Obs Period Type,Valid,Non-standard,
+44814724,OMOP4822291,Period covering healthcare encounters,Obs Period Type,Type Concept,Obs Period Type,Valid,Non-standard,

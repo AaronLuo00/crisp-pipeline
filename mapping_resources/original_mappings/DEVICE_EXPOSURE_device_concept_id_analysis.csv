@@ -728,3 +728,5 @@ Id,Code,Name,Standard Class,Domain,Vocab,Validity,Concept,Frequency
 2614782,A4356,"External urethral clamp or compression device (not to be used for catheter clamp), each",HCPCS,Device,HCPCS,Valid,Standard,1
 2614749,A4313,"Insertion tray without drainage bag with indwelling catheter, foley type, three-way, for continuous irrigation",HCPCS,Device,HCPCS,Valid,Standard,1
 1314557,L1852,"Knee orthosis (ko), double upright, thigh and calf, with adjustable flexion and extension joint (unicentric or polycentric), medial-lateral and rotation control, with or without varus/valgus adjustment, prefabricated, off-the-shelf",HCPCS,Device,HCPCS,Valid,Standard,1
+44818707,OMOP4822235,EHR Detail,Device Type,Type Concept,Device Type,Valid,Non-standard,
+32817,OMOP4976890,EHR,Type Concept,Type Concept,Type Concept,Valid,Standard,
