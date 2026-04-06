@@ -5,9 +5,18 @@ Generate patient trajectory markdown files for all patients.
 This module creates human-readable markdown summaries of patient medical histories,
 organized chronologically by visits and including all medical events.
 Output files are saved as patient_trajectory.md in each patient's folder.
+
+Optional filtering:
+- --keep-tables limits which clinical content tables are kept in the output.
+- The values should match original table names (without .csv), e.g.
+  CONDITION_OCCURRENCE, DRUG_EXPOSURE, MEASUREMENT.
+- If --keep-tables is omitted, all filterable clinical content tables are used.
+- PERSON, VISIT_OCCURRENCE, VISIT_DETAIL, and ICU_EPISODES are always included
+  and are not controlled by --keep-tables.
 """
 from __future__ import annotations
 
+import argparse
 import csv
 import json
 import logging
@@ -48,6 +57,24 @@ output_dir.mkdir(parents=True, exist_ok=True)
 # Parallel processing configuration
 MAX_WORKERS = max(1, mp.cpu_count() - 2)  # Reserve 2 cores for system
 
+ALWAYS_INCLUDED_TABLES = {
+    "PERSON",
+    "VISIT_OCCURRENCE",
+    "VISIT_DETAIL",
+    "ICU_EPISODES",
+}
+FILTERABLE_TABLES = {
+    "CONDITION_OCCURRENCE",
+    "CONDITION_ERA",
+    "DRUG_EXPOSURE",
+    "DRUG_ERA",
+    "MEASUREMENT",
+    "OBSERVATION",
+    "PROCEDURE_OCCURRENCE",
+    "DEVICE_EXPOSURE",
+    "SPECIMEN",
+}
+
 
 @dataclass
 class Event:
@@ -56,6 +83,7 @@ class Event:
     description: str
     visit_occurrence_id: Optional[str]
     visit_detail_id: Optional[str]
+    source_table: str
 
 
 @dataclass
@@ -332,11 +360,16 @@ def measurement_value_string(row: Dict[str, str]) -> Optional[str]:
 
 
 def collect_events_for_patient(
-    patient_dir: Path, mappings: Dict[str, Dict[int, str]]
+    patient_dir: Path,
+    mappings: Dict[str, Dict[int, str]],
+    keep_tables: Optional[set[str]] = None,
 ) -> Tuple[List[Event], List[str], List[Dict[str, str]]]:
     """Collect all medical events for a patient."""
     events: List[Event] = []
     no_timestamp: List[str] = []
+
+    if keep_tables is None:
+        keep_tables = set(FILTERABLE_TABLES)
 
     def add_event(
         ts: Optional[datetime],
@@ -344,6 +377,7 @@ def collect_events_for_patient(
         value: Optional[str],
         visit_occurrence_id: Optional[str],
         visit_detail_id: Optional[str],
+        source_table: str,
     ) -> None:
         value_text = str(value).strip() if value is not None else None
         if not value_text:
@@ -353,7 +387,7 @@ def collect_events_for_patient(
         else:
             text = f"{concept}, {value_text}"
         if ts:
-            events.append(Event(ts, text, visit_occurrence_id, visit_detail_id))
+            events.append(Event(ts, text, visit_occurrence_id, visit_detail_id, source_table))
         else:
             no_timestamp.append(text)
 
@@ -364,7 +398,10 @@ def collect_events_for_patient(
         mapping_key: str,
         fallback_label: str,
         value_fn,
+        source_table: str,
     ) -> None:
+        if source_table not in ALWAYS_INCLUDED_TABLES and source_table not in keep_tables:
+            return
         mapping = mappings.get(mapping_key, {})
         for row in rows:
             ts = first_timestamp(row, timestamp_cols)
@@ -372,7 +409,7 @@ def collect_events_for_patient(
             value = value_fn(row)
             visit_occurrence_id = normalize_id(row.get("visit_occurrence_id"))
             visit_detail_id = normalize_id(row.get("visit_detail_id"))
-            add_event(ts, concept, value, visit_occurrence_id, visit_detail_id)
+            add_event(ts, concept, value, visit_occurrence_id, visit_detail_id, source_table)
 
     # Read all relevant tables
     visits = read_csv_rows(patient_dir / "VISIT_OCCURRENCE.csv")
@@ -405,6 +442,7 @@ def collect_events_for_patient(
                 else None,
             ]
         ),
+        "VISIT_OCCURRENCE",
     )
 
     # Process visit details
@@ -422,6 +460,7 @@ def collect_events_for_patient(
                 else None,
             ]
         ),
+        "VISIT_DETAIL",
     )
 
     # Process conditions (diagnoses don't have a numeric value — the concept name IS the value)
@@ -432,6 +471,7 @@ def collect_events_for_patient(
         "condition",
         "condition",
         lambda row: "",
+        "CONDITION_OCCURRENCE",
     )
 
     # Process condition eras
@@ -451,6 +491,7 @@ def collect_events_for_patient(
                 else None,
             ]
         ),
+        "CONDITION_ERA",
     )
 
     # Process drugs
@@ -468,6 +509,7 @@ def collect_events_for_patient(
                 else None,
             ]
         ),
+        "DRUG_EXPOSURE",
     )
 
     # Process drug eras
@@ -487,6 +529,7 @@ def collect_events_for_patient(
                 else None,
             ]
         ),
+        "DRUG_ERA",
     )
 
     # Process measurements
@@ -497,6 +540,7 @@ def collect_events_for_patient(
         "measurement",
         "measurement",
         lambda row: measurement_value_string(row),
+        "MEASUREMENT",
     )
 
     # Process observations (include both numeric and non-numeric observations)
@@ -512,6 +556,7 @@ def collect_events_for_patient(
             and str(row.get("value_as_number")).strip() != ""
             else ""
         ),
+        "OBSERVATION",
     )
 
     # Process procedures
@@ -524,6 +569,7 @@ def collect_events_for_patient(
         lambda row: (
             f"quantity {row.get('quantity')}" if row.get("quantity") else ""
         ),
+        "PROCEDURE_OCCURRENCE",
     )
 
     # Process devices
@@ -536,6 +582,7 @@ def collect_events_for_patient(
         lambda row: (
             f"quantity {row.get('quantity')}" if row.get("quantity") else ""
         ),
+        "DEVICE_EXPOSURE",
     )
 
     # Process specimens
@@ -548,6 +595,7 @@ def collect_events_for_patient(
         lambda row: (
             f"quantity {row.get('quantity')}" if row.get("quantity") else ""
         ),
+        "SPECIMEN",
     )
 
     # Process ICU episodes
@@ -571,6 +619,7 @@ def collect_events_for_patient(
             value,
             visit_occurrence_id=None,
             visit_detail_id=None,
+            source_table="ICU_EPISODES",
         )
 
     events.sort(key=lambda event: event.timestamp or datetime.min)
@@ -625,6 +674,7 @@ def organize_events_by_visit_details(
                     checkpoint_description,
                     visit_occurrence_id,
                     None,
+                    "VISIT_DETAIL",
                 )
             )
             continue
@@ -793,10 +843,11 @@ def render_patient_trajectory(
 # Parallel Processing Worker
 # ============================================================================
 
-def _init_trajectory_worker(shared_mappings):
-    """Initializer for trajectory worker processes — loads mappings once per worker."""
-    global _WORKER_MAPPINGS
+def _init_trajectory_worker(shared_mappings, keep_tables):
+    """Initializer for trajectory worker processes — loads shared config once per worker."""
+    global _WORKER_MAPPINGS, _WORKER_KEEP_TABLES
     _WORKER_MAPPINGS = shared_mappings
+    _WORKER_KEEP_TABLES = keep_tables
 
 
 def process_patient_worker(patient_dir: Path) -> Tuple[str, bool, Optional[str]]:
@@ -806,11 +857,14 @@ def process_patient_worker(patient_dir: Path) -> Tuple[str, bool, Optional[str]]
     pickling mappings for every task submission (which would be 500K+ copies).
     """
     mappings = _WORKER_MAPPINGS
+    keep_tables = _WORKER_KEEP_TABLES
     patient_id = patient_dir.name
 
     try:
         # Collect events
-        events, no_ts, visit_details = collect_events_for_patient(patient_dir, mappings)
+        events, no_ts, visit_details = collect_events_for_patient(
+            patient_dir, mappings, keep_tables=keep_tables
+        )
 
         # Organize by visits
         visit_sections, overflow_events = organize_events_by_visit_details(
@@ -846,8 +900,9 @@ def process_patient_worker(patient_dir: Path) -> Tuple[str, bool, Optional[str]]
 class TrajectoryGenerator:
     """Main class for generating patient trajectories."""
 
-    def __init__(self):
+    def __init__(self, keep_tables: Optional[set[str]] = None):
         self.mappings = None
+        self.keep_tables = set(FILTERABLE_TABLES) if keep_tables is None else keep_tables
         self.stats = {
             "total_patients": 0,
             "successful": 0,
@@ -880,7 +935,7 @@ class TrajectoryGenerator:
         with ProcessPoolExecutor(
             max_workers=MAX_WORKERS,
             initializer=_init_trajectory_worker,
-            initargs=(self.mappings,)
+            initargs=(self.mappings, self.keep_tables)
         ) as executor:
             futures = {executor.submit(process_patient_worker, patient_dir): patient_dir
                       for patient_dir in patient_dirs}
@@ -916,6 +971,16 @@ class TrajectoryGenerator:
             f.write("PATIENT TRAJECTORY GENERATION REPORT\n")
             f.write("=" * 80 + "\n\n")
             f.write(f"Generated: {datetime.now().isoformat()}\n\n")
+            f.write(
+                "Always included tables: "
+                + ", ".join(sorted(ALWAYS_INCLUDED_TABLES))
+                + "\n"
+            )
+            f.write(
+                "Selected filterable tables: "
+                + ", ".join(sorted(self.keep_tables))
+                + "\n\n"
+            )
 
             f.write("SUMMARY\n")
             f.write("-" * 80 + "\n")
@@ -932,8 +997,53 @@ class TrajectoryGenerator:
         logging.info(f"Report saved to {report_path}")
 
 
+def parse_keep_tables_arg(raw_keep_tables: Optional[str]) -> set[str]:
+    """Parse --keep-tables into a validated set of original table names."""
+    if not raw_keep_tables or not raw_keep_tables.strip():
+        return set(FILTERABLE_TABLES)
+
+    parsed = {
+        item.strip().upper()
+        for item in raw_keep_tables.split(',')
+        if item.strip()
+    }
+    invalid = sorted(parsed - FILTERABLE_TABLES)
+    if invalid:
+        valid = ", ".join(sorted(FILTERABLE_TABLES))
+        raise ValueError(
+            "Invalid --keep-tables value(s): "
+            f"{', '.join(invalid)}. Valid options: {valid}"
+        )
+    return parsed
+
+
+def build_arg_parser() -> argparse.ArgumentParser:
+    """Build CLI argument parser."""
+    parser = argparse.ArgumentParser(
+        description=(
+            "Generate patient trajectory markdown files. PERSON, "
+            "VISIT_OCCURRENCE, VISIT_DETAIL, and ICU_EPISODES are always included."
+        )
+    )
+    parser.add_argument(
+        "--keep-tables",
+        type=str,
+        default=None,
+        help=(
+            "Comma-separated original table names to keep for clinical content. "
+            "If omitted, all filterable tables are used. Valid options: "
+            + ", ".join(sorted(FILTERABLE_TABLES))
+        ),
+    )
+    return parser
+
+
 def main():
     """Main execution function."""
+    parser = build_arg_parser()
+    args = parser.parse_args()
+    keep_tables = parse_keep_tables_arg(args.keep_tables)
+
     # Setup logging
     log_dir = output_dir / "logs"
     log_dir.mkdir(parents=True, exist_ok=True)
@@ -955,9 +1065,17 @@ def main():
     logging.info(f"Mapping directory: {mapping_dir}")
     logging.info(f"Output directory: {output_dir}")
     logging.info(f"Max workers: {MAX_WORKERS}")
+    logging.info(
+        "Always included tables: %s",
+        ", ".join(sorted(ALWAYS_INCLUDED_TABLES)),
+    )
+    logging.info(
+        "Selected filterable tables: %s",
+        ", ".join(sorted(keep_tables)),
+    )
 
     # Run generation
-    generator = TrajectoryGenerator()
+    generator = TrajectoryGenerator(keep_tables=keep_tables)
     generator.load_concept_mappings()
     generator.generate_all_trajectories()
     generator.save_report()
