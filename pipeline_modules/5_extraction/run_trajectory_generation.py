@@ -193,8 +193,14 @@ def load_mappings(mapping_root: Path) -> Dict[str, Dict[int, str]]:
         "condition": load_mapping_csv(
             mapping_root / "CONDITION_OCCURRENCE_condition_concept_mapping.csv"
         ),
+        "condition_era": load_mapping_csv(
+            mapping_root / "CONDITION_ERA_condition_concept_mapping.csv"
+        ),
         "drug": load_mapping_csv(
             mapping_root / "DRUG_EXPOSURE_drug_concept_mapping.csv"
+        ),
+        "drug_era": load_mapping_csv(
+            mapping_root / "DRUG_ERA_drug_concept_mapping.csv"
         ),
         "measurement": load_mapping_csv(
             mapping_root / "MEASUREMENT_concept_mapping.csv"
@@ -207,6 +213,9 @@ def load_mappings(mapping_root: Path) -> Dict[str, Dict[int, str]]:
         ),
         "device": load_mapping_csv(
             mapping_root / "DEVICE_EXPOSURE_concept_mapping.csv"
+        ),
+        "specimen": load_mapping_csv(
+            mapping_root / "SPECIMEN_specimen_concept_mapping.csv"
         ),
         "gender": load_mapping_csv(
             mapping_root / "PERSON_gender_concept_mapping.csv"
@@ -337,7 +346,12 @@ def collect_events_for_patient(
         visit_detail_id: Optional[str],
     ) -> None:
         value_text = str(value).strip() if value is not None else None
-        text = f"{concept} (No Value)" if not value_text else f"{concept}, {value_text}"
+        if not value_text:
+            text = f"{concept} (No Value)"
+        elif value_text.startswith("end time:"):
+            text = f"{concept} (No Value) ({value_text})"
+        else:
+            text = f"{concept}, {value_text}"
         if ts:
             events.append(Event(ts, text, visit_occurrence_id, visit_detail_id))
         else:
@@ -364,11 +378,14 @@ def collect_events_for_patient(
     visits = read_csv_rows(patient_dir / "VISIT_OCCURRENCE.csv")
     visit_details = read_csv_rows(patient_dir / "VISIT_DETAIL.csv")
     conditions = read_csv_rows(patient_dir / "CONDITION_OCCURRENCE.csv")
+    condition_eras = read_csv_rows(patient_dir / "CONDITION_ERA.csv")
     drugs = read_csv_rows(patient_dir / "DRUG_EXPOSURE.csv")
+    drug_eras = read_csv_rows(patient_dir / "DRUG_ERA.csv")
     measurements = read_csv_rows(patient_dir / "MEASUREMENT.csv")
     observations = read_csv_rows(patient_dir / "OBSERVATION.csv")
     procedures = read_csv_rows(patient_dir / "PROCEDURE_OCCURRENCE.csv")
     devices = read_csv_rows(patient_dir / "DEVICE_EXPOSURE.csv")
+    specimens = read_csv_rows(patient_dir / "SPECIMEN.csv")
     icu_episodes = read_csv_rows(patient_dir / "icu_episodes.csv")
 
     # Process visits
@@ -417,6 +434,25 @@ def collect_events_for_patient(
         lambda row: "",
     )
 
+    # Process condition eras
+    process_table(
+        condition_eras,
+        ("condition_era_start_date",),
+        "condition_concept_id",
+        "condition_era",
+        "condition",
+        lambda row: format_parts(
+            [
+                f"condition occurrence count: {row.get('condition_occurrence_count')}"
+                if row.get("condition_occurrence_count")
+                else None,
+                f"end time: {row.get('condition_era_end_date')}"
+                if row.get("condition_era_end_date")
+                else None,
+            ]
+        ),
+    )
+
     # Process drugs
     process_table(
         drugs,
@@ -429,6 +465,25 @@ def collect_events_for_patient(
                 f"quantity {row.get('quantity')}" if row.get("quantity") else None,
                 f"days supplied {row.get('days_supply')}"
                 if row.get("days_supply")
+                else None,
+            ]
+        ),
+    )
+
+    # Process drug eras
+    process_table(
+        drug_eras,
+        ("drug_era_start_date",),
+        "drug_concept_id",
+        "drug_era",
+        "drug",
+        lambda row: format_parts(
+            [
+                f"drug exposure count: {row.get('drug_exposure_count')}"
+                if row.get("drug_exposure_count")
+                else None,
+                f"end time: {row.get('drug_era_end_date')}"
+                if row.get("drug_era_end_date")
                 else None,
             ]
         ),
@@ -478,6 +533,18 @@ def collect_events_for_patient(
         "device_concept_id",
         "device",
         "device",
+        lambda row: (
+            f"quantity {row.get('quantity')}" if row.get("quantity") else ""
+        ),
+    )
+
+    # Process specimens
+    process_table(
+        specimens,
+        ("specimen_datetime", "specimen_date"),
+        "specimen_concept_id",
+        "specimen",
+        "specimen",
         lambda row: (
             f"quantity {row.get('quantity')}" if row.get("quantity") else ""
         ),
