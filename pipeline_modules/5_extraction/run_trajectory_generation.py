@@ -11,8 +11,12 @@ Optional filtering:
 - The values should match original table names (without .csv), e.g.
   CONDITION_OCCURRENCE, DRUG_EXPOSURE, MEASUREMENT.
 - If --keep-tables is omitted, all filterable clinical content tables are used.
+- --keep-keywords keeps only clinical content events whose rendered event text
+  matches at least one keyword (case-insensitive substring match).
+- If both --keep-tables and --keep-keywords are provided, both filters apply
+  (AND between filters, OR within each filter list).
 - PERSON, VISIT_OCCURRENCE, VISIT_DETAIL, and ICU_EPISODES are always included
-  and are not controlled by --keep-tables.
+  and are not controlled by these filters.
 """
 from __future__ import annotations
 
@@ -363,6 +367,7 @@ def collect_events_for_patient(
     patient_dir: Path,
     mappings: Dict[str, Dict[int, str]],
     keep_tables: Optional[set[str]] = None,
+    keep_keywords: Optional[set[str]] = None,
 ) -> Tuple[List[Event], List[str], List[Dict[str, str]]]:
     """Collect all medical events for a patient."""
     events: List[Event] = []
@@ -370,6 +375,10 @@ def collect_events_for_patient(
 
     if keep_tables is None:
         keep_tables = set(FILTERABLE_TABLES)
+    if keep_keywords is not None:
+        keep_keywords = {kw.lower() for kw in keep_keywords if kw.strip()}
+        if not keep_keywords:
+            keep_keywords = None
 
     def add_event(
         ts: Optional[datetime],
@@ -386,6 +395,10 @@ def collect_events_for_patient(
             text = f"{concept} (No Value) ({value_text})"
         else:
             text = f"{concept}, {value_text}"
+        if source_table not in ALWAYS_INCLUDED_TABLES and keep_keywords is not None:
+            haystack = text.lower()
+            if not any(keyword in haystack for keyword in keep_keywords):
+                return
         if ts:
             events.append(Event(ts, text, visit_occurrence_id, visit_detail_id, source_table))
         else:
@@ -843,11 +856,12 @@ def render_patient_trajectory(
 # Parallel Processing Worker
 # ============================================================================
 
-def _init_trajectory_worker(shared_mappings, keep_tables):
+def _init_trajectory_worker(shared_mappings, keep_tables, keep_keywords):
     """Initializer for trajectory worker processes — loads shared config once per worker."""
-    global _WORKER_MAPPINGS, _WORKER_KEEP_TABLES
+    global _WORKER_MAPPINGS, _WORKER_KEEP_TABLES, _WORKER_KEEP_KEYWORDS
     _WORKER_MAPPINGS = shared_mappings
     _WORKER_KEEP_TABLES = keep_tables
+    _WORKER_KEEP_KEYWORDS = keep_keywords
 
 
 def process_patient_worker(patient_dir: Path) -> Tuple[str, bool, Optional[str]]:
@@ -858,12 +872,13 @@ def process_patient_worker(patient_dir: Path) -> Tuple[str, bool, Optional[str]]
     """
     mappings = _WORKER_MAPPINGS
     keep_tables = _WORKER_KEEP_TABLES
+    keep_keywords = _WORKER_KEEP_KEYWORDS
     patient_id = patient_dir.name
 
     try:
         # Collect events
         events, no_ts, visit_details = collect_events_for_patient(
-            patient_dir, mappings, keep_tables=keep_tables
+            patient_dir, mappings, keep_tables=keep_tables, keep_keywords=keep_keywords
         )
 
         # Organize by visits
@@ -900,9 +915,14 @@ def process_patient_worker(patient_dir: Path) -> Tuple[str, bool, Optional[str]]
 class TrajectoryGenerator:
     """Main class for generating patient trajectories."""
 
-    def __init__(self, keep_tables: Optional[set[str]] = None):
+    def __init__(
+        self,
+        keep_tables: Optional[set[str]] = None,
+        keep_keywords: Optional[set[str]] = None,
+    ):
         self.mappings = None
         self.keep_tables = set(FILTERABLE_TABLES) if keep_tables is None else keep_tables
+        self.keep_keywords = keep_keywords
         self.stats = {
             "total_patients": 0,
             "successful": 0,
@@ -935,7 +955,7 @@ class TrajectoryGenerator:
         with ProcessPoolExecutor(
             max_workers=MAX_WORKERS,
             initializer=_init_trajectory_worker,
-            initargs=(self.mappings, self.keep_tables)
+            initargs=(self.mappings, self.keep_tables, self.keep_keywords)
         ) as executor:
             futures = {executor.submit(process_patient_worker, patient_dir): patient_dir
                       for patient_dir in patient_dirs}
@@ -979,6 +999,11 @@ class TrajectoryGenerator:
             f.write(
                 "Selected filterable tables: "
                 + ", ".join(sorted(self.keep_tables))
+                + "\n"
+            )
+            f.write(
+                "Selected keywords: "
+                + (", ".join(sorted(self.keep_keywords)) if self.keep_keywords else "<none>")
                 + "\n\n"
             )
 
@@ -1017,6 +1042,18 @@ def parse_keep_tables_arg(raw_keep_tables: Optional[str]) -> set[str]:
     return parsed
 
 
+def parse_keep_keywords_arg(raw_keep_keywords: Optional[str]) -> Optional[set[str]]:
+    """Parse --keep-keywords into a normalized keyword set."""
+    if not raw_keep_keywords or not raw_keep_keywords.strip():
+        return None
+    parsed = {
+        item.strip().lower()
+        for item in raw_keep_keywords.split(',')
+        if item.strip()
+    }
+    return parsed or None
+
+
 def build_arg_parser() -> argparse.ArgumentParser:
     """Build CLI argument parser."""
     parser = argparse.ArgumentParser(
@@ -1035,6 +1072,16 @@ def build_arg_parser() -> argparse.ArgumentParser:
             + ", ".join(sorted(FILTERABLE_TABLES))
         ),
     )
+    parser.add_argument(
+        "--keep-keywords",
+        type=str,
+        default=None,
+        help=(
+            "Comma-separated case-insensitive keywords. Clinical content events are kept "
+            "only if their rendered event text matches at least one keyword. If omitted, "
+            "no keyword filtering is applied."
+        ),
+    )
     return parser
 
 
@@ -1043,6 +1090,7 @@ def main():
     parser = build_arg_parser()
     args = parser.parse_args()
     keep_tables = parse_keep_tables_arg(args.keep_tables)
+    keep_keywords = parse_keep_keywords_arg(args.keep_keywords)
 
     # Setup logging
     log_dir = output_dir / "logs"
@@ -1073,9 +1121,13 @@ def main():
         "Selected filterable tables: %s",
         ", ".join(sorted(keep_tables)),
     )
+    logging.info(
+        "Selected keywords: %s",
+        ", ".join(sorted(keep_keywords)) if keep_keywords else "<none>",
+    )
 
     # Run generation
-    generator = TrajectoryGenerator(keep_tables=keep_tables)
+    generator = TrajectoryGenerator(keep_tables=keep_tables, keep_keywords=keep_keywords)
     generator.load_concept_mappings()
     generator.generate_all_trajectories()
     generator.save_report()
