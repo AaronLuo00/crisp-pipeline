@@ -39,7 +39,7 @@ project_root = base_dir.parent.parent  # Go up to crisp_pipeline_public
 
 # Input/output directories
 patient_data_dir = (project_root / "extracted_patient_data").resolve()
-mapping_dir = (project_root / "temp" / "3_init_exp" / "2_mapping_resources").resolve()
+mapping_dir = (project_root / "mapping_resources").resolve()
 output_dir = (project_root / "output" / "5_extraction").resolve()
 
 # Create output directory
@@ -336,7 +336,8 @@ def collect_events_for_patient(
         visit_occurrence_id: Optional[str],
         visit_detail_id: Optional[str],
     ) -> None:
-        text = concept if not value else f"{concept}, {value}"
+        value_text = str(value).strip() if value is not None else None
+        text = f"{concept} (No Value)" if not value_text else f"{concept}, {value_text}"
         if ts:
             events.append(Event(ts, text, visit_occurrence_id, visit_detail_id))
         else:
@@ -355,8 +356,6 @@ def collect_events_for_patient(
             ts = first_timestamp(row, timestamp_cols)
             concept = concept_name(safe_int(row.get(concept_col)), mapping, fallback_label)
             value = value_fn(row)
-            if value is None:
-                continue
             visit_occurrence_id = normalize_id(row.get("visit_occurrence_id"))
             visit_detail_id = normalize_id(row.get("visit_detail_id"))
             add_event(ts, concept, value, visit_occurrence_id, visit_detail_id)
@@ -532,7 +531,8 @@ def organize_events_by_visit_details(
         )
         or datetime.min,
     )
-    for idx, row in enumerate(sorted_details, start=1):
+    section_index = 1
+    for row in sorted_details:
         visit_detail_id = normalize_id(row.get("visit_detail_id"))
         visit_occurrence_id = normalize_id(row.get("visit_occurrence_id"))
         start_dt = first_timestamp(
@@ -546,16 +546,33 @@ def organize_events_by_visit_details(
             detail_mapping,
             "visit detail",
         )
+
+        if start_dt and end_dt and start_dt == end_dt:
+            checkpoint_description = (
+                f"{concept} detail checkpoint "
+                f"[{format_datetime(start_dt)} -> {format_datetime(end_dt)}; zero-duration]"
+            )
+            events.append(
+                Event(
+                    start_dt,
+                    checkpoint_description,
+                    visit_occurrence_id,
+                    None,
+                )
+            )
+            continue
+
         label = (
             f"{format_datetime(start_dt)} to {format_datetime(end_dt)} — {concept}"
         )
         section = VisitSection(
-            index=idx,
+            index=section_index,
             label=label,
             start=start_dt,
             end=end_dt,
             events=[],
         )
+        section_index += 1
         sections.append(section)
         if visit_detail_id:
             detail_map[visit_detail_id] = section
